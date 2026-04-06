@@ -126,6 +126,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:1px solid var(--bd);border-top:none;border-right:none;border-bottom:none;background:var(--bg2)}
 .zones{flex:0 0 auto;overflow-y:auto;overscroll-behavior:contain}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:14px}
+
 .dice-pop{background:var(--bg2);border:1px solid var(--bd);padding:16px 20px;text-align:center;width:100%;max-width:300px}
 .dice-lbl{font-size:9px;color:var(--fg2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
 .die-scene{perspective:180px;display:inline-block}
@@ -653,16 +654,16 @@ function dice3D(sides,val,rolling,settling){
   var sh=shapes[sides]||shapes[20];
   return '<div class="poly-wrap'+(rolling?' rolling':'')+'" style="width:70px;height:70px"><svg width="70" height="70" viewBox="0 0 70 70">'+sh+' fill="var(--bg3)" stroke="'+col+'" stroke-width="2.5"/></svg><span class="poly-val" style="color:'+col+'">'+(rolling?'?':n)+'</span></div>';
 }
-function rollDice(sides,count,colIdx){
+function rollDice(sides,count,colIdx,pi){
   if(diceAnim)clearInterval(diceAnim);
   var rolls=[];for(var i=0;i<count;i++)rolls.push(Math.ceil(Math.random()*sides));
   var ci=(colIdx!=null?colIdx:G.dieCI);
-  G.dice={sides:sides,count:count,rolling:true,rolls:rolls,final:null,settling:false,ci:ci};render();var t=0;
+  G.dice={sides:sides,count:count,rolling:true,rolls:rolls,final:null,settling:false,ci:ci,pi:pi!=null?pi:0};render();var t=0;
   diceAnim=setInterval(function(){
     t++;if(t>=12){
       clearInterval(diceAnim);diceAnim=null;
       var fin=[];for(var i=0;i<count;i++)fin.push(Math.ceil(Math.random()*sides));
-      G.dice={sides:sides,count:count,rolling:false,rolls:fin,final:fin.reduce(function(a,b){return a+b;},0),settling:true};
+      G.dice={sides:sides,count:count,rolling:false,rolls:fin,final:fin.reduce(function(a,b){return a+b;},0),settling:true,ci:ci,pi:pi!=null?pi:0};
       render();setTimeout(function(){if(G.dice){G.dice.settling=false;render();}},460);
     } else {
       var pvs=document.querySelectorAll('.poly-val');for(var i=0;i<pvs.length;i++)pvs[i].textContent=Math.ceil(Math.random()*sides);
@@ -911,47 +912,55 @@ function extractJSON(txt,type){
 }
 
 // ── YOUTUBE ───────────────────────────────────────────────────────────────────
-// Loads newest videos from each channel via YouTube public RSS feeds.
-// Uses allorigins.win as a CORS proxy since YouTube doesn't set CORS headers.
-// YouTube RSS by handle: https://www.youtube.com/feeds/videos.xml?@HANDLE
+// YouTube Data API v3 - dedicated key with YT API enabled
+var YT_API_KEY = 'AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
+var _ytCidCache = {};
 
-function _ytHandleFromUrl(url){
-  // Extract @handle from URL like https://www.youtube.com/@sorcerytcg/videos
-  var m=url.match(/@([A-Za-z0-9_-]+)/);
-  return m?m[1]:null;
+function _ytGet(endpoint, params, cb){
+  var qs = Object.keys(params).map(function(k){
+    return encodeURIComponent(k)+'='+encodeURIComponent(params[k]);
+  }).join('&');
+  fetch('https://www.googleapis.com/youtube/v3/'+endpoint+'?'+qs+'&key='+YT_API_KEY)
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.error){cb(new Error(d.error.message),null);}
+      else{cb(null,d);}
+    })
+    .catch(function(e){cb(e,null);});
 }
 
-function _ytRSSUrl(handle){
-  return 'https://www.youtube.com/feeds/videos.xml?%40'+encodeURIComponent(handle);
+function _resolveCid(ch, cb){
+  if(ch.cid){cb(null,ch.cid);return;}
+  var handle=ch.url.replace('https://www.youtube.com/','').replace('/videos','');
+  if(_ytCidCache[handle]){cb(null,_ytCidCache[handle]);return;}
+  var handleName=handle.replace(/^@/,'');
+  _ytGet('channels',{part:'id',forHandle:handleName,maxResults:1},function(err,d){
+    if(err||!d||!d.items||!d.items.length){cb(err||new Error('not found'),null);return;}
+    var cid=d.items[0].id;
+    _ytCidCache[handle]=cid;
+    cb(null,cid);
+  });
 }
 
-function _proxiedRSSUrl(handle){
-  var rss=_ytRSSUrl(handle);
-  return 'https://api.allorigins.win/get?url='+encodeURIComponent(rss);
-}
-
-function _parseRSS(xmlText, chName){
-  var vids=[];
-  try{
-    var parser=new DOMParser();
-    var xml=parser.parseFromString(xmlText,'text/xml');
-    var entries=xml.getElementsByTagName('entry');
-    for(var i=0;i<Math.min(entries.length,5);i++){
-      var e=entries[i];
-      var title=(e.getElementsByTagName('title')[0]||{}).textContent||'';
-      var link=e.getElementsByTagName('link')[0];
-      var url=link?link.getAttribute('href'):'';
-      var videoId=url.replace(/.*[?&]v=/,'').split('&')[0];
-      var pub=(e.getElementsByTagName('published')[0]||{}).textContent||'';
-      var dt=pub?new Date(pub):null;
-      var ts=dt&&!isNaN(dt)?dt.getTime():0;
-      var dateStr=dt&&!isNaN(dt)?dt.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'';
-      if(videoId&&/^[A-Za-z0-9_-]{11}$/.test(videoId)){
-        vids.push({channel:chName,title:title,videoId:videoId,date:dateStr,_ts:ts});
-      }
-    }
-  }catch(e){}
-  return vids;
+function _fetchVideos(cid, chName, cb){
+  _ytGet('search',{
+    part:'snippet',channelId:cid,order:'date',
+    type:'video',maxResults:3
+  },function(err,d){
+    if(err||!d||!d.items){cb([]);return;}
+    var vids=d.items.map(function(item){
+      var snip=item.snippet||{};
+      var pub=snip.publishedAt?new Date(snip.publishedAt):null;
+      return {
+        channel:chName,
+        title:snip.title||'',
+        videoId:(item.id&&item.id.videoId)||'',
+        date:pub?pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'',
+        _ts:pub?pub.getTime():0
+      };
+    }).filter(function(v){return v.videoId&&/^[A-Za-z0-9_-]{11}$/.test(v.videoId);});
+    cb(vids);
+  });
 }
 
 function loadYTVideos(){
@@ -965,24 +974,21 @@ function loadYTVideos(){
     if(done>=total){
       G.ytLoading=false;G.ytLoaded=true;
       allVids.sort(function(a,b){return (b._ts||0)-(a._ts||0);});
-      G.ytVids=allVids.map(function(v){return {channel:v.channel,title:v.title,videoId:v.videoId,date:v.date};});
-      if(!G.ytVids.length)G.ytErr='Could not load videos. Check your connection.';
+      G.ytVids=allVids.map(function(v){
+        return {channel:v.channel,title:v.title,videoId:v.videoId,date:v.date};
+      });
+      if(!G.ytVids.length)G.ytErr='No videos found. Check API key quota.';
       render();
     }
   }
   channels.forEach(function(ch){
-    var handle=_ytHandleFromUrl(ch.url);
-    if(!handle){finish();return;}
-    var proxyUrl=_proxiedRSSUrl(handle);
-    fetch(proxyUrl)
-      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-      .then(function(d){
-        var xml=d.contents||'';
-        var vids=_parseRSS(xml,ch.n);
+    _resolveCid(ch,function(err,cid){
+      if(err||!cid){finish();return;}
+      _fetchVideos(cid,ch.n,function(vids){
         if(vids.length)allVids=allVids.concat(vids);
         finish();
-      })
-      .catch(function(){finish();});
+      });
+    });
   });
 }
 // ── NEWS ──────────────────────────────────────────────────────────────────────
@@ -1315,7 +1321,7 @@ function pHTML(p,pi){
   var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
   o('<div class="dice-strip" style="padding:2px 2px 1px">');
   var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
-  visD.forEach(function(d){o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
+  visD.forEach(function(d){o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
   // menu button moved to turnBar
   o('</div>');
@@ -1380,10 +1386,28 @@ function render(){
 
     // ── Overlays ──
     if(G.dice){
-      var d=G.dice;var _dci=d.ci!=null?d.ci:G.dieCI;o('<div class="ov" onclick="if(event.target===this&&!G.dice.rolling)closeDice()"><div class="dice-pop"><div class="dice-lbl">'+(d.count>1?d.count+'&times; ':'')+'d'+d.sides+'</div><div style="display:flex;justify-content:center;gap:16px;margin-bottom:10px">');
-      for(var i=0;i<d.count;i++)o(dice3D(d.sides,d.rolls[i],d.rolling,d.settling));
-      o('</div>');if(d.rolling){o('<div class="dice-result" style="opacity:.25;color:'+DIE_COLS[_dci%DIE_COLS.length]+'">&hellip;</div>');}else{o('<div class="dice-result" style="color:'+DIE_COLS[_dci%DIE_COLS.length]+'">'+d.final+'</div>');if(d.count>1)o('<div class="dice-brk">'+d.rolls.join(' + ')+'</div>');}
-      if(!d.rolling&&!d.settling)o('<div class="dice-btns"><button class="dbtn acc" onclick="rollDice('+d.sides+','+d.count+','+(d.ci!=null?d.ci:G.dieCI)+')">Roll Again</button><button class="dbtn" onclick="closeDice()">Done</button></div>');
+      var d=G.dice;var _dci=d.ci!=null?d.ci:G.dieCI;var _isP2=d.pi===1;
+      var _rs=_isP2?' style="transform:rotate(180deg)"':'';
+      o('<div class="ov" onclick="if(event.target===this&&!G.dice.rolling)closeDice()"><div class="dice-pop">');
+      if(_isP2){
+        // P2: render in reverse DOM order so after 180deg rotation visuals read: label → dice → number → buttons
+        if(!d.rolling&&!d.settling)o('<div'+_rs+'><div class="dice-btns"><button class="dbtn acc" onclick="rollDice('+d.sides+','+d.count+','+(d.ci!=null?d.ci:G.dieCI)+','+(d.pi!=null?d.pi:0)+')">Roll Again</button><button class="dbtn" onclick="closeDice()">Done</button></div></div>');
+        if(d.rolling){o('<div'+_rs+'><div class="dice-result" style="opacity:.25;color:'+DIE_COLS[_dci%DIE_COLS.length]+'">&hellip;</div></div>');}
+        else{o('<div'+_rs+'><div class="dice-result" style="color:'+DIE_COLS[_dci%DIE_COLS.length]+'">'+d.final+'</div>'+(d.count>1?'<div class="dice-brk">'+d.rolls.join(' + ')+'</div>':'')+'</div>');}
+        o('<div style="display:flex;justify-content:center;gap:16px;margin-bottom:10px">');
+        for(var i=0;i<d.count;i++)o(dice3D(d.sides,d.rolls[i],d.rolling,d.settling));
+        o('</div>');
+        o('<div'+_rs+'><div class="dice-lbl">'+(d.count>1?d.count+'&times; ':'')+'d'+d.sides+'</div></div>');
+      } else {
+        // P1: normal order
+        o('<div class="dice-lbl">'+(d.count>1?d.count+'&times; ':'')+'d'+d.sides+'</div>');
+        o('<div style="display:flex;justify-content:center;gap:16px;margin-bottom:10px">');
+        for(var i=0;i<d.count;i++)o(dice3D(d.sides,d.rolls[i],d.rolling,d.settling));
+        o('</div>');
+        if(d.rolling){o('<div class="dice-result" style="opacity:.25;color:'+DIE_COLS[_dci%DIE_COLS.length]+'">&hellip;</div>');}
+        else{o('<div class="dice-result" style="color:'+DIE_COLS[_dci%DIE_COLS.length]+'">'+d.final+'</div>');if(d.count>1)o('<div class="dice-brk">'+d.rolls.join(' + ')+'</div>');}
+        if(!d.rolling&&!d.settling)o('<div class="dice-btns"><button class="dbtn acc" onclick="rollDice('+d.sides+','+d.count+','+(d.ci!=null?d.ci:G.dieCI)+','+(d.pi!=null?d.pi:0)+')">Roll Again</button><button class="dbtn" onclick="closeDice()">Done</button></div>');
+      }
       o('</div></div>');
     }
     if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){o('<div class="ov"><div class="log-pop"><div class="lp-t">Log Result</div><div class="lp-b"><span style="color:var(--grn);font-weight:700">'+h(w.name)+'</span> wins<br><span style="color:var(--red);font-weight:700">'+h(lo.name)+'</span> loses</div><div class="lp-btns"><button class="lp-btn" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" onclick="confirmLog()">Confirm</button></div></div></div>');}}
@@ -1413,6 +1437,7 @@ function render(){
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;render()"><img src="'+G.expImg+'" alt="card"></div>');
 
     document.getElementById('app').innerHTML=out.join('');
+
     // Trigger Drive image resolution for any pending card images
     if(_driveReady){
       document.querySelectorAll('img[data-drive-pending]').forEach(function(img){
