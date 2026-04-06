@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#1C1B19">
-<link rel="manifest" href="data:application/json,{%22name%22:%22Sorcery+Grimoire%22,%22short_name%22:%22Grimoire%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%231C1B19%22,%22theme_color%22:%22%231C1B19%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg+xmlns='http://www.w3.org/2000/svg'+viewBox='0+0+512+512'%3E%3Crect+width='512'+height='512'+rx='80'+fill='%231C1B19'/%3E%3Ctext+x='256'+y='340'+text-anchor='middle'+font-size='280'+fill='%23FBB829'+font-family='serif'%3E%E2%9C%A7%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
+<link rel="manifest" href="data:application/json,{%22name%22:%22Sorcery+Grimoire%22,%22short_name%22:%22Grimoire%22,%22start_url%22:%22.%22,%22display%22:%22fullscreen%22,%22orientation%22:%22portrait%22,%22background_color%22:%22%231C1B19%22,%22theme_color%22:%22%231C1B19%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg+xmlns='http://www.w3.org/2000/svg'+viewBox='0+0+512+512'%3E%3Crect+width='512'+height='512'+rx='80'+fill='%231C1B19'/%3E%3Ctext+x='256'+y='340'+text-anchor='middle'+font-size='280'+fill='%23FBB829'+font-family='serif'%3E%E2%9C%A7%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
 <!-- Install prompt -->
 <script>
 var _installPrompt=null;
@@ -65,7 +65,7 @@ function installApp(){
 
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;font-family:'Courier New',monospace;font-size:13px}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Courier New',monospace;font-size:13px;background:#1C1B19}
 button{cursor:pointer;background:none;border:none;color:inherit;font-family:inherit;font-size:inherit}
 input,select{font-family:'Courier New',monospace;font-size:inherit;color:inherit;-webkit-appearance:none;appearance:none;border-radius:0}
 a{text-decoration:none}img{display:block}
@@ -75,7 +75,7 @@ body.td{--bg:#282A36;--bg2:#323442;--bg3:#44475A;--bd:#6272A4;--fg:#F8F8F2;--fg2
 body.tn{--bg:#2E3440;--bg2:#3B4252;--bg3:#434C5E;--bd:#4C566A;--fg:#ECEFF4;--fg2:#D8DEE9;--fg3:#B0BAC8;--red:#BF616A;--grn:#A3BE8C;--yel:#EBCB8B;--cyn:#8FBCBB;--wht:#E5E9F0;--bgrn:#A3BE8C;--bbl:#88C0D0;--life:#BF616A;--mana:#88C0D0}
 body.te{--bg:#272E33;--bg2:#2E383C;--bg3:#374145;--bd:#495156;--fg:#D3C6AA;--fg2:#859289;--fg3:#4F5B58;--red:#E67E80;--grn:#A7C080;--yel:#DBBC7F;--cyn:#83C092;--wht:#D3C6AA;--bgrn:#A7C080;--bbl:#7FBBB3;--life:#E67E80;--mana:#7FBBB3}
 body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2:#6B5B45;--fg3:#9A8B75;--red:#C0392B;--grn:#27AE60;--yel:#D4820A;--cyn:#16A085;--wht:#1A1008;--bgrn:#2ECC71;--bbl:#2980B9;--life:#E74C3C;--mana:#2980B9}
-#app{width:100%;height:100dvh;height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg)}
+#app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .flip{transform:rotate(180deg);flex:0 0 auto;overflow-y:auto;overscroll-behavior:contain}.flip-spacer{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:13px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
@@ -988,12 +988,18 @@ function loadYTVideos(){
 // ── NEWS ──────────────────────────────────────────────────────────────────────
 function loadNews(){
   if(G.newsLoading)return;G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
-  var prompt='Search the web for recent Sorcery Contested Realm TCG news articles from sorcerytcg.com/news. Return ONLY a raw JSON array with no markdown: [{title:str,url:str,date:str,source:str}]. Include 5 real articles with real URLs and titles.';
-  apiCall(prompt,2000,function(err,txt){
+  // Use Claude web_search to find real news articles from sorcerytcg.com
+  var prompt='Please search the web right now for the latest news articles on https://sorcerytcg.com/news and return a JSON array of the 5 most recent articles. Each item must have these exact keys: "title" (article headline as a string), "url" (full article URL starting with https://sorcerytcg.com/news/), "date" (publication month and year as a string), "source" (always "sorcerytcg.com"). Return ONLY the raw JSON array with no explanation, no markdown code fences, no extra text. Example format: [{"title":"Article Name","url":"https://sorcerytcg.com/news/article-slug","date":"Apr 2026","source":"sorcerytcg.com"}]';
+  apiCall(prompt,3000,function(err,txt){
     G.newsLoading=false;G.newsLoaded=true;
     if(!err&&txt){
       var arr=extractJSON(txt,'array');
-      if(arr){var valid=arr.filter(function(n){return n.url&&n.title&&n.url.indexOf('http')===0&&n.url.length>20;}).slice(0,5);if(valid.length){G.newsItems=valid;}}
+      if(arr&&arr.length){
+        var valid=arr.filter(function(n){
+          return n.title&&n.url&&typeof n.title==='string'&&typeof n.url==='string'&&n.url.indexOf('http')===0&&n.url.length>25;
+        }).slice(0,5);
+        if(valid.length){G.newsItems=valid;}
+      }
     }
     if(!G.newsItems||!G.newsItems.length)G.newsErr='Could not load articles.';
     render();
