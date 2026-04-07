@@ -961,13 +961,17 @@ function cThr(c){return c.th||'';}function cSlug(c){return c.sl||'';}
 // Card images are served from ./card_images/{slug}.jpg in the repo.
 // Falls back to SVG placeholder if image not found.
 
-var IMG_PATH = 'https://images.sorcerycard.io/images/art/';
+var IMG_PATH = 'https://images.sorcerycard.io/images/';
 
+function _imgUrl(slug){
+  var set=slug.split('-')[0];
+  return IMG_PATH+set+'/'+slug+'.webp';
+}
 function cImgTag(c, style){
   style = style||'width:100%;height:100%;object-fit:cover;display:block';
   var s = cSlug(c);
   if(!s) return '<img src="'+cSVGfb(c)+'" style="'+style+'">';
-  return '<img src="'+IMG_PATH+s+'.png"'
+  return '<img src="'+_imgUrl(s)+'"'
     +' style="'+style+'" loading="lazy" data-slug="'+s+'"'
     +' onerror="imgErr(this)">';
 }
@@ -983,7 +987,7 @@ function _expandImg(el){
 function imgURL(c){
   var s=cSlug(c);
   if(!s) return cSVGfb(c);
-  return IMG_PATH+s+'.webp';
+  return _imgUrl(s);
 }
 
 function imgErr(img){
@@ -1006,7 +1010,7 @@ function imgErr(img){
   if(img._varIdx < img._variants.length){
     var next = img._variants[img._varIdx++];
     img.onerror = function(){ imgErr(img); };
-    img.src = IMG_PATH + next + '.webp';
+    img.src = _imgUrl(next);
     return;
   }
   img.onerror=null;
@@ -1396,7 +1400,7 @@ function cModal(){
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
   if(isSite){
     var _sid='si'+Math.random().toString(36).slice(2,7);
-    var _src=IMG_PATH+cSlug(c)+'.webp';
+    var _src=_imgUrl(cSlug(c));
     o('<canvas id="'+_sid+'" width="220" height="165" onclick="_expandImg(this)" style="display:block;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd)" data-src="'+_src+'"></canvas>');
     setTimeout(function(){
       var cv=document.getElementById(_sid);
