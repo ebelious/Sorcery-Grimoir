@@ -211,7 +211,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .cm-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .cm-nm{font-size:12px;font-weight:700;color:var(--wht)}
 .cm-img{width:100%;max-width:160px;margin:0 auto 6px;aspect-ratio:3/4;overflow:hidden;background:var(--bg);cursor:pointer;border:1px solid var(--bd)}
-.cm-img img{width:100%;height:100%;object-fit:cover;display:block}.cm-img-site{width:100%;max-width:260px;aspect-ratio:4/3;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd);overflow:hidden;background:var(--bg)}.cm-img-site img{width:100%;height:100%;display:block;object-fit:cover}
+.cm-img img{width:100%;height:100%;object-fit:cover;display:block}.cm-img-site{width:100%;max-width:260px;aspect-ratio:4/3;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd);overflow:hidden;background:var(--bg)}.cm-img-site img{width:133%;height:133%;margin:-16.5%;display:block;object-fit:cover;transform:rotate(90deg)}
 .cm-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;margin-bottom:5px}
 .cm-tag{font-size:8px;padding:2px 5px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:9px;color:var(--fg2);text-align:center;line-height:1.7;margin-bottom:4px}
@@ -1534,7 +1534,7 @@ function render(){
       o('<div class="pbg" onclick="if(event.target===this)goBack()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
-    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="max-height:90vh;max-width:90vw;object-fit:contain"></div>');
+    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'max-width:90vh;max-height:90vw;transform:rotate(90deg)':'max-height:90vh;max-width:90vw')+'"></div>');
 
     document.getElementById('app').innerHTML=out.join('');
 
