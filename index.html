@@ -887,12 +887,28 @@ function imgURL(c){
 function imgErr(img){
   var s = img.dataset.slug||'';
   if(!s){ img.onerror=null; img.src=imgSVGfb(''); return; }
-  // Try swapping last char s<->f
-  if(!img._tried){
-    img._tried=true;
-    var alt = s.slice(0,-1) + (s.slice(-1)==='s'?'f':'s');
-    img.onerror = function(){ img.onerror=null; img.src=imgSVGfb(s); };
-    img.src = IMG_PATH + alt + '.png';
+  if(!img._variants){
+    // Build all variants: all set prefixes x both prints, same card name
+    var parts = s.split('-');
+    // parts[0]=set, parts[1..n-2]=cardname, parts[n-1]=print, parts[n-2]=product
+    var cardname = parts.slice(1,-2).join('-'); // e.g. apprentice_wizard
+    var sets = ['alp','bet','pro','got','art','dra'];
+    var prints = ['s','f'];
+    var tried = {}; tried[s]=true;
+    var variants = [];
+    sets.forEach(function(st){
+      prints.forEach(function(pr){
+        var v = st+'-'+cardname+'-b-'+pr;
+        if(!tried[v]){ tried[v]=true; variants.push(v); }
+      });
+    });
+    img._variants = variants;
+    img._varIdx = 0;
+  }
+  if(img._varIdx < img._variants.length){
+    var next = img._variants[img._varIdx++];
+    img.onerror = function(){ imgErr(img); };
+    img.src = IMG_PATH + next + '.png';
     return;
   }
   img.onerror=null;
