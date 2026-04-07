@@ -1205,7 +1205,7 @@ function fetchPrice(nm){
   if(!nm)return;var px=G.prices[nm];
   if(px&&(px.loading||(px.ts&&Date.now()-px.ts<3600000)))return;
   G.prices[nm]={loading:true};render();
-  var prompt='Find the current market price for the Sorcery Contested Realm TCG card "'+nm+'". Search TCGPlayer at https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(nm)+' and also check sorcerytcg.gg for the price. Return ONLY this JSON object with no other text: {"market":"$X.XX","low":"$X.XX","mid":"$X.XX","high":"$X.XX","source":"tcgplayer"}. Set source to tcgplayer or sorcerytcg.gg. Use N/A for unavailable prices.';
+    var prompt='Find the current market price for the Sorcery Contested Realm TCG card "'+nm+'". First check https://sorcerytcg.gg/prices/ for the price. If not found there, check TCGPlayer at https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(nm)+'. Return ONLY this JSON object with no other text: {"market":"$X.XX","low":"$X.XX","mid":"$X.XX","high":"$X.XX","source":"sorcerytcg.gg"}. Set source to sorcerytcg.gg or tcgplayer depending on where you found the price. Use N/A for unavailable prices.';
   apiCall(prompt,2000,function(err,txt){
     if(err||!txt){G.prices[nm]={loading:false,err:'Request failed',ts:Date.now()};render();return;}
     var obj=extractJSON(txt,'object');
@@ -1457,6 +1457,7 @@ function cModal(){
   else if(px.err){o('<div style="font-size:8px;color:var(--fg2)">'+h(px.err)+'</div>');}
   else{o('<div class="price-grid">');if(px.market)o('<div class="price-item"><span>Market</span><b style="color:var(--yel)">'+h(px.market)+'</b></div>');if(px.low)o('<div class="price-item"><span>Low</span><b style="color:var(--bgrn)">'+h(px.low)+'</b></div>');if(px.mid)o('<div class="price-item"><span>Mid</span><b>'+h(px.mid)+'</b></div>');if(px.high)o('<div class="price-item"><span>High</span><b style="color:var(--red)">'+h(px.high)+'</b></div>');o('</div>');if(px.source)o('<div style="font-size:7px;color:var(--fg2);margin-top:2px">Source: '+h(px.source)+'</div>');}
   o('</div><a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">View on TCGPlayer &rarr;</a>');
+    o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--grn);color:var(--grn)" href="https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+'" target="_blank">Prices on sorcerytcg.gg &rarr;</a>');
   o('<div class="qty-row"><div class="qty-lbl">In collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
   o(own?own+' cop'+(own===1?'y':'ies'):'Not owned');
   o('</b></div><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span class="qty-val">'+own+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div>');
