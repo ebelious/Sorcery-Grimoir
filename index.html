@@ -55,6 +55,8 @@ function installPWA(){
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Courier New',monospace;font-size:13px;background:#1C1B19}
 button{cursor:pointer;background:none;border:none;color:inherit;font-family:inherit;font-size:inherit}
 input,select{font-family:'Courier New',monospace;font-size:inherit;color:inherit;-webkit-appearance:none;appearance:none;border-radius:0}
+body.rounded .zone,body.rounded .sbox2,body.rounded .acc,body.rounded .cm,body.rounded .panel,body.rounded .drawer,body.rounded .cpop,body.rounded .fb,body.rounded .adj2,body.rounded .eadj2,body.rounded .die-btn,body.rounded #tbar,body.rounded .ov .dice-pop{border-radius:8px}
+body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
 body.tg{--bg:#282828;--bg2:#32302F;--bg3:#3C3836;--bd:#504945;--fg:#EBDBB2;--fg2:#BDAE93;--fg3:#7C6F64;--red:#CC241D;--grn:#98971A;--yel:#D79921;--cyn:#689D6A;--wht:#FBF1C7;--bgrn:#B8BB26;--bbl:#83A598;--life:#FB4934;--mana:#83A598}
@@ -536,14 +538,19 @@ function ld(k,d){try{var r=localStorage.getItem(k);return r!==null?JSON.parse(r)
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2'});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);initP(G.mode);render();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);render();
   
 }
-function applyTheme(t){document.body.className=t||'';G.theme=t;sv('sg-th',t);}
+function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
+function _applyBodyClass(){
+  var cls=(G.theme||'');
+  if(G.cfg.roundedCorners) cls+=' rounded';
+  document.body.className=cls.trim();
+}
 
 // ── PLAYERS ───────────────────────────────────────────────────────────────────
 function mkP(i){return{name:i===0?G.cfg.p1:G.cfg.p2,life:G.cfg.maxLife,mana:0,manaUsed:0,dead:false,thresh:{fire:0,water:0,earth:0,air:0},hist:[],deck:null,tlog:[],phase:'start'};}
@@ -1194,7 +1201,13 @@ function pContent(){
   if(p==='life'){o('<div class="set-row"><div><b>Starting Life</b><br><span style="font-size:8px;color:var(--fg2)">Applied on next Reset</span></div><div class="ctr"><button class="eadj" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span class="cv">'+G.cfg.maxLife+'</span><button class="eadj" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
   if(p==='dice'){o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});o('</div><div class="slbl2">Die Color</div><div class="dc-row">');DIE_COLS.forEach(function(col,i){o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+col+'" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');return out.join('');}
   if(p==='names'){o('<div class="fr"><label style="font-size:9px;color:var(--fg2);width:22px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div><div class="fr"><label style="font-size:9px;color:var(--fg2);width:22px">P2</label><input class="fi" id="ni1" value="'+h(G.cfg.p2)+'"></div><button class="fb gold full" onclick="G.cfg.p1=document.getElementById(\'ni0\').value;G.cfg.p2=document.getElementById(\'ni1\').value;sv(\'sg-cfg\',G.cfg);render()">Save Names</button>');return out.join('');}
-  if(p==='themes'){o('<div class="tgrid">');THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});o('</div>');if(_pwaPrompt){o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');}else{o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px">Open in browser &rarr; Share/Menu &rarr; "Add to Home Screen"</div>');}return out.join('');}
+  if(p==='themes'){
+    o('<div class="tgrid">');
+    THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});
+    o('</div>');
+    o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
+    o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');}else{o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px">Open in browser &rarr; Share/Menu &rarr; "Add to Home Screen"</div>');}return out.join('');}
   if(p==='rules'){RULES.forEach(function(r){o('<div class="acc" style="margin-bottom:3px"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>');});o('<a class="ext-lnk" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook &rarr;</a>');return out.join('');}
   if(p==='codex'){
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
@@ -1505,15 +1518,13 @@ function turnBar(){
   function ph(p){return p&&p.phase==='active'?'&#9654; ':'';}
   // Layout: [ghost spacer] [P0 flex:1] [T# fixed center] [P1 flex:1] [☰ menu]
   // Ghost spacer matches menu-btn width so T# is truly centered
-  return '<div id="tbar">'
-    +'<div class="tb-ghost"></div>'
-    +'<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'">'+ph(p0)+(p0?h(p0.name):'')+'</div>'
-    +'<div class="tb-n">T'+G.turnNum+'</div>'
-    +(p1
-      ?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'">'+ph(p1)+h(p1.name)+'</div>'
-      :'<div class="tb-s" style="pointer-events:none"></div>')
-    +'<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>'
-    +'</div>';
+  var _ml=G.cfg&&G.cfg.menuLeft;
+  var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
+  var _ghost='<div class="tb-ghost"></div>';
+    var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'">'+ph(p0)+(p0?h(p0.name):'')+' </div>';
+  var _tn='<div class="tb-n">T'+G.turnNum+'</div>';
+  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'">'+ph(p1)+h(p1.name)+'</div>':'<div class="tb-s" style="pointer-events:none"></div>';
+  return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_mbtn)+'</div>';
 }
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
