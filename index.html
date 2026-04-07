@@ -62,7 +62,7 @@ body.tn{--bg:#2E3440;--bg2:#3B4252;--bg3:#434C5E;--bd:#4C566A;--fg:#ECEFF4;--fg2
 body.te{--bg:#272E33;--bg2:#2E383C;--bg3:#374145;--bd:#495156;--fg:#D3C6AA;--fg2:#859289;--fg3:#4F5B58;--red:#E67E80;--grn:#A7C080;--yel:#DBBC7F;--cyn:#83C092;--wht:#D3C6AA;--bgrn:#A7C080;--bbl:#7FBBB3;--life:#E67E80;--mana:#7FBBB3}
 body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2:#6B5B45;--fg3:#9A8B75;--red:#C0392B;--grn:#27AE60;--yel:#D4820A;--cyn:#16A085;--wht:#1A1008;--bgrn:#2ECC71;--bbl:#2980B9;--life:#E74C3C;--mana:#2980B9}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-.flip{transform:rotate(180deg);flex:0 0 auto;overflow-y:auto;overscroll-behavior:contain}.flip-spacer{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.flip{transform:rotate(180deg);flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:13px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
 .stats{display:flex;gap:4px}
@@ -103,14 +103,14 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .tb-s.act{background:var(--yel);color:var(--bg);font-weight:700}
 .tb-e{font-size:8px;color:var(--fg2);padding:3px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;max-width:90px}
 #topbar{display:flex;align-items:center;gap:4px;padding:3px 7px;background:var(--bg2);border-bottom:1px solid var(--bd);flex-shrink:0}
-.dice-strip{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none;align-items:center}
+.dice-strip{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none;align-items:center;justify-content:center}
 .dice-strip::-webkit-scrollbar{display:none}
 .die-btn{display:flex;flex-direction:column;align-items:center;padding:2px 3px;flex-shrink:0;border:1px solid var(--bd);background:var(--bg3)}
 .die-btn:active{background:var(--bd)}
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--yel)}
-.menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:1px solid var(--bd);border-top:none;border-right:none;border-bottom:none;background:var(--bg2)}
-.zones{flex:0 0 auto;overflow-y:auto;overscroll-behavior:contain}
+.menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:1px solid var(--bd);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:32px}
+.zones{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:14px}
 
 .dice-pop{background:var(--bg2);border:1px solid var(--bd);padding:16px 20px;text-align:center;width:100%;max-width:300px}
@@ -446,14 +446,14 @@ var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Co
 var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Color Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',sp:'Public Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
-  {id:'stcg', n:'Sorcery TCG',          url:'https://www.youtube.com/@sorcerytcg/videos',          cid:'UCqmv-SKT0_SO5FbP3vGZ_uQ'},
+  {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
   {id:'css',  n:'Common Sense Sorcery', url:'https://www.youtube.com/@commonsensesorcery/videos',  cid:'UCrCpAOPrsn3iSH7xMyEvwsg'},
   {id:'gec',  n:'Golden Eagle Cards',   url:'https://www.youtube.com/@goldeneagle1833/videos',     cid:'UCzWglR4ytbyq0aAfWrNaMHw'},
   {id:'loi',  n:'Lord of Itza',         url:'https://www.youtube.com/@lord_of_itza/videos',        cid:'UC598IUEN4qp8N_KAPkTvx0w'},
   {id:'ofn',  n:'OldFashionedNerds',    url:'https://www.youtube.com/@oldfashionednerds/videos',   cid:'UCRZw6WkGb5O34JCUTPCFvDQ'},
   {id:'rt',   n:'Roaring Turkey',       url:'https://www.youtube.com/@roaringturkey/videos',       cid:'UCcS-iAfvSn1Dub-fpTCFASQ'},
+  {id:'stcg', n:'Sorcery TCG',          url:'https://www.youtube.com/@sorcerytcg/videos',          cid:'UCqmv-SKT0_SO5FbP3vGZ_uQ'},
   {id:'aa',   n:'The Assorted Animals', url:'https://www.youtube.com/@theassortedanimals/videos',  cid:'UCaO-qqRZVlaGvF5AE0EmbNg'},
-  {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
 ];
 var YT_SEED=[
   {channel:'Sorcery TCG',title:'SorceryCon 2026 Live Stream',videoId:'Wv4pCs3QxYc',date:'Feb 2026'},
@@ -496,7 +496,7 @@ function boot(){
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
   applyTheme(G.theme);initP(G.mode);render();
-  _loadDriveMap();
+  
 }
 function applyTheme(t){document.body.className=t||'';G.theme=t;sv('sg-th',t);}
 
@@ -862,119 +862,40 @@ function cThr(c){return c.th||'';}function cSlug(c){return c.sl||'';}
 // No secret API key is needed — just set DRIVE_API_KEY to a free browser-restricted key
 // from Google Cloud Console (restrict to Drive API + your domain).
 // Without a key, images fall back to the SVG placeholder.
-var DRIVE_FOLDER_ID = '1PDbS2HWHXbH7lUu6QDmYy97N4o9XQ7Dh';
-var DRIVE_API_KEY   = 'AIzaSyDbBME-NleEclY3_UhcRkvImVuasyQN754';
-var _driveMap   = {};      // slug → fileId, populated on boot
-var _driveReady = false;
-var _driveQueue = [];      // {img,slug} pairs waiting for the map
+// ── IMAGE LOADING ────────────────────────────────────────────────────────────
+// Card images are served from ./card_images/{slug}.jpg in the repo.
+// Falls back to SVG placeholder if image not found.
 
-function _loadDriveMap() {
-  if (!DRIVE_API_KEY) { _driveReady = true; return; }
-  var allFiles = [];
-  function fetchPage(pageToken) {
-    var url = 'https://www.googleapis.com/drive/v3/files'
-      + '?q=' + encodeURIComponent("'" + DRIVE_FOLDER_ID + "' in parents and trashed=false")
-      + '&fields=' + encodeURIComponent('nextPageToken,files(id,name)')
-      + '&pageSize=1000'
-      + '&supportsAllDrives=true'
-      + '&includeItemsFromAllDrives=true'
-      + '&key=' + DRIVE_API_KEY
-      + (pageToken ? '&pageToken=' + encodeURIComponent(pageToken) : '');
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        var d = JSON.parse(xhr.responseText);
-        if (d.files) {
-          d.files.forEach(function(f) {
-            var slug = f.name.replace(/\.png$/i, '').replace(/\.jpg$/i, '');
-            _driveMap[slug] = f.id;
-            allFiles.push(f.name);
-          });
-        }
-        if (d.nextPageToken) {
-          fetchPage(d.nextPageToken);
-        } else {
-          _driveReady = true;
-          G._driveCount = allFiles.length;
-          _driveQueue.forEach(function(item){ _resolveImg(item.img, item.slug); });
-          _driveQueue = [];
-          // Re-render card images now that map is ready
-          document.querySelectorAll('img[data-drive-pending]').forEach(function(img){
-            img.removeAttribute('data-drive-pending');
-            if(img.dataset.slug) _resolveImg(img, img.dataset.slug);
-          });
-        }
-      } else {
-        console.error('Drive API error', xhr.status, xhr.responseText);
-        _driveReady = true;
-      }
-    };
-    xhr.onerror = function() { _driveReady = true; };
-    xhr.send();
-  }
-  fetchPage(null);
+var IMG_PATH = './Card_Images/';
+
+function cImgTag(c, style){
+  style = style||'width:100%;height:100%;object-fit:cover;display:block';
+  var s = cSlug(c);
+  if(!s) return '<img src="'+cSVGfb(c)+'" style="'+style+'">';
+  return '<img src="'+IMG_PATH+s+'.png"'
+    +' style="'+style+'" loading="lazy" data-slug="'+s+'"'
+    +' onerror="imgErr(this,this.dataset.slug)">';
 }
 
-function _resolveImg(img, slug) {
-  var id = _driveMap[slug];
-  if (id) {
-    img.onerror = function(){ img.onerror = null; img.src = imgSVGfb(slug); };
-    img.src = 'https://drive.google.com/thumbnail?id=' + id + '&sz=w400';
-  } else {
-    img.onerror = null;
-    img.src = imgSVGfb(slug);
-  }
+function imgURL(c){
+  var s=cSlug(c);
+  if(!s) return cSVGfb(c);
+  return IMG_PATH+s+'.png';
 }
 
-function imgErr(img, slug, step) {
-  // Primary CDN failed — resolve via Google Drive map
-  img.onerror = null;
-  if (!_driveReady) {
-    _driveQueue.push({img: img, slug: slug});
-  } else {
-    _resolveImg(img, slug);
-  }
+function imgErr(img, slug){
+  img.onerror=null;
+  img.src=imgSVGfb(slug);
 }
+
 function imgSVGfb(slug){
-  var card=null;for(var i=0;i<CARDS.length;i++){if(CARDS[i].sl===slug){card=CARDS[i];break;}}
-  if(card)return cSVGfb(card);
+  var card=null;
+  for(var i=0;i<CARDS.length;i++){if(CARDS[i].sl===slug){card=CARDS[i];break;}}
+  if(card) return cSVGfb(card);
   return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 266"><rect width="200" height="266" fill="#1C1B19"/><text x="100" y="140" text-anchor="middle" font-size="12" fill="#918175" font-family="monospace">No Image</text></svg>');
 }
-function cImgTag(c,style){
-  style=style||'width:100%;height:100%;object-fit:cover;display:block';
-  var s=cSlug(c);
-  if(!s)return '<img src="'+cSVGfb(c)+'" style="'+style+'">';
-  // Show SVG placeholder immediately; resolve to Drive image after map loads
-  var placeholder=cSVGfb(c);
-  if(_driveReady){
-    var id=_driveMap[s];
-    if(id)return '<img src="https://drive.google.com/thumbnail?id='+id+'&sz=w400"'
-      +' style="'+style+'" loading="lazy" data-slug="'+s+'"'
-      +' onerror="this.onerror=null;this.src=imgSVGfb(this.dataset.slug)">';
-  }
-  return '<img src="'+placeholder+'"'
-    +' style="'+style+'" loading="lazy" data-slug="'+s+'" data-drive-pending="1"'
-    +' onerror="imgErr(this,this.dataset.slug,0)">';
-}
-function cSVGfb(c){
-  var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];
-  var rC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[cRar(c)]||'#918175';
-  var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};
-  var nm=cName(c).length>14?cName(c).slice(0,12)+'\u2026':cName(c);
-  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 266"><rect width="200" height="266" fill="#1C1B19"/>'+
-    '<rect width="200" height="266" fill="none" stroke="'+el.c+'" stroke-width="1.5" stroke-opacity=".35"/>'+
-    '<rect x="8" y="8" width="184" height="155" fill="'+el.c+'" fill-opacity=".07"/>'+
-    '<text x="100" y="105" text-anchor="middle" font-size="36" fill="'+el.c+'" font-family="sans-serif">'+(cEl(c)==='fire'?'\u25b2':cEl(c)==='water'?'\u25bd':cEl(c)==='earth'?'\u25bd':cEl(c)==='air'?'\u25b2':'\u25a1')+'</text>'+
-    '<text x="100" y="185" text-anchor="middle" font-size="10" font-weight="700" fill="'+el.c+'" font-family="monospace">'+nm+'</text>'+
-    '<text x="100" y="198" text-anchor="middle" font-size="7" fill="'+rC+'" font-family="monospace">'+cType(c).toUpperCase()+'</text>'+
-    '<text x="100" y="213" text-anchor="middle" font-size="9" fill="'+si.c+'" font-family="monospace">'+si.sym+'</text>'+
-    '</svg>');
-}
-function imgURL(c){var s=cSlug(c);if(!s)return cSVGfb(c);var id=_driveMap[s];return id?'https://drive.google.com/thumbnail?id='+id+'&sz=w800':cSVGfb(c);}
-function tcgURL(c){return 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(cName(c))+'&view=grid';}
 
+function tcgURL(c){return 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(cName(c))+'&view=grid';}
 // ── FILTER & HELPERS ─────────────────────────────────────────────────────────
 function cFilter(arr,f,q){
   var lq=(q||'').toLowerCase();
@@ -1081,62 +1002,62 @@ function extractJSON(txt,type){
 }
 
 // ── YOUTUBE ───────────────────────────────────────────────────────────────────
-// Uses YouTube Data API v3 search endpoint to fetch latest videos per channel.
-// All channel IDs are hardcoded — no handle resolution needed.
+// Uses playlistItems.list (1 quota unit per channel vs 100 for search).
+// Each channel's uploads playlist ID = channel ID with 'UC' replaced by 'UU'.
 
 var YT_API_KEY='AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
 
 function _fetchVideos(cid, chName, cb){
-  var url='https://www.googleapis.com/youtube/v3/search'
-    +'?part=snippet'
-    +'&channelId='+encodeURIComponent(cid)
-    +'&order=date'
-    +'&type=video'
-    +'&maxResults=3'
-    +'&key='+YT_API_KEY;
+  // Uploads playlist: replace leading UC with UU
+  var pid = 'UU' + cid.slice(2);
+  var url = 'https://www.googleapis.com/youtube/v3/playlistItems'
+    + '?part=snippet'
+    + '&playlistId=' + pid
+    + '&maxResults=3'
+    + '&key=' + YT_API_KEY;
   fetch(url)
-    .then(function(r){return r.json();})
+    .then(function(r){ return r.json(); })
     .then(function(d){
-      if(d.error||!d.items||!d.items.length){cb([]);return;}
-      var vids=d.items.map(function(item){
-        var snip=item.snippet||{};
-        var vid=(item.id&&item.id.videoId)||'';
-        if(!vid||!/^[A-Za-z0-9_-]{11}$/.test(vid))return null;
-        var pub=snip.publishedAt?new Date(snip.publishedAt):null;
+      if(d.error||!d.items||!d.items.length){ cb([]); return; }
+      var vids = d.items.map(function(item){
+        var snip = item.snippet||{};
+        var vid = snip.resourceId && snip.resourceId.videoId;
+        if(!vid||!/^[A-Za-z0-9_-]{11}$/.test(vid)) return null;
+        var pub = snip.publishedAt ? new Date(snip.publishedAt) : null;
         return {
-          channel:chName,
-          title:snip.title||'',
-          videoId:vid,
-          date:pub?pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'',
-          _ts:pub?pub.getTime():0
+          channel: chName,
+          title: snip.title||'',
+          videoId: vid,
+          date: pub ? pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '',
+          _ts: pub ? pub.getTime() : 0
         };
       }).filter(Boolean);
       cb(vids);
     })
-    .catch(function(){cb([]);});
+    .catch(function(){ cb([]); });
 }
 
 function loadYTVideos(){
-  if(G.ytLoading)return;
-  G.ytLoading=true;G.ytLoaded=false;G.ytErr=null;
-  G.ytVids=[];render();
-  var channels=YT_CHS.filter(function(x){return x.id!=='all'&&x.cid;});
-  var allVids=[];var done=0;var total=channels.length;
+  if(G.ytLoading) return;
+  G.ytLoading=true; G.ytLoaded=false; G.ytErr=null;
+  G.ytVids=[]; render();
+  var channels = YT_CHS.filter(function(x){ return x.id!=='all' && x.cid; });
+  var allVids=[]; var done=0; var total=channels.length;
   function finish(){
     done++;
     if(done>=total){
-      G.ytLoading=false;G.ytLoaded=true;
-      allVids.sort(function(a,b){return (b._ts||0)-(a._ts||0);});
-      G.ytVids=allVids.map(function(v){
+      G.ytLoading=false; G.ytLoaded=true;
+      allVids.sort(function(a,b){ return (b._ts||0)-(a._ts||0); });
+      G.ytVids = allVids.map(function(v){
         return {channel:v.channel,title:v.title,videoId:v.videoId,date:v.date};
       });
-      if(!G.ytVids.length)G.ytErr='No videos found. Check API key quota.';
+      if(!G.ytVids.length) G.ytErr='No videos found. Check API key.';
       render();
     }
   }
   channels.forEach(function(ch){
-    _fetchVideos(ch.cid,ch.n,function(vids){
-      if(vids.length)allVids=allVids.concat(vids);
+    _fetchVideos(ch.cid, ch.n, function(vids){
+      if(vids.length) allVids = allVids.concat(vids);
       finish();
     });
   });
@@ -1590,13 +1511,7 @@ function render(){
 
     document.getElementById('app').innerHTML=out.join('');
 
-    // Trigger Drive image resolution for any pending card images
-    if(_driveReady){
-      document.querySelectorAll('img[data-drive-pending]').forEach(function(img){
-        img.removeAttribute('data-drive-pending');
-        _resolveImg(img,img.dataset.slug);
-      });
-    }
+
     bindSearchInputs();
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
