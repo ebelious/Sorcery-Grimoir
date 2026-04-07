@@ -210,8 +210,8 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .cm{background:var(--bg2);border:1px solid var(--bd);padding:10px;max-width:300px;width:100%;max-height:92vh;overflow-y:auto}
 .cm-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .cm-nm{font-size:12px;font-weight:700;color:var(--wht)}
-.cm-img{width:100%;max-width:160px;margin:0 auto 6px;aspect-ratio:3/4;overflow:hidden;background:var(--bg);cursor:pointer;border:1px solid var(--bd)}.cm-img-site{width:220px!important;max-width:100%!important;aspect-ratio:4/3!important;overflow:hidden!important;margin:0 auto 6px!important}
-.cm-img img{width:100%;height:100%;object-fit:cover;display:block}.cm-img-site img{transform:rotate(90deg) scale(1.33)!important;object-fit:cover!important;transform-origin:center center!important}
+.cm-img{width:100%;max-width:160px;margin:0 auto 6px;aspect-ratio:3/4;overflow:hidden;background:var(--bg);cursor:pointer;border:1px solid var(--bd)}
+.cm-img img{width:100%;height:100%;object-fit:cover;display:block}.cm-img-site{max-width:100%!important;aspect-ratio:unset!important;height:auto!important;overflow:visible!important}.cm-img-site img{width:100%!important;height:auto!important;object-fit:contain!important;transform:none!important}
 .cm-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;margin-bottom:5px}
 .cm-tag{font-size:8px;padding:2px 5px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:9px;color:var(--fg2);text-align:center;line-height:1.7;margin-bottom:4px}
@@ -1300,7 +1300,7 @@ function cModal(){
   var out=[];function o(s){out.push(s);}
   o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
-  o('<div class="cm-img'+(isSite?' cm-img-site':'')+'" onclick="_expandImg(this)">'+cImgTag(c)+'</div>');
+  o('<div class="'+(isSite?'cm-img-site':'cm-img')+'" onclick="_expandImg(this)">'+cImgTag(c)+'</div>');
   o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
   o('<div class="cm-tags"><span class="cm-tag" style="color:'+el.c+';border-color:'+el.c+'">'+eSVG(cEl(c),10)+' '+cEl(c)+'</span><span class="cm-tag" style="color:'+rC+';border-color:'+rC+'">'+cRar(c)+'</span><span class="cm-tag">'+cType(c)+'</span><span class="cm-tag" style="color:'+si.c+';border-color:'+si.c+'">'+si.sym+' '+cSet(c)+'</span></div>');
   o('<div class="cm-mt">Mana: <b>'+(cMana(c)!=null?cMana(c):'&mdash;')+'</b> &middot; Threshold: <b>'+(cThr(c)||'none')+'</b> &middot; Power: <b>'+(cPow(c)!=null?cPow(c):'&mdash;')+'</b>'+(cArt(c)?'<br>Artist: '+h(cArt(c)):'')+'</div>');
