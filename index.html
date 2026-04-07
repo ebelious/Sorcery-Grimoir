@@ -1205,11 +1205,20 @@ function fetchPrice(nm){
   if(!nm)return;var px=G.prices[nm];
   if(px&&(px.loading||(px.ts&&Date.now()-px.ts<3600000)))return;
   G.prices[nm]={loading:true};render();
-    var prompt='Find the current market price for the Sorcery Contested Realm TCG card "'+nm+'". First check https://sorcerytcg.gg/prices/ for the price. If not found there, check TCGPlayer at https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(nm)+'. Return ONLY this JSON object with no other text: {"market":"$X.XX","low":"$X.XX","mid":"$X.XX","high":"$X.XX","source":"sorcerytcg.gg"}. Set source to sorcerytcg.gg or tcgplayer depending on where you found the price. Use N/A for unavailable prices.';
-  apiCall(prompt,2000,function(err,txt){
+  var prompt='Search the web right now for the price of the Sorcery Contested Realm TCG card named "'+nm+'". '
+    +'Check these sites in order: '
+    +'1. https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+' '
+    +'2. https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(nm)+' '
+    +'Find the market price, low price, and high price. '
+    +'Return ONLY a raw JSON object, no markdown, no explanation: '
+    +'{"market":"$X.XX","low":"$X.XX","high":"$X.XX","source":"sorcerytcg.gg"} '
+    +'Replace X.XX with the actual dollar amounts you find. Set source to whichever site had the price.';
+  apiCall(prompt,1500,function(err,txt){
     if(err||!txt){G.prices[nm]={loading:false,err:'Request failed',ts:Date.now()};render();return;}
     var obj=extractJSON(txt,'object');
-    if(!obj){G.prices[nm]={loading:false,err:'Price unavailable',ts:Date.now()};render();return;}
+    if(!obj||(!obj.market&&!obj.low&&!obj.high)){
+      G.prices[nm]={loading:false,err:'No price found',ts:Date.now()};render();return;
+    }
     G.prices[nm]=Object.assign({},obj,{ts:Date.now(),loading:false,err:null});render();
   });
 }
@@ -1451,13 +1460,12 @@ function cModal(){
     }
     o('</div>');
   }
-  o('<div class="price-box"><div class="price-hdr"><span class="price-lbl">Market Price</span><button class="price-btn" onclick="fetchPrice(\''+h(nm)+'\')">'+(px&&px.loading?'Loading&hellip;':'Refresh')+'</button></div>');
-  if(!px){o('<div style="font-size:8px;color:var(--fg2)">Tap Refresh to fetch current price</div>');}
-  else if(px.loading){o('<div style="font-size:8px;color:var(--fg2)"><span class="spin">&#8635;</span> Fetching&hellip;</div>');}
-  else if(px.err){o('<div style="font-size:8px;color:var(--fg2)">'+h(px.err)+'</div>');}
-  else{o('<div class="price-grid">');if(px.market)o('<div class="price-item"><span>Market</span><b style="color:var(--yel)">'+h(px.market)+'</b></div>');if(px.low)o('<div class="price-item"><span>Low</span><b style="color:var(--bgrn)">'+h(px.low)+'</b></div>');if(px.mid)o('<div class="price-item"><span>Mid</span><b>'+h(px.mid)+'</b></div>');if(px.high)o('<div class="price-item"><span>High</span><b style="color:var(--red)">'+h(px.high)+'</b></div>');o('</div>');if(px.source)o('<div style="font-size:7px;color:var(--fg2);margin-top:2px">Source: '+h(px.source)+'</div>');}
-  o('</div><a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">View on TCGPlayer &rarr;</a>');
-    o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--grn);color:var(--grn)" href="https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+'" target="_blank">Prices on sorcerytcg.gg &rarr;</a>');
+  o('<div class="price-box">');
+  o('<div class="slbl2">Prices</div>');
+  o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
+  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--grn);color:var(--grn)" href="https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+'" target="_blank">sorcerytcg.gg &rarr;</a>');
+  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/price-guide?search='+encodeURIComponent(nm)+'" target="_blank">sorcerycard.io &rarr;</a>');
+  o('</div>');
   o('<div class="qty-row"><div class="qty-lbl">In collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
   o(own?own+' cop'+(own===1?'y':'ies'):'Not owned');
   o('</b></div><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span class="qty-val">'+own+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div>');
