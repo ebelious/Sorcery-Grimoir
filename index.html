@@ -58,6 +58,19 @@ input,select{font-family:'Courier New',monospace;font-size:inherit;color:inherit
 body.rounded .zone,body.rounded .sbox2,body.rounded .acc,body.rounded .cm,body.rounded .panel,body.rounded .drawer,body.rounded .cpop,body.rounded .fb,body.rounded .adj2,body.rounded .eadj2,body.rounded .die-btn,body.rounded #tbar,body.rounded .ov .dice-pop{border-radius:8px}
 body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 /* ── CIRCULAR LAYOUT ── */
+.p-mini{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0}
+.mini-name{font-size:18px;font-weight:700;color:var(--fg);text-align:center;padding:6px 4px;border-bottom:1px solid var(--bd)}
+.mini-tile{display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:8px 6px;border-bottom:1px solid var(--bd);gap:2px}
+.mini-tile-lbl{font-size:18px;font-weight:700;width:32px;text-align:center}
+.mini-tile-val{font-size:56px;font-weight:700;line-height:1;min-width:70px;text-align:center;flex:1}
+.mini-tile-btn{width:64px;height:64px;font-size:36px;font-weight:700;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mini-thresh-row{display:flex;border-bottom:1px solid var(--bd)}
+.mini-el{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px;gap:4px;border-right:1px solid var(--bd)}
+.mini-el:last-child{border-right:none}
+.mini-el-val{font-size:32px;font-weight:700;line-height:1}
+.mini-el-btns{display:flex;gap:4px}
+.mini-el-btn{width:44px;height:44px;font-size:22px;font-weight:700;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);cursor:pointer}
+.mini-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px;border-bottom:1px solid var(--bd)}
 .p-circ{display:flex;flex-direction:column;align-items:center;padding:4px;gap:3px;background:var(--bg2);border:1px solid var(--bd);margin:1px}
 .circ-ring{position:relative;width:110px;height:110px;border-radius:50%;border:3px solid var(--bd);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column}
 .circ-life{font-size:32px;font-weight:700;line-height:1;color:var(--life)}
@@ -67,13 +80,6 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .circ-el{display:flex;align-items:center;gap:2px;font-size:9px;font-weight:700}
 .circ-adjs{display:flex;gap:6px;justify-content:center}
 /* ── MINIMAL LAYOUT ── */
-.p-mini{display:flex;align-items:center;gap:6px;padding:3px 5px;background:var(--bg2);border:1px solid var(--bd);margin:1px}
-.mini-name{font-size:9px;color:var(--fg2);min-width:40px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mini-stat{display:flex;align-items:center;gap:2px}
-.mini-val{font-size:18px;font-weight:700;line-height:1;min-width:24px;text-align:center}
-.mini-lbl{font-size:7px;color:var(--fg2)}
-.mini-adjs{display:flex;gap:1px}
-.mini-thresh{display:flex;gap:3px;align-items:center}
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
 body.tg{--bg:#282828;--bg2:#32302F;--bg3:#3C3836;--bd:#504945;--fg:#EBDBB2;--fg2:#BDAE93;--fg3:#7C6F64;--red:#CC241D;--grn:#98971A;--yel:#D79921;--cyn:#689D6A;--wht:#FBF1C7;--bgrn:#B8BB26;--bbl:#83A598;--life:#FB4934;--mana:#83A598}
@@ -625,7 +631,7 @@ function turnBtn(pi){
 }
 function adjStat(pi,stat,d){
   var p=G.players[pi];var pv=p[stat];
-  p[stat]=Math.max(0,Math.min(999,p[stat]+d));if(p[stat]===pv)return;
+  var _max=(stat==='life'?G.cfg.maxLife:999);p[stat]=Math.max(0,Math.min(_max,p[stat]+d));if(p[stat]===pv)return;
   var df=p[stat]-pv;
   if(stat==='mana'&&df<0)p.manaUsed=Math.max(0,Math.min(999,p.manaUsed+Math.abs(df)));
   var ev=p.name+': '+stat+' '+(df>0?'+':'')+df;
@@ -1472,7 +1478,7 @@ function pCirc(p,pi){
   o('<div class="p-circ">');
   o('<div class="circ-name">'+h(p.name)+'</div>');
   o('<div class="circ-ring" style="border-color:'+lifeColor+'">');
-  if(p.dead){o('<div style="font-size:8px;color:var(--red)">DEATH&#39;S</div><div style="font-size:8px;color:var(--red)">DOOR</div>');}
+  if(p.dead){o('<div style="font-size:8px;color:var(--red)">DEATH&#39;S</div><div style="font-size:8px;color:var(--red)">DOOR</div><button class="dd-btn" style="font-size:7px" onclick="showLog('+pi+')">Log</button>');}
   else{o('<div class="circ-life" style="color:'+lifeColor+'">'+p.life+'</div>');}
   o('<div class="circ-mana">&#x25c6;'+p.mana+'</div>');
   o('</div>');
@@ -1496,7 +1502,7 @@ function pCirc(p,pi){
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
   var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
   var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
-  visD.forEach(function(d){o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'</button>');});
+  visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'</button>');});
   o('</div>');
   o('</div>');
   return out.join('');
@@ -1505,33 +1511,64 @@ function pCirc(p,pi){
 function pMini(p,pi){
   var out=[];function o(s){out.push(s);}
   var lifeColor=p.dead?'var(--red)':'var(--life)';
+  var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
+  var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
+  var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
+
   o('<div class="p-mini">');
+
+  // Name
   o('<div class="mini-name">'+h(p.name)+'</div>');
-  o('<div class="mini-stat">');
-  o('<div class="mini-lbl" style="color:'+lifeColor+'">&#x2665;</div>');
-  o('<button class="adj2" onclick="adjStat('+pi+',\'life\',-1)">-</button>');
-  o('<div class="mini-val" style="color:'+lifeColor+'">'+p.life+'</div>');
-  o('<button class="adj2" onclick="adjStat('+pi+',\'life\',1)">+</button>');
+
+  // Health tile
+  o('<div class="mini-tile" style="flex-direction:row;justify-content:space-between">');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'life\',-1)">-</button>');
+  o('<div style="display:flex;flex-direction:column;align-items:center">');
+  o('<div class="mini-tile-lbl" style="color:'+lifeColor+'">&#x2665; Life</div>');
+  o('<div class="mini-tile-val" style="color:'+lifeColor+'">'+(p.dead?'<svg width="70" height="70" viewBox="0 0 70 70"><line x1="5" y1="62" x2="65" y2="62" stroke="var(--red)" stroke-width="1.5"/><rect x="12" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5"/><rect x="49" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5"/><path d="M12 28 Q12 7 35 7 Q58 7 58 28" fill="none" stroke="var(--red)" stroke-width="2"/><polygon points="35,4 39,11 31,11" fill="var(--red)"/></svg>':p.life)+'</div>');
   o('</div>');
-  o('<div class="mini-stat">');
-  o('<div class="mini-lbl" style="color:var(--mana)">&#x25c6;</div>');
-  o('<button class="adj2" onclick="adjStat('+pi+',\'mana\',-1)">-</button>');
-  o('<div class="mini-val" style="color:var(--mana)">'+p.mana+'</div>');
-  o('<button class="adj2" onclick="adjStat('+pi+',\'mana\',1)">+</button>');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'life\',1)">+</button>');
   o('</div>');
-  o('<div class="mini-thresh">');
+  if(p.dead)o('<button class="dd-btn" style="width:100%" onclick="showLog('+pi+')">Log</button>');
+
+  // Mana tile
+  o('<div class="mini-tile" style="flex-direction:row;justify-content:space-between">');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'mana\',-1)">-</button>');
+  o('<div style="display:flex;flex-direction:column;align-items:center">');
+  o('<div class="mini-tile-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
+  o('<div class="mini-tile-val" style="color:var(--mana)">'+p.mana+'</div>');
+  o('</div>');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'mana\',1)">+</button>');
+  o('</div>');
+
+  // Threshold tile
+  o('<div class="mini-thresh-row">');
   ELEM.slice(0,4).forEach(function(e){
-    o(eSVG(e.k,12));
-    o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)">-</button>');
-    o('<span style="color:'+e.c+';font-size:10px;font-weight:700">'+p.thresh[e.k]+'</span>');
-    o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',1)">+</button>');
+    o('<div class="mini-el">');
+    o(eSVG(e.k,36));
+    o('<div class="mini-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
+    o('<div class="mini-el-btns">');
+    o('<button class="mini-el-btn" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)">-</button>');
+    o('<button class="mini-el-btn" onclick="adjEl('+pi+',\''+e.k+'\',1)">+</button>');
+    o('</div>');
+    o('</div>');
   });
   o('</div>');
-  o('<div style="flex:1"></div>');
+
+  // Dice tile
+  o('<div class="mini-dice-row">');
+  visD.forEach(function(d){
+    o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="font-size:11px;'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
+  });
+  o('</div>');
+
+  // Turn button
   o(turnBtn(pi));
+
   o('</div>');
   return out.join('');
 }
+
 
 function pHTML(p,pi){
   var out=[];function o(s){out.push(s);}
@@ -1600,7 +1637,7 @@ function pHTML(p,pi){
   var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
   o('<div class="dice-strip" style="padding:2px 2px 1px">');
   var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
-  visD.forEach(function(d){o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
+  visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
   // menu button moved to turnBar
   o('</div>');
