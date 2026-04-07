@@ -300,12 +300,12 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .ld{font-size:10px;color:var(--fg2);padding:12px;text-align:center}
 .tb.dis{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.45}
 /* Site cards display horizontally (landscape) */
-.cimg-site{aspect-ratio:2/3!important}
+
 .cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
 
 
 /* Site cards display horizontal/landscape */
-.cimg-site{aspect-ratio:2/3!important}
+
 .cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
 
 /* ── NEW PLAYER ZONE LAYOUT ──────────────────────────────── */
@@ -352,7 +352,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .eb{display:flex;flex-direction:column;gap:1px}
 
 /* Site card orientation */
-.cimg-site{aspect-ratio:2/3!important}
+
 .cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
 
 /* History/log */
@@ -390,7 +390,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 /* Bigger adj buttons for main zone */
 .adj{width:40px;height:40px;border:1px solid var(--bd);background:var(--bg);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px}
 /* Site card landscape aspect */
-.cimg-site{aspect-ratio:2/3!important}
+
 .cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
 </style>
 
@@ -1181,7 +1181,7 @@ function pContent(){
     fil.slice(0,120).forEach(function(c){
       var own=(G.coll[cName(c)]||{}).qty||0;var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];var si=SETS[cSet(c)]||{sym:'?',c:'var(--fg2)'};var isSite=cType(c)==='site';
       o('<div class="ct" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">');
-      o('<div class="cimg'+(isSite?' cimg-site':'')+'">'+cImgTag(c)+'</div>');
+      o('<div class="cimg">'+cImgTag(c)+'</div>');
       o('<div class="cinfo"><div class="cnm">'+h(cName(c))+(own?'<span class="own-b">&times;'+own+'</span>':'')+'</div><div class="cmeta" style="color:'+el.c+'">'+eSVG(cEl(c),9)+' '+cEl(c)+'</div><div class="cmeta"><span style="color:'+si.c+'">'+si.sym+'</span> '+cSet(c)+'</div></div></div>');
     });
     if(!fil.length)o('<div class="ld">No cards match.</div>');
