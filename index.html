@@ -302,12 +302,12 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .tb.dis{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.45}
 /* Site cards display horizontally (landscape) */
 
-.cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
+.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important;transform:rotate(90deg);transform-origin:center center}
 
 
 /* Site cards display horizontal/landscape */
 
-.cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
+.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important;transform:rotate(90deg);transform-origin:center center}
 
 /* ── NEW PLAYER ZONE LAYOUT ──────────────────────────────── */
 /* zone-main: horizontal strip with counters on edges */
@@ -354,7 +354,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 
 /* Site card orientation */
 
-.cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
+.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important;transform:rotate(90deg);transform-origin:center center}
 
 /* History/log */
 .hist{display:flex;flex-wrap:wrap;gap:2px;justify-content:center}
@@ -392,7 +392,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .adj{width:40px;height:40px;border:1px solid var(--bd);background:var(--bg);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px}
 /* Site card landscape aspect */
 
-.cm-img-site{aspect-ratio:4/3!important;max-width:240px!important}
+.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important;transform:rotate(90deg);transform-origin:center center}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -879,6 +879,12 @@ function cImgTag(c, style){
 }
 
 
+function _expandImg(el){
+  var im=el.querySelector('img');
+  G.expImg=im?im.src:imgURL(G.selCard);
+  G.expImgSite=G.selCard&&cType(G.selCard)==='site';
+  render();
+}
 function imgURL(c){
   var s=cSlug(c);
   if(!s) return cSVGfb(c);
@@ -1294,7 +1300,7 @@ function cModal(){
   var out=[];function o(s){out.push(s);}
   o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
-  o('<div class="cm-img'+(isSite?' cm-img-site':'')+'" onclick="G.expImg=imgURL(G.selCard);render()">'+cImgTag(c)+'</div>');
+  o('<div class="cm-img'+(isSite?' cm-img-site':'')+'" onclick="_expandImg(this)">'+cImgTag(c)+'</div>');
   o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
   o('<div class="cm-tags"><span class="cm-tag" style="color:'+el.c+';border-color:'+el.c+'">'+eSVG(cEl(c),10)+' '+cEl(c)+'</span><span class="cm-tag" style="color:'+rC+';border-color:'+rC+'">'+cRar(c)+'</span><span class="cm-tag">'+cType(c)+'</span><span class="cm-tag" style="color:'+si.c+';border-color:'+si.c+'">'+si.sym+' '+cSet(c)+'</span></div>');
   o('<div class="cm-mt">Mana: <b>'+(cMana(c)!=null?cMana(c):'&mdash;')+'</b> &middot; Threshold: <b>'+(cThr(c)||'none')+'</b> &middot; Power: <b>'+(cPow(c)!=null?cPow(c):'&mdash;')+'</b>'+(cArt(c)?'<br>Artist: '+h(cArt(c)):'')+'</div>');
@@ -1528,7 +1534,7 @@ function render(){
       o('<div class="pbg" onclick="if(event.target===this)goBack()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
-    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;render()"><img src="'+G.expImg+'" alt="card"></div>');
+    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card"'+(G.expImgSite?' style="transform:rotate(90deg);max-height:90vw;max-width:90vh"':' style="max-height:90vh;max-width:90vw"')+'></div>');
 
     document.getElementById('app').innerHTML=out.join('');
 
