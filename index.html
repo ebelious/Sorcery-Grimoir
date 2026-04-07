@@ -81,6 +81,9 @@ body.td{--bg:#282A36;--bg2:#323442;--bg3:#44475A;--bd:#6272A4;--fg:#F8F8F2;--fg2
 body.tn{--bg:#2E3440;--bg2:#3B4252;--bg3:#434C5E;--bd:#4C566A;--fg:#ECEFF4;--fg2:#D8DEE9;--fg3:#B0BAC8;--red:#BF616A;--grn:#A3BE8C;--yel:#EBCB8B;--cyn:#8FBCBB;--wht:#E5E9F0;--bgrn:#A3BE8C;--bbl:#88C0D0;--life:#BF616A;--mana:#88C0D0}
 body.te{--bg:#272E33;--bg2:#2E383C;--bg3:#374145;--bd:#495156;--fg:#D3C6AA;--fg2:#859289;--fg3:#4F5B58;--red:#E67E80;--grn:#A7C080;--yel:#DBBC7F;--cyn:#83C092;--wht:#D3C6AA;--bgrn:#A7C080;--bbl:#7FBBB3;--life:#E67E80;--mana:#7FBBB3}
 body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2:#6B5B45;--fg3:#9A8B75;--red:#C0392B;--grn:#27AE60;--yel:#D4820A;--cyn:#16A085;--wht:#1A1008;--bgrn:#2ECC71;--bbl:#2980B9;--life:#E74C3C;--mana:#2980B9}
+body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2:#C1A78E;--fg3:#867462;--red:#D47766;--grn:#85B695;--yel:#EBC06D;--cyn:#89B3B6;--wht:#ECE1D7;--bgrn:#85B695;--bbl:#A3A9CE;--life:#D47766;--mana:#89B3B6}
+body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b}
+body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2:#908CAA;--fg3:#6E6A86;--red:#EB6F92;--grn:#31748F;--yel:#F6C177;--cyn:#9CCFD8;--wht:#FAEBD7;--bgrn:#31748F;--bbl:#C4A7E7;--life:#EB6F92;--mana:#C4A7E7}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .flip{transform:rotate(180deg);flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px}
@@ -452,7 +455,7 @@ function eSVG(el,sz){
   return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 20 20"><rect x="1" y="1" width="18" height="18" fill="'+cc+'"/></svg>';
 }
 var SETS={'Alpha':{sym:'\u03b1',c:'#FBB829'},'Beta':{sym:'\u03b2',c:'#68A8E4'},'Arthurian Legends':{sym:'\u2720',c:'#98BC37'},'Gothic':{sym:'\u2629',c:'#E02C6D'},'Dragonlord':{sym:'\u27e1',c:'#F75341'},'Promotional':{sym:'\u2605',c:'#D699B6'}};
-var THEMES=[{k:'',l:'Srcery'},{k:'tg',l:'Gruvbox'},{k:'td',l:'Dracula'},{k:'tn',l:'Nord'},{k:'te',l:'Everforest'},{k:'tl',l:'Light'}];
+var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00'];
 var MENU_S={
@@ -469,6 +472,7 @@ var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'T
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
+  {id:'cg',   n:'Cardboard Guide',      url:'https://www.youtube.com/@cardboardguide/videos',      cid:'UCkI76BFK6-hKNI1nndQSp9A'},
   {id:'css',  n:'Common Sense Sorcery', url:'https://www.youtube.com/@commonsensesorcery/videos',  cid:'UCrCpAOPrsn3iSH7xMyEvwsg'},
   {id:'gec',  n:'Golden Eagle Cards',   url:'https://www.youtube.com/@goldeneagle1833/videos',     cid:'UCzWglR4ytbyq0aAfWrNaMHw'},
   {id:'loi',  n:'Lord of Itza',         url:'https://www.youtube.com/@lord_of_itza/videos',        cid:'UC598IUEN4qp8N_KAPkTvx0w'},
@@ -552,14 +556,30 @@ function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function ld(k,d){try{var r=localStorage.getItem(k);return r!==null?JSON.parse(r):d;}catch(e){return d;}}
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
+var _wakeLock=null;
+async function _requestWakeLock(){
+  if(!('wakeLock' in navigator))return;
+  try{
+    _wakeLock=await navigator.wakeLock.request('screen');
+    _wakeLock.addEventListener('release',function(){_wakeLock=null;});
+  }catch(e){_wakeLock=null;}
+}
+function _releaseWakeLock(){
+  if(_wakeLock){_wakeLock.release();_wakeLock=null;}
+}
+// Re-acquire wake lock when page becomes visible again
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='visible'&&G.cfg&&G.cfg.keepAwake)_requestWakeLock();
+});
+
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'standard'});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'standard',keepAwake:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);_applyBodyClass();initP(G.mode);render();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);render();if(G.cfg.keepAwake)_requestWakeLock();
   
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
@@ -1678,7 +1698,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Search cards, FAQ, codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button></div></div>');
       o('<div class="dbody">');
       Object.keys(MENU_S).forEach(function(cat){o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');});
       o('</div><div class="dfoot"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></div></div>');
