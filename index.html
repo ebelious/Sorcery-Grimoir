@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:;">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 
 <!-- PWA -->
@@ -1027,62 +1028,57 @@ function extractJSON(txt,type){
 }
 
 // ── YOUTUBE ───────────────────────────────────────────────────────────────────
-// Uses playlistItems.list (1 quota unit per channel vs 100 for search).
-// Each channel's uploads playlist ID = channel ID with 'UC' replaced by 'UU'.
-
 var YT_API_KEY='AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
 
 function _fetchVideos(cid, chName, cb){
-  // Uploads playlist: replace leading UC with UU
   var pid = 'UU' + cid.slice(2);
   var url = 'https://www.googleapis.com/youtube/v3/playlistItems'
-    + '?part=snippet'
-    + '&playlistId=' + pid
-    + '&maxResults=3'
-    + '&key=' + YT_API_KEY;
+    +'?part=snippet&playlistId='+pid+'&maxResults=3&key='+YT_API_KEY;
   fetch(url)
     .then(function(r){ return r.json(); })
     .then(function(d){
-      if(d.error||!d.items||!d.items.length){ cb([]); return; }
-      var vids = d.items.map(function(item){
-        var snip = item.snippet||{};
-        var vid = snip.resourceId && snip.resourceId.videoId;
-        if(!vid||!/^[A-Za-z0-9_-]{11}$/.test(vid)) return null;
-        var pub = snip.publishedAt ? new Date(snip.publishedAt) : null;
+      if(d.error){
+        console.warn('YT API error for '+chName+':', d.error.code, d.error.message);
+        cb([]); return;
+      }
+      if(!d.items||!d.items.length){ cb([]); return; }
+      var vids=d.items.map(function(item){
+        var snip=item.snippet||{};
+        var vid=snip.resourceId&&snip.resourceId.videoId;
+        if(!vid||!/^[A-Za-z0-9_-]{11}$/.test(vid))return null;
+        var pub=snip.publishedAt?new Date(snip.publishedAt):null;
         return {
-          channel: chName,
-          title: snip.title||'',
-          videoId: vid,
-          date: pub ? pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '',
-          _ts: pub ? pub.getTime() : 0
+          channel:chName, title:snip.title||'', videoId:vid,
+          date:pub?pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'',
+          _ts:pub?pub.getTime():0
         };
       }).filter(Boolean);
       cb(vids);
     })
-    .catch(function(){ cb([]); });
+    .catch(function(e){ console.warn('YT fetch error for '+chName+':', e); cb([]); });
 }
 
 function loadYTVideos(){
-  if(G.ytLoading) return;
+  if(G.ytLoading)return;
   G.ytLoading=true; G.ytLoaded=false; G.ytErr=null;
   G.ytVids=[]; render();
-  var channels = YT_CHS.filter(function(x){ return x.id!=='all' && x.cid; });
+  var channels=YT_CHS.filter(function(x){ return x.id!=='all'&&x.cid; });
   var allVids=[]; var done=0; var total=channels.length;
   function finish(){
     done++;
     if(done>=total){
       G.ytLoading=false; G.ytLoaded=true;
       allVids.sort(function(a,b){ return (b._ts||0)-(a._ts||0); });
-      G.ytVids = allVids.map(function(v){
+      G.ytVids=allVids.map(function(v){
         return {channel:v.channel,title:v.title,videoId:v.videoId,date:v.date};
       });
-      if(!G.ytVids.length) G.ytErr='No videos found. Check API key.';
+      if(!G.ytVids.length) G.ytErr='No videos found. Check API key in Google Cloud Console.';
       render();
     }
   }
   channels.forEach(function(ch){
     _fetchVideos(ch.cid, ch.n, function(vids){
-      if(vids.length) allVids = allVids.concat(vids);
+      if(vids.length) allVids=allVids.concat(vids);
       finish();
     });
   });
