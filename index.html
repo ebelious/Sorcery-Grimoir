@@ -186,10 +186,10 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .acc-meta{display:flex;align-items:center;gap:5px}
 .acc-cnt{font-size:8px;color:var(--fg2)}
 .acc-arr{font-size:9px;color:var(--fg2)}
-.acc-body{padding:0 9px 7px;border-top:1px solid var(--bd)}
+.acc-body{padding:4px 9px 8px;border-top:1px solid var(--bd);overflow:visible}
 .acc-row{padding:5px 0;border-bottom:1px solid var(--bg2)}
 .acc-q{font-size:9px;font-weight:700;color:var(--wht);margin-bottom:2px}
-.acc-a{font-size:8px;color:var(--fg2);line-height:1.5}
+.acc-a{font-size:9px;color:var(--fg2);line-height:1.6;white-space:normal;word-break:break-word}
 .cod-def{font-size:8px;color:var(--fg2);line-height:1.55;padding-top:6px}
 .stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:5px;margin-bottom:6px}
@@ -302,12 +302,12 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .tb.dis{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.45}
 /* Site cards display horizontally (landscape) */
 
-.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important}.cm-img-site img{transform:rotate(90deg) scale(1.35);transform-origin:center center}
+.cm-img-site{aspect-ratio:4/3!important;max-width:260px!important}.cm-img-site img{transform:none}
 
 
 /* Site cards display horizontal/landscape */
 
-.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important}.cm-img-site img{transform:rotate(90deg) scale(1.35);transform-origin:center center}
+.cm-img-site{aspect-ratio:4/3!important;max-width:260px!important}.cm-img-site img{transform:none}
 
 /* ── NEW PLAYER ZONE LAYOUT ──────────────────────────────── */
 /* zone-main: horizontal strip with counters on edges */
@@ -354,7 +354,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 
 /* Site card orientation */
 
-.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important}.cm-img-site img{transform:rotate(90deg) scale(1.35);transform-origin:center center}
+.cm-img-site{aspect-ratio:4/3!important;max-width:260px!important}.cm-img-site img{transform:none}
 
 /* History/log */
 .hist{display:flex;flex-wrap:wrap;gap:2px;justify-content:center}
@@ -392,7 +392,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .adj{width:40px;height:40px;border:1px solid var(--bd);background:var(--bg);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px}
 /* Site card landscape aspect */
 
-.cm-img-site{aspect-ratio:3/4!important;max-width:160px!important}.cm-img-site img{transform:rotate(90deg) scale(1.35);transform-origin:center center}
+.cm-img-site{aspect-ratio:4/3!important;max-width:260px!important}.cm-img-site img{transform:none}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1323,7 +1323,7 @@ function cModal(){
       }
       if(cardCodex.length){
         o('<div style="font-size:8px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex Keywords</div>');
-        cardCodex.forEach(function(k){o('<div class="acc-row"><div class="acc-q">'+h(k.k)+'</div><div class="acc-a">'+h(k.def.slice(0,200))+(k.def.length>200?'&hellip;':'')+'</div></div>');});
+        cardCodex.forEach(function(k){o('<div class="acc-row"><div class="acc-q">'+h(k.k)+'</div><div class="acc-a">'+h(k.def)+'</div></div>');});
       }
       o('</div>');
     }
@@ -1534,7 +1534,7 @@ function render(){
       o('<div class="pbg" onclick="if(event.target===this)goBack()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
-    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card"'+(G.expImgSite?' style="transform:rotate(90deg);max-height:90vw;max-width:90vh"':' style="max-height:90vh;max-width:90vw"')+'></div>');
+    if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="max-height:90vh;max-width:90vw;object-fit:contain"></div>');
 
     document.getElementById('app').innerHTML=out.join('');
 
