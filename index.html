@@ -60,7 +60,7 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 /* ── CIRCULAR LAYOUT ── */
 .p-mini{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0}
 .mini-name{font-size:18px;font-weight:700;color:var(--fg);text-align:center;padding:6px 4px;border-bottom:1px solid var(--bd)}
-.mini-tile{display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:8px 6px;border-bottom:1px solid var(--bd);gap:2px}
+.mini-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;border-bottom:1px solid var(--bd);gap:6px}
 .mini-tile-lbl{font-size:18px;font-weight:700;width:32px;text-align:center}
 .mini-tile-val{font-size:56px;font-weight:700;line-height:1;min-width:70px;text-align:center;flex:1}
 .mini-tile-btn{width:64px;height:64px;font-size:36px;font-weight:700;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -1525,26 +1525,24 @@ function pMini(p,pi){
   o('<div class="mini-name">'+h(p.name)+'</div>');
 
   // Health tile
-  o('<div class="mini-tile" style="flex-direction:row;justify-content:space-between">');
-  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'life\',-1)">-</button>');
-  o('<div style="display:flex;flex-direction:column;align-items:center">');
+  o('<div class="mini-tile">');
   o('<div class="mini-tile-lbl" style="color:'+lifeColor+'">&#x2665; Life</div>');
-  o('<div class="mini-tile-val" style="color:'+lifeColor+'">'+(p.dead?'<svg width="70" height="70" viewBox="0 0 70 70"><line x1="5" y1="62" x2="65" y2="62" stroke="var(--red)" stroke-width="1.5"/><rect x="12" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5"/><rect x="49" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5"/><path d="M12 28 Q12 7 35 7 Q58 7 58 28" fill="none" stroke="var(--red)" stroke-width="2"/><polygon points="35,4 39,11 31,11" fill="var(--red)"/></svg>':p.life)+'</div>');
-  o('</div>');
+  o('<div style="display:flex;align-items:center;gap:6px;justify-content:center">');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'life\',-1)">-</button>');
+  o('<div class="mini-tile-val" style="color:'+lifeColor+'">'+(p.dead?ddSVG():p.life)+'</div>');
   o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'life\',1)">+</button>');
   o('</div>');
-  if(p.dead)o('<button class="dd-btn" style="width:100%" onclick="showLog('+pi+')">Log</button>');
-
-  // Mana tile
-  o('<div class="mini-tile" style="flex-direction:row;justify-content:space-between">');
-  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'mana\',-1)">-</button>');
-  o('<div style="display:flex;flex-direction:column;align-items:center">');
-  o('<div class="mini-tile-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
-  o('<div class="mini-tile-val" style="color:var(--mana)">'+p.mana+'</div>');
+  if(p.dead)o('<button class="dd-btn" style="width:100%;margin-top:4px" onclick="showLog('+pi+')">Log</button>');
   o('</div>');
+  // Mana tile
+  o('<div class="mini-tile">');
+  o('<div class="mini-tile-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
+  o('<div style="display:flex;align-items:center;gap:6px;justify-content:center">');
+  o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'mana\',-1)">-</button>');
+  o('<div class="mini-tile-val" style="color:var(--mana)">'+p.mana+'</div>');
   o('<button class="mini-tile-btn" onclick="adjStat('+pi+',\'mana\',1)">+</button>');
   o('</div>');
-
+  o('</div>');
   // Threshold tile
   o('<div class="mini-thresh-row">');
   ELEM.slice(0,4).forEach(function(e){
