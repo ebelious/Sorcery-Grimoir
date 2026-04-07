@@ -1348,7 +1348,7 @@ function cModal(){
   if(isSite){
     var _sid='si'+Math.random().toString(36).slice(2,7);
     var _src=IMG_PATH+cSlug(c)+'.png';
-    o('<canvas id="'+_sid+'" width="280" height="210" onclick="_expandImg(this)" style="display:block;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd)" data-src="'+_src+'"></canvas>');
+    o('<canvas id="'+_sid+'" width="220" height="165" onclick="_expandImg(this)" style="display:block;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd)" data-src="'+_src+'"></canvas>');
     setTimeout(function(){
       var cv=document.getElementById(_sid);
       if(!cv)return;
@@ -1356,9 +1356,9 @@ function cModal(){
       var img=new Image();
       img.onload=function(){
         ctx.save();
-        ctx.translate(280,0);
+        ctx.translate(220,0);
         ctx.rotate(Math.PI/2);
-        ctx.drawImage(img,0,0,210,280);
+        ctx.drawImage(img,0,0,165,220);
         ctx.restore();
       };
       img.onerror=function(){
