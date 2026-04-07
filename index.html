@@ -213,7 +213,7 @@ body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2
 .cm-img{width:100%;max-width:160px;margin:0 auto 6px;aspect-ratio:3/4;overflow:hidden;background:var(--bg);cursor:pointer;border:1px solid var(--bd)}
 .cm-img img{width:100%;height:100%;object-fit:cover;display:block}
 .cm-img-site{width:100%;max-width:260px;height:195px;margin:0 auto 6px;cursor:pointer;border:1px solid var(--bd);overflow:hidden;background:var(--bg);position:relative}
-.cm-img-site img{position:absolute;top:50%;left:50%;width:195px;height:260px;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center center;object-fit:cover}
+.cm-img-site img{position:absolute;top:50%;left:50%;height:260px;width:195px;min-height:100%;min-width:100%;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center center;object-fit:cover}
 .cm-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;margin-bottom:5px}
 .cm-tag{font-size:8px;padding:2px 5px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:9px;color:var(--fg2);text-align:center;line-height:1.7;margin-bottom:4px}
@@ -463,8 +463,50 @@ var YT_SEED=[
   {channel:'SorceryCon', title:'SorceryCon 2024 Day 1',     videoId:'zvplVwKCmtI',date:'Nov 2024'},
   {channel:'SorceryCon', title:'SorceryCon 2024 Day 2',     videoId:'pZSK1GSqaQU',date:'Nov 2024'},
 ];
-var ARTISTS=[{n:'Boris Vallejo',k:'Dust rewards, promos'},{n:'Liz Danforth',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Drew Tucker',k:'Alpha/Beta/Arthurian major illustrator'},{n:'Ed Beard Jr.',k:'Dragonlord miniset'},{n:'Séverine Pineaux',k:'Elemental Avatars, Alpha/Beta/Gothic/Arthurian'},{n:'Brian Smith',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Tony Szczudlo',k:'Alpha/Beta fire & battle cards'},{n:'Michal Nagypál',k:'Alpha/Beta/Gothic air & stealth'},{n:'Jussi Pylkäs',k:'Alpha/Beta/Gothic water & undead'},{n:'Dan Seagrave',k:'Alpha/Beta/Gothic metal/dark art'},{n:'Caio Calazans',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Vasiliy Ermolaev',k:'Alpha/Beta/Arthurian'},{n:'Jesper Ejsing',k:'Arthurian Legends'},{n:'Jeff A. Menges',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Peter Mohrbacher',k:'Gothic angelic art'},{n:'Raymond Swanland',k:'Gothic set'},{n:'Elvira Shakirova',k:'Alpha/Beta/Gothic/Arthurian'},{n:'Ossi Hiekkala',k:'Alpha/Beta/Arthurian'},{n:'Francesca Baerald',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Alan Pollack',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Melissa A. Benson',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Vincent Pompetti',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Andrea Modesti',k:'Alpha/Beta/Arthurian'},{n:'Elwira Pawlikowska',k:'Alpha/Beta/Arthurian/Gothic'},{n:'Lindsey Crummett',k:'Alpha/Beta/Arthurian/Gothic'}];
-var PUB_DECKS=[{name:'Hot Springs Druid',author:'Nate "Duo" Smith',el:'Water/Fire',av:'Druid',url:'https://curiosa.io/decks',desc:'Gen Con 2025 Crossroads Champion.'},{name:'Seeing Red',author:'Julian Singer-Corbin',el:'Fire',av:'Avatar of Fire',url:'https://curiosa.io/decks',desc:'Fast mono-fire. SCG CON Baltimore winner.'},{name:'Earth Crusade',author:'Community',el:'Earth',av:'Geomancer',url:'https://curiosa.io/decks',desc:'Midrange: Crusade, Roots, Bedrock, Sinkhole.'},{name:'Aura Enchantress',author:'Community',el:'Water/Earth',av:'Enchantress',url:'https://curiosa.io/decks',desc:'Animated auras + Fey Changeling combos.'},{name:'Gothic Necromancer',author:'Community',el:'Earth/Neutral',av:'Necromancer',url:'https://curiosa.io/decks',desc:'Gothic undead synergies.'}];
+var ARTISTS=[
+  {n:'Adam Burke',k:'Alpha/Beta/Gothic/Arthurian',url:'https://www.collectorarthouse.com/sorcery-artists/adam-burke'},
+  {n:'Adam Kaspar',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/adam-kaspar'},
+  {n:'Alan Pollack',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/alan-pollack'},
+  {n:'Anson Maddocks',k:'Alpha/Beta — Magic: The Gathering veteran',url:'https://www.collectorarthouse.com/sorcery-artists/anson-maddocks'},
+  {n:'Atlas Thorn',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/atlas-thorn'},
+  {n:'Boris Vallejo',k:'Dust rewards & promos',url:''},
+  {n:'Brian Smith',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Bryon Wackwitz',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/bryon-wackwitz'},
+  {n:'Caio Calazans',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/caio-calazans'},
+  {n:'Dan Seagrave',k:'Alpha/Beta/Gothic dark art',url:''},
+  {n:'Doug Kovacs',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/doug-kovacs'},
+  {n:'Drew Tucker',k:'Alpha/Beta/Arthurian — major illustrator',url:'https://www.collectorarthouse.com/sorcery-artists/drew-tucker'},
+  {n:'Ed Beard Jr.',k:'Dragonlord miniset',url:''},
+  {n:'Elvira Shakirova',k:'Alpha/Beta/Gothic/Arthurian',url:''},
+  {n:'Elwira Pawlikowska',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/elwira-pawlikowska'},
+  {n:'Emil Idzikowski',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/emil-idzikowski'},
+  {n:'Francesca Baerald',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Gadu Duaso',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/gadu-duaso'},
+  {n:'Gerald Brom',k:'Sorcery TCG artist',url:''},
+  {n:'Jeff A. Menges',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/jeff-a-menges'},
+  {n:'Jeff Easley',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Jesper Ejsing',k:'Arthurian Legends',url:''},
+  {n:'Jussi Pylkäs',k:'Alpha/Beta/Gothic water & undead',url:'https://www.collectorarthouse.com/sorcery-artists/jussi-pylkas'},
+  {n:'Lindsey Crummett',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Liz Danforth',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Margaret Organ-Kean',k:'Alpha/Beta — Magic: The Gathering veteran',url:''},
+  {n:'Marta Molina',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/marta-molina'},
+  {n:'Mattias Frisk',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Melissa Benson',k:'Alpha/Beta/Arthurian/Gothic — Magic: The Gathering veteran',url:'https://www.collectorarthouse.com/sorcery-artists/melissa-benson'},
+  {n:'Michal Nagypál',k:'Alpha/Beta/Gothic air & stealth',url:'https://www.collectorarthouse.com/sorcery-artists/michal-nagypal'},
+  {n:'Ossi Hiekkala',k:'Alpha/Beta/Arthurian',url:''},
+  {n:'Peter Mohrbacher',k:'Gothic angelic art',url:''},
+  {n:'Raffaela Lerch-Cech',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/raffaela-lerch-cech'},
+  {n:'Raymond Swanland',k:'Gothic set',url:''},
+  {n:'Rodney Matthews',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Sam McKinnon',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Scott Kirschner',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/scott-kirschner'},
+  {n:'Séverine Pineaux',k:'Elemental Avatars — Alpha/Beta/Gothic/Arthurian',url:''},
+  {n:'Tony Szczudlo',k:'Alpha/Beta fire & battle cards',url:''},
+  {n:'Truitt Parrish',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/truitt-parrish'},
+  {n:'Vasiliy Ermolaev',k:'Alpha/Beta/Arthurian',url:''},
+  {n:'Vincent Pompetti',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+];var PUB_DECKS=[{name:'Hot Springs Druid',author:'Nate "Duo" Smith',el:'Water/Fire',av:'Druid',url:'https://curiosa.io/decks',desc:'Gen Con 2025 Crossroads Champion.'},{name:'Seeing Red',author:'Julian Singer-Corbin',el:'Fire',av:'Avatar of Fire',url:'https://curiosa.io/decks',desc:'Fast mono-fire. SCG CON Baltimore winner.'},{name:'Earth Crusade',author:'Community',el:'Earth',av:'Geomancer',url:'https://curiosa.io/decks',desc:'Midrange: Crusade, Roots, Bedrock, Sinkhole.'},{name:'Aura Enchantress',author:'Community',el:'Water/Earth',av:'Enchantress',url:'https://curiosa.io/decks',desc:'Animated auras + Fey Changeling combos.'},{name:'Gothic Necromancer',author:'Community',el:'Earth/Neutral',av:'Necromancer',url:'https://curiosa.io/decks',desc:'Gothic undead synergies.'}];
 var RULES=[{s:'Setup',c:'60+ card Spellbook, 30+ site Atlas, one Avatar. Draw 4. Optional mulligan.'},{s:'Turn Order',c:'1. Start: untap, sites produce mana, draw 1. 2. Main: move, cast, attack. 3. End: discard to limit.'},{s:'Mana & Threshold',c:'Sites produce mana each Start. Threshold checked (not paid) at casting.'},{s:'Combat',c:'Simultaneous damage equal to power. Lower power destroyed. Higher reduced until end of turn.'},{s:"Death's Door",c:"At 0 life: no damage that turn. Next damage = defeat."},{s:'Winning',c:"Reduce Avatar to Death's Door then deal damage, or deplete opponent Spellbook."},{s:'Golden Rule',c:'Card text overrides rulebook.'}];
 
 // ── STATE ────────────────────────────────────────────────────────────────────
@@ -1286,7 +1328,7 @@ function pContent(){
   }
   if(p==='art'){
     o('<div class="stbar">'+ARTISTS.length+' artists</div>');
-    ARTISTS.forEach(function(a,i){var exp=!!G.artExp[i];o('<div class="art-c"><div class="art-h" onclick="G.artExp['+i+']=!G.artExp['+i+'];render()"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--fg2);font-size:8px">'+(exp?'&#9650;':'&#9660;')+'</span></div>');if(exp)o('<div class="art-body"><a class="ext-lnk" style="padding:2px 0;font-size:9px" href="https://www.google.com/search?q='+encodeURIComponent(a.n+' Sorcery TCG card art')+'&tbm=isch" target="_blank">Search artwork &rarr;</a></div>');o('</div>');});
+    ARTISTS.forEach(function(a,i){var exp=!!G.artExp[i];o('<div class="art-c"><div class="art-h" onclick="G.artExp['+i+']=!G.artExp['+i+'];render()"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--fg2);font-size:8px">'+(exp?'&#9650;':'&#9660;')+'</span></div>');if(exp)o('<div class="art-body">'+(a.url?'<a class="ext-lnk" style="padding:2px 0;font-size:9px" href="'+a.url+'" target="_blank">Collector Arthouse &rarr;</a>':'')+'<a class="ext-lnk" style="padding:2px 0;font-size:9px" href="https://www.google.com/search?q='+encodeURIComponent(a.n+' Sorcery TCG card art')+'&tbm=isch" target="_blank">Search artwork &rarr;</a></div>');o('</div>');});
     return out.join('');
   }
   return '';
