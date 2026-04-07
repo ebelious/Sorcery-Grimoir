@@ -888,16 +888,13 @@ function imgErr(img){
   var s = img.dataset.slug||'';
   if(!s){ img.onerror=null; img.src=imgSVGfb(''); return; }
   if(!img._variants){
-    // Build all variants: all set prefixes x both prints, same card name
     var parts = s.split('-');
-    // parts[0]=set, parts[1..n-2]=cardname, parts[n-1]=print, parts[n-2]=product
-    var cardname = parts.slice(1,-2).join('-'); // e.g. apprentice_wizard
-    var sets = ['alp','bet','pro','got','art','dra'];
-    var prints = ['s','f'];
+    var cardname = parts.slice(1,-2).join('-');
     var tried = {}; tried[s]=true;
     var variants = [];
-    sets.forEach(function(st){
-      prints.forEach(function(pr){
+    // Try alp and bet with both prints - these two sets share most cards
+    ['alp','bet'].forEach(function(st){
+      ['s','f'].forEach(function(pr){
         var v = st+'-'+cardname+'-b-'+pr;
         if(!tried[v]){ tried[v]=true; variants.push(v); }
       });
