@@ -71,6 +71,20 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .mini-el-btns{display:flex;gap:4px}
 .mini-el-btn{width:44px;height:44px;font-size:22px;font-weight:700;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);cursor:pointer}
 .mini-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px;border-bottom:1px solid var(--bd)}
+.p-tap{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0;user-select:none}
+.tap-name{font-size:15px;font-weight:700;color:var(--fg);text-align:center;padding:5px;border-bottom:1px solid var(--bd)}
+.tap-row{display:flex;border-bottom:1px solid var(--bd)}
+.tap-tile{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 4px;min-height:110px;border-right:1px solid var(--bd);overflow:hidden}
+.tap-tile:last-child{border-right:none}
+.tap-lbl{font-size:11px;font-weight:700;color:var(--fg2);margin-bottom:4px}
+.tap-val{font-size:52px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
+.tap-btn-top{position:absolute;top:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .1s}.tap-btn-top:active{background:rgba(255,255,255,0.15)}
+.tap-btn-bot{position:absolute;bottom:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .1s}.tap-btn-bot:active{background:rgba(255,255,255,0.15)}
+.tap-el-row{display:flex;border-bottom:1px solid var(--bd)}
+.tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 2px;border-right:1px solid var(--bd);overflow:hidden}
+.tap-el:last-child{border-right:none}
+.tap-el-val{font-size:30px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
+.tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
 .p-circ{display:flex;flex-direction:column;align-items:center;padding:4px;gap:3px;background:var(--bg2);border:1px solid var(--bd);margin:1px}
 .circ-ring{position:relative;width:110px;height:110px;border-radius:50%;border:3px solid var(--bd);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column}
 .circ-life{font-size:32px;font-weight:700;line-height:1;color:var(--life)}
@@ -305,6 +319,11 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .pd-mt{font-size:8px;color:var(--fg2);margin-top:1px}
 .pd-ds{font-size:8px;color:var(--fg2);margin-top:3px;line-height:1.4}
 .pd-lnk{display:inline-block;font-size:8px;color:var(--bbl);margin-top:3px}
+.ev-ac-wrap{position:relative;flex:1}
+.ev-ac-box{position:absolute;top:100%;left:0;right:0;background:var(--bg3);border:1px solid var(--bd);z-index:100;max-height:180px;overflow-y:auto}
+.ev-ac-item{padding:7px 9px;font-size:11px;cursor:pointer;border-bottom:1px solid var(--bd)}
+.ev-ac-item:active{background:var(--bg2)}
+.ev-ac-none{padding:7px 9px;font-size:10px;color:var(--fg2)}
 .ev-c{padding:7px 8px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:4px}
 .ev-nm{font-size:10px;font-weight:700}
 .ev-mt{font-size:8px;color:var(--fg2);margin-top:2px}
@@ -585,7 +604,7 @@ function boot(){
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);_applyBodyClass();initP(G.mode);render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
@@ -1180,6 +1199,113 @@ function loadYTVideos(){
   });
 }
 // ── NEWS ──────────────────────────────────────────────────────────────────────
+var _evACTimer=null;
+function evCityAutocomplete(val){
+  clearTimeout(_evACTimer);
+  var box=document.getElementById('ev-ac-box');
+  if(!val||val.length<2){if(box)box.innerHTML='';return;}
+  _evACTimer=setTimeout(function(){
+    fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(val)+'&format=json&limit=6&addressdetails=1&accept-language=en&countrycodes=us')
+      .then(function(r){return r.json();})
+      .then(function(results){
+        var box=document.getElementById('ev-ac-box');
+        if(!box)return;
+        if(!results||!results.length){box.innerHTML='<div class="ev-ac-none">No cities found</div>';return;}
+        var html='';
+        results.forEach(function(r){
+          var addr=r.address||{};
+          var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||r.display_name.split(',')[0];
+          var state=addr.state||'';
+          var label=city+(state?', '+state:'');
+          html+='<div class="ev-ac-item" onclick="evSelectCity(this)" data-label="'+label.replace(/"/g,'&quot;')+'"><b>'+city+'</b>'+(state?'<span style="color:var(--fg2)">, '+state+'</span>':'')+'</div>';
+        });
+        box.innerHTML=html;
+      })
+      .catch(function(){});
+  },300);
+}
+
+function evSelectCity(el){
+  var label=typeof el==='string'?el:(el.dataset?el.dataset.label:el);
+  if(!label)return;
+  G.evCityInput=label;G.evCity=label;
+  var inp=document.getElementById('ev-city-inp');
+  if(inp)inp.value=label;
+  var box=document.getElementById('ev-ac-box');
+  if(box)box.innerHTML='';
+  loadLocalEvents(label);
+}
+
+function evUnsaveKey(key){
+  G.evSaved=(G.evSaved||[]).filter(function(x){return (x.name+(x.location||x.loc||''))!==key;});
+  sv('sg-evsaved',G.evSaved);render();
+}
+function evSave(idx){
+  var ev=(G._evReg||[])[idx];if(!ev)return;
+  G.evSaved=G.evSaved||[];
+  var key=ev.name+(ev.location||ev.loc||'');
+  if(!G.evSaved.find(function(x){return (x.name+(x.location||x.loc||''))===key;})){
+    G.evSaved.push(ev);sv('sg-evsaved',G.evSaved);
+  }
+  render();
+}
+function evUnsave(idx){
+  var ev=(G._evReg||[])[idx];
+  var key=ev?ev.name+(ev.location||ev.loc||''):idx;
+  G.evSaved=(G.evSaved||[]).filter(function(x){return (x.name+(x.location||x.loc||''))!==key;});
+  sv('sg-evsaved',G.evSaved);render();
+}
+
+function loadLocalEvents(city){
+  if(G.evLoading)return;
+  G.evLoading=true;G.evLoaded=false;G.evErr=null;G.evItems=null;render();
+  var loc=city||G.evCity||'your area';
+  var coordHint=(G.evLat&&G.evLng)?' (lat '+G.evLat.toFixed(4)+' lon '+G.evLng.toFixed(4)+')':'';
+  var prompt='Search the web for Sorcery Contested Realm TCG events near '+loc+coordHint+'. '
+    +'IMPORTANT: Fetch and search https://play.sorcerytcg.com/events — this is the official Play Network which lists weekly game store events. Look for stores in or near '+loc+'. '
+    +'Also search Google for: Sorcery Contested Realm TCG events near '+loc+'. '
+    +'Include recurring weekly events (e.g. every Friday) if they are at a local game store near '+loc+'. '
+    +'Return ONLY a raw JSON array, no markdown fences, no explanation: '
+    +'[{"name":"Event or Store Name","date":"Day schedule e.g. Every Friday","location":"Store Name, City, State","address":"Full street address if found","type":"Casual/Tournament/Weekly","url":"https://..."}]. '
+    +'Include up to 8 events. Prefer events closest to '+loc+'.';
+  apiCall(prompt,2500,function(err,txt){
+    G.evLoading=false;G.evLoaded=true;
+    if(!err&&txt){
+      var arr=extractJSON(txt,'array');
+      if(arr&&arr.length){G.evItems=arr;render();return;}
+    }
+    G.evErr='Could not load events. Try the Play Network link below.';render();
+  });
+}
+
+function getLocationAndLoadEvents(){
+  if(!navigator.geolocation){G.evCity='your area';loadLocalEvents();return;}
+  G.evLoading=true;render();
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      var lat=pos.coords.latitude,lng=pos.coords.longitude;
+      // Reverse geocode using nominatim (free, no key)
+      fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lng+'&format=json&accept-language=en')
+        .then(function(r){return r.json();})
+        .then(function(d){
+          var addr=d.address||{};
+          var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||'';
+          var state=addr.state||addr.state_district||'';
+          var country=addr.country_code||'';
+          // Build readable location: "Jacksonville, FL" style
+          var stateAbbr=state;
+          G.evCity=city+(stateAbbr?', '+stateAbbr:'')+(country&&country!=='us'?' ('+country.toUpperCase()+')':'');
+          if(!G.evCity.trim())G.evCity=d.display_name?d.display_name.split(',')[0]:'your area';
+          G.evLat=lat;G.evLng=lng;
+          G.evLoading=false;
+          loadLocalEvents(G.evCity);
+        })
+        .catch(function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();});
+    },
+    function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();}
+  );
+}
+
 function loadNews(){
   if(G.newsLoading)return;G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
   // Use Claude web_search to find real news articles from sorcerytcg.com
@@ -1254,7 +1380,7 @@ function pContent(){
     THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});
     o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
-    o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==='standard')?' selected':'')+'>Standard</option><option value="circular"'+(G.cfg.layout==='circular'?' selected':'')+'>Circular</option><option value="minimal"'+(G.cfg.layout==='minimal'?' selected':'')+'>Minimal</option></select></div>');
+    o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==="standard")?" selected":"")+'>Standard</option><option value="circular"'+(G.cfg.layout==="circular"?" selected":"")+'>Circular</option><option value="minimal"'+(G.cfg.layout==="minimal"?" selected":"")+'>Minimal</option><option value="tap"'+(G.cfg.layout==="tap"?" selected":"")+'>Tap</option></select></div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');}else{o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px">Open in browser &rarr; Share/Menu &rarr; "Add to Home Screen"</div>');}return out.join('');}
   if(p==='rules'){RULES.forEach(function(r){o('<div class="acc" style="margin-bottom:3px"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>');});o('<a class="ext-lnk" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook &rarr;</a>');return out.join('');}
@@ -1343,7 +1469,86 @@ function pContent(){
     o('<a class="ext-lnk" href="https://curiosa.io/decks" target="_blank">Curiosa decklists &rarr;</a>');
     return out.join('');
   }
-  if(p==='ev'){[{n:'Weekly Casual Play',date:'Every Sunday',loc:'Local game stores',type:'Casual',url:'https://play.sorcerytcg.com'},{n:'Cornerstone Championship',date:'Check Play Network',loc:'Participating stores',type:'Championship',url:'https://play.sorcerytcg.com'},{n:'SCG CON',date:'Check schedule',loc:'United States',type:'Competitive',url:'https://starcitygames.com'}].forEach(function(e){o('<div class="ev-c"><div class="ev-nm">'+h(e.n)+'</div><div class="ev-mt">'+localDate(e.date)+' &middot; '+h(e.loc)+' &middot; '+h(e.type)+'</div><a class="ext-lnk" style="padding:3px 0" href="'+e.url+'" target="_blank">Details &rarr;</a></div>');});o('<a class="ext-lnk" href="https://play.sorcerytcg.com" target="_blank">All events on Play Network &rarr;</a>');return out.join('');}
+  if(p==='ev'){G._evReg=[];
+    var _evCity=G.evCity||'';
+    // Build Play Network search URL with city
+    var _pnParts=_evCity.split(',');
+    var _pnCity=_pnParts[0]?_pnParts[0].trim():'';
+    var _pnState=_pnParts[1]?_pnParts[1].trim():'';
+    var _pnURL='https://play.sorcerytcg.com/events'
+      +(_pnCity?'?city='+encodeURIComponent(_pnCity):'')
+      +(_pnState?(_pnCity?'&':'?')+'state='+encodeURIComponent(_pnState):'');
+
+    // City search row
+    o('<div style="display:flex;gap:4px;margin-bottom:6px;align-items:flex-start">');
+    o('<div class="ev-ac-wrap">');
+    o('<input id="ev-city-inp" class="fi" placeholder="City, State&hellip;" value="'+h(G.evCityInput||'')+'" style="width:100%;box-sizing:border-box" oninput="G.evCityInput=this.value;evCityAutocomplete(this.value)" onkeydown="if(event.key===\'Enter\'){var v=this.value.trim();if(v){evSelectCity(v);}}">');
+    o('<div id="ev-ac-box" class="ev-ac-box"></div>');
+    o('</div>');
+    o('<button class="fb gold" onclick="var v=document.getElementById(\'ev-city-inp\').value.trim();if(v){evSelectCity(v);}else{getLocationAndLoadEvents();}">'+( G.evLoading?'&hellip;':'Search')+'</button>');
+    o('</div>');
+    o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="G.evCityInput=\'\';getLocationAndLoadEvents()">'+(G.evLoading?'<span class="spin">&#8635;</span> Locating&hellip;':'&#x1F4CD; Use My Location')+'</button>');
+
+    if(_evCity&&!G.evLoading)o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">Searching near: <b>'+h(_evCity)+'</b></div>');
+
+    // Play Network direct link - primary method
+    o('<a class="ext-lnk" style="background:var(--bg3);border-color:var(--yel);color:var(--yel);text-align:center;font-weight:700;padding:7px" href="'+_pnURL+'" target="_blank">&#x1F3AE; Open Play Network'+(_pnCity?' for '+h(_pnCity):'')+'&rarr;</a>');
+
+    if(G.evLoading){o('<div class="ld"><span class="spin">&#8635;</span> Searching&hellip;</div>');}
+    else if(G.evItems&&G.evItems.length){
+      o('<div class="slbl2" style="margin-top:8px">Results</div>');
+      G._evReg=[];
+      G.evItems.forEach(function(e,_ei){
+        G._evReg.push(e);
+        var loc=e.location||e.loc||'';
+        var addr=e.address||'';
+        var mapsQ=encodeURIComponent(addr||loc);
+        var key=e.name+(loc||'');
+        var saved=!!(G.evSaved||[]).find(function(x){return (x.name+(x.location||x.loc||''))===key;});
+        o('<div class="ev-c">');
+        o('<div style="display:flex;align-items:flex-start;justify-content:space-between">');
+        o('<div class="ev-nm" style="flex:1">'+h(e.name||e.n||'')+'</div>');
+        o('<button class="eadj" style="flex-shrink:0;font-size:12px;border-color:'+(saved?'var(--yel)':'var(--bd)')+';color:'+(saved?'var(--yel)':'var(--fg2)')+'" onclick="'+(saved?'evUnsave(\''+_ei+'\')':'evSave(\''+_ei+'\'')+')">&#9733;</button>');
+        o('</div>');
+        if(e.date)o('<div class="ev-mt">&#128197; '+h(localDate(e.date||''))+(e.type?' &middot; '+h(e.type):'')+'</div>');
+        if(loc)o('<div class="ev-mt" style="color:var(--fg)">&#128205; '+h(loc)+'</div>');
+        if(addr&&addr!==loc)o('<div class="ev-mt" style="color:var(--fg2);font-size:8px">'+h(addr)+'</div>');
+        o('<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">');
+        if(mapsQ)o('<a class="ext-lnk" style="padding:3px 6px;flex:1;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn)" href="https://www.google.com/maps/search/?api=1&query='+mapsQ+'" target="_blank">&#x1F5FA; Maps</a>');
+        if(e.url)o('<a class="ext-lnk" style="padding:3px 6px;flex:1;text-align:center;background:var(--bg3)" href="'+h(e.url)+'" target="_blank">Details &rarr;</a>');
+        o('</div>');
+        o('</div>');
+      });
+      o('<button class="fb" style="width:100%;margin:6px 0" onclick="G.evLoaded=false;G.evItems=null;loadLocalEvents(G.evCity)">&#8634; Refresh</button>');
+    } else if(G.evErr){
+      o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
+    } else if(!G.evLoaded){
+      o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">Enter a city or use your location, then open the Play Network link above to see all local events.</div>');
+    }
+
+    // Saved events
+    if(G.evSaved&&G.evSaved.length){
+      o('<div class="slbl2" style="margin-top:10px">&#9733; Saved Events</div>');
+      G.evSaved.forEach(function(e,si){
+        var loc=e.location||e.loc||'';
+        var addr=e.address||'';
+        var mapsQ=encodeURIComponent(addr||loc);
+        o('<div class="ev-c">');
+        o('<div style="display:flex;align-items:flex-start;justify-content:space-between">');
+        o('<div class="ev-nm" style="flex:1">'+h(e.name||'')+'</div>');
+        o('<button class="eadj" style="flex-shrink:0;font-size:12px;color:var(--yel);border-color:var(--yel)" onclick="G.evSaved.splice('+si+',1);sv(\'sg-evsaved\',G.evSaved);render()">&#9733;</button>');
+        o('</div>');
+        if(e.date)o('<div class="ev-mt">&#128197; '+h(e.date)+'</div>');
+        if(loc)o('<div class="ev-mt" style="color:var(--fg)">&#128205; '+h(loc)+'</div>');
+        o('<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">');
+        if(mapsQ)o('<a class="ext-lnk" style="padding:3px 6px;flex:1;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn)" href="https://www.google.com/maps/search/?api=1&query='+mapsQ+'" target="_blank">&#x1F5FA; Maps</a>');
+        if(e.url)o('<a class="ext-lnk" style="padding:3px 6px;flex:1;text-align:center;background:var(--bg3)" href="'+h(e.url)+'" target="_blank">Details &rarr;</a>');
+        o('</div>');
+        o('</div>');
+      });
+    }
+    return out.join('');
+  }
   if(p==='yt'){
     if(!G.ytLoaded&&!G.ytLoading){setTimeout(function(){loadYTVideos();},50);}
     var selCh=YT_CHS.find(function(x){return x.id===G.ytCh;})||YT_CHS[0];
@@ -1581,6 +1786,69 @@ function pMini(p,pi){
 }
 
 
+function pTap(p,pi){
+  var out=[];function o(s){out.push(s);}
+  var lifeColor=p.dead?'var(--red)':'var(--life)';
+  var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
+  var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
+  var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
+
+  o('<div class="p-tap">');
+  o('<div class="tap-name">'+h(p.name)+'</div>');
+
+  // Life + Mana row
+  o('<div class="tap-row">');
+
+  // Life tile
+  o('<div class="tap-tile">');
+  o('<div class="tap-lbl" style="color:'+lifeColor+'">&#x2665; Life</div>');
+  if(p.dead){
+    o('<div class="tap-val" style="color:var(--red)">'+ddSVG()+'</div>');
+    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
+    o('<button class="tap-btn-bot" onclick="showLog('+pi+')"><span style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--red);pointer-events:none">Log</span></button>');
+  } else {
+    o('<div class="tap-val" style="color:'+lifeColor+'">'+p.life+'</div>');
+    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)" title="+1"></button>');
+    o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)" title="-1"></button>');
+  }
+  o('</div>');
+
+  // Mana tile
+  o('<div class="tap-tile">');
+  o('<div class="tap-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
+  o('<div class="tap-val" style="color:var(--mana)">'+p.mana+'</div>');
+  o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)" title="+1"></button>');
+  o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)" title="-1"></button>');
+  o('</div>');
+
+  o('</div>'); // end tap-row
+
+  // Threshold row
+  o('<div class="tap-el-row">');
+  ELEM.slice(0,4).forEach(function(e){
+    o('<div class="tap-el">');
+    o(eSVG(e.k,28));
+    o('<div class="tap-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
+    o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)" title="+1"></button>');
+    o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)" title="-1"></button>');
+    o('</div>');
+  });
+  o('</div>');
+
+  // Dice row
+  o('<div class="tap-dice-row">');
+  visD.forEach(function(d){
+    o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
+  });
+  o('</div>');
+
+  // Turn button
+  o(turnBtn(pi));
+
+  o('</div>');
+  return out.join('');
+}
+
 function pHTML(p,pi){
   var out=[];function o(s){out.push(s);}
   var lifeColor='var(--life)';var manaColor='var(--mana)';
@@ -1697,7 +1965,7 @@ function render(){
     var out=[];function o(s){out.push(s);}
 
     var _layout=G.cfg&&G.cfg.layout||'standard';
-    var _pFn=_layout==='circular'?pCirc:_layout==='minimal'?pMini:pHTML;
+    var _pFn=_layout==='circular'?pCirc:_layout==='minimal'?pMini:_layout==='tap'?pTap:pHTML;
     // P2 at TOP (flipped 180°)
     if(p1)o('<div class="flip">'+_pFn(p1,1)+'</div>');
 
