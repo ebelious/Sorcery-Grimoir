@@ -160,7 +160,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 #topbar{display:flex;align-items:center;gap:4px;padding:3px 7px;background:var(--bg2);border-bottom:1px solid var(--bd);flex-shrink:0}
 .dice-strip{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none;align-items:center;justify-content:center}
 .dice-strip::-webkit-scrollbar{display:none}
-.die-btn{display:flex;flex-direction:column;align-items:center;padding:6px 8px;flex-shrink:0;border:2px solid var(--bd);background:var(--bg3);border-radius:50%;width:52px;height:52px;justify-content:center;box-sizing:border-box}
+.die-btn{display:flex;flex-direction:column;align-items:center;padding:4px 6px;flex-shrink:0;border:2px solid var(--bd);background:var(--bg3);border-radius:50%;width:44px;height:44px;justify-content:center;box-sizing:border-box}
 .die-btn:active{background:var(--bd)}
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--yel)}
@@ -1812,7 +1812,14 @@ function cModal(){
   o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
   o('<div class="cm-tags"><span class="cm-tag" style="color:'+el.c+';border-color:'+el.c+'">'+eSVG(cEl(c),10)+' '+cEl(c)+'</span><span class="cm-tag" style="color:'+rC+';border-color:'+rC+'">'+cRar(c)+'</span><span class="cm-tag">'+cType(c)+'</span><span class="cm-tag" style="color:'+si.c+';border-color:'+si.c+'">'+si.sym+' '+cSet(c)+'</span></div>');
   o('<div class="cm-mt">Mana: <b>'+(cMana(c)!=null?cMana(c):'&mdash;')+'</b> &middot; Threshold: '+thrIcons(cThr(c))+'&middot; Power: <b>'+(cPow(c)!=null?cPow(c):'&mdash;')+'</b>'+(cArt(c)?'<br>Artist: <a href="https://www.collectorarthouse.com/sorcery-artists/'+encodeURIComponent(cArt(c).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))+'" target="_blank" style="color:var(--bbl)">'+h(cArt(c))+'</a>':'')+'</div>');
-  if(cTxt(c))o('<div class="cm-rt">'+h(cTxt(c))+'</div>');
+  if(cTxt(c)){
+    o((function(){var _i=(G._rd=G._rd||[]).push({t:cName(c)+' — Card Text',b:cTxt(c)})-1;
+      return '<div class="cm-rt rd-entry" onclick="rdPopIdx('+_i+')" title="Tap to expand">'
+        +h(cTxt(c))
+        
+        +'</div>';
+    })());
+  }
   var allSets=cSets(c);if(allSets.length>1)o('<div style="font-size:8px;color:var(--fg2);margin-bottom:4px">Also in: '+allSets.filter(function(s){return s!==cSet(c);}).map(h).join(', ')+'</div>');
   // FAQ for this card
   var cardFaqs=[];var _lastFC='';
@@ -1923,27 +1930,27 @@ function pCirc(p,pi){
   var screenW=typeof window!=='undefined'?window.innerWidth:390;
   var availH=Math.floor(screenH/2)-32-22-60-32-16;
   var availW=screenW-8;
-  // Orbit aspect ratio is 440:340 = 1.294
+  // Orbit aspect ratio is 450:300 = 1.5
   // Scale to fit both width and height
-  var scaleW=availW/440;
-  var scaleH=availH/340;
+  var scaleW=availW/582;
+  var scaleH=availH/390;
   var scale=Math.min(scaleW,scaleH,1);
-  var orbitW=Math.round(440*scale);
-  var orbitH=Math.round(340*scale);
+  var orbitW=Math.round(582*scale);
+  var orbitH=Math.round(390*scale);
 
   // Main circle sizes scale with orbit
-  var mSz=Math.round(140*scale);
-  var eSz=68;
-  var fontSize=Math.round(52*scale);
+  var mSz=Math.round(170*scale);
+  var eSz=Math.round(110*scale);
+  var fontSize=Math.round(60*scale);
   var lblSize=Math.round(11*scale);
-  var elValSize=20;
-  var elIconSize=26;
+  var elValSize=Math.round(30*scale);
+  var elIconSize=Math.round(40*scale);
 
-  // Positions scale proportionally
-  var lifeLeft=Math.round(75*scale);
-  var manaRight=Math.round(75*scale);
-  var elOff=Math.round(75*scale-68-4);
-  var elVert=Math.round(100*scale-68-4);
+  // Positions: threshold circles at elOff from edge, lifeLeft=elOff+eSz+8
+  var elOff=Math.round(6*scale);
+  var lifeLeft=elOff+eSz;
+  var manaRight=lifeLeft;
+  var elVert=0;
 
   o('<div class="p-circ">');
   o('<div class="circ-name">'+h(p.name)+'</div>');
@@ -1967,7 +1974,7 @@ function pCirc(p,pi){
   o('</div>');
 
   // ── Mana circle ──
-  var manaLeft=orbitW-manaRight-mSz;
+  var manaLeft=orbitW-lifeLeft-mSz;
   o('<div style="position:absolute;width:'+mSz+'px;height:'+mSz+'px;left:'+manaLeft+'px;top:'+mTop+'px;border-radius:50%;border:3px solid var(--mana);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
   o('<div style="font-size:'+lblSize+'px;font-weight:700;color:var(--mana);pointer-events:none;z-index:1">&#x25c6; Mana</div>');
   o('<div style="font-size:'+fontSize+'px;font-weight:700;color:var(--mana);pointer-events:none;z-index:1;line-height:1">'+p.mana+'</div>');
@@ -1994,15 +2001,14 @@ function pCirc(p,pi){
     o('</div>');
   });
 
-  o('</div>'); // end orbit
+  // All dice in one wrapped row below the orbit
+  o('</div>'); // end orbit wrapper
 
-  // Dice
-  o('<div class="tap-dice-row" style="width:100%">');
+  o('<div class="tap-dice-row" style="width:100%;flex-wrap:wrap;justify-content:center">');
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
   o('</div>');
-
   o(turnBtn(pi));
   o('</div>');
   return out.join('');
