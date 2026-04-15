@@ -1918,65 +1918,85 @@ function pCirc(p,pi){
   var _pCI=pi===1?(G.dieCI+4)%DIE_COLS.length:G.dieCI;
   var diceCol=pi===1?DIE_COLS[(G.dieCI+4)%DIE_COLS.length]:null;
 
+  // Available space: half screen minus turnbar(32) minus name(22) minus dice(60) minus turn(32) minus padding
+  var screenH=typeof window!=='undefined'?window.innerHeight:700;
+  var screenW=typeof window!=='undefined'?window.innerWidth:390;
+  var availH=Math.floor(screenH/2)-32-22-60-32-16;
+  var availW=screenW-8;
+  // Orbit aspect ratio is 440:340 = 1.294
+  // Scale to fit both width and height
+  var scaleW=availW/440;
+  var scaleH=availH/340;
+  var scale=Math.min(scaleW,scaleH,1);
+  var orbitW=Math.round(440*scale);
+  var orbitH=Math.round(340*scale);
+
+  // Main circle sizes scale with orbit
+  var mSz=Math.round(110*scale);
+  var eSz=Math.round(82*scale);
+  var fontSize=Math.round(46*scale);
+  var lblSize=Math.round(10*scale);
+  var elValSize=Math.round(26*scale);
+  var elIconSize=Math.round(28*scale);
+
+  // Positions scale proportionally
+  var lifeLeft=Math.round(100*scale);
+  var manaRight=Math.round(100*scale);
+  var elOff=Math.round(4*scale);
+  var elVert=Math.round(22*scale);
+
   o('<div class="p-circ">');
   o('<div class="circ-name">'+h(p.name)+'</div>');
 
-  // Orbit container
-  var _cw=Math.min(1,(typeof window!=='undefined'?window.innerWidth-8:360)/440);
-  var _ch=Math.round(340*_cw);
-  o('<div style="width:100%;height:'+_ch+'px;overflow:hidden">');
-  o('<div class="circ-orbit" style="transform-origin:top left;transform:scale('+_cw.toFixed(3)+')">');
+  // Scaled orbit wrapper
+  o('<div style="width:'+orbitW+'px;height:'+orbitH+'px;position:relative;flex-shrink:0">');
 
-  // ── Life circle (left, vertically centered) ──
-  o('<div class="circ-ring circ-main circ-life-pos" style="border-color:'+lifeColor+'">');
-  o('<div class="circ-lbl" style="color:'+lifeColor+'">&#x2665; Life</div>');
+  // ── Life circle ──
+  var mTop=Math.round((orbitH-mSz)/2);
+  o('<div style="position:absolute;width:'+mSz+'px;height:'+mSz+'px;left:'+lifeLeft+'px;top:'+mTop+'px;border-radius:50%;border:3px solid '+lifeColor+';background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
+  o('<div style="font-size:'+lblSize+'px;font-weight:700;color:'+lifeColor+';pointer-events:none;z-index:1">&#x2665; Life</div>');
   if(p.dead){
-    o('<div style="z-index:1;pointer-events:none;transform:scale(0.6)">'+ddSVG()+'</div>');
+    o('<div style="z-index:1;pointer-events:none;transform:scale('+Math.round(scale*60)/100+')">'+ddSVG()+'</div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="showLog('+pi+')"></button>');
-    o('<div style="position:absolute;bottom:4px;left:0;width:100%;text-align:center;font-size:8px;color:var(--red);pointer-events:none;z-index:1">log</div>');
   } else {
-    o('<div class="circ-life" style="color:'+lifeColor+'">'+p.life+'</div>');
+    o('<div style="font-size:'+fontSize+'px;font-weight:700;color:'+lifeColor+';pointer-events:none;z-index:1;line-height:1">'+p.life+'</div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
   o('</div>');
 
-  // ── Mana circle (right, vertically centered) ──
-  o('<div class="circ-ring circ-main circ-mana-pos" style="border-color:var(--mana)">');
-  o('<div class="circ-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
-  o('<div class="circ-mana-val">'+p.mana+'</div>');
+  // ── Mana circle ──
+  var manaLeft=orbitW-manaRight-mSz;
+  o('<div style="position:absolute;width:'+mSz+'px;height:'+mSz+'px;left:'+manaLeft+'px;top:'+mTop+'px;border-radius:50%;border:3px solid var(--mana);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
+  o('<div style="font-size:'+lblSize+'px;font-weight:700;color:var(--mana);pointer-events:none;z-index:1">&#x25c6; Mana</div>');
+  o('<div style="font-size:'+fontSize+'px;font-weight:700;color:var(--mana);pointer-events:none;z-index:1;line-height:1">'+p.mana+'</div>');
   o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
   o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
   o('</div>');
 
-  // ── 4 Threshold circles orbiting the pair ──
-  // fire: top-left, water: top-right, earth: bottom-left, air: bottom-right
-  var _elPos=[
-    {k:'fire',  left:'4px',   top:'22px'},
-    {k:'earth', left:'4px',   bottom:'22px'},
-    {k:'water', right:'4px',  top:'22px'},
-    {k:'air',   right:'4px',  bottom:'22px'}
+  // ── 4 Threshold circles ──
+  var eTop1=elVert;
+  var eTop2=orbitH-elVert-eSz;
+  var positions=[
+    {k:'fire',  x:elOff,             y:eTop1},
+    {k:'earth', x:elOff,             y:eTop2},
+    {k:'water', x:orbitW-elOff-eSz,  y:eTop1},
+    {k:'air',   x:orbitW-elOff-eSz,  y:eTop2}
   ];
-  _elPos.forEach(function(ep){
+  positions.forEach(function(ep){
     var e=ELEM.find(function(x){return x.k===ep.k;})||ELEM[4];
-    var pos='position:absolute;';
-    if(ep.left)pos+='left:'+ep.left+';';
-    if(ep.right)pos+='right:'+ep.right+';';
-    if(ep.top)pos+='top:'+ep.top+';';
-    if(ep.bottom)pos+='bottom:'+ep.bottom+';';
-    o('<div class="circ-ring circ-el-ring" style="'+pos+'border-color:'+e.c+'">');
-    o('<div style="z-index:1;pointer-events:none">'+eSVG(ep.k,28)+'</div>');
-    o('<div class="circ-el-val" style="color:'+e.c+'">'+p.thresh[ep.k]+'</div>');
+    o('<div style="position:absolute;width:'+eSz+'px;height:'+eSz+'px;left:'+ep.x+'px;top:'+ep.y+'px;border-radius:50%;border:2px solid '+e.c+';background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
+    o('<div style="z-index:1;pointer-events:none">'+eSVG(ep.k,elIconSize)+'</div>');
+    o('<div style="font-size:'+elValSize+'px;font-weight:700;color:'+e.c+';pointer-events:none;z-index:1;line-height:1">'+p.thresh[ep.k]+'</div>');
     o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+ep.k+'\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+ep.k+'\',\''+(-1)+'\'-1)"></button>');
     o('</div>');
   });
 
   o('</div>'); // end orbit
-  o('</div>'); // end scale wrapper
 
-  // ── Dice ──
+  // Dice
   o('<div class="tap-dice-row" style="width:100%">');
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
