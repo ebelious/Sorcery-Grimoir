@@ -73,15 +73,29 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .mini-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px;border-bottom:1px solid var(--bd)}
 .p-tap{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0;user-select:none}
 .tap-name{font-size:15px;font-weight:700;color:var(--fg);text-align:center;padding:5px;border-bottom:1px solid var(--bd)}
-.tap-row{display:flex;flex-direction:column;border-bottom:1px solid var(--bd)}
-.tap-tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 4px;min-height:120px;border-bottom:1px solid var(--bd);overflow:hidden}
+
+
 .tap-tile:last-child{border-right:none}
-.tap-lbl{font-size:11px;font-weight:700;color:var(--fg2);margin-bottom:4px}
+
+
+
+
+
+
+.tap-el:last-child{border-right:none}
+
+
+.tap-row{display:flex;flex-direction:row;border-bottom:1px solid var(--bd);min-height:160px}
+.tap-tile{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;border-right:1px solid var(--bd);overflow:hidden}
+.tap-tile:last-child{border-right:none}
+.tap-lbl{font-size:11px;font-weight:700;color:var(--fg2);margin-bottom:2px;pointer-events:none;z-index:1}
 .tap-val{font-size:52px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
-.tap-btn-top{position:absolute;top:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .1s}.tap-btn-top:active{background:rgba(255,255,255,0.15)}
-.tap-btn-bot{position:absolute;bottom:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .1s}.tap-btn-bot:active{background:rgba(255,255,255,0.15)}
-.tap-el-row{display:flex;border-bottom:1px solid var(--bd)}.tap-tile:last-of-type{border-bottom:none}
-.tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 2px;min-height:110px;border-right:1px solid var(--bd);overflow:hidden}
+.tap-btn-top{position:absolute;top:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .08s}
+.tap-btn-top:active{background:rgba(255,255,255,0.18)}
+.tap-btn-bot{position:absolute;bottom:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .08s}
+.tap-btn-bot:active{background:rgba(0,0,0,0.18)}
+.tap-el-row{display:flex;border-bottom:1px solid var(--bd)}
+.tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;min-height:120px;border-right:1px solid var(--bd);overflow:hidden}
 .tap-el:last-child{border-right:none}
 .tap-el-val{font-size:30px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
@@ -1681,7 +1695,33 @@ function cModal(){
 //   [Life LEFT ║ thresh center ║ Mana RIGHT] — main stat row fills width
 //   [Turn button — full width]
 //   [History — compact]
-function ddSVG(){return '<svg width="80" height="80" viewBox="0 0 70 70"><line x1="5" y1="62" x2="65" y2="62" stroke="var(--red)" stroke-width="1.5" opacity=".5"/><rect x="12" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".6"/><rect x="49" y="28" width="9" height="34" fill="none" stroke="var(--red)" stroke-width="1.5" opacity=".6"/><path d="M12 28 Q12 7 35 7 Q58 7 58 28" fill="none" stroke="var(--red)" stroke-width="2" opacity=".8"/><polygon points="35,4 39,11 31,11" fill="var(--red)" opacity=".6"/></svg>';}
+function ddSVG(){
+  return '<svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">'
+    // ground line
+    +'<line x1="2" y1="65" x2="68" y2="65" stroke="var(--red)" stroke-width="1.5" opacity=".5"/>'
+    // left tower
+    +'<rect x="4" y="30" width="14" height="35" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".8"/>'
+    // left tower battlements
+    +'<rect x="4" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    +'<rect x="9" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    +'<rect x="14" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    // right tower
+    +'<rect x="52" y="30" width="14" height="35" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".8"/>'
+    // right tower battlements
+    +'<rect x="52" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    +'<rect x="57" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    +'<rect x="62" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
+    // gothic arch between towers
+    +'<path d="M18 65 L18 42 Q18 18 35 15 Q52 18 52 42 L52 65" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".9"/>'
+    // inner arch opening (dark)
+    +'<path d="M22 65 L22 44 Q22 24 35 21 Q48 24 48 44 L48 65" fill="var(--bg2)" stroke="none"/>'
+    // skull above arch
+    +'<circle cx="35" cy="10" r="5" fill="none" stroke="var(--red)" stroke-width="1.2" opacity=".7"/>'
+    +'<circle cx="32.5" cy="9" r="1.2" fill="var(--red)" opacity=".7"/>'
+    +'<circle cx="37.5" cy="9" r="1.2" fill="var(--red)" opacity=".7"/>'
+    +'<path d="M33 12 L34 13 L36 13 L37 12" fill="none" stroke="var(--red)" stroke-width=".8" opacity=".7"/>'
+    +'</svg>';
+}
 
 function statBox(label,val,color,adjMinus,adjPlus,small){
   var display=small?'<span class="sval-sm" style="color:'+color+'">'+val+'</span>':'<span class="sval" style="color:'+color+'">'+val+'</span>';
@@ -1794,41 +1834,42 @@ function pTap(p,pi){
   o('<div class="p-tap">');
   o('<div class="tap-name">'+h(p.name)+'</div>');
 
-  // Life + Mana row
+  // Life + Mana side by side
   o('<div class="tap-row">');
 
-  // Life tile
+  // Life tile — invisible overlay: top half = +1, bottom half = -1
   o('<div class="tap-tile">');
   o('<div class="tap-lbl" style="color:'+lifeColor+'">&#x2665; Life</div>');
   if(p.dead){
-    o('<div class="tap-val" style="color:var(--red)">'+ddSVG()+'</div>');
+    o('<div style="z-index:1;pointer-events:none">'+ddSVG()+'</div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
-    o('<button class="tap-btn-bot" onclick="showLog('+pi+')"><span style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--red);pointer-events:none">Log</span></button>');
+    o('<button class="tap-btn-bot" onclick="showLog('+pi+')"></button>');
+    o('<div style="position:absolute;bottom:6px;left:0;width:100%;text-align:center;font-size:9px;color:var(--red);pointer-events:none;z-index:1">tap to log</div>');
   } else {
     o('<div class="tap-val" style="color:'+lifeColor+'">'+p.life+'</div>');
-    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)" title="+1"></button>');
-    o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)" title="-1"></button>');
+    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
+    o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
   o('</div>');
 
-  // Mana tile
+  // Mana tile — invisible overlay: top half = +1, bottom half = -1
   o('<div class="tap-tile">');
   o('<div class="tap-lbl" style="color:var(--mana)">&#x25c6; Mana</div>');
   o('<div class="tap-val" style="color:var(--mana)">'+p.mana+'</div>');
-  o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)" title="+1"></button>');
-  o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)" title="-1"></button>');
+  o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
+  o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
   o('</div>');
 
   o('</div>'); // end tap-row
 
-  // Threshold row
+  // Threshold row — each element: top half = +1, bottom half = -1
   o('<div class="tap-el-row">');
   ELEM.slice(0,4).forEach(function(e){
     o('<div class="tap-el">');
-    o(eSVG(e.k,28));
+    o('<div style="z-index:1;pointer-events:none">'+eSVG(e.k,26)+'</div>');
     o('<div class="tap-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
-    o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)" title="+1"></button>');
-    o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)" title="-1"></button>');
+    o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)"></button>');
+    o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)"></button>');
     o('</div>');
   });
   o('</div>');
@@ -1840,12 +1881,11 @@ function pTap(p,pi){
   });
   o('</div>');
 
-  // Turn button
   o(turnBtn(pi));
-
   o('</div>');
   return out.join('');
 }
+
 
 function pHTML(p,pi){
   var out=[];function o(s){out.push(s);}
