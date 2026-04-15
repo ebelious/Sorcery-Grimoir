@@ -160,7 +160,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 #topbar{display:flex;align-items:center;gap:4px;padding:3px 7px;background:var(--bg2);border-bottom:1px solid var(--bd);flex-shrink:0}
 .dice-strip{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none;align-items:center;justify-content:center}
 .dice-strip::-webkit-scrollbar{display:none}
-.die-btn{display:flex;flex-direction:column;align-items:center;padding:2px 3px;flex-shrink:0;border:1px solid var(--bd);background:var(--bg3)}
+.die-btn{display:flex;flex-direction:column;align-items:center;padding:6px 8px;flex-shrink:0;border:2px solid var(--bd);background:var(--bg3);border-radius:50%;width:52px;height:52px;justify-content:center;box-sizing:border-box}
 .die-btn:active{background:var(--bd)}
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--yel)}
@@ -1102,7 +1102,12 @@ function tcgURL(c){return 'https://www.tcgplayer.com/search/sorcery-contested-re
 function cFilter(arr,f,q){
   var lq=(q||'').toLowerCase();
   return arr.filter(function(c){
-    if(lq&&cName(c).toLowerCase().indexOf(lq)<0)return false;
+    if(lq){
+      var nm=cName(c).toLowerCase();
+      var txt=cTxt(c).toLowerCase();
+      var thr=cThr(c).toLowerCase();
+      if(nm.indexOf(lq)<0&&txt.indexOf(lq)<0&&thr.indexOf(lq)<0)return false;
+    }
     if(f.el&&f.el.length&&f.el.indexOf(cEl(c))<0)return false;
     if(f.type&&f.type.length&&f.type.indexOf(cType(c))<0)return false;
     if(f.rarity&&f.rarity.length&&f.rarity.indexOf(cRar(c))<0)return false;
