@@ -92,8 +92,8 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .tap-el:last-child{border-right:none}
 .tap-el-val{font-size:30px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
-.p-circ{display:flex;flex-direction:column;align-items:center;padding:8px 4px;gap:8px;background:var(--bg2);border:1px solid var(--bd);margin:1px;width:100%;box-sizing:border-box}
-.circ-orbit{position:relative;width:440px;height:340px;flex-shrink:0;margin:0 auto}
+.p-circ{display:flex;flex-direction:column;align-items:center;padding:4px;gap:4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;width:100%;box-sizing:border-box;overflow:hidden}
+.circ-orbit{position:relative;width:440px;height:340px;flex-shrink:0;margin:0 auto;transform-origin:top center;transform:scale(var(--co-scale,1))}
 .circ-ring{position:absolute;border-radius:50%;border:4px solid;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
 .circ-main{width:110px;height:110px;top:50%;transform:translateY(-50%);margin:0}
 .circ-life-pos{left:100px}
@@ -1922,7 +1922,10 @@ function pCirc(p,pi){
   o('<div class="circ-name">'+h(p.name)+'</div>');
 
   // Orbit container
-  o('<div class="circ-orbit">');
+  var _cw=Math.min(1,(typeof window!=='undefined'?window.innerWidth-8:360)/440);
+  var _ch=Math.round(340*_cw);
+  o('<div style="width:100%;height:'+_ch+'px;overflow:hidden">');
+  o('<div class="circ-orbit" style="transform-origin:top left;transform:scale('+_cw.toFixed(3)+')">');
 
   // ── Life circle (left, vertically centered) ──
   o('<div class="circ-ring circ-main circ-life-pos" style="border-color:'+lifeColor+'">');
@@ -1970,7 +1973,8 @@ function pCirc(p,pi){
     o('</div>');
   });
 
-  o('</div>'); // end circ-orbit
+  o('</div>'); // end orbit
+  o('</div>'); // end scale wrapper
 
   // ── Dice ──
   o('<div class="tap-dice-row" style="width:100%">');
