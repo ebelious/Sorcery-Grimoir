@@ -249,9 +249,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .acc-arr{font-size:9px;color:var(--fg2)}
 .acc-body{padding:4px 9px 8px;border-top:1px solid var(--bd);overflow:visible}
 .acc-row{padding:5px 0;border-bottom:1px solid var(--bg2)}
-.acc-q{font-size:9px;font-weight:700;color:var(--wht);margin-bottom:2px}
-.acc-a{font-size:9px;color:var(--fg2);line-height:1.6;white-space:normal;word-break:break-word}
-.cod-def{font-size:8px;color:var(--fg2);line-height:1.55;padding-top:6px}
+.acc-q{font-size:9px;font-weight:700;color:var(--wht);margin-bottom:2px;font-family:'Fantaisie','Courier New',monospace}
+.acc-a{font-size:9px;color:var(--fg2);line-height:1.6;white-space:normal;word-break:break-word;font-family:Georgia,serif}
+.cod-def{font-size:8px;color:var(--fg2);line-height:1.55;padding-top:6px;font-family:Georgia,serif}
 .stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:5px;margin-bottom:6px}
 .frow{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:2px;align-items:center}
@@ -278,7 +278,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cm-tags{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;margin-bottom:5px}
 .cm-tag{font-size:8px;padding:2px 5px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:9px;color:var(--fg2);text-align:center;line-height:1.7;margin-bottom:4px}
-.cm-rt{font-size:9px;background:var(--bg3);border:1px solid var(--bd);padding:6px;line-height:1.5;margin-bottom:4px}
+.cm-rt{font-size:9px;background:var(--bg3);border:1px solid var(--bd);padding:6px;line-height:1.5;margin-bottom:4px;font-family:Georgia,serif}
 .cm-tcg{display:block;font-size:9px;color:var(--bbl);font-weight:700;text-align:center;padding:4px;border:1px solid var(--bbl);margin-bottom:6px}
 .qty-row{display:flex;align-items:center;gap:6px;padding-top:6px;border-top:1px solid var(--bd)}
 .qty-lbl{flex:1;font-size:10px;color:var(--fg2)}
@@ -1411,7 +1411,17 @@ function pContent(){
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
     o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==="standard")?" selected":"")+'>Standard</option><option value="circular"'+(G.cfg.layout==="circular"?" selected":"")+'>Circular</option><option value="minimal"'+(G.cfg.layout==="minimal"?" selected":"")+'>Minimal</option><option value="tap"'+(G.cfg.layout==="tap"?" selected":"")+'>Tap</option></select></div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');}else{o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px">Open in browser &rarr; Share/Menu &rarr; "Add to Home Screen"</div>');}return out.join('');}
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
+      o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
+    } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
+      o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
+      o('<div style="font-size:8px;color:var(--fg2);text-align:center">Switch to browser: open in Safari/Chrome and tap &ldquo;Open in Browser&rdquo;</div>');
+    } else {
+      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px;font-weight:700">Install as app:</div>');
+      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">iOS: Share &rarr; &ldquo;Add to Home Screen&rdquo;</div>');
+      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Android: Menu &rarr; &ldquo;Add to Home Screen&rdquo; or &ldquo;Install App&rdquo;</div>');
+      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Desktop: Address bar install icon &#x2B07;</div>');
+    }return out.join('');}
   if(p==='rules'){RULES.forEach(function(r){o('<div class="acc" style="margin-bottom:3px"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>');});o('<a class="ext-lnk" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook &rarr;</a>');return out.join('');}
   if(p==='codex'){
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
@@ -1668,7 +1678,7 @@ function cModal(){
   }
   o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
   o('<div class="cm-tags"><span class="cm-tag" style="color:'+el.c+';border-color:'+el.c+'">'+eSVG(cEl(c),10)+' '+cEl(c)+'</span><span class="cm-tag" style="color:'+rC+';border-color:'+rC+'">'+cRar(c)+'</span><span class="cm-tag">'+cType(c)+'</span><span class="cm-tag" style="color:'+si.c+';border-color:'+si.c+'">'+si.sym+' '+cSet(c)+'</span></div>');
-  o('<div class="cm-mt">Mana: <b>'+(cMana(c)!=null?cMana(c):'&mdash;')+'</b> &middot; Threshold: '+thrIcons(cThr(c))+'&middot; Power: <b>'+(cPow(c)!=null?cPow(c):'&mdash;')+'</b>'+(cArt(c)?'<br>Artist: '+h(cArt(c)):'')+'</div>');
+  o('<div class="cm-mt">Mana: <b>'+(cMana(c)!=null?cMana(c):'&mdash;')+'</b> &middot; Threshold: '+thrIcons(cThr(c))+'&middot; Power: <b>'+(cPow(c)!=null?cPow(c):'&mdash;')+'</b>'+(cArt(c)?'<br>Artist: <a href="https://www.collectorarthouse.com/sorcery-artists/'+encodeURIComponent(cArt(c).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))+'" target="_blank" style="color:var(--bbl)">'+h(cArt(c))+'</a>':'')+'</div>');
   if(cTxt(c))o('<div class="cm-rt">'+h(cTxt(c))+'</div>');
   var allSets=cSets(c);if(allSets.length>1)o('<div style="font-size:8px;color:var(--fg2);margin-bottom:4px">Also in: '+allSets.filter(function(s){return s!==cSet(c);}).map(h).join(', ')+'</div>');
   // FAQ for this card
