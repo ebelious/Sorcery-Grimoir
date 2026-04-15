@@ -93,12 +93,12 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .tap-el-val{font-size:30px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
 .p-circ{display:flex;flex-direction:column;align-items:center;padding:8px 4px;gap:8px;background:var(--bg2);border:1px solid var(--bd);margin:1px;width:100%;box-sizing:border-box}
-.circ-orbit{position:relative;width:360px;height:360px;flex-shrink:0;margin:0 auto}
+.circ-orbit{position:relative;width:440px;height:340px;flex-shrink:0;margin:0 auto}
 .circ-ring{position:absolute;border-radius:50%;border:4px solid;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
-.circ-main{width:130px;height:130px;top:50%;transform:translateY(-50%);margin:0}
-.circ-life-pos{left:22px}
-.circ-mana-pos{right:22px}
-.circ-el-ring{width:96px;height:96px;position:absolute}
+.circ-main{width:110px;height:110px;top:50%;transform:translateY(-50%);margin:0}
+.circ-life-pos{left:100px}
+.circ-mana-pos{right:100px}
+.circ-el-ring{width:82px;height:82px;position:absolute}
 .circ-life{font-size:46px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .circ-mana-val{font-size:46px;font-weight:700;line-height:1;z-index:1;pointer-events:none;color:var(--mana)}
 .circ-lbl{font-size:10px;font-weight:700;z-index:1;pointer-events:none;margin-bottom:1px}
@@ -589,8 +589,8 @@ var G={
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
-  cF:{el:'all',type:'all',rarity:'all',set:'all',mana:'all'},
-  coF:{el:'all',type:'all',rarity:'all',set:'all'},
+  cF:{el:[],type:[],rarity:[],set:[],mana:[]},
+  coF:{el:[],type:[],rarity:[],set:[]},
   accExp:{},prices:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
@@ -645,7 +645,7 @@ function boot(){
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
@@ -1103,20 +1103,32 @@ function cFilter(arr,f,q){
   var lq=(q||'').toLowerCase();
   return arr.filter(function(c){
     if(lq&&cName(c).toLowerCase().indexOf(lq)<0)return false;
-    if(f.el!=='all'&&cEl(c)!==f.el)return false;
-    if(f.type!=='all'&&cType(c)!==f.type)return false;
-    if(f.rarity!=='all'&&cRar(c)!==f.rarity)return false;
-    if(f.set!=='all'&&cSets(c).indexOf(f.set)<0)return false;
-    if(f.mana!=='all'){var mc=cMana(c);if(f.mana==='6+'){if(mc==null||mc<6)return false;}else{if(mc!==parseInt(f.mana))return false;}}
+    if(f.el&&f.el.length&&f.el.indexOf(cEl(c))<0)return false;
+    if(f.type&&f.type.length&&f.type.indexOf(cType(c))<0)return false;
+    if(f.rarity&&f.rarity.length&&f.rarity.indexOf(cRar(c))<0)return false;
+    if(f.set&&f.set.length&&cSets(c).filter(function(s){return f.set.indexOf(s)>=0;}).length===0)return false;
+    if(f.mana&&f.mana.length){var mc=cMana(c);var manaMatch=f.mana.some(function(mv){if(mv==='6+')return mc!=null&&mc>=6;return mc===parseInt(mv);});if(!manaMatch)return false;}
     return true;
   });
 }
-function setCF(k,v){G.cF[k]=v;render();}function setCoF(k,v){G.coF[k]=v;render();}
+function _toggleF(f,k,v){
+  if(v==='all'){f[k]=[];render();return;}
+  var i=f[k].indexOf(v);
+  if(i>=0)f[k].splice(i,1);else f[k].push(v);
+  render();
+}
+function setCF(k,v){_toggleF(G.cF,k,v);}
+function setCoF(k,v){_toggleF(G.coF,k,v);}
+function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],mana:[]};render();}
+function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[]};render();}
 function allSetNames(){var seen={};var out=[];CARDS.forEach(function(c){cSets(c).forEach(function(s){if(!seen[s]){seen[s]=1;out.push(s);}});});return out.sort();}
-function fBar(f,fn,mana){
+function fBar(f,fn,mana,resetFn){
   var sets=allSetNames();
-  function row(lbl,key,opts){return '<div class="frow"><span class="flbl">'+lbl+'</span>'+opts.map(function(o){var on=f[key]===o;var label=o==='all'?'All':(o.length>5?o.slice(0,4):o);return '<button class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('')+'</div>';}
-  return '<div class="fbar">'+row('Elem','el',['all','fire','water','earth','air','neutral'])+row('Type','type',['all','avatar','minion','magic','aura','relic','site','artifact'])+row('Rarity','rarity',['all','ordinary','exceptional','elite','unique'])+row('Set','set',['all'].concat(sets))+(mana?row('Mana','mana',['all','0','1','2','3','4','5','6+']):'')+'</div>';
+  function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
+  function row(lbl,key,opts){return '<div class="frow"><span class="flbl">'+lbl+'</span>'+opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(o.length>5?o.slice(0,4):o);return '<button class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('')+'</div>';}
+  var anyActive=Object.keys(f).some(function(k){return f[k]&&f[k].length>0;});
+  var resetBtn=anyActive&&resetFn?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
+  return '<div class="fbar">'+resetBtn+row('Elem','el',['all','fire','water','earth','air','neutral'])+row('Type','type',['all','avatar','minion','magic','aura','relic','site','artifact'])+row('Rarity','rarity',['all','ordinary','exceptional','elite','unique'])+row('Set','set',['all'].concat(sets))+(mana?row('Mana','mana',['all','0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function localDate(s){if(!s||/check|every/i.test(s))return s||'TBD';try{var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});}catch(e){return s;}}
@@ -1154,6 +1166,59 @@ function exportColl(){
 }
 function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv('sg-co',G.coll);render();}
 function delDeck(k){delete G.decks[k];sv('sg-dk',G.decks);render();}
+function importCuriosaUrl(url){
+  url=(url||'').trim();
+  if(!url||url.indexOf('curiosa.io/decks')<0){G.curiosaErr='Please enter a valid curiosa.io/decks URL';render();return;}
+  if(G.curiosaLoading)return;
+  G.curiosaLoading=true;G.curiosaErr=null;render();
+  // Curiosa uses tRPC/Next.js — the card list is JS-rendered and not in the page HTML.
+  // We can only reliably get the deck name and author from the static HTML.
+  // Prompt Claude to fetch the page and extract what it can, then show a paste fallback.
+  var prompt='Fetch the URL '+url+' and extract whatever deck information is visible. '    +'The page is for a Sorcery Contested Realm deck on Curiosa.io. '    +'Extract the deck name, author username, and any card names and quantities you can see. '    +'Return ONLY raw JSON: {"name":"Deck Name","author":"username","avatar":"","element":"","description":"","cards":[{"name":"Card Name","qty":1}]}. '    +'If no cards are visible in the HTML, return cards as empty array [].';
+  apiCall(prompt,2000,function(err,txt){
+    G.curiosaLoading=false;
+    if(err||!txt){G.curiosaErr='Could not reach Curiosa. Try the paste method below.';render();return;}
+    var obj=extractJSON(txt,'object');
+    if(!obj||!obj.name){
+      // Show paste fallback
+      G.curiosaErr=null;
+      G.curiosaPasteMode=url;
+      render();return;
+    }
+    PUB_DECKS.unshift({name:obj.name,author:obj.author||'Community',el:obj.element||'?',av:obj.avatar||'?',desc:obj.description||'',url:url});
+    if(obj.cards&&obj.cards.length){
+      var key=obj.name;G.decks[key]={name:obj.name,cards:obj.cards};sv('sg-dk',G.decks);
+    }
+    if(!obj.cards||!obj.cards.length){G.curiosaPasteMode=url;}
+    render();
+  });
+}
+
+function importCuriosaText(txt){
+  // Parse pasted deck text — supports "4x Card Name", "4 Card Name", "Card Name x4" formats
+  var lines=txt.trim().split('\n');
+  var cards=[];
+  lines.forEach(function(line){
+    line=line.trim();if(!line||line.startsWith('//'))return;
+    var m=line.match(/^(\d+)[x\s]+(.+)$/i)||line.match(/^(.+?)\s+x?(\d+)$/i);
+    if(m){
+      var qty=parseInt(m[1])||parseInt(m[2])||1;
+      var name=(m[2]||m[1]).trim();
+      if(name&&qty)cards.push({name:name,qty:qty});
+    } else if(line.length>1){
+      cards.push({name:line,qty:1});
+    }
+  });
+  if(!cards.length){alert('No cards found. Try the format: 4x Card Name');return;}
+  var url=G.curiosaPasteMode||'';
+  var deckName=document.getElementById('curiosa-deck-name');
+  var nm=(deckName&&deckName.value.trim())||'Imported Deck';
+  PUB_DECKS.unshift({name:nm,author:'Imported',el:'?',av:'?',desc:url?'Imported from '+url:'',url:url});
+  G.decks[nm]={name:nm,cards:cards};sv('sg-dk',G.decks);
+  G.curiosaPasteMode=null;render();
+  alert('Deck imported: '+nm+' ('+cards.length+' card types)');
+}
+
 function trigUpDecks(){
   var inp=document.createElement('input');inp.type='file';inp.accept='.csv';
   inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){
@@ -1492,7 +1557,7 @@ function pContent(){
     var q=S.cS||'';var fil=cFilter(CARDS,G.cF,q);
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
     o('<div id="csrch-wrap" class="si" style="margin:0 0 5px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
-    o(fBar(G.cF,'setCF',true));o('<div class="cgrid">');
+    o(fBar(G.cF,'setCF',true,'resetCF'));o('<div class="cgrid">');
     fil.slice(0,120).forEach(function(c){
       var own=(G.coll[cName(c)]||{}).qty||0;var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];var si=SETS[cSet(c)]||{sym:'?',c:'var(--fg2)'};var isSite=cType(c)==='site';
       o('<div class="ct" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">');
@@ -1509,7 +1574,7 @@ function pContent(){
     o('<div class="fr"><button class="fb" onclick="trigUpColl()">Import CSV</button><button class="fb gold" onclick="exportColl()">Export</button><button class="fb red" onclick="clearColl()">Clear</button></div>');
     o('<div class="stbar">'+Object.keys(G.coll).length+' unique &middot; '+total+' total</div>');
     o('<div id="csrch2-wrap" class="si" style="margin:0 0 5px"><input id="coll-srch" placeholder="Search collection&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.coS=\'\';render()">&times;</button>');o('</div>');
-    o(fBar(G.coF,'setCoF',false));
+    o(fBar(G.coF,'setCoF',false,'resetCoF'));
     if(fil.length){fil.forEach(function(c){var nm=c._nm||cName(c);var d=G.coll[nm];if(!d)return;var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];o('<div class="coll-it"><div class="coll-th">'+cImgTag(c)+'</div><div style="flex:1;min-width:0"><div style="font-size:10px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(nm)+'</div><div style="font-size:8px;color:'+el.c+'">'+cEl(c)+'</div></div><div style="display:flex;align-items:center;gap:3px;flex-shrink:0"><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span style="font-size:11px;font-weight:700;color:var(--bgrn);min-width:16px;text-align:center">'+d.qty+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div></div>');});}
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
@@ -1518,7 +1583,29 @@ function pContent(){
     Object.entries(G.decks).forEach(function(kv){var k=kv[0],dk=kv[1];var ds=G.dkstat[dk.name]||{w:0,l:0};var pct=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';o('<div class="dk-c"><div style="display:flex;align-items:center;gap:4px;margin-bottom:2px"><input style="font-size:10px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dk.name)+'" onchange="G.decks[\''+h(k)+'\'].name=this.value;sv(\'sg-dk\',G.decks)"><button class="fb red" style="font-size:7px;padding:1px 4px" onclick="delDeck(\''+h(k)+'\')">&times;</button></div><div class="ss"><span>'+dk.cards.length+' cards</span><span class="sw">'+ds.w+'W</span><span class="sl_">'+ds.l+'L</span><span class="sp_">'+pct+'</span></div><div class="dk-tags">');dk.cards.forEach(function(c){o('<span class="dk-tag">'+c.qty+'&times; '+h(c.name)+'</span>');});o('</div></div>');});
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
-  if(p==='pubdecks'){PUB_DECKS.forEach(function(d){o('<div class="pd-c"><div class="pd-nm">'+h(d.name)+'</div><div class="pd-mt">'+h(d.author)+' &middot; '+h(d.el)+' &middot; '+h(d.av)+'</div><div class="pd-ds">'+h(d.desc)+'</div><a class="pd-lnk" href="'+d.url+'" target="_blank">View on Curiosa &rarr;</a></div>');});o('<a class="ext-lnk" href="https://curiosa.io/decks" target="_blank">All community decks &rarr;</a>');return out.join('');}
+  if(p==='pubdecks'){
+    // URL import section
+    o('<div class="slbl2">Import Curiosa Deck</div>');
+    o('<div style="display:flex;gap:4px;margin-bottom:4px">');
+    o('<input class="fi" id="curiosa-url" placeholder="https://curiosa.io/decks/..." style="flex:1">');
+    o('<button class="fb gold" onclick="importCuriosaUrl(document.getElementById(\'curiosa-url\').value)">'+(G.curiosaLoading?'&hellip;':'Import')+'</button>');
+    o('</div>');
+    if(G.curiosaLoading)o('<div class="ld"><span class="spin">&#8635;</span> Fetching&hellip;</div>');
+    if(G.curiosaErr)o('<div style="font-size:9px;color:var(--red);margin-bottom:6px">'+h(G.curiosaErr)+'</div>');
+    if(G.curiosaPasteMode){
+      o('<div style="font-size:9px;color:var(--yel);margin-bottom:4px">&#9888; Curiosa uses JavaScript rendering — card list not visible in HTML.<br>Open the deck on Curiosa, copy the card list text, and paste it below:</div>');
+      o('<input class="fi" id="curiosa-deck-name" placeholder="Deck name&hellip;" style="margin-bottom:4px">');
+      o('<textarea class="fi" id="curiosa-paste" placeholder="Paste card list here&#10;4x Card Name&#10;3x Another Card" style="height:100px;resize:vertical;margin-bottom:4px"></textarea>');
+      o('<div style="display:flex;gap:4px">');
+      o('<button class="fb gold" style="flex:1" onclick="importCuriosaText(document.getElementById(\'curiosa-paste\').value)">Import Cards</button>');
+      o('<button class="fb" onclick="G.curiosaPasteMode=null;render()">Cancel</button>');
+      o('</div>');
+    }
+    o('<div class="slbl2">Featured Decks</div>');
+    PUB_DECKS.forEach(function(d){o('<div class="pd-c"><div class="pd-nm">'+h(d.name)+'</div><div class="pd-mt">'+h(d.author)+' &middot; '+h(d.el)+' &middot; '+h(d.av)+'</div><div class="pd-ds">'+h(d.desc)+'</div><a class="pd-lnk" href="'+d.url+'" target="_blank">View on Curiosa &rarr;</a></div>');});
+    o('<a class="ext-lnk" href="https://curiosa.io/decks" target="_blank">All community decks &rarr;</a>');
+    return out.join('');
+  }
   if(p==='sl'){
     var ns=Object.keys(G.records),pO=G.players.map(function(pp){return '<option value="'+h(pp.name)+'">'+h(pp.name)+'</option>';}).join(''),dO='<option value="">No deck</option>'+Object.entries(G.decks).map(function(kv){return '<option value="'+h(kv[0])+'">'+h(kv[1].name)+'</option>';}).join('');
     o('<div class="fr"><input class="fi" id="npp" placeholder="Add player&hellip;" style="flex:1"><button class="fb gold" onclick="addRec(document.getElementById(\'npp\').value);document.getElementById(\'npp\').value=\'\'">Add</button></div>');
@@ -1858,10 +1945,10 @@ function pCirc(p,pi){
   // ── 4 Threshold circles orbiting the pair ──
   // fire: top-left, water: top-right, earth: bottom-left, air: bottom-right
   var _elPos=[
-    {k:'fire',  left:'16px',  top:'16px'},
-    {k:'water', right:'16px', top:'16px'},
-    {k:'earth', left:'16px',  bottom:'16px'},
-    {k:'air',   right:'16px', bottom:'16px'}
+    {k:'fire',  left:'4px',   top:'22px'},
+    {k:'earth', left:'4px',   bottom:'22px'},
+    {k:'water', right:'4px',  top:'22px'},
+    {k:'air',   right:'4px',  bottom:'22px'}
   ];
   _elPos.forEach(function(ep){
     var e=ELEM.find(function(x){return x.k===ep.k;})||ELEM[4];
