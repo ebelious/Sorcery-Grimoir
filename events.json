@@ -1,159 +1,665 @@
 {
-  "updated": "2026-04-16T21:49:31.400Z",
+  "updated": "2026-04-16T22:51:29.653Z",
   "events": [
-    {
-      "name": "SEARCH & FILTER",
-      "date": "",
-      "location": "",
-      "type": "",
-      "url": ""
-    },
     {
       "name": "Sorcery Sealed League",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "b0196756-3247-4c8c-be12-d27d8339400d",
+        "createdAt": "2023-10-13T20:30:13.931Z",
+        "updatedAt": "2025-02-21T19:06:21.575Z",
+        "name": "",
+        "formatted": null,
+        "address1": "1133 Saint Vincent Avenue",
+        "address2": "",
+        "address3": null,
+        "city": "Shreveport",
+        "state": "LA",
+        "zip": "71104",
+        "country": "US",
+        "geo": {
+          "lat": 32.4761507,
+          "lng": -93.7541028
+        },
+        "primary": true,
+        "defaultShipping": true,
+        "defaultBilling": true,
+        "resourceType": "Event",
+        "resourceId": "b7b951d0-ab60-4906-8749-4af83f311b7b"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/b7b951d0-ab60-4906-8749-4af83f311b7b"
     },
     {
       "name": "Mighty Cool Games - Sorcery TCG League",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "f24b09b9-a04d-4c39-8346-866add8adcbf",
+        "createdAt": "2026-01-31T07:11:53.196Z",
+        "updatedAt": "2026-01-31T07:11:53.196Z",
+        "name": "",
+        "formatted": null,
+        "address1": "189, Peats Ferry Rd",
+        "address2": "",
+        "address3": null,
+        "city": "Hornsby",
+        "state": "NSW",
+        "zip": "2077",
+        "country": "AU",
+        "geo": {
+          "lat": -33.7024803,
+          "lng": 151.0969895
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "8ae6e3b0-4469-4ad2-80a8-0ebd1c35b411"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/8ae6e3b0-4469-4ad2-80a8-0ebd1c35b411"
     },
     {
-      "name": "Learn to play",
+      "name": "Learn to play ",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "33780c99-feb3-4936-b019-08743e31a545",
+        "createdAt": "2026-03-31T04:43:32.572Z",
+        "updatedAt": "2026-03-31T04:43:32.572Z",
+        "name": "",
+        "formatted": null,
+        "address1": "51 McCusker Dr",
+        "address2": "51 McCusker Drive",
+        "address3": null,
+        "city": "Bungendore",
+        "state": "NSW",
+        "zip": "2621",
+        "country": "AU",
+        "geo": {
+          "lat": -35.2493563,
+          "lng": 149.4496266
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "1e4125c3-3993-44b8-8324-2c816048a29e"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/1e4125c3-3993-44b8-8324-2c816048a29e"
     },
     {
       "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "afc8c507-2e25-4dea-a779-c130c1cf86c8",
+        "createdAt": "2025-12-09T10:37:17.840Z",
+        "updatedAt": "2025-12-09T10:37:17.840Z",
+        "name": "",
+        "formatted": null,
+        "address1": "14260b Centreville Square",
+        "address2": "",
+        "address3": null,
+        "city": "Centreville",
+        "state": "VA",
+        "zip": "20121",
+        "country": "US",
+        "geo": {
+          "lat": 38.8380659,
+          "lng": -77.4396123
+        },
+        "primary": true,
+        "defaultShipping": true,
+        "defaultBilling": true,
+        "resourceType": "Event",
+        "resourceId": "18a6bc10-656f-466d-a79e-ab32c9046433"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/18a6bc10-656f-466d-a79e-ab32c9046433"
     },
     {
       "name": "SpieleNarren Casual",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "cb285a8a-eb5f-49d0-a84a-c7ef994006b7",
+        "createdAt": "2026-03-25T18:25:48.283Z",
+        "updatedAt": "2026-03-25T18:25:48.283Z",
+        "name": "",
+        "formatted": null,
+        "address1": "42A Sievekingdamm",
+        "address2": "",
+        "address3": null,
+        "city": "Hamburg",
+        "state": "HH",
+        "zip": "20535",
+        "country": "DE",
+        "geo": {
+          "lat": 53.5588646,
+          "lng": 10.0485021
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "589618f0-292f-4574-aa34-5133b66f90ac"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/589618f0-292f-4574-aa34-5133b66f90ac"
     },
     {
       "name": "sorcery tournament",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "6d48c4b8-97be-4946-8d56-95b72092a539",
+        "createdAt": "2026-01-28T13:12:47.463Z",
+        "updatedAt": "2026-01-28T13:12:47.463Z",
+        "name": "",
+        "formatted": null,
+        "address1": "Za Poříčskou bránou",
+        "address2": "21",
+        "address3": null,
+        "city": "Praha 8",
+        "state": "Hlavní město Praha",
+        "zip": "186 00",
+        "country": "CZ",
+        "geo": {
+          "lat": 50.0910801,
+          "lng": 14.4420904
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "f74d2254-106a-4b3a-8f41-a24fc05de3d8"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/f74d2254-106a-4b3a-8f41-a24fc05de3d8"
     },
     {
       "name": "Vault Casual Constructed",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "65f8a401-da97-4055-8ef3-554e456a9a28",
+        "createdAt": "2026-03-06T15:49:55.473Z",
+        "updatedAt": "2026-03-23T21:45:01.662Z",
+        "name": "",
+        "formatted": null,
+        "address1": "30 Plachého",
+        "address2": "",
+        "address3": null,
+        "city": "Plzeň 3",
+        "state": "Plzeňský kraj",
+        "zip": "301 00",
+        "country": "CZ",
+        "geo": {
+          "lat": 49.7433965,
+          "lng": 13.3679933
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "b1fcbe27-07a6-4ae1-94b1-f19c49a282c3"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/b1fcbe27-07a6-4ae1-94b1-f19c49a282c3"
     },
     {
       "name": "Weekly Casual 16.04.2026.",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "78b7de37-c664-492f-8305-13dd8d39ed26",
+        "createdAt": "2026-03-31T09:29:07.037Z",
+        "updatedAt": "2026-03-31T09:29:07.037Z",
+        "name": "",
+        "formatted": null,
+        "address1": "3, Trg Lava Mirskog",
+        "address2": "",
+        "address3": null,
+        "city": "Osijek",
+        "state": "Osječko-baranjska županija",
+        "zip": "31000",
+        "country": "HR",
+        "geo": {
+          "lat": 45.5601709,
+          "lng": 18.677129
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "2658559c-dc4b-4a0c-9132-4f85c8330f49"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/2658559c-dc4b-4a0c-9132-4f85c8330f49"
     },
     {
       "name": "Gothic Draft @ Alphaspel",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "1459f1cd-e52e-4c4b-b33f-4da03a892fc1",
+        "createdAt": "2026-03-16T09:28:19.093Z",
+        "updatedAt": "2026-03-16T09:28:19.093Z",
+        "name": "",
+        "formatted": null,
+        "address1": "2 Instrumentvägen",
+        "address2": "",
+        "address3": null,
+        "city": "Hägersten",
+        "state": "Stockholms län",
+        "zip": "126 53",
+        "country": "SE",
+        "geo": {
+          "lat": 59.3059898,
+          "lng": 17.9868011
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "ad3014e4-ad6b-4500-b9c0-5f097830ca9f"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/ad3014e4-ad6b-4500-b9c0-5f097830ca9f"
     },
     {
       "name": "Weekly Sorcering Tournament",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "10092933-b7e1-437e-8e98-a3709a0b9b31",
+        "createdAt": "2026-04-08T08:24:52.134Z",
+        "updatedAt": "2026-04-08T08:24:52.134Z",
+        "name": "",
+        "formatted": null,
+        "address1": "18-20 Lochrin Buildings",
+        "address2": "",
+        "address3": "",
+        "city": "Edinburgh",
+        "state": "Scotland",
+        "zip": "EH3 9ND",
+        "country": "GB",
+        "geo": {
+          "lat": 55.941954,
+          "lng": -3.204254
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "99957770-192d-4b53-a1c0-f30cd947d8eb"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/99957770-192d-4b53-a1c0-f30cd947d8eb"
     },
     {
       "name": "Sorcery @lair",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "5a49ab5c-184a-4016-a59d-d82f3c9a6b00",
+        "createdAt": "2026-04-01T20:48:09.279Z",
+        "updatedAt": "2026-04-01T20:48:09.279Z",
+        "name": "",
+        "formatted": null,
+        "address1": "14/F Corso Principe Oddone",
+        "address2": "",
+        "address3": null,
+        "city": "Torino",
+        "state": "Piemonte",
+        "zip": "10122",
+        "country": "IT",
+        "geo": {
+          "lat": 45.0788666,
+          "lng": 7.670357000000001
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "e9948984-9c75-4dad-95bc-724e34033b16"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/e9948984-9c75-4dad-95bc-724e34033b16"
     },
     {
       "name": "Sorcery Constructed Vila Geek Serra",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "215a828d-90a7-4b4e-aa15-623e8e82cdda",
+        "createdAt": "2025-10-30T23:38:45.492Z",
+        "updatedAt": "2026-01-11T20:57:57.267Z",
+        "name": "",
+        "formatted": null,
+        "address1": "R. Viriato Corrêa",
+        "address2": "13, SL 201, PQ RES LARANJEIRAS, SERRA, ES, CEP 29165-500",
+        "address3": null,
+        "city": "Parque Res. Laranjeiras",
+        "state": "ES",
+        "zip": "29165-500",
+        "country": "BR",
+        "geo": {
+          "lat": -20.1964885,
+          "lng": -40.247688
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "a9752140-279f-4c6f-81a0-1168844ae270"
+      },
       "type": "",
-      "url": ""
-    },
-    {
-      "name": "In Progress",
-      "date": "",
-      "location": "",
-      "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/a9752140-279f-4c6f-81a0-1168844ae270"
     },
     {
       "name": "Casual 160426",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "a1ca5608-9ab5-42c9-94b6-e9383d745603",
+        "createdAt": "2026-03-09T20:00:56.779Z",
+        "updatedAt": "2026-03-09T20:00:56.779Z",
+        "name": "",
+        "formatted": null,
+        "address1": "Viale Leonardo Da Vinci",
+        "address2": "279",
+        "address3": null,
+        "city": "Roma",
+        "state": "RM - Roma",
+        "zip": "00145",
+        "country": "IT",
+        "geo": {
+          "lat": 41.8557976,
+          "lng": 12.4807569
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "699a983b-eb02-4ebc-9d65-bcab7c71e1ae"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/699a983b-eb02-4ebc-9d65-bcab7c71e1ae"
     },
     {
       "name": "Sorcery Night at the Forge",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "a810c497-7c4e-4209-8d24-357ee86aa9f1",
+        "createdAt": "2024-10-13T21:15:47.393Z",
+        "updatedAt": "2025-02-21T19:35:53.753Z",
+        "name": "",
+        "formatted": null,
+        "address1": "26324 John R Road",
+        "address2": "",
+        "address3": null,
+        "city": "Madison Heights",
+        "state": "MI",
+        "zip": "48071",
+        "country": "US",
+        "geo": {
+          "lat": 42.4862099,
+          "lng": -83.1047258
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "200203b7-8343-43d2-a1ee-3056826383cd"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/200203b7-8343-43d2-a1ee-3056826383cd"
     },
     {
       "name": "Casual play",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "cba508f7-9195-4147-8cd7-1543b58c97f2",
+        "createdAt": "2026-04-16T21:06:34.173Z",
+        "updatedAt": "2026-04-16T21:06:34.173Z",
+        "name": null,
+        "formatted": null,
+        "address1": "10 Długa",
+        "address2": "",
+        "address3": null,
+        "city": "Kraków",
+        "state": "Województwo małopolskie",
+        "zip": "31-146",
+        "country": "PL",
+        "geo": {
+          "lat": 50.066983,
+          "lng": 19.9386143
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "7c58cead-df1b-412b-ad16-cfc754ebf144"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/7c58cead-df1b-412b-ad16-cfc754ebf144"
     },
     {
-      "name": "Constructed tournament",
+      "name": "Constructed tournament ",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "c863a1ee-a0be-45ba-a7f9-fd051071ec1f",
+        "createdAt": "2026-01-15T15:56:35.165Z",
+        "updatedAt": "2026-01-15T15:56:35.165Z",
+        "name": "",
+        "formatted": null,
+        "address1": "154, E Davis St",
+        "address2": "",
+        "address3": null,
+        "city": "Culpeper",
+        "state": "VA",
+        "zip": "22701",
+        "country": "US",
+        "geo": {
+          "lat": 38.4732991,
+          "lng": -77.99505409999999
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "359c0fe4-46a0-4c0f-83b5-086622ee1bbc"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/359c0fe4-46a0-4c0f-83b5-086622ee1bbc"
     },
     {
       "name": "Weekly Casual/Learn to Play",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "9a76f5df-5087-4f5a-88be-f49f75feb836",
+        "createdAt": "2026-03-28T21:50:28.435Z",
+        "updatedAt": "2026-03-28T21:50:28.435Z",
+        "name": "",
+        "formatted": null,
+        "address1": "8075 Mechanicsville Turnpike",
+        "address2": "",
+        "address3": null,
+        "city": "Mechanicsville",
+        "state": "VA",
+        "zip": "23111",
+        "country": "US",
+        "geo": {
+          "lat": 37.601486,
+          "lng": -77.3742759
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "bb68879a-2a17-49ef-87f5-c4bb219139c7"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/bb68879a-2a17-49ef-87f5-c4bb219139c7"
+    },
+    {
+      "name": "BMG Draft",
+      "date": "",
+      "time": "",
+      "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "dd349873-d59f-415d-a157-b02a84d697cc",
+        "createdAt": "2023-10-13T20:30:12.822Z",
+        "updatedAt": "2025-06-04T19:08:03.903Z",
+        "name": "",
+        "formatted": null,
+        "address1": "101 S 3rd St",
+        "address2": "",
+        "address3": null,
+        "city": "Lemoyne",
+        "state": "PA",
+        "zip": "17043",
+        "country": "US",
+        "geo": {
+          "lat": 40.24491559999999,
+          "lng": -76.8928634
+        },
+        "primary": true,
+        "defaultShipping": true,
+        "defaultBilling": true,
+        "resourceType": "Event",
+        "resourceId": "1df711a2-d414-4892-b127-972b4b68fe2c"
+      },
+      "type": "",
+      "url": "https://play.sorcerytcg.com/events/1df711a2-d414-4892-b127-972b4b68fe2c"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "bc11fb0a-4b15-4d87-a50b-79ee83495778",
+        "createdAt": "2026-03-04T06:32:49.868Z",
+        "updatedAt": "2026-03-04T06:32:49.868Z",
+        "name": "1554 Wadsworth Ave",
+        "formatted": null,
+        "address1": "1554 Wadsworth Ave",
+        "address2": "",
+        "address3": null,
+        "city": "Philadelphia",
+        "state": "PA",
+        "zip": "19150",
+        "country": "US",
+        "geo": {
+          "lat": 40.0800202,
+          "lng": -75.1727417
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "53a6c905-317b-4cee-988d-291da8b7359f"
+      },
       "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/53a6c905-317b-4cee-988d-291da8b7359f"
     },
     {
       "name": "Draft and Constructed",
       "date": "",
+      "time": "",
       "location": "",
+      "city": "",
+      "state": "",
+      "address": {
+        "id": "e876e458-a340-4c07-8434-c6164703a7b6",
+        "createdAt": "2026-03-26T18:02:19.197Z",
+        "updatedAt": "2026-03-26T18:02:19.197Z",
+        "name": "",
+        "formatted": null,
+        "address1": "591, N Valley Mills Dr",
+        "address2": "",
+        "address3": null,
+        "city": "Waco",
+        "state": "TX",
+        "zip": "76710",
+        "country": "US",
+        "geo": {
+          "lat": 31.5300261,
+          "lng": -97.172727
+        },
+        "primary": true,
+        "defaultShipping": false,
+        "defaultBilling": false,
+        "resourceType": "Event",
+        "resourceId": "33b188d5-0741-4b7e-8560-68003181d935"
+      },
       "type": "",
-      "url": ""
-    },
-    {
-      "name": "Fox Den's Thursday Sorcery Locals",
-      "date": "",
-      "location": "",
-      "type": "",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/33b188d5-0741-4b7e-8560-68003181d935"
     }
   ]
 }
