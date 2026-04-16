@@ -1277,50 +1277,83 @@ function extractJSON(txt,type){
 var YT_API_KEY='AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
 
 function _fetchVideos(cid, chName, cb){
-  var pid='UU'+cid.slice(2);
-  var url='https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId='+pid+'&maxResults=3&key='+YT_API_KEY;
-  fetch(url)
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d.error){console.warn('YT error',chName,d.error.code,d.error.message);cb([]);return;}
-      if(!d.items||!d.items.length){cb([]);return;}
-      var vids=d.items.map(function(item){
-        var snip=item.snippet||{};
-        var vid=snip.resourceId&&snip.resourceId.videoId;
-        if(!vid||!/^[A-Za-z0-9_-]{11}$/.test(vid))return null;
-        var pub=snip.publishedAt?new Date(snip.publishedAt):null;
-        return {channel:chName,title:snip.title||'',videoId:vid,
-          date:pub?pub.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'',
-          _ts:pub?pub.getTime():0};
-      }).filter(Boolean);
-      cb(vids);
-    })
-    .catch(function(e){console.warn('YT fetch error',chName,e);cb([]);});
+  // Fetch RSS feed via multiple CORS proxy attempts
+  var rssUrl='https://www.youtube.com/feeds/videos.xml?channel_id='+cid;
+  var proxies=[
+    'https://api.allorigins.win/raw?url='+encodeURIComponent(rssUrl),
+    'https://corsproxy.io/?url='+encodeURIComponent(rssUrl),
+    'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(rssUrl)
+  ];
+  var pi=0;
+  function tryNext(){
+    if(pi>=proxies.length){cb([]);return;}
+    var url=proxies[pi++];
+    fetch(url,{signal:AbortSignal.timeout?AbortSignal.timeout(8000):undefined})
+      .then(function(r){
+        if(!r.ok)throw new Error('HTTP '+r.status);
+        return r.text();
+      })
+      .then(function(txt){
+        // Parse YouTube Atom XML
+        var vids=[];
+        var entries=txt.match(/<entry>([\s\S]*?)<\/entry>/g)||[];
+        entries.slice(0,5).forEach(function(e){
+          var vM=e.match(/<yt:videoId>([A-Za-z0-9_-]{11})<\/yt:videoId>/);
+          var tM=e.match(/<title>(?:<!\[CDATA\[)?([^<\]]+?)(?:\]\]>)?<\/title>/);
+          var pM=e.match(/<published>([^<]+)<\/published>/);
+          if(!vM)return;
+          var pub=pM?new Date(pM[1]):null;
+          vids.push({
+            channel:chName,
+            title:(tM?tM[1]:'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&quot;/g,'"'),
+            videoId:vM[1],
+            date:pub?pub.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'',
+            _ts:pub?pub.getTime():0
+          });
+        });
+        if(vids.length){cb(vids);}
+        else{tryNext();}
+      })
+      .catch(function(){tryNext();});
+  }
+  tryNext();
 }
+
 
 function loadYTVideos(){
   if(G.ytLoading)return;
   G.ytLoading=true;G.ytLoaded=false;G.ytErr=null;
   G.ytVids=[];render();
+  // Fetch selected channel only, or all channels (batched to limit API calls)
+  var selId=G.ytCh||'all';
   var channels=YT_CHS.filter(function(x){return x.id!=='all'&&x.cid;});
+  if(selId!=='all'){
+    var sel=channels.filter(function(x){return x.id===selId;});
+    if(sel.length)channels=sel;
+    else channels=channels.slice(0,3); // fallback: first 3
+  } else {
+    channels=channels.slice(0,4); // limit All to 4 channels
+  }
   var allVids=[];var done=0;var total=channels.length;
-  function finish(){
+  if(!total){G.ytLoading=false;G.ytErr='No channels selected.';render();return;}
+  function finish(vids){
+    if(vids&&vids.length)allVids=allVids.concat(vids);
     done++;
+    // Show partial results as they come in
+    allVids.sort(function(a,b){return (b._ts||0)-(a._ts||0);});
+    G.ytVids=allVids.slice();
     if(done>=total){
       G.ytLoading=false;G.ytLoaded=true;
-      allVids.sort(function(a,b){return (b._ts||0)-(a._ts||0);});
-      G.ytVids=allVids.map(function(v){return {channel:v.channel,title:v.title,videoId:v.videoId,date:v.date};});
-      if(!G.ytVids.length)G.ytErr='No videos found.';
-      render();
+      if(!G.ytVids.length)G.ytErr='No videos found. Try selecting a specific channel.';
     }
+    render();
   }
   channels.forEach(function(ch){
-    _fetchVideos(ch.cid,ch.n,function(vids){
-      if(vids.length)allVids=allVids.concat(vids);
-      finish();
-    });
+    _fetchVideos(ch.cid,ch.n,function(vids){finish(vids);});
   });
 }
+
+
 // ── NEWS ──────────────────────────────────────────────────────────────────────
 var _evACTimer=null;
 function evCityAutocomplete(val){
@@ -1428,6 +1461,19 @@ function getLocationAndLoadEvents(){
     function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();}
   );
 }
+
+var NEWS_SEED=[
+  {title:"2026 Grand Contests: Where the Realm Gathers",date:"Apr 3, 2026",url:"https://sorcerytcg.com/news/2026-grand-contests",source:"sorcerytcg.com"},
+  {title:"Where Communities Are Celebrated: 2026 Cornerstone Championships",date:"Mar 27, 2026",url:"https://sorcerytcg.com/news/where-communities-are-celebrated-2026-cornerstone-championships",source:"sorcerytcg.com"},
+  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
+  {title:"SorceryCon 2026: Worlds Largest Community-Run Sorcery Event Returns",date:"Dec 12, 2025",url:"https://sorcerytcg.com/news/sorcerycon-2026-the-worlds-largest-community-run-sorcery-event",source:"sorcerytcg.com"},
+  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm December 2025 Rulebook Update",date:"Dec 19, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-december-2025-rulebook-update",source:"sorcerytcg.com"},
+  {title:"Sorcery at SCG CON Las Vegas: Closing Crossroads 2025 Season Strong",date:"Nov 28, 2025",url:"https://sorcerytcg.com/news/sorcery-at-scg-con-las-vegas-closing-crossroads-2025-season-strong",source:"sorcerytcg.com"},
+  {title:"SCG Houston 2025: Crossroads Champion Deck Breakdown",date:"Oct 27, 2025",url:"https://sorcerytcg.com/news/scg-houston-2025-crossroads-champion-deck-breakdown",source:"sorcerytcg.com"},
+  {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
+];
 
 function loadNews(){
   if(G.newsLoading)return;G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
@@ -1756,13 +1802,19 @@ function pContent(){
     return out.join('');
   }
   if(p==='news'){
-    if(!G.newsLoaded&&!G.newsLoading){setTimeout(function(){loadNews();},50);}
-    o('<div class="fr"><button class="fb gold" onclick="loadNews()">'+(G.newsLoading?'Loading&hellip;':(!G.newsLoaded?'Load News':'Refresh'))+'</button></div>');
-    if(G.newsLoading){o('<div class="ld"><span class="spin">&#8635;</span> Loading&hellip;</div>');}
-    else if(G.newsItems&&G.newsItems.length){G.newsItems.forEach(function(n){o('<div class="ev-c"><div class="ev-nm">'+h(n.title)+'</div>'+(n.date?'<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>':'')+'<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+n.url+'" target="_blank">Read article &rarr;</a></div>');});}
-    else if(G.newsErr){o('<div style="font-size:9px;color:var(--fg2);padding:4px 0">'+h(G.newsErr)+'</div>');}
-    o('<div style="font-size:9px;font-weight:700;color:var(--fg2);text-transform:uppercase;letter-spacing:.07em;margin:10px 0 5px">Browse</div>');
-    o('<a class="ext-lnk" href="https://sorcerytcg.com/news" target="_blank">sorcerytcg.com/news &rarr;</a>');
+    // Show seed articles immediately, offer refresh for latest
+    var _displayNews=G.newsItems&&G.newsItems.length?G.newsItems:NEWS_SEED;
+    o('<div class="fr"><button class="fb gold" onclick="loadNews()">'+(G.newsLoading?'<span class="spin">&#8635;</span> Loading&hellip;':'&#8634; Refresh')+'</button></div>');
+    if(G.newsLoading)o('<div class="ld"><span class="spin">&#8635;</span> Checking for latest news&hellip;</div>');
+    if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
+    _displayNews.forEach(function(n){
+      o('<div class="ev-c">');
+      o('<div class="ev-nm">'+h(n.title)+'</div>');
+      if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
+      o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
+      o('</div>');
+    });
+    o('<a class="ext-lnk" href="https://sorcerytcg.com/news" target="_blank">All news on sorcerytcg.com &rarr;</a>');
     o('<a class="ext-lnk" href="https://curiosa.io/blog" target="_blank">Curiosa blog &rarr;</a>');
     return out.join('');
   }
