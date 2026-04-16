@@ -19,7 +19,7 @@ This has a lot of simple 'click to use' features to expand images or enlarge tex
 
 
 ## Add the App to your phone (PWA).
-There is 2 ways to accomplish this:<br>
+There are two ways to accomplish this:<br>
     Option 1:  [Sorcery-Grimoir](https://ebelious.github.io/Sorcery-Grimoir/) > Menu > settings > Theme > Install As App <br>
     Option 2: Menu in browser > Add to Home screan, Install or Install as App <br>
 
