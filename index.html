@@ -1426,6 +1426,35 @@ function evUnsave(idx){
 function loadLocalEvents(city){
   if(G.evLoading)return;
   G.evLoading=true;G.evLoaded=false;G.evErr=null;G.evItems=null;render();
+  var loc=(city||G.evCity||'').toLowerCase().trim();
+
+  // Try events.json from GitHub Pages first
+  fetch('https://ebelious.github.io/Sorcery-Grimoir/events.json?t='+Date.now())
+    .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
+    .then(function(d){
+      var all=d.events||[];
+      if(!all.length)throw new Error('empty');
+      // Filter by city/state if provided
+      var filtered=loc?all.filter(function(e){
+        var l=(e.location||e.address||'').toLowerCase();
+        var n=(e.name||'').toLowerCase();
+        return loc.split(',').some(function(part){
+          var p=part.trim();
+          return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
+        });
+      }):all;
+      G.evLoading=false;G.evLoaded=true;
+      G.evItems=filtered.length?filtered:all.slice(0,20);
+      if(!filtered.length&&loc)G.evErr='No events found near '+loc+'. Showing all upcoming events.';
+      render();
+    })
+    .catch(function(){
+      // Fallback to Claude API search
+      _loadEventsViaAPI(city);
+    });
+}
+
+function _loadEventsViaAPI(city){
   var loc=city||G.evCity||'your area';
   var coordHint=(G.evLat&&G.evLng)?' (lat '+G.evLat.toFixed(4)+' lon '+G.evLng.toFixed(4)+')':'';
   var prompt='Search the web for Sorcery Contested Realm TCG events near '+loc+coordHint+'. '
@@ -1444,6 +1473,7 @@ function loadLocalEvents(city){
     G.evErr='Could not load events. Try the Play Network link below.';render();
   });
 }
+
 
 function getLocationAndLoadEvents(){
   if(!navigator.geolocation){G.evCity='your area';loadLocalEvents();return;}
