@@ -2,8 +2,8 @@ name: Scrape Sorcery Events
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # runs daily at 6am UTC
-  workflow_dispatch:        # allows manual run from GitHub Actions tab
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
   scrape:
@@ -23,10 +23,89 @@ jobs:
           npm install playwright
           npx playwright install chromium --with-deps
 
-      - name: Run scraper
-        run: node scrape-events.js
+      - name: Scrape events
+        run: |
+          node << 'JSEOF'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            const apiCalls = [];
+            page.on('response', async (response) => {
+              const url = response.url();
+              if (url.includes('api.carde.io/api/play/events') &&
+                  (response.headers()['content-type'] || '').includes('json')) {
+                try { const json = await response.json(); apiCalls.push({ url, json }); } catch(e) {}
+              }
+            });
+            await page.goto('https://play.sorcerytcg.com/events', { waitUntil: 'networkidle', timeout: 30000 });
+            await page.waitForTimeout(5000);
+            let clickCount = 0;
+            while (clickCount < 25) {
+              try {
+                const btn = await page.$('button:has-text("Show More"), button:has-text("Load More")');
+                if (!btn || !(await btn.isVisible())) break;
+                await btn.click();
+                await page.waitForTimeout(1500);
+                clickCount++;
+              } catch(e) { break; }
+            }
+            console.log('Show More clicks:', clickCount, '| API calls:', apiCalls.length);
+            await browser.close();
+            const seen = new Set();
+            const allEvents = [];
+            for (const call of apiCalls) {
+              const d = call.json;
+              const arr = d?.data || d?.events || d?.results || d?.items || (Array.isArray(d) ? d : null);
+              if (!arr) continue;
+              arr.forEach(e => {
+                if (!e.id || seen.has(e.id)) return;
+                seen.add(e.id);
+                const addr = e.address || {};
+                const city = addr.city || addr.locality || '';
+                const state = addr.state || addr.region || addr.province || '';
+                const country = addr.country || addr.countryCode || '';
+                const street = addr.street || addr.line1 || addr.streetAddress || '';
+                const zip = addr.zip || addr.postalCode || '';
+                const fullAddr = [street, city, state, zip, country].filter(Boolean).join(', ');
+                const startDate = e.startsAt ? new Date(e.startsAt) : null;
+                const endDate = e.endsAt ? new Date(e.endsAt) : null;
+                const date = startDate ? startDate.toLocaleDateString('en-US', {weekday:'short',year:'numeric',month:'short',day:'numeric'}) : '';
+                const time = startDate ? startDate.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit',timeZoneName:'short'}) : '';
+                const endDateStr = endDate ? endDate.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) : '';
+                let entryFee = 'FREE';
+                if (e.ticketPrices && e.ticketPrices.length) {
+                  const p = e.ticketPrices[0];
+                  entryFee = p.amount > 0 ? '$' + (p.amount / 100).toFixed(2) : 'FREE';
+                }
+                let type = '';
+                if (e.activities && e.activities.length) {
+                  type = e.activities.map(a => a.name || a.format || a.type || '').filter(Boolean).join(', ');
+                }
+                if (!type && e.configuration) type = e.configuration.format || e.configuration.type || '';
+                allEvents.push({
+                  id: e.id, name: e.name || '', status: e.status || '',
+                  date, time, endDate: endDateStr,
+                  location: e.owner || addr.name || city || '',
+                  city, state, country, address: fullAddr, street, zip,
+                  type, entryFee,
+                  capacity: e.capacity || '',
+                  registered: e.registrationCount || 0,
+                  organizer: e.owner || '',
+                  bannerImage: e.bannerImage || '',
+                  url: 'https://play.sorcerytcg.com/events/' + e.id
+                });
+              });
+            }
+            allEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+            console.log('Total events:', allEvents.length);
+            fs.writeFileSync('events.json', JSON.stringify({ updated: new Date().toISOString(), total: allEvents.length, events: allEvents }, null, 2));
+            console.log('Done');
+          })();
+          JSEOF
 
-      - name: Commit events.json if changed
+      - name: Commit events.json
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
