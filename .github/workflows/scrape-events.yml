@@ -1,0 +1,35 @@
+name: Scrape Sorcery Events
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # runs daily at 6am UTC
+  workflow_dispatch:        # allows manual run from GitHub Actions tab
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright
+          npx playwright install chromium --with-deps
+
+      - name: Run scraper
+        run: node scrape-events.js
+
+      - name: Commit events.json if changed
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add events.json
+          git diff --staged --quiet || git commit -m "chore: update events.json [skip ci]"
+          git push
