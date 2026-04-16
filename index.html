@@ -1795,8 +1795,8 @@ function pContent(){
     }
     o('<div class="slbl2">'+(_ytKey?'Replace Key':'Enter API Key')+'</div>');
     o('<div style="display:flex;gap:4px;margin-bottom:8px">');
-    o('<input class="fi" id="yt-key-inp" placeholder="AIza..." style="flex:1" value="'+h(_ytKey)+'">');
-    o('<button class="fb gold" onclick="var k=document.getElementById(\'yt-key-inp\').value.trim();if(k){localStorage.setItem(\'sg-ytkey\',k);G.ytVids=[];G.ytLoaded=false;render();alert(\'API key saved! Open YouTube to load videos.\');}">Save</button>');
+    o('<input class="fi" id="yt-key-inp" placeholder="AIza..." style="flex:1">');  // always empty
+    o('<button class="fb gold" onclick="var k=document.getElementById(\'yt-key-inp\').value.trim();if(k){localStorage.setItem(\'sg-ytkey\',k);G.ytVids=[];G.ytLoaded=false;render();}">Save</button>');
     o('</div>');
     o('<div class="slbl2">How to get a free API key</div>');
     o('<div style="font-size:9px;color:var(--fg2);line-height:1.6">');
@@ -1836,6 +1836,9 @@ function pContent(){
       o('<button class="yt-pill'+(isOn?' on':'')+'" onclick="G.ytCh=\''+x.id+'\';G.ytSelCh='+(x.id==='all'?'null':'\''+x.id+'\'')+ ';render()">'+h(x.n)+'</button>');
     });
     o('</div>');
+    o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
+    o('<button class="fb" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">'+(G.ytLoading?'<span class="spin">&#8635;</span> Loading&hellip;':'&#8634; Refresh')+'</button>');
+    o('</div>');
     if(G.ytLoading){o('<div class="ld"><span class="spin">&#8635;</span> Loading videos&hellip;</div>');}
     else if(filtVids.length){
       filtVids.forEach(function(v){
@@ -1844,7 +1847,7 @@ function pContent(){
         o('<div class="yt-thumb"><img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="thumb"><div class="yt-play">&#9654;</div></div>');
         o('<div class="yt-info"><div class="yt-ch2">'+h(v.channel||'')+'</div><div class="yt-title">'+h(v.title||'')+'</div>'+(v.date?'<div class="yt-date">'+h(v.date)+'</div>':'')+'</div></a>');
       });
-      o('<button class="fb" style="width:100%;margin-bottom:8px" onclick="G.ytLoaded=false;G.ytVids=null;loadYTVideos()">&#8634; Refresh</button>');
+      o('<button class="fb gold" style="width:100%;margin-bottom:8px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">&#8634; Refresh</button>');
     } else if(G.ytLoaded){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No videos found. Browse channel directly below.</div>');}
     o('<a class="ext-lnk" style="margin-top:6px" href="https://www.youtube.com/results?search_query=sorcery+contested+realm+tcg" target="_blank">Search YouTube &rarr;</a>');
     return out.join('');
