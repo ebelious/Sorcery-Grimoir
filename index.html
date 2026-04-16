@@ -656,7 +656,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'standard',keepAwake:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'tap',keepAwake:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
@@ -1569,7 +1569,7 @@ function pContent(){
     THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});
     o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
-    o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==="standard")?" selected":"")+'>Standard</option><option value="circular"'+(G.cfg.layout==="circular"?" selected":"")+'>Circular</option><option value="tap"'+(G.cfg.layout==="tap"?" selected":"")+'>Tap</option></select></div>');
+    o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==="standard")?" selected":"")+'>Full</option><option value="circular"'+(G.cfg.layout==="circular"?" selected":"")+'>Circular</option><option value="tap"'+(G.cfg.layout==="tap"?" selected":"")+'>Tap</option></select></div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
