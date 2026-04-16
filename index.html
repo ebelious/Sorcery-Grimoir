@@ -657,11 +657,10 @@ function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
   G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'standard',keepAwake:false});
-  delete G.cfg.ytProxy; // always use hardcoded proxy, never cached value
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.newsAddMode=false;G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
@@ -1296,7 +1295,6 @@ function _fetchVideos(cid, chName, cb){
   var key=localStorage.getItem('sg-ytkey')||'';
   if(!key){cb([]);return;}
 
-  // YouTube uploads playlist ID = replace 'UC' prefix with 'UU'
   var pid='UU'+cid.slice(2);
   var url='https://www.googleapis.com/youtube/v3/playlistItems'
     +'?part=snippet&maxResults=5'
@@ -1306,10 +1304,7 @@ function _fetchVideos(cid, chName, cb){
   fetch(url)
     .then(function(r){return r.json();})
     .then(function(d){
-      if(d.error){
-        console.warn('YT API error',chName,d.error.message);
-        cb([]);return;
-      }
+      if(d.error){console.warn('YT API error',chName,d.error.message);cb([]);return;}
       if(!d.items||!d.items.length){cb([]);return;}
       var vids=d.items.map(function(item){
         var snip=item.snippet||{};
@@ -1481,35 +1476,44 @@ function getLocationAndLoadEvents(){
 var NEWS_SEED=[
   {title:"2026 Grand Contests: Where the Realm Gathers",date:"Apr 3, 2026",url:"https://sorcerytcg.com/news/2026-grand-contests",source:"sorcerytcg.com"},
   {title:"Where Communities Are Celebrated: 2026 Cornerstone Championships",date:"Mar 27, 2026",url:"https://sorcerytcg.com/news/where-communities-are-celebrated-2026-cornerstone-championships",source:"sorcerytcg.com"},
-  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
+  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 13, 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
+  {title:"Avatar of the Realm Update",date:"Feb 18, 2026",url:"https://sorcerytcg.com/news/avatar-of-the-realm-update",source:"sorcerytcg.com"},
+  {title:"Sorcery Awaits: Join Us at Gen Con 2026",date:"Feb 6, 2026",url:"https://sorcerytcg.com/news/sorcery-awaits-join-us-at-gen-con-2026",source:"sorcerytcg.com"},
   {title:"SorceryCon 2026: Worlds Largest Community-Run Sorcery Event Returns",date:"Dec 12, 2025",url:"https://sorcerytcg.com/news/sorcerycon-2026-the-worlds-largest-community-run-sorcery-event",source:"sorcerytcg.com"},
-  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
   {title:"Sorcery: Contested Realm December 2025 Rulebook Update",date:"Dec 19, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-december-2025-rulebook-update",source:"sorcerytcg.com"},
+  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
   {title:"Sorcery at SCG CON Las Vegas: Closing Crossroads 2025 Season Strong",date:"Nov 28, 2025",url:"https://sorcerytcg.com/news/sorcery-at-scg-con-las-vegas-closing-crossroads-2025-season-strong",source:"sorcerytcg.com"},
-  {title:"SCG Houston 2025: Crossroads Champion Deck Breakdown",date:"Oct 27, 2025",url:"https://sorcerytcg.com/news/scg-houston-2025-crossroads-champion-deck-breakdown",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm Rules Update (July 2025)",date:"Jul 10, 2025",url:"https://sorcerytcg.com/news/july-2025-rulebook-update",source:"sorcerytcg.com"},
   {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
 ];
 
 function loadNews(){
-  if(G.newsLoading)return;G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
-  // Use Claude web_search to find real news articles from sorcerytcg.com
-  var prompt='Please search the web right now for the latest news articles on https://sorcerytcg.com/news and return a JSON array of the 5 most recent articles. Each item must have these exact keys: "title" (article headline as a string), "url" (full article URL starting with https://sorcerytcg.com/news/), "date" (publication month and year as a string), "source" (always "sorcerytcg.com"). Return ONLY the raw JSON array with no explanation, no markdown code fences, no extra text. Example format: [{"title":"Article Name","url":"https://sorcerytcg.com/news/article-slug","date":"Apr 2026","source":"sorcerytcg.com"}]';
-  apiCall(prompt,3000,function(err,txt){
-    G.newsLoading=false;G.newsLoaded=true;
-    if(!err&&txt){
-      var arr=extractJSON(txt,'array');
-      if(arr&&arr.length){
-        var valid=arr.filter(function(n){
-          return n.title&&n.url&&typeof n.title==='string'&&typeof n.url==='string'&&n.url.indexOf('http')===0&&n.url.length>25;
-        }).slice(0,5);
-        if(valid.length){G.newsItems=valid;}
-      }
-    }
-    if(!G.newsItems||!G.newsItems.length)G.newsErr='Could not load articles.';
-    render();
-  });
+  if(G.newsLoading)return;
+  G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
+
+  // Fetch news.json generated by GitHub Actions scraper
+  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/news.json?t='+Date.now();
+  fetch(jsonUrl)
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      var arr=d.articles||d;
+      if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
+      G.newsItems=arr;
+      G.newsLoading=false;G.newsLoaded=true;
+      render();
+    })
+    .catch(function(){
+      // news.json not yet available — keep showing seed articles
+      G.newsLoading=false;G.newsLoaded=true;
+      G.newsErr='Could not load latest news — showing cached articles.';
+      render();
+    });
 }
+
 
 // ── PRICE ─────────────────────────────────────────────────────────────────────
 function fetchPrice(nm){
@@ -1818,8 +1822,8 @@ function pContent(){
     if(!G.ytLoaded&&!G.ytLoading){setTimeout(function(){loadYTVideos();},50);}
     var selCh=YT_CHS.find(function(x){return x.id===G.ytCh;})||YT_CHS[0];
     var filtVids=!G.ytVids?[]:G.ytCh==='all'?G.ytVids:G.ytVids.filter(function(v){
-      var want=(selCh.ch||selCh.n).toLowerCase();var got=(v.channel||'').toLowerCase();
-      return got===want||want.split(' ').some(function(w){return w.length>3&&got.indexOf(w)>=0;});
+      // Exact match on channel name stored during fetch
+      return (v.channel||'').toLowerCase()===(selCh.n||'').toLowerCase();
     });
     // Show selected channel link above cards
     var _selChObj=G.ytSelCh?YT_CHS.find(function(x){return x.id===G.ytSelCh;}):null;
@@ -1853,11 +1857,30 @@ function pContent(){
     return out.join('');
   }
   if(p==='news'){
-    // Show seed articles immediately, offer refresh for latest
-    var _displayNews=G.newsItems&&G.newsItems.length?G.newsItems:NEWS_SEED;
-    o('<div class="fr"><button class="fb gold" onclick="loadNews()">'+(G.newsLoading?'<span class="spin">&#8635;</span> Loading&hellip;':'&#8634; Refresh')+'</button></div>');
+    var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
+
+    // Toolbar: Refresh + Add Article
+    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
+    o('<button class="fb gold" style="flex:1" onclick="loadNews()">'+(G.newsLoading?'<span class="spin">&#8635;</span> Loading&hellip;':'&#8634; Refresh')+'</button>');
+    o('<button class="fb" style="flex:1" onclick="G.newsAddMode=!G.newsAddMode;render()">+ Add Article</button>');
+    o('</div>');
+
+    // Add article form
+    if(G.newsAddMode){
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);padding:8px;margin-bottom:8px;border-radius:3px">');
+      o('<div style="font-size:10px;color:var(--fg2);margin-bottom:5px">Paste the URL of a new article from sorcerytcg.com/news:</div>');
+      o('<input class="fi" id="news-add-url" placeholder="https://sorcerytcg.com/news/article-slug" style="margin-bottom:4px">');
+      o('<input class="fi" id="news-add-title" placeholder="Article title" style="margin-bottom:4px">');
+      o('<div style="display:flex;gap:4px">');
+      o('<button class="fb gold" style="flex:1" onclick="var u=document.getElementById(\'news-add-url\').value.trim(),t=document.getElementById(\'news-add-title\').value.trim();if(u&&u.indexOf(\'sorcerytcg.com/news\')>=0){var n={title:t||u.split(\'/\').pop().replace(/-/g,\' \'),url:u,date:\'Today\',source:\'sorcerytcg.com\'};G.newsItems=G.newsItems||NEWS_SEED.slice();G.newsItems.unshift(n);G.newsAddMode=false;render();}">Add</button>');
+      o('<button class="fb" style="flex:1" onclick="G.newsAddMode=false;render()">Cancel</button>');
+      o('</div>');
+      o('</div>');
+    }
+
     if(G.newsLoading)o('<div class="ld"><span class="spin">&#8635;</span> Checking for latest news&hellip;</div>');
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
+
     _displayNews.forEach(function(n){
       o('<div class="ev-c">');
       o('<div class="ev-nm">'+h(n.title)+'</div>');
