@@ -1,5 +1,6 @@
 {
-  "updated": "2026-04-16T23:02:01.548Z",
+  "updated": "2026-04-16T23:32:02.573Z",
+  "total": 20,
   "events": [
     {
       "name": "Sorcery Sealed League",
@@ -31,7 +32,13 @@
         "resourceType": "Event",
         "resourceId": "b7b951d0-ab60-4906-8749-4af83f311b7b"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/b7b951d0-ab60-4906-8749-4af83f311b7b"
     },
     {
@@ -64,7 +71,13 @@
         "resourceType": "Event",
         "resourceId": "8ae6e3b0-4469-4ad2-80a8-0ebd1c35b411"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/8ae6e3b0-4469-4ad2-80a8-0ebd1c35b411"
     },
     {
@@ -97,7 +110,13 @@
         "resourceType": "Event",
         "resourceId": "1e4125c3-3993-44b8-8324-2c816048a29e"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/1e4125c3-3993-44b8-8324-2c816048a29e"
     },
     {
@@ -130,7 +149,13 @@
         "resourceType": "Event",
         "resourceId": "18a6bc10-656f-466d-a79e-ab32c9046433"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/18a6bc10-656f-466d-a79e-ab32c9046433"
     },
     {
@@ -163,7 +188,13 @@
         "resourceType": "Event",
         "resourceId": "589618f0-292f-4574-aa34-5133b66f90ac"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/589618f0-292f-4574-aa34-5133b66f90ac"
     },
     {
@@ -196,7 +227,13 @@
         "resourceType": "Event",
         "resourceId": "f74d2254-106a-4b3a-8f41-a24fc05de3d8"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/f74d2254-106a-4b3a-8f41-a24fc05de3d8"
     },
     {
@@ -229,7 +266,13 @@
         "resourceType": "Event",
         "resourceId": "b1fcbe27-07a6-4ae1-94b1-f19c49a282c3"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/b1fcbe27-07a6-4ae1-94b1-f19c49a282c3"
     },
     {
@@ -262,7 +305,13 @@
         "resourceType": "Event",
         "resourceId": "2658559c-dc4b-4a0c-9132-4f85c8330f49"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/2658559c-dc4b-4a0c-9132-4f85c8330f49"
     },
     {
@@ -295,7 +344,13 @@
         "resourceType": "Event",
         "resourceId": "ad3014e4-ad6b-4500-b9c0-5f097830ca9f"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/ad3014e4-ad6b-4500-b9c0-5f097830ca9f"
     },
     {
@@ -328,7 +383,13 @@
         "resourceType": "Event",
         "resourceId": "99957770-192d-4b53-a1c0-f30cd947d8eb"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/99957770-192d-4b53-a1c0-f30cd947d8eb"
     },
     {
@@ -361,7 +422,13 @@
         "resourceType": "Event",
         "resourceId": "e9948984-9c75-4dad-95bc-724e34033b16"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/e9948984-9c75-4dad-95bc-724e34033b16"
     },
     {
@@ -394,7 +461,13 @@
         "resourceType": "Event",
         "resourceId": "a9752140-279f-4c6f-81a0-1168844ae270"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/a9752140-279f-4c6f-81a0-1168844ae270"
     },
     {
@@ -427,7 +500,13 @@
         "resourceType": "Event",
         "resourceId": "699a983b-eb02-4ebc-9d65-bcab7c71e1ae"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/699a983b-eb02-4ebc-9d65-bcab7c71e1ae"
     },
     {
@@ -460,7 +539,13 @@
         "resourceType": "Event",
         "resourceId": "200203b7-8343-43d2-a1ee-3056826383cd"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/200203b7-8343-43d2-a1ee-3056826383cd"
     },
     {
@@ -493,7 +578,13 @@
         "resourceType": "Event",
         "resourceId": "7c58cead-df1b-412b-ad16-cfc754ebf144"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/7c58cead-df1b-412b-ad16-cfc754ebf144"
     },
     {
@@ -526,7 +617,13 @@
         "resourceType": "Event",
         "resourceId": "359c0fe4-46a0-4c0f-83b5-086622ee1bbc"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/359c0fe4-46a0-4c0f-83b5-086622ee1bbc"
     },
     {
@@ -559,7 +656,13 @@
         "resourceType": "Event",
         "resourceId": "bb68879a-2a17-49ef-87f5-c4bb219139c7"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/bb68879a-2a17-49ef-87f5-c4bb219139c7"
     },
     {
@@ -592,7 +695,13 @@
         "resourceType": "Event",
         "resourceId": "1df711a2-d414-4892-b127-972b4b68fe2c"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/1df711a2-d414-4892-b127-972b4b68fe2c"
     },
     {
@@ -625,7 +734,13 @@
         "resourceType": "Event",
         "resourceId": "53a6c905-317b-4cee-988d-291da8b7359f"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/53a6c905-317b-4cee-988d-291da8b7359f"
     },
     {
@@ -658,7 +773,13 @@
         "resourceType": "Event",
         "resourceId": "33b188d5-0741-4b7e-8560-68003181d935"
       },
+      "zip": "",
+      "country": "",
       "type": "",
+      "description": "",
+      "organizer": "",
+      "entryFee": "",
+      "players": "",
       "url": "https://play.sorcerytcg.com/events/33b188d5-0741-4b7e-8560-68003181d935"
     }
   ]
