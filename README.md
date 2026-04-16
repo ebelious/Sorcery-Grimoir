@@ -22,3 +22,32 @@ There is 2 ways to accomplish this:<br>
     Option 1:  [Sorcery-Grimoir](https://ebelious.github.io/Sorcery-Grimoir/) > Menu > settings > Theme > Install As App <br>
     Option 2: Menu in browser > Add to Home screan, Install or Install as App <br>
 
+
+## How to get API key for YouTube video feeds
+
+1. Go to [console.developers.google.com](https://console.developers.google.com)
+2. Create a project (or use an existing one)
+3. Click Enable APIs → search YouTube Data API v3 → Enable
+4. Go to Credentials → Create Credentials → API Key
+
+### API Config
+1. API Restrictions (limits which APIs the key can call)<br>
+2. In Credentials → click your API key → API restrictions
+3. Select Restrict key
+4. Choose YouTube Data API v3 from the dropdown
+5. Save
+
+This means even if someone gets your key, they can only use it for YouTube — not run up charges on other Google APIs.
+6. Application Restrictions (limits where the key can be used from)
+7. On the same page → Application restrictions
+8. Select HTTP referrers (websites)
+9. Add these referrers:
+```
+  https://ebelious.github.io/*
+  http://localhost/*
+```
+10. Save
+
+In App got to `Menu > Settings > YouTubeAPI` and enter the API key into this field and `save`
+- This should now populate the Youtube viedo feed
+
