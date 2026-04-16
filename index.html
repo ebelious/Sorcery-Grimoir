@@ -657,10 +657,7 @@ function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
   G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'standard',keepAwake:false});
-  if(typeof YT_PROXY_URL!=='undefined'&&YT_PROXY_URL){G.cfg.ytProxy=YT_PROXY_URL;sv('sg-cfg',G.cfg);}
-  // Always ensure the YouTube proxy URL is set
-  G.cfg.ytProxy='https://sorcery-grimoir.ebel2590.workers.dev';
-  sv('sg-cfg',G.cfg);
+  delete G.cfg.ytProxy; // always use hardcoded proxy, never cached value
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
@@ -1323,8 +1320,7 @@ function _fetchVideos(cid, chName, cb){
   }
 
   // If user has set a custom proxy worker URL, use it first
-  // Always use the hardcoded worker URL — G.cfg.ytProxy is a backup
-  var customProxy='https://sorcery-grimoir.ebel2590.workers.dev';
+  var customProxy='https://sorcery-grimoir.ebel2590.workers.dev'; // fixed - not configurable
 
   function tryCustomProxy(){
     var url=customProxy.replace(/\/+$/,'')+'?channel_id='+cid;
@@ -1839,26 +1835,7 @@ function pContent(){
       o('<span class="yt-ch-banner-lnk">&#9654; Browse Videos &rarr;</span>');
       o('</a>');
     }
-    if(false){
-      o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:4px;padding:8px;margin-bottom:8px;font-size:9px">');
-      o('<div style="color:var(--yel);font-weight:700;margin-bottom:5px">&#9888; One-time setup needed for YouTube videos</div>');
-      o('<div style="color:var(--fg2);margin-bottom:5px">YouTube RSS feeds block direct browser requests (CORS). You need a free Cloudflare Worker proxy — takes about 2 minutes:</div>');
-      o('<div style="color:var(--fg);margin-bottom:3px">1. Go to <a href="https://workers.cloudflare.com" target="_blank" style="color:var(--bbl)">workers.cloudflare.com</a> &rarr; sign up free</div>');
-      o('<div style="color:var(--fg);margin-bottom:3px">2. Click <b>Create Worker</b></div>');
-      o('<div style="color:var(--fg);margin-bottom:3px">3. Replace all code with the worker script (copy below)</div>');
-      o('<div style="color:var(--fg);margin-bottom:6px">4. Click <b>Save and Deploy</b>, copy your worker URL, paste it below</div>');
-      o('<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:3px;padding:5px;font-size:8px;color:var(--cyn);font-family:monospace;margin-bottom:6px;overflow-x:auto;white-space:pre-wrap;cursor:pointer;user-select:all" title="Tap to select all">See yt-rss-worker.js in the GitHub repo</div>');
-      o('<div style="display:flex;gap:4px">');
-      o('<input class="fi" id="yt-proxy-inp" placeholder="https://your-worker.workers.dev" style="flex:1">');
-      o('<button class="fb gold" onclick="var v=document.getElementById(\'yt-proxy-inp\').value.trim();if(v){G.cfg.ytProxy=v;sv(\'sg-cfg\',G.cfg);G.ytLoaded=false;G.ytVids=[];render();}">Save</button>');
-      o('</div>');
-      o('</div>');
-    } else {
-      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:9px">');
-      o('<span style="color:var(--grn)">&#10003; Proxy active</span>');
-      o('<button class="fb" style="font-size:8px;padding:1px 5px" onclick="G.cfg.ytProxy=\'\';sv(\'sg-cfg\',G.cfg);render()">Change</button>');
-      o('</div>');
-    }
+
     o('<div class="yt-pills">');
     YT_CHS.forEach(function(x){
       var isOn=G.ytCh===x.id;
