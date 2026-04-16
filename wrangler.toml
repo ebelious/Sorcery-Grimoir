@@ -1,3 +1,6 @@
-name = "sorcery-yt-rss"
+name = "sorcery-grimoir"
 main = "yt-rss-worker.js"
 compatibility_date = "2024-01-01"
+
+[build]
+command = "npx wrangler deploy"
