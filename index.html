@@ -1819,6 +1819,17 @@ function pContent(){
     return out.join('');
   }
   if(p==='yt'){
+    // Check for API key first
+    var _ytKey=localStorage.getItem('sg-ytkey')||'';
+    if(!_ytKey){
+      o('<div style="background:var(--bg3);border:1px solid var(--yel);border-radius:4px;padding:12px;margin:8px 0;font-size:11px">');
+      o('<div style="color:var(--yel);font-weight:700;margin-bottom:6px">&#9888; YouTube API Key Required</div>');
+      o('<div style="color:var(--fg2);margin-bottom:8px">To load videos, add your YouTube API key in:</div>');
+      o('<div style="color:var(--fg);font-weight:700;margin-bottom:8px">Menu &rsaquo; Settings &rsaquo; YouTube API</div>');
+      o('<button class="fb gold" style="width:100%" onclick="openPanel(\'ytapi\')">Go to YouTube API Settings &rarr;</button>');
+      o('</div>');
+      return out.join('');
+    }
     if(!G.ytLoaded&&!G.ytLoading){setTimeout(function(){loadYTVideos();},50);}
     var selCh=YT_CHS.find(function(x){return x.id===G.ytCh;})||YT_CHS[0];
     var filtVids=!G.ytVids?[]:G.ytCh==='all'?G.ytVids:G.ytVids.filter(function(v){
