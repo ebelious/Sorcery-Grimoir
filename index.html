@@ -1293,77 +1293,40 @@ function extractJSON(txt,type){
 var YT_API_KEY='AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
 
 function _fetchVideos(cid, chName, cb){
-  var rssUrl='https://www.youtube.com/feeds/videos.xml?channel_id='+cid;
+  var key=localStorage.getItem('sg-ytkey')||'';
+  if(!key){cb([]);return;}
 
-  function parseXml(txt){
-    var vids=[];
-    var entries=txt.match(/<entry>[\s\S]*?<\/entry>/g)||[];
-    entries.slice(0,5).forEach(function(e){
-      var vM=e.match(/<yt:videoId>([A-Za-z0-9_-]{11})<\/yt:videoId>/);
-      var tM=e.match(/<title>(?:<!\[CDATA\[)?([^\]<]{1,200}?)(?:\]\]>)?<\/title>/);
-      var pM=e.match(/<published>([^<]+)<\/published>/);
-      if(!vM)return;
-      var pub=pM?new Date(pM[1]):null;
-      vids.push({
-        channel:chName,
-        title:(tM?tM[1]:'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&quot;/g,'"').trim(),
-        videoId:vM[1],
-        date:pub?pub.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'',
-        _ts:pub?pub.getTime():0
-      });
-    });
-    return vids;
-  }
+  // YouTube uploads playlist ID = replace 'UC' prefix with 'UU'
+  var pid='UU'+cid.slice(2);
+  var url='https://www.googleapis.com/youtube/v3/playlistItems'
+    +'?part=snippet&maxResults=5'
+    +'&playlistId='+encodeURIComponent(pid)
+    +'&key='+encodeURIComponent(key);
 
-  function withTimeout(p,ms){
-    return Promise.race([p,new Promise(function(_,r){setTimeout(function(){r(new Error('timeout'));},ms);})]);
-  }
-
-  // If user has set a custom proxy worker URL, use it first
-  var customProxy='https://sorcery-grimoir.ebel2590.workers.dev'; // fixed - not configurable
-
-  function tryCustomProxy(){
-    var url=customProxy.replace(/\/+$/,'')+'?channel_id='+cid;
-    return withTimeout(fetch(url),8000).then(function(r){return r.text();}).then(function(txt){
-      var vids=parseXml(txt);
-      if(!vids.length)throw new Error('empty');
-      return vids;
-    });
-  }
-
-  function tryRss2json(){
-    var url='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rssUrl)+'&count=5';
-    return withTimeout(fetch(url),6000).then(function(r){return r.json();}).then(function(d){
-      if(!d.items||!d.items.length)throw new Error('empty');
+  fetch(url)
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.error){
+        console.warn('YT API error',chName,d.error.message);
+        cb([]);return;
+      }
+      if(!d.items||!d.items.length){cb([]);return;}
       var vids=d.items.map(function(item){
-        var m=(item.link||item.guid||'').match(/[?&]v=([A-Za-z0-9_-]{11})/);
-        if(!m)return null;
-        var pub=item.pubDate?new Date(item.pubDate):null;
-        return {channel:chName,title:(item.title||'').trim(),videoId:m[1],
-          date:pub?pub.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'',_ts:pub?pub.getTime():0};
+        var snip=item.snippet||{};
+        var vid=snip.resourceId&&snip.resourceId.videoId;
+        if(!vid)return null;
+        var pub=snip.publishedAt?new Date(snip.publishedAt):null;
+        return {
+          channel:chName,
+          title:snip.title||'',
+          videoId:vid,
+          date:pub?pub.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'',
+          _ts:pub?pub.getTime():0
+        };
       }).filter(Boolean);
-      if(!vids.length)throw new Error('no ids');
-      return vids;
-    });
-  }
-
-  function tryAllorigins(){
-    var url='https://api.allorigins.win/get?url='+encodeURIComponent(rssUrl);
-    return withTimeout(fetch(url),6000).then(function(r){return r.json();}).then(function(d){
-      var txt=d&&d.contents||'';
-      if(!txt)throw new Error('empty');
-      var vids=parseXml(txt);
-      if(!vids.length)throw new Error('no entries');
-      return vids;
-    });
-  }
-
-  var chain=customProxy?tryCustomProxy():Promise.reject(new Error('no proxy'));
-  chain
-    .catch(function(){return tryRss2json();})
-    .catch(function(){return tryAllorigins();})
-    .then(function(vids){cb(vids||[]);})
-    .catch(function(){cb([]);});
+      cb(vids);
+    })
+    .catch(function(e){console.warn('YT fetch err',e);cb([]);});
 }
 
 
