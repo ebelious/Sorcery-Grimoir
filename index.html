@@ -268,7 +268,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .rd-q{font-size:13px;font-weight:700;color:var(--wht);margin-bottom:6px;font-family:'Fantaisie','Courier New',monospace;line-height:1.4}
 .rd-a{font-size:13px;color:var(--fg);font-family:Georgia,serif;line-height:1.7;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
 .rd-a:last-child{border-bottom:none}
-.acc-q{font-size:12px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:'Fantaisie','Courier New',monospace}
+.acc-q{font-size:12px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:'Courier New',monospace}
 .acc-a{font-size:12px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:Georgia,serif}
 .cod-def{font-size:8px;color:var(--fg2);line-height:1.55;padding-top:6px;font-family:Georgia,serif}
 .stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
@@ -352,11 +352,16 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .yt-ch2{font-size:9px;font-weight:700;color:var(--yel);text-transform:uppercase;margin-bottom:3px;letter-spacing:.03em}
 .yt-title{font-size:11px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--fg);font-weight:600}
 .yt-date{font-size:9px;color:var(--fg2);margin-top:3px}
-.pd-c{background:var(--bg3);border:1px solid var(--bd);padding:6px;margin-bottom:4px}
-.pd-nm{font-size:10px;font-weight:700;color:var(--wht)}
-.pd-mt{font-size:8px;color:var(--fg2);margin-top:1px}
-.pd-ds{font-size:8px;color:var(--fg2);margin-top:3px;line-height:1.4}
+.pd-c{background:var(--bg3);border:1px solid var(--bd);padding:0;margin-bottom:6px;overflow:hidden;display:flex;gap:0}
+.pd-thumb{width:72px;min-width:72px;height:72px;object-fit:cover;background:var(--bg2);display:block;flex-shrink:0}
+.pd-thumb-ph{width:72px;min-width:72px;height:72px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;color:var(--fg2)}
+.pd-info{flex:1;padding:6px 7px;min-width:0}
+.pd-nm{font-size:10px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pd-mt{font-size:8px;color:var(--fg2);margin-top:2px}
+.pd-ds{font-size:8px;color:var(--fg2);margin-top:3px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .pd-lnk{display:inline-block;font-size:8px;color:var(--bbl);margin-top:3px}
+.pd-stats{font-size:8px;color:var(--fg2);margin-top:2px}
+.pd-el{display:inline-block;font-size:9px;font-weight:700;margin-right:3px}
 .ev-ac-wrap{position:relative;flex:1}
 .ev-ac-box{position:absolute;top:100%;left:0;right:0;background:var(--bg3);border:1px solid var(--bd);z-index:100;max-height:180px;overflow-y:auto}
 .ev-ac-item{padding:7px 9px;font-size:11px;cursor:pointer;border-bottom:1px solid var(--bd)}
@@ -602,6 +607,7 @@ var G={
   selCard:null,expImg:null,logPopup:null,
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
+  pubDecksItems:null,pubDecksLoading:false,pubDecksLoaded:false,pubDecksErr:null,
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
   cF:{el:[],type:[],rarity:[],set:[],mana:[]},
   coF:{el:[],type:[],rarity:[],set:[]},
@@ -1513,6 +1519,44 @@ function getLocationAndLoadEvents(){
   );
 }
 
+var NEWS_SEED=[
+  {title:"2026 Grand Contests: Where the Realm Gathers",date:"Apr 3, 2026",url:"https://sorcerytcg.com/news/2026-grand-contests",source:"sorcerytcg.com"},
+  {title:"Where Communities Are Celebrated: 2026 Cornerstone Championships",date:"Mar 27, 2026",url:"https://sorcerytcg.com/news/where-communities-are-celebrated-2026-cornerstone-championships",source:"sorcerytcg.com"},
+  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 13, 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
+  {title:"Avatar of the Realm Update",date:"Feb 18, 2026",url:"https://sorcerytcg.com/news/avatar-of-the-realm-update",source:"sorcerytcg.com"},
+  {title:"Sorcery Awaits: Join Us at Gen Con 2026",date:"Feb 6, 2026",url:"https://sorcerytcg.com/news/sorcery-awaits-join-us-at-gen-con-2026",source:"sorcerytcg.com"},
+  {title:"SorceryCon 2026: Worlds Largest Community-Run Sorcery Event Returns",date:"Dec 12, 2025",url:"https://sorcerytcg.com/news/sorcerycon-2026-the-worlds-largest-community-run-sorcery-event",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm December 2025 Rulebook Update",date:"Dec 19, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-december-2025-rulebook-update",source:"sorcerytcg.com"},
+  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
+  {title:"Sorcery at SCG CON Las Vegas: Closing Crossroads 2025 Season Strong",date:"Nov 28, 2025",url:"https://sorcerytcg.com/news/sorcery-at-scg-con-las-vegas-closing-crossroads-2025-season-strong",source:"sorcerytcg.com"},
+  {title:"Sorcery: Contested Realm Rules Update (July 2025)",date:"Jul 10, 2025",url:"https://sorcerytcg.com/news/july-2025-rulebook-update",source:"sorcerytcg.com"},
+  {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
+];
+
+// ── PUBLISHED DECKS (curiosa.io/decks) ────────────────────────────────────────
+function loadPubDecks(){
+  if(G.pubDecksLoading)return;
+  G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;render();
+  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now();
+  fetch(jsonUrl)
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      var arr=d.decks||d;
+      if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
+      G.pubDecksItems=arr;
+      G.pubDecksLoading=false;G.pubDecksLoaded=true;
+      render();
+    })
+    .catch(function(){
+      G.pubDecksLoading=false;G.pubDecksLoaded=true;
+      G.pubDecksErr='Could not load decks.json — showing featured decks.';
+      render();
+    });
+}
 
 function loadNews(){
   if(G.newsLoading)return;
@@ -1533,8 +1577,9 @@ function loadNews(){
       render();
     })
     .catch(function(){
+      // news.json not yet available — keep showing seed articles
       G.newsLoading=false;G.newsLoaded=true;
-      G.newsErr='Could not load news. Try refreshing.';
+      G.newsErr='Could not load latest news — showing cached articles.';
       render();
     });
 }
@@ -1697,9 +1742,73 @@ function pContent(){
       o('<button class="fb" onclick="G.curiosaPasteMode=null;render()">Cancel</button>');
       o('</div>');
     }
-    o('<div class="slbl2">Featured Decks</div>');
-    PUB_DECKS.forEach(function(d){o('<div class="pd-c"><div class="pd-nm">'+h(d.name)+'</div><div class="pd-mt">'+h(d.author)+' &middot; '+h(d.el)+' &middot; '+h(d.av)+'</div><div class="pd-ds">'+h(d.desc)+'</div><a class="pd-lnk" href="'+d.url+'" target="_blank">View on Curiosa &rarr;</a></div>');});
-    o('<a class="ext-lnk" href="https://curiosa.io/decks" target="_blank">All community decks &rarr;</a>');
+
+    // Live deck browser
+    o('<div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 4px">');
+    o('<div class="slbl2" style="margin:0">Community Decks</div>');
+    o('<button class="fb gold" style="font-size:9px;padding:3px 8px" onclick="loadPubDecks()">'+(G.pubDecksLoading?spinIcon()+' Loading&hellip;':'&#8634; Load from curiosa.io')+'</button>');
+    o('</div>');
+
+    if(G.pubDecksLoading)o('<div class="ld">'+spinIcon()+' Fetching decks&hellip;</div>');
+    if(G.pubDecksErr)o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">'+h(G.pubDecksErr)+'</div>');
+
+    // Show live-fetched decks
+    var _decksToShow=G.pubDecksItems&&G.pubDecksItems.length?G.pubDecksItems:null;
+    if(_decksToShow){
+      _decksToShow.forEach(function(d){
+        var elColors={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9','Neutral':'var(--fg2)'};
+        o('<div class="pd-c">');
+        if(d.thumbnail){
+          o('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
+          o('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
+        } else {
+          o('<div class="pd-thumb-ph">&#127183;</div>');
+        }
+        o('<div class="pd-info">');
+        o('<div class="pd-nm">'+h(d.name)+'</div>');
+        // Author + avatar + format
+        var meta=[];
+        if(d.author)meta.push('by '+d.author);
+        if(d.avatar)meta.push(d.avatar);
+        if(d.format)meta.push(d.format);
+        if(meta.length)o('<div class="pd-mt">'+h(meta.join(' · '))+'</div>');
+        // Elements
+        if(d.elements&&d.elements.length){
+          o('<div style="margin-top:2px">');
+          d.elements.forEach(function(el){
+            var c=elColors[el]||'var(--fg2)';
+            o('<span class="pd-el" style="color:'+c+'">'+h(el)+'</span>');
+          });
+          o('</div>');
+        }
+        // Stats row
+        var stats=[];
+        if(d.cardCount)stats.push(d.cardCount+' cards');
+        if(d.likes)stats.push('&#9829; '+d.likes);
+        if(d.views)stats.push(d.views+' views');
+        if(d.updatedAt)stats.push(h(d.updatedAt).split('T')[0]);
+        if(stats.length)o('<div class="pd-stats">'+stats.join(' &middot; ')+'</div>');
+        // Description
+        if(d.description)o('<div class="pd-ds">'+h(d.description)+'</div>');
+        o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
+        o('</div></div>');
+      });
+    } else if(!G.pubDecksLoading) {
+      // Seed / featured decks fallback
+      o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">Tap &ldquo;Load from curiosa.io&rdquo; to fetch the latest community decks.</div>');
+      PUB_DECKS.forEach(function(d){
+        o('<div class="pd-c">');
+        o('<div class="pd-thumb-ph">&#127183;</div>');
+        o('<div class="pd-info">');
+        o('<div class="pd-nm">'+h(d.name)+'</div>');
+        o('<div class="pd-mt">'+h(d.author)+' &middot; '+h(d.el)+' &middot; '+h(d.av)+'</div>');
+        if(d.desc)o('<div class="pd-ds">'+h(d.desc)+'</div>');
+        o('<a class="pd-lnk" href="'+d.url+'" target="_blank">View on Curiosa &rarr;</a>');
+        o('</div></div>');
+      });
+    }
+
+    o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
   }
   if(p==='sl'){
@@ -1927,19 +2036,32 @@ function pContent(){
     return out.join('');
   }
   if(p==='news'){
-    if(!G.newsLoaded&&!G.newsLoading)loadNews();
+    var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
 
-    o('<div style="margin-bottom:8px">');
-    o('<button class="fb gold" style="width:100%" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
+    // Toolbar: Refresh + Add Article
+    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
+    o('<button class="fb gold" style="flex:1" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
+    o('<button class="fb" style="flex:1" onclick="G.newsAddMode=!G.newsAddMode;render()">+ Add Article</button>');
     o('</div>');
 
-    if(G.newsLoading){o('<div class="ld">'+spinIcon()+' Loading news&hellip;</div>');return out.join('');}
-    if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
-    if(!G.newsItems||!G.newsItems.length){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No articles found.</div>');return out.join('');}
+    // Add article form
+    if(G.newsAddMode){
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);padding:8px;margin-bottom:8px;border-radius:3px">');
+      o('<div style="font-size:10px;color:var(--fg2);margin-bottom:5px">Paste the URL of a new article from sorcerytcg.com/news:</div>');
+      o('<input class="fi" id="news-add-url" placeholder="https://sorcerytcg.com/news/article-slug" style="margin-bottom:4px">');
+      o('<input class="fi" id="news-add-title" placeholder="Article title" style="margin-bottom:4px">');
+      o('<div style="display:flex;gap:4px">');
+      o('<button class="fb gold" style="flex:1" onclick="var u=document.getElementById(\'news-add-url\').value.trim(),t=document.getElementById(\'news-add-title\').value.trim();if(u&&u.indexOf(\'sorcerytcg.com/news\')>=0){var n={title:t||u.split(\'/\').pop().replace(/-/g,\' \'),url:u,date:\'Today\',source:\'sorcerytcg.com\'};G.newsItems=G.newsItems||NEWS_SEED.slice();G.newsItems.unshift(n);G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render();}">Add</button>');
+      o('<button class="fb" style="flex:1" onclick="G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render()">Cancel</button>');
+      o('</div>');
+      o('</div>');
+    }
 
-    G.newsItems.forEach(function(n){
+    if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Checking for latest news&hellip;</div>');
+    if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
+
+    _displayNews.forEach(function(n){
       o('<div class="ev-c">');
-      if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
       o('<div class="ev-nm">'+h(n.title)+'</div>');
       if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
       o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
@@ -2429,7 +2551,10 @@ function render(){
       o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button></div></div>');
       o('<div class="dbody">');
       o('<div class="cro" onclick="openPanel(\'ev\')"><div class="crn">Events</div><div style="color:var(--fg2)">&rsaquo;</div></div>');
-      Object.keys(MENU_S).forEach(function(cat){o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');});
+      Object.keys(MENU_S).forEach(function(cat){
+        if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
+        else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
+      });
       o('</div><div class="dfoot"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></div></div>');
 
       if(G.cat&&!G.panel){
