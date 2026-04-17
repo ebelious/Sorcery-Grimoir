@@ -1450,9 +1450,18 @@ function loadLocalEvents(city){
     .then(function(d){
       var all=d.events||[];
       if(!all.length)throw new Error('empty');
-      // Filter by city/state if provided
+      // Normalize location field: may be object {id,name} or string
+      all.forEach(function(e){
+        if(e.location&&typeof e.location==='object'){
+          e.location=e.location.name||e.location.id||'';
+        }
+        if(e.organizer&&typeof e.organizer==='object'){
+          e._organizerName=e.organizer.name||'';
+        }
+      });
+      // Filter by city/state if provided — use city/state fields and address
       var filtered=loc?all.filter(function(e){
-        var l=(e.location||e.address||'').toLowerCase();
+        var l=((e.city||'') + ' ' + (e.state||'') + ' ' + (e.address||'') + ' ' + (e.location||'')).toLowerCase();
         var n=(e.name||'').toLowerCase();
         return loc.split(',').some(function(part){
           var p=part.trim();
