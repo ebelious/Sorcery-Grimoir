@@ -335,6 +335,12 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .yt-pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:9px}
 .yt-pill{font-size:10px;padding:5px 10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg2);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;border-radius:2px}
 .yt-pill.on{border-color:var(--red);color:var(--red);background:var(--bg)}
+.pd-pill{font-size:9px;padding:3px 8px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg2);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;border-radius:2px;display:inline-block}
+.pd-pill.on-e{border-color:#8D9B4A;color:#8D9B4A;background:var(--bg)}
+.pd-pill.on-f{border-color:var(--red);color:var(--red);background:var(--bg)}
+.pd-pill.on-w{border-color:#5BA3C9;color:#5BA3C9;background:var(--bg)}
+.pd-pill.on-a{border-color:var(--cyn);color:var(--cyn);background:var(--bg)}
+.pd-pill.on-fmt{border-color:var(--yel);color:var(--yel);background:var(--bg)}
 .yt-ch-banner{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--red);padding:8px 10px;margin-bottom:8px;text-decoration:none}
 .yt-ch-banner:active{opacity:.8}
 .yt-ch-banner-nm{font-size:11px;font-weight:700;color:var(--fg)}
@@ -608,6 +614,7 @@ var G={
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
   pubDecksItems:null,pubDecksLoading:false,pubDecksLoaded:false,pubDecksErr:null,
+  pdQ:'',pdF:[],
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
   cF:{el:[],type:[],rarity:[],set:[],mana:[]},
   coF:{el:[],type:[],rarity:[],set:[]},
@@ -1720,66 +1727,115 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
   if(p==='pubdecks'){
-    o('<div class="slbl2">Import Curiosa Deck</div>');
-    o('<div style="display:flex;gap:4px;margin-bottom:4px">');
-    o('<input class="fi" id="curiosa-url" placeholder="https://curiosa.io/decks/..." style="flex:1">');
-    o('<button class="fb gold" onclick="importCuriosaUrl(document.getElementById(\'curiosa-url\').value)">'+(G.curiosaLoading?'&hellip;':'Import')+'</button>');
-    o('</div>');
-    if(G.curiosaLoading)o('<div class="ld">'+spinIcon()+' Fetching&hellip;</div>');
-    if(G.curiosaErr)o('<div style="font-size:9px;color:var(--red);margin-bottom:6px">'+h(G.curiosaErr)+'</div>');
-    if(G.curiosaPasteMode){
-      o('<div style="font-size:9px;color:var(--yel);margin-bottom:4px">&#9888; Curiosa uses JavaScript rendering — card list not visible in HTML.<br>Open the deck on Curiosa, copy the card list text, and paste it below:</div>');
-      o('<input class="fi" id="curiosa-deck-name" placeholder="Deck name&hellip;" style="margin-bottom:4px">');
-      o('<textarea class="fi" id="curiosa-paste" placeholder="Paste card list here&#10;4x Card Name&#10;3x Another Card" style="height:100px;resize:vertical;margin-bottom:4px"></textarea>');
-      o('<div style="display:flex;gap:4px">');
-      o('<button class="fb gold" style="flex:1" onclick="importCuriosaText(document.getElementById(\'curiosa-paste\').value)">Import Cards</button>');
-      o('<button class="fb" onclick="G.curiosaPasteMode=null;render()">Cancel</button>');
-      o('</div>');
-    }
-    o('<div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 4px">');
+    // Auto-fetch on first open
+    if(!G.pubDecksLoaded&&!G.pubDecksLoading)loadPubDecks();
+
+    // Header + refresh
+    o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">');
     o('<div class="slbl2" style="margin:0">Community Decks</div>');
-    o('<button class="fb gold" style="font-size:9px;padding:3px 8px" onclick="loadPubDecks()">'+(G.pubDecksLoading?spinIcon()+' Loading&hellip;':'&#8634; Load from curiosa.io')+'</button>');
+    o('<button class="fb gold" style="font-size:9px;padding:3px 8px" onclick="loadPubDecks()">'+(G.pubDecksLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
     o('</div>');
+
+    // Search input
+    o('<input class="fi" placeholder="Search decks&hellip;" value="'+h(G.pdQ||'')+'" oninput="G.pdQ=this.value;render()" style="margin-bottom:6px">');
+
+    // Quickfilter chips
+    var _elChips=[
+      {k:'Earth', cls:'on-e'},
+      {k:'Fire',  cls:'on-f'},
+      {k:'Water', cls:'on-w'},
+      {k:'Air',   cls:'on-a'}
+    ];
+    var _fmtChips=[
+      {k:'Constructed', cls:'on-fmt'},
+      {k:'Multiplayer', cls:'on-fmt'},
+      {k:'Draft',       cls:'on-fmt'},
+      {k:'Sealed',      cls:'on-fmt'}
+    ];
+    o('<div style="display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px">');
+    _elChips.concat(_fmtChips).forEach(function(c){
+      var on=(G.pdF||[]).indexOf(c.k)>=0;
+      o('<button class="pd-pill'+(on?' '+c.cls:'')+'" onclick="var f=G.pdF||[];var i=f.indexOf(\''+c.k+'\');if(i>=0)f.splice(i,1);else f.push(\''+c.k+'\');G.pdF=f.slice();render()">'+c.k+'</button>');
+    });
+    // Clear filters button — only show when something is active
+    if((G.pdF&&G.pdF.length)||(G.pdQ&&G.pdQ.trim())){
+      o('<button class="pd-pill" style="color:var(--fg2)" onclick="G.pdF=[];G.pdQ=\'\';render()">&#10005; Clear</button>');
+    }
+    o('</div>');
+
+    // Loading / error states
     if(G.pubDecksLoading){
       o('<div class="ld">'+spinIcon()+' Fetching decks&hellip;</div>');
     } else if(G.pubDecksErr){
       o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">'+h(G.pubDecksErr)+'</div>');
     }
+
+    // Filter + render decks
     if(G.pubDecksItems&&G.pubDecksItems.length){
       var _elC={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9'};
-      G.pubDecksItems.forEach(function(d){
-        o('<div class="pd-c">');
-        if(d.thumbnail){
-          o('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
-          o('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
-        } else {
-          o('<div class="pd-thumb-ph">&#127183;</div>');
+      var _q=(G.pdQ||'').toLowerCase().trim();
+      var _filters=G.pdF||[];
+
+      var _visible=G.pubDecksItems.filter(function(d){
+        // Element filters (OR within element group, AND with format group)
+        var _elFilters=_filters.filter(function(f){return ['Earth','Fire','Water','Air'].indexOf(f)>=0;});
+        var _fmtFilters=_filters.filter(function(f){return ['Constructed','Multiplayer','Draft','Sealed'].indexOf(f)>=0;});
+
+        if(_elFilters.length){
+          var els=d.elements||[];
+          var match=_elFilters.some(function(ef){return els.indexOf(ef)>=0;});
+          if(!match)return false;
         }
-        o('<div class="pd-info">');
-        o('<div class="pd-nm">'+h(d.name)+'</div>');
-        var meta=[];
-        if(d.author)meta.push('by '+d.author);
-        if(d.avatar)meta.push(d.avatar);
-        if(d.format)meta.push(d.format);
-        if(meta.length)o('<div class="pd-mt">'+h(meta.join(' · '))+'</div>');
-        if(d.elements&&d.elements.length){
-          o('<div style="margin-top:2px">');
-          d.elements.forEach(function(el){o('<span class="pd-el" style="color:'+(_elC[el]||'var(--fg2)')+'">'+h(el)+'</span>');});
-          o('</div>');
+        if(_fmtFilters.length){
+          var fmt=(d.format||'').toLowerCase();
+          var match=_fmtFilters.some(function(ff){return fmt.indexOf(ff.toLowerCase())>=0;});
+          if(!match)return false;
         }
-        var stats=[];
-        if(d.cardCount)stats.push(d.cardCount+' cards');
-        if(d.likes)stats.push('&#9829; '+d.likes);
-        if(d.views)stats.push(d.views+' views');
-        if(d.updatedAt)stats.push(d.updatedAt.split('T')[0]);
-        if(stats.length)o('<div class="pd-stats">'+stats.join(' &middot; ')+'</div>');
-        if(d.description)o('<div class="pd-ds">'+h(d.description)+'</div>');
-        o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
-        o('</div></div>');
+        if(_q){
+          var hay=((d.name||'')+' '+(d.author||'')+' '+(d.description||'')).toLowerCase();
+          if(hay.indexOf(_q)<0)return false;
+        }
+        return true;
       });
+
+      if(_visible.length){
+        _visible.forEach(function(d){
+          o('<div class="pd-c">');
+          if(d.thumbnail){
+            o('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
+            o('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
+          } else {
+            o('<div class="pd-thumb-ph">&#127183;</div>');
+          }
+          o('<div class="pd-info">');
+          o('<div class="pd-nm">'+h(d.name)+'</div>');
+          var meta=[];
+          if(d.author)meta.push('by '+d.author);
+          if(d.avatar)meta.push(d.avatar);
+          if(d.format)meta.push(d.format);
+          if(meta.length)o('<div class="pd-mt">'+h(meta.join(' · '))+'</div>');
+          if(d.elements&&d.elements.length){
+            o('<div style="margin-top:2px">');
+            d.elements.forEach(function(el){o('<span class="pd-el" style="color:'+(_elC[el]||'var(--fg2)')+'">'+h(el)+'</span>');});
+            o('</div>');
+          }
+          var stats=[];
+          if(d.cardCount)stats.push(d.cardCount+' cards');
+          if(d.likes)stats.push('&#9829; '+d.likes);
+          if(d.views)stats.push(d.views+' views');
+          if(d.updatedAt)stats.push(d.updatedAt.split('T')[0]);
+          if(stats.length)o('<div class="pd-stats">'+stats.join(' &middot; ')+'</div>');
+          if(d.description)o('<div class="pd-ds">'+h(d.description)+'</div>');
+          o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
+          o('</div></div>');
+        });
+      } else {
+        o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No decks match your filters.</div>');
+      }
     } else if(!G.pubDecksLoading){
-      o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap &ldquo;Load from curiosa.io&rdquo; to fetch the latest community decks.</div>');
+      o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No decks loaded yet.</div>');
     }
+
     o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
   }
