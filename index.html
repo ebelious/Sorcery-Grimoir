@@ -666,7 +666,7 @@ function boot(){
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
   applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
-  
+  loadPubDecks();
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
 function _applyBodyClass(){
@@ -1520,49 +1520,6 @@ function getLocationAndLoadEvents(){
 }
 
 
-// Confirmed curiosa.io API endpoint and CDN
-var _CDNBASE='https://d27a44hjr9gen3.cloudfront.net/cards/';
-var _CURIOSA_SEARCH={query:'',set:'*',filters:[],sort:'relevance',divider:'all',avatar:'*'};
-
-function _curiosaThumb(item){
-  // Direct URL fields
-  if(item.thumbnailUrl&&item.thumbnailUrl.startsWith('http'))return item.thumbnailUrl;
-  if(item.thumbnail&&item.thumbnail.startsWith('http'))return item.thumbnail;
-  if(item.imageUrl&&item.imageUrl.startsWith('http'))return item.imageUrl;
-  if(item.coverImage&&item.coverImage.startsWith('http'))return item.coverImage;
-  if(item.image&&item.image.startsWith('http'))return item.image;
-  // Nested card objects
-  var cardKeys=['featuredCard','coverCard','avatarCard','mainCard','heroCard'];
-  for(var i=0;i<cardKeys.length;i++){
-    var c=item[cardKeys[i]];
-    if(c&&typeof c==='object'){
-      var u=c.thumbnailUrl||c.imageUrl||c.image||c.img;
-      if(u&&u.startsWith('http'))return u;
-      var sl=c.slug||c.cardSlug||c.id;
-      if(sl)return _CDNBASE+sl+'.png';
-    }
-  }
-  // avatar object
-  var av=item.avatar;
-  if(av&&typeof av==='object'){
-    var u2=av.thumbnailUrl||av.imageUrl||av.image;
-    if(u2&&u2.startsWith('http'))return u2;
-    var sl2=av.slug||av.cardSlug;
-    if(sl2)return _CDNBASE+sl2+'.png';
-  }
-  // slug fields
-  var slugKeys=['featuredCardSlug','coverCardSlug','cardSlug','heroSlug','thumbnailSlug'];
-  for(var j=0;j<slugKeys.length;j++){if(item[slugKeys[j]])return _CDNBASE+item[slugKeys[j]]+'.png';}
-  // cards array first item
-  if(Array.isArray(item.cards)&&item.cards[0]){
-    var c2=item.cards[0];
-    var u3=c2.thumbnailUrl||c2.imageUrl||c2.image;
-    if(u3&&u3.startsWith('http'))return u3;
-    var sl3=c2.slug||c2.cardSlug;
-    if(sl3)return _CDNBASE+sl3+'.png';
-  }
-  return '';
-}
 
 function loadPubDecks(){
   if(G.pubDecksLoading)return;
@@ -1798,7 +1755,6 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
   if(p==='pubdecks'){
-    if(!G.pubDecksLoaded&&!G.pubDecksLoading)loadPubDecks();
     o('<div class="slbl2">Community Decks</div>');
     if(G.pubDecksItems&&G.pubDecksItems.length){
       o('<input class="fi" id="pd-search" placeholder="&#128269; Search decks&hellip;" style="margin-bottom:6px" value="'+h(G.pubDecksSearch||'')+'" oninput="G.pubDecksSearch=this.value;_filterPubDecks()">');
