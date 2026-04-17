@@ -55,12 +55,62 @@ const fs = require('fs');
     return results.slice(0, 25);
   });
 
-  await browser.close();
-
   if (!articles.length) {
+    await browser.close();
     console.error('No articles found — page may not have rendered correctly');
     process.exit(1);
   }
+
+  // Load existing news.json to skip re-fetching images for articles we already have
+  let existingImages = {};
+  try {
+    const existing = JSON.parse(fs.readFileSync('news.json', 'utf8'));
+    (existing.articles || []).forEach(a => {
+      if (a.url && a.image) existingImages[a.url] = a.image;
+    });
+    console.log(`Loaded ${Object.keys(existingImages).length} cached images from existing news.json`);
+  } catch (e) {
+    console.log('No existing news.json found, will fetch all images fresh');
+  }
+
+  // Fetch OG image for each article (skip if already cached)
+  console.log('Fetching OG images for articles...');
+  for (let i = 0; i < articles.length; i++) {
+    const article = articles[i];
+
+    if (existingImages[article.url]) {
+      article.image = existingImages[article.url];
+      console.log(`[${i + 1}/${articles.length}] cached  ${article.url}`);
+      continue;
+    }
+
+    try {
+      const articlePage = await browser.newPage();
+      await articlePage.goto(article.url, {
+        waitUntil: 'domcontentloaded',
+        timeout: 15000
+      });
+
+      const ogImage = await articlePage.$eval(
+        'meta[property="og:image"]',
+        el => el.getAttribute('content')
+      ).catch(() => null);
+
+      if (ogImage) {
+        // Make sure it's an absolute URL
+        article.image = ogImage.startsWith('http') ? ogImage : 'https://sorcerytcg.com' + ogImage;
+        console.log(`[${i + 1}/${articles.length}] found   ${article.url} → ${article.image}`);
+      } else {
+        console.log(`[${i + 1}/${articles.length}] no img  ${article.url}`);
+      }
+
+      await articlePage.close();
+    } catch (e) {
+      console.log(`[${i + 1}/${articles.length}] failed  ${article.url} — ${e.message}`);
+    }
+  }
+
+  await browser.close();
 
   const output = {
     updated: new Date().toISOString(),
@@ -68,5 +118,5 @@ const fs = require('fs');
   };
 
   fs.writeFileSync('news.json', JSON.stringify(output, null, 2));
-  console.log(`Scraped ${articles.length} articles → news.json`);
+  console.log(`Done — scraped ${articles.length} articles → news.json`);
 })();
