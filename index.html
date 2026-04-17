@@ -1944,24 +1944,9 @@ function pContent(){
   if(p==='news'){
     var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
 
-    // Toolbar: Refresh + Add Article
-    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
-    o('<button class="fb gold" style="flex:1" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
-    o('<button class="fb" style="flex:1" onclick="G.newsAddMode=!G.newsAddMode;render()">+ Add Article</button>');
+    o('<div style="margin-bottom:8px">');
+    o('<button class="fb gold" style="width:100%" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
     o('</div>');
-
-    // Add article form
-    if(G.newsAddMode){
-      o('<div style="background:var(--bg3);border:1px solid var(--bd);padding:8px;margin-bottom:8px;border-radius:3px">');
-      o('<div style="font-size:10px;color:var(--fg2);margin-bottom:5px">Paste the URL of a new article from sorcerytcg.com/news:</div>');
-      o('<input class="fi" id="news-add-url" placeholder="https://sorcerytcg.com/news/article-slug" style="margin-bottom:4px">');
-      o('<input class="fi" id="news-add-title" placeholder="Article title" style="margin-bottom:4px">');
-      o('<div style="display:flex;gap:4px">');
-      o('<button class="fb gold" style="flex:1" onclick="var u=document.getElementById(\'news-add-url\').value.trim(),t=document.getElementById(\'news-add-title\').value.trim();if(u&&u.indexOf(\'sorcerytcg.com/news\')>=0){var n={title:t||u.split(\'/\').pop().replace(/-/g,\' \'),url:u,date:\'Today\',source:\'sorcerytcg.com\'};G.newsItems=G.newsItems||NEWS_SEED.slice();G.newsItems.unshift(n);G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render();}">Add</button>');
-      o('<button class="fb" style="flex:1" onclick="G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render()">Cancel</button>');
-      o('</div>');
-      o('</div>');
-    }
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Checking for latest news&hellip;</div>');
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
