@@ -12,7 +12,6 @@ const fs = require('fs');
     timeout: 30000
   });
 
-  // Wait for article links to appear
   await page.waitForSelector('a[href^="/news/"]', { timeout: 15000 }).catch(() => {});
 
   const articles = await page.evaluate(() => {
@@ -23,12 +22,10 @@ const fs = require('fs');
       const href = a.getAttribute('href');
       const url = 'https://sorcerytcg.com' + href;
 
-      // Skip non-article links (nav, footer, etc.)
       const slug = href.replace('/news/', '');
       if (!slug || slug.length < 5 || seen.has(url)) return;
       seen.add(url);
 
-      // Try to find a title — use link text, or nearest heading, or format slug
       let title = '';
       const heading = a.querySelector('h1,h2,h3,h4,p');
       if (heading) {
@@ -36,12 +33,10 @@ const fs = require('fs');
       } else {
         title = a.innerText.trim();
       }
-      // If still no title, format the slug
       if (!title || title.length < 4) {
         title = slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
       }
 
-      // Try to find a date near the link
       let date = '';
       const parent = a.closest('article,section,div,[class]');
       if (parent) {
@@ -57,30 +52,30 @@ const fs = require('fs');
 
   if (!articles.length) {
     await browser.close();
-    console.error('No articles found — page may not have rendered correctly');
+    console.error('No articles found -- page may not have rendered correctly');
     process.exit(1);
   }
 
-  // Load existing news.json to skip re-fetching images for articles we already have
+  // Load existing news.json to avoid re-fetching images we already have
   let existingImages = {};
   try {
     const existing = JSON.parse(fs.readFileSync('news.json', 'utf8'));
     (existing.articles || []).forEach(a => {
       if (a.url && a.image) existingImages[a.url] = a.image;
     });
-    console.log(`Loaded ${Object.keys(existingImages).length} cached images from existing news.json`);
+    console.log('Loaded ' + Object.keys(existingImages).length + ' cached images from existing news.json');
   } catch (e) {
     console.log('No existing news.json found, will fetch all images fresh');
   }
 
-  // Fetch OG image for each article (skip if already cached)
-  console.log('Fetching OG images for articles...');
+  // Fetch cover image for each article
+  console.log('Fetching images for articles...');
   for (let i = 0; i < articles.length; i++) {
     const article = articles[i];
 
     if (existingImages[article.url]) {
       article.image = existingImages[article.url];
-      console.log(`[${i + 1}/${articles.length}] cached  ${article.url}`);
+      console.log('[' + (i + 1) + '/' + articles.length + '] cached  ' + article.url);
       continue;
     }
 
@@ -91,22 +86,43 @@ const fs = require('fs');
         timeout: 15000
       });
 
-      const ogImage = await articlePage.$eval(
+      // Try og:image first, then fall back to first img in main content
+      let rawImage = await articlePage.$eval(
         'meta[property="og:image"]',
         el => el.getAttribute('content')
       ).catch(() => null);
 
-      if (ogImage) {
-        // Make sure it's an absolute URL
-        article.image = ogImage.startsWith('http') ? ogImage : 'https://sorcerytcg.com' + ogImage;
-        console.log(`[${i + 1}/${articles.length}] found   ${article.url} → ${article.image}`);
+      if (!rawImage) {
+        rawImage = await articlePage.$eval(
+          'main img[src], article img[src], img[src*="sanity"]',
+          el => el.getAttribute('src')
+        ).catch(() => null);
+      }
+
+      if (rawImage) {
+        let finalImage = rawImage.startsWith('http')
+          ? rawImage
+          : 'https://sorcerytcg.com' + rawImage;
+
+        // sorcerytcg.com wraps all images in Next.js image optimizer:
+        //   /_next/image?url=https%3A%2F%2Fcdn.sanity.io%2F...&w=3840&q=75
+        // This wrapper is same-origin only and fails cross-origin in the app.
+        // Decode the inner `url` param to get the real Sanity CDN URL directly.
+        try {
+          const parsed = new URL(finalImage);
+          const inner = parsed.searchParams.get('url');
+          if (inner) finalImage = decodeURIComponent(inner);
+        } catch (e) {}
+
+        article.image = finalImage;
+        console.log('[' + (i + 1) + '/' + articles.length + '] found   ' + article.url);
       } else {
-        console.log(`[${i + 1}/${articles.length}] no img  ${article.url}`);
+        console.log('[' + (i + 1) + '/' + articles.length + '] no img  ' + article.url);
       }
 
       await articlePage.close();
     } catch (e) {
-      console.log(`[${i + 1}/${articles.length}] failed  ${article.url} — ${e.message}`);
+      console.log('[' + (i + 1) + '/' + articles.length + '] failed  ' + article.url + ' -- ' + e.message);
     }
   }
 
@@ -118,5 +134,5 @@ const fs = require('fs');
   };
 
   fs.writeFileSync('news.json', JSON.stringify(output, null, 2));
-  console.log(`Done — scraped ${articles.length} articles → news.json`);
+  console.log('Done -- scraped ' + articles.length + ' articles to news.json');
 })();
