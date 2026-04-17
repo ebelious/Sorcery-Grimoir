@@ -1939,6 +1939,7 @@ function pContent(){
 
     G.newsItems.forEach(function(n){
       o('<div class="ev-c">');
+      if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
       o('<div class="ev-nm">'+h(n.title)+'</div>');
       if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
       o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
