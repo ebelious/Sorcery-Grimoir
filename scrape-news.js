@@ -65,7 +65,7 @@ const fs = require('fs');
     });
     console.log('Loaded ' + Object.keys(existingImages).length + ' cached images from existing news.json');
   } catch (e) {
-    console.log('No existing news.json found, will fetch all images fresh');
+    console.log('No existing news.json -- fetching all images fresh');
   }
 
   // Fetch cover image for each article
@@ -81,33 +81,25 @@ const fs = require('fs');
 
     try {
       const articlePage = await browser.newPage();
+      // networkidle ensures the SSR page has fully loaded before we query
       await articlePage.goto(article.url, {
-        waitUntil: 'domcontentloaded',
-        timeout: 15000
+        waitUntil: 'networkidle',
+        timeout: 20000
       });
 
-      // Try og:image first, then fall back to first img in main content
-      let rawImage = await articlePage.$eval(
-        'meta[property="og:image"]',
-        el => el.getAttribute('content')
+      // The cover image on sorcerytcg.com always has alt="Cover Image"
+      // Its src is a Next.js image optimizer URL: /_next/image?url=<encoded sanity cdn url>&w=...
+      // We decode the inner `url` param to get the real cross-origin-safe Sanity CDN URL.
+      const rawSrc = await articlePage.$eval(
+        'img[alt="Cover Image"]',
+        el => el.getAttribute('src')
       ).catch(() => null);
 
-      if (!rawImage) {
-        rawImage = await articlePage.$eval(
-          'main img[src], article img[src], img[src*="sanity"]',
-          el => el.getAttribute('src')
-        ).catch(() => null);
-      }
+      if (rawSrc) {
+        let finalImage = rawSrc.startsWith('http')
+          ? rawSrc
+          : 'https://sorcerytcg.com' + rawSrc;
 
-      if (rawImage) {
-        let finalImage = rawImage.startsWith('http')
-          ? rawImage
-          : 'https://sorcerytcg.com' + rawImage;
-
-        // sorcerytcg.com wraps all images in Next.js image optimizer:
-        //   /_next/image?url=https%3A%2F%2Fcdn.sanity.io%2F...&w=3840&q=75
-        // This wrapper is same-origin only and fails cross-origin in the app.
-        // Decode the inner `url` param to get the real Sanity CDN URL directly.
         try {
           const parsed = new URL(finalImage);
           const inner = parsed.searchParams.get('url');
