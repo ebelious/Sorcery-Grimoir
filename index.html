@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:;">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 
 <!-- PWA -->
@@ -352,16 +352,16 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .yt-ch2{font-size:9px;font-weight:700;color:var(--yel);text-transform:uppercase;margin-bottom:3px;letter-spacing:.03em}
 .yt-title{font-size:11px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--fg);font-weight:600}
 .yt-date{font-size:9px;color:var(--fg2);margin-top:3px}
-.pd-c{background:var(--bg3);border:1px solid var(--bd);padding:0;margin-bottom:6px;overflow:hidden;display:flex;gap:0}
-.pd-thumb{width:72px;min-width:72px;height:72px;object-fit:cover;background:var(--bg2);display:block;flex-shrink:0}
-.pd-thumb-ph{width:72px;min-width:72px;height:72px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;color:var(--fg2)}
-.pd-info{flex:1;padding:6px 7px;min-width:0}
-.pd-nm{font-size:10px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pd-mt{font-size:8px;color:var(--fg2);margin-top:2px}
-.pd-ds{font-size:8px;color:var(--fg2);margin-top:3px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pd-lnk{display:inline-block;font-size:8px;color:var(--bbl);margin-top:3px}
-.pd-stats{font-size:8px;color:var(--fg2);margin-top:2px}
-.pd-el{display:inline-block;font-size:9px;font-weight:700;margin-right:3px}
+.pd-c{background:var(--bg3);border:1px solid var(--bd);padding:0;margin-bottom:8px;overflow:hidden;display:flex;gap:0}
+.pd-thumb{width:90px;min-width:90px;height:90px;object-fit:cover;background:var(--bg2);display:block;flex-shrink:0}
+.pd-thumb-ph{width:90px;min-width:90px;height:90px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--fg2)}
+.pd-info{flex:1;padding:8px 10px;min-width:0}
+.pd-nm{font-size:13px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pd-mt{font-size:11px;color:var(--fg2);margin-top:3px}
+.pd-ds{font-size:10px;color:var(--fg2);margin-top:4px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pd-lnk{display:inline-block;font-size:11px;color:var(--bbl);margin-top:4px}
+.pd-stats{font-size:11px;color:var(--fg2);margin-top:3px}
+.pd-el{display:inline-block;font-size:11px;font-weight:700;margin-right:4px}
 .ev-ac-wrap{position:relative;flex:1}
 .ev-ac-box{position:absolute;top:100%;left:0;right:0;background:var(--bg3);border:1px solid var(--bd);z-index:100;max-height:180px;overflow-y:auto}
 .ev-ac-item{padding:7px 9px;font-size:11px;cursor:pointer;border-bottom:1px solid var(--bd)}
@@ -1525,23 +1525,110 @@ function loadPubDecks(){
   if(G.pubDecksLoading)return;
   G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;G.pubDecksItems=[];render();
 
-  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now();
-  fetch(jsonUrl)
-    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
-    .then(function(data){
-      var list=Array.isArray(data)?data:(Array.isArray(data.decks)?data.decks:[]);
-      G.pubDecksItems=list;
-      G.pubDecksLoading=false;
-      G.pubDecksLoaded=true;
-      if(!list.length)G.pubDecksErr='No decks found.';
-      render();
-    })
-    .catch(function(){
-      G.pubDecksErr='Could not load decks.';
-      G.pubDecksLoading=false;
-      G.pubDecksLoaded=true;
-      render();
+  var _seen=new Set();
+
+  function normDeck(item){
+    if(!item||!item.id)return null;
+    var auth=(item.user&&(item.user.username||item.user.displayName||item.user.name))||(item.creator&&(item.creator.username||item.creator.name))||item.author||'';
+    if(!auth)return null; // skip archetype stubs
+    var els=[];
+    if(Array.isArray(item.elements))els=item.elements.map(function(e){return typeof e==='string'?e:(e.name||e.label||'');}).filter(Boolean);
+    var upd=item.updatedAt||item.updated_at||'';
+    try{if(upd)upd=new Date(upd).toISOString().split('T')[0];}catch(e){upd='';}
+    var av=(item.avatar&&typeof item.avatar==='object'&&(item.avatar.name||item.avatar.cardName))||item.avatarName||'';
+    var _thumb=item.thumbnail||item.thumbnailUrl||item.imageUrl||'';
+    if(!_thumb&&item.id)_thumb='https://curiosa.io/api/og/deck/'+item.id;
+    return{id:item.id,name:item.name||'Unnamed',author:auth,avatar:av,elements:els,
+      format:item.format||'Constructed',description:item.description||'',
+      cardCount:item.cardCount||(Array.isArray(item.cards)?item.cards.length:0)||0,
+      likes:item.likes||item.likesCount||(item._count&&item._count.likes)||0,
+      views:item.views||item.viewsCount||(item._count&&item._count.views)||0,
+      updatedAt:upd,thumbnail:_thumb,url:item.url||('https://curiosa.io/decks/'+item.id)};
+  }
+
+  function mergeDecks(items){
+    var added=0;
+    items.forEach(function(item){
+      var d=normDeck(item);
+      if(d&&!_seen.has(d.id)){
+        // Ensure thumbnail — for items from static JSON that have empty thumbnail
+        if(!d.thumbnail&&d.id)d.thumbnail='https://curiosa.io/api/og/deck/'+d.id;
+        _seen.add(d.id);G.pubDecksItems.push(d);added++;
+      }
     });
+    if(added){G.pubDecksItems.sort(function(a,b){return(b.views||0)-(a.views||0);});render();}
+    return added;
+  }
+
+  function absorbTrpc(obj,depth){
+    if(!obj||typeof obj!=='object'||depth>14)return[];
+    if(Array.isArray(obj)){
+      if(obj.length&&obj[0]&&obj[0].id&&obj[0].name!==undefined)return obj;
+      var found=[];
+      obj.forEach(function(v){var r=absorbTrpc(v,depth+1);if(r.length)found=found.concat(r);});
+      return found;
+    }
+    var found=[];
+    Object.values(obj).forEach(function(v){var r=absorbTrpc(v,depth+1);if(r.length)found=found.concat(r);});
+    return found;
+  }
+
+  function findCursor(obj,d){
+    if(!obj||typeof obj!=='object'||d>10)return null;
+    var keys=['nextCursor','next_cursor','cursor','endCursor','after'];
+    for(var i=0;i<keys.length;i++){
+      var v=obj[keys[i]];
+      if(v!==null&&v!==undefined&&v!=='')return v;
+    }
+    var r=null;
+    Object.values(obj).forEach(function(v){if(r===null)r=findCursor(v,d+1);});
+    return r;
+  }
+
+  // Step 1: load static JSON immediately for fast first paint
+  var staticUrl='https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now();
+  fetch(staticUrl)
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(data){
+      if(data){
+        var list=Array.isArray(data)?data:(Array.isArray(data.decks)?data.decks:[]);
+        mergeDecks(list);
+      }
+    })
+    .catch(function(){});
+
+  // Step 2: live-paginate curiosa.io directly with correct params
+  var _inp={query:'',set:'*',filters:[],csort:'views',dsort:'views',fsort:'views',divider:'all',avatar:'*',limit:100};
+  var _cursor=null,_pageN=0,_stale=0;
+
+  function fetchPage(){
+    if(_pageN>200||_stale>2){done();return;}
+    var inp=Object.assign({},_inp);
+    if(_cursor!==null&&_cursor!==undefined)inp.cursor=_cursor;
+    var apiUrl='https://curiosa.io/api/trpc/deck.search?batch=1&input='+encodeURIComponent(JSON.stringify({0:{json:inp}}));
+    var proxyUrl='https://corsproxy.io/?url='+encodeURIComponent(apiUrl);
+    fetch(proxyUrl)
+      .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+      .then(function(data){
+        var items=absorbTrpc(data,0);
+        var added=mergeDecks(items);
+        var nc=findCursor(data,0);
+        if(added===0)_stale++;else _stale=0;
+        if(!nc||nc===_cursor){done();return;}
+        _cursor=nc;_pageN++;
+        setTimeout(fetchPage,300);
+      })
+      .catch(function(){done();});
+  }
+
+  function done(){
+    G.pubDecksLoading=false;
+    G.pubDecksLoaded=true;
+    if(!G.pubDecksItems.length)G.pubDecksErr='Could not load decks.';
+    render();
+  }
+
+  fetchPage();
 }
 
 function _filterPubDecks(){
@@ -1555,13 +1642,17 @@ function _filterPubDecks(){
   }):G.pubDecksItems;
   var out=[];
   if(q&&!filtered.length){out.push('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match \u201c'+h(q)+'\u201d</div>');}
+  var _elIcon2={'Air':'&#127787;','Fire':'&#128293;','Earth':'&#127795;','Water':'&#128164;'};
   filtered.forEach(function(d){
+    var _priEl2=(d.elements&&d.elements.find(function(e){return e&&e!=='None'}))||'';
+    var _phIcon2=_elIcon2[_priEl2]||'&#127183;';
+    var _turl2=d.thumbnail||(d.id?'https://curiosa.io/api/og/deck/'+d.id:'');
     out.push('<div class="pd-c">');
-    if(d.thumbnail){
-      out.push('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
-      out.push('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
+    if(_turl2){
+      out.push('<img class="pd-thumb" src="'+h(_turl2)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
+      out.push('<div class="pd-thumb-ph" style="display:none">'+_phIcon2+'</div>');
     } else {
-      out.push('<div class="pd-thumb-ph">&#127183;</div>');
+      out.push('<div class="pd-thumb-ph">'+_phIcon2+'</div>');
     }
     out.push('<div class="pd-info">');
     out.push('<div class="pd-nm">'+h(d.name)+'</div>');
@@ -1755,7 +1846,7 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
   if(p==='pubdecks'){
-    o('<div class="slbl2">Community Decks</div>');
+    o('<div class="slbl2">Most Viewed Published Decks</div>');
     if(G.pubDecksItems&&G.pubDecksItems.length){
       o('<input class="fi" id="pd-search" placeholder="&#128269; Search decks&hellip;" style="margin-bottom:6px" value="'+h(G.pubDecksSearch||'')+'" oninput="G.pubDecksSearch=this.value;_filterPubDecks()">');
     }
@@ -1771,12 +1862,16 @@ function pContent(){
       o('<div id="pd-list">');
       if(_pdSearch&&!_pdFiltered.length){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match &ldquo;'+h(G.pubDecksSearch)+'&rdquo;</div>');}
       _pdFiltered.forEach(function(d){
+        var _elIcon={'Air':'&#127787;','Fire':'&#128293;','Earth':'&#127795;','Water':'&#128164;'};
+        var _priEl=(d.elements&&d.elements.find(function(e){return e&&e!=='None'}))||'';
+        var _phIcon=_elIcon[_priEl]||'&#127183;';
         o('<div class="pd-c">');
-        if(d.thumbnail){
-          o('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
-          o('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
+        var _turl=d.thumbnail||(d.id?'https://curiosa.io/api/og/deck/'+d.id:'');
+        if(_turl){
+          o('<img class="pd-thumb" src="'+h(_turl)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
+          o('<div class="pd-thumb-ph" style="display:none">'+_phIcon+'</div>');
         } else {
-          o('<div class="pd-thumb-ph">&#127183;</div>');
+          o('<div class="pd-thumb-ph">'+_phIcon+'</div>');
         }
         o('<div class="pd-info">');
         o('<div class="pd-nm">'+h(d.name)+'</div>');
@@ -2443,11 +2538,35 @@ function smallDieSVG(sides,count,colOverride){
   return '<svg width="20" height="20" viewBox="0 0 20 20">'+(shapes[sides]||shapes[20])+' fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/></svg>';
 }
 
+function gsOpenFaq(cardName){
+  S.gs='';S.gsDrop=false;G.menu=false;
+  var faqs=[];var cur='';
+  FAQ_DATA.forEach(function(f){if(f.card)cur=f.card;if(cur===cardName)faqs.push(f);});
+  if(!faqs.length)return;
+  var sections=[{items:faqs.map(function(f){return {q:f.q,a:f.a};})}];
+  showReadModal(cardName+' — FAQ',sections);
+}
+
+function gsOpenCodex(key){
+  S.gs='';S.gsDrop=false;G.menu=false;
+  var entry=null;
+  for(var i=0;i<CODEX_DATA.length;i++){if(CODEX_DATA[i].k===key){entry=CODEX_DATA[i];break;}}
+  if(!entry)return;
+  // Collect main def plus all following sub-entries (k==='')
+  var idx=CODEX_DATA.indexOf(entry);
+  var items=[{def:entry.def}];
+  for(var j=idx+1;j<CODEX_DATA.length;j++){
+    if(!CODEX_DATA[j].k)items.push({q:CODEX_DATA[j].sub||'',a:CODEX_DATA[j].def});
+    else break;
+  }
+  showReadModal(key,[{items:items}]);
+}
+
 function buildGsDrop(){
   var q=S.gs.toLowerCase();if(!q)return '';var items=[];
   CARDS.filter(function(c){return cName(c).toLowerCase().indexOf(q)>=0;}).slice(0,5).forEach(function(c){items.push('<div class="sddi" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}"><div class="sn">'+h(cName(c))+'</div><div class="sc">'+cEl(c)+' '+cType(c)+'</div></div>');});
-  FAQ_DATA.filter(function(f){return f.card.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(f){items.push('<div class="sddi" onclick="openPanel(\'faq\');S.faqQ=\''+h(f.card)+'\';render()"><div class="sn">'+h(f.card)+'</div><div class="sc">FAQ</div></div>');});
-  CODEX_DATA.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" onclick="openPanel(\'codex\');S.codexQ=\''+h(k.k)+'\';render()"><div class="sn">'+h(k.k)+'</div><div class="sc">Codex</div></div>');});
+  FAQ_DATA.filter(function(f){return f.card&&f.card.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(f){items.push('<div class="sddi" data-faq="'+h(f.card)+'" onclick="gsOpenFaq(this.dataset.faq)"><div class="sn">'+h(f.card)+'</div><div class="sc">FAQ</div></div>');});
+  CODEX_DATA.filter(function(k){return k.k&&k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" data-codex="'+h(k.k)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(k.k)+'</div><div class="sc">Codex</div></div>');});
   return items.slice(0,8).join('');
 }
 
