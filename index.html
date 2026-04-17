@@ -1513,20 +1513,6 @@ function getLocationAndLoadEvents(){
   );
 }
 
-var NEWS_SEED=[
-  {title:"2026 Grand Contests: Where the Realm Gathers",date:"Apr 3, 2026",url:"https://sorcerytcg.com/news/2026-grand-contests",source:"sorcerytcg.com"},
-  {title:"Where Communities Are Celebrated: 2026 Cornerstone Championships",date:"Mar 27, 2026",url:"https://sorcerytcg.com/news/where-communities-are-celebrated-2026-cornerstone-championships",source:"sorcerytcg.com"},
-  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 13, 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
-  {title:"Avatar of the Realm Update",date:"Feb 18, 2026",url:"https://sorcerytcg.com/news/avatar-of-the-realm-update",source:"sorcerytcg.com"},
-  {title:"Sorcery Awaits: Join Us at Gen Con 2026",date:"Feb 6, 2026",url:"https://sorcerytcg.com/news/sorcery-awaits-join-us-at-gen-con-2026",source:"sorcerytcg.com"},
-  {title:"SorceryCon 2026: Worlds Largest Community-Run Sorcery Event Returns",date:"Dec 12, 2025",url:"https://sorcerytcg.com/news/sorcerycon-2026-the-worlds-largest-community-run-sorcery-event",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm December 2025 Rulebook Update",date:"Dec 19, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-december-2025-rulebook-update",source:"sorcerytcg.com"},
-  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
-  {title:"Sorcery at SCG CON Las Vegas: Closing Crossroads 2025 Season Strong",date:"Nov 28, 2025",url:"https://sorcerytcg.com/news/sorcery-at-scg-con-las-vegas-closing-crossroads-2025-season-strong",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm Rules Update (July 2025)",date:"Jul 10, 2025",url:"https://sorcerytcg.com/news/july-2025-rulebook-update",source:"sorcerytcg.com"},
-  {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
-];
 
 function loadNews(){
   if(G.newsLoading)return;
@@ -1547,9 +1533,8 @@ function loadNews(){
       render();
     })
     .catch(function(){
-      // news.json not yet available — keep showing seed articles
       G.newsLoading=false;G.newsLoaded=true;
-      G.newsErr='Could not load latest news — showing cached articles.';
+      G.newsErr='Could not load news. Try refreshing.';
       render();
     });
 }
@@ -1942,18 +1927,18 @@ function pContent(){
     return out.join('');
   }
   if(p==='news'){
-    var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
+    if(!G.newsLoaded&&!G.newsLoading)loadNews();
 
     o('<div style="margin-bottom:8px">');
     o('<button class="fb gold" style="width:100%" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
     o('</div>');
 
-    if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Checking for latest news&hellip;</div>');
+    if(G.newsLoading){o('<div class="ld">'+spinIcon()+' Loading news&hellip;</div>');return out.join('');}
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
+    if(!G.newsItems||!G.newsItems.length){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No articles found.</div>');return out.join('');}
 
-    _displayNews.forEach(function(n){
+    G.newsItems.forEach(function(n){
       o('<div class="ev-c">');
-      if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
       o('<div class="ev-nm">'+h(n.title)+'</div>');
       if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
       o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
