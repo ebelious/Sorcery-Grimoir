@@ -1720,26 +1720,8 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
   if(p==='pubdecks'){
-    o('<div class="slbl2">Import Curiosa Deck</div>');
-    o('<div style="display:flex;gap:4px;margin-bottom:4px">');
-    o('<input class="fi" id="curiosa-url" placeholder="https://curiosa.io/decks/..." style="flex:1">');
-    o('<button class="fb gold" onclick="importCuriosaUrl(document.getElementById(\'curiosa-url\').value)">'+(G.curiosaLoading?'&hellip;':'Import')+'</button>');
-    o('</div>');
-    if(G.curiosaLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
-    if(G.curiosaErr)o('<div style="font-size:9px;color:var(--red);margin-bottom:6px">'+h(G.curiosaErr)+'</div>');
-    if(G.curiosaPasteMode){
-      o('<div style="font-size:9px;color:var(--yel);margin-bottom:4px">&#9888; Curiosa uses JavaScript rendering — card list not visible in HTML.<br>Open the deck on Curiosa, copy the card list text, and paste it below:</div>');
-      o('<input class="fi" id="curiosa-deck-name" placeholder="Deck name&hellip;" style="margin-bottom:4px">');
-      o('<textarea class="fi" id="curiosa-paste" placeholder="Paste card list here&#10;4x Card Name&#10;3x Another Card" style="height:100px;resize:vertical;margin-bottom:4px"></textarea>');
-      o('<div style="display:flex;gap:4px">');
-      o('<button class="fb gold" style="flex:1" onclick="importCuriosaText(document.getElementById(\'curiosa-paste\').value)">Import Cards</button>');
-      o('<button class="fb" onclick="G.curiosaPasteMode=null;render()">Cancel</button>');
-      o('</div>');
-    }
-    o('<div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 4px">');
-    o('<div class="slbl2" style="margin:0">Community Decks</div>');
-    o('<button class="fb gold" style="font-size:9px;padding:3px 8px" onclick="loadPubDecks()">'+(G.pubDecksLoading?spinIcon()+' Elements Are at Work&hellip;':'&#8634; Load from curiosa.io')+'</button>');
-    o('</div>');
+    if(!G.pubDecksLoaded&&!G.pubDecksLoading)loadPubDecks();
+    o('<div class="slbl2">Community Decks</div>');
     if(G.pubDecksItems&&G.pubDecksItems.length){
       o('<input class="fi" placeholder="&#128269; Search decks&hellip;" style="margin-bottom:6px" value="'+h(G.pubDecksSearch||'')+'" oninput="G.pubDecksSearch=this.value;render()">');
     }
@@ -1783,8 +1765,6 @@ function pContent(){
         o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
         o('</div></div>');
       });
-    } else if(!G.pubDecksLoading){
-      o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap &ldquo;Load from curiosa.io&rdquo; to fetch the latest community decks.</div>');
     }
     o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
@@ -1808,7 +1788,7 @@ function pContent(){
   }
   if(p==='sd'){var entries=Object.entries(G.dkstat);if(entries.length){entries.forEach(function(kv){var k=kv[0],d=kv[1];var pct=d.w+d.l>0?Math.round(d.w/(d.w+d.l)*100)+'%':'--';o('<div class="sc"><div class="sn">'+h(k)+'</div><div class="ss"><span class="sw">'+d.w+'W</span><span class="sl_">'+d.l+'L</span><span class="sp_">'+pct+'</span></div></div>');});}else{o('<div class="ld">No deck stats yet.</div>');}return out.join('');}
   if(p==='sp'){
-    o('<div class="fr"><button class="fb gold" onclick="loadPubStats()">'+(G.pubStatsLoading?'Elements Are at Work&hellip;':(!G.pubStatsLoaded?'Load from sorcerytcg.gg':'Refresh'))+'</button></div>');
+    o('<div class="fr"><button class="fb gold" onclick="loadPubStats()">Load Stats</button></div>');
     if(G.pubStatsLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(G.pubStatsErr){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">'+h(G.pubStatsErr)+'</div>');}
     else if(G.pubStats&&G.pubStats.topDecks){
@@ -1846,9 +1826,9 @@ function pContent(){
       }
     }
     o('</div></div>');
-    o('<button class="fb gold" onclick="var inp=document.getElementById(\'ev-city-inp\');var v=inp?inp.value.trim():\'\';if(v){evSelectCity(v);}else{getLocationAndLoadEvents();}">'+( G.evLoading?'&hellip;':'Search')+'</button>');
+    o('<button class="fb gold" onclick="var inp=document.getElementById(\'ev-city-inp\');var v=inp?inp.value.trim():\'\';if(v){evSelectCity(v);}else{getLocationAndLoadEvents();}">Search</button>');
     o('</div>');
-    o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="G.evCityInput=\'\';getLocationAndLoadEvents()">'+(G.evLoading?spinIcon()+' Elements Are at Work&hellip;':'&#x1F4CD; Use My Location')+'</button>');
+    o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="G.evCityInput=\'\';getLocationAndLoadEvents()">&#x1F4CD; Use My Location</button>');
 
     if(_evCity&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching near: <b>'+h(_evCity)+'</b></div>');
     o('<a class="ext-lnk" style="background:var(--bg3);border-color:var(--yel);color:var(--yel);text-align:center;font-weight:700;padding:8px" href="'+_pnURL+'" target="_blank">&#x1F3AE; Open Play Network'+(_pnCity?' for '+h(_pnCity):'')+'&rarr;</a>');
@@ -1876,7 +1856,7 @@ function pContent(){
         o('<div style="font-size:10px;color:var(--fg2);margin-top:3px">Tap for details &rsaquo;</div>');
         o('</div>');
       });
-      o('<button class="fb" style="width:100%;margin:6px 0" onclick="G.evLoaded=false;G.evItems=null;loadLocalEvents(G.evCity)">&#8634; Refresh</button>');
+      o('<button class="fb" style="width:100%;margin:6px 0" onclick="G.evLoaded=false;G.evItems=null;loadLocalEvents(G.evCity)">Refresh</button>');
     } else if(G.evErr){
       o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
     } else if(!G.evLoaded){
@@ -1998,7 +1978,7 @@ function pContent(){
     });
     o('</div>');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
-    o('<button class="fb" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">'+(G.ytLoading?spinIcon()+' Elements Are at Work&hellip;':'&#8634; Refresh')+'</button>');
+    o('<button class="fb" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
     o('</div>');
     if(G.ytLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(filtVids.length){
@@ -2008,7 +1988,7 @@ function pContent(){
         o('<div class="yt-thumb"><img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="thumb"><div class="yt-play">&#9654;</div></div>');
         o('<div class="yt-info"><div class="yt-ch2">'+h(v.channel||'')+'</div><div class="yt-title">'+h(v.title||'')+'</div>'+(v.date?'<div class="yt-date">'+h(v.date)+'</div>':'')+'</div></a>');
       });
-      o('<button class="fb gold" style="width:100%;margin-bottom:8px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">&#8634; Refresh</button>');
+      o('<button class="fb gold" style="width:100%;margin-bottom:8px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
     } else if(G.ytLoaded){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No videos found. Browse channel directly below.</div>');}
     o('<a class="ext-lnk" style="margin-top:6px" href="https://www.youtube.com/results?search_query=sorcery+contested+realm+tcg" target="_blank">Search YouTube &rarr;</a>');
     return out.join('');
@@ -2018,7 +1998,7 @@ function pContent(){
 
     // Toolbar: Refresh only
     o('<div style="margin-bottom:8px">');
-    o('<button class="fb gold full" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Elements Are at Work&hellip;':'&#8634; Refresh')+'</button>');
+    o('<button class="fb gold full" onclick="loadNews()">Refresh</button>');
     o('</div>');
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
