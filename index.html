@@ -1534,16 +1534,11 @@ var NEWS_SEED=[
   {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
 ];
 
-// ── PUBLISHED DECKS (curiosa.io/decks) ────────────────────────────────────────
 function loadPubDecks(){
   if(G.pubDecksLoading)return;
   G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;render();
-  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now();
-  fetch(jsonUrl)
-    .then(function(r){
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      return r.json();
-    })
+  fetch('https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now())
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(d){
       var arr=d.decks||d;
       if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
@@ -1553,7 +1548,7 @@ function loadPubDecks(){
     })
     .catch(function(){
       G.pubDecksLoading=false;G.pubDecksLoaded=true;
-      G.pubDecksErr='Could not load decks.json — showing featured decks.';
+      G.pubDecksErr='Could not load decks — scraper may not have run yet.';
       render();
     });
 }
@@ -1725,7 +1720,6 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
   }
   if(p==='pubdecks'){
-    // URL import section
     o('<div class="slbl2">Import Curiosa Deck</div>');
     o('<div style="display:flex;gap:4px;margin-bottom:4px">');
     o('<input class="fi" id="curiosa-url" placeholder="https://curiosa.io/decks/..." style="flex:1">');
@@ -1742,21 +1736,18 @@ function pContent(){
       o('<button class="fb" onclick="G.curiosaPasteMode=null;render()">Cancel</button>');
       o('</div>');
     }
-
-    // Live deck browser
     o('<div style="display:flex;align-items:center;justify-content:space-between;margin:8px 0 4px">');
     o('<div class="slbl2" style="margin:0">Community Decks</div>');
     o('<button class="fb gold" style="font-size:9px;padding:3px 8px" onclick="loadPubDecks()">'+(G.pubDecksLoading?spinIcon()+' Loading&hellip;':'&#8634; Load from curiosa.io')+'</button>');
     o('</div>');
-
-    if(G.pubDecksLoading)o('<div class="ld">'+spinIcon()+' Fetching decks&hellip;</div>');
-    if(G.pubDecksErr)o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">'+h(G.pubDecksErr)+'</div>');
-
-    // Show live-fetched decks
-    var _decksToShow=G.pubDecksItems&&G.pubDecksItems.length?G.pubDecksItems:null;
-    if(_decksToShow){
-      _decksToShow.forEach(function(d){
-        var elColors={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9','Neutral':'var(--fg2)'};
+    if(G.pubDecksLoading){
+      o('<div class="ld">'+spinIcon()+' Fetching decks&hellip;</div>');
+    } else if(G.pubDecksErr){
+      o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">'+h(G.pubDecksErr)+'</div>');
+    }
+    if(G.pubDecksItems&&G.pubDecksItems.length){
+      var _elC={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9'};
+      G.pubDecksItems.forEach(function(d){
         o('<div class="pd-c">');
         if(d.thumbnail){
           o('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
@@ -1766,48 +1757,29 @@ function pContent(){
         }
         o('<div class="pd-info">');
         o('<div class="pd-nm">'+h(d.name)+'</div>');
-        // Author + avatar + format
         var meta=[];
         if(d.author)meta.push('by '+d.author);
         if(d.avatar)meta.push(d.avatar);
         if(d.format)meta.push(d.format);
         if(meta.length)o('<div class="pd-mt">'+h(meta.join(' · '))+'</div>');
-        // Elements
         if(d.elements&&d.elements.length){
           o('<div style="margin-top:2px">');
-          d.elements.forEach(function(el){
-            var c=elColors[el]||'var(--fg2)';
-            o('<span class="pd-el" style="color:'+c+'">'+h(el)+'</span>');
-          });
+          d.elements.forEach(function(el){o('<span class="pd-el" style="color:'+(_elC[el]||'var(--fg2)')+'">'+h(el)+'</span>');});
           o('</div>');
         }
-        // Stats row
         var stats=[];
         if(d.cardCount)stats.push(d.cardCount+' cards');
         if(d.likes)stats.push('&#9829; '+d.likes);
         if(d.views)stats.push(d.views+' views');
-        if(d.updatedAt)stats.push(h(d.updatedAt).split('T')[0]);
+        if(d.updatedAt)stats.push(d.updatedAt.split('T')[0]);
         if(stats.length)o('<div class="pd-stats">'+stats.join(' &middot; ')+'</div>');
-        // Description
         if(d.description)o('<div class="pd-ds">'+h(d.description)+'</div>');
         o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
         o('</div></div>');
       });
-    } else if(!G.pubDecksLoading) {
-      // Seed / featured decks fallback
-      o('<div style="font-size:9px;color:var(--fg2);margin-bottom:6px">Tap &ldquo;Load from curiosa.io&rdquo; to fetch the latest community decks.</div>');
-      PUB_DECKS.forEach(function(d){
-        o('<div class="pd-c">');
-        o('<div class="pd-thumb-ph">&#127183;</div>');
-        o('<div class="pd-info">');
-        o('<div class="pd-nm">'+h(d.name)+'</div>');
-        o('<div class="pd-mt">'+h(d.author)+' &middot; '+h(d.el)+' &middot; '+h(d.av)+'</div>');
-        if(d.desc)o('<div class="pd-ds">'+h(d.desc)+'</div>');
-        o('<a class="pd-lnk" href="'+d.url+'" target="_blank">View on Curiosa &rarr;</a>');
-        o('</div></div>');
-      });
+    } else if(!G.pubDecksLoading){
+      o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap &ldquo;Load from curiosa.io&rdquo; to fetch the latest community decks.</div>');
     }
-
     o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
   }
@@ -2038,30 +2010,17 @@ function pContent(){
   if(p==='news'){
     var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
 
-    // Toolbar: Refresh + Add Article
-    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
-    o('<button class="fb gold" style="flex:1" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
-    o('<button class="fb" style="flex:1" onclick="G.newsAddMode=!G.newsAddMode;render()">+ Add Article</button>');
+    // Toolbar: Refresh only
+    o('<div style="margin-bottom:8px">');
+    o('<button class="fb gold full" onclick="loadNews()">'+(G.newsLoading?spinIcon()+' Loading&hellip;':'&#8634; Refresh')+'</button>');
     o('</div>');
-
-    // Add article form
-    if(G.newsAddMode){
-      o('<div style="background:var(--bg3);border:1px solid var(--bd);padding:8px;margin-bottom:8px;border-radius:3px">');
-      o('<div style="font-size:10px;color:var(--fg2);margin-bottom:5px">Paste the URL of a new article from sorcerytcg.com/news:</div>');
-      o('<input class="fi" id="news-add-url" placeholder="https://sorcerytcg.com/news/article-slug" style="margin-bottom:4px">');
-      o('<input class="fi" id="news-add-title" placeholder="Article title" style="margin-bottom:4px">');
-      o('<div style="display:flex;gap:4px">');
-      o('<button class="fb gold" style="flex:1" onclick="var u=document.getElementById(\'news-add-url\').value.trim(),t=document.getElementById(\'news-add-title\').value.trim();if(u&&u.indexOf(\'sorcerytcg.com/news\')>=0){var n={title:t||u.split(\'/\').pop().replace(/-/g,\' \'),url:u,date:\'Today\',source:\'sorcerytcg.com\'};G.newsItems=G.newsItems||NEWS_SEED.slice();G.newsItems.unshift(n);G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render();}">Add</button>');
-      o('<button class="fb" style="flex:1" onclick="G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];render()">Cancel</button>');
-      o('</div>');
-      o('</div>');
-    }
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Checking for latest news&hellip;</div>');
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
 
     _displayNews.forEach(function(n){
       o('<div class="ev-c">');
+      if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
       o('<div class="ev-nm">'+h(n.title)+'</div>');
       if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
       o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
