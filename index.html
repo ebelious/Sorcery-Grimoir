@@ -1608,11 +1608,13 @@ function loadPubDecks(){
   function next(){
     if(pageN>500){done();return;}
     var inp=Object.assign({},_CURIOSA_SEARCH,{limit:100},cursor?{cursor:cursor}:{});
-    var url='https://curiosa.io/api/trpc/deck.search?batch=1&input='+encodeURIComponent(JSON.stringify({0:{json:inp}}));
+    var apiUrl='https://curiosa.io/api/trpc/deck.search?batch=1&input='+encodeURIComponent(JSON.stringify({0:{json:inp}}));
+    var url='https://api.allorigins.win/get?url='+encodeURIComponent(apiUrl);
 
-    fetch(url,{credentials:'include',headers:{accept:'application/json'}})
+    fetch(url)
       .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
-      .then(function(data){
+      .then(function(wrapper){
+        var data=JSON.parse(wrapper.contents);
         var before=all.length;
         absorb(data,0);
         var added=all.length-before;
@@ -1621,7 +1623,7 @@ function loadPubDecks(){
         var nc=findCursor(data,0);
         if(!nc||added===0){done();return;}
         cursor=nc;pageN++;
-        setTimeout(next,200);
+        setTimeout(next,300);
       })
       .catch(function(){
         G.pubDecksErr='Could not load decks from curiosa.io.';
@@ -2270,31 +2272,7 @@ function cModal(){
 //   [Turn button — full width]
 //   [History — compact]
 function ddSVG(){
-  return '<svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">'
-    // ground line
-    +'<line x1="2" y1="65" x2="68" y2="65" stroke="var(--red)" stroke-width="1.5" opacity=".5"/>'
-    // left tower
-    +'<rect x="4" y="30" width="14" height="35" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".8"/>'
-    // left tower battlements
-    +'<rect x="4" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    +'<rect x="9" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    +'<rect x="14" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    // right tower
-    +'<rect x="52" y="30" width="14" height="35" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".8"/>'
-    // right tower battlements
-    +'<rect x="52" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    +'<rect x="57" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    +'<rect x="62" y="25" width="3" height="7" fill="var(--bg)" stroke="var(--red)" stroke-width="1" opacity=".8"/>'
-    // gothic arch between towers
-    +'<path d="M18 65 L18 42 Q18 18 35 15 Q52 18 52 42 L52 65" fill="var(--bg)" stroke="var(--red)" stroke-width="1.5" opacity=".9"/>'
-    // inner arch opening (dark)
-    +'<path d="M22 65 L22 44 Q22 24 35 21 Q48 24 48 44 L48 65" fill="var(--bg2)" stroke="none"/>'
-    // skull above arch
-    +'<circle cx="35" cy="10" r="5" fill="none" stroke="var(--red)" stroke-width="1.2" opacity=".7"/>'
-    +'<circle cx="32.5" cy="9" r="1.2" fill="var(--red)" opacity=".7"/>'
-    +'<circle cx="37.5" cy="9" r="1.2" fill="var(--red)" opacity=".7"/>'
-    +'<path d="M33 12 L34 13 L36 13 L37 12" fill="none" stroke="var(--red)" stroke-width=".8" opacity=".7"/>'
-    +'</svg>';
+  return '<img src="DD.jpg" alt="Death\'s Door" style="width:70px;height:70px;object-fit:cover;border-radius:4px;opacity:.9">';
 }
 
 function statBox(label,val,color,adjMinus,adjPlus,small){
