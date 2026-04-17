@@ -1536,21 +1536,172 @@ var NEWS_SEED=[
 
 function loadPubDecks(){
   if(G.pubDecksLoading)return;
-  G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;render();
-  fetch('https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now())
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-    .then(function(d){
-      var arr=d.decks||d;
-      if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
-      G.pubDecksItems=arr;
-      G.pubDecksLoading=false;G.pubDecksLoaded=true;
-      render();
-    })
-    .catch(function(){
-      G.pubDecksLoading=false;G.pubDecksLoaded=true;
-      G.pubDecksErr='Could not load decks — scraper may not have run yet.';
-      render();
-    });
+  G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;G.pubDecksItems=[];render();
+
+  // Fetch directly from curiosa.io's tRPC API with pagination
+  var _allDecks=[];
+  var _cursor=null;
+  var _page=0;
+  var _maxPages=40; // up to ~2000 decks
+
+  function _normDeck(item){
+    if(!item||!item.id)return null;
+    var thumbnail=
+      item.thumbnailUrl||item.thumbnail||item.previewImageUrl||item.coverImage||
+      item.image||item.imageUrl||item.deckImage||item.preview||item.bannerUrl||
+      item.cover||item.cardImage||
+      (item.featuredCard&&(item.featuredCard.thumbnailUrl||item.featuredCard.imageUrl||item.featuredCard.image||item.featuredCard.img))||
+      (item.coverCard&&(item.coverCard.thumbnailUrl||item.coverCard.imageUrl||item.coverCard.image))||
+      (item.avatarCard&&typeof item.avatarCard==='object'&&(item.avatarCard.imageUrl||item.avatarCard.image))||
+      (item.avatar&&typeof item.avatar==='object'&&(item.avatar.imageUrl||item.avatar.image||item.avatar.thumbnailUrl))||
+      '';
+    var elements=[];
+    if(Array.isArray(item.elements))elements=item.elements.map(function(e){return typeof e==='string'?e:(e.name||e.label||'');}).filter(Boolean);
+    var author=(item.user&&(item.user.username||item.user.displayName||item.user.name))||(item.creator&&(item.creator.username||item.creator.name))||item.author||'';
+    var avatar=(item.avatar&&typeof item.avatar==='object'&&(item.avatar.name||item.avatar.cardName||item.avatar.title))||item.avatarName||item.avatarCard||'';
+    var updated=item.updatedAt||item.updated_at||'';
+    try{if(updated)updated=new Date(updated).toISOString().split('T')[0];}catch(e){updated='';}
+    return{
+      id:item.id,
+      name:item.name||item.title||'Unnamed Deck',
+      author:author,avatar:avatar,elements:elements,
+      format:item.format||item.deckFormat||'Constructed',
+      description:item.description||'',
+      cardCount:item.cardCount||(Array.isArray(item.cards)?item.cards.length:0)||0,
+      likes:item.likes||item.likesCount||item._count&&item._count.likes||0,
+      views:item.views||item.viewsCount||item._count&&item._count.views||0,
+      updatedAt:updated,thumbnail:thumbnail,
+      url:'https://curiosa.io/decks/'+item.id
+    };
+  }
+
+  function _extractDecks(data){
+    // Walk any JSON shape to find arrays of deck objects
+    var found=[];
+    function walk(obj,depth){
+      if(!obj||typeof obj!=='object'||depth>12)return;
+      if(Array.isArray(obj)){
+        if(obj.length&&obj[0]&&obj[0].id&&(obj[0].name||obj[0].title)){
+          obj.forEach(function(item){var d=_normDeck(item);if(d)found.push(d);});
+          return;
+        }
+        obj.forEach(function(v){walk(v,depth+1);});
+      }else{
+        Object.values(obj).forEach(function(v){walk(v,depth+1);});
+      }
+    }
+    walk(data,0);
+    return found;
+  }
+
+  function _findCursor(data){
+    // Try to find nextCursor anywhere in the response
+    function seek(obj,depth){
+      if(!obj||typeof obj!=='object'||depth>8)return null;
+      var keys=['nextCursor','next_cursor','cursor','endCursor','after'];
+      for(var i=0;i<keys.length;i++){
+        if(obj[keys[i]]&&typeof obj[keys[i]]==='string')return obj[keys[i]];
+      }
+      var vals=Object.values(obj);
+      for(var j=0;j<vals.length;j++){
+        var r=seek(vals[j],depth+1);
+        if(r)return r;
+      }
+      return null;
+    }
+    return seek(data,0);
+  }
+
+  // Try these tRPC procedure names in order
+  var _procs=['deck.list','deck.getAll','deck.getPublic','deck.getRecent','deck.browse','deck.feed','decks.list','decks.getAll'];
+  var _bases=['https://curiosa.io/api/trpc/','https://curiosa.io/trpc/'];
+  var _procIdx=0, _baseIdx=0;
+
+  function _fetchPage(){
+    if(_page>=_maxPages){_done();return;}
+    var proc=_procs[_procIdx];
+    var base=_bases[_baseIdx];
+    var inputObj=Object.assign({limit:50,orderBy:'recent'},_cursor?{cursor:_cursor}:{});
+    var url=base+proc+'?batch=1&input='+encodeURIComponent(JSON.stringify({0:{json:inputObj}}));
+
+    fetch(url,{headers:{accept:'application/json'}})
+      .then(function(r){
+        if(!r.ok){
+          // Try next proc/base combo
+          _procIdx++;
+          if(_procIdx>=_procs.length){_procIdx=0;_baseIdx++;}
+          if(_baseIdx>=_bases.length){
+            // All procedures exhausted — fall back to static JSON
+            _fallback();
+            return;
+          }
+          _cursor=null;_page=0;
+          _fetchPage();
+          return;
+        }
+        return r.json();
+      })
+      .then(function(data){
+        if(!data)return;
+        var found=_extractDecks(data);
+        var seen=new Set(_allDecks.map(function(d){return d.id;}));
+        var added=found.filter(function(d){return!seen.has(d.id);});
+        _allDecks=_allDecks.concat(added);
+
+        // Update display progressively
+        G.pubDecksItems=_allDecks.slice();
+        _filterPubDecks();
+
+        if(!added.length&&_page>0){_done();return;}
+        if(added.length===0&&_page===0){
+          // This proc returned no decks, try next
+          _procIdx++;
+          if(_procIdx>=_procs.length){_procIdx=0;_baseIdx++;}
+          if(_baseIdx>=_bases.length){_fallback();return;}
+          _cursor=null;
+          _fetchPage();
+          return;
+        }
+
+        var nextCursor=_findCursor(data);
+        if(!nextCursor){_done();return;}
+        _cursor=nextCursor;
+        _page++;
+        setTimeout(_fetchPage,200);
+      })
+      .catch(function(){
+        _procIdx++;
+        if(_procIdx>=_procs.length){_procIdx=0;_baseIdx++;}
+        if(_baseIdx>=_bases.length){_fallback();return;}
+        _cursor=null;_page=0;
+        _fetchPage();
+      });
+  }
+
+  function _fallback(){
+    // Fall back to the static scraped JSON
+    fetch('https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now())
+      .then(function(r){return r.json();})
+      .then(function(d){
+        var arr=d.decks||d;
+        if(Array.isArray(arr)&&arr.length){
+          var seen=new Set(_allDecks.map(function(x){return x.id;}));
+          arr.forEach(function(item){var dk=_normDeck(item);if(dk&&!seen.has(dk.id)){_allDecks.push(dk);seen.add(dk.id);}});
+        }
+        _done();
+      })
+      .catch(function(){_done();});
+  }
+
+  function _done(){
+    G.pubDecksItems=_allDecks;
+    G.pubDecksLoading=false;
+    G.pubDecksLoaded=true;
+    if(!_allDecks.length)G.pubDecksErr='Could not load decks from curiosa.io.';
+    render();
+  }
+
+  _fetchPage();
 }
 
 function _filterPubDecks(){
