@@ -1553,6 +1553,50 @@ function loadPubDecks(){
     });
 }
 
+function _filterPubDecks(){
+  // Update just the deck list container without rebuilding entire DOM (preserves keyboard focus)
+  var listEl=document.getElementById('pd-list');
+  if(!listEl||!G.pubDecksItems)return;
+  var _elC={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9'};
+  var q=(G.pubDecksSearch||'').toLowerCase().trim();
+  var filtered=q?G.pubDecksItems.filter(function(d){
+    return (d.name||'').toLowerCase().includes(q)||(d.author||'').toLowerCase().includes(q)||(d.avatar||'').toLowerCase().includes(q);
+  }):G.pubDecksItems;
+  var out=[];
+  if(q&&!filtered.length){out.push('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match \u201c'+h(q)+'\u201d</div>');}
+  filtered.forEach(function(d){
+    out.push('<div class="pd-c">');
+    if(d.thumbnail){
+      out.push('<img class="pd-thumb" src="'+h(d.thumbnail)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
+      out.push('<div class="pd-thumb-ph" style="display:none">&#127183;</div>');
+    } else {
+      out.push('<div class="pd-thumb-ph">&#127183;</div>');
+    }
+    out.push('<div class="pd-info">');
+    out.push('<div class="pd-nm">'+h(d.name)+'</div>');
+    var meta=[];
+    if(d.author)meta.push('by '+d.author);
+    if(d.avatar)meta.push(d.avatar);
+    if(d.format)meta.push(d.format);
+    if(meta.length)out.push('<div class="pd-mt">'+h(meta.join(' \u00b7 '))+'</div>');
+    if(d.elements&&d.elements.length){
+      out.push('<div style="margin-top:2px">');
+      d.elements.forEach(function(el){out.push('<span class="pd-el" style="color:'+(_elC[el]||'var(--fg2)')+'">'+h(el)+'</span>');});
+      out.push('</div>');
+    }
+    var stats=[];
+    if(d.cardCount)stats.push(d.cardCount+' cards');
+    if(d.likes)stats.push('&#9829; '+d.likes);
+    if(d.views)stats.push(d.views+' views');
+    if(d.updatedAt)stats.push(d.updatedAt.split('T')[0]);
+    if(stats.length)out.push('<div class="pd-stats">'+stats.join(' &middot; ')+'</div>');
+    if(d.description)out.push('<div class="pd-ds">'+h(d.description)+'</div>');
+    out.push('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
+    out.push('</div></div>');
+  });
+  listEl.innerHTML=out.join('');
+}
+
 function loadNews(){
   if(G.newsLoading)return;
   G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
@@ -1723,7 +1767,7 @@ function pContent(){
     if(!G.pubDecksLoaded&&!G.pubDecksLoading)loadPubDecks();
     o('<div class="slbl2">Community Decks</div>');
     if(G.pubDecksItems&&G.pubDecksItems.length){
-      o('<input class="fi" placeholder="&#128269; Search decks&hellip;" style="margin-bottom:6px" value="'+h(G.pubDecksSearch||'')+'" oninput="G.pubDecksSearch=this.value;render()">');
+      o('<input class="fi" id="pd-search" placeholder="&#128269; Search decks&hellip;" style="margin-bottom:6px" value="'+h(G.pubDecksSearch||'')+'" oninput="G.pubDecksSearch=this.value;_filterPubDecks()">');
     }
     if(G.pubDecksLoading){
       o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
@@ -1734,6 +1778,7 @@ function pContent(){
       var _elC={'Air':'var(--cyn)','Fire':'var(--red)','Earth':'#8D9B4A','Water':'#5BA3C9'};
       var _pdSearch=(G.pubDecksSearch||'').toLowerCase().trim();
       var _pdFiltered=_pdSearch?G.pubDecksItems.filter(function(d){return (d.name||'').toLowerCase().includes(_pdSearch)||(d.author||'').toLowerCase().includes(_pdSearch)||(d.avatar||'').toLowerCase().includes(_pdSearch);}) : G.pubDecksItems;
+      o('<div id="pd-list">');
       if(_pdSearch&&!_pdFiltered.length){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match &ldquo;'+h(G.pubDecksSearch)+'&rdquo;</div>');}
       _pdFiltered.forEach(function(d){
         o('<div class="pd-c">');
@@ -1765,6 +1810,7 @@ function pContent(){
         o('<a class="pd-lnk" href="'+h(d.url)+'" target="_blank">View on Curiosa &rarr;</a>');
         o('</div></div>');
       });
+      o('</div>');
     }
     o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
