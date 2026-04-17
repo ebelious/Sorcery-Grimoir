@@ -265,11 +265,11 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .rd-body{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch}
 .rd-section{margin-bottom:16px}
 .rd-section-hdr{font-size:13px;font-weight:700;color:var(--cyn);font-family:'Fantaisie','Courier New',monospace;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
-.rd-q{font-size:13px;font-weight:700;color:var(--wht);margin-bottom:6px;font-family:'Fantaisie','Courier New',monospace;line-height:1.4}
-.rd-a{font-size:13px;color:var(--fg);font-family:Georgia,serif;line-height:1.7;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.rd-q{font-size:15px;font-weight:700;color:var(--wht);margin-bottom:6px;font-family:'Fantaisie','Courier New',monospace;line-height:1.4}
+.rd-a{font-size:15px;color:var(--fg);font-family:Georgia,serif;line-height:1.7;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
 .rd-a:last-child{border-bottom:none}
-.acc-q{font-size:12px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:'Courier New',monospace}
-.acc-a{font-size:12px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:Georgia,serif}
+.acc-q{font-size:14px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:'Courier New',monospace}
+.acc-a{font-size:14px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:Georgia,serif}
 .cod-def{font-size:8px;color:var(--fg2);line-height:1.55;padding-top:6px;font-family:Georgia,serif}
 .stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
@@ -1519,20 +1519,6 @@ function getLocationAndLoadEvents(){
   );
 }
 
-var NEWS_SEED=[
-  {title:"2026 Grand Contests: Where the Realm Gathers",date:"Apr 3, 2026",url:"https://sorcerytcg.com/news/2026-grand-contests",source:"sorcerytcg.com"},
-  {title:"Where Communities Are Celebrated: 2026 Cornerstone Championships",date:"Mar 27, 2026",url:"https://sorcerytcg.com/news/where-communities-are-celebrated-2026-cornerstone-championships",source:"sorcerytcg.com"},
-  {title:"Where Tables Connect: Sorcery Organized Play 2026",date:"Mar 13, 2026",url:"https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",source:"sorcerytcg.com"},
-  {title:"Avatar of the Realm Update",date:"Feb 18, 2026",url:"https://sorcerytcg.com/news/avatar-of-the-realm-update",source:"sorcerytcg.com"},
-  {title:"Sorcery Awaits: Join Us at Gen Con 2026",date:"Feb 6, 2026",url:"https://sorcerytcg.com/news/sorcery-awaits-join-us-at-gen-con-2026",source:"sorcerytcg.com"},
-  {title:"SorceryCon 2026: Worlds Largest Community-Run Sorcery Event Returns",date:"Dec 12, 2025",url:"https://sorcerytcg.com/news/sorcerycon-2026-the-worlds-largest-community-run-sorcery-event",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm December 2025 Rulebook Update",date:"Dec 19, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-december-2025-rulebook-update",source:"sorcerytcg.com"},
-  {title:"The Path Ahead: SCG CON Atlanta Leads the Way in 2026",date:"Dec 9, 2025",url:"https://sorcerytcg.com/news/the-path-ahead-scg-con-atlanta-leads-the-way-in-2026",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm Card Updates 2025",date:"Nov 25, 2025",url:"https://sorcerytcg.com/news/sorcery-contested-realm-card-updates-2025",source:"sorcerytcg.com"},
-  {title:"Sorcery at SCG CON Las Vegas: Closing Crossroads 2025 Season Strong",date:"Nov 28, 2025",url:"https://sorcerytcg.com/news/sorcery-at-scg-con-las-vegas-closing-crossroads-2025-season-strong",source:"sorcerytcg.com"},
-  {title:"Sorcery: Contested Realm Rules Update (July 2025)",date:"Jul 10, 2025",url:"https://sorcerytcg.com/news/july-2025-rulebook-update",source:"sorcerytcg.com"},
-  {title:"Gen Con 2025 Recap: Thank You for An Unforgettable Weekend",date:"Aug 8, 2025",url:"https://sorcerytcg.com/news/gen-con-2025-recap-thank-you-for-an-unforgettable-weekend",source:"sorcerytcg.com"}
-];
 
 // Confirmed curiosa.io API endpoint and CDN
 var _CDNBASE='https://d27a44hjr9gen3.cloudfront.net/cards/';
@@ -2054,7 +2040,7 @@ function pContent(){
         if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--yel);margin-bottom:4px">&#128205; '+h(_epicitystate)+'</div>');
         if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:3px">&#127978; '+h(_eloc)+'</div>');
         if(_eaddr&&_eaddr!==_eloc)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
-        if(_ep.description||_ep.desc)o('<div style="font-size:12px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
+        if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
         o('<div style="display:flex;gap:8px;flex-direction:column">');
         if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">&#x1F5FA; Open in Google Maps</a>');
         if(_ep.url)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);font-size:13px" href="'+h(_ep.url)+'" target="_blank">View on Play Network &rarr;</a>');
@@ -2145,8 +2131,6 @@ function pContent(){
     return out.join('');
   }
   if(p==='news'){
-    var _displayNews=(G.newsItems&&G.newsItems.length)?G.newsItems:NEWS_SEED;
-
     // Toolbar: Refresh only
     o('<div style="margin-bottom:8px">');
     o('<button class="fb gold full" onclick="loadNews()">Refresh</button>');
@@ -2155,14 +2139,18 @@ function pContent(){
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
 
-    _displayNews.forEach(function(n){
-      o('<div class="ev-c">');
-      if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
-      o('<div class="ev-nm">'+h(n.title)+'</div>');
-      if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
-      o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
-      o('</div>');
-    });
+    if(G.newsItems&&G.newsItems.length){
+      G.newsItems.forEach(function(n){
+        o('<div class="ev-c">');
+        if(n.image)o('<a href="'+h(n.url)+'" target="_blank"><img src="'+h(n.image)+'" alt="" style="width:100%;display:block;object-fit:cover;max-height:140px;border-radius:3px;margin-bottom:6px" onerror="this.style.display=\'none\'"></a>');
+        o('<div class="ev-nm">'+h(n.title)+'</div>');
+        if(n.date)o('<div class="ev-mt">'+h(n.date)+(n.source?' &middot; '+h(n.source):'')+'</div>');
+        o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(n.url)+'" target="_blank">Read article &rarr;</a>');
+        o('</div>');
+      });
+    } else if(!G.newsLoading){
+      o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap Refresh to load the latest news.</div>');
+    }
     o('<a class="ext-lnk" href="https://sorcerytcg.com/news" target="_blank">All news on sorcerytcg.com &rarr;</a>');
     o('<a class="ext-lnk" href="https://curiosa.io/blog" target="_blank">Curiosa blog &rarr;</a>');
     return out.join('');
