@@ -10,243 +10,134 @@ const DECKS_URL = 'https://curiosa.io/decks#search=eyJxdWVyeSI6IiIsInNldCI6IioiL
   });
   const page = await context.newPage();
 
-  const captured = []; // { url, json }
+  // Capture everything
+  const allRequests  = [];
+  const allResponses = [];
+
+  page.on('request', req => allRequests.push({ url: req.url(), method: req.method() }));
 
   page.on('response', async response => {
     const url = response.url();
     const ct  = response.headers()['content-type'] || '';
-    if (!ct.includes('application/json')) return;
     try {
       const text = await response.text();
-      if (text.length < 20 || text.length > 20_000_000) return;
-      const json = JSON.parse(text);
-      captured.push({ url, json });
-    } catch (e) {}
+      if (text.length < 10 || text.length > 20_000_000) return;
+      allResponses.push({ url, ct, text });
+    } catch(e) {}
   });
 
   console.log('Loading page...');
   await page.goto(DECKS_URL, { waitUntil: 'networkidle', timeout: 60000 });
-  await page.waitForTimeout(4000);
+  await page.waitForTimeout(6000);
 
-  // Scroll to load more
   for (let i = 0; i < 5; i++) {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(2500);
+  }
+
+  // Extract Algolia credentials from page JS
+  const pageHTML = await page.content();
+  const algoliaAppId  = (pageHTML.match(/"?applicationId"?\s*[=:]\s*"([A-Z0-9]{8,15})"/i) || pageHTML.match(/appId['":\s]*['"]([A-Z0-9]{8,15})['"]/i) || [])[1];
+  const algoliaApiKey = (pageHTML.match(/apiKey['":\s]*['"]([a-f0-9]{20,40})['"]/i) || [])[1];
+  const algoliaIndex  = (pageHTML.match(/indexName['":\s]*['"]([^'"]{3,50})['"]/i) || [])[1];
+
+  console.log('Algolia appId:', algoliaAppId);
+  console.log('Algolia apiKey:', algoliaApiKey);
+  console.log('Algolia index:', algoliaIndex);
+
+  // Also search JS bundle files for Algolia config
+  const jsResponses = allResponses.filter(r => r.url.includes('/_next/static/') && r.ct.includes('javascript'));
+  for (const jr of jsResponses.slice(0, 20)) {
+    const m1 = jr.text.match(/([A-Z0-9]{8,12})['"]\s*,\s*['"](search_only|[a-f0-9]{20,40})['"]/i);
+    const m2 = jr.text.match(/algolia[^{]{0,50}{[^}]{0,200}}/i);
+    if (m1 || m2) {
+      console.log('JS bundle Algolia clue:', jr.url.slice(-60));
+      if (m1) console.log('  match1:', m1[0].slice(0,100));
+      if (m2) console.log('  match2:', m2[0].slice(0,100));
+    }
   }
 
   const cookies  = await context.cookies();
   const cookieStr = cookies.map(c => `${c.name}=${c.value}`).join('; ');
-
   await browser.close();
 
-  // ── Print every URL we saw ────────────────────────────────────────────────
-  console.log('\n=== ALL API URLS ===');
-  captured.forEach(c => console.log(c.url));
-  console.log('===================\n');
+  // Print all non-static requests to spot the search API
+  console.log('\n=== NON-STATIC REQUESTS ===');
+  allRequests
+    .filter(r => !r.url.match(/\.(js|css|png|jpg|svg|ico|woff|ttf)(\?|$)/) && !r.url.includes('_next/static'))
+    .forEach(r => console.log(r.method, r.url.slice(0, 180)));
 
-  // ── Find the one that looks like a deck list ──────────────────────────────
-  // Look for any response containing an array of objects with id + name fields
-  let deckUrl = null;
-  let deckProc = null;
-  let sampleDeck = null;
-
-  for (const { url, json } of captured) {
-    // Recursively find first array of deck-like objects
-    function findDecks(obj, depth) {
-      if (!obj || typeof obj !== 'object' || depth > 10) return null;
-      if (Array.isArray(obj)) {
-        if (obj.length > 0 && obj[0] && typeof obj[0] === 'object' && obj[0].id && obj[0].name) {
-          return obj;
-        }
-        for (const v of obj) { const r = findDecks(v, depth+1); if (r) return r; }
-      } else {
-        // Check Algolia hits
-        if (obj.hits && Array.isArray(obj.hits) && obj.hits.length > 0 && obj.hits[0].id) return obj.hits;
-        if (obj.results && Array.isArray(obj.results) && obj.results[0]?.hits?.length > 0) return obj.results[0].hits;
-        for (const v of Object.values(obj)) { const r = findDecks(v, depth+1); if (r) return r; }
-      }
-      return null;
-    }
-    const arr = findDecks(json, 0);
-    if (arr && arr.length > 0) {
-      deckUrl  = url;
-      sampleDeck = arr[0];
-      if (url.includes('/trpc/')) {
-        const m = url.match(/\/trpc\/([^?&,]+)/);
-        if (m) deckProc = m[1];
-      }
-      console.log(`\n✓ Found deck array at: ${url}`);
-      console.log(`  Procedure: ${deckProc}`);
-      console.log(`  Sample deck keys: ${Object.keys(sampleDeck).join(', ')}`);
-      console.log(`  Sample deck (first item):\n${JSON.stringify(sampleDeck, null, 2).slice(0, 2000)}`);
-      break;
-    }
-  }
-
-  if (!sampleDeck) {
-    console.error('\n✗ No deck data found in any API response.');
-    console.error('The page may require authentication, or uses a non-JSON API (like Algolia with a separate app key).');
-    console.error('\nFull response dump:');
-    captured.forEach(({url, json}) => {
-      console.log(`\n--- ${url} ---`);
-      console.log(JSON.stringify(json).slice(0, 500));
+  // Print all JSON-ish responses
+  console.log('\n=== API RESPONSES ===');
+  allResponses
+    .filter(r => r.ct.includes('json') || r.url.includes('algolia') || r.url.includes('search') || r.url.includes('api/'))
+    .forEach(r => {
+      console.log('\n--- ' + r.url.slice(0, 120) + ' ---');
+      console.log(r.text.slice(0, 800));
     });
-    process.exit(1);
-  }
 
-  // ── Now paginate using what we discovered ─────────────────────────────────
-  const seen  = new Set();
+  // Try Algolia if we found credentials
   const decks = [];
+  const seen  = new Set();
 
-  function normalise(item) {
-    if (!item || !item.id) return null;
-    // Print all field names from first item to debug thumbnail field name
-    if (decks.length === 0 && seen.size === 0) {
-      console.log('\nAll fields on first deck item:', Object.keys(item).join(', '));
-      // Print any field that looks like an image URL
-      Object.entries(item).forEach(([k, v]) => {
-        if (typeof v === 'string' && (v.includes('http') && (v.includes('.jpg') || v.includes('.png') || v.includes('.webp') || v.includes('image') || v.includes('cdn') || v.includes('thumb')))) {
-          console.log(`  IMAGE FIELD: ${k} = ${v}`);
-        }
-        if (typeof v === 'object' && v) {
-          Object.entries(v).forEach(([k2, v2]) => {
-            if (typeof v2 === 'string' && v2.includes('http')) console.log(`  NESTED: ${k}.${k2} = ${v2.slice(0,100)}`);
-          });
-        }
-      });
-    }
-
-    // Try every conceivable thumbnail field name
-    const thumbnail =
-      item.thumbnailUrl     || item.thumbnail      || item.previewImageUrl ||
-      item.coverImage       || item.image           || item.imageUrl        ||
-      item.deckImage        || item.preview         || item.bannerUrl       ||
-      item.cover            || item.cardImage       || item.img             ||
-      item.photo            || item.picture         || item.artwork         ||
-      item['thumbnail_url'] || item['image_url']    || item['cover_image']  ||
-      item['card_image']    || item['deck_image']   || item['preview_url']  ||
-      (item.featuredCard  && (item.featuredCard.thumbnailUrl || item.featuredCard.imageUrl || item.featuredCard.image || item.featuredCard.img || item.featuredCard.src)) ||
-      (item.coverCard     && (item.coverCard.thumbnailUrl    || item.coverCard.imageUrl    || item.coverCard.image   || item.coverCard.img  || item.coverCard.src))    ||
-      (item.avatarCard    && typeof item.avatarCard === 'object' && (item.avatarCard.imageUrl || item.avatarCard.image || item.avatarCard.thumbnailUrl)) ||
-      (item.avatar        && typeof item.avatar    === 'object' && (item.avatar.imageUrl    || item.avatar.image     || item.avatar.thumbnailUrl || item.avatar.img))  ||
-      (item.cards && Array.isArray(item.cards) && item.cards[0] && (item.cards[0].thumbnailUrl || item.cards[0].imageUrl || item.cards[0].image)) ||
-      '';
-
-    let elements = [];
-    if (Array.isArray(item.elements))
-      elements = item.elements.map(e => typeof e === 'string' ? e : (e.name || e.label || '')).filter(Boolean);
-
-    const author =
-      (item.user    && (item.user.username || item.user.displayName || item.user.name)) ||
-      (item.creator && (item.creator.username || item.creator.name)) ||
-      item.author || item.username || '';
-
-    const avatar =
-      (item.avatar && typeof item.avatar === 'object' && (item.avatar.name || item.avatar.cardName)) ||
-      item.avatarName || item.avatarCard || '';
-
-    const updated = item.updatedAt || item.updated_at || '';
-    return {
-      id: item.id,
-      name: item.name || item.title || 'Unnamed Deck',
-      author, avatar, elements,
-      format:      item.format || item.deckFormat || 'Constructed',
-      description: item.description || '',
-      cardCount:   item.cardCount || (Array.isArray(item.cards) ? item.cards.length : 0) || 0,
-      likes:       item.likes || item.likesCount || item._count?.likes || 0,
-      views:       item.views || item.viewsCount || item._count?.views || 0,
-      updatedAt:   updated ? (() => { try { return new Date(updated).toISOString().split('T')[0]; } catch(e) { return ''; }})() : '',
-      thumbnail,
-      url: 'https://curiosa.io/decks/' + item.id
-    };
-  }
-
-  function absorb(arr) {
-    if (!Array.isArray(arr)) return 0;
-    let n = 0;
-    arr.forEach(item => {
-      const d = normalise(item);
-      if (d && !seen.has(d.id)) { seen.add(d.id); decks.push(d); n++; }
-    });
-    return n;
-  }
-
-  function walkAbsorb(obj, depth) {
-    if (!obj || typeof obj !== 'object' || depth > 14) return;
-    if (Array.isArray(obj)) { absorb(obj); obj.forEach(v => walkAbsorb(v, depth+1)); }
-    else {
-      if (obj.hits) absorb(obj.hits);
-      if (obj.results) obj.results.forEach(r => r?.hits && absorb(r.hits));
-      Object.values(obj).forEach(v => walkAbsorb(v, depth+1));
-    }
-  }
-
-  // Absorb everything we already captured
-  captured.forEach(({ json }) => walkAbsorb(json, 0));
-  console.log(`\nAfter initial page: ${decks.length} decks`);
-
-  // ── Paginate if we found the procedure ──────────────────────────────────
-  if (deckProc && deckUrl) {
-    const base = deckUrl.split('/trpc/')[0] + '/trpc/';
-    const searchInput = { query: '', set: '*', filters: [], csort: 'relevance', dsort: 'relevance', fsort: 'relevance', divider: 'all', avatar: '*', limit: 50 };
-
-    let cursor = null;
-    let pageN  = 0;
-
-    function findCursor(obj, d) {
-      if (!obj || typeof obj !== 'object' || d > 8) return null;
-      for (const k of ['nextCursor','next_cursor','cursor','endCursor','after']) {
-        if (obj[k] && typeof obj[k] === 'string' && obj[k].length > 1) return obj[k];
-      }
-      for (const v of Object.values(obj)) { const r = findCursor(v, d+1); if (r) return r; }
-      return null;
-    }
-
-    while (pageN < 50) {
-      const inp  = { ...searchInput, ...(cursor ? { cursor } : {}) };
-      const url  = `${base}${deckProc}?batch=1&input=${encodeURIComponent(JSON.stringify({ 0: { json: inp } }))}`;
-
+  if (algoliaAppId && algoliaApiKey) {
+    console.log('\n=== Trying Algolia ===');
+    const indexName = algoliaIndex || 'decks';
+    let page_n = 0;
+    while (page_n < 100) {
+      const body = JSON.stringify({ query: '', hitsPerPage: 100, page: page_n, attributesToRetrieve: ['*'] });
+      const url  = `https://${algoliaAppId}-dsn.algolia.net/1/indexes/${indexName}/query`;
       try {
-        const resp = await fetch(url, { headers: { cookie: cookieStr, accept: 'application/json' } });
-        if (!resp.ok) { console.log(`HTTP ${resp.status} — stopping`); break; }
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'X-Algolia-Application-Id': algoliaAppId, 'X-Algolia-API-Key': algoliaApiKey, 'Content-Type': 'application/json' },
+          body
+        });
+        if (!resp.ok) { console.log('Algolia HTTP', resp.status); break; }
         const data = await resp.json();
-        const before = decks.length;
-        walkAbsorb(data, 0);
-        const added = decks.length - before;
-        const nc = findCursor(data, 0);
-        console.log(`Page ${pageN}: +${added} decks (total ${decks.length}), nextCursor=${nc ? nc.slice(0,20) : 'none'}`);
-        if (!nc || added === 0) break;
-        cursor = nc;
-        pageN++;
-        await new Promise(r => setTimeout(r, 300));
-      } catch (e) {
-        console.log('Error:', e.message);
+        if (page_n === 0) {
+          console.log('Algolia nbHits:', data.nbHits, 'nbPages:', data.nbPages);
+          console.log('Sample hit keys:', data.hits?.[0] ? Object.keys(data.hits[0]).join(', ') : 'none');
+          if (data.hits?.[0]) console.log('Sample hit:', JSON.stringify(data.hits[0]).slice(0, 500));
+        }
+        const hits = data.hits || [];
+        hits.forEach(item => {
+          const id = item.objectID || item.id;
+          if (!id || seen.has(id)) return;
+          seen.add(id);
+          decks.push({
+            id, name: item.name || item.title || 'Unnamed',
+            author: item.author || (item.user?.username) || '',
+            avatar: item.avatarName || item.avatarCard || (item.avatar?.name) || '',
+            elements: Array.isArray(item.elements) ? item.elements : [],
+            format: item.format || 'Constructed',
+            description: item.description || '',
+            cardCount: item.cardCount || 0,
+            likes: item.likes || 0, views: item.views || 0,
+            updatedAt: item.updatedAt ? new Date(item.updatedAt).toISOString().split('T')[0] : '',
+            thumbnail: item.thumbnailUrl || item.thumbnail || item.image || item.imageUrl || item.coverImage || item.img || '',
+            url: 'https://curiosa.io/decks/' + id
+          });
+        });
+        console.log(`Algolia page ${page_n}: ${hits.length} hits, total so far: ${decks.length}`);
+        if (page_n >= (data.nbPages - 1)) break;
+        page_n++;
+        await new Promise(r => setTimeout(r, 200));
+      } catch(e) {
+        console.log('Algolia error:', e.message);
         break;
       }
     }
   }
 
   if (!decks.length) {
-    console.error('No decks collected.');
+    console.error('\nNo decks found. Check the === API RESPONSES === section above for the real endpoint.');
     process.exit(1);
   }
 
-  // Report thumbnail coverage
   const withThumb = decks.filter(d => d.thumbnail).length;
-  console.log(`\nThumbnail coverage: ${withThumb}/${decks.length} (${Math.round(withThumb/decks.length*100)}%)`);
-
-  const cleaned = decks.map(d => ({
-    ...d,
-    name: d.name
-      .replace(/\s*\d+\s*(second|minute|hour|day|week|month|year)s?\s*ago.*/i, '')
-      .replace(/\s*(Constructed|Draft|Sealed|Limited)\s*@.*/i, '')
-      .replace(/\s*@[^\s]+$/, '')
-      .replace(/^(Primer|New|Update)\s+/i, '')
-      .trim() || d.name
-  }));
-
-  cleaned.sort((a, b) => (b.views || 0) - (a.views || 0));
-  fs.writeFileSync('decks.json', JSON.stringify({ updated: new Date().toISOString(), total: cleaned.length, decks: cleaned }, null, 2));
-  console.log(`\n✓ Wrote ${cleaned.length} decks to decks.json`);
-  console.log(`  ${withThumb} have thumbnail images`);
+  console.log(`\nTotal: ${decks.length} decks, ${withThumb} with thumbnails`);
+  decks.sort((a, b) => (b.views || 0) - (a.views || 0));
+  fs.writeFileSync('decks.json', JSON.stringify({ updated: new Date().toISOString(), total: decks.length, decks }, null, 2));
+  console.log('✓ Wrote decks.json');
 })();
