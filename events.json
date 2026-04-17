@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-16T23:44:53.187Z",
+  "updated": "2026-04-17T07:45:23.352Z",
   "total": 20,
   "events": [
     {
@@ -17,8 +17,6 @@
       "state": "LA",
       "country": "US",
       "address": "Shreveport, LA, 71104, US",
-      "street": "",
-      "zip": "71104",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
@@ -27,7 +25,6 @@
         "id": "7329a85b-dd64-4b98-b7b3-a3aec029b10f",
         "name": "Secondhand Soldiers"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_2.webp",
       "url": "https://play.sorcerytcg.com/events/b7b951d0-ab60-4906-8749-4af83f311b7b"
     },
     {
@@ -45,8 +42,6 @@
       "state": "NSW",
       "country": "AU",
       "address": "Hornsby, NSW, 2077, AU",
-      "street": "",
-      "zip": "2077",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -55,7 +50,6 @@
         "id": "bc0df6e9-0c60-451a-8ae8-c3e3f84ab77d",
         "name": "Mighty Cool Games"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_6.webp",
       "url": "https://play.sorcerytcg.com/events/8ae6e3b0-4469-4ad2-80a8-0ebd1c35b411"
     },
     {
@@ -73,8 +67,6 @@
       "state": "NSW",
       "country": "AU",
       "address": "Bungendore, NSW, 2621, AU",
-      "street": "",
-      "zip": "2621",
       "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
@@ -83,7 +75,6 @@
         "id": "14065dc7-28a7-4677-8163-fbaffc49f640",
         "name": "Cryptic Battlefield"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/1e4125c3-3993-44b8-8324-2c816048a29e"
     },
     {
@@ -101,17 +92,14 @@
       "state": "VA",
       "country": "US",
       "address": "Centreville, VA, 20121, US",
-      "street": "",
-      "zip": "20121",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 4,
+      "registered": 6,
       "organizer": {
         "id": "309c68b9-4bc7-4ddd-aa27-33cda9b32b61",
         "name": "Curio (Centreville Sq)"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/18a6bc10-656f-466d-a79e-ab32c9046433"
     },
     {
@@ -129,8 +117,6 @@
       "state": "HH",
       "country": "DE",
       "address": "Hamburg, HH, 20535, DE",
-      "street": "",
-      "zip": "20535",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
@@ -139,7 +125,6 @@
         "id": "a7c98f07-a881-46ed-b89b-c35bbf20697e",
         "name": "Der SpieleNarr"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/589618f0-292f-4574-aa34-5133b66f90ac"
     },
     {
@@ -157,8 +142,6 @@
       "state": "Hlavní město Praha",
       "country": "CZ",
       "address": "Praha 8, Hlavní město Praha, 186 00, CZ",
-      "street": "",
-      "zip": "186 00",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -167,7 +150,6 @@
         "id": "1bb20ee0-f136-431f-b847-0a00ae7176e8",
         "name": "Černý rytíř"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/f74d2254-106a-4b3a-8f41-a24fc05de3d8"
     },
     {
@@ -185,8 +167,6 @@
       "state": "Plzeňský kraj",
       "country": "CZ",
       "address": "Plzeň 3, Plzeňský kraj, 301 00, CZ",
-      "street": "",
-      "zip": "301 00",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
@@ -195,7 +175,6 @@
         "id": "6ed6f66e-ae97-4aff-9e84-f084c80336bf",
         "name": "Vault Zero"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/b1fcbe27-07a6-4ae1-94b1-f19c49a282c3"
     },
     {
@@ -213,8 +192,6 @@
       "state": "Osječko-baranjska županija",
       "country": "HR",
       "address": "Osijek, Osječko-baranjska županija, 31000, HR",
-      "street": "",
-      "zip": "31000",
       "type": "Casual Constructed",
       "entryFee": "FREE",
       "capacity": "",
@@ -223,7 +200,6 @@
         "id": "6fad79e4-9a82-4154-8c5a-366e943a2921",
         "name": "Phoenix Feather"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_2.webp",
       "url": "https://play.sorcerytcg.com/events/2658559c-dc4b-4a0c-9132-4f85c8330f49"
     },
     {
@@ -241,8 +217,6 @@
       "state": "Stockholms län",
       "country": "SE",
       "address": "Hägersten, Stockholms län, 126 53, SE",
-      "street": "",
-      "zip": "126 53",
       "type": "Gothic Draft @ Alphaspel",
       "entryFee": "FREE",
       "capacity": "",
@@ -251,7 +225,6 @@
         "id": "a043f740-e524-4a3c-a880-6bf1d68eafc7",
         "name": "Alphaspel"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/ad3014e4-ad6b-4500-b9c0-5f097830ca9f"
     },
     {
@@ -269,8 +242,6 @@
       "state": "Scotland",
       "country": "GB",
       "address": "Edinburgh, Scotland, EH3 9ND, GB",
-      "street": "",
-      "zip": "EH3 9ND",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -279,7 +250,6 @@
         "id": "5018c383-6d81-4cb2-aeb3-c7d8d9a91834",
         "name": "Mox in the Hole"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/99957770-192d-4b53-a1c0-f30cd947d8eb"
     },
     {
@@ -297,8 +267,6 @@
       "state": "Piemonte",
       "country": "IT",
       "address": "Torino, Piemonte, 10122, IT",
-      "street": "",
-      "zip": "10122",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -307,13 +275,12 @@
         "id": "ad1257da-a982-4f08-aa7c-e648394e5c5b",
         "name": "Magic Lair"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/e9948984-9c75-4dad-95bc-724e34033b16"
     },
     {
       "id": "a9752140-279f-4c6f-81a0-1168844ae270",
       "name": "Sorcery Constructed Vila Geek Serra",
-      "status": "inProgress",
+      "status": "complete",
       "date": "Thu, Apr 16, 2026",
       "time": "7:00 PM UTC",
       "endDate": "Apr 16, 2026",
@@ -325,8 +292,6 @@
       "state": "ES",
       "country": "BR",
       "address": "Parque Res. Laranjeiras, ES, 29165-500, BR",
-      "street": "",
-      "zip": "29165-500",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -335,7 +300,6 @@
         "id": "c55d9f41-3ec8-42bc-9ec5-68a0fc0201e6",
         "name": "VILA GEEK"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/a9752140-279f-4c6f-81a0-1168844ae270"
     },
     {
@@ -353,8 +317,6 @@
       "state": "RM - Roma",
       "country": "IT",
       "address": "Roma, RM - Roma, 00145, IT",
-      "street": "",
-      "zip": "00145",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
@@ -363,7 +325,6 @@
         "id": "c03dbec6-21ce-4179-afcc-dd2c3f632895",
         "name": "Il Covo del Nerd - Roma"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/699a983b-eb02-4ebc-9d65-bcab7c71e1ae"
     },
     {
@@ -381,17 +342,14 @@
       "state": "MI",
       "country": "US",
       "address": "Madison Heights, MI, 48071, US",
-      "street": "",
-      "zip": "48071",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 13,
+      "registered": 14,
       "organizer": {
         "id": "af05405f-c40c-4aa6-816d-6b986382edcb",
         "name": "Mythic Forge Gaming"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/200203b7-8343-43d2-a1ee-3056826383cd"
     },
     {
@@ -409,8 +367,6 @@
       "state": "Województwo małopolskie",
       "country": "PL",
       "address": "Kraków, Województwo małopolskie, 31-146, PL",
-      "street": "",
-      "zip": "31-146",
       "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
@@ -419,7 +375,6 @@
         "id": "dce5bf7a-10b0-4932-865b-09491e4c6f5a",
         "name": "Guildmage"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_4.webp",
       "url": "https://play.sorcerytcg.com/events/7c58cead-df1b-412b-ad16-cfc754ebf144"
     },
     {
@@ -437,8 +392,6 @@
       "state": "VA",
       "country": "US",
       "address": "Culpeper, VA, 22701, US",
-      "street": "",
-      "zip": "22701",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -447,7 +400,6 @@
         "id": "6e55d9ca-8e25-466c-88b4-421d62288f66",
         "name": "BrickHammer Hobbies"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_5.webp",
       "url": "https://play.sorcerytcg.com/events/359c0fe4-46a0-4c0f-83b5-086622ee1bbc"
     },
     {
@@ -465,23 +417,20 @@
       "state": "VA",
       "country": "US",
       "address": "Mechanicsville, VA, 23111, US",
-      "street": "",
-      "zip": "23111",
       "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 2,
+      "registered": 4,
       "organizer": {
         "id": "0988c03a-1590-42b4-a267-911b970d626d",
         "name": "Waterloo Games"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_3.webp",
       "url": "https://play.sorcerytcg.com/events/bb68879a-2a17-49ef-87f5-c4bb219139c7"
     },
     {
       "id": "1df711a2-d414-4892-b127-972b4b68fe2c",
       "name": "BMG Draft",
-      "status": "inProgress",
+      "status": "complete",
       "date": "Thu, Apr 16, 2026",
       "time": "10:05 PM UTC",
       "endDate": "Apr 17, 2026",
@@ -493,8 +442,6 @@
       "state": "PA",
       "country": "US",
       "address": "Lemoyne, PA, 17043, US",
-      "street": "",
-      "zip": "17043",
       "type": "Draft Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -503,7 +450,6 @@
         "id": "18219d67-2931-42ca-b3bf-ceabef679413",
         "name": "Blue Moon Games"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_1.webp",
       "url": "https://play.sorcerytcg.com/events/1df711a2-d414-4892-b127-972b4b68fe2c"
     },
     {
@@ -521,8 +467,6 @@
       "state": "PA",
       "country": "US",
       "address": "Philadelphia, PA, 19150, US",
-      "street": "",
-      "zip": "19150",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
@@ -531,7 +475,6 @@
         "id": "491b2a8f-6bde-4051-9a08-4717136c0255",
         "name": "Storefront Games"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_4.webp",
       "url": "https://play.sorcerytcg.com/events/53a6c905-317b-4cee-988d-291da8b7359f"
     },
     {
@@ -549,8 +492,6 @@
       "state": "TX",
       "country": "US",
       "address": "Waco, TX, 76710, US",
-      "street": "",
-      "zip": "76710",
       "type": "Draft Tournament",
       "entryFee": "FREE",
       "capacity": "",
@@ -559,7 +500,6 @@
         "id": "f6b72773-845a-402c-a91c-a918b26f8a48",
         "name": "The Mana Base"
       },
-      "bannerImage": "https://storage.googleapis.com/cardeio-images/sorcery/banners/SORC_banner_4.webp",
       "url": "https://play.sorcerytcg.com/events/33b188d5-0741-4b7e-8560-68003181d935"
     }
   ]
