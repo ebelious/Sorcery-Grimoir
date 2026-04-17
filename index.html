@@ -525,15 +525,15 @@ var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00'];
 var MENU_S={
-  Settings:['Starting Life','Dice Settings','Player Names','Theme','YouTube API'],
-  Knowledge:['Rulebook','Codex','FAQ','Links'],
+  Settings:['Starting Life','Dice Settings','Player Names','Theme','Anthropic API','YouTube API'],
   Cards:['Card Search','Collection','My Decks','Published Decks'],
+  Knowledge:['Rulebook','Codex','FAQ','Links'],
   Stats:['Local Stats','Deck Stats','Public Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Published Decks':'pubdecks','Local Stats':'sl','Deck Stats':'sd','Public Stats':'sp','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',sp:'Public Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Published Decks':'pubdecks','Local Stats':'sl','Deck Stats':'sd','Public Stats':'sp','Events':'ev','YouTube API':'ytapi','Anthropic API':'anthropicapi','YouTube':'yt','News':'news','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',sp:'Public Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists',ytapi:'YouTube API',anthropicapi:'Anthropic API'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -1274,9 +1274,11 @@ function logMatch(){
 // internally and returns the synthesised answer in a single response as
 // text blocks.  No manual tool_result round-trips are needed.
 function apiCall(prompt,maxTokens,cb){
+  var _ak=localStorage.getItem('sg-anthropic-key')||'';
+  if(!_ak){cb(new Error('No API key'),null);return;}
   fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
-    headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true','x-api-key':_ak},
     body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTokens,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]})
   })
   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
@@ -1947,6 +1949,13 @@ function pContent(){
     o('<a class="ext-lnk" style="background:var(--bg3);border-color:var(--yel);color:var(--yel);text-align:center;font-weight:700;padding:8px" href="'+_pnURL+'" target="_blank">&#x1F3AE; Open Play Network'+(_pnCity?' for '+h(_pnCity):'')+'&rarr;</a>');
 
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
+    else if(!localStorage.getItem('sg-anthropic-key')&&!G.evItems){
+      o('<div style="margin-top:8px;padding:10px;background:var(--bg3);border:1px solid var(--yel);border-radius:4px">');
+      o('<div style="color:var(--yel);font-weight:700;margin-bottom:6px">&#9888; Anthropic API Key Required</div>');
+      o('<div style="color:var(--fg2);font-size:9px;margin-bottom:8px">Event search uses Claude AI to find local events. Add your free API key in Settings.</div>');
+      o('<button class="fb gold" style="width:100%" onclick="openPanel(\'anthropicapi\')">Go to Settings &rarr; Anthropic API</button>');
+      o('</div>');
+    }
     else if(G.evItems&&G.evItems.length){
       o('<div class="slbl2" style="margin-top:8px">Results</div>');
       G._evReg=[];
@@ -2024,6 +2033,30 @@ function pContent(){
       }
     }
 
+    return out.join('');
+  }
+  if(p==='anthropicapi'){
+    var _ak=localStorage.getItem('sg-anthropic-key')||'';
+    o('<div style="font-size:9px;color:var(--fg2);margin-bottom:8px">Required for Events AI search. Your key is stored only on this device and never sent anywhere except Anthropic.</div>');
+    if(_ak){
+      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;background:var(--bg3);border:1px solid var(--grn);border-radius:4px;padding:6px 8px">');
+      o('<span style="color:var(--grn);font-size:11px">&#10003; API Key saved</span>');
+      o('<button class="fb red" style="margin-left:auto;font-size:8px;padding:2px 6px" onclick="localStorage.removeItem(\'sg-anthropic-key\');render()">Remove</button>');
+      o('</div>');
+      o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">Current key: <span style="color:var(--fg);font-family:monospace">'+_ak.slice(0,12)+'&hellip;</span></div>');
+    }
+    o('<div class="slbl2">'+(_ak?'Replace Key':'Enter API Key')+'</div>');
+    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
+    o('<input class="fi" id="ak-inp" placeholder="sk-ant-..." style="flex:1">');
+    o('<button class="fb gold" onclick="var k=document.getElementById(\'ak-inp\').value.trim();if(k){localStorage.setItem(\'sg-anthropic-key\',k);render();}">Save</button>');
+    o('</div>');
+    o('<div class="slbl2">How to get a key</div>');
+    o('<div style="font-size:9px;color:var(--fg2);line-height:1.6">');
+    o('1. Go to <a href="https://console.anthropic.com" target="_blank" style="color:var(--bbl)">console.anthropic.com</a><br>');
+    o('2. Sign in or create an account<br>');
+    o('3. Go to <b>API Keys</b> &rarr; <b>Create Key</b><br>');
+    o('4. Copy the key (starts with sk-ant-...) and paste above');
+    o('</div>');
     return out.join('');
   }
   if(p==='ytapi'){
@@ -2611,10 +2644,10 @@ function render(){
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
       o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button></div></div>');
       o('<div class="dbody">');
-      o('<div class="cro" onclick="openPanel(\'ev\')"><div class="crn">Events</div><div style="color:var(--fg2)">&rsaquo;</div></div>');
       Object.keys(MENU_S).forEach(function(cat){
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
+        if(cat==='Knowledge'){o('<div class="cro" onclick="openPanel(\'ev\')"><div class="crn">Events</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
       });
       o('</div><div class="dfoot"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></div></div>');
 
