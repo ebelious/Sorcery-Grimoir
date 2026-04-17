@@ -368,8 +368,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .ev-ac-item:active{background:var(--bg2)}
 .ev-ac-none{padding:7px 9px;font-size:10px;color:var(--fg2)}
 .ev-c{padding:10px 10px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:5px;border-radius:3px}
-.ev-nm{font-size:13px;font-weight:700}
-.ev-mt{font-size:11px;color:var(--fg2);margin-top:3px}
+.ev-nm{font-size:16px;font-weight:700}
+.ev-mt{font-size:13px;color:var(--fg2);margin-top:3px}
 .price-box{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
 .price-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
 .price-lbl{font-size:9px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.06em}
@@ -1468,9 +1468,9 @@ function loadLocalEvents(city){
           return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
         });
       }):all;
+      if(!filtered.length&&loc){_loadEventsViaAPI(city);return;}
       G.evLoading=false;G.evLoaded=true;
-      G.evItems=filtered.length?filtered:all.slice(0,20);
-      if(!filtered.length&&loc)G.evErr='No events found near '+loc+'. Showing all upcoming events.';
+      G.evItems=filtered;
       render();
     })
     .catch(function(){
@@ -1481,21 +1481,22 @@ function loadLocalEvents(city){
 
 function _loadEventsViaAPI(city){
   var loc=city||G.evCity||'your area';
-  var coordHint=(G.evLat&&G.evLng)?' (lat '+G.evLat.toFixed(4)+' lon '+G.evLng.toFixed(4)+')':'';
-  var prompt='Search the web for Sorcery Contested Realm TCG events near '+loc+coordHint+'. '
-    +'IMPORTANT: Fetch and search https://play.sorcerytcg.com/events — this is the official Play Network which lists weekly game store events. Look for stores in or near '+loc+'. '
-    +'Also search Google for: Sorcery Contested Realm TCG events near '+loc+'. '
-    +'Include recurring weekly events (e.g. every Friday) if they are at a local game store near '+loc+'. '
-    +'Return ONLY a raw JSON array, no markdown fences, no explanation: '
-    +'[{"name":"Event or Store Name","date":"Day schedule e.g. Every Friday","location":"Store Name, City, State","address":"Full street address if found","type":"Casual/Tournament/Weekly","url":"https://..."}]. '
-    +'Include up to 8 events. Prefer events closest to '+loc+'.';
-  apiCall(prompt,2500,function(err,txt){
+  var coordHint=(G.evLat&&G.evLng)?' (coordinates: '+G.evLat.toFixed(4)+', '+G.evLng.toFixed(4)+')':'';
+  var prompt='Find Sorcery Contested Realm TCG events near '+loc+coordHint+'. '
+    +'Step 1: Fetch https://play.sorcerytcg.com/events and look for any events in or within 100 miles of '+loc+'. '
+    +'Step 2: Also search for "Sorcery TCG '+loc+'" and "Sorcery Contested Realm game store '+loc+'". '
+    +'Step 3: Include any recurring weekly events at local game stores near '+loc+'. '
+    +'If no events are found in the exact city, expand search to nearby cities and the broader region. '
+    +'Return ONLY a raw JSON array (no markdown, no explanation): '
+    +'[{"name":"Event or Store Name","date":"Date or schedule e.g. Every Friday 7pm","location":"Store Name","city":"City","state":"ST","address":"Full address if found","type":"Casual/Tournament/Weekly","url":"https://...","entryFee":"FREE or $X"}]. '
+    +'Include up to 10 events sorted by distance from '+loc+'.';
+  apiCall(prompt,3000,function(err,txt){
     G.evLoading=false;G.evLoaded=true;
     if(!err&&txt){
       var arr=extractJSON(txt,'array');
       if(arr&&arr.length){G.evItems=arr;render();return;}
     }
-    G.evErr='Could not load events. Try the Play Network link below.';render();
+    G.evErr='Could not find events near '+loc+'. Try the Play Network link below.';render();
   });
 }
 
@@ -1970,10 +1971,10 @@ function pContent(){
         o('<div class="ev-nm" style="flex:1">'+h(e.name||e.n||'')+'</div>');
         o('<button class="eadj" style="flex-shrink:0;font-size:14px;border-color:'+(saved?'var(--yel)':'var(--bd)')+';color:'+(saved?'var(--yel)':'var(--fg2)')+'" onclick="event.stopPropagation();'+(saved?'evUnsave('+_ei+')':'evSave('+_ei+')')+'">&#9733;</button>');
         o('</div>');
-        if(e.date||e.time)o('<div class="ev-mt">&#128197; '+(e.date?h(localDate(e.date)):'')+( e.time?' &#128336; '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt">&#128197; '+(e.date?h(localDate(e.date)):'')+( e.time?' &#128336; '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+(e.entryFee?' &middot; '+h(e.entryFee):'')+'</div>');
         if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">&#128205; '+h(_cityState)+'</div>');
-        if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
-        o('<div style="font-size:10px;color:var(--fg2);margin-top:3px">Tap for details &rsaquo;</div>');
+        if(loc&&loc!==_cityState)o('<div class="ev-mt">&#127968; '+h(loc)+'</div>');
+        o('<div style="font-size:11px;color:var(--fg2);margin-top:3px">Tap for details &rsaquo;</div>');
         o('</div>');
       });
       o('<button class="fb" style="width:100%;margin:6px 0" onclick="G.evLoaded=false;G.evItems=null;loadLocalEvents(G.evCity)">Refresh</button>');
