@@ -2,93 +2,86 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 (async () => {
-  // ── Phase 1: Intercept the tRPC/API calls on the decks page ─────────────────
   const browser = await chromium.launch({ headless: true });
-  const page    = await browser.newPage();
-
-  const apiCalls = [];
-  let tRPCBase   = null;
-  let authCookie = '';
-
-  page.on('request', req => {
-    const url = req.url();
-    if (url.includes('/trpc/')) tRPCBase = url.split('/trpc/')[0] + '/trpc/';
-    const cookies = req.headers()['cookie'] || '';
-    if (cookies && cookies.length > authCookie.length) authCookie = cookies;
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   });
+  const page = await context.newPage();
+
+  // Capture EVERY json response — we'll sort out which ones have decks after
+  const allResponses = [];
 
   page.on('response', async response => {
-    const url = response.url();
-    const ct  = response.headers()['content-type'] || '';
-    if (
-      ct.includes('application/json') &&
-      (url.includes('/trpc/') || url.includes('/api/')) &&
-      !url.includes('analytics') && !url.includes('sentry') && !url.includes('clerk')
-    ) {
-      try { apiCalls.push({ url, json: await response.json() }); } catch (e) {}
-    }
+    const url  = response.url();
+    const ct   = (response.headers()['content-type'] || '');
+    if (!ct.includes('application/json')) return;
+    try {
+      const text = await response.text();
+      if (text.length < 20 || text.length > 5_000_000) return;
+      const json = JSON.parse(text);
+      allResponses.push({ url, json });
+    } catch (e) {}
   });
 
-  console.log('Loading https://curiosa.io/decks ...');
+  console.log('Loading curiosa.io/decks...');
   await page.goto('https://curiosa.io/decks', { waitUntil: 'networkidle', timeout: 60000 });
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(4000);
 
-  // Scroll to trigger more deck loading
-  for (let i = 0; i < 6; i++) {
+  // Scroll repeatedly to trigger infinite scroll / load more
+  let prevHeight = 0;
+  for (let i = 0; i < 15; i++) {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(2000);
+    const newHeight = await page.evaluate(() => document.body.scrollHeight);
+    if (newHeight === prevHeight) break; // no more content loaded
+    prevHeight = newHeight;
   }
 
-  // Also try __NEXT_DATA__
+  // Grab __NEXT_DATA__ which sometimes has everything server-side rendered
   const nextData = await page.evaluate(() => {
-    const el = document.getElementById('__NEXT_DATA__');
-    if (!el) return null;
-    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+    try { return JSON.parse(document.getElementById('__NEXT_DATA__')?.textContent || 'null'); }
+    catch(e) { return null; }
   });
 
-  // Grab cookies for subsequent requests
-  const cookies = await page.context().cookies();
-  const cookieStr = cookies.map(c => c.name + '=' + c.value).join('; ');
+  // Grab all cookies for subsequent direct API calls
+  const cookies  = await context.cookies();
+  const cookieStr = cookies.map(c => `${c.name}=${c.value}`).join('; ');
+
+  // Find the tRPC base URL and any cursor tokens from the captured responses
+  let tRPCBase = null;
+  let seenCursors = new Set();
+
+  for (const { url } of allResponses) {
+    if (url.includes('/trpc/')) {
+      tRPCBase = url.split('/trpc/')[0] + '/trpc/';
+      break;
+    }
+  }
 
   await browser.close();
 
-  // ── Helper: normalise any deck object ─────────────────────────────────────
+  // ─── Normalise any deck-shaped object ──────────────────────────────────────
   function normalise(item) {
+    if (!item || typeof item !== 'object') return null;
     const id = item.id || item.slug || item._id;
     if (!id || typeof id !== 'string' || id.length < 4) return null;
 
-    // Thumbnail — try every possible field name curiosa might use
     const thumbnail =
-      item.thumbnailUrl        ||
-      item.thumbnail           ||
-      item.previewImageUrl     ||
-      item.coverImage          ||
-      item.image               ||
-      item.imageUrl            ||
-      item.deckImage           ||
-      item.deck_image          ||
-      item.preview             ||
-      item.previewUrl          ||
-      item.bannerUrl           ||
-      item.banner              ||
-      (item.featuredCard && (
-        item.featuredCard.thumbnailUrl || item.featuredCard.imageUrl ||
-        item.featuredCard.image        || item.featuredCard.img
-      ))  ||
-      (item.coverCard && (
-        item.coverCard.thumbnailUrl || item.coverCard.imageUrl || item.coverCard.image
-      ))  ||
-      (item._featuredCard && (item._featuredCard.imageUrl || item._featuredCard.image)) ||
-      (item.cards && Array.isArray(item.cards) && item.cards[0] && (
-        item.cards[0].thumbnailUrl || item.cards[0].imageUrl
-      ))  ||
+      item.thumbnailUrl     || item.thumbnail      || item.previewImageUrl ||
+      item.coverImage       || item.image           || item.imageUrl        ||
+      item.deckImage        || item.deck_image      || item.preview         ||
+      item.previewUrl       || item.bannerUrl       || item.banner          ||
+      item.cover            || item.cardImage       || item.cardImageUrl    ||
+      (item.featuredCard && (item.featuredCard.thumbnailUrl || item.featuredCard.imageUrl || item.featuredCard.image || item.featuredCard.img || item.featuredCard.url)) ||
+      (item.coverCard    && (item.coverCard.thumbnailUrl    || item.coverCard.imageUrl    || item.coverCard.image)) ||
+      (item.avatarCard   && (item.avatarCard.thumbnailUrl   || item.avatarCard.imageUrl   || item.avatarCard.image)) ||
+      (item.avatar       && typeof item.avatar === 'object' && (item.avatar.imageUrl || item.avatar.image || item.avatar.thumbnailUrl)) ||
+      (item.cards && Array.isArray(item.cards) && item.cards[0] && (item.cards[0].thumbnailUrl || item.cards[0].imageUrl || item.cards[0].image)) ||
       '';
 
     let elements = [];
     if (Array.isArray(item.elements)) {
-      elements = item.elements
-        .map(e => typeof e === 'string' ? e : (e.name || e.label || e.value || ''))
-        .filter(Boolean);
+      elements = item.elements.map(e => typeof e === 'string' ? e : (e.name || e.label || e.value || '')).filter(Boolean);
     } else if (typeof item.element === 'string' && item.element) {
       elements = [item.element];
     }
@@ -98,220 +91,190 @@ const fs = require('fs');
       (item.creator && (item.creator.username || item.creator.name)) ||
       item.author || item.createdBy || item.username || '';
 
-    const avatar =
-      (item.avatar    && (item.avatar.name    || item.avatar.cardName    || item.avatar.title)) ||
-      (item.avatarObj && (item.avatarObj.name || item.avatarObj.cardName))                       ||
+    const avatarName =
+      (typeof item.avatar === 'object' && item.avatar && (item.avatar.name || item.avatar.cardName || item.avatar.title)) ||
+      (item.avatarObj && (item.avatarObj.name || item.avatarObj.cardName)) ||
+      (typeof item.avatar === 'string' ? item.avatar : '') ||
       item.avatarName || item.avatarCard || '';
-
-    const likes   = item.likes     || item.likesCount  || item.likeCount  || item._count?.likes  || 0;
-    const views   = item.views     || item.viewsCount  || item.viewCount  || item._count?.views  || 0;
-    const cards   = item.cardCount || item.cards_count ||
-                    (Array.isArray(item.cards) ? item.cards.length : 0) || 0;
-    const updated = item.updatedAt || item.updated_at || item.lastUpdated || '';
 
     return {
       id,
       name:        item.name || item.title || 'Unnamed Deck',
       author,
-      avatar,
+      avatar:      avatarName,
       elements,
       format:      item.format || item.deckFormat || item.type || 'Constructed',
       description: item.description || item.desc || '',
-      cardCount:   cards,
-      likes,
-      views,
-      updatedAt:   updated ? new Date(updated).toISOString().split('T')[0] : '',
+      cardCount:   item.cardCount || item.cards_count || (Array.isArray(item.cards) ? item.cards.length : 0) || 0,
+      likes:       item.likes || item.likesCount || item.likeCount || item._count?.likes || 0,
+      views:       item.views || item.viewsCount || item.viewCount || item._count?.views || 0,
+      updatedAt:   (() => { const u = item.updatedAt || item.updated_at || item.lastUpdated || ''; try { return u ? new Date(u).toISOString().split('T')[0] : ''; } catch(e) { return ''; } })(),
       thumbnail,
       url: 'https://curiosa.io/decks/' + id
     };
   }
 
-  // ── Strategy 1: Walk __NEXT_DATA__ ────────────────────────────────────────
   const seen  = new Set();
-  let   decks = [];
+  const decks = [];
 
-  function extractArrays(obj, depth) {
+  function absorb(arr, source) {
+    if (!Array.isArray(arr) || !arr.length) return 0;
+    const first = arr[0];
+    if (!first || typeof first !== 'object') return 0;
+    if (!first.id && !first.slug && !first.name && !first.title) return 0;
+    let added = 0;
+    arr.forEach(item => {
+      const d = normalise(item);
+      if (d && !seen.has(d.id)) { seen.add(d.id); decks.push(d); added++; }
+    });
+    if (added) console.log(`  +${added} decks from ${source}`);
+    return added;
+  }
+
+  function walkObject(obj, depth, source) {
     if (!obj || typeof obj !== 'object' || depth > 16) return;
     if (Array.isArray(obj)) {
-      if (obj.length > 0) {
-        const f = obj[0];
-        if (f && typeof f === 'object' && (f.id || f.slug) && (f.name || f.title)) {
-          console.log(`Found deck array (${obj.length}) in __NEXT_DATA__`);
-          obj.forEach(item => {
-            const d = normalise(item);
-            if (d && !seen.has(d.id)) { seen.add(d.id); decks.push(d); }
-          });
-        }
-      }
-      obj.forEach(v => extractArrays(v, depth + 1));
+      absorb(obj, source);
+      obj.forEach(v => walkObject(v, depth + 1, source));
     } else {
-      Object.values(obj).forEach(v => extractArrays(v, depth + 1));
+      Object.values(obj).forEach(v => walkObject(v, depth + 1, source));
     }
   }
 
-  if (nextData) extractArrays(nextData, 0);
-  console.log(`After __NEXT_DATA__: ${decks.length} decks`);
-
-  // ── Strategy 2: Intercepted tRPC / REST responses ─────────────────────────
-  for (const call of apiCalls) {
-    const roots = Array.isArray(call.json) ? call.json : [call.json];
-    for (const root of roots) {
-      const candidates = [
-        root?.result?.data?.decks,
-        root?.result?.data?.json?.decks,
-        root?.result?.data?.json,
-        root?.result?.data,
-        root?.data?.decks,
-        root?.data?.json?.decks,
-        root?.data?.json,
-        root?.data,
-        root?.decks,
-        Array.isArray(root) ? root : null,
-      ].filter(v => Array.isArray(v) && v.length > 0);
-
-      for (const arr of candidates) {
-        const f = arr[0];
-        if (!f || !f.id && !f.slug) continue;
-        console.log(`API array (${arr.length}): ${call.url.slice(0, 80)}`);
-        arr.forEach(item => {
-          const d = normalise(item);
-          if (d && !seen.has(d.id)) { seen.add(d.id); decks.push(d); }
-        });
-      }
-    }
+  // ── 1. __NEXT_DATA__ ────────────────────────────────────────────────────────
+  if (nextData) {
+    console.log('Walking __NEXT_DATA__...');
+    walkObject(nextData, 0, '__NEXT_DATA__');
   }
 
-  console.log(`After API intercept: ${decks.length} decks`);
+  // ── 2. Intercepted responses ─────────────────────────────────────────────
+  console.log(`Processing ${allResponses.length} intercepted JSON responses...`);
+  for (const { url, json } of allResponses) {
+    walkObject(json, 0, url.slice(0, 60));
+  }
 
-  // ── Strategy 3: Try paginating the tRPC deck.list endpoint directly ────────
+  console.log(`After initial scrape: ${decks.length} decks`);
+
+  // ── 3. Direct tRPC pagination ─────────────────────────────────────────────
+  // Try every plausible procedure name curiosa might use
+  const procedureNames = [
+    'deck.getAll', 'deck.list', 'deck.getPublic', 'deck.getRecent',
+    'decks.getAll', 'decks.list', 'decks.getPublic',
+    'getDecks', 'listDecks', 'publicDecks',
+    'deck.feed', 'deck.browse', 'deck.community',
+  ];
+
   if (tRPCBase) {
-    console.log('Attempting tRPC pagination via:', tRPCBase);
-    let cursor = null;
-    let page_n = 0;
-    const MAX_PAGES = 20;
+    console.log('tRPC base:', tRPCBase);
 
-    while (page_n < MAX_PAGES) {
-      try {
-        // Common tRPC batch request shape for curiosa deck listing
-        const input = JSON.stringify({ 0: { json: { cursor, limit: 50, orderBy: 'recent' } } });
-        const url   = tRPCBase + 'deck.list?batch=1&input=' + encodeURIComponent(input);
+    for (const proc of procedureNames) {
+      let cursor = undefined;
+      let pageNum = 0;
+      let procWorked = false;
 
-        const resp = await fetch(url, {
-          headers: { 'cookie': cookieStr, 'accept': 'application/json' }
-        }).catch(() => null);
+      while (pageNum < 30) {
+        try {
+          const inputObj = { limit: 50, ...(cursor !== undefined ? { cursor } : {}) };
+          const batchInput = JSON.stringify({ 0: { json: inputObj } });
+          const url = `${tRPCBase}${proc}?batch=1&input=${encodeURIComponent(batchInput)}`;
 
-        if (!resp || !resp.ok) break;
+          const resp = await fetch(url, {
+            headers: { 'cookie': cookieStr, 'accept': 'application/json', 'content-type': 'application/json' }
+          });
 
-        const data = await resp.json().catch(() => null);
-        if (!data) break;
+          if (!resp.ok) break;
 
-        const roots = Array.isArray(data) ? data : [data];
-        let found = 0;
-        let nextCursor = null;
+          const data = await resp.json();
+          const roots = Array.isArray(data) ? data : [data];
+          let pageDecks = 0;
+          let nextCursor = null;
 
-        for (const root of roots) {
-          const inner = root?.result?.data?.json || root?.result?.data || root?.data?.json || root?.data || root;
-          const arr   = inner?.decks || inner?.items || (Array.isArray(inner) ? inner : null);
-          if (arr && Array.isArray(arr)) {
-            arr.forEach(item => {
-              const d = normalise(item);
-              if (d && !seen.has(d.id)) { seen.add(d.id); decks.push(d); found++; }
-            });
-            nextCursor = inner?.nextCursor || inner?.cursor || inner?.next || null;
+          for (const root of roots) {
+            // Walk every level to find deck arrays AND next cursor
+            const inner =
+              root?.result?.data?.json ||
+              root?.result?.data      ||
+              root?.data?.json        ||
+              root?.data              ||
+              root;
+
+            // Find arrays of decks
+            const candidates = [
+              inner?.decks, inner?.items, inner?.data,
+              inner?.result, inner?.nodes,
+              Array.isArray(inner) ? inner : null
+            ].filter(v => Array.isArray(v) && v.length > 0);
+
+            for (const arr of candidates) {
+              pageDecks += absorb(arr, `${proc} p${pageNum}`);
+            }
+
+            // Find next cursor
+            nextCursor =
+              inner?.nextCursor || inner?.next_cursor || inner?.cursor ||
+              inner?.pageInfo?.endCursor || inner?.meta?.nextCursor ||
+              inner?.pagination?.cursor || null;
           }
+
+          if (pageDecks > 0) procWorked = true;
+          if (!procWorked && pageNum === 0) break; // this proc does nothing
+          if (!nextCursor || pageDecks === 0) break;
+
+          cursor = nextCursor;
+          pageNum++;
+          await new Promise(r => setTimeout(r, 300));
+
+        } catch (e) {
+          break;
         }
+      }
 
-        console.log(`tRPC page ${page_n}: +${found} decks, cursor=${nextCursor}`);
-        if (!found || !nextCursor) break;
-        cursor = nextCursor;
-        page_n++;
-
-        // Be polite
-        await new Promise(r => setTimeout(r, 500));
-      } catch (e) {
-        console.log('tRPC pagination error:', e.message);
-        break;
+      if (procWorked) {
+        console.log(`Procedure '${proc}' worked, total now: ${decks.length}`);
+        break; // found the right one
       }
     }
-  }
-
-  console.log(`After pagination: ${decks.length} decks`);
-
-  // ── Strategy 4: DOM fallback ──────────────────────────────────────────────
-  if (!decks.length) {
-    console.log('Falling back to DOM scraping...');
-    const browser2 = await chromium.launch({ headless: true });
-    const page2    = await browser2.newPage();
-    await page2.goto('https://curiosa.io/decks', { waitUntil: 'networkidle', timeout: 60000 });
-
-    for (let i = 0; i < 10; i++) {
-      await page2.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-      await page2.waitForTimeout(2500);
-    }
-
-    const domDecks = await page2.evaluate(() => {
-      const results = [], seen2 = new Set();
-      document.querySelectorAll('a[href*="/decks/"]').forEach(a => {
-        const m = (a.getAttribute('href') || '').match(/\/decks\/([a-zA-Z0-9_-]+)/);
-        if (!m) return;
-        const id = m[1];
-        if (!id || id === 'new' || id === 'import' || seen2.has(id)) return;
-        seen2.add(id);
-
-        const c      = a.closest('article,[class*="card"],[class*="deck"],li') || a;
-        const nameEl = c.querySelector('h2,h3,h4,[class*="name"],[class*="title"]');
-        const authEl = c.querySelector('[class*="author"],[class*="user"],[class*="creator"]');
-        const imgEl  = c.querySelector('img');
-        const descEl = c.querySelector('p,[class*="desc"]');
-
-        let thumb = '';
-        if (imgEl) thumb = imgEl.getAttribute('src') || imgEl.getAttribute('data-src') || '';
-        if (!thumb) {
-          const bg = c.querySelector('[style*="background-image"]');
-          if (bg) {
-            const bm = (bg.getAttribute('style') || '').match(/url\(["']?([^"')]+)["']?\)/);
-            if (bm) thumb = bm[1];
-          }
-        }
-
-        results.push({
-          id,
-          name:        (nameEl && nameEl.textContent.trim()) || a.textContent.trim().split('\n')[0].trim() || 'Deck ' + id,
-          author:      (authEl && authEl.textContent.replace('@','').trim()) || '',
-          avatar: '', elements: [], format: 'Constructed', description: (descEl && descEl.textContent.trim()) || '',
-          cardCount: 0, likes: 0, views: 0, updatedAt: '',
-          thumbnail: thumb.startsWith('http') ? thumb : '',
-          url: 'https://curiosa.io/decks/' + id
+  } else {
+    console.log('No tRPC base URL detected — trying common paths...');
+    const commonBases = [
+      'https://curiosa.io/api/trpc/',
+      'https://api.curiosa.io/trpc/',
+      'https://curiosa.io/trpc/',
+    ];
+    for (const base of commonBases) {
+      try {
+        const test = await fetch(`${base}deck.list?batch=1&input=${encodeURIComponent(JSON.stringify({ 0: { json: { limit: 10 } } }))}`, {
+          headers: { 'accept': 'application/json' }
         });
-      });
-      return results;
-    });
-
-    await browser2.close();
-    domDecks.forEach(d => { if (!seen.has(d.id)) { seen.add(d.id); decks.push(d); } });
-    console.log(`After DOM fallback: ${decks.length} decks`);
+        if (test.ok) {
+          tRPCBase = base;
+          console.log('Found tRPC at:', base);
+          break;
+        }
+      } catch(e) {}
+    }
   }
 
+  console.log(`Total after all strategies: ${decks.length} decks`);
+
   if (!decks.length) {
-    console.error('No decks found.');
+    console.error('No decks found — curiosa.io may have changed its API or requires auth.');
     process.exit(1);
   }
 
-  // Clean names that have metadata concatenated in
-  decks = decks.map(d => {
-    let name = d.name
+  // Clean up concatenated metadata in names
+  const cleaned = decks.map(d => ({
+    ...d,
+    name: d.name
       .replace(/\s*\d+\s*(second|minute|hour|day|week|month|year)s?\s*ago.*/i, '')
       .replace(/\s*(Constructed|Draft|Sealed|Limited)\s*@.*/i, '')
-      .replace(/\s*@[A-Za-z0-9_\u00C0-\u024F]+$/, '')
+      .replace(/\s*@[A-Za-z0-9_\u00C0-\u024F\u00F8-\u00FF]+$/, '')
       .replace(/^(Primer|New|Update)\s+/i, '')
-      .trim() || d.name;
-    return { ...d, name };
-  });
+      .trim() || d.name
+  }));
 
-  // Sort by views descending
-  decks.sort((a, b) => (b.views || 0) - (a.views || 0));
+  cleaned.sort((a, b) => (b.views || 0) - (a.views || 0));
 
-  const output = { updated: new Date().toISOString(), total: decks.length, decks };
-  fs.writeFileSync('decks.json', JSON.stringify(output, null, 2));
-  console.log(`Done: ${decks.length} decks written to decks.json`);
+  fs.writeFileSync('decks.json', JSON.stringify({ updated: new Date().toISOString(), total: cleaned.length, decks: cleaned }, null, 2));
+  console.log(`✓ Wrote ${cleaned.length} decks to decks.json`);
 })();
