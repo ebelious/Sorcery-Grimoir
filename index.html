@@ -1568,76 +1568,23 @@ function loadPubDecks(){
   if(G.pubDecksLoading)return;
   G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;G.pubDecksItems=[];render();
 
-  var all=[],seen=new Set();
-
-  function norm(item){
-    if(!item||!item.id)return null;
-    var els=[];
-    if(Array.isArray(item.elements))els=item.elements.map(function(e){return typeof e==='string'?e:(e.name||e.label||'');}).filter(Boolean);
-    var auth=(item.user&&(item.user.username||item.user.displayName||item.user.name))||(item.creator&&(item.creator.username||item.creator.name))||item.author||item.username||'';
-    var av=(item.avatar&&typeof item.avatar==='object'&&(item.avatar.name||item.avatar.cardName))||item.avatarName||item.avatarCard||'';
-    var upd=item.updatedAt||item.updated_at||'';
-    try{if(upd)upd=new Date(upd).toISOString().split('T')[0];}catch(e){upd='';}
-    return{id:item.id,name:item.name||'Unnamed Deck',author:auth,avatar:av,elements:els,
-      format:item.format||item.deckFormat||'Constructed',description:item.description||'',
-      cardCount:item.cardCount||(Array.isArray(item.cards)?item.cards.length:0)||0,
-      likes:item.likes||item.likesCount||(item._count&&item._count.likes)||0,
-      views:item.views||item.viewsCount||(item._count&&item._count.views)||0,
-      updatedAt:upd,thumbnail:_curiosaThumb(item),url:'https://curiosa.io/decks/'+item.id};
-  }
-
-  function absorb(obj,depth){
-    if(!obj||typeof obj!=='object'||depth>14)return;
-    if(Array.isArray(obj)){
-      if(obj.length&&obj[0]&&obj[0].id&&obj[0].name){
-        obj.forEach(function(item){var d=norm(item);if(d&&!seen.has(d.id)){seen.add(d.id);all.push(d);}});
-      } else {obj.forEach(function(v){absorb(v,depth+1);});}
-    } else {Object.values(obj).forEach(function(v){absorb(v,depth+1);});}
-  }
-
-  function findCursor(obj,d){
-    if(!obj||typeof obj!=='object'||d>8)return null;
-    var keys=['nextCursor','next_cursor','cursor','endCursor','after'];
-    for(var i=0;i<keys.length;i++){if(obj[keys[i]]&&typeof obj[keys[i]]==='string'&&obj[keys[i]].length>1)return obj[keys[i]];}
-    var r=null;Object.values(obj).forEach(function(v){if(!r)r=findCursor(v,d+1);});
-    return r;
-  }
-
-  var cursor=null,pageN=0;
-
-  function next(){
-    if(pageN>500){done();return;}
-    var inp=Object.assign({},_CURIOSA_SEARCH,{limit:100},cursor?{cursor:cursor}:{});
-    var apiUrl='https://curiosa.io/api/trpc/deck.search?batch=1&input='+encodeURIComponent(JSON.stringify({0:{json:inp}}));
-    var url='https://api.allorigins.win/get?url='+encodeURIComponent(apiUrl);
-
-    fetch(url)
-      .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
-      .then(function(wrapper){
-        var data=JSON.parse(wrapper.contents);
-        var before=all.length;
-        absorb(data,0);
-        var added=all.length-before;
-        // Progressive update
-        G.pubDecksItems=all.slice();_filterPubDecks();
-        var nc=findCursor(data,0);
-        if(!nc||added===0){done();return;}
-        cursor=nc;pageN++;
-        setTimeout(next,300);
-      })
-      .catch(function(){
-        G.pubDecksErr='Could not load decks from curiosa.io.';
-        done();
-      });
-  }
-
-  function done(){
-    G.pubDecksItems=all;G.pubDecksLoading=false;G.pubDecksLoaded=true;
-    if(!all.length)G.pubDecksErr='Could not load decks from curiosa.io.';
-    render();
-  }
-
-  next();
+  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/decks.json?t='+Date.now();
+  fetch(jsonUrl)
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(data){
+      var list=Array.isArray(data)?data:(Array.isArray(data.decks)?data.decks:[]);
+      G.pubDecksItems=list;
+      G.pubDecksLoading=false;
+      G.pubDecksLoaded=true;
+      if(!list.length)G.pubDecksErr='No decks found.';
+      render();
+    })
+    .catch(function(){
+      G.pubDecksErr='Could not load decks.';
+      G.pubDecksLoading=false;
+      G.pubDecksLoaded=true;
+      render();
+    });
 }
 
 function _filterPubDecks(){
