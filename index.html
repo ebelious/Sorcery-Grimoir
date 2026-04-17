@@ -1642,18 +1642,8 @@ function _filterPubDecks(){
   }):G.pubDecksItems;
   var out=[];
   if(q&&!filtered.length){out.push('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match \u201c'+h(q)+'\u201d</div>');}
-  var _elIcon2={'Air':'&#127787;','Fire':'&#128293;','Earth':'&#127795;','Water':'&#128164;'};
   filtered.forEach(function(d){
-    var _priEl2=(d.elements&&d.elements.find(function(e){return e&&e!=='None'}))||'';
-    var _phIcon2=_elIcon2[_priEl2]||'&#127183;';
-    var _turl2=d.thumbnail||(d.id?'https://curiosa.io/api/og/deck/'+d.id:'');
     out.push('<div class="pd-c">');
-    if(_turl2){
-      out.push('<img class="pd-thumb" src="'+h(_turl2)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
-      out.push('<div class="pd-thumb-ph" style="display:none">'+_phIcon2+'</div>');
-    } else {
-      out.push('<div class="pd-thumb-ph">'+_phIcon2+'</div>');
-    }
     out.push('<div class="pd-info">');
     out.push('<div class="pd-nm">'+h(d.name)+'</div>');
     var meta=[];
@@ -1862,17 +1852,7 @@ function pContent(){
       o('<div id="pd-list">');
       if(_pdSearch&&!_pdFiltered.length){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">No decks match &ldquo;'+h(G.pubDecksSearch)+'&rdquo;</div>');}
       _pdFiltered.forEach(function(d){
-        var _elIcon={'Air':'&#127787;','Fire':'&#128293;','Earth':'&#127795;','Water':'&#128164;'};
-        var _priEl=(d.elements&&d.elements.find(function(e){return e&&e!=='None'}))||'';
-        var _phIcon=_elIcon[_priEl]||'&#127183;';
         o('<div class="pd-c">');
-        var _turl=d.thumbnail||(d.id?'https://curiosa.io/api/og/deck/'+d.id:'');
-        if(_turl){
-          o('<img class="pd-thumb" src="'+h(_turl)+'" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">');
-          o('<div class="pd-thumb-ph" style="display:none">'+_phIcon+'</div>');
-        } else {
-          o('<div class="pd-thumb-ph">'+_phIcon+'</div>');
-        }
         o('<div class="pd-info">');
         o('<div class="pd-nm">'+h(d.name)+'</div>');
         var meta=[];
