@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-18T07:06:25.322Z",
+  "updated": "2026-04-19T07:18:22.326Z",
   "total": 20,
   "events": [
     {
@@ -28,479 +28,479 @@
       "url": "https://play.sorcerytcg.com/events/b7b951d0-ab60-4906-8749-4af83f311b7b"
     },
     {
-      "id": "2a58246a-1268-4712-b919-776cb0896467",
-      "name": "Friday Night Casual Play",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
+      "id": "543c60dc-5ce3-48cf-a28e-f4c1856b82b0",
+      "name": "Booster Draft Sorcery Gothic",
+      "status": "inProgress",
+      "date": "Sat, Apr 18, 2026",
       "time": "8:00 AM UTC",
-      "endDate": "Apr 17, 2026",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "9a060829-adf1-4925-b115-cbded44fece7",
-        "name": "Good Games - Woden"
+        "id": "2b3f5738-ef2a-4a59-9169-321df3f08b69",
+        "name": "Drachental Games & Magic"
       },
-      "city": "Phillip",
-      "state": "ACT",
-      "country": "AU",
-      "address": "Phillip, ACT, 2606, AU",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 2,
-      "organizer": {
-        "id": "9a060829-adf1-4925-b115-cbded44fece7",
-        "name": "Good Games - Woden"
-      },
-      "url": "https://play.sorcerytcg.com/events/2a58246a-1268-4712-b919-776cb0896467"
-    },
-    {
-      "id": "2e59bab2-865e-4525-a10d-57ca05014e1f",
-      "name": "Tabletop Cafe Friday Night Casual Sorcery",
-      "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "8:00 AM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "5051e336-e00e-4206-89ab-d3f305eaf81a",
-        "name": "Tabletop Cafe"
-      },
-      "city": "Blenheim Central",
-      "state": "Marlborough",
-      "country": "NZ",
-      "address": "Blenheim Central, Marlborough, 7201, NZ",
-      "type": "Constructed Tournament",
+      "city": "Düsseldorf",
+      "state": "NRW",
+      "country": "DE",
+      "address": "Düsseldorf, NRW, 40212, DE",
+      "type": "Draft Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 4,
       "organizer": {
-        "id": "5051e336-e00e-4206-89ab-d3f305eaf81a",
-        "name": "Tabletop Cafe"
+        "id": "2b3f5738-ef2a-4a59-9169-321df3f08b69",
+        "name": "Drachental Games & Magic"
       },
-      "url": "https://play.sorcerytcg.com/events/2e59bab2-865e-4525-a10d-57ca05014e1f"
+      "url": "https://play.sorcerytcg.com/events/543c60dc-5ce3-48cf-a28e-f4c1856b82b0"
     },
     {
-      "id": "6d97ed79-9f0a-421d-a6d8-fc1fd668aff7",
-      "name": "1704 Mox Saga Sorcery",
-      "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "12:00 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "bd5ec2e9-2246-429b-a406-c0d7330ac771",
-        "name": "Mox Saga"
-      },
-      "city": "Yau Ma Tei",
-      "state": "Kowloon",
-      "country": "HK",
-      "address": "Yau Ma Tei, Kowloon, 00, HK",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 8,
-      "organizer": {
-        "id": "bd5ec2e9-2246-429b-a406-c0d7330ac771",
-        "name": "Mox Saga"
-      },
-      "url": "https://play.sorcerytcg.com/events/6d97ed79-9f0a-421d-a6d8-fc1fd668aff7"
-    },
-    {
-      "id": "f7bddaaf-db92-4c47-9886-6d8626da773f",
-      "name": "Friday Afternoon Sorcery",
+      "id": "f95fed0d-a26c-426f-8d5d-c571ce48c823",
+      "name": "Learn to play",
       "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "3:00 PM UTC",
-      "endDate": "Apr 17, 2026",
+      "date": "Sat, Apr 18, 2026",
+      "time": "8:30 AM UTC",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "497437c8-5841-4062-8c70-a54e2af0fd07",
-        "name": "War Lotus"
+        "id": "d227425c-7d5a-4bd8-afb6-78a3733a568c",
+        "name": "Hobbity.pl"
       },
-      "city": "Granada",
-      "state": "AN",
-      "country": "ES",
-      "address": "Granada, AN, 18003, ES",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "497437c8-5841-4062-8c70-a54e2af0fd07",
-        "name": "War Lotus"
-      },
-      "url": "https://play.sorcerytcg.com/events/f7bddaaf-db92-4c47-9886-6d8626da773f"
-    },
-    {
-      "id": "8d8c29a4-8125-41d5-83d4-2c1b7f3ad1e4",
-      "name": "DEMO DAY",
-      "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "3:00 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "7fb74b42-6412-4c87-b2d4-6daf4e9184fd",
-        "name": "megazord store"
-      },
-      "city": "Ourense",
-      "state": "SPAIN",
-      "country": "ES",
-      "address": "Ourense, SPAIN, 32003, ES",
+      "city": "Nowy Sącz",
+      "state": "Województwo małopolskie",
+      "country": "PL",
+      "address": "Nowy Sącz, Województwo małopolskie, 33-300, PL",
       "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 3,
       "organizer": {
-        "id": "7fb74b42-6412-4c87-b2d4-6daf4e9184fd",
-        "name": "megazord store"
+        "id": "d227425c-7d5a-4bd8-afb6-78a3733a568c",
+        "name": "Hobbity.pl"
       },
-      "url": "https://play.sorcerytcg.com/events/8d8c29a4-8125-41d5-83d4-2c1b7f3ad1e4"
+      "url": "https://play.sorcerytcg.com/events/f95fed0d-a26c-426f-8d5d-c571ce48c823"
     },
     {
-      "id": "a92c6824-3e3b-4e51-9739-9c874908b9b1",
-      "name": "Pikazard Weekly",
+      "id": "006e429c-6a81-4fc7-b530-bdd661ee368c",
+      "name": "CTGH SAT CASUAL",
       "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "3:30 PM UTC",
-      "endDate": "Apr 17, 2026",
+      "date": "Sat, Apr 18, 2026",
+      "time": "9:21 AM UTC",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "8733b8e1-545c-43f1-a243-b98bb7df0cab",
-        "name": "Pikazard.eu"
+        "id": "92a9df33-9227-4565-af8f-56692fd3fcf5",
+        "name": "Games Haven Chinatown "
       },
-      "city": "Bratislava",
-      "state": "Bratislavský kraj",
-      "country": "SK",
-      "address": "Bratislava, Bratislavský kraj, 85103, SK",
+      "city": "Singapore",
+      "state": "50531",
+      "country": "SG",
+      "address": "Singapore, 50531, 50531, SG",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 10,
+      "registered": 8,
       "organizer": {
-        "id": "8733b8e1-545c-43f1-a243-b98bb7df0cab",
-        "name": "Pikazard.eu"
+        "id": "92a9df33-9227-4565-af8f-56692fd3fcf5",
+        "name": "Games Haven Chinatown "
       },
-      "url": "https://play.sorcerytcg.com/events/a92c6824-3e3b-4e51-9739-9c874908b9b1"
+      "url": "https://play.sorcerytcg.com/events/006e429c-6a81-4fc7-b530-bdd661ee368c"
     },
     {
-      "id": "85a7f3b6-49c9-435c-8110-3fbad28c6e88",
-      "name": "Spielraum Weekly",
+      "id": "232687e3-a56f-4b2d-91d0-c73d28da27a5",
+      "name": "Sorcery  Visarno Realm",
       "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "3:30 PM UTC",
-      "endDate": "Apr 17, 2026",
+      "date": "Sat, Apr 18, 2026",
+      "time": "9:30 AM UTC",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "cb8f10c6-64ee-469a-9df3-c0782f215fe6",
-        "name": "SpielRaum GmbH"
+        "id": "44304b5e-af76-4467-9c93-c55c3c7435a3",
+        "name": "Game"
       },
-      "city": "Vienna",
-      "state": "Wien",
-      "country": "AT",
-      "address": "Vienna, Wien, 1060, AT",
+      "city": "Firenze",
+      "state": "Toscana",
+      "country": "IT",
+      "address": "Firenze, Toscana, 50144, IT",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 7,
+      "organizer": {
+        "id": "44304b5e-af76-4467-9c93-c55c3c7435a3",
+        "name": "Game"
+      },
+      "url": "https://play.sorcerytcg.com/events/232687e3-a56f-4b2d-91d0-c73d28da27a5"
+    },
+    {
+      "id": "62826f9f-795f-4c93-a385-18f4f5634577",
+      "name": "Luźne czarowanie w Redrafcie",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "10:00 AM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "eb55b361-e8bb-443b-82e3-b26b8bfae59c",
+        "name": "Redraft"
+      },
+      "city": "Katowice",
+      "state": "Województwo śląskie",
+      "country": "PL",
+      "address": "Katowice, Województwo śląskie, 40-067, PL",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 4,
       "organizer": {
-        "id": "cb8f10c6-64ee-469a-9df3-c0782f215fe6",
-        "name": "SpielRaum GmbH"
+        "id": "eb55b361-e8bb-443b-82e3-b26b8bfae59c",
+        "name": "Redraft"
       },
-      "url": "https://play.sorcerytcg.com/events/85a7f3b6-49c9-435c-8110-3fbad28c6e88"
+      "url": "https://play.sorcerytcg.com/events/62826f9f-795f-4c93-a385-18f4f5634577"
     },
     {
-      "id": "3b79ccae-1274-4add-aaea-c76bcc6ad135",
-      "name": "Geek Haven - Casual Meetup",
-      "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "3:30 PM UTC",
-      "endDate": "Apr 17, 2026",
+      "id": "b7334fc9-b710-4330-81bd-bad87f95dcd3",
+      "name": "Pre-Con Battle at Card Merchant Dunedin",
+      "status": "inProgress",
+      "date": "Sat, Apr 18, 2026",
+      "time": "10:30 AM UTC",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "650ec0da-ef79-4fbf-9184-e0596a457dec",
-        "name": "Geek Haven"
+        "id": "09d12682-68aa-49c1-9eec-c2def5828693",
+        "name": "Card Merchant Dunedin"
       },
-      "city": "Bonn",
-      "state": "NRW",
-      "country": "DE",
-      "address": "Bonn, NRW, 53225, DE",
+      "city": "Dunedin",
+      "state": "Otago",
+      "country": "NZ",
+      "address": "Dunedin, Otago, 9016, NZ",
+      "type": "Sealed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "09d12682-68aa-49c1-9eec-c2def5828693",
+        "name": "Card Merchant Dunedin"
+      },
+      "url": "https://play.sorcerytcg.com/events/b7334fc9-b710-4330-81bd-bad87f95dcd3"
+    },
+    {
+      "id": "3d324c5c-ab78-4d4d-a989-e38c944254cf",
+      "name": "Svarog's Sorcery Meet-up",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "11:00 AM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "422d95a9-d083-4337-978c-dece2b2bfda4",
+        "name": "Think Ink d.o.o."
+      },
+      "city": "Varaždin",
+      "state": "Varaždinska županija",
+      "country": "HR",
+      "address": "Varaždin, Varaždinska županija, 42000, HR",
       "type": "Casual Meetup",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "422d95a9-d083-4337-978c-dece2b2bfda4",
+        "name": "Think Ink d.o.o."
+      },
+      "url": "https://play.sorcerytcg.com/events/3d324c5c-ab78-4d4d-a989-e38c944254cf"
+    },
+    {
+      "id": "f8dfc526-a4cc-4c2a-9803-aa31b5172e21",
+      "name": "Conjuradores de Rívia - Season Finale",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "1:30 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "d054c0c1-991e-4eba-9bdd-05afa71607e2",
+        "name": "Filhos de Rívia"
+      },
+      "city": "Niterói",
+      "state": "RS",
+      "country": "BR",
+      "address": "Niterói, RS, 92110-000, BR",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "d054c0c1-991e-4eba-9bdd-05afa71607e2",
+        "name": "Filhos de Rívia"
+      },
+      "url": "https://play.sorcerytcg.com/events/f8dfc526-a4cc-4c2a-9803-aa31b5172e21"
+    },
+    {
+      "id": "33227911-382f-47eb-8340-0f8886fd0163",
+      "name": "Hex Saturday Morning Weekly Play (Constructed)",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "3:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "2a73f2c2-9913-4801-bbd1-f03d22429283",
+        "name": "Hex & Company"
+      },
+      "city": "New York",
+      "state": "NY",
+      "country": "US",
+      "address": "New York, NY, 10003, US",
+      "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 5,
       "organizer": {
-        "id": "650ec0da-ef79-4fbf-9184-e0596a457dec",
-        "name": "Geek Haven"
+        "id": "2a73f2c2-9913-4801-bbd1-f03d22429283",
+        "name": "Hex & Company"
       },
-      "url": "https://play.sorcerytcg.com/events/3b79ccae-1274-4add-aaea-c76bcc6ad135"
+      "url": "https://play.sorcerytcg.com/events/33227911-382f-47eb-8340-0f8886fd0163"
     },
     {
-      "id": "16f9d01e-9398-4e4d-92ef-65f594198c71",
-      "name": "Monstersorcery",
+      "id": "476bffad-9cdf-44db-bf07-7b3fc4b9aba8",
+      "name": "Casual Meet Up!",
       "status": "complete",
-      "date": "Fri, Apr 17, 2026",
+      "date": "Sat, Apr 18, 2026",
+      "time": "3:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "c19e4eb2-991c-41fc-9cdf-47a00950cc01",
+        "name": "Roll & Play"
+      },
+      "city": "Conway",
+      "state": "AR",
+      "country": "US",
+      "address": "Conway, AR, 72034, US",
+      "type": "Casual Meetup",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 2,
+      "organizer": {
+        "id": "c19e4eb2-991c-41fc-9cdf-47a00950cc01",
+        "name": "Roll & Play"
+      },
+      "url": "https://play.sorcerytcg.com/events/476bffad-9cdf-44db-bf07-7b3fc4b9aba8"
+    },
+    {
+      "id": "3ff74d0c-4f73-4dbd-af5f-c423112de28d",
+      "name": "Saturday Sorcery",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "3:10 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "50b9f987-3674-493c-84a8-c63571ee2a40",
+        "name": "Kirin Studio"
+      },
+      "city": "Pompeia",
+      "state": "SP",
+      "country": "BR",
+      "address": "Pompeia, SP, 05021-001, BR",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "50b9f987-3674-493c-84a8-c63571ee2a40",
+        "name": "Kirin Studio"
+      },
+      "url": "https://play.sorcerytcg.com/events/3ff74d0c-4f73-4dbd-af5f-c423112de28d"
+    },
+    {
+      "id": "db2f56e5-2906-49ce-bcc9-5740072f2022",
+      "name": "Casual Learn to Play",
+      "status": "published",
+      "date": "Sat, Apr 18, 2026",
       "time": "3:30 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "4c8915c1-c10f-414c-bcbd-1683bcc3158d",
-        "name": "Monstercards"
-      },
-      "city": "Les Corts",
-      "state": "CT",
-      "country": "ES",
-      "address": "Les Corts, CT, 08028, ES",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 6,
-      "organizer": {
-        "id": "4c8915c1-c10f-414c-bcbd-1683bcc3158d",
-        "name": "Monstercards"
-      },
-      "url": "https://play.sorcerytcg.com/events/16f9d01e-9398-4e4d-92ef-65f594198c71"
-    },
-    {
-      "id": "c1bd93cb-8a62-4974-8e88-bac8b0194494",
-      "name": "TGR casual meetup",
-      "status": "complete",
-      "date": "Fri, Apr 17, 2026",
-      "time": "5:00 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "927a0f09-f209-4d51-8122-d6c897fbd04e",
-        "name": "The Game Room"
-      },
-      "city": "Chichester",
-      "state": "England",
-      "country": "GB",
-      "address": "Chichester, England, PO19 8PR, GB",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 6,
-      "organizer": {
-        "id": "927a0f09-f209-4d51-8122-d6c897fbd04e",
-        "name": "The Game Room"
-      },
-      "url": "https://play.sorcerytcg.com/events/c1bd93cb-8a62-4974-8e88-bac8b0194494"
-    },
-    {
-      "id": "41107f17-6d36-46ca-8513-2c95f8bb4ab8",
-      "name": "Friday night sealed",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "5:30 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "1a468200-b6b8-48fc-8dc9-abc509e31782",
-        "name": "TF-Cards"
-      },
-      "city": "Leiden",
-      "state": "ZH",
-      "country": "NL",
-      "address": "Leiden, ZH, 2332 KE, NL",
-      "type": "Sealed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "1a468200-b6b8-48fc-8dc9-abc509e31782",
-        "name": "TF-Cards"
-      },
-      "url": "https://play.sorcerytcg.com/events/41107f17-6d36-46ca-8513-2c95f8bb4ab8"
-    },
-    {
-      "id": "6d7bc329-9bbd-4d7f-b79f-d94ac0de8c38",
-      "name": "Monthly Casual Friday",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "5:30 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "9b192533-cfd7-4e9f-813c-4638b2bb5255",
-        "name": "The Happy Halfling"
-      },
-      "city": "Eindhoven",
-      "state": "NB",
-      "country": "NL",
-      "address": "Eindhoven, NB, 5625 AA, NL",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "9b192533-cfd7-4e9f-813c-4638b2bb5255",
-        "name": "The Happy Halfling"
-      },
-      "url": "https://play.sorcerytcg.com/events/6d7bc329-9bbd-4d7f-b79f-d94ac0de8c38"
-    },
-    {
-      "id": "c80df6e6-5870-4f76-9d99-768541c2de50",
-      "name": "Spellbound Weekly Sorcery",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "5:33 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "1674ee99-6ca8-4fb7-9052-88ef00993e13",
-        "name": "Spellbound Games"
-      },
-      "city": "Greater London",
-      "state": "England",
-      "country": "GB",
-      "address": "Greater London, England, SE17 3FR, GB",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "1674ee99-6ca8-4fb7-9052-88ef00993e13",
-        "name": "Spellbound Games"
-      },
-      "url": "https://play.sorcerytcg.com/events/c80df6e6-5870-4f76-9d99-768541c2de50"
-    },
-    {
-      "id": "530d7004-1fa3-4a2a-ae20-76c2ccec67c9",
-      "name": "CREMOS: Gothic DRAFT",
-      "status": "inProgress",
-      "date": "Fri, Apr 17, 2026",
-      "time": "7:30 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "eed73873-07e9-42d9-b3d8-51203f0d1404",
-        "name": "GameLover"
-      },
-      "city": "Crema",
-      "state": "Cremona",
-      "country": "IT",
-      "address": "Crema, Cremona, 26013, IT",
-      "type": "Draft Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 9,
-      "organizer": {
-        "id": "eed73873-07e9-42d9-b3d8-51203f0d1404",
-        "name": "GameLover"
-      },
-      "url": "https://play.sorcerytcg.com/events/530d7004-1fa3-4a2a-ae20-76c2ccec67c9"
-    },
-    {
-      "id": "007cf0d7-64ca-4c0c-832b-6f5eebd67aa7",
-      "name": "Weekly Sorcery",
-      "status": "inProgress",
-      "date": "Fri, Apr 17, 2026",
-      "time": "9:00 PM UTC",
       "endDate": "Apr 18, 2026",
       "location": {
-        "id": "d31bd2e8-0a04-47d3-b291-0f18839b4b64",
-        "name": "JC Hobby"
+        "id": "c19e4eb2-991c-41fc-9cdf-47a00950cc01",
+        "name": "Roll & Play"
       },
-      "city": "Norfolk",
-      "state": "NE",
+      "city": "Conway",
+      "state": "AR",
       "country": "US",
-      "address": "Norfolk, NE, 68701, US",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 6,
-      "organizer": {
-        "id": "d31bd2e8-0a04-47d3-b291-0f18839b4b64",
-        "name": "JC Hobby"
-      },
-      "url": "https://play.sorcerytcg.com/events/007cf0d7-64ca-4c0c-832b-6f5eebd67aa7"
-    },
-    {
-      "id": "79731d7c-e1dd-4d6f-99e8-f6ad0992af44",
-      "name": "Friday Sorcery",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "10:00 PM UTC",
-      "endDate": "Apr 18, 2026",
-      "location": {
-        "id": "a72bebac-aacf-487e-9cc2-2d0798ec1c0a",
-        "name": "Super Heroes"
-      },
-      "city": "Newnan",
-      "state": "GA",
-      "country": "US",
-      "address": "Newnan, GA, 30263, US",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "a72bebac-aacf-487e-9cc2-2d0798ec1c0a",
-        "name": "Super Heroes"
-      },
-      "url": "https://play.sorcerytcg.com/events/79731d7c-e1dd-4d6f-99e8-f6ad0992af44"
-    },
-    {
-      "id": "12b7a136-c7bb-48fc-8676-3a23dc4cc7af",
-      "name": "The Crypt Sorcery League",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "10:00 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "2eedd0e7-4ade-4550-bffd-d8ca39ddfc72",
-        "name": "The Crypt"
-      },
-      "city": "Providence",
-      "state": "RI",
-      "country": "US",
-      "address": "Providence, RI, 02903, US",
-      "type": "Sealed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 0,
-      "organizer": {
-        "id": "2eedd0e7-4ade-4550-bffd-d8ca39ddfc72",
-        "name": "The Crypt"
-      },
-      "url": "https://play.sorcerytcg.com/events/12b7a136-c7bb-48fc-8676-3a23dc4cc7af"
-    },
-    {
-      "id": "9c8ae86b-5e99-48a1-94bf-6bb0e75f9f68",
-      "name": "Learn to Play/Open Play",
-      "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "10:00 PM UTC",
-      "endDate": "Apr 17, 2026",
-      "location": {
-        "id": "035226e5-7801-402c-ad53-b52bf66acc5b",
-        "name": "Best Of One Gaming"
-      },
-      "city": "Depew",
-      "state": "NY",
-      "country": "US",
-      "address": "Depew, NY, 14043, US",
+      "address": "Conway, AR, 72034, US",
       "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 0,
       "organizer": {
-        "id": "035226e5-7801-402c-ad53-b52bf66acc5b",
-        "name": "Best Of One Gaming"
+        "id": "c19e4eb2-991c-41fc-9cdf-47a00950cc01",
+        "name": "Roll & Play"
       },
-      "url": "https://play.sorcerytcg.com/events/9c8ae86b-5e99-48a1-94bf-6bb0e75f9f68"
+      "url": "https://play.sorcerytcg.com/events/db2f56e5-2906-49ce-bcc9-5740072f2022"
     },
     {
-      "id": "74e7e638-d523-4def-a347-8dc5e0a0e7a3",
-      "name": "Free play",
+      "id": "cc97f0a7-0c4c-42d3-aefb-60428da44388",
+      "name": "Gothic Draft-Cleveland!!!",
       "status": "published",
-      "date": "Fri, Apr 17, 2026",
-      "time": "10:00 PM UTC",
-      "endDate": "Apr 17, 2026",
+      "date": "Sat, Apr 18, 2026",
+      "time": "4:00 PM UTC",
+      "endDate": "Apr 18, 2026",
       "location": {
-        "id": "fd4f33d6-7ffe-4df6-bd8d-7dc121118e3a",
-        "name": "Hobby Addicts"
+        "id": "4785283a-998b-4611-a0ec-77f0923fe848",
+        "name": "Gold & Glory Gaming"
       },
-      "city": "Livermore",
-      "state": "CA",
+      "city": "Broadview Heights",
+      "state": "OH",
       "country": "US",
-      "address": "Livermore, CA, 94551, US",
-      "type": "Constructed Tournament",
+      "address": "Broadview Heights, OH, 44147, US",
+      "type": "Draft Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 7,
+      "organizer": {
+        "id": "4785283a-998b-4611-a0ec-77f0923fe848",
+        "name": "Gold & Glory Gaming"
+      },
+      "url": "https://play.sorcerytcg.com/events/cc97f0a7-0c4c-42d3-aefb-60428da44388"
+    },
+    {
+      "id": "22876b6a-b9fe-4f11-954c-77b3dd5a80f9",
+      "name": "Sorcery Draft",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "4:30 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "8ade683c-4d8a-4654-80bd-e30135b430f2",
+        "name": "Game Shack"
+      },
+      "city": "Toronto",
+      "state": "ON",
+      "country": "CA",
+      "address": "Toronto, ON, M6A 1L7, CA",
+      "type": "Sealed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 6,
+      "organizer": {
+        "id": "8ade683c-4d8a-4654-80bd-e30135b430f2",
+        "name": "Game Shack"
+      },
+      "url": "https://play.sorcerytcg.com/events/22876b6a-b9fe-4f11-954c-77b3dd5a80f9"
+    },
+    {
+      "id": "d8fc0ec9-79f6-4c0f-ae39-c35e444c2537",
+      "name": "Casual Sorcery ",
+      "status": "published",
+      "date": "Sat, Apr 18, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "f5016829-185c-481b-8187-95b7818deddd",
+        "name": "Geekified"
+      },
+      "city": "Vinton",
+      "state": "IA",
+      "country": "US",
+      "address": "Vinton, IA, 52349, US",
+      "type": "Learn To Play",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 0,
       "organizer": {
-        "id": "fd4f33d6-7ffe-4df6-bd8d-7dc121118e3a",
-        "name": "Hobby Addicts"
+        "id": "f5016829-185c-481b-8187-95b7818deddd",
+        "name": "Geekified"
       },
-      "url": "https://play.sorcerytcg.com/events/74e7e638-d523-4def-a347-8dc5e0a0e7a3"
+      "url": "https://play.sorcerytcg.com/events/d8fc0ec9-79f6-4c0f-ae39-c35e444c2537"
+    },
+    {
+      "id": "eb0369d0-0c65-4177-9384-95d2c58d742e",
+      "name": "Welcome Event - Sorcery",
+      "status": "published",
+      "date": "Sat, Apr 18, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "9ae6536a-9979-4c2f-9b13-2abae3a4cbc1",
+        "name": "Cardvantage Jogos e Colecionáveis"
+      },
+      "city": "Mirante",
+      "state": "PB",
+      "country": "BR",
+      "address": "Mirante, PB, 58407-660, BR",
+      "type": "Learn To Play",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 0,
+      "organizer": {
+        "id": "9ae6536a-9979-4c2f-9b13-2abae3a4cbc1",
+        "name": "Cardvantage Jogos e Colecionáveis"
+      },
+      "url": "https://play.sorcerytcg.com/events/eb0369d0-0c65-4177-9384-95d2c58d742e"
+    },
+    {
+      "id": "d2ed2a3d-d057-46d8-8fab-755ba97e1ceb",
+      "name": "Sorcery Weekly Play - Constructed/Draft",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "c3dff397-7c51-44ff-a763-47d6b6fe46e1",
+        "name": "Cosmic Hearth Games"
+      },
+      "city": "Concord",
+      "state": "NC",
+      "country": "US",
+      "address": "Concord, NC, 28027, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 6,
+      "organizer": {
+        "id": "c3dff397-7c51-44ff-a763-47d6b6fe46e1",
+        "name": "Cosmic Hearth Games"
+      },
+      "url": "https://play.sorcerytcg.com/events/d2ed2a3d-d057-46d8-8fab-755ba97e1ceb"
+    },
+    {
+      "id": "f8a9a794-fa07-4047-9bc7-a8daf2d4a571",
+      "name": "Sorcerous Saturdays",
+      "status": "complete",
+      "date": "Sat, Apr 18, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "f5016829-185c-481b-8187-95b7818deddd",
+        "name": "Geekified"
+      },
+      "city": "Vinton",
+      "state": "IA",
+      "country": "US",
+      "address": "Vinton, IA, 52349, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "f5016829-185c-481b-8187-95b7818deddd",
+        "name": "Geekified"
+      },
+      "url": "https://play.sorcerytcg.com/events/f8a9a794-fa07-4047-9bc7-a8daf2d4a571"
+    },
+    {
+      "id": "e3a31960-1add-4c05-bdf8-2ca6618c5139",
+      "name": "Casual Sorcery",
+      "status": "published",
+      "date": "Sat, Apr 18, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 18, 2026",
+      "location": {
+        "id": "d2b28cf4-29ad-48f1-8797-0308c392ce22",
+        "name": "CURIO (BALTIMORE)"
+      },
+      "city": "Woodlawn",
+      "state": "MD",
+      "country": "US",
+      "address": "Woodlawn, MD, 21244, US",
+      "type": "Casual Meetup",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 0,
+      "organizer": {
+        "id": "d2b28cf4-29ad-48f1-8797-0308c392ce22",
+        "name": "CURIO (BALTIMORE)"
+      },
+      "url": "https://play.sorcerytcg.com/events/e3a31960-1add-4c05-bdf8-2ca6618c5139"
     }
   ]
 }
