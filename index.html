@@ -495,7 +495,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 var FAQ_DATA=[];var CODEX_DATA=[];
 (function(){
   var _loaded=0;
-  function _tryInit(){if(++_loaded===2&&typeof render==='function')render();}
+  function _tryInit(){++_loaded;if(typeof render==='function')render();}
   function parseCSV(text){
     var lines=text.split(/\r?\n/);
     if(!lines.length)return[];
