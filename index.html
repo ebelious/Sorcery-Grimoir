@@ -1016,7 +1016,16 @@ function rollDice(sides,count,colIdx,pi){
   },83);
 }
 function closeDice(){if(diceAnim){clearInterval(diceAnim);diceAnim=null;}G.dice=null;render();}
-function toggleAcc(key){G.accExp[key]=!G.accExp[key];render();}
+function toggleAcc(key){
+  G.accExp[key]=!G.accExp[key];
+  var panel=document.querySelector('.panel');
+  var scrollY=panel?panel.scrollTop:0;
+  render();
+  if(scrollY){
+    var p=document.querySelector('.panel');
+    if(p)p.scrollTop=scrollY;
+  }
+}
 
 // ── CARD HELPERS ─────────────────────────────────────────────────────────────
 var _cm={};(function(){CARDS.forEach(function(c){_cm[c.n]=c;});})();
