@@ -507,8 +507,8 @@ var FAQ_DATA=[];var CODEX_DATA=[];
       var cols=[];var cur='';var inQ=false;
       for(var c=0;c<line.length;c++){
         var ch=line[c];
-        if(ch==='"'){if(inQ&&line[c+1]==='"'){cur+='"';c++;}else{inQ=!inQ;}}
-        else if(ch===','&&!inQ){cols.push(cur);cur='';}
+        if(ch=='"'){if(inQ&&line[c+1]=='"'){cur+='"';c++;}else{inQ=!inQ;}}
+        else if(ch==','&&!inQ){cols.push(cur);cur='';}
         else{cur+=ch;}
       }
       cols.push(cur);
@@ -524,7 +524,6 @@ var FAQ_DATA=[];var CODEX_DATA=[];
   function loadCodexFromCSV(rows){
     CODEX_DATA=rows.map(function(r){return{k:r['title']||r['k']||'',def:r['content']||r['def']||'',sub:r['subcodexes']||r['sub']||''};});
   }
-  // FAQ: try CSV first, fall back to JSON
   fetch('./faq.csv').then(function(r){
     if(!r.ok)throw new Error('no csv');
     return r.text();
@@ -533,7 +532,6 @@ var FAQ_DATA=[];var CODEX_DATA=[];
   }).catch(function(){
     fetch('./faq.json').then(function(r){return r.json();}).then(function(d){FAQ_DATA=d;_tryInit();}).catch(function(e){console.error('FAQ load failed',e);_tryInit();});
   });
-  // Codex: try CSV first, fall back to JSON
   fetch('./codex.csv').then(function(r){
     if(!r.ok)throw new Error('no csv');
     return r.text();
