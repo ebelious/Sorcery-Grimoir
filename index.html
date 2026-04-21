@@ -575,12 +575,12 @@ var MENU_S={
   Settings:['Starting Life','Dice Settings','Player Names','Theme','YouTube API'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks','Published Decks'],
-  Stats:['Local Stats','Deck Stats','Public Stats'],
+  Stats:['Local Stats','Deck Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Published Decks':'pubdecks','Local Stats':'sl','Deck Stats':'sd','Public Stats':'sp','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',sp:'Public Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Published Decks':'pubdecks','Local Stats':'sl','Deck Stats':'sd','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -655,7 +655,7 @@ var G={
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
   pubDecksItems:null,pubDecksLoading:false,pubDecksLoaded:false,pubDecksErr:null,pubDecksSearch:'',
-  pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
+  
   cF:{el:[],type:[],rarity:[],set:[],mana:[]},
   coF:{el:[],type:[],rarity:[],set:[]},
   accExp:{},prices:{},matchLog:[],matchStartTime:null,
@@ -712,7 +712,7 @@ function boot(){
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
-  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.newsAddMode=false;G.readModal=null;render();if(G.cfg.keepAwake)_requestWakeLock();
   loadPubDecks();
 }
 function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
@@ -1419,155 +1419,6 @@ function loadYTVideos(){
 
 // ── NEWS ──────────────────────────────────────────────────────────────────────
 var _evACTimer=null;
-function evCityAutocomplete(val){
-  clearTimeout(_evACTimer);
-  if(!val||val.length<2){G.evAcResults=[];render();return;}
-  _evACTimer=setTimeout(function(){
-    fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(val)+'&format=json&limit=6&addressdetails=1&accept-language=en')
-      .then(function(r){return r.json();})
-      .then(function(results){
-        if(!results||!results.length){G.evAcResults=[];render();return;}
-        G.evAcResults=results.map(function(r){
-          var addr=r.address||{};
-          var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||r.display_name.split(',')[0];
-          var state=addr.state||addr.state_district||'';
-          var country=addr.country_code||'';
-          var label=city+(state?', '+state:'')+(country&&country!=='us'?' ('+country.toUpperCase()+')':'');
-          return {label:label,city:city,state:state};
-        });
-        render();
-      })
-      .catch(function(){G.evAcResults=[];});
-  },250);
-}
-
-function evSelectCity(el){
-  var label=typeof el==='string'?el:(el.dataset?el.dataset.label:el);
-  if(!label)return;
-  G.evCityInput=label;G.evCity=label;G.evAcResults=[];
-  var inp=document.getElementById('ev-city-inp');
-  if(inp)inp.value=label;
-  var box=document.getElementById('ev-ac-box');
-  if(box)box.innerHTML='';
-  // Save to recent locations
-  try{
-    var recent=JSON.parse(localStorage.getItem('sg-ev-recent')||'[]');
-    recent=recent.filter(function(r){return r!==label;});
-    recent.unshift(label);
-    localStorage.setItem('sg-ev-recent',JSON.stringify(recent.slice(0,8)));
-  }catch(e){}
-  loadLocalEvents(label);
-}
-
-function showEvPopup(ei){
-  G.evPopup=ei;render();
-}
-function closeEvPopup(){
-  G.evPopup=null;G.evAcResults=[];render();
-}
-
-function evUnsaveKey(key){
-  G.evSaved=(G.evSaved||[]).filter(function(x){return (x.name+(x.location||x.loc||''))!==key;});
-  sv('sg-evsaved',G.evSaved);render();
-}
-function evSave(idx){
-  var ev=(G._evReg||[])[idx];if(!ev)return;
-  G.evSaved=G.evSaved||[];
-  var key=ev.name+(ev.location||ev.loc||'');
-  if(!G.evSaved.find(function(x){return (x.name+(x.location||x.loc||''))===key;})){
-    G.evSaved.push(ev);sv('sg-evsaved',G.evSaved);
-  }
-  render();
-}
-function evUnsave(idx){
-  var ev=(G._evReg||[])[idx];
-  var key=ev?ev.name+(ev.location||ev.loc||''):idx;
-  G.evSaved=(G.evSaved||[]).filter(function(x){return (x.name+(x.location||x.loc||''))!==key;});
-  sv('sg-evsaved',G.evSaved);render();
-}
-
-function loadLocalEvents(city){
-  if(G.evLoading)return;
-  G.evLoading=true;G.evLoaded=false;G.evErr=null;G.evItems=null;render();
-  var loc=(city||G.evCity||'').toLowerCase().trim();
-
-  // Try events.json from GitHub Pages first
-  fetch('https://ebelious.github.io/Sorcery-Grimoir/events.json?t='+Date.now())
-    .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
-    .then(function(d){
-      var all=d.events||[];
-      if(!all.length)throw new Error('empty');
-      // Filter by city/state if provided
-      var filtered=loc?all.filter(function(e){
-        var l=(e.location||e.address||'').toLowerCase();
-        var n=(e.name||'').toLowerCase();
-        return loc.split(',').some(function(part){
-          var p=part.trim();
-          return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
-        });
-      }):all;
-      G.evLoading=false;G.evLoaded=true;
-      G.evItems=filtered.length?filtered:all.slice(0,20);
-      if(!filtered.length&&loc)G.evErr='No events found near '+loc+'. Showing all upcoming events.';
-      render();
-    })
-    .catch(function(){
-      // Fallback to Claude API search
-      _loadEventsViaAPI(city);
-    });
-}
-
-function _loadEventsViaAPI(city){
-  var loc=city||G.evCity||'your area';
-  var coordHint=(G.evLat&&G.evLng)?' (lat '+G.evLat.toFixed(4)+' lon '+G.evLng.toFixed(4)+')':'';
-  var prompt='Search the web for Sorcery Contested Realm TCG events near '+loc+coordHint+'. '
-    +'IMPORTANT: Fetch and search https://play.sorcerytcg.com/events — this is the official Play Network which lists weekly game store events. Look for stores in or near '+loc+'. '
-    +'Also search Google for: Sorcery Contested Realm TCG events near '+loc+'. '
-    +'Include recurring weekly events (e.g. every Friday) if they are at a local game store near '+loc+'. '
-    +'Return ONLY a raw JSON array, no markdown fences, no explanation: '
-    +'[{"name":"Event or Store Name","date":"Day schedule e.g. Every Friday","location":"Store Name, City, State","address":"Full street address if found","type":"Casual/Tournament/Weekly","url":"https://..."}]. '
-    +'Include up to 8 events. Prefer events closest to '+loc+'.';
-  apiCall(prompt,2500,function(err,txt){
-    G.evLoading=false;G.evLoaded=true;
-    if(!err&&txt){
-      var arr=extractJSON(txt,'array');
-      if(arr&&arr.length){G.evItems=arr;render();return;}
-    }
-    G.evErr='Could not load events. Try the Play Network link below.';render();
-  });
-}
-
-
-function getLocationAndLoadEvents(){
-  if(!navigator.geolocation){G.evCity='your area';loadLocalEvents();return;}
-  G.evLoading=true;render();
-  navigator.geolocation.getCurrentPosition(
-    function(pos){
-      var lat=pos.coords.latitude,lng=pos.coords.longitude;
-      // Reverse geocode using nominatim (free, no key)
-      fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lng+'&format=json&accept-language=en')
-        .then(function(r){return r.json();})
-        .then(function(d){
-          var addr=d.address||{};
-          var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||'';
-          var state=addr.state||addr.state_district||'';
-          var country=addr.country_code||'';
-          // Build readable location: "Jacksonville, FL" style
-          var stateAbbr=state;
-          G.evCity=city+(stateAbbr?', '+stateAbbr:'')+(country&&country!=='us'?' ('+country.toUpperCase()+')':'');
-          if(!G.evCity.trim())G.evCity=d.display_name?d.display_name.split(',')[0]:'your area';
-          G.evLat=lat;G.evLng=lng;
-          G.evLoading=false;
-          loadLocalEvents(G.evCity);
-        })
-        .catch(function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();});
-    },
-    function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();}
-  );
-}
-
-
-
 function loadPubDecks(){
   if(G.pubDecksLoading)return;
   G.pubDecksLoading=true;G.pubDecksLoaded=false;G.pubDecksErr=null;G.pubDecksItems=[];render();
@@ -1767,15 +1618,6 @@ function fetchPrice(nm){
 }
 
 // ── PUBLIC STATS ──────────────────────────────────────────────────────────────
-function loadPubStats(){
-  if(G.pubStatsLoading)return;G.pubStatsLoading=true;G.pubStatsLoaded=false;G.pubStatsErr=null;render();
-  var prompt='Go to sorcerytcg.gg right now and find the current Sorcery: Contested Realm metagame stats, top performing decks, win rates and meta share. Return ONLY this JSON: {"updated":"Apr 2026","source":"sorcerytcg.gg","topDecks":[{"rank":1,"name":"Deck Name","avatar":"Avatar","element":"Fire","winRate":"54%","metaShare":"20%","results":"3 top 8s"}]}. Include top 6 decks.';
-  apiCall(prompt,2000,function(err,txt){
-    G.pubStatsLoading=false;G.pubStatsLoaded=true;
-    if(!err&&txt){var obj=extractJSON(txt,'object');if(obj&&obj.topDecks){G.pubStats=obj;render();return;}}
-    G.pubStatsErr='Could not load stats.';render();
-  });
-}
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 function openPanel(id){G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();}
@@ -1814,21 +1656,33 @@ function pContent(){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
   });o('<a class="ext-lnk" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook &rarr;</a>');return out.join('');}
   if(p==='codex'){
-    var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
-    o('<div class="stbar">'+fil.length+' / '+codexMain.length+' keywords</div>');
+    var _codexMerged=[];
+    CODEX_DATA.forEach(function(k){
+      if(k.k&&k.k.trim()){
+        var body=k.def||'';
+        if(k.sub&&k.sub.trim())body+=(body?'\n\n':'')+k.sub;
+        _codexMerged.push({k:k.k,body:body});
+      } else if(k.sub&&k.sub.trim()&&_codexMerged.length){
+        _codexMerged[_codexMerged.length-1].body+=(_codexMerged[_codexMerged.length-1].body?'\n\n':'')+k.sub;
+      }
+    });
+    var q=(S.codexQ||'').toLowerCase();
+    var fil=q?_codexMerged.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.body.toLowerCase().indexOf(q)>=0;}):_codexMerged;
+    function _nlbr(s){return h(s).replace(/\n/g,'<br>');}
+    o('<div class="stbar">'+fil.length+' / '+_codexMerged.length+' keywords</div>');
     o('<div id="codex-srch-wrap" class="si" style="margin:0 0 6px"><input id="codex-srch" placeholder="Search codex&hellip;" value="'+h(S.codexQ||'')+'">');if(S.codexQ)o('<button class="sx" onclick="S.codexQ=\'\';render()">&times;</button>');o('</div>');
     fil.forEach(function(k,i){var key='cod_'+i;var exp=!!G.accExp[key];
-      o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def})-1;
-        return '<div class="acc rd-entry"><div class="acc-h" data-k="'+key+'" onclick="rdPopIdx('+_i+')">'
-          +'<div class="acc-nm" style="flex:1">'+h(k.k)+'</div>'
-          +'</div>'
-          +(exp?'<div class="acc-body"><div class="cod-def">'+h(k.def)+'</div></div>':'')
-          +'</div>';
-      })());
+      o('<div class="acc">'
+        +'<div class="acc-h" data-k="'+key+'" onclick="toggleAcc(this.dataset.k)">'
+        +'<div class="acc-nm" style="flex:1">'+h(k.k)+'</div>'
+        +'<div class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</div>'
+        +'</div>'
+        +(exp?'<div class="acc-body"><div style="font-size:11px;color:var(--fg2);line-height:1.6;white-space:normal;word-break:break-word;font-family:Georgia,serif;padding-top:2px">'+_nlbr(k.body)+'</div></div>':'')
+        +'</div>');
     });
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/codex" target="_blank">Full Codex on Curiosa &rarr;</a>');return out.join('');
   }
-  if(p==='faq'){
+    if(p==='faq'){
     var q=(S.faqQ||'').toLowerCase();var grouped={};
     var _lastFaqCard='';
     FAQ_DATA.forEach(function(f){
@@ -1841,17 +1695,27 @@ function pContent(){
     var cardNames=Object.keys(grouped).sort();var total=Object.values(grouped).reduce(function(s,a){return s+a.length;},0);
     o('<div class="stbar">'+total+' entries &mdash; '+cardNames.length+' cards</div>');
     o('<div id="faq-srch-wrap" class="si" style="margin:0 0 6px"><input id="faq-srch" placeholder="Search FAQ&hellip;" value="'+h(S.faqQ||'')+'">');if(S.faqQ)o('<button class="sx" onclick="S.faqQ=\'\';render()">&times;</button>');o('</div>');
-    cardNames.forEach(function(card,i){var faqs=grouped[card];var key='faq_'+i;var exp=!!G.accExp[key];o('<div class="acc"><div class="acc-h" data-k="'+key+'" onclick="toggleAcc(this.dataset.k)"><div class="acc-nm">'+h(card)+'</div><div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</span></div></div>');if(exp){o('<div class="acc-body">');faqs.forEach(function(f){
-        o((function(){var _i=(G._rd=G._rd||[]).push({t:f.q,b:f.a})-1;
-          return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
-            +'<div class="acc-q">'+h(f.q)+'</div>'
-            +'<div class="acc-a">'+h(f.a)+'</div>'
-            +'</div>';
-        })());
-      });o('</div>');}o('</div>');});
+    cardNames.forEach(function(card,ci){var faqs=grouped[card];var key='faq_'+ci;var exp=!!G.accExp[key];
+      o('<div class="acc"><div class="acc-h" data-k="'+key+'" onclick="toggleAcc(this.dataset.k)"><div class="acc-nm">'+h(card)+'</div><div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</span></div></div>');
+      if(exp){
+        o('<div class="acc-body">');
+        faqs.forEach(function(f,fi){
+          var qkey='faq_'+ci+'_'+fi;var qexp=!!G.accExp[qkey];
+          o('<div style="border-bottom:1px solid var(--bg2);padding:8px 0">'
+            +'<div data-k="'+qkey+'" onclick="toggleAcc(this.dataset.k)" style="cursor:pointer;display:flex;align-items:flex-start;gap:6px">'
+            +'<span style="color:var(--cyn);font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px">'+(qexp?'▾':'▸')+'</span>'
+            +'<div style="font-size:11px;font-weight:700;color:var(--wht);line-height:1.5;flex:1">'+h(f.q)+'</div>'
+            +'</div>'
+            +(qexp?'<div style="margin-top:6px;padding-left:16px;font-size:11px;color:var(--fg2);line-height:1.65;font-family:Georgia,serif;white-space:normal;word-break:break-word">'+h(f.a)+'</div>':'')
+            +'</div>');
+        });
+        o('</div>');
+      }
+      o('</div>');
+    });
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/faqs" target="_blank">Official FAQ on Curiosa &rarr;</a>');return out.join('');
   }
-  if(p==='links'){[{n:'Official Rulebook',u:'https://sorcerytcg.com/how-to-play',d:'How to play'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'SorceryTCG.gg',u:'https://sorcerytcg.gg',d:'Meta reports & prices'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'}].forEach(function(l){o('<a class="ext-lnk" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
+    if(p==='links'){[{n:'Official Rulebook',u:'https://sorcerytcg.com/how-to-play',d:'How to play'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'SorceryTCG.gg',u:'https://sorcerytcg.gg',d:'Meta reports & prices'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'}].forEach(function(l){o('<a class="ext-lnk" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
   if(p==='cards'){
     var q=S.cS||'';var fil=cFilter(CARDS,G.cF,q);
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
@@ -1945,132 +1809,6 @@ function pContent(){
     return out.join('');
   }
   if(p==='sd'){var entries=Object.entries(G.dkstat);if(entries.length){entries.forEach(function(kv){var k=kv[0],d=kv[1];var pct=d.w+d.l>0?Math.round(d.w/(d.w+d.l)*100)+'%':'--';o('<div class="sc"><div class="sn">'+h(k)+'</div><div class="ss"><span class="sw">'+d.w+'W</span><span class="sl_">'+d.l+'L</span><span class="sp_">'+pct+'</span></div></div>');});}else{o('<div class="ld">No deck stats yet.</div>');}return out.join('');}
-  if(p==='sp'){
-    o('<div class="fr"><button class="fb gold" onclick="loadPubStats()">Load Stats</button></div>');
-    if(G.pubStatsLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
-    else if(G.pubStatsErr){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">'+h(G.pubStatsErr)+'</div>');}
-    else if(G.pubStats&&G.pubStats.topDecks){
-      o('<div style="font-size:8px;color:var(--fg2);margin-bottom:8px">'+h(G.pubStats.source||'sorcerytcg.gg')+' &middot; '+h(G.pubStats.updated||'')+'</div>');
-      G.pubStats.topDecks.forEach(function(d,i){o('<div class="sc" style="display:flex;align-items:center;gap:7px"><div style="font-size:15px;font-weight:700;color:var(--yel);min-width:22px">'+(d.rank||i+1)+'</div><div style="flex:1"><div class="sn">'+h(d.name||'')+'</div><div style="font-size:8px;color:var(--fg2)">'+h(d.avatar||'')+' &middot; '+h(d.element||'')+'</div><div class="ss"><span class="sw">'+h(d.winRate||'')+'</span><span class="sp_">'+h(d.metaShare||'')+'</span></div></div></div>');});
-    }
-    o('<a class="ext-lnk" style="margin-top:6px" href="https://sorcerytcg.gg" target="_blank">sorcerytcg.gg &rarr;</a>');
-    o('<a class="ext-lnk" href="https://curiosa.io/decks" target="_blank">Curiosa decklists &rarr;</a>');
-    return out.join('');
-  }
-  if(p==='ev'){G._evReg=[];
-    var _evCity=G.evCity||'';
-    var _pnParts=_evCity.split(',');
-    var _pnCity=_pnParts[0]?_pnParts[0].trim():'';
-    var _pnState=_pnParts[1]?_pnParts[1].trim():'';
-    var _pnURL='https://play.sorcerytcg.com/events'
-      +(_pnCity?'?city='+encodeURIComponent(_pnCity):'')
-      +(_pnState?(_pnCity?'&':'?')+'state='+encodeURIComponent(_pnState):'');
-
-    // Search row
-    o('<div style="display:flex;gap:4px;margin-bottom:4px;align-items:flex-start">');
-    o('<div class="ev-ac-wrap" style="flex:1">');
-    o('<input id="ev-city-inp" class="fi" placeholder="City, State&hellip;" value="'+h(G.evCityInput||'')+'" style="width:100%;box-sizing:border-box" oninput="G.evCityInput=this.value;evCityAutocomplete(this.value)" onkeydown="if(event.key===\'Enter\'){var v=this.value.trim();if(v)evSelectCity(v);}">');
-    o('<div id="ev-ac-box" class="ev-ac-box">');
-    if(G.evAcResults&&G.evAcResults.length){
-      G.evAcResults.forEach(function(r){
-        o('<div class="ev-ac-item" data-label="'+h(r.label)+'" onclick="evSelectCity(this)"><b>'+h(r.city)+'</b>'+(r.state?'<span style="color:var(--fg2)">, '+h(r.state)+'</span>':'')+'</div>');
-      });
-    } else {
-      var _recentLocs=[];try{_recentLocs=JSON.parse(localStorage.getItem('sg-ev-recent')||'[]');}catch(e){}
-      if(_recentLocs.length&&!G.evCityInput){
-        _recentLocs.slice(0,5).forEach(function(loc){
-          o('<div class="ev-ac-item" data-label="'+h(loc)+'" onclick="evSelectCity(this)" style="color:var(--fg2)">&#128337; '+h(loc)+'</div>');
-        });
-      }
-    }
-    o('</div></div>');
-    o('<button class="fb gold" onclick="var inp=document.getElementById(\'ev-city-inp\');var v=inp?inp.value.trim():\'\';if(v){evSelectCity(v);}else{getLocationAndLoadEvents();}">Search</button>');
-    o('</div>');
-    o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="G.evCityInput=\'\';getLocationAndLoadEvents()">&#x1F4CD; Use My Location</button>');
-
-    if(_evCity&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching near: <b>'+h(_evCity)+'</b></div>');
-    o('<a class="ext-lnk" style="background:var(--bg3);border-color:var(--yel);color:var(--yel);text-align:center;font-weight:700;padding:8px" href="'+_pnURL+'" target="_blank">&#x1F3AE; Open Play Network'+(_pnCity?' for '+h(_pnCity):'')+'&rarr;</a>');
-
-    if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
-    else if(G.evItems&&G.evItems.length){
-      o('<div class="slbl2" style="margin-top:8px">Results</div>');
-      G._evReg=[];
-      G.evItems.forEach(function(e,_ei){
-        G._evReg.push(e);
-        var loc=e.location||e.loc||'';
-        var key=e.name+(loc||'');
-        var saved=!!(G.evSaved||[]).find(function(x){return (x.name+(x.location||x.loc||''))===key;});
-        var _city=e.city||(loc.split(',')[1]||'').trim();
-        var _state=e.state||(loc.split(',')[2]||loc.split(',')[1]||'').trim().slice(0,2).toUpperCase();
-        var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
-        o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
-        o('<div style="display:flex;align-items:flex-start;justify-content:space-between">');
-        o('<div class="ev-nm" style="flex:1">'+h(e.name||e.n||'')+'</div>');
-        o('<button class="eadj" style="flex-shrink:0;font-size:14px;border-color:'+(saved?'var(--yel)':'var(--bd)')+';color:'+(saved?'var(--yel)':'var(--fg2)')+'" onclick="event.stopPropagation();'+(saved?'evUnsave('+_ei+')':'evSave('+_ei+')')+'">&#9733;</button>');
-        o('</div>');
-        if(e.date||e.time)o('<div class="ev-mt">&#128197; '+(e.date?h(localDate(e.date)):'')+( e.time?' &#128336; '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
-        if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">&#128205; '+h(_cityState)+'</div>');
-        if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
-        o('<div style="font-size:10px;color:var(--fg2);margin-top:3px">Tap for details &rsaquo;</div>');
-        o('</div>');
-      });
-      o('<button class="fb" style="width:100%;margin:6px 0" onclick="G.evLoaded=false;G.evItems=null;loadLocalEvents(G.evCity)">Refresh</button>');
-    } else if(G.evErr){
-      o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
-    } else if(!G.evLoaded){
-      o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">Enter a city or use your location to find events.</div>');
-    }
-
-    // Saved events
-    if(G.evSaved&&G.evSaved.length){
-      o('<div class="slbl2" style="margin-top:10px">&#9733; Saved Events</div>');
-      G.evSaved.forEach(function(e,si){
-        var loc=e.location||e.loc||'';
-        o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
-        o('<div style="display:flex;align-items:flex-start;justify-content:space-between">');
-        o('<div class="ev-nm" style="flex:1">'+h(e.name||'')+'</div>');
-        o('<button class="eadj" style="flex-shrink:0;font-size:14px;color:var(--yel);border-color:var(--yel)" onclick="event.stopPropagation();G.evSaved.splice('+si+',1);sv(\'sg-evsaved\',G.evSaved);render()">&#9733;</button>');
-        o('</div>');
-        if(e.date)o('<div class="ev-mt">&#128197; '+h(e.date)+'</div>');
-        if(loc)o('<div class="ev-mt" style="color:var(--fg)">&#128205; '+h(loc)+'</div>');
-        o('<div style="font-size:10px;color:var(--fg2);margin-top:3px">Tap for details &rsaquo;</div>');
-        o('</div>');
-      });
-    }
-
-    // Event detail popup
-    if(G.evPopup!=null){
-      var _ep=G.evPopup>=0?G._evReg[G.evPopup]:G.evSaved[-(G.evPopup+1)];
-      if(_ep){
-        var _eloc=_ep.location||_ep.loc||'';
-        var _eaddr=_ep.address||'';
-        var _emaps=encodeURIComponent(_eaddr||_eloc);
-        var _ekey=_ep.name+(_eloc||'');
-        var _esaved=!!(G.evSaved||[]).find(function(x){return (x.name+(x.location||x.loc||''))===_ekey;});
-        o('<div class="pbg" onclick="if(event.target===this)closeEvPopup()">');
-        o('<div class="panel" style="border-radius:8px 8px 0 0;max-height:85vh">');
-        o('<div class="phdr">');
-        o('<button class="p-bk" onclick="closeEvPopup()">&#x2715;</button>');
-        o('<div class="p-ttl" style="font-size:16px">Event Details</div>');
-        o('<button class="eadj" style="font-size:16px;border-color:'+(_esaved?'var(--yel)':'var(--bd)')+';color:'+(_esaved?'var(--yel)':'var(--fg2)')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">&#9733;</button>');
-        o('</div>');
-        o('<div style="padding:14px;overflow-y:auto">');
-        o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
-        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">&#128197; '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' &#128336; <b>'+h(_ep.time)+'</b>':'')+( _ep.type?' &middot; '+h(_ep.type):'')+'</div>');
-        var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
-        if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--yel);margin-bottom:4px">&#128205; '+h(_epicitystate)+'</div>');
-        if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:3px">&#127978; '+h(_eloc)+'</div>');
-        if(_eaddr&&_eaddr!==_eloc)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
-        if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
-        o('<div style="display:flex;gap:8px;flex-direction:column">');
-        if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">&#x1F5FA; Open in Google Maps</a>');
-        if(_ep.url)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);font-size:13px" href="'+h(_ep.url)+'" target="_blank">View on Play Network &rarr;</a>');
-        o('</div></div></div></div>');
-      }
-    }
-
-    return out.join('');
-  }
   if(p==='ytapi'){
     var _ytKey=localStorage.getItem('sg-ytkey')||'';
     o('<div style="font-size:9px;color:var(--fg2);margin-bottom:8px">The YouTube Data API v3 is free (10,000 requests/day). Your key is stored only on this device.</div>');
@@ -2656,7 +2394,7 @@ function render(){
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
       o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button></div></div>');
       o('<div class="dbody">');
-      o('<div class="cro" onclick="openPanel(\'ev\')"><div class="crn">Events</div><div style="color:var(--fg2)">&rsaquo;</div></div>');
+
       Object.keys(MENU_S).forEach(function(cat){
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
