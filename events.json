@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-20T08:05:56.394Z",
+  "updated": "2026-04-21T07:49:01.838Z",
   "total": 20,
   "events": [
     {
@@ -28,479 +28,479 @@
       "url": "https://play.sorcerytcg.com/events/b7b951d0-ab60-4906-8749-4af83f311b7b"
     },
     {
-      "id": "d67d863e-35ca-4b08-8ca8-8288eb6445bd",
-      "name": "PRECON DECKS EVENT",
+      "id": "7aa80410-eeeb-499d-b468-9d12f053f784",
+      "name": "Monday Night Casual @ Good Games Belconnen",
       "status": "complete",
-      "date": "Sun, Apr 19, 2026",
+      "date": "Mon, Apr 20, 2026",
       "time": "8:00 AM UTC",
-      "endDate": "Apr 19, 2026",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "69485516-670e-49ff-b018-9f69fbc4c7dc",
-        "name": "mundo magic fantasy"
+        "id": "3c578cff-4a5c-4c06-bfef-67627f8eccbf",
+        "name": "Good Games Belconnen"
       },
-      "city": "Alicante (Alacant)",
-      "state": "VC",
-      "country": "ES",
-      "address": "Alicante (Alacant), VC, 03010, ES",
-      "type": "Constructed Tournament",
+      "city": "Belconnen",
+      "state": "ACT",
+      "country": "AU",
+      "address": "Belconnen, ACT, 2617, AU",
+      "type": "Sorcery @ Good Games Belconnen",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 2,
+      "organizer": {
+        "id": "3c578cff-4a5c-4c06-bfef-67627f8eccbf",
+        "name": "Good Games Belconnen"
+      },
+      "url": "https://play.sorcerytcg.com/events/7aa80410-eeeb-499d-b468-9d12f053f784"
+    },
+    {
+      "id": "784f7771-5acc-4d44-a27a-12ba633bc525",
+      "name": "OMG Biweekly Sorcery",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "12:00 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "c4a2195c-84f0-4cb1-953f-ba99f164ce73",
+        "name": "Oh My Game"
+      },
+      "city": "Vantaa",
+      "state": "Uusimaa",
+      "country": "FI",
+      "address": "Vantaa, Uusimaa, 01600, FI",
+      "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 10,
       "organizer": {
-        "id": "69485516-670e-49ff-b018-9f69fbc4c7dc",
-        "name": "mundo magic fantasy"
+        "id": "c4a2195c-84f0-4cb1-953f-ba99f164ce73",
+        "name": "Oh My Game"
       },
-      "url": "https://play.sorcerytcg.com/events/d67d863e-35ca-4b08-8ca8-8288eb6445bd"
+      "url": "https://play.sorcerytcg.com/events/784f7771-5acc-4d44-a27a-12ba633bc525"
     },
     {
-      "id": "de8a0ba2-9bad-4634-b8e9-1303c2c0b3b6",
-      "name": "Spelgalaxen weekly",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "9:00 AM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "f691a844-8f67-456e-ba77-eba5483d4d10",
-        "name": "Spelgalaxen"
-      },
-      "city": "Rådmansvången",
-      "state": "Skåne län",
-      "country": "SE",
-      "address": "Rådmansvången, Skåne län, 211 43, SE",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 8,
-      "organizer": {
-        "id": "f691a844-8f67-456e-ba77-eba5483d4d10",
-        "name": "Spelgalaxen"
-      },
-      "url": "https://play.sorcerytcg.com/events/de8a0ba2-9bad-4634-b8e9-1303c2c0b3b6"
-    },
-    {
-      "id": "f1e6ee78-dd1a-45a9-93f3-7af324ad6e37",
-      "name": "April Constructed",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "11:00 AM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "16606304-6fac-4a1e-bf4b-172e99567344",
-        "name": "Rarehuntershop"
-      },
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "country": "AT",
-      "address": "Schwechat, Niederösterreich, 2320, AT",
-      "type": "TCG Weekend Playmat Special",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 12,
-      "organizer": {
-        "id": "16606304-6fac-4a1e-bf4b-172e99567344",
-        "name": "Rarehuntershop"
-      },
-      "url": "https://play.sorcerytcg.com/events/f1e6ee78-dd1a-45a9-93f3-7af324ad6e37"
-    },
-    {
-      "id": "3fbc733b-c95b-4a1d-87a2-843917efe701",
-      "name": "Sorcery April Wizard Clash",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "223dbfca-d4d5-4c02-8895-1d622e893eb5",
-        "name": "Top Deck Games - Cherry Hill"
-      },
-      "city": "Cherry Hill Township",
-      "state": "NJ",
-      "country": "US",
-      "address": "Cherry Hill Township, NJ, 08003, US",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 3,
-      "organizer": {
-        "id": "223dbfca-d4d5-4c02-8895-1d622e893eb5",
-        "name": "Top Deck Games - Cherry Hill"
-      },
-      "url": "https://play.sorcerytcg.com/events/3fbc733b-c95b-4a1d-87a2-843917efe701"
-    },
-    {
-      "id": "c6c51100-39b6-4005-8fc3-7b30ef34c4b9",
-      "name": "Sorcery Sundays at Cold Foil Heroes",
+      "id": "6f736d20-46c8-43ca-a3bc-9b7405a5700b",
+      "name": "Gongaii Casual",
       "status": "published",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:00 PM UTC",
+      "date": "Mon, Apr 20, 2026",
+      "time": "1:00 PM UTC",
       "endDate": "Apr 20, 2026",
       "location": {
-        "id": "2d82ad5b-4665-4563-8cc2-6bd2b49103ea",
-        "name": "Cold Foil Heroes"
+        "id": "f2915d52-090c-4849-9663-107153ddcd02",
+        "name": "Gongaii Games, Inc"
       },
-      "city": "Woodstock",
-      "state": "GA",
+      "city": "Beaverton",
+      "state": "OR",
       "country": "US",
-      "address": "Woodstock, GA, 30188, US",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 3,
-      "organizer": {
-        "id": "2d82ad5b-4665-4563-8cc2-6bd2b49103ea",
-        "name": "Cold Foil Heroes"
-      },
-      "url": "https://play.sorcerytcg.com/events/c6c51100-39b6-4005-8fc3-7b30ef34c4b9"
-    },
-    {
-      "id": "d187e389-f477-418a-adce-f8d554d9bd5b",
-      "name": "Sorcery Open Play w Merfolku",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "c5251776-ab26-4be9-a7ec-fcbaec458927",
-        "name": "Merfolk"
-      },
-      "city": "Pruszków",
-      "state": "MZ",
-      "country": "PL",
-      "address": "Pruszków, MZ, 05-800, PL",
-      "type": "Casual Meetup",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 9,
-      "organizer": {
-        "id": "c5251776-ab26-4be9-a7ec-fcbaec458927",
-        "name": "Merfolk"
-      },
-      "url": "https://play.sorcerytcg.com/events/d187e389-f477-418a-adce-f8d554d9bd5b"
-    },
-    {
-      "id": "2596c766-3113-40b9-aecc-baa77c7131a0",
-      "name": "Sunday Sorcery Casual Meetup",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "66c4310f-a53e-44a2-b70c-d16403e3ea0b",
-        "name": "Tabletop Cincy"
-      },
-      "city": "West Chester Township",
-      "state": "OH",
-      "country": "US",
-      "address": "West Chester Township, OH, 45069, US",
+      "address": "Beaverton, OR, 97005, US",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 5,
       "organizer": {
-        "id": "66c4310f-a53e-44a2-b70c-d16403e3ea0b",
-        "name": "Tabletop Cincy"
+        "id": "f2915d52-090c-4849-9663-107153ddcd02",
+        "name": "Gongaii Games, Inc"
       },
-      "url": "https://play.sorcerytcg.com/events/2596c766-3113-40b9-aecc-baa77c7131a0"
+      "url": "https://play.sorcerytcg.com/events/6f736d20-46c8-43ca-a3bc-9b7405a5700b"
     },
     {
-      "id": "9bc95908-f6bd-4c60-bc6f-4a49cb946231",
-      "name": "Sealed Sunday",
+      "id": "88612baf-bbf2-479b-9dbe-94faadff7c07",
+      "name": "Poniedzialkowe Sorcery",
       "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:30 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "date": "Mon, Apr 20, 2026",
+      "time": "4:00 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "73d056d1-7821-49e1-acd3-4823ce6b6155",
-        "name": "Cold Foil Heroes"
+        "id": "4b1f14dc-49fb-4748-880c-636f0819ab23",
+        "name": "Wilczek Sklep"
       },
-      "city": "Woodstock",
-      "state": "GA",
-      "country": "US",
-      "address": "Woodstock, GA, 30188, US",
-      "type": "Sealed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 10,
-      "organizer": {
-        "id": "73d056d1-7821-49e1-acd3-4823ce6b6155",
-        "name": "Cold Foil Heroes"
-      },
-      "url": "https://play.sorcerytcg.com/events/9bc95908-f6bd-4c60-bc6f-4a49cb946231"
-    },
-    {
-      "id": "38ed9434-9853-4894-8c7a-b88175cec7b3",
-      "name": "Sunday Sorcery Constructed",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "4:45 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "a783ca61-cb6c-4a61-93d4-27c50e9dd5ef",
-        "name": "The Feisty Goblin Gamehouse"
-      },
-      "city": "New Kensington",
-      "state": "PA",
-      "country": "US",
-      "address": "New Kensington, PA, 15068, US",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 7,
-      "organizer": {
-        "id": "a783ca61-cb6c-4a61-93d4-27c50e9dd5ef",
-        "name": "The Feisty Goblin Gamehouse"
-      },
-      "url": "https://play.sorcerytcg.com/events/38ed9434-9853-4894-8c7a-b88175cec7b3"
-    },
-    {
-      "id": "c639e0bc-511b-4216-9b40-3e152de108c8",
-      "name": "Thieves Guild Sundays",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "5:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "f769210a-442e-404e-810c-789f4765dd65",
-        "name": "Thieves Guild Gaming"
-      },
-      "city": "Newport",
-      "state": "KY",
-      "country": "US",
-      "address": "Newport, KY, 41071, US",
+      "city": "Poznań",
+      "state": "Województwo wielkopolskie",
+      "country": "PL",
+      "address": "Poznań, Województwo wielkopolskie, 61-001, PL",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 6,
       "organizer": {
-        "id": "f769210a-442e-404e-810c-789f4765dd65",
-        "name": "Thieves Guild Gaming"
+        "id": "4b1f14dc-49fb-4748-880c-636f0819ab23",
+        "name": "Wilczek Sklep"
       },
-      "url": "https://play.sorcerytcg.com/events/c639e0bc-511b-4216-9b40-3e152de108c8"
+      "url": "https://play.sorcerytcg.com/events/88612baf-bbf2-479b-9dbe-94faadff7c07"
     },
     {
-      "id": "b0786aa8-8c4e-4826-85c5-b8ca51146763",
-      "name": "$15 TTD Constructed",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "5:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "ca7cfb66-871e-446d-b116-4f3e6a9d7a9f",
-        "name": "Through The Decades Sports Cards & Gaming"
-      },
-      "city": "Louisville",
-      "state": "KY",
-      "country": "US",
-      "address": "Louisville, KY, 40220, US",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 8,
-      "organizer": {
-        "id": "ca7cfb66-871e-446d-b116-4f3e6a9d7a9f",
-        "name": "Through The Decades Sports Cards & Gaming"
-      },
-      "url": "https://play.sorcerytcg.com/events/b0786aa8-8c4e-4826-85c5-b8ca51146763"
-    },
-    {
-      "id": "f78ea810-5f46-4057-bcde-a8640be0f915",
-      "name": "Sunday Play",
-      "status": "inProgress",
-      "date": "Sun, Apr 19, 2026",
-      "time": "5:15 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "27488109-22fa-4afe-9717-596a654a6698",
-        "name": "Hobbits Land"
-      },
-      "city": "Estoril",
-      "state": "Lisboa",
-      "country": "PT",
-      "address": "Estoril, Lisboa, 2765, PT",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 6,
-      "organizer": {
-        "id": "27488109-22fa-4afe-9717-596a654a6698",
-        "name": "Hobbits Land"
-      },
-      "url": "https://play.sorcerytcg.com/events/f78ea810-5f46-4057-bcde-a8640be0f915"
-    },
-    {
-      "id": "0f10d493-d937-4bfb-90ee-95a000f9b649",
-      "name": "Sorcery Sunday KC!!",
+      "id": "61ec749a-a6f0-4f29-93a5-008d54a3493b",
+      "name": "Weekly Play",
       "status": "published",
-      "date": "Sun, Apr 19, 2026",
-      "time": "5:30 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "date": "Mon, Apr 20, 2026",
+      "time": "4:00 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "a6756439-0131-4008-ae6a-1aa42c7ff48c",
-        "name": "Collector's Cache"
+        "id": "fdda44b7-8a55-4a92-a8ee-b32f33cbfc39",
+        "name": "White Rabbit - Community Game Store (Aachen)"
       },
-      "city": "Lenexa",
-      "state": "KS",
-      "country": "US",
-      "address": "Lenexa, KS, 66210, US",
+      "city": "Aachen",
+      "state": "NRW",
+      "country": "DE",
+      "address": "Aachen, NRW, 52062, DE",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 0,
       "organizer": {
-        "id": "a6756439-0131-4008-ae6a-1aa42c7ff48c",
-        "name": "Collector's Cache"
+        "id": "fdda44b7-8a55-4a92-a8ee-b32f33cbfc39",
+        "name": "White Rabbit - Community Game Store (Aachen)"
       },
-      "url": "https://play.sorcerytcg.com/events/0f10d493-d937-4bfb-90ee-95a000f9b649"
+      "url": "https://play.sorcerytcg.com/events/61ec749a-a6f0-4f29-93a5-008d54a3493b"
     },
     {
-      "id": "60ec537e-4a41-401c-8547-181f3f105e1c",
-      "name": "Sorcery Casual Play",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "6:00 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "id": "90aada84-5f21-48b3-8ed5-9df14bf565ed",
+      "name": "Tolarian Weekly Play",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "4:30 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "7badf404-cb25-45e4-b5ec-b2f9b122ab66",
-        "name": "The Eldritch Bastion"
+        "id": "a6e4c53b-5e6c-4d51-8989-7b766167553d",
+        "name": "Tolarie.cz"
       },
-      "city": "Ashland",
-      "state": "OH",
-      "country": "US",
-      "address": "Ashland, OH, 44805, US",
-      "type": "Casual Meetup",
+      "city": "Pardubice",
+      "state": "Pardubický kraj",
+      "country": "CZ",
+      "address": "Pardubice, Pardubický kraj, 530 02, CZ",
+      "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 2,
+      "registered": 0,
       "organizer": {
-        "id": "7badf404-cb25-45e4-b5ec-b2f9b122ab66",
-        "name": "The Eldritch Bastion"
+        "id": "a6e4c53b-5e6c-4d51-8989-7b766167553d",
+        "name": "Tolarie.cz"
       },
-      "url": "https://play.sorcerytcg.com/events/60ec537e-4a41-401c-8547-181f3f105e1c"
+      "url": "https://play.sorcerytcg.com/events/90aada84-5f21-48b3-8ed5-9df14bf565ed"
     },
     {
-      "id": "e958238b-3c2d-48c1-a5a6-5b4d39ea4a31",
-      "name": "Sorcery Free Play / Learn to Play",
-      "status": "published",
-      "date": "Sun, Apr 19, 2026",
-      "time": "6:00 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "id": "f95195fa-2374-4372-9e4c-397bbec4f74e",
+      "name": "Monday Afternoon Sorcery",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "4:38 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "cf61b133-b6a5-4bfa-a4e3-fc6e7d903856",
-        "name": "Slick Mimic's"
+        "id": "c18dc084-7bcb-4091-91d9-37a87a44c542",
+        "name": "Hrana Stolu"
       },
-      "city": "Appleton",
-      "state": "WI",
-      "country": "US",
-      "address": "Appleton, WI, 54914, US",
-      "type": "Learn To Play",
+      "city": "Brno-střed",
+      "state": "Jihomoravský kraj",
+      "country": "CZ",
+      "address": "Brno-střed, Jihomoravský kraj, 602 00, CZ",
+      "type": "Sealed Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 4,
       "organizer": {
-        "id": "cf61b133-b6a5-4bfa-a4e3-fc6e7d903856",
-        "name": "Slick Mimic's"
+        "id": "c18dc084-7bcb-4091-91d9-37a87a44c542",
+        "name": "Hrana Stolu"
       },
-      "url": "https://play.sorcerytcg.com/events/e958238b-3c2d-48c1-a5a6-5b4d39ea4a31"
+      "url": "https://play.sorcerytcg.com/events/f95195fa-2374-4372-9e4c-397bbec4f74e"
     },
     {
-      "id": "1bce0eae-27d0-42b3-97d7-fa36963e2308",
-      "name": "Sorcery Weekly Play",
+      "id": "38ac71ff-cac0-4555-baf3-25f51e5ad0b2",
+      "name": "Free game night",
       "status": "published",
-      "date": "Sun, Apr 19, 2026",
-      "time": "6:00 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "date": "Mon, Apr 20, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "1a8f0330-5390-473c-abae-193fc54b58cd",
-        "name": "Athoria Games Tempe"
+        "id": "c8660ee4-a1ea-4df9-8dcb-4c9ef0e6947a",
+        "name": "Librairie Chimères"
       },
-      "city": "Tempe",
-      "state": "AZ",
+      "city": "Ixelles",
+      "state": "Bruxelles",
+      "country": "BE",
+      "address": "Ixelles, Bruxelles, 1050, BE",
+      "type": "Casual Meetup",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 2,
+      "organizer": {
+        "id": "c8660ee4-a1ea-4df9-8dcb-4c9ef0e6947a",
+        "name": "Librairie Chimères"
+      },
+      "url": "https://play.sorcerytcg.com/events/38ac71ff-cac0-4555-baf3-25f51e5ad0b2"
+    },
+    {
+      "id": "fba90291-a5bc-4a56-84a9-d3a362478544",
+      "name": "1º Sorcery Championship",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "5:00 PM UTC",
+      "endDate": "Apr 21, 2026",
+      "location": {
+        "id": "8b610794-4dcf-4bd0-8504-9ebe45a6b123",
+        "name": "Cards Hall"
+      },
+      "city": "Jardim Faculdade",
+      "state": "SP",
+      "country": "BR",
+      "address": "Jardim Faculdade, SP, 18030-205, BR",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 6,
+      "organizer": {
+        "id": "8b610794-4dcf-4bd0-8504-9ebe45a6b123",
+        "name": "Cards Hall"
+      },
+      "url": "https://play.sorcerytcg.com/events/fba90291-a5bc-4a56-84a9-d3a362478544"
+    },
+    {
+      "id": "91c410a0-bf6b-44e5-bc4f-ded892cdff8e",
+      "name": "Competitive Monday",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "10:00 PM UTC",
+      "endDate": "Apr 21, 2026",
+      "location": {
+        "id": "0da858e4-b876-4a43-b5ba-92a3b45280fa",
+        "name": "Capstone Games Retail Store"
+      },
+      "city": "Cincinnati",
+      "state": "OH",
       "country": "US",
-      "address": "Tempe, AZ, 85282, US",
+      "address": "Cincinnati, OH, 45215, US",
       "type": "Constructed Tournament",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 2,
       "organizer": {
-        "id": "1a8f0330-5390-473c-abae-193fc54b58cd",
-        "name": "Athoria Games Tempe"
+        "id": "0da858e4-b876-4a43-b5ba-92a3b45280fa",
+        "name": "Capstone Games Retail Store"
       },
-      "url": "https://play.sorcerytcg.com/events/1bce0eae-27d0-42b3-97d7-fa36963e2308"
+      "url": "https://play.sorcerytcg.com/events/91c410a0-bf6b-44e5-bc4f-ded892cdff8e"
     },
     {
-      "id": "5ac3fa14-0665-41e7-a35f-9161cda0257f",
-      "name": "Weekly Play",
+      "id": "a7a4e55e-c4c4-44ad-920b-3e2663554d29",
+      "name": "Sorcery Open Play",
       "status": "published",
-      "date": "Sun, Apr 19, 2026",
-      "time": "6:52 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "date": "Mon, Apr 20, 2026",
+      "time": "10:00 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "38e5cdb6-8c6a-43dc-bcb9-5f68759d0b58",
-        "name": "SilverShield Gaming"
+        "id": "0da858e4-b876-4a43-b5ba-92a3b45280fa",
+        "name": "Capstone Games Retail Store"
       },
-      "city": "Powder Springs",
-      "state": "GA",
+      "city": "Cincinnati",
+      "state": "OH",
       "country": "US",
-      "address": "Powder Springs, GA, 30127, US",
+      "address": "Cincinnati, OH, 45215, US",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
       "registered": 0,
       "organizer": {
-        "id": "38e5cdb6-8c6a-43dc-bcb9-5f68759d0b58",
-        "name": "SilverShield Gaming"
+        "id": "0da858e4-b876-4a43-b5ba-92a3b45280fa",
+        "name": "Capstone Games Retail Store"
       },
-      "url": "https://play.sorcerytcg.com/events/5ac3fa14-0665-41e7-a35f-9161cda0257f"
+      "url": "https://play.sorcerytcg.com/events/a7a4e55e-c4c4-44ad-920b-3e2663554d29"
     },
     {
-      "id": "70139576-fefd-4ceb-aab4-0f6279647a99",
-      "name": "Dane's Games Weekly Play",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "7:00 PM UTC",
-      "endDate": "Apr 19, 2026",
+      "id": "7234b605-df9a-41de-8432-d35ff33f2999",
+      "name": "Weekly Open Play - Sorcery Mondays",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "10:00 PM UTC",
+      "endDate": "Apr 20, 2026",
       "location": {
-        "id": "2db8eb5c-9027-4c3c-9b39-9f9f1a3ad5bf",
-        "name": "Dane's Games"
+        "id": "3e7007e6-903f-4e5e-be01-7932c5e1f211",
+        "name": "Immortals Inc LLC"
       },
-      "city": "West Chicago",
-      "state": "IL",
+      "city": "Rocky River",
+      "state": "OH",
       "country": "US",
-      "address": "West Chicago, IL, 60185, US",
-      "type": "Constructed Tournament",
-      "entryFee": "FREE",
-      "capacity": "",
-      "registered": 7,
-      "organizer": {
-        "id": "2db8eb5c-9027-4c3c-9b39-9f9f1a3ad5bf",
-        "name": "Dane's Games"
-      },
-      "url": "https://play.sorcerytcg.com/events/70139576-fefd-4ceb-aab4-0f6279647a99"
-    },
-    {
-      "id": "1f20010b-73ae-4c5b-9a09-b1eb48911427",
-      "name": "Sunday Skirmish",
-      "status": "complete",
-      "date": "Sun, Apr 19, 2026",
-      "time": "7:00 PM UTC",
-      "endDate": "Apr 19, 2026",
-      "location": {
-        "id": "1ec3e394-f479-4e5b-ad9a-ef163b162886",
-        "name": "East Coast Gaming"
-      },
-      "city": "Cary",
-      "state": "NC",
-      "country": "US",
-      "address": "Cary, NC, 27511, US",
+      "address": "Rocky River, OH, 44116, US",
       "type": "Casual Meetup",
       "entryFee": "FREE",
       "capacity": "",
-      "registered": 8,
+      "registered": 0,
       "organizer": {
-        "id": "1ec3e394-f479-4e5b-ad9a-ef163b162886",
-        "name": "East Coast Gaming"
+        "id": "3e7007e6-903f-4e5e-be01-7932c5e1f211",
+        "name": "Immortals Inc LLC"
       },
-      "url": "https://play.sorcerytcg.com/events/1f20010b-73ae-4c5b-9a09-b1eb48911427"
+      "url": "https://play.sorcerytcg.com/events/7234b605-df9a-41de-8432-d35ff33f2999"
+    },
+    {
+      "id": "4f6a1451-6fa4-46e7-9a16-9931db5da5e7",
+      "name": "Monday Sorcery",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "10:30 PM UTC",
+      "endDate": "Apr 21, 2026",
+      "location": {
+        "id": "9dab6d3d-a45e-4908-9ed3-3f55675e9b82",
+        "name": "Giga-Bites Cafe"
+      },
+      "city": "Marietta",
+      "state": "GA",
+      "country": "US",
+      "address": "Marietta, GA, 30062, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 0,
+      "organizer": {
+        "id": "9dab6d3d-a45e-4908-9ed3-3f55675e9b82",
+        "name": "Giga-Bites Cafe"
+      },
+      "url": "https://play.sorcerytcg.com/events/4f6a1451-6fa4-46e7-9a16-9931db5da5e7"
+    },
+    {
+      "id": "6aee0931-78b3-4b65-842c-fdbb3bd109a5",
+      "name": "Sorcery Night @ Battle & Board",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "10:45 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "1be2acd8-cb09-457e-a951-1de4584591e9",
+        "name": "Battle & Board"
+      },
+      "city": "Raleigh",
+      "state": "NC",
+      "country": "US",
+      "address": "Raleigh, NC, 27615, US",
+      "type": "Draft Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 5,
+      "organizer": {
+        "id": "1be2acd8-cb09-457e-a951-1de4584591e9",
+        "name": "Battle & Board"
+      },
+      "url": "https://play.sorcerytcg.com/events/6aee0931-78b3-4b65-842c-fdbb3bd109a5"
+    },
+    {
+      "id": "654b714d-3ce2-407a-a907-1487b655b10b",
+      "name": "Sorcery Casuals (1v1)",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "11:00 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "884c7125-9a38-41c2-a68f-c090f863aa61",
+        "name": "Middle Tennessee Gaming"
+      },
+      "city": "Nashville",
+      "state": "TN",
+      "country": "US",
+      "address": "Nashville, TN, 37221, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "884c7125-9a38-41c2-a68f-c090f863aa61",
+        "name": "Middle Tennessee Gaming"
+      },
+      "url": "https://play.sorcerytcg.com/events/654b714d-3ce2-407a-a907-1487b655b10b"
+    },
+    {
+      "id": "cb8f473e-37b8-4c08-8f5e-f6bdac0fb944",
+      "name": "Sorcery at Oinkers",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "11:00 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "98efd35f-9158-4f3b-8e18-d3d833d0fc58",
+        "name": "Oinkers Island"
+      },
+      "city": "Broken Arrow",
+      "state": "OK",
+      "country": "US",
+      "address": "Broken Arrow, OK, 74012, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 0,
+      "organizer": {
+        "id": "98efd35f-9158-4f3b-8e18-d3d833d0fc58",
+        "name": "Oinkers Island"
+      },
+      "url": "https://play.sorcerytcg.com/events/cb8f473e-37b8-4c08-8f5e-f6bdac0fb944"
+    },
+    {
+      "id": "427af4a8-eabd-4caf-83e8-129106c4ffef",
+      "name": "Sorcery at Oinkers",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "11:00 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "98efd35f-9158-4f3b-8e18-d3d833d0fc58",
+        "name": "Oinkers Island"
+      },
+      "city": "Broken Arrow",
+      "state": "OK",
+      "country": "US",
+      "address": "Broken Arrow, OK, 74012, US",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 0,
+      "organizer": {
+        "id": "98efd35f-9158-4f3b-8e18-d3d833d0fc58",
+        "name": "Oinkers Island"
+      },
+      "url": "https://play.sorcerytcg.com/events/427af4a8-eabd-4caf-83e8-129106c4ffef"
+    },
+    {
+      "id": "f7e04263-e41a-431b-8b99-d3a38941dcc4",
+      "name": "Semanal MegaGeek ",
+      "status": "complete",
+      "date": "Mon, Apr 20, 2026",
+      "time": "11:03 PM UTC",
+      "endDate": "Apr 21, 2026",
+      "location": {
+        "id": "1f3a7083-b3d0-4272-97c8-2b62e0d0f74c",
+        "name": "MegaGeek"
+      },
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "BR",
+      "address": "São Paulo, SP, 01543-001, BR",
+      "type": "Constructed Tournament",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 4,
+      "organizer": {
+        "id": "1f3a7083-b3d0-4272-97c8-2b62e0d0f74c",
+        "name": "MegaGeek"
+      },
+      "url": "https://play.sorcerytcg.com/events/f7e04263-e41a-431b-8b99-d3a38941dcc4"
+    },
+    {
+      "id": "74ab8c29-6fd9-4f6a-b404-02ba4e479391",
+      "name": "Casual Meetup",
+      "status": "published",
+      "date": "Mon, Apr 20, 2026",
+      "time": "11:06 PM UTC",
+      "endDate": "Apr 20, 2026",
+      "location": {
+        "id": "6ac3d3c8-98fb-4ef5-bf1b-b741f03de1f2",
+        "name": "Gamezenter"
+      },
+      "city": "Roseville",
+      "state": "MN",
+      "country": "US",
+      "address": "Roseville, MN, 55113, US",
+      "type": "Casual Meetup",
+      "entryFee": "FREE",
+      "capacity": "",
+      "registered": 14,
+      "organizer": {
+        "id": "6ac3d3c8-98fb-4ef5-bf1b-b741f03de1f2",
+        "name": "Gamezenter"
+      },
+      "url": "https://play.sorcerytcg.com/events/74ab8c29-6fd9-4f6a-b404-02ba4e479391"
     }
   ]
 }
