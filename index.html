@@ -1582,6 +1582,7 @@ function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();
 function pContent(){
   var p=G.panel;if(!p||p==='card')return '';
   var out=[];function o(s){out.push(s);}
+  var _nlbr=function(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/\n/g,'<br>');};
 
   if(p==='life'){o('<div class="set-row"><div><b>Starting Life</b><br><span style="font-size:8px;color:var(--fg2)">Applied on next Reset</span></div><div class="ctr"><button class="eadj" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span class="cv">'+G.cfg.maxLife+'</span><button class="eadj" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
   if(p==='dice'){o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});o('</div><div class="slbl2">Die Color</div><div class="dc-row">');DIE_COLS.forEach(function(col,i){o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+col+'" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');return out.join('');}
@@ -1612,7 +1613,6 @@ function pContent(){
     var q=(S.codexQ||'').toLowerCase();
     var fil=q?CODEX_DATA.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.body.toLowerCase().indexOf(q)>=0;}):CODEX_DATA;
     var _total=CODEX_DATA.length;
-    function _nlbr(s){return h(s).replace(/\n/g,'<br>');}
     o('<div class="stbar">'+fil.length+' / '+_total+' keywords</div>');
     o('<div id="codex-srch-wrap" class="si" style="margin:0 0 6px"><input id="codex-srch" placeholder="Search codex&hellip;" value="'+h(S.codexQ||'')+'">');if(S.codexQ)o('<button class="sx" onclick="S.codexQ=\'\';render()">&times;</button>');o('</div>');
     fil.forEach(function(k,i){var key='cod_'+i;var exp=!!G.accExp[key];
@@ -1925,7 +1925,7 @@ function cModal(){
     // Build sections for popout
     var _rdSecs=[];
     if(cardFaqs.length)_rdSecs.push({hdr:'FAQ',items:cardFaqs.map(function(f){return{q:f.q,a:f.a};})});
-    if(cardCodex.length)_rdSecs.push({hdr:'Codex Keywords',items:cardCodex.map(function(k){return{q:k.k,def:k.def};})});
+    if(cardCodex.length)_rdSecs.push({hdr:'Codex Keywords',items:cardCodex.map(function(k){return{q:k.k,a:k.body};})});
     var _rdData=JSON.stringify(_rdSecs).replace(/'/g,"\\'").replace(/"/g,'&quot;');
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" style="display:flex;align-items:center" data-k="'+faqKey+'" onclick="toggleAcc(this.dataset.k)">');
@@ -1948,10 +1948,10 @@ function cModal(){
       if(cardCodex.length){
         o('<div style="font-size:8px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex Keywords</div>');
         cardCodex.forEach(function(k){
-        o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def})-1;
+        o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.body})-1;
           return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
             +'<div class="acc-q">'+h(k.k)+'</div>'
-            +'<div class="acc-a">'+h(k.def)+'</div>'
+            +'<div class="acc-a">'+h(k.body)+'</div>'
             +'</div>';
         })());
       });
