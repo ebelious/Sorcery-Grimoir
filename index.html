@@ -1440,34 +1440,37 @@ function _diceShadeHex(col,factor){
 function _diceInitOverlay(){
   if(_diceOverlay) return; // already created
 
-  // Outer wrapper - fullscreen overlay
+  // Outer wrapper - fullscreen overlay, position:relative so popup can anchor to it
   var wrap=document.createElement('div');
   wrap.id='dice-overlay';
   wrap.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;display:none;flex-direction:column;';
 
+  // Button bar — rendered FIRST in DOM so it sits at top for P2 (order swapped via JS)
+  var bar=document.createElement('div');
+  bar.id='dice-3d-bar';
+  bar.style.cssText='display:flex;gap:10px;justify-content:center;align-items:center;padding:12px 0;background:rgba(0,0,0,0.6);order:2;';
+  bar.innerHTML='<button id="dice-3d-again" style="background:#6366f1;border:none;color:#fff;border-radius:8px;padding:8px 28px;font-size:14px;font-weight:700;cursor:pointer;display:none" onclick="_diceRollAgain()">Roll Again</button><button style="background:#1f2937;border:1px solid #374151;color:#d1d5db;border-radius:8px;padding:8px 22px;font-size:14px;cursor:pointer" onclick="closeDice()">Done</button>';
+
   // Canvas container (fills most of screen)
   var canvasWrap=document.createElement('div');
-  canvasWrap.style.cssText='flex:1;position:relative;overflow:hidden;';
+  canvasWrap.style.cssText='flex:1;position:relative;overflow:hidden;order:1;';
 
   var cv=document.createElement('canvas');
+  cv.id='dice-3d-canvas';
   cv.style.cssText='display:block;width:100%;height:100%;';
   canvasWrap.appendChild(cv);
   _diceCanvas=cv;
 
-  // Result popup (absolutely positioned over canvas)
+  // Result popup — absolutely positioned over the whole overlay, NOT inside canvasWrap
+  // This means it never gets rotated with the canvas
   var popup=document.createElement('div');
   popup.id='dice-3d-popup';
   popup.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:linear-gradient(135deg,rgba(30,27,75,0.97),rgba(49,46,129,0.97));border:2px solid #6366f1;border-radius:16px;padding:24px 48px;text-align:center;box-shadow:0 0 60px rgba(99,102,241,0.5);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:180px;';
   popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:#818cf8;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px"></div><div id="dice-3d-num" style="font-size:80px;font-weight:900;color:#fff;line-height:1;text-shadow:0 0 30px rgba(165,180,252,0.8);font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:12px;color:#a5b4fc;margin-top:4px"></div>';
-  canvasWrap.appendChild(popup);
 
-  // Bottom bar with buttons
-  var bar=document.createElement('div');
-  bar.id='dice-3d-bar';
-  bar.style.cssText='display:flex;gap:10px;justify-content:center;align-items:center;padding:12px 0;background:rgba(0,0,0,0.6);';
-  bar.innerHTML='<button id="dice-3d-again" style="background:#6366f1;border:none;color:#fff;border-radius:8px;padding:8px 28px;font-size:14px;font-weight:700;cursor:pointer;display:none" onclick="_diceRollAgain()">Roll Again</button><button style="background:#1f2937;border:1px solid #374151;color:#d1d5db;border-radius:8px;padding:8px 22px;font-size:14px;cursor:pointer" onclick="closeDice()">Done</button>';
-  wrap.appendChild(canvasWrap);
   wrap.appendChild(bar);
+  wrap.appendChild(canvasWrap);
+  wrap.appendChild(popup);  // popup is sibling of canvasWrap, not child
   document.body.appendChild(wrap);
   _diceOverlay=wrap;
 
@@ -1524,23 +1527,23 @@ function _diceInitOverlay(){
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        var bounce=Math.max(0,Math.sin(_diceTimer*Math.PI*2.8)*(1.2-_diceTimer*0.7));
+        var bounce=Math.max(0,Math.sin(_diceTimer*Math.PI*3.5)*(1.0-_diceTimer*1.0));
         _diceGroup.position.y=Math.max(0,bounce)-0.1;
-        var damp=Math.pow(0.975,dt*60);
+        var damp=Math.pow(0.88,dt*60);
         _diceVX*=damp; _diceVY*=damp; _diceVZ*=damp;
-        if(_diceTimer>0.5&&_diceTimer<1.5){
-          var knock=Math.sin(_diceTimer*17)*Math.max(0,0.5-(_diceTimer-0.5));
-          _diceGroup.position.y=Math.max(-0.1,_diceGroup.position.y+knock*0.15);
+        if(_diceTimer>0.2&&_diceTimer<0.6){
+          var knock=Math.sin(_diceTimer*20)*Math.max(0,0.4-(_diceTimer-0.2));
+          _diceGroup.position.y=Math.max(-0.1,_diceGroup.position.y+knock*0.12);
         }
-        if(_diceTimer>1.8&&Math.abs(_diceVX)<0.5&&Math.abs(_diceVY)<0.5) _dicePhase='settling';
+        if(_diceTimer>0.65&&Math.abs(_diceVX)<0.5&&Math.abs(_diceVY)<0.5) _dicePhase='settling';
       }
       if(_dicePhase==='settling'){
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        _diceVX*=0.88; _diceVY*=0.88; _diceVZ*=0.88;
-        _diceGroup.position.y+=(-0.1-_diceGroup.position.y)*0.18;
-        if(Math.abs(_diceVX)<0.02&&Math.abs(_diceVY)<0.02){
+        _diceVX*=0.72; _diceVY*=0.72; _diceVZ*=0.72;
+        _diceGroup.position.y+=(-0.1-_diceGroup.position.y)*0.38;
+        if(Math.abs(_diceVX)<0.06&&Math.abs(_diceVY)<0.06){
           _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=-0.1;
           _diceShowResult();
         }
@@ -1560,7 +1563,8 @@ function _diceShowResult(){
   document.getElementById('dice-3d-label').textContent=(_diceCount>1?_diceCount+'x ':'')+'d'+_diceSides;
   document.getElementById('dice-3d-num').textContent=total;
   document.getElementById('dice-3d-brk').textContent=_diceCount>1?_dicePendingRolls.join(' + '):'';
-  popup.style.transform='translate(-50%,-50%) scale(1)';
+  var isP2=_dicePI===1;
+  popup.style.transform='translate(-50%,-50%) scale(1)'+(isP2?' rotate(180deg)':'');
   popup.style.pointerEvents='all';
   var againBtn=document.getElementById('dice-3d-again');
   if(againBtn) againBtn.style.display='inline-block';
@@ -1571,7 +1575,7 @@ function _diceShowResult(){
 
 function _diceHidePopup(){
   var popup=document.getElementById('dice-3d-popup');
-  if(popup){popup.style.transform='translate(-50%,-50%) scale(0)';popup.style.pointerEvents='none';}
+  if(popup){var isP2=_dicePI===1;popup.style.transform='translate(-50%,-50%) scale(0)'+(isP2?' rotate(180deg)':'');popup.style.pointerEvents='none';}
   var againBtn=document.getElementById('dice-3d-again');
   if(againBtn) againBtn.style.display='none';
 }
@@ -1598,14 +1602,24 @@ function rollDice(sides,count,colIdx,pi){
 
   // Kick physics
   _diceRolling=true; _dicePhase='rolling'; _diceTimer=0;
-  _diceVX=(Math.random()-0.5)*30+(Math.random()>0.5?14:-14);
-  _diceVY=(Math.random()-0.5)*25+(Math.random()>0.5?10:-10);
-  _diceVZ=(Math.random()-0.5)*20+(Math.random()>0.5?8:-8);
+  _diceVX=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
+  _diceVY=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
+  _diceVZ=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
   if(_diceGroup) _diceGroup.position.set((Math.random()-0.5)*1.0,0.5,(Math.random()-0.5)*0.5);
 
-  // P2 rotation
-  var canvasWrap=_diceOverlay.querySelector('div');
-  if(canvasWrap) canvasWrap.style.transform=(_dicePI===1?'rotate(180deg)':'');
+  // P2 rotation: rotate canvas only (not popup or buttons)
+  var cv2=document.getElementById('dice-3d-canvas');
+  if(cv2) cv2.style.transform=(_dicePI===1?'rotate(180deg)':'');
+  // Move button bar to top (order:0) for P2 so it faces them, bottom (order:2) for P1
+  var bar2=document.getElementById('dice-3d-bar');
+  var cw2=_diceOverlay.querySelector('[id=dice-3d-bar]');
+  if(bar2){
+    bar2.style.order=(_dicePI===1?'0':'2');
+    // Also rotate the bar text 180 for P2 so buttons read correctly from their side
+    bar2.style.transform=(_dicePI===1?'rotate(180deg)':'');
+  }
+  var popup2=document.getElementById('dice-3d-popup');
+  if(popup2) popup2.style.transform=(_dicePI===1?'translate(-50%,-50%) scale(0) rotate(180deg)':'translate(-50%,-50%) scale(0)');
 
   // Show overlay
   _diceOverlay.style.display='flex';
@@ -3279,6 +3293,12 @@ function spinIcon(){
 }
 
 boot();
+
+// Eagerly warm up the dice overlay after the page has painted,
+// so the first roll has no cold-start delay.
+setTimeout(function(){
+  try{ _diceInitOverlay(); }catch(e){}
+}, 800);
 
 </script>
 </body>
