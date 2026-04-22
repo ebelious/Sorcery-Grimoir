@@ -3203,23 +3203,23 @@ function pCirc(p,pi){
 
   // Main circle sizes scale with orbit
   var mSz=Math.round(170*scale);
-  var eSz=Math.round(120*scale);
+  var eSz=Math.round(155*scale);  // threshold circles — larger than life/mana
   var fontSize=Math.round(60*scale);
   var lblSize=Math.round(11*scale);
-  var elValSize=Math.round(38*scale);
-  var elIconSize=Math.round(52*scale);
+  var elValSize=Math.round(50*scale);
+  var elIconSize=Math.round(66*scale);
 
   // Positions: threshold circles flush to edge, life/mana circles adjacent
   var elOff=0;
-  var lifeLeft=eSz;
+  var lifeLeft=Math.round(120*scale);  // life/mana stay same distance from edge as before
   var manaRight=lifeLeft;
-  var elVert=0;
+  var elVert=0;  // threshold circles flush to top/bottom edges
 
   o('<div class="p-circ">');
   o('<div class="circ-name">'+h(p.name)+'</div>');
 
   // Scaled orbit wrapper
-  o('<div style="width:'+orbitW+'px;height:'+orbitH+'px;position:relative;flex-shrink:0">');
+  o('<div style="width:'+orbitW+'px;height:'+orbitH+'px;position:relative;flex-shrink:0;overflow:visible">');
 
   // ── Life circle ──
   var mTop=Math.round((orbitH-mSz)/2);
