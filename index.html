@@ -3396,7 +3396,11 @@ function pContent(){
   }
   if(p==='art'){
     o('<div class="stbar">'+ARTISTS.length+' artists</div>');
-    ARTISTS.forEach(function(a,i){var click=a.url?'window.open(\''+a.url+'\',\'_blank\')':'window.open(\'https://www.google.com/search?q='+encodeURIComponent(a.n+' Sorcery TCG card art')+'&tbm=isch\',\'_blank\')';o('<div class="art-c"><div class="art-h" onclick="'+click+'" style="cursor:pointer"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--bbl);font-size:9px">&rarr;</span></div></div>');});
+    ARTISTS.forEach(function(a,i){
+      var slug=a.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      var artUrl='https://www.collectorarthouse.com/sorcery-artists/'+slug;
+      o('<div class="art-c"><div class="art-h" onclick="window.open(\''+artUrl+'\',\'_blank\')" style="cursor:pointer"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--bbl);font-size:9px">&rarr;</span></div></div>');
+    });
     return out.join('');
   }
   return '';
