@@ -2203,6 +2203,29 @@ function _renderKeepScroll(){
     if(cm2)cm2.scrollTop=scrollTop;
   });
 }
+function _dvSearch(q){
+  var drop=document.getElementById('dv-drop');if(!drop)return;
+  q=(q||'').trim().toLowerCase();
+  if(!q){drop.style.display='none';drop.innerHTML='';return;}
+  var dv=G.selDeck&&G.decks[G.selDeck];
+  // Search CARDS array filtered to those in the deck first, then all cards
+  var deckNames=(dv?dv.cards.map(function(e){return e.name.toLowerCase();}):[] );
+  var matches=CARDS.filter(function(c){return cName(c).toLowerCase().indexOf(q)>=0;});
+  // Sort: deck cards first
+  matches.sort(function(a,b){
+    var ai=deckNames.indexOf(cName(a).toLowerCase()),bi=deckNames.indexOf(cName(b).toLowerCase());
+    if(ai>=0&&bi<0)return -1;if(bi>=0&&ai<0)return 1;return 0;
+  });
+  matches=matches.slice(0,8);
+  if(!matches.length){drop.style.display='none';return;}
+  drop.style.cssText='position:absolute;left:0;right:0;top:100%;background:var(--bg2);border:1px solid var(--bd);z-index:30;max-height:200px;overflow-y:auto;margin-top:1px';
+  drop.innerHTML=matches.map(function(c){
+    var inDeck=dv&&dv.cards.find(function(e){return e.name===cName(c);});
+    var badge=inDeck?'<span style="font-size:9px;color:var(--bgrn);margin-left:4px">×'+inDeck.qty+'</span>':'';
+    return '<div data-cn="'+h(cName(c))+'" style="padding:9px 10px;cursor:pointer;border-bottom:1px solid var(--bg3);font-size:13px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onmousedown="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\')}"><span style="color:var(--wht)">'+h(cName(c))+'</span>'+badge+'<span style="font-size:10px;color:var(--fg3);margin-left:6px">'+cEl(c)+' '+cType(c)+'</span></div>';
+  }).join('');
+  drop.style.display='block';
+}
 function _deckManaCurve(dk){
   // returns array[0..10+] of counts
   var bins=new Array(11).fill(0);
@@ -2915,7 +2938,12 @@ function pContent(){
       typeGroups[t].push({entry:entry,card:c});
     });
     var totalCards=dv.cards.reduce(function(s,c){return s+c.qty;},0);
-    o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+totalCards+' cards total</div>');
+    o('<div style="font-size:12px;color:var(--fg2);margin-bottom:8px">'+totalCards+' cards total</div>');
+    // ── Card search bar with autocomplete ──
+    o('<div class="si" style="margin-bottom:10px;position:relative">');
+    o('<input id="dv-srch" placeholder="Search cards&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" oninput="_dvSearch(this.value)" onfocus="_dvSearch(this.value)" onblur="setTimeout(function(){var d=document.getElementById(\'dv-drop\');if(d)d.remove();},200)">');
+    o('<div id="dv-drop" style="display:none"></div>');
+    o('</div>');
     typeOrder.forEach(function(t){
       var grp=typeGroups[t]||[];
       var grpTotal=grp.reduce(function(s,x){return s+x.entry.qty;},0);
@@ -2983,7 +3011,7 @@ function pContent(){
     });
     // ─── Element stat pills ───
     o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px">');
-    o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px">'+totalSpells+' Spells &middot; '+totalSites+' Sites &middot; Avg Cost '+avgCost+'</div>');
+    o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+totalSpells+' Spells &middot; '+totalSites+' Sites &middot; Avg Cost '+avgCost+'</div>');
     o('<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">');
     ['a','e','f','w'].forEach(function(el){
       var spPct=totalSpells>0?Math.round((elSpells[el]||0)/totalSpells*100):0;
@@ -2997,7 +3025,7 @@ function pContent(){
       var elFullName={a:'air',e:'earth',f:'fire',w:'water'}[el]||'neutral';
       o(eSVG(elFullName,28));
       o('</div>');
-      o('<div style="font-size:13px;color:var(--fg2);line-height:1.9">');
+      o('<div style="font-size:13px;color:var(--fg2);line-height:1.9;font-family:-apple-system,BlinkMacSystemFont,sans-serif">');
       o('<span style="color:var(--wht);font-weight:700">'+spPct+'%</span> Spells / <span style="color:var(--wht);font-weight:700">'+costPct+'%</span> Cost<br>');
       o('<span style="color:var(--wht);font-weight:700">'+sitePct+'%</span> Sites / <span style="color:var(--wht);font-weight:700">'+outputPct+'%</span> Output');
       o('</div>');
@@ -3061,9 +3089,9 @@ function pContent(){
       o('</svg>');
       // legend
       o('<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;justify-content:flex-end">');
-      o('<span style="font-size:13px;color:var(--fg2);display:flex;align-items:center;gap:3px"><span style="display:inline-block;width:14px;height:2px;background:white;border-radius:1px"></span>Total</span>');
+      o('<span style="font-size:13px;color:var(--fg2);display:flex;align-items:center;gap:3px;font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:14px;height:2px;background:white;border-radius:1px"></span>Total</span>');
       activeEls.forEach(function(el){
-        o('<span style="font-size:13px;color:'+elColors[el]+';display:flex;align-items:center;gap:3px"><span style="display:inline-block;width:14px;height:2px;background:'+elColors[el]+';border-radius:1px"></span>'+elNames[el]+'</span>');
+        o('<span style="font-size:13px;color:'+elColors[el]+';display:flex;align-items:center;gap:3px;font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:14px;height:2px;background:'+elColors[el]+';border-radius:1px"></span>'+elNames[el]+'</span>');
       });
       o('</div>');
       o('</div>');
