@@ -801,6 +801,8 @@ var _diceRenderer=null;
 var _diceScene=null;
 var _diceCamera=null;
 var _diceGroup=null;
+var _diceGroup2=null;   // second die for 2d6
+var _diceVX2=0,_diceVY2=0,_diceVZ2=0;
 var _diceRAF=null;
 var _diceRolling=false;
 var _dicePhase='idle';   // idle | rolling | settling
@@ -841,6 +843,7 @@ function _diceEnsureVisible(r,g,b){
 
 function _diceClearMesh(){
   if(_diceGroup){_diceScene.remove(_diceGroup);_diceGroup=null;}
+  if(_diceGroup2){_diceScene.remove(_diceGroup2);_diceGroup2=null;}
 }
 
 function _diceBuildD6(col){
@@ -854,7 +857,19 @@ function _diceBuildD6(col){
   var mesh=new THREE.Mesh(geo,mats); mesh.castShadow=true;
   _diceGroup=new THREE.Group(); _diceGroup.add(mesh);
   _diceGroup.scale.setScalar(1.1/Math.sqrt(3));
-  _diceGroup.position.y=0; _diceScene.add(_diceGroup);
+  if(_diceCount>=2){
+    _diceGroup.position.set(-1.2,0,0);
+    var geo2=new THREE.BoxGeometry(2,2,2);
+    var mats2=[dim(1.0),dim(0.88),dim(1.0),dim(0.88),dim(1.08),dim(0.82)];
+    var mesh2=new THREE.Mesh(geo2,mats2); mesh2.castShadow=true;
+    _diceGroup2=new THREE.Group(); _diceGroup2.add(mesh2);
+    _diceGroup2.scale.setScalar(1.1/Math.sqrt(3));
+    _diceGroup2.position.set(1.2,0,0);
+    _diceScene.add(_diceGroup2);
+  } else {
+    _diceGroup.position.y=0;
+  }
+  _diceScene.add(_diceGroup);
 }
 
 function _diceBuildD4(col){
@@ -1692,6 +1707,19 @@ function _diceInitOverlay(){
           var knock=Math.sin(_diceTimer*20)*Math.max(0,0.4-(_diceTimer-0.2));
           _diceGroup.position.y=Math.max(-0.1,_diceGroup.position.y+knock*0.12);
         }
+        if(_diceGroup2){
+          _diceGroup2.rotation.x+=_diceVX2*dt;
+          _diceGroup2.rotation.y+=_diceVY2*dt;
+          _diceGroup2.rotation.z+=_diceVZ2*dt;
+          var bounce2=Math.max(0,Math.sin(_diceTimer*Math.PI*3.2)*(1.0-_diceTimer*1.0));
+          _diceGroup2.position.y=Math.max(0,bounce2)-0.1;
+          var damp2=Math.pow(0.88,dt*60);
+          _diceVX2*=damp2; _diceVY2*=damp2; _diceVZ2*=damp2;
+          if(_diceTimer>0.2&&_diceTimer<0.6){
+            var knock2=Math.sin(_diceTimer*22)*Math.max(0,0.4-(_diceTimer-0.2));
+            _diceGroup2.position.y=Math.max(-0.1,_diceGroup2.position.y+knock2*0.12);
+          }
+        }
         if(_diceTimer>0.65&&Math.abs(_diceVX)<0.5&&Math.abs(_diceVY)<0.5) _dicePhase='settling';
       }
       if(_dicePhase==='settling'){
@@ -1700,13 +1728,22 @@ function _diceInitOverlay(){
         _diceGroup.rotation.z+=_diceVZ*dt;
         _diceVX*=0.72; _diceVY*=0.72; _diceVZ*=0.72;
         _diceGroup.position.y+=(-0.1-_diceGroup.position.y)*0.38;
+        if(_diceGroup2){
+          _diceGroup2.rotation.x+=_diceVX2*dt;
+          _diceGroup2.rotation.y+=_diceVY2*dt;
+          _diceGroup2.rotation.z+=_diceVZ2*dt;
+          _diceVX2*=0.72; _diceVY2*=0.72; _diceVZ2*=0.72;
+          _diceGroup2.position.y+=(-0.1-_diceGroup2.position.y)*0.38;
+        }
         if(Math.abs(_diceVX)<0.06&&Math.abs(_diceVY)<0.06){
           _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=-0.1;
+          if(_diceGroup2) _diceGroup2.position.y=-0.1;
           _diceShowResult();
         }
       }
     } else if(_diceGroup && !_diceRolling){
       _diceGroup.rotation.y+=0.006;
+      if(_diceGroup2) _diceGroup2.rotation.y+=0.006;
     }
     _diceRenderer.render(_diceScene,_diceCamera);
   }
@@ -1783,7 +1820,13 @@ function rollDice(sides,count,colIdx,pi){
   _diceVX=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
   _diceVY=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
   _diceVZ=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
-  if(_diceGroup) _diceGroup.position.set((Math.random()-0.5)*1.0,0.5,(Math.random()-0.5)*0.5);
+  if(_diceGroup) _diceGroup.position.set(_diceCount>=2?-1.2:(Math.random()-0.5)*1.0,0.5,(Math.random()-0.5)*0.5);
+  if(_diceGroup2){
+    _diceVX2=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
+    _diceVY2=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
+    _diceVZ2=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
+    _diceGroup2.position.set(1.2,0.5,(Math.random()-0.5)*0.5);
+  }
 
   },0); // end setTimeout — deferred for fast overlay open
 }
