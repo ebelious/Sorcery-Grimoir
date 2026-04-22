@@ -296,16 +296,16 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .rd-entry{cursor:pointer;transition:background .1s}.rd-entry:active{background:rgba(255,255,255,0.08)}
 .rd-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.97);z-index:9999;display:flex;flex-direction:column;overflow:hidden}
 .rd-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--bd);flex-shrink:0}
-.rd-title{font-size:16px;font-weight:700;color:var(--fg);font-family:'Fantaisie','Courier New',monospace}
+.rd-title{font-size:16px;font-weight:700;color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 .rd-close{background:transparent;border:1px solid var(--bd);color:var(--fg);width:32px;height:32px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .rd-body{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch}
 .rd-section{margin-bottom:16px}
-.rd-section-hdr{font-size:16px;font-weight:700;color:var(--cyn);font-family:'Fantaisie','Courier New',monospace;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.rd-section-hdr{font-size:16px;font-weight:700;color:var(--cyn);font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
 .rd-q{font-size:15px;font-weight:700;color:var(--wht);margin-bottom:6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.4}
 .rd-a{font-size:15px;color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
 .rd-a:last-child{border-bottom:none}
 .acc-q{font-size:16px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Courier New',monospace}
-.acc-a{font-size:16px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:Georgia,serif}
+.acc-a{font-size:16px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Courier New',monospace}
 .cod-def{font-size:13px;color:var(--fg2);line-height:1.55;padding-top:6px;font-family:Georgia,serif}
 .stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
@@ -342,8 +342,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .coll-th{width:30px;height:40px;overflow:hidden;background:var(--bg3);flex-shrink:0;border:1px solid var(--bd)}
 .coll-th img{width:100%;height:100%;object-fit:cover}
 .dk-c{background:var(--bg3);border:1px solid var(--bd);padding:6px;margin-bottom:4px}
-.dk-tags{display:flex;flex-wrap:wrap;gap:2px;margin-top:3px;max-height:38px;overflow:hidden}
-.dk-tag{font-size:8px;color:var(--fg2);background:var(--bg);border:1px solid var(--bd);padding:1px 4px}
+.dk-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.dk-tag{font-size:12px;color:var(--fg);background:var(--bg);border:1px solid var(--bd);padding:3px 7px;cursor:pointer}.dk-tag:active{background:var(--bg3)}
 .ext-lnk{display:block;font-size:14px;color:var(--bbl);padding:5px 0;border-bottom:1px solid var(--bg3)}
 .art-c{background:var(--bg3);border:1px solid var(--bd);margin-bottom:3px;overflow:hidden}
 .art-h{display:flex;align-items:center;justify-content:space-between;padding:11px 10px;cursor:pointer}
@@ -575,7 +575,7 @@ var MENU_S={
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',sl:'Local Stats',sd:'Deck Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -641,7 +641,7 @@ var RULES=[{s:'Setup',c:'60+ card Spellbook, 30+ site Atlas, one Avatar. Draw 4.
 
 // ── STATE ────────────────────────────────────────────────────────────────────
 var G={
-  theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],
+  theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
   diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',
   vdice:{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false},
@@ -2170,7 +2170,63 @@ function exportColl(){
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='sorcery_collection.csv';a.click();URL.revokeObjectURL(a.href);
 }
 function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv('sg-co',G.coll);render();}
-function delDeck(k){delete G.decks[k];sv('sg-dk',G.decks);render();}
+function delDeck(k){if(!confirm('Delete this deck?'))return;delete G.decks[k];sv('sg-dk',G.decks);render();}
+function createDeck(){var nm='New Deck '+(Object.keys(G.decks).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
+function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
+function addCardToDeck(deckKey,cardName){
+  var c=cardByName(cardName);if(!c)return;
+  var dk=G.decks[deckKey];if(!dk)return;
+  var max=_maxCopies(c);
+  var existing=dk.cards.find(function(x){return x.name===cardName;});
+  var curQty=existing?existing.qty:0;
+  if(curQty>=max){alert('Max '+max+' cop'+(max===1?'y':'ies')+' of '+cardName+' allowed ('+cRar(c)+').');return;}
+  if(existing){existing.qty++;}else{dk.cards.push({name:cardName,qty:1});}
+  sv('sg-dk',G.decks);
+  _renderKeepScroll();
+  var msg=document.getElementById('add-deck-msg');
+  if(msg){msg.textContent='Added to '+dk.name;msg.style.opacity='1';setTimeout(function(){msg.style.opacity='0';},1500);}
+}
+function removeCardFromDeck(deckKey,cardName){
+  var dk=G.decks[deckKey];if(!dk)return;
+  var idx=dk.cards.findIndex(function(x){return x.name===cardName;});
+  if(idx<0)return;
+  if(dk.cards[idx].qty>1){dk.cards[idx].qty--;}else{dk.cards.splice(idx,1);}
+  sv('sg-dk',G.decks);
+  _renderKeepScroll();
+}
+function _renderKeepScroll(){
+  var cm=document.querySelector('.cm');
+  var scrollTop=cm?cm.scrollTop:0;
+  render();
+  requestAnimationFrame(function(){
+    var cm2=document.querySelector('.cm');
+    if(cm2)cm2.scrollTop=scrollTop;
+  });
+}
+function _deckManaCurve(dk){
+  // returns array[0..10+] of counts
+  var bins=new Array(11).fill(0);
+  dk.cards.forEach(function(entry){
+    var c=cardByName(entry.name);if(!c)return;
+    var cost=cMana(c);if(cost==null||cType(c)==='site'||cType(c)==='avatar')return;
+    var bin=Math.min(cost,10);
+    bins[bin]+=entry.qty;
+  });
+  return bins;
+}
+function _deckThresh(dk){
+  var thresh={a:0,e:0,f:0,w:0};
+  dk.cards.forEach(function(entry){
+    var c=cardByName(entry.name);if(!c)return;
+    var th=cThr(c)||'';
+    var matches=th.match(/\d+[aefw]/gi)||[];
+    matches.forEach(function(m){
+      var n=parseInt(m);var el=m.slice(-1).toLowerCase();
+      if(thresh[el]!==undefined)thresh[el]+=n*entry.qty;
+    });
+  });
+  return thresh;
+}
 function importCuriosaUrl(url){
   url=(url||'').trim();
   if(!url||url.indexOf('curiosa.io/decks')<0){G.curiosaErr='Please enter a valid curiosa.io/decks URL';render();return;}
@@ -2822,8 +2878,197 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb" onclick="trigUpDecks()">Import Deck CSV</button></div>');
-    Object.entries(G.decks).forEach(function(kv){var k=kv[0],dk=kv[1];var ds=G.dkstat[dk.name]||{w:0,l:0};var pct=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';o('<div class="dk-c"><div style="display:flex;align-items:center;gap:4px;margin-bottom:2px"><input style="font-size:10px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dk.name)+'" onchange="G.decks[\''+h(k)+'\'].name=this.value;sv(\'sg-dk\',G.decks)"><button class="fb red" style="font-size:7px;padding:1px 4px" onclick="delDeck(\''+h(k)+'\')">&times;</button></div><div class="ss"><span>'+dk.cards.length+' cards</span><span class="sw">'+ds.w+'W</span><span class="sl_">'+ds.l+'L</span><span class="sp_">'+pct+'</span></div><div class="dk-tags">');dk.cards.forEach(function(c){o('<span class="dk-tag">'+c.qty+'&times; '+h(c.name)+'</span>');});o('</div></div>');});
+    o('<div class="fr"><button class="fb gold" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import CSV</button></div>');
+    if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
+    Object.entries(G.decks).forEach(function(kv){
+      var k=kv[0],dk=kv[1];
+      var ds=G.dkstat[dk.name]||{w:0,l:0};
+      var pct2=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';
+      var totalCards=dk.cards.reduce(function(s,c){return s+c.qty;},0);
+      var safeK=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      o('<div class="dk-c" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px" onclick="G.selDeck=\''+safeK+'\';openPanel(\'deckview\')">');
+      o('<div style="flex:1;min-width:0">');
+      o('<div style="font-size:17px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+h(dk.name)+'</div>');
+      o('<div class="ss" style="margin-top:3px"><span>'+totalCards+' cards</span><span class="sw">'+ds.w+'W</span><span class="sl_">'+ds.l+'L</span><span class="sp_">'+pct2+'</span></div>');
+      o('</div>');
+      o('<span style="color:var(--fg2);font-size:16px">&#9656;</span>');
+      o('</div>');
+    });
+    return out.join('');
+  }
+  if(p==='deckview'){
+    var dvk=G.selDeck;var dv=dvk&&G.decks[dvk];
+    if(!dv){o('<div class="ld">Deck not found.</div>');return out.join('');}
+    // Rename input + delete
+    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+    o('<input style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="G.decks[\''+h(dvk)+'\'].name=this.value;sv(\'sg-dk\',G.decks);render()">');
+    o('<button class="fb red" style="font-size:9px;padding:2px 7px" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
+    o('</div>');
+    // Group cards by type
+    var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+    var typeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
+    var typeOrder=['avatar','aura','artifact','minion','magic','site'];
+    dv.cards.forEach(function(entry){
+      var c=cardByName(entry.name);
+      var t=c?cType(c):'minion';
+      if(!typeGroups[t])t='minion';
+      typeGroups[t].push({entry:entry,card:c});
+    });
+    var totalCards=dv.cards.reduce(function(s,c){return s+c.qty;},0);
+    o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+totalCards+' cards total</div>');
+    typeOrder.forEach(function(t){
+      var grp=typeGroups[t]||[];
+      var grpTotal=grp.reduce(function(s,x){return s+x.entry.qty;},0);
+      o('<div style="margin-bottom:12px">');
+      o('<div style="font-size:11px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd)">'+typeLabels[t]+' <span style="color:var(--fg2);font-weight:400">('+grpTotal+')</span></div>');
+      if(!grp.length){
+        o('<div style="font-size:11px;color:var(--fg3);padding:4px 0;font-style:italic">None</div>');
+      }
+      grp.forEach(function(x){
+        var entry=x.entry;var c=x.card;
+        var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
+        o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3);cursor:pointer" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+        o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
+        o('<span style="flex:1;font-size:14px;color:var(--wht)">'+h(entry.name)+'</span>');
+        if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+        o('</div>');
+      });
+      o('</div>');
+    });
+    // ─── Element breakdown header ───
+    var elColors={a:'var(--cyn)',e:'#8D9B4A',f:'var(--red)',w:'#5BA3C9'};
+    var elNames={a:'Air',e:'Earth',f:'Fire',w:'Water'};
+    // Use project ELEM_ICONS via eSVG()
+    // Count spells and cost by element
+    var totalSpells=0,totalSites=0,totalCost=0;
+    var elSpells={a:0,e:0,f:0,w:0,n:0};
+    var elCost={a:0,e:0,f:0,w:0,n:0};
+    var elSites={a:0,e:0,f:0,w:0,n:0};
+    dv.cards.forEach(function(entry){
+      var c=cardByName(entry.name);if(!c)return;
+      var qty=entry.qty;
+      var t=cType(c);
+      var th=cThr(c)||'';
+      var elSet=[];
+      ['a','e','f','w'].forEach(function(el){if(th.indexOf(el)>=0)elSet.push(el);});
+      if(elSet.length===0)elSet=['n'];
+      if(t==='site'){
+        totalSites+=qty;
+        elSet.forEach(function(el){elSites[el]=(elSites[el]||0)+qty/elSet.length;});
+      } else if(t!=='avatar'){
+        totalSpells+=qty;
+        var cost=cMana(c)||0;
+        totalCost+=cost*qty;
+        elSet.forEach(function(el){
+          elSpells[el]=(elSpells[el]||0)+qty/elSet.length;
+          elCost[el]=(elCost[el]||0)+(cost*qty)/elSet.length;
+        });
+      }
+    });
+    var avgCost=totalSpells>0?(totalCost/totalSpells).toFixed(1):'0';
+    // Per-element mana curves
+    var elBins={a:new Array(9).fill(0),e:new Array(9).fill(0),f:new Array(9).fill(0),w:new Array(9).fill(0),total:new Array(9).fill(0)};
+    dv.cards.forEach(function(entry){
+      var c=cardByName(entry.name);if(!c)return;
+      var t=cType(c);if(t==='site'||t==='avatar')return;
+      var cost=Math.min(cMana(c)||0,8);
+      var qty=entry.qty;
+      var th=cThr(c)||'';
+      var elSet=[];
+      ['a','e','f','w'].forEach(function(el){if(th.indexOf(el)>=0)elSet.push(el);});
+      elBins.total[cost]+=qty;
+      if(elSet.length===0){return;}
+      elSet.forEach(function(el){if(elBins[el])elBins[el][cost]+=qty/elSet.length;});
+    });
+    // ─── Element stat pills ───
+    o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px">');
+    o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px">'+totalSpells+' Spells &middot; '+totalSites+' Sites &middot; Avg Cost '+avgCost+'</div>');
+    o('<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">');
+    ['a','e','f','w'].forEach(function(el){
+      var spPct=totalSpells>0?Math.round((elSpells[el]||0)/totalSpells*100):0;
+      var costPct=totalCost>0?Math.round((elCost[el]||0)/totalCost*100):0;
+      var sitePct=totalSites>0?Math.round((elSites[el]||0)/totalSites*100):0;
+      // site output = site share of deck total
+      var deckTotal=totalSpells+totalSites;
+      var outputPct=deckTotal>0?Math.round(((elSpells[el]||0)+(elSites[el]||0))/deckTotal*100):0;
+      o('<div style="text-align:center">');
+      o('<div style="width:44px;height:44px;border-radius:50%;border:2px solid '+elColors[el]+';display:flex;align-items:center;justify-content:center;margin:0 auto 5px;color:'+elColors[el]+'">');
+      var elFullName={a:'air',e:'earth',f:'fire',w:'water'}[el]||'neutral';
+      o(eSVG(elFullName,28));
+      o('</div>');
+      o('<div style="font-size:13px;color:var(--fg2);line-height:1.9">');
+      o('<span style="color:var(--wht);font-weight:700">'+spPct+'%</span> Spells / <span style="color:var(--wht);font-weight:700">'+costPct+'%</span> Cost<br>');
+      o('<span style="color:var(--wht);font-weight:700">'+sitePct+'%</span> Sites / <span style="color:var(--wht);font-weight:700">'+outputPct+'%</span> Output');
+      o('</div>');
+      o('</div>');
+    });
+    o('</div>');
+    // ─── Multi-line mana curve SVG ───
+    var W=300,H=110,padL=32,padR=10,padT=10,padB=22;
+    var plotW=W-padL-padR,plotH=H-padT-padB;
+    var maxAll=Math.max.apply(null,elBins.total)||1;
+    var xCount=9; // 0..8
+    function bx(i){return padL+i*(plotW/(xCount-1));}
+    function by(v){return padT+plotH-Math.round((v/maxAll)*plotH);}
+    function smoothPoints(bins){
+      // cardinal spline approximation: generate SVG cubic bezier path
+      var pts=bins.map(function(v,i){return [bx(i),by(v)];});
+      var d='M'+pts[0][0]+','+pts[0][1];
+      for(var i=0;i<pts.length-1;i++){
+        var p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
+        var t=0.4;
+        var cp1x=p1[0]+(p2[0]-p0[0])*t;
+        var cp1y=p1[1]+(p2[1]-p0[1])*t;
+        var cp2x=p2[0]-(p3[0]-p1[0])*t;
+        var cp2y=p2[1]-(p3[1]-p1[1])*t;
+        d+=' C'+cp1x+','+cp1y+' '+cp2x+','+cp2y+' '+p2[0]+','+p2[1];
+      }
+      return d;
+    }
+    function areaPath(pathD,bins){
+      return pathD+' L'+bx(bins.length-1)+','+(padT+plotH)+' L'+bx(0)+','+(padT+plotH)+' Z';
+    }
+    var hasSpells=elBins.total.some(function(b){return b>0;});
+    if(hasSpells){
+      o('<div style="margin-top:4px">');
+      o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'"  preserveAspectRatio="none">');
+      // grid lines + y-axis labels
+      var ySteps=4;
+      for(var gi=0;gi<=ySteps;gi++){
+        var gy=padT+gi*(plotH/ySteps);
+        var gv=Math.round(maxAll*(1-gi/ySteps));
+        o('<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="var(--bd)" stroke-width="0.5"/>');
+        if(gv>0)o('<text x="'+(padL-3)+'" y="'+(gy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+gv+'</text>');
+      }
+      // x-axis labels
+      for(var xi=0;xi<xCount;xi++){
+        o('<text x="'+bx(xi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(xi===8?'8+':String(xi))+'</text>');
+      }
+      // x-axis line
+      o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+      // draw active element lines (only those with spells)
+      var activeEls=['a','e','f','w'].filter(function(el){return elBins[el].some(function(b){return b>0;});});
+      // total line always shown
+      var totalPath=smoothPoints(elBins.total);
+      o('<path d="'+areaPath(totalPath,elBins.total)+'" fill="white" fill-opacity="0.04"/>');
+      o('<path d="'+totalPath+'" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>');
+      activeEls.forEach(function(el){
+        var ep=smoothPoints(elBins[el]);
+        o('<path d="'+areaPath(ep,elBins[el])+'" fill="'+elColors[el]+'" fill-opacity="0.08"/>');
+        o('<path d="'+ep+'" fill="none" stroke="'+elColors[el]+'" stroke-width="1.5" stroke-linecap="round"/>');
+      });
+      o('</svg>');
+      // legend
+      o('<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;justify-content:flex-end">');
+      o('<span style="font-size:13px;color:var(--fg2);display:flex;align-items:center;gap:3px"><span style="display:inline-block;width:14px;height:2px;background:white;border-radius:1px"></span>Total</span>');
+      activeEls.forEach(function(el){
+        o('<span style="font-size:13px;color:'+elColors[el]+';display:flex;align-items:center;gap:3px"><span style="display:inline-block;width:14px;height:2px;background:'+elColors[el]+';border-radius:1px"></span>'+elNames[el]+'</span>');
+      });
+      o('</div>');
+      o('</div>');
+    }
+    o('</div>'); // close breakdown card
     return out.join('');
   }
   if(p==='pubdecks'){
@@ -3226,6 +3471,32 @@ function cModal(){
   o('<div class="slbl2">Markets</div>');
   o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
   o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/card/'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'" target="_blank">sorcerycard.io &rarr;</a>');
+  o('</div>');
+  // Add to Deck section
+  var dkKeys=Object.keys(G.decks);
+  o('<div class="price-box" style="margin-bottom:6px">');
+  o('<div class="slbl2" style="margin-top:0;margin-bottom:4px">Add to Deck</div>');
+  if(!dkKeys.length){
+    o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">No decks yet.<br>Go to My Decks to create one.</div>');
+  } else {
+    var maxC=_maxCopies(c);
+    o('<div style="font-size:8px;color:var(--fg2);margin-bottom:5px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' per deck</div>');
+    dkKeys.forEach(function(dk){
+      var d=G.decks[dk];
+      var safeKey=dk.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var safeNm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var entry=d.cards.find(function(x){return x.name===nm;});
+      var inDeck=entry?entry.qty:0;
+      var atMax=inDeck>=maxC;
+      o('<div style="display:flex;align-items:center;gap:4px;margin-bottom:4px">');
+      o('<span style="flex:1;font-size:15px;font-weight:700;color:var(--wht);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+h(d.name)+'</span>');
+      o('<span style="font-size:9px;color:'+(atMax?'var(--red)':'var(--fg2)')+';min-width:24px;text-align:center">'+inDeck+'/'+maxC+'</span>');
+      o('<button class="eadj" style="width:22px;height:22px;font-size:13px'+(inDeck===0?';opacity:.3':'')+'" '+(inDeck===0?'disabled':'')+' onclick="removeCardFromDeck(\''+safeKey+'\',\''+safeNm+'\')">&#8722;</button>');
+      o('<button class="eadj" style="width:22px;height:22px;font-size:13px'+(atMax?';opacity:.3':'')+'" '+(atMax?'disabled':'')+' onclick="addCardToDeck(\''+safeKey+'\',\''+safeNm+'\')">+</button>');
+      o('</div>');
+    });
+    o('<div id="add-deck-msg" style="font-size:9px;color:var(--bgrn);text-align:center;transition:opacity .4s;opacity:0;height:13px;margin-top:2px"></div>');
+  }
   o('</div>');
   o('<div class="qty-row"><div class="qty-lbl">In collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
   o(own?own+' cop'+(own===1?'y':'ies'):'Not owned');
