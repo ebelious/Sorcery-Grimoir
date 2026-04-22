@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://drive.google.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://ebelious.github.io;">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 
 <!-- PWA -->
@@ -3608,7 +3608,7 @@ setTimeout(function(){
 function openRulebook(){
   var m=document.getElementById('rulebook-modal');
   var f=document.getElementById('rulebook-frame');
-  if(!f.src||f.src==='about:blank'||f.src==='')f.src='https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/preview';
+  if(!f.src||f.src==='about:blank'||f.src==='')f.src='https://ebelious.github.io/Sorcery-Grimoir/rulebook.pdf';
   m.classList.add('open');
 }
 function closeRulebook(){
