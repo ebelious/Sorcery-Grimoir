@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src https://drive.google.com;">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 
 <!-- PWA -->
@@ -73,6 +73,8 @@ function installPWA(){
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'Fantaisie','Courier New',monospace;font-size:13px;background:#1C1B19}
+body.plain-font,body.plain-font button,body.plain-font input,body.plain-font select{font-family:'Courier New',monospace!important}
+body.plain-font .rd-title,body.plain-font .rd-section-hdr{font-family:'Courier New',monospace!important}
 button{cursor:pointer;background:none;border:none;color:inherit;font-family:inherit;font-size:inherit}
 input,select{font-family:'Courier New',monospace;font-size:inherit;color:inherit;-webkit-appearance:none;appearance:none;border-radius:0}
 body.rounded .zone,body.rounded .sbox2,body.rounded .acc,body.rounded .cm,body.rounded .panel,body.rounded .drawer,body.rounded .cpop,body.rounded .fb,body.rounded .adj2,body.rounded .eadj2,body.rounded .die-btn,body.rounded #tbar,body.rounded .ov .dice-pop{border-radius:8px}
@@ -105,7 +107,7 @@ body.rounded .cm-img,body.rounded .cm-img-site{border-radius:6px}
 .tap-el-row{display:flex;border-bottom:1px solid var(--bd)}
 .tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;min-height:120px;border-right:1px solid var(--bd);overflow:hidden}
 .tap-el:last-child{border-right:none}
-.tap-el-val{font-size:30px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
+.tap-el-val{font-size:40px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
 .p-circ{display:flex;flex-direction:column;align-items:center;padding:4px;gap:4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;width:100%;box-sizing:border-box;overflow:hidden}
 .circ-orbit{position:relative;width:440px;height:340px;flex-shrink:0;margin:0 auto;transform-origin:top center;transform:scale(var(--co-scale,1))}
@@ -224,23 +226,23 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dbody{flex:1;overflow-y:auto}
 .cro{display:flex;align-items:center;justify-content:space-between;padding:14px 13px;border-bottom:1px solid var(--bd);cursor:pointer}
 .cro:active{background:var(--bg3)}
-.crn{font-size:14px;font-weight:700}
+.crn{font-size:18px;font-weight:700}
 .dfoot{padding:6px 11px;border-top:1px solid var(--bd);text-align:center;flex-shrink:0}
 .app-nm{font-size:10px;font-weight:700;color:var(--yel);letter-spacing:.1em;text-transform:uppercase}
 .app-sb{font-size:7px;color:var(--fg3);text-transform:uppercase;letter-spacing:.1em}
 .cbg{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;padding:14px}
 .cpop{background:var(--bg2);border:1px solid var(--bd);padding:11px;width:100%;max-width:268px}
-.cpop-t{font-size:16px;font-weight:700;text-align:center;margin-bottom:10px;text-transform:uppercase;color:var(--yel)}
-.cpop-it{padding:13px 12px;border:1px solid var(--bd);margin-bottom:4px;font-size:13px;cursor:pointer;border-radius:3px}
+.cpop-t{font-size:20px;font-weight:700;text-align:center;margin-bottom:10px;text-transform:uppercase;color:var(--yel)}
+.cpop-it{padding:13px 12px;border:1px solid var(--bd);margin-bottom:4px;font-size:17px;cursor:pointer;border-radius:3px}
 .cpop-it:active{background:var(--bg3)}
-.cpop-bk{width:100%;padding:6px;border:1px solid var(--bd);color:var(--fg2);font-size:9px;margin-top:3px;text-transform:uppercase}
+.cpop-bk{width:100%;padding:6px;border:1px solid var(--bd);color:var(--fg2);font-size:13px;margin-top:3px;text-transform:uppercase}
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
 .panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto}
 .phdr{display:flex;align-items:center;gap:6px;margin-bottom:9px}
-.p-bk{font-size:8px;padding:3px 6px;border:1px solid var(--cyn);color:var(--cyn);text-transform:uppercase}
-.p-ttl{font-size:16px;font-weight:700;flex:1;text-transform:uppercase;color:var(--yel)}
-.p-cl{font-size:8px;padding:3px 6px;border:1px solid var(--bd);color:var(--fg2);text-transform:uppercase}
-.slbl2{font-size:10px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px}
+.p-bk{font-size:11px;padding:3px 6px;border:1px solid var(--cyn);color:var(--cyn);text-transform:uppercase}
+.p-ttl{font-size:19px;font-weight:700;flex:1;text-transform:uppercase;color:var(--yel)}
+.p-cl{font-size:11px;padding:3px 6px;border:1px solid var(--bd);color:var(--fg2);text-transform:uppercase}
+.slbl2{font-size:11px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px}
 .fi{font-size:13px;padding:6px 8px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);outline:none;width:100%;font-family:'Courier New',monospace}
 .fi::placeholder{color:var(--fg3)}
 .fr{display:flex;gap:4px;align-items:center;margin-bottom:6px}
@@ -308,7 +310,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dk-c{background:var(--bg3);border:1px solid var(--bd);padding:6px;margin-bottom:4px}
 .dk-tags{display:flex;flex-wrap:wrap;gap:2px;margin-top:3px;max-height:38px;overflow:hidden}
 .dk-tag{font-size:8px;color:var(--fg2);background:var(--bg);border:1px solid var(--bd);padding:1px 4px}
-.ext-lnk{display:block;font-size:10px;color:var(--bbl);padding:5px 0;border-bottom:1px solid var(--bg3)}
+.ext-lnk{display:block;font-size:14px;color:var(--bbl);padding:5px 0;border-bottom:1px solid var(--bg3)}
 .art-c{background:var(--bg3);border:1px solid var(--bd);margin-bottom:3px;overflow:hidden}
 .art-h{display:flex;align-items:center;justify-content:space-between;padding:11px 10px;cursor:pointer}
 .art-h:active{background:var(--bd)}
@@ -485,6 +487,12 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 /* Site card landscape aspect */
 
 
+#rulebook-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);flex-direction:column}
+#rulebook-modal.open{display:flex}
+#rulebook-modal .rb-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg2);border-bottom:1px solid var(--bd);flex-shrink:0}
+#rulebook-modal .rb-title{font-size:14px;font-weight:700;color:var(--wht)}
+#rulebook-modal .rb-close{font-size:22px;line-height:1;background:none;border:none;color:var(--fg2);cursor:pointer;padding:0 4px}
+#rulebook-modal iframe{flex:1;width:100%;border:none;background:#fff}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -667,7 +675,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:false,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
@@ -693,6 +701,7 @@ function applyTheme(t){G.theme=t;sv('sg-th',t);_applyBodyClass();}
 function _applyBodyClass(){
   var cls=(G.theme||'');
   if(G.cfg.roundedCorners) cls+=' rounded';
+  if(G.cfg.plainFont) cls+=' plain-font';
   document.body.className=cls.trim();
 }
 
@@ -1062,33 +1071,18 @@ function _diceMakeTex(type,col,sz){
 
   // ── FELT ─────────────────────────────────────────────────────────────────
   if(type==='felt'){
-    var threads=sz*8;
-    // Base fill with color
-    for(var y=0;y<S;y++) for(var x=0;x<S;x++) put(x,y,CR,CG,CB);
-    // Draw many short thread lines at random angles — like real felt
-    for(var i=0;i<threads;i++){
-      var tx=Math.random()*S, ty=Math.random()*S;
-      var ang=Math.random()*Math.PI;
-      var len=2+Math.random()*5;
-      var bright=(Math.random()-0.5)*0.28;
-      var alpha=0.25+Math.random()*0.35;
-      ctx.putImageData(id,0,0); // flush so we can use ctx
-      break; // will do pixel-level below
-    }
-    // Pixel level — multi-frequency fiber
     ctx.clearRect(0,0,S,S);
     var id2=ctx.createImageData(S,S); px=id2.data;
     for(var y=0;y<S;y++){
       for(var x=0;x<S;x++){
-        var u=x/S*18, v=y/S*18;
-        // Fibers run mostly horizontally and vertically with noise jitter
-        var jx=_dF(u*0.3,v*0.3,3,1)*1.5;
-        var jy=_dF(u*0.3,v*0.3,3,8)*1.5;
-        var h=_dN(u+jx,v*8+jy,3);   // fine horizontal threads
-        var v2=_dN(u*8+jx,v+jy,7);  // fine vertical threads
-        var coarse=_dN(u*0.6+jx*0.5,v*0.6+jy*0.5,11)*0.15; // large pile variation
-        var thread=Math.max(h,v2)*0.55+coarse;
-        var bmp=(thread-0.45)*0.6;
+        var u=x/S, v=y/S;
+        // Smooth directional gradient: brighter top-right, darker bottom-left (matches photo)
+        var grad=(u*0.55+(1.0-v)*0.45)*0.5+0.25; // range ~0.25–0.75
+        // Large gentle undulation from pile direction
+        var pile=_dN(u*3.5,v*3.5,2)*0.07+_dN(u*7,v*7,9)*0.03;
+        // Extremely subtle micro-nap — fine noise, very low amplitude
+        var micro=_dF(u*22,v*22,2,5)*0.018;
+        var bmp=(grad-0.5)*0.32+pile+micro;
         put(x,y,CR+bmp,CG+bmp,CB+bmp);
       }
     }
@@ -1451,8 +1445,8 @@ function _diceMakeTex(type,col,sz){
   ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
 
   var tex=new THREE.CanvasTexture(cv);
-  tex.wrapS=THREE.RepeatWrapping; tex.wrapT=THREE.RepeatWrapping;
-  tex.repeat.set(3,3); tex.anisotropy=16; tex.needsUpdate=true;
+  tex.wrapS=THREE.ClampToEdgeWrapping; tex.wrapT=THREE.ClampToEdgeWrapping;
+  tex.repeat.set(1,1); tex.anisotropy=16; tex.needsUpdate=true;
   _diceTexCache[key]=tex;
   return tex;
 }
@@ -1469,7 +1463,8 @@ function _diceMakeNormalMap(type,sz){
 
   function H(nx,ny){
     if(type==='felt'){
-      return _dN(nx*2,ny*2,3)*0.5+_dN(nx*5,ny*0.5,7)*0.3+_dN(nx*0.5,ny*5,11)*0.2;
+      // Very gentle undulation — smooth baize, almost flat normals
+      return _dN(nx*2.5,ny*2.5,3)*0.3+_dN(nx*6,ny*6,7)*0.12+0.29;
     } else if(type==='oak'||type==='mahogany'||type==='pine'){
       var wx=_dF(nx*0.4,ny*0.4,5,1)*3.2; return Math.sin((nx+wx)*Math.PI*2.8)*0.5+0.5;
     } else if(type==='walnut'){
@@ -1520,8 +1515,8 @@ function _diceMakeNormalMap(type,sz){
   }
   cv.getContext('2d').putImageData(id,0,0);
   var tex=new THREE.CanvasTexture(cv);
-  tex.wrapS=THREE.RepeatWrapping; tex.wrapT=THREE.RepeatWrapping;
-  tex.repeat.set(3,3); tex.needsUpdate=true;
+  tex.wrapS=THREE.ClampToEdgeWrapping; tex.wrapT=THREE.ClampToEdgeWrapping;
+  tex.repeat.set(1,1); tex.needsUpdate=true;
   _diceTexCache[key]=tex;
   return tex;
 }
@@ -2644,7 +2639,7 @@ function pContent(){
   var out=[];function o(s){out.push(s);}
 
   if(p==='life'){o('<div class="set-row"><div><b>Starting Life</b><br><span style="font-size:8px;color:var(--fg2)">Applied on next Reset</span></div><div class="ctr"><button class="eadj" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span class="cv">'+G.cfg.maxLife+'</span><button class="eadj" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
-  if(p==='dice'){o('<div style="font-size:9px;color:var(--fg2);margin-bottom:4px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});
+  if(p==='dice'){o('<div style="font-size:12px;color:var(--fg2);margin-bottom:6px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     var _p2TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
     o('</div><div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+col+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
@@ -2661,7 +2656,9 @@ function pContent(){
     o('</div>');}
 
     o('<div class="slbl2">P1 Options</div>');
-    o('<div class="set-row"><span style="font-size:10px">Show P1 dice color button</span><button class="ftag'+(G.cfg.p1Flip?' on':'')+'" onclick="G.cfg.p1Flip=!G.cfg.p1Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p1Flip?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span style="font-size:13px">Show P1 dice color button</span><button class="ftag'+(G.cfg.p1Flip?' on':'')+'" onclick="G.cfg.p1Flip=!G.cfg.p1Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p1Flip?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">P2 Options</div>');
+    o('<div class="set-row"><span style="font-size:13px">Show P2 dice color button</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
     return out.join('');}
   if(p==='names'){o('<div class="fr"><label style="font-size:9px;color:var(--fg2);width:22px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div><div class="fr"><label style="font-size:9px;color:var(--fg2);width:22px">P2</label><input class="fi" id="ni1" value="'+h(G.cfg.p2)+'"></div><button class="fb gold full" onclick="G.cfg.p1=document.getElementById(\'ni0\').value;G.cfg.p2=document.getElementById(\'ni1\').value;sv(\'sg-cfg\',G.cfg);render()">Save Names</button>');return out.join('');}
   if(p==='themes'){
@@ -2669,9 +2666,13 @@ function pContent(){
     o('<div class="tgrid">');
     THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});
     o('</div>');
+    o('<div class="slbl2" style="margin-top:10px">Layout</div>');
+    o('<div class="tgrid">');
+    [['standard','Full'],['circular','Circular'],['tap','Tap']].forEach(function(lv){var active=lv[0]===(G.cfg.layout||'standard');o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.layout=\''+lv[0]+'\';sv(\'sg-cfg\',G.cfg);render()">'+lv[1]+'</button>');});
+    o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
-    o('<div class="set-row"><span>Layout</span><select class="fi" style="font-size:9px;padding:2px 4px;flex:0 0 auto" onchange="G.cfg.layout=this.value;sv(\'sg-cfg\',G.cfg);render()"><option value="standard"'+((!G.cfg.layout||G.cfg.layout==="standard")?" selected":"")+'>Full</option><option value="circular"'+(G.cfg.layout==="circular"?" selected":"")+'>Circular</option><option value="tap"'+(G.cfg.layout==="tap"?" selected":"")+'>Tap</option></select></div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=!G.cfg.plainFont;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
@@ -2685,7 +2686,7 @@ function pContent(){
     }return out.join('');}
   G._rd=G._rd||[];G._faqRd=[];if(p==='rules'){RULES.forEach(function(r){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
-  });o('<a class="ext-lnk" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook &rarr;</a>');return out.join('');}
+  });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
   if(p==='codex'){
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
     o('<div class="stbar">'+fil.length+' / '+codexMain.length+' keywords</div>');
@@ -3202,15 +3203,15 @@ function pCirc(p,pi){
 
   // Main circle sizes scale with orbit
   var mSz=Math.round(170*scale);
-  var eSz=Math.round(110*scale);
+  var eSz=Math.round(120*scale);
   var fontSize=Math.round(60*scale);
   var lblSize=Math.round(11*scale);
-  var elValSize=Math.round(30*scale);
-  var elIconSize=Math.round(40*scale);
+  var elValSize=Math.round(38*scale);
+  var elIconSize=Math.round(52*scale);
 
-  // Positions: threshold circles at elOff from edge, lifeLeft=elOff+eSz+8
-  var elOff=Math.round(6*scale);
-  var lifeLeft=elOff+eSz;
+  // Positions: threshold circles flush to edge, life/mana circles adjacent
+  var elOff=0;
+  var lifeLeft=eSz;
   var manaRight=lifeLeft;
   var elVert=0;
 
@@ -3269,7 +3270,7 @@ function pCirc(p,pi){
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
-  if(pi===1){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
   if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   o('</div>');
@@ -3318,7 +3319,7 @@ function pTap(p,pi){
   o('<div class="tap-el-row">');
   ELEM.slice(0,4).forEach(function(e){
     o('<div class="tap-el">');
-    o('<div style="z-index:1;pointer-events:none">'+eSVG(e.k,26)+'</div>');
+    o('<div style="z-index:1;pointer-events:none">'+eSVG(e.k,36)+'</div>');
     o('<div class="tap-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
     o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+e.k+'\',\''+(-1)+'\'-1)"></button>');
@@ -3331,7 +3332,7 @@ function pTap(p,pi){
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
-  if(pi===1){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
   if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   o('</div>');
@@ -3389,8 +3390,8 @@ function pHTML(p,pi){
     o('<div class="ei2">');
     o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',-1)">-</button>');
     o('<div style="display:flex;flex-direction:column;align-items:center;gap:1px">');
-    o(eSVG(e.k,26));
-    o('<span style="color:'+e.c+';font-size:16px;font-weight:700;line-height:1">'+p.thresh[e.k]+'</span>');
+    o(eSVG(e.k,34));
+    o('<span style="color:'+e.c+';font-size:22px;font-weight:700;line-height:1">'+p.thresh[e.k]+'</span>');
     o('</div>');
     o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',1)">+</button>');
     o('</div>');
@@ -3410,7 +3411,7 @@ function pHTML(p,pi){
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
   visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
-  if(pi===1){o('<button onclick="showDiceColorPop2(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
   if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   // menu button moved to turnBar
@@ -3595,6 +3596,24 @@ setTimeout(function(){
   try{ _diceInitOverlay(); }catch(e){}
 }, 800);
 
+</script>
+<div id="rulebook-modal">
+  <div class="rb-header">
+    <span class="rb-title">📖 Official Rulebook</span>
+    <button class="rb-close" onclick="closeRulebook()" title="Close">&times;</button>
+  </div>
+  <iframe id="rulebook-frame" src="" allowfullscreen></iframe>
+</div>
+<script>
+function openRulebook(){
+  var m=document.getElementById('rulebook-modal');
+  var f=document.getElementById('rulebook-frame');
+  if(!f.src||f.src==='about:blank'||f.src==='')f.src='https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/preview';
+  m.classList.add('open');
+}
+function closeRulebook(){
+  document.getElementById('rulebook-modal').classList.remove('open');
+}
 </script>
 </body>
 </html>
