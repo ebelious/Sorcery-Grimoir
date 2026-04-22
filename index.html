@@ -3055,7 +3055,7 @@ function pContent(){
   }
   if(p==='art'){
     o('<div class="stbar">'+ARTISTS.length+' artists</div>');
-    ARTISTS.forEach(function(a,i){var exp=!!G.artExp[i];o('<div class="art-c"><div class="art-h" onclick="G.artExp['+i+']=!G.artExp['+i+'];render()"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--fg2);font-size:8px">'+(exp?'&#9650;':'&#9660;')+'</span></div>');if(exp)o('<div class="art-body">'+(a.url?'<a class="ext-lnk" style="padding:2px 0;font-size:9px" href="'+a.url+'" target="_blank">Collector Arthouse &rarr;</a>':'')+'<a class="ext-lnk" style="padding:2px 0;font-size:9px" href="https://www.google.com/search?q='+encodeURIComponent(a.n+' Sorcery TCG card art')+'&tbm=isch" target="_blank">Search artwork &rarr;</a></div>');o('</div>');});
+    ARTISTS.forEach(function(a,i){var click=a.url?'window.open(\''+a.url+'\',\'_blank\')':'window.open(\'https://www.google.com/search?q='+encodeURIComponent(a.n+' Sorcery TCG card art')+'&tbm=isch\',\'_blank\')';o('<div class="art-c"><div class="art-h" onclick="'+click+'" style="cursor:pointer"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--bbl);font-size:9px">&rarr;</span></div></div>');});
     return out.join('');
   }
   return '';
