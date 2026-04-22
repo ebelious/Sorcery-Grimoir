@@ -268,7 +268,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cpop-it:active{background:var(--bg3)}
 .cpop-bk{width:100%;padding:6px;border:1px solid var(--cyn);color:var(--cyn);font-size:13px;margin-top:3px;text-transform:uppercase}
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
+.pbg.pbg-center{align-items:center;justify-content:center}
 .panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto}
+.pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
 .phdr{display:flex;align-items:center;gap:6px;margin-bottom:9px}
 .p-bk{font-size:11px;padding:3px 6px;border:1px solid var(--cyn);color:var(--cyn);text-transform:uppercase}
 .p-ttl{font-size:19px;font-weight:700;flex:1;text-transform:uppercase;color:var(--yel)}
@@ -2697,7 +2699,7 @@ function pContent(){
   var p=G.panel;if(!p||p==='card')return '';
   var out=[];function o(s){out.push(s);}
 
-  if(p==='life'){o('<div class="set-row"><div><b>Starting Life</b><br><span style="font-size:8px;color:var(--fg2)">Applied on next Reset</span></div><div class="ctr"><button class="eadj" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span class="cv">'+G.cfg.maxLife+'</span><button class="eadj" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
+  if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--yel);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
   if(p==='dice'){o('<div style="font-size:12px;color:var(--fg2);margin-bottom:6px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     var _p2TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
@@ -3589,7 +3591,7 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg" onclick="if(event.target===this)goBack()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'?' pbg-center':'')+'" onclick="if(event.target===this)goBack()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
