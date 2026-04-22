@@ -3584,7 +3584,8 @@ function cModal(){
     o('<div style="font-size:13px;color:var(--fg2);margin-bottom:4px">No decks yet.<br>Go to My Decks to create one.</div>');
   } else {
     var maxC=_maxCopies(c);
-    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' per deck &middot; collection max 10 cards</div>');
+    var cardZone=cType(c)==='site'?'Atlas':'Spellbook';
+    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' in '+cardZone+' &middot; collection max 10 cards</div>');
     dkKeys.forEach(function(dk){
       var d=G.decks[dk];
       var safeKey=dk.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
@@ -3599,9 +3600,9 @@ function cModal(){
       var collAtMax=inColl>=maxC||collTotal>=10;
       o('<div style="margin-bottom:8px;padding:10px;background:var(--bg3);border-radius:8px">');
       o('<div style="font-size:14px;font-weight:700;color:var(--wht);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(d.name)+'</div>');
-      // Deck row
+      // Spellbook / Atlas row
       o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
-      o('<span style="font-size:13px;color:var(--fg2);width:72px;flex-shrink:0">Deck</span>');
+      o('<span style="font-size:13px;color:var(--fg2);width:72px;flex-shrink:0">'+cardZone+'</span>');
       o('<span style="font-size:13px;font-weight:700;color:'+(atMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inDeck+'/'+maxC+'</span>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inDeck===0?';opacity:.3':'')+'" '+(inDeck===0?'disabled':'')+' onclick="removeCardFromDeck(\''+safeKey+'\',\''+safeNm+'\')">&#8722;</button>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(atMax?';opacity:.3':'')+'" '+(atMax?'disabled':'')+' onclick="addCardToDeck(\''+safeKey+'\',\''+safeNm+'\')">+</button>');
