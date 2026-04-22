@@ -2669,21 +2669,40 @@ function fetchPrice(nm){
   if(!nm)return;var px=G.prices[nm];
   if(px&&(px.loading||(px.ts&&Date.now()-px.ts<3600000)))return;
   G.prices[nm]={loading:true};render();
-  var prompt='Search the web right now for the price of the Sorcery Contested Realm TCG card named "'+nm+'". '
-    +'Check these sites in order: '
-    +'1. https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+' '
-    +'2. https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(nm)+' '
-    +'Find the market price, low price, and high price. '
-    +'Return ONLY a raw JSON object, no markdown, no explanation: '
-    +'{"market":"$X.XX","low":"$X.XX","high":"$X.XX","source":"sorcerytcg.gg"} '
-    +'Replace X.XX with the actual dollar amounts you find. Set source to whichever site had the price.';
-  apiCall(prompt,1500,function(err,txt){
-    if(err||!txt){G.prices[nm]={loading:false,err:'Request failed',ts:Date.now()};render();return;}
-    var obj=extractJSON(txt,'object');
-    if(!obj||(!obj.market&&!obj.low&&!obj.high)){
-      G.prices[nm]={loading:false,err:'No price found',ts:Date.now()};render();return;
+  var slug=nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  var url='https://sorcerycard.io/card/'+slug;
+  var proxy='https://api.allorigins.win/get?url='+encodeURIComponent(url);
+  fetch(proxy).then(function(r){return r.json();}).then(function(d){
+    var html=d.contents||'';
+    // Parse price table rows — look for standard (non-foil) print rows
+    // Each row: <tr> with cells for Print | Market | Low | Mid | High
+    var prints=[];
+    var rowRe=/<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    var cellRe=/<td[^>]*>([\s\S]*?)<\/td>/gi;
+    var strip=function(s){return s.replace(/<[^>]+>/g,'').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();};
+    var m;
+    while((m=rowRe.exec(html))!==null){
+      var row=m[1];var cells=[];var cm;
+      var cellRe2=/<td[^>]*>([\s\S]*?)<\/td>/gi;
+      while((cm=cellRe2.exec(row))!==null)cells.push(strip(cm[1]));
+      if(cells.length>=2){
+        var label=cells[0];var mkt=cells[1];
+        // Only standard (non-foil) rows; skip foil rows
+        if(mkt&&mkt.match(/^\$[\d.]+$/)&&label&&label.toLowerCase().indexOf('foil')<0){
+          // Extract set name: Alpha or Beta
+          var setM=label.match(/^(Alpha|Beta|Promotional)/i);
+          if(setM)prints.push({set:setM[1],market:mkt,low:cells[2]||'',high:cells[4]||''});
+        }
+      }
     }
-    G.prices[nm]=Object.assign({},obj,{ts:Date.now(),loading:false,err:null});render();
+    if(prints.length){
+      G.prices[nm]={loading:false,err:null,ts:Date.now(),prints:prints,source:'sorcerycard.io'};
+    } else {
+      G.prices[nm]={loading:false,err:'No price found',ts:Date.now()};
+    }
+    render();
+  }).catch(function(){
+    G.prices[nm]={loading:false,err:'Request failed',ts:Date.now()};render();
   });
 }
 
@@ -3232,7 +3251,17 @@ function cModal(){
     o('</div>');
   }
   o('<div class="price-box">');
-  o('<div class="slbl2">Prices</div>');
+  o('<div class="slbl2">Prices <span style="font-size:7px;color:var(--fg2);font-weight:400">TCGplayer market · standard</span></div>');
+  if(!px){fetchPrice(nm);o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">Loading&hellip;</div>');}
+  else if(px.loading){o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">'+spinIcon()+' Fetching prices&hellip;</div>');}
+  else if(px.err){o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">'+px.err+'</div>');}
+  else if(px.prints&&px.prints.length){
+    o('<div class="price-grid" style="margin-bottom:5px">');
+    px.prints.forEach(function(p){
+      o('<div class="price-item"><span>'+h(p.set)+'</span><b style="color:var(--bgrn)">'+h(p.market)+'</b></div>');
+    });
+    o('</div>');
+  }
   o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
   o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/card/'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'" target="_blank">sorcerycard.io &rarr;</a>');
   o('</div>');
