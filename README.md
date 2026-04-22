@@ -61,12 +61,15 @@ In App got to `Menu > Settings > YouTubeAPI` and enter the API key into this fie
 <summary>Screenshots</summary>
 <table>
   <tr>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_115852_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_115857_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_115911_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_115958_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_121123_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260416_121134_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145633_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145641_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145649_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145709_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145742_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145750_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145830_Brave.jpg" width="300"/></td>
+    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145839_Brave.jpg" width="300"/></td>
   </tr>
 </table>
 </details>
+
