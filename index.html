@@ -557,13 +557,13 @@ var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8
 var MENU_S={
   Settings:['Starting Life','Dice Settings','Player Names','Theme','YouTube API'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
-  Cards:['Card Search','Collection','My Decks','Published Decks'],
-  Stats:['Local Stats','Deck Stats','Public Stats'],
+  Cards:['Card Search','Collection','My Decks'],
+  Stats:['Local Stats','Deck Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Published Decks':'pubdecks','Local Stats':'sl','Deck Stats':'sd','Public Stats':'sp','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',pubdecks:'Published Decks',sl:'Local Stats',sd:'Deck Stats',sp:'Public Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',sl:'Local Stats',sd:'Deck Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -2833,7 +2833,7 @@ function pContent(){
   if(p==='decks'){
     o('<div class="fr"><button class="fb" onclick="trigUpDecks()">Import Deck CSV</button></div>');
     Object.entries(G.decks).forEach(function(kv){var k=kv[0],dk=kv[1];var ds=G.dkstat[dk.name]||{w:0,l:0};var pct=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';o('<div class="dk-c"><div style="display:flex;align-items:center;gap:4px;margin-bottom:2px"><input style="font-size:10px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dk.name)+'" onchange="G.decks[\''+h(k)+'\'].name=this.value;sv(\'sg-dk\',G.decks)"><button class="fb red" style="font-size:7px;padding:1px 4px" onclick="delDeck(\''+h(k)+'\')">&times;</button></div><div class="ss"><span>'+dk.cards.length+' cards</span><span class="sw">'+ds.w+'W</span><span class="sl_">'+ds.l+'L</span><span class="sp_">'+pct+'</span></div><div class="dk-tags">');dk.cards.forEach(function(c){o('<span class="dk-tag">'+c.qty+'&times; '+h(c.name)+'</span>');});o('</div></div>');});
-    o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/decks" target="_blank">Browse published decks &rarr;</a>');return out.join('');
+    return out.join('');
   }
   if(p==='pubdecks'){
     o('<div class="slbl2">Most Viewed Published Decks</div>');
