@@ -2,18 +2,19 @@
 This is Sorcer Grimoir, a Contested Realm Companion application for the seekers and masters of the realm. This app is a multi tool for anyone intersted in playing, understanding, and/or just interested in Sorcery Contested Realm.
 
 ## Features
-- Global Saerch for artists, cards, card key words
+- Global Saerch for cards, card key words in the FAQ and Codex for quick answers while playing
 - UI for counters when playing the game with 1 player and 2 player views
 - UI extras such as Dice rolling, Turn counter, win/loss tracker
-- All Cards with attached FAQ, Codex, and Rulebook keywords for easily understanding how each card is used
-- Expandeable text option that may be difficult to read 
-- Direct card inks to different trading markets to assess card value for easy inspection to make fair trades
+- All Cards with attached FAQ and Codex keywords for easily understanding how each card is used
+- Expandeable text option for smaller text that may be difficult to read 
+- Direct card links to different trading markets to assess card value for easy lookup to make fair trades
 - All of the amazing artists have the links to see thier awesome work
 - Allows Collections to be added to keep track of all of you cards
-- Settings to theme the app in some additional ways
-- Links to news, and other media
-
-This has a lot of simple 'click to use' features to expand images or enlarge text for easier reading that dont show an actual button.
+- Settings to theme the app by color witha few different UI options, including Dice color, table color and Dice Roll animations
+- Links to news, curios, rulebook, and other media
+- Current news feed along with latest YouTube videos that talk about Sorcery
+- This app has a lot of simple 'click to use' features that are not noted  in the app to expand images or enlarge text for easier reading that dont show an actual button.
+- Decorative Death's Door Icon in UI
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*
 
@@ -50,7 +51,9 @@ This means even if someone gets your key, they can only use it for YouTube — n
 10. Save
 
 In App got to `Menu > Settings > YouTubeAPI` and enter the API key into this field and `save`
-- This should now populate the Youtube viedo feed
+- This should now populate the Youtube viedo feed<br>
+**NOTE: Make sure you save this API key, because sometimes PWA saved apps can be removed from our homescreen and if you clear browser data the key will not be saved in the app**
+
 
 ## Preview
 
