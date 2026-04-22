@@ -322,7 +322,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cm-tag{font-size:10px;padding:3px 7px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:11px;color:var(--fg2);text-align:center;line-height:1.8;margin-bottom:6px}
 .cm-rt{font-size:12px;background:var(--bg3);border:1px solid var(--bd);padding:8px;line-height:1.6;margin-bottom:6px;font-family:Georgia,serif}
-.cm-tcg{display:block;font-size:9px;color:var(--bbl);font-weight:700;text-align:center;padding:4px;border:1px solid var(--bbl);margin-bottom:6px}
+.cm-tcg{display:block;font-size:13px;color:var(--bbl);font-weight:700;text-align:center;padding:4px;border:1px solid var(--bbl);margin-bottom:6px}
 .qty-row{display:flex;align-items:center;gap:6px;padding-top:6px;border-top:1px solid var(--bd)}
 .qty-lbl{flex:1;font-size:10px;color:var(--fg2)}
 .qty-val{font-size:13px;font-weight:700;min-width:20px;text-align:center}
@@ -3234,8 +3234,7 @@ function cModal(){
   o('<div class="price-box">');
   o('<div class="slbl2">Prices</div>');
   o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
-  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--grn);color:var(--grn)" href="https://sorcerytcg.gg/prices/?search='+encodeURIComponent(nm)+'" target="_blank">sorcerytcg.gg &rarr;</a>');
-  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/price-guide?search='+encodeURIComponent(nm)+'" target="_blank">sorcerycard.io &rarr;</a>');
+  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/card/'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'" target="_blank">sorcerycard.io &rarr;</a>');
   o('</div>');
   o('<div class="qty-row"><div class="qty-lbl">In collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
   o(own?own+' cop'+(own===1?'y':'ies'):'Not owned');
