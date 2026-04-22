@@ -3312,7 +3312,7 @@ function pTap(p,pi){
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="showLog('+pi+')"></button>');
   } else {
-    o('<div class="tap-val" style="color:'+lifeColor+';font-size:68px">'+p.life+'</div>');
+    o('<div class="tap-val" style="color:'+lifeColor+';font-size:88px">'+p.life+'</div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
@@ -3320,7 +3320,7 @@ function pTap(p,pi){
 
   // Mana tile — invisible overlay: top half = +1, bottom half = -1
   o('<div class="tap-tile">');
-  o('<div class="tap-val" style="color:var(--mana);font-size:68px">'+p.mana+'</div>');
+  o('<div class="tap-val" style="color:var(--mana);font-size:88px">'+p.mana+'</div>');
   o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
   o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
   o('</div>');
