@@ -1621,7 +1621,7 @@ function _diceInitOverlay(){
   bar.id='dice-3d-bar';
   bar.style.cssText='display:flex;gap:10px;justify-content:center;align-items:center;padding:12px 0;background:var(--bg2);border-top:1px solid var(--bd);order:2;';
   var _diceRnd=document.body.classList.contains('rounded')?'8px':'0';
-  bar.innerHTML='<button id="dice-3d-again" style="background:var(--fg);border:none;color:var(--bg);border-radius:'+_diceRnd+';padding:8px 28px;font-size:14px;font-weight:700;cursor:pointer;display:none;font-family:inherit" onclick="_diceRollAgain()">Roll Again</button><button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);border-radius:'+_diceRnd+';padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
+  bar.innerHTML='<button id="dice-3d-again" style="background:var(--fg);border:none;color:var(--bg);padding:8px 28px;font-size:14px;font-weight:700;cursor:pointer;display:none;font-family:inherit" onclick="_diceRollAgain()">Roll Again</button><button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // Canvas container (fills most of screen)
   var canvasWrap=document.createElement('div');
@@ -1638,7 +1638,7 @@ function _diceInitOverlay(){
   var popup=document.createElement('div');
   popup.id='dice-3d-popup';
   popup.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:24px 48px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:180px;';
-  popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;font-family:inherit"></div><div id="dice-3d-num" style="font-size:80px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:12px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
+  popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;font-family:inherit"></div><div id="dice-3d-num" style="font-size:80px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:22px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
 
   wrap.appendChild(bar);
   wrap.appendChild(canvasWrap);
