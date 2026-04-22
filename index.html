@@ -3583,8 +3583,10 @@ function cModal(){
   if(!dkKeys.length){
     o('<div style="font-size:13px;color:var(--fg2);margin-bottom:4px">No decks yet.<br>Go to My Decks to create one.</div>');
   } else {
-    var maxC=_maxCopies(c);
-    var cardZone=cType(c)==='site'?'Atlas':'Spellbook';
+    var isAvatar=cType(c)==='avatar';
+    var maxC=isAvatar?1:_maxCopies(c);
+    var cardZone=isAvatar?'Avatar':cType(c)==='site'?'Atlas':'Spellbook';
+    var maxColl=isAvatar?1:maxC;
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' in '+cardZone+' &middot; collection max 10 cards</div>');
     dkKeys.forEach(function(dk){
       var d=G.decks[dk];
@@ -3597,9 +3599,9 @@ function cModal(){
       var collEntry=coll.find(function(x){return x.name===nm;});
       var inColl=collEntry?collEntry.qty:0;
       var collTotal=coll.reduce(function(s,x){return s+x.qty;},0);
-      var collAtMax=inColl>=maxC||collTotal>=10;
+      var collAtMax=inColl>=maxColl||collTotal>=10;
       o('<div style="margin-bottom:8px;padding:10px;background:var(--bg3);border-radius:8px">');
-      o('<div style="font-size:14px;font-weight:700;color:var(--wht);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(d.name)+'</div>');
+      o('<div style="font-size:17px;font-weight:400;color:var(--wht);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Fantaisie,serif">'+h(d.name)+'</div>');
       // Spellbook / Atlas row
       o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
       o('<span style="font-size:13px;color:var(--fg2);width:72px;flex-shrink:0">'+cardZone+'</span>');
@@ -3610,7 +3612,7 @@ function cModal(){
       // Collection row
       o('<div style="display:flex;align-items:center;gap:8px">');
       o('<span style="font-size:13px;color:var(--yel);width:72px;flex-shrink:0">Collection</span>');
-      o('<span style="font-size:13px;font-weight:700;color:'+(collAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inColl+'/'+maxC+'<br><span style="font-size:10px;font-weight:400;color:var(--fg3)">'+collTotal+'/10</span></span>');
+      o('<span style="font-size:13px;font-weight:700;color:'+(collAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inColl+'/'+maxColl+'<br><span style="font-size:10px;font-weight:400;color:var(--fg3)">'+collTotal+'/10</span></span>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inColl===0?';opacity:.3':'')+'" '+(inColl===0?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(collAtMax?';opacity:.3':'')+'" '+(collAtMax?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
       o('</div>');
