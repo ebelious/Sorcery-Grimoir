@@ -101,6 +101,15 @@ body.rounded #p2-dice-cpop button,body.rounded #p1-dice-cpop button,body.rounded
 body.rounded .cpop-it,body.rounded .adj,body.rounded .yt-pill,body.rounded .yt-vid,body.rounded .ev-c{border-radius:8px}
 body.rounded .si input,body.rounded .si select{border-radius:8px}
 body.rounded .qbtn,body.rounded .sx,body.rounded .cpop-bk,body.rounded .p-bk{border-radius:8px}
+/* Rounded corners: card details */
+body.rounded .cm-tag,body.rounded .cm-rt,body.rounded .price-box,body.rounded .qty-row,body.rounded .acc-row{border-radius:6px}
+/* Rounded corners: remaining bordered elements */
+body.rounded .p-tap,body.rounded .p-circ,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
+body.rounded .dice-pop,body.rounded .log-pop,body.rounded .dbtn,body.rounded .lp-btn,body.rounded .sdd{border-radius:8px}
+body.rounded .dk-c,body.rounded .dk-tag,body.rounded .art-c,body.rounded .sc,body.rounded .own-b{border-radius:6px}
+body.rounded .coll-th,body.rounded .p-cl,body.rounded .yt-sel{border-radius:6px}
+body.rounded .rd-modal{border-radius:10px}
+body.rounded .rd-close{border-radius:6px}
 /* ── CIRCULAR LAYOUT ── */
 .mini-el:last-child{border-right:none}
 .p-tap{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0;user-select:none;width:100%;box-sizing:border-box}
@@ -642,7 +651,7 @@ var G={
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
   cF:{el:[],type:[],rarity:[],set:[],mana:[]},
   coF:{el:[],type:[],rarity:[],set:[]},
-  accExp:{},prices:{},matchLog:[],matchStartTime:null,
+  accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
 };
@@ -2665,54 +2674,6 @@ function loadNews(){
 
 
 // ── PRICE ─────────────────────────────────────────────────────────────────────
-function _parseSorceryPrices(html){
-  var prints=[];
-  var strip=function(s){return s.replace(/<[^>]+>/g,'').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();};
-  var rowRe=/<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  var m;
-  while((m=rowRe.exec(html))!==null){
-    var row=m[1];var cells=[];var cm;
-    var cellRe2=/<td[^>]*>([\s\S]*?)<\/td>/gi;
-    while((cm=cellRe2.exec(row))!==null)cells.push(strip(cm[1]));
-    if(cells.length>=2){
-      var label=cells[0];var mkt=cells[1];
-      if(mkt&&mkt.match(/^\$[\d.]+$/)&&label&&label.toLowerCase().indexOf('foil')<0){
-        var setM=label.match(/^(Alpha|Beta|Promotional)/i);
-        if(setM)prints.push({set:setM[1],market:mkt,low:cells[2]||'',high:cells[4]||''});
-      }
-    }
-  }
-  return prints;
-}
-function fetchPrice(nm){
-  if(!nm)return;var px=G.prices[nm];
-  if(px&&(px.loading||(px.ts&&Date.now()-px.ts<3600000)))return;
-  G.prices[nm]={loading:true};render();
-  var slug=nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  var prompt='Fetch the page https://sorcerycard.io/card/'+slug+' and find the Price Breakdown table. '
-    +'Return ONLY a raw JSON array of standard (non-foil) TCGplayer market prices, no markdown, no explanation: '
-    +'[{"set":"Alpha","market":"$X.XX"},{"set":"Beta","market":"$X.XX"}] '
-    +'Only include rows where the print name does NOT contain "Foil". Use the Market column value.';
-  apiCall(prompt,500,function(err,txt){
-    if(err||!txt){G.prices[nm]={loading:false,err:'Request failed',ts:Date.now()};render();return;}
-    var arr=extractJSON(txt,'array');
-    if(arr&&arr.length){
-      var prints=arr.filter(function(p){return p.set&&p.market;});
-      if(prints.length){
-        G.prices[nm]={loading:false,err:null,ts:Date.now(),prints:prints,source:'sorcerycard.io'};
-        render();return;
-      }
-    }
-    // fallback: try parsing as HTML in case model returned raw page content
-    var prints2=_parseSorceryPrices(txt);
-    if(prints2.length){
-      G.prices[nm]={loading:false,err:null,ts:Date.now(),prints:prints2,source:'sorcerycard.io'};
-    } else {
-      G.prices[nm]={loading:false,err:'No price found',ts:Date.now()};
-    }
-    render();
-  });
-}
 
 // ── PUBLIC STATS ──────────────────────────────────────────────────────────────
 function loadPubStats(){
@@ -3171,7 +3132,7 @@ function cModal(){
   var nm=cName(c);var own=(G.coll[nm]||{}).qty||0;
   var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];
   var rC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[cRar(c)]||'#918175';
-  var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};var px=G.prices[nm];var isSite=cType(c)==='site';
+  var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};var isSite=cType(c)==='site';
   var out=[];function o(s){out.push(s);}
   o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
@@ -3259,17 +3220,7 @@ function cModal(){
     o('</div>');
   }
   o('<div class="price-box">');
-  o('<div class="slbl2">Prices <span style="font-size:7px;color:var(--fg2);font-weight:400">TCGplayer market · standard</span></div>');
-  if(!px){fetchPrice(nm);o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">Loading&hellip;</div>');}
-  else if(px.loading){o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">'+spinIcon()+' Fetching prices&hellip;</div>');}
-  else if(px.err){o('<div style="font-size:9px;color:var(--fg2);margin:4px 0">'+px.err+'</div>');}
-  else if(px.prints&&px.prints.length){
-    o('<div class="price-grid" style="margin-bottom:5px">');
-    px.prints.forEach(function(p){
-      o('<div class="price-item"><span>'+h(p.set)+'</span><b style="color:var(--bgrn)">'+h(p.market)+'</b></div>');
-    });
-    o('</div>');
-  }
+  o('<div class="slbl2">Markets</div>');
   o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
   o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/card/'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'" target="_blank">sorcerycard.io &rarr;</a>');
   o('</div>');
