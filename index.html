@@ -3532,7 +3532,7 @@ function render(){
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)goBack()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
-        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'openRulebook();goBack()':'openPanel(\''+PM[item]+'\')';o('<div class="cpop-it" onclick="'+onclick+'">' +item+'</div>');});
+        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';o('<div class="cpop-it" onclick="'+onclick+'">' +item+'</div>');});
         o('<button class="cpop-bk" onclick="goBack()">&larr; Back</button></div></div>');
       }
     }
