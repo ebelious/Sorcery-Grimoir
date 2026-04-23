@@ -202,7 +202,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .tb.done{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.4}
 #tbar{display:flex;align-items:stretch;flex-shrink:0;background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
 .tb-n{font-weight:700;color:var(--hi);padding:3px 10px;flex-shrink:0;border-left:1px solid var(--bd);border-right:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px}
-.tb-s{flex:1;padding:3px 5px;text-align:center;font-size:14px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--bd);overflow:hidden;min-width:0}
+.tb-s{flex:1;width:0;padding:3px 5px;text-align:center;font-size:14px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--bd);overflow:hidden;min-width:0;white-space:nowrap}
 .tb-s.act{background:var(--hi);color:var(--bg);font-weight:700}
 .tb-e{font-size:8px;color:var(--fg2);padding:3px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;max-width:90px}
 #topbar{display:flex;align-items:center;gap:4px;padding:3px 7px;background:var(--bg2);border-bottom:1px solid var(--bd);flex-shrink:0}
@@ -749,6 +749,17 @@ function resetHighlight(){
   var defHi=THEME_HI[G.theme||'']||'#FBB829';
   G.cfg.hi=defHi;sv('sg-cfg',G.cfg);
   document.body.style.setProperty('--hi',defHi);
+}
+function resetAllTheme(){
+  // Reset all theming to factory defaults
+  G.cfg.hiOverride=false;
+  G.cfg.roundedCorners=true;
+  G.cfg.plainFont=false;
+  G.cfg.menuLeft=false;
+  G.cfg.layout='tap';
+  sv('sg-cfg',G.cfg);
+  applyTheme(''); // default theme, also resets --hi
+  _applyBodyClass();
 }
 var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#DBBC7F','tl':'#D4820A','tm':'#EBC06D','ti':'#d7c483','tr':'#F6C177'};
 function _applyBodyClass(){
@@ -2889,7 +2900,7 @@ function pContent(){
       o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');render()">'+name+'</button>');
     });
     o('</div>');
-    o('<button class="fb" style="font-size:11px;padding:4px 10px" onclick="resetHighlight();render()">Reset to Theme Default</button>');
+    o('<button class="fb" style="font-size:11px;padding:4px 10px" onclick="resetAllTheme();render()">Reset to Default</button>');
     o('<div class="slbl2" style="margin-top:18px">Layout</div>');
     o('<div class="tgrid">');
     [['standard','Full'],['circular','Circular'],['tap','Tap']].forEach(function(lv){var active=lv[0]===(G.cfg.layout||'standard');o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.layout=\''+lv[0]+'\';sv(\'sg-cfg\',G.cfg);render()">'+lv[1]+'</button>');});
@@ -3940,9 +3951,9 @@ function turnBar(){
   var _ml=G.cfg&&G.cfg.menuLeft;
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<div class="tb-ghost"></div>';
-    var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'">'+ph(p0)+(p0?h(p0.name):'')+' </div>';
+    var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
-  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'">'+ph(p1)+h(p1.name)+'</div>':'<div class="tb-s" style="pointer-events:none"></div>';
+  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
   return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_mbtn)+'</div>';
 }
 
