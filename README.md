@@ -57,6 +57,9 @@ In App got to `Menu > Settings > YouTubeAPI` and enter the API key into this fie
 
 ## Preview
 
+
+[View Screenshots](https://ebelious.github.io/Sorcery-Grimoir/gallery.html)
+
 <details open>
 <summary>Screenshots</summary>
 <table>
