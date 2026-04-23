@@ -18,46 +18,15 @@ This is Sorcer Grimoir, a Contested Realm Companion application for the seekers 
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*
 
-
 ## Add the App to your phone (PWA).
 There are two ways to accomplish this:<br>
     Option 1:  [Sorcery-Grimoir](https://ebelious.github.io/Sorcery-Grimoir/) > Menu > settings > Theme > Install As App <br>
     Option 2: Menu in browser > Add to Home screan, Install or Install as App <br>
 
-
-## How to get API key for YouTube video feeds
-
-1. Go to [console.developers.google.com](https://console.developers.google.com)
-2. Create a project (or use an existing one)
-3. Click Enable APIs → search YouTube Data API v3 → Enable
-4. Go to Credentials → Create Credentials → API Key
-
-### API Config
-1. API Restrictions (limits which APIs the key can call)<br>
-2. In Credentials → click your API key → API restrictions
-3. Select Restrict key
-4. Choose YouTube Data API v3 from the dropdown
-5. Save
-
-This means even if someone gets your key, they can only use it for YouTube — not run up charges on other Google APIs.<br>
-6. Application Restrictions (limits where the key can be used from)<br>
-7. On the same page → Application restrictions<br>
-8. Select HTTP referrers (websites)<br>
-9. Add these referrers:
-```
-  https://ebelious.github.io/*
-  http://localhost/*
-```
-10. Save
-
-In App got to `Menu > Settings > YouTubeAPI` and enter the API key into this field and `save`
-- This should now populate the Youtube viedo feed<br>
-**NOTE: Make sure you save this API key, because sometimes PWA saved apps can be removed from our homescreen and if you clear browser data the key will not be saved in the app**
-
+# Stats
+Create a deck and select it by using the settings icon in the counter UI. when you are at DD -1 more health and the logging option pops to record the stats
 
 ## Preview
-
-
 [View Screenshots](https://ebelious.github.io/Sorcery-Grimoir/gallery.html)
 
 <details open>
