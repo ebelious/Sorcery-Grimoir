@@ -107,6 +107,7 @@ body.rounded .cm-tag,body.rounded .cm-rt,body.rounded .price-box,body.rounded .q
 body.rounded .p-tap,body.rounded .p-circ,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
 body.rounded .dice-pop,body.rounded .log-pop,body.rounded .dbtn,body.rounded .lp-btn,body.rounded .sdd{border-radius:8px}
 body.rounded .dk-c,body.rounded .dk-tag,body.rounded .art-c,body.rounded .sc,body.rounded .own-b{border-radius:6px}
+body.rounded .p1-settings-btn{border-radius:8px}
 body.rounded .coll-th,body.rounded .p-cl,body.rounded .yt-sel{border-radius:6px}
 body.rounded .rd-modal{border-radius:10px}
 body.rounded .rd-close{border-radius:6px}
@@ -567,14 +568,14 @@ var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
 var MENU_S={
-  Settings:['Starting Life','Dice Settings','Player Names','Theme'],
+  Settings:['Starting Life','Dice Settings','Player Names','Theme','YouTube API'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Events':'ev','YouTube':'yt','News':'news','All Artists':'art'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Events':'ev','YouTube API':'ytapi','YouTube':'yt','News':'news','All Artists':'art'};
 var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
@@ -2491,10 +2492,10 @@ function extractJSON(txt,type){
 }
 
 // ── YOUTUBE ───────────────────────────────────────────────────────────────────
-var YT_API_KEY='AIzaSyB11GtYh2qyf0nvfOlVJW8yvS5ycEdqu5o';
+var YT_API_KEY='AIzaSyAMSuLvkJFR_Y2RKcOuQkrKK7IHSy51Bzs';
 
 function _fetchVideos(cid, chName, cb){
-  var key=YT_API_KEY;
+  var key=localStorage.getItem('sg-ytkey')||'';
   if(!key){cb([]);return;}
 
   var pid='UU'+cid.slice(2);
@@ -3499,7 +3500,49 @@ function pContent(){
 
     return out.join('');
   }
+  if(p==='ytapi'){
+    var _ytKey=localStorage.getItem('sg-ytkey')||'';
+    o('<div style="font-size:13px;color:var(--fg2);margin-bottom:8px">The YouTube Data API v3 is free (10,000 requests/day). Your key is stored only on this device.</div>');
+    if(_ytKey){
+      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;background:var(--bg3);border:1px solid var(--grn);border-radius:4px;padding:6px 8px">');
+      o('<span style="color:var(--grn);font-size:13px">&#10003; API Key saved</span>');
+      o('<button class="fb red" style="margin-left:auto;font-size:11px;padding:2px 6px" onclick="localStorage.removeItem(\'sg-ytkey\');G.ytVids=[];G.ytLoaded=false;render()">Remove</button>');
+      o('</div>');
+      o('<div style="font-size:13px;color:var(--fg2);margin-bottom:4px">Current key: <span style="color:var(--fg);font-family:monospace">'+_ytKey.slice(0,8)+'&hellip;</span></div>');
+    }
+    o('<div class="slbl2">'+(_ytKey?'Replace Key':'Enter API Key')+'</div>');
+    o('<div style="display:flex;gap:4px;margin-bottom:8px">');
+    o('<input class="fi" id="yt-key-inp" placeholder="AIza..." style="flex:1">');  // always empty
+    o('<button class="fb gold" onclick="var k=document.getElementById(\'yt-key-inp\').value.trim();if(k){localStorage.setItem(\'sg-ytkey\',k);G.ytVids=[];G.ytLoaded=false;render();}">Save</button>');
+    o('</div>');
+    o('<div class="slbl2">How to get a free API key</div>');
+    o('<div style="font-size:13px;color:var(--fg2);line-height:1.7">');
+    o('1. Go to <a href="https://console.developers.google.com" target="_blank" style="color:var(--bbl)">console.developers.google.com</a><br>');
+    o('2. Create a project &rarr; click <b>Enable APIs</b><br>');
+    o('3. Search <b>YouTube Data API v3</b> &rarr; Enable<br>');
+    o('4. Go to <b>Credentials</b> &rarr; <b>Create Credentials</b> &rarr; <b>API Key</b><br>');
+    o('5. Copy the key (starts with AIza...) and paste above');
+    o('</div>');
+    o('<div class="slbl2" style="margin-top:10px">Recommended restrictions</div>');
+    o('<div style="font-size:13px;color:var(--fg2);line-height:1.7">');
+    o('In the Google Console &rarr; click your key &rarr;<br>');
+    o('&bull; <b>API restrictions</b>: restrict to YouTube Data API v3<br>');
+    o('&bull; <b>HTTP referrers</b>: add <span style="font-family:monospace;color:var(--fg)">https://ebelious.github.io/*</span>');
+    o('</div>');
+    return out.join('');
+  }
   if(p==='yt'){
+    // Check for API key first
+    var _ytKey=localStorage.getItem('sg-ytkey')||'';
+    if(!_ytKey){
+      o('<div style="background:var(--bg3);border:1px solid var(--yel);border-radius:4px;padding:12px;margin:8px 0;font-size:11px">');
+      o('<div style="color:var(--yel);font-weight:700;margin-bottom:6px">&#9888; YouTube API Key Required</div>');
+      o('<div style="color:var(--fg2);margin-bottom:8px">To load videos, add your YouTube API key in:</div>');
+      o('<div style="color:var(--fg);font-weight:700;margin-bottom:8px">Menu &rsaquo; Settings &rsaquo; YouTube API</div>');
+      o('<button class="fb gold" style="width:100%" onclick="openPanel(\'ytapi\')">Go to YouTube API Settings &rarr;</button>');
+      o('</div>');
+      return out.join('');
+    }
     if(!G.ytLoaded&&!G.ytLoading){setTimeout(function(){loadYTVideos();},50);}
     var selCh=YT_CHS.find(function(x){return x.id===G.ytCh;})||YT_CHS[0];
     var filtVids=!G.ytVids?[]:G.ytCh==='all'?G.ytVids:G.ytVids.filter(function(v){
@@ -3833,7 +3876,7 @@ function pCirc(p,pi){
   o('</div>');
   o('<div style="display:flex;gap:4px;align-items:stretch;width:100%">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -3898,7 +3941,7 @@ function pTap(p,pi){
 
   o('<div style="display:flex;gap:4px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -3978,7 +4021,7 @@ function pHTML(p,pi){
   // Row: Turn button + P1 Settings button (side by side)
   o('<div style="display:flex;gap:4px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   o('</div>');
 
   o('</div>'); // end zone
