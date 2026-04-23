@@ -23,6 +23,12 @@ There are two ways to accomplish this:<br>
     Option 1:  [Sorcery-Grimoir](https://ebelious.github.io/Sorcery-Grimoir/) > Menu > settings > Theme > Install As App <br>
     Option 2: Menu in browser > Add to Home screan, Install or Install as App <br>
 
+# Decks
+You need to export the decks you create for persistence when updating the app. clearing browser cache and history will clear all data
+
+You can re-upload the decks when the app is updated.
+Im still thinking about how to make this persistent in app
+
 # Stats
 Create a deck and select it by using the settings icon in the counter UI. when you are at DD -1 more health and the logging option pops to record the stats
 
