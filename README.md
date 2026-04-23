@@ -30,7 +30,7 @@ You can re-upload the decks when the app is updated.
 Im still thinking about how to make this persistent in app
 
 # Stats
-Create a deck and select it by using the settings icon in the counter UI. when you are at DD -1 more health and the logging option pops to record the stats
+Create a deck and select it by using the settings icon in the counter UI. When a player is at DD, -1 more health and the logging option pops to record the stats
 
 ## Preview
 [View Screenshots](https://ebelious.github.io/Sorcery-Grimoir/gallery.html)
