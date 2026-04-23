@@ -307,7 +307,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .acc-q{font-size:16px;font-weight:700;color:var(--wht);margin-bottom:4px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Courier New',monospace}
 .acc-a{font-size:16px;color:var(--fg2);line-height:1.7;white-space:normal;word-break:break-word;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Courier New',monospace}
 .cod-def{font-size:13px;color:var(--fg2);line-height:1.55;padding-top:6px;font-family:Georgia,serif}
-.stbar{font-size:8px;color:var(--fg2);text-align:center;padding:3px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:5px}
+.stbar{font-size:12px;color:var(--fg2);text-align:center;padding:4px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:6px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
 .frow{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px;align-items:center}
 .flbl{font-size:10px;color:var(--fg2);width:40px;flex-shrink:0;text-transform:uppercase}
@@ -363,9 +363,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dc-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
 .dcb{width:28px;height:28px;border:2px solid transparent;cursor:pointer;border-radius:50%}
 .dcb.on{border-color:var(--wht)}
-.sc{padding:6px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:4px}
-.sn{font-size:10px;font-weight:700}
-.ss{display:flex;gap:7px;font-size:9px;margin-top:2px}
+.sc{padding:8px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:5px}
+.sn{font-size:14px;font-weight:700}
+.ss{display:flex;gap:9px;font-size:13px;margin-top:4px}
 .sw{color:var(--grn);font-weight:700}.sl_{color:var(--red);font-weight:700}.sp_{color:var(--fg2)}
 .yt-sel{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:5px 6px;outline:none;margin-bottom:8px;font-size:10px;font-family:'Courier New',monospace}
 .yt-pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:9px}
@@ -415,14 +415,14 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .price-item b{font-size:11px}
 .fs-img{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center}
 .fs-img img{max-width:90vw;max-height:88vh;object-fit:contain}
-.rt{width:100%;font-size:9px;border-collapse:collapse}
-.ml-row{display:flex;align-items:center;gap:4px;padding:3px 0;border-bottom:1px solid var(--bg3);font-size:8px;flex-wrap:wrap}
+.rt{width:100%;font-size:13px;border-collapse:collapse}
+.ml-row{display:flex;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--bg3);font-size:12px;flex-wrap:wrap}
 .ml-w{color:var(--grn);font-weight:700;flex-shrink:0}
-.ml-sep{color:var(--fg3);font-size:7px;flex-shrink:0}
+.ml-sep{color:var(--fg3);font-size:11px;flex-shrink:0}
 .ml-l{color:var(--red);font-weight:700;flex-shrink:0}
-.ml-meta{color:var(--fg3);font-size:7px;margin-left:auto}
-.rt th{font-weight:700;color:var(--fg2);text-align:left;padding:3px;border-bottom:1px solid var(--bd);font-size:7px;text-transform:uppercase}
-.rt td{padding:3px 4px;border-bottom:1px solid var(--bg3)}
+.ml-meta{color:var(--fg3);font-size:11px;margin-left:auto}
+.rt th{font-weight:700;color:var(--fg2);text-align:left;padding:4px;border-bottom:1px solid var(--bd);font-size:11px;text-transform:uppercase}
+.rt td{padding:4px 5px;border-bottom:1px solid var(--bg3)}
 .wc{color:var(--grn);font-weight:700}.lc{color:var(--red);font-weight:700}
 @keyframes sp{to{transform:rotate(360deg)}}
 .spin{animation:sp .8s linear infinite;display:inline-flex;align-items:center;justify-content:center;transform-origin:center center;vertical-align:middle}.spin img,.spin svg{display:block;transform-origin:center center}
@@ -852,8 +852,10 @@ function confirmLog(){
   sv('sg-ml',G.matchLog);
   if(!G.records[w.name])G.records[w.name]={w:0,l:0};if(!G.records[lo.name])G.records[lo.name]={w:0,l:0};
   G.records[w.name].w++;G.records[lo.name].l++;
-  if(w.deck){if(!G.dkstat[w.deck])G.dkstat[w.deck]={w:0,l:0};G.dkstat[w.deck].w++;}
-  if(lo.deck){if(!G.dkstat[lo.deck])G.dkstat[lo.deck]={w:0,l:0};G.dkstat[lo.deck].l++;}
+  var _wDkN=w.deck?(G.decks[w.deck]?G.decks[w.deck].name:w.deck):'';
+  var _lDkN=lo.deck?(G.decks[lo.deck]?G.decks[lo.deck].name:lo.deck):'';
+  if(w.deck){if(!G.dkstat[w.deck])G.dkstat[w.deck]={w:0,l:0,name:_wDkN};G.dkstat[w.deck].w++;G.dkstat[w.deck].name=_wDkN;}
+  if(lo.deck){if(!G.dkstat[lo.deck])G.dkstat[lo.deck]={w:0,l:0,name:_lDkN};G.dkstat[lo.deck].l++;G.dkstat[lo.deck].name=_lDkN;}
   sv('sg-rec',G.records);sv('sg-ds',G.dkstat);G.logPopup=null;G.matchStartTime=null;render();
 }
 function cancelLog(){G.logPopup=null;render();}
@@ -2034,6 +2036,70 @@ function _refreshP1Popup(){
   }
   render();
 }
+
+// ── P1 SETTINGS POPUP ────────────────────────────────────────────────────────
+function showP1Settings(anchorEl){
+  // Toggle off if already open
+  var old=document.getElementById('p1-settings-pop');
+  if(old){old.remove();return;}
+  // Close any open dice popup
+  var dp=document.getElementById('p1-dice-cpop');if(dp)dp.remove();
+
+  var pop=document.createElement('div');
+  pop.id='p1-settings-pop';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:10px 12px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;max-width:92vw;';
+
+  var dkKeys=Object.keys(G.decks);
+  var p0=G.players[0];
+  var curDeck=p0?p0.deck:null;
+
+  // ── Section: Deck ──
+  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Deck</div>';
+  html+='<div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">';
+  html+='<button style="text-align:left;padding:6px 8px;border:1px solid '+(curDeck===null?'var(--cyn,#22d3ee)':'var(--bd,#374151)')+';background:'+(curDeck===null?'var(--bg3,#374151)':'transparent')+';color:'+(curDeck===null?'var(--cyn,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:4px;cursor:pointer;font-size:12px" onclick="setDeck(0,\'\');_refreshP1Settings()">No deck</button>';
+  dkKeys.forEach(function(dk){
+    var d=G.decks[dk];
+    var on=curDeck===dk;
+    var safeDk=dk.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    html+='<button style="text-align:left;padding:6px 8px;border:1px solid '+(on?'var(--cyn,#22d3ee)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'transparent')+';color:'+(on?'var(--cyn,#22d3ee)':'var(--fg,#e2e8f0)')+';border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%" onclick="setDeck(0,\''+safeDk+'\');_refreshP1Settings()">'+h(d.name)+'</button>';
+  });
+  if(!dkKeys.length) html+='<div style="font-size:11px;color:var(--fg3,#6b7280)">No decks yet — create one in My Decks</div>';
+  html+='</div>';
+
+  // ── Section: Dice Theme ──
+  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Dice Theme</div>';
+  html+='<div style="display:flex;align-items:center;gap:8px">';
+  var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];
+  html+='<button onclick="showDiceColorPop1(this);document.getElementById(\'p1-settings-pop\')&&document.getElementById(\'p1-settings-pop\').remove()" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid '+p1Col+';background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:'+p1Col+'" title="Change P1 dice color"><span>🎨</span><span style="font-size:11px">Dice Color &amp; Surface</span></button>';
+  html+='</div>';
+
+  pop.innerHTML=html;
+  document.body.appendChild(pop);
+
+  // Position above anchor
+  var rect=anchorEl.getBoundingClientRect();
+  var pw=240, ph=300;
+  var left=rect.right-pw;
+  if(left<4) left=4;
+  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
+  var top=rect.top-ph-4;
+  if(top<4) top=rect.bottom+4;
+  pop.style.left=left+'px';
+  pop.style.top=Math.max(4,top)+'px';
+
+  setTimeout(function(){
+    function onOut(e){if(!pop.contains(e.target)&&!document.getElementById('p1-dice-cpop')){pop.remove();document.removeEventListener('click',onOut,true);}}
+    document.addEventListener('click',onOut,true);
+  },0);
+}
+
+function _refreshP1Settings(){
+  var pop=document.getElementById('p1-settings-pop');
+  var anchor=document.querySelector('[onclick*="showP1Settings"]');
+  if(pop && anchor){pop.remove();showP1Settings(anchor);}
+  render();
+}
+
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];render();}
 
 // ── CARD HELPERS ─────────────────────────────────────────────────────────────
@@ -3285,10 +3351,23 @@ function pContent(){
     if(G.matchLog&&G.matchLog.length){
       o('<div class="slbl2" style="margin-top:10px">Match History</div>');
       G.matchLog.slice(0,20).forEach(function(e){
-        var dk=e.winnerDeck?' ['+e.winnerDeck+']':'';
-        var turns=' T'+e.turns;
         var dur=e.duration?' · '+e.duration:'';
-        o('<div class="ml-row"><span class="ml-w">'+h(e.winner)+h(dk)+'</span><span class="ml-sep"> def. </span><span class="ml-l">'+h(e.loser)+'</span><span class="ml-meta">'+h(e.time||'')+turns+dur+'</span></div>');
+        var turns=e.turns?' · T'+e.turns:'';
+        o('<div class="ml-row" style="flex-direction:column;align-items:flex-start;gap:2px">');
+        o('<div style="display:flex;align-items:center;gap:4px;width:100%;flex-wrap:nowrap">');
+        o('<span class="ml-w">'+h(e.winner||'')+'</span>');
+        o('<span class="ml-sep">def.</span>');
+        o('<span class="ml-l">'+h(e.loser||'')+'</span>');
+        o('<span class="ml-meta" style="margin-left:auto;white-space:nowrap">'+h(e.time||'')+dur+turns+'</span>');
+        o('</div>');
+        if(e.winnerDeck||e.loserDeck){
+          o('<div style="display:flex;gap:6px;font-size:8px;color:var(--fg2);padding-left:2px">');
+          if(e.winnerDeck)o('<span style="color:var(--grn)">'+h(e.winnerDeck)+'</span>');
+          if(e.winnerDeck&&e.loserDeck)o('<span style="color:var(--fg3)">vs</span>');
+          if(e.loserDeck)o('<span style="color:var(--red)">'+h(e.loserDeck)+'</span>');
+          o('</div>');
+        }
+        o('</div>');
       });
     }
     return out.join('');
@@ -3793,9 +3872,11 @@ function pCirc(p,pi){
   });
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
-  if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   o('</div>');
-  o(turnBtn(pi));
+  o('<div style="display:flex;gap:4px;align-items:stretch;width:100%">');
+  o('<div style="flex:1">'+turnBtn(pi)+'</div>');
+  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  o('</div>');
   o('</div>');
   return out.join('');
 }
@@ -3855,10 +3936,12 @@ function pTap(p,pi){
   });
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
-  if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   o('</div>');
 
-  o(turnBtn(pi));
+  o('<div style="display:flex;gap:4px;align-items:stretch">');
+  o('<div style="flex:1">'+turnBtn(pi)+'</div>');
+  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  o('</div>');
   o('</div>');
   return out.join('');
 }
@@ -3919,9 +4002,6 @@ function pHTML(p,pi){
   });
   o('</div>');
 
-  // Row 3: Turn button full width
-  o('<div class="prow-turn">'+turnBtn(pi)+'</div>');
-
   // Row 4: History (compact)
   if(p.hist.length)o('<div class="hist">'+p.hist.slice(0,2).map(function(hh){return '<span class="hp">'+h(hh)+'</span>';}).join('')+'</div>');
 
@@ -3934,8 +4014,13 @@ function pHTML(p,pi){
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
-  if(pi===0&&G.cfg&&G.cfg.p1Flip){var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];o('<button onclick="showDiceColorPop1(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+p1Col+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change P1 dice color">🎨</button>');}
   // menu button moved to turnBar
+  o('</div>');
+
+  // Row: Turn button + P1 Settings button (side by side)
+  o('<div style="display:flex;gap:4px;align-items:stretch">');
+  o('<div style="flex:1">'+turnBtn(pi)+'</div>');
+  if(pi===0){o('<button onclick="showP1Settings(this)" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   o('</div>');
 
   o('</div>'); // end zone
@@ -4021,7 +4106,27 @@ function render(){
     o('<div class="zones">'+_pFn(p0,0)+'</div>');
 
     // ── Overlays ── (dice overlay is now a persistent fullscreen DOM element, not rendered here)
-    if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){o('<div class="ov"><div class="log-pop"><div class="lp-t">Log Result</div><div class="lp-b"><span style="color:var(--grn);font-weight:700">'+h(w.name)+'</span> wins<br><span style="color:var(--red);font-weight:700">'+h(lo.name)+'</span> loses</div><div class="lp-btns"><button class="lp-btn" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" onclick="confirmLog()">Confirm</button></div></div></div>');}}
+    if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
+      var _wDk=w.deck&&G.decks[w.deck]?G.decks[w.deck].name:(w.deck||'');
+      var _loDk=lo.deck&&G.decks[lo.deck]?G.decks[lo.deck].name:(lo.deck||'');
+      o('<div class="ov"><div class="log-pop"><div class="lp-t">Log Result</div><div class="lp-b">');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">');
+      o('<span style="color:var(--grn);font-weight:700;font-size:15px">'+h(w.name)+'</span>');
+      o('<span style="font-size:8px;color:var(--fg3);background:var(--bg);padding:2px 5px;border:1px solid var(--bd)">WINNER</span>');
+      o('</div>');
+      if(_wDk)o('<div style="color:var(--cyn);font-size:11px;margin-bottom:8px;padding:3px 6px;background:var(--bg);border-left:2px solid var(--cyn)">&#9660; '+h(_wDk)+'</div>');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">');
+      o('<span style="color:var(--red);font-weight:700;font-size:15px">'+h(lo.name)+'</span>');
+      o('<span style="font-size:8px;color:var(--fg3);background:var(--bg);padding:2px 5px;border:1px solid var(--bd)">LOSER</span>');
+      o('</div>');
+      if(_loDk)o('<div style="color:var(--red);font-size:11px;opacity:.75;margin-bottom:8px;padding:3px 6px;background:var(--bg);border-left:2px solid var(--red)">&#9660; '+h(_loDk)+'</div>');
+      o('<div style="display:flex;gap:8px;justify-content:center;margin-top:6px;font-size:9px;color:var(--fg2)">');
+      o('<span style="background:var(--bg);padding:2px 8px;border:1px solid var(--bd)">&#8635; Turn '+G.turnNum+'</span>');
+      if(G.matchStartTime){var _elapsedMin=Math.round((Date.now()-G.matchStartTime)/60000);o('<span style="background:var(--bg);padding:2px 8px;border:1px solid var(--bd)">&#9200; '+_elapsedMin+'m</span>');}
+      o('</div>');
+      o('<div style="font-size:8px;color:var(--fg3);text-align:center;margin-top:7px;border-top:1px solid var(--bd);padding-top:5px">&#10003; Saves to Local Stats &amp; Deck Stats</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" onclick="confirmLog()">Confirm</button></div></div></div>');
+    }}
 
     // ── Drawer ──
     if(G.menu){
