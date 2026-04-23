@@ -107,7 +107,7 @@ body.rounded .cm-tag,body.rounded .cm-rt,body.rounded .price-box,body.rounded .q
 body.rounded .p-tap,body.rounded .p-circ,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
 body.rounded .dice-pop,body.rounded .log-pop,body.rounded .dbtn,body.rounded .lp-btn,body.rounded .sdd{border-radius:8px}
 body.rounded .dk-c,body.rounded .dk-tag,body.rounded .art-c,body.rounded .sc,body.rounded .own-b{border-radius:6px}
-body.rounded .p1-settings-btn{border-radius:8px}
+body.rounded .p1-settings-btn,body.rounded .p2-dice-theme-btn{border-radius:8px}
 body.rounded .coll-th,body.rounded .p-cl,body.rounded .yt-sel{border-radius:6px}
 body.rounded .rd-modal{border-radius:10px}
 body.rounded .rd-close{border-radius:6px}
@@ -3871,12 +3871,11 @@ function pCirc(p,pi){
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
-
   o('</div>');
   o('<div style="display:flex;gap:4px;align-items:stretch;width:100%">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -3935,13 +3934,13 @@ function pTap(p,pi){
   visD.forEach(function(d){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:36px;height:36px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
   o('</div>');
 
   o('<div style="display:flex;gap:4px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -4013,15 +4012,15 @@ function pHTML(p,pi){
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
   visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
 
   // menu button moved to turnBar
   o('</div>');
 
-  // Row: Turn button + P1 Settings button (side by side)
+  // Row: Turn button + settings/dice button (side by side)
   o('<div style="display:flex;gap:4px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
 
   o('</div>'); // end zone
