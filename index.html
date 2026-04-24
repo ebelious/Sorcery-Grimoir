@@ -2268,7 +2268,7 @@ function parseCsv(txt){
   });
   sv('sg-co',G.coll);render();
 }
-function trigUpColl(){var inp=document.createElement('input');inp.type='file';inp.accept='.csv';inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){parseCsv(ev.target.result);};r.readAsText(f);};inp.click();}
+function trigUpColl(){var inp=document.createElement('input');inp.type='file';inp.accept='.csv';inp.style.display='none';inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){parseCsv(ev.target.result);};r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();}
 function exportColl(){
   var rows=['card name,set,finish,product,quantity,notes'];
   Object.entries(G.coll).forEach(function(kv){var nm=kv[0],d=kv[1],c=d.card||{};rows.push([nm,c.s||'','Standard','Booster',d.qty,''].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(','));});
@@ -2464,7 +2464,7 @@ function importCuriosaText(txt){
 }
 
 function trigUpDecks(){
-  var inp=document.createElement('input');inp.type='file';inp.accept='.csv';
+  var inp=document.createElement('input');inp.type='file';inp.accept='.csv';inp.style.display='none';
   inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){
     var txt=ev.target.result;var lines=txt.trim().split('\n');if(lines.length<2)return;
     var hd=lines[0].split(',').map(function(x){return x.trim().replace(/"/g,'').toLowerCase();});
@@ -2473,7 +2473,7 @@ function trigUpDecks(){
     if(ni<0)return;var cards=[];
     lines.slice(1).forEach(function(line){var cols=line.split(',').map(function(v){return v.trim().replace(/^"|"$/g,'');});var nm=cols[ni];if(!nm)return;cards.push({name:nm,qty:qi>=0?parseInt(cols[qi])||1:1});});
     var key='Deck '+(Object.keys(G.decks).length+1);G.decks[key]={name:key,cards:cards};sv('sg-dk',G.decks);render();
-  };r.readAsText(f);};inp.click();
+  };r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();
 }
 function addRec(n){n=(n||'').trim();if(!n)return;if(!G.records[n])G.records[n]={w:0,l:0};sv('sg-rec',G.records);render();}
 function delRec(n){delete G.records[n];sv('sg-rec',G.records);render();}
