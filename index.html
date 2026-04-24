@@ -2268,7 +2268,7 @@ function parseCsv(txt){
   });
   sv('sg-co',G.coll);render();
 }
-function trigUpColl(){var inp=document.createElement('input');inp.type='file';inp.accept='.csv';inp.style.display='none';inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){parseCsv(ev.target.result);};r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();}
+function trigUpColl(){var inp=document.createElement('input');inp.type='file';inp.accept='.csv,text/csv,text/plain,application/csv,application/vnd.ms-excel';inp.style.display='none';inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){parseCsv(ev.target.result);};r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();}
 function exportColl(){
   var rows=['card name,set,finish,product,quantity,notes'];
   Object.entries(G.coll).forEach(function(kv){var nm=kv[0],d=kv[1],c=d.card||{};rows.push([nm,c.s||'','Standard','Booster',d.qty,''].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(','));});
@@ -2464,7 +2464,7 @@ function importCuriosaText(txt){
 }
 
 function trigUpDecks(){
-  var inp=document.createElement('input');inp.type='file';inp.accept='.csv';inp.style.display='none';
+  var inp=document.createElement('input');inp.type='file';inp.accept='.csv,text/csv,text/plain,application/csv,application/vnd.ms-excel';inp.style.display='none';
   inp.onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){
     var txt=ev.target.result;var lines=txt.trim().split('\n');if(lines.length<2)return;
     var hd=lines[0].split(',').map(function(x){return x.trim().replace(/"/g,'').toLowerCase();});
