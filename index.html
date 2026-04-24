@@ -2276,6 +2276,27 @@ function exportColl(){
 }
 function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv('sg-co',G.coll);render();}
 function delDeck(k){if(!confirm('Delete this deck?'))return;delete G.decks[k];sv('sg-dk',G.decks);render();}
+function exportDeckCSV(k){
+  var dv=G.decks[k];if(!dv)return;
+  var rows=[['qty','name','type','rarity','cost','threshold','element']];
+  dv.cards.forEach(function(entry){
+    var c=cardByName(entry.name);
+    var t=c?cType(c):'';
+    var r=c?cRar(c):'';
+    var cost=c?(c[3]!==undefined?c[3]:''):'';
+    var thr=c?cThr(c):'';
+    var el='';
+    if(thr){var els=[];['a','e','f','w'].forEach(function(e){if(thr.indexOf(e)>=0)els.push({a:'Air',e:'Earth',f:'Fire',w:'Water'}[e]);});el=els.join('/');}
+    rows.push([entry.qty,entry.name,t,r,cost,thr||'',el]);
+  });
+  var csv=rows.map(function(r){return r.map(function(v){var s=String(v);if(s.indexOf(',')>=0||s.indexOf('"')>=0)s='"'+s.replace(/"/g,'""')+'"';return s;}).join(',');}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=(dv.name||'deck').replace(/[^a-z0-9_\-]/gi,'_')+'.csv';
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+}
 function createDeck(){var nm='New Deck '+(Object.keys(G.decks).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
@@ -3086,6 +3107,7 @@ function pContent(){
     // Rename input + delete
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
     o('<input style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="G.decks[\''+h(dvk)+'\'].name=this.value;sv(\'sg-dk\',G.decks);render()">');
+    o('<button class="fb gold" style="font-size:9px;padding:2px 7px" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export CSV</button>');
     o('<button class="fb red" style="font-size:9px;padding:2px 7px" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
     // Group cards by type
@@ -3523,8 +3545,9 @@ function pContent(){
     });
     o('</div>');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
-    o('<button class="fb" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
+    o('<button class="fb gold" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
     o('</div>');
+
     if(G.ytLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(filtVids.length){
       filtVids.forEach(function(v){
@@ -3533,9 +3556,7 @@ function pContent(){
         o('<div class="yt-thumb"><img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="thumb"><div class="yt-play">&#9654;</div></div>');
         o('<div class="yt-info"><div class="yt-ch2">'+h(v.channel||'')+'</div><div class="yt-title">'+h(v.title||'')+'</div>'+(v.date?'<div class="yt-date">'+h(v.date)+'</div>':'')+'</div></a>');
       });
-      o('<button class="fb gold" style="width:100%;margin-bottom:8px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
-    } else if(G.ytLoaded){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No videos found. Browse channel directly below.</div>');}
-    o('<a class="ext-lnk" style="margin-top:6px" href="https://www.youtube.com/results?search_query=sorcery+contested+realm+tcg" target="_blank">Search YouTube &rarr;</a>');
+    } else if(G.ytLoaded){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No videos found.</div>');}
     return out.join('');
   }
   if(p==='news'){
