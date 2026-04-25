@@ -2956,8 +2956,6 @@ function pContent(){
     o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();render()"></div>');
     o('</div>');}
 
-    o('<div class="slbl2" style="margin-top:18px">P1 Options</div>');
-    o('<div class="set-row"><span style="font-size:13px">Show Player 1 dice theme on UI</span><button class="ftag'+(G.cfg.p1Flip?' on':'')+'" onclick="G.cfg.p1Flip=!G.cfg.p1Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p1Flip?'On':'Off')+'</button></div>');
     o('<div class="slbl2" style="margin-top:18px">P2 Options</div>');
     o('<div class="set-row"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
     return out.join('');}
