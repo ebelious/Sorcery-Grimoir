@@ -3561,9 +3561,8 @@ function pContent(){
   }
   if(p==='news'){
     if(!G.newsLoaded&&!G.newsLoading)loadNews();
-    // Toolbar: Refresh only
-    o('<div style="margin-bottom:8px">');
-    o('<button class="fb gold full" onclick="loadNews()">Refresh</button>');
+    o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
+    o('<button class="fb gold" style="font-size:9px;padding:3px 10px" onclick="G.newsLoaded=false;G.newsItems=null;loadNews()">Refresh</button>');
     o('</div>');
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
@@ -3581,8 +3580,6 @@ function pContent(){
     } else if(!G.newsLoading){
       o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap Refresh to load the latest news.</div>');
     }
-    o('<a class="ext-lnk" href="https://sorcerytcg.com/news" target="_blank">All news on sorcerytcg.com &rarr;</a>');
-    o('<a class="ext-lnk" href="https://curiosa.io/blog" target="_blank">Curiosa blog &rarr;</a>');
     return out.join('');
   }
   if(p==='art'){
