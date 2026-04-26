@@ -245,7 +245,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dhead{padding:8px 10px 7px;border-bottom:1px solid var(--bd);flex-shrink:0}
 .si{position:relative;margin-bottom:5px}
 .si input{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 34px 9px 10px;outline:none;font-size:14px;font-family:'Courier New',monospace;display:block}
-#gs-inp:focus,#card-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
+#gs-inp:focus,#card-srch:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
 .si input::placeholder{color:var(--fg3)}
 .si .sx{position:absolute;right:0;top:0;height:100%;width:36px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--fg2)}
 .sdd{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--bd);z-index:20;max-height:175px;overflow-y:auto;margin-top:1px}
@@ -567,6 +567,8 @@ var SETS={'Alpha':{sym:'\u03b1',c:'#FBB829'},'Beta':{sym:'\u03b2',c:'#68A8E4'},'
 var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
+// Index 0 is a special "theme color" slot — always returns the current --hi accent
+function getDieCol(i){var idx=(i==null?0:i)%DIE_COLS.length;if(idx===0){return (G&&G.cfg&&G.cfg.hi)?G.cfg.hi:(document.body.style.getPropertyValue('--hi')||'#FBB829');}return DIE_COLS[idx];}
 var MENU_S={
   Settings:['Starting Life','Dice Settings','Player Names','Theme'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
@@ -1880,7 +1882,7 @@ function rollDice(sides,count,colIdx,pi){
   // Defer texture generation + physics kick to next frame
   var _sides=sides, _pi=pi;
   // Die color is always the player's selected color — fixedColor only affects the felt surface
-  var _col=DIE_COLS[_diceCI%DIE_COLS.length];
+  var _col=getDieCol(_diceCI);
   setTimeout(function(){
     _diceUpdateSceneBg(_pi===1?(G.diceTexture2||'felt'):undefined);
     _diceBuildForSides(_sides,_col);
@@ -1921,7 +1923,8 @@ function showDiceColorPop2(anchorEl){
   html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI2%DIE_COLS.length)===i;
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+col+';border:2px solid '+(on?'#fff':'transparent')+';box-sizing:border-box" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');_refreshP2Popup()"></div>';
+    var swatchCol=getDieCol(i);
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'#fff':'transparent')+';box-sizing:border-box" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');_refreshP2Popup()"></div>';
   });
   html+='</div>';
 
@@ -1995,7 +1998,8 @@ function showDiceColorPop1(anchorEl){
   html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI%DIE_COLS.length)===i;
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+col+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_refreshP1Popup()"></div>';
+    var swatchCol=getDieCol(i);
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_refreshP1Popup()"></div>';
   });
   html+='</div>';
 
@@ -2073,7 +2077,7 @@ function showP1Settings(anchorEl){
   // ── Section: Dice Theme ──
   html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Dice Theme</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
-  var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];
+  var p1Col=getDieCol(G.dieCI);
   html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:11px">Dice Color &amp; Surface</span></button>';
   html+='</div>';
 
@@ -2946,8 +2950,8 @@ function pContent(){
   if(p==='dice'){o('<div style="font-size:12px;color:var(--fg2);margin-bottom:6px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     var _p2TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
-    o('</div><div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+col+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">P2 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var on2=(G.dieCI2%DIE_COLS.length)===i;o('<div class="dcb'+(on2?' on':'')+'" style="background:'+col+';border-color:'+(on2?'#fff':'transparent')+'" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');render()"></div>');});o('</div>');
+    o('</div><div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
+    o('<div class="slbl2" style="margin-top:18px">P2 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var on2=(G.dieCI2%DIE_COLS.length)===i;var swatchCol2=getDieCol(i);o('<div class="dcb'+(on2?' on':'')+'" style="background:'+swatchCol2+';border-color:'+(on2?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');render()"></div>');});o('</div>');
     o('<div class="slbl2" style="margin-top:18px">P1 Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
@@ -3764,7 +3768,7 @@ function pCirc(p,pi){
   var lifeColor=p.dead?'var(--red)':'var(--life)';
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
+  var diceCol=pi===1?getDieCol(G.dieCI2):null;
 
   // Available space: half screen minus turnbar(32) minus name(22) minus dice(60) minus turn(32) minus padding
   var screenH=typeof window!=='undefined'?window.innerHeight:700;
@@ -3864,7 +3868,7 @@ function pTap(p,pi){
   var lifeColor=p.dead?'var(--red)':'var(--life)';
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
+  var diceCol=pi===1?getDieCol(G.dieCI2):null;
 
   o('<div class="p-tap">');
   o('<div class="tap-name">'+h(p.name)+'</div>');
@@ -3984,7 +3988,7 @@ function pHTML(p,pi){
 
   // Row 5: Dice strip + (P1 only) menu button
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
-  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
+  var diceCol=pi===1?getDieCol(G.dieCI2):null;
   o('<div class="dice-strip" style="padding:2px 2px 1px">');
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
   visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
@@ -4021,7 +4025,7 @@ function turnBar(){
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
 function smallDieSVG(sides,count,colOverride){
-  var col=colOverride||DIE_COLS[G.dieCI%DIE_COLS.length];
+  var col=colOverride||getDieCol(G.dieCI);
   if(sides===6&&count===1)return '<svg width="20" height="20" viewBox="0 0 20 20"><rect x="1" y="1" width="18" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="'+col+'"/><circle cx="14" cy="14" r="2" fill="'+col+'"/><circle cx="14" cy="6" r="2" fill="'+col+'"/><circle cx="6" cy="14" r="2" fill="'+col+'"/></svg>';
   if(sides===6&&count===2)return '<svg width="24" height="20" viewBox="0 0 26 20"><rect x="1" y="1" width="11" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/><rect x="14" y="1" width="11" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/></svg>';
   var shapes={4:'<polygon points="10,1 19,17 1,17"',8:'<polygon points="10,1 19,10 10,19 1,10"',10:'<polygon points="10,1 18,7 19,15 10,19 1,15 2,7"',12:'<polygon points="10,1 17,4 19,11 17,18 10,19 3,18 1,11 3,4"',20:'<polygon points="10,1 18,6 19,14 14,19 6,19 1,14 2,6"'};
