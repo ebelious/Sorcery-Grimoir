@@ -9,14 +9,17 @@ This is Sorcer Grimoir, a Contested Realm Companion application for the seekers 
 - Expandeable text option for smaller text that may be difficult to read 
 - Direct card links to different trading markets to assess card value for easy lookup to make fair trades
 - All of the amazing artists have the links to see thier awesome work
-- Allows collections to be added to keep track of all of your cards
-- Settings to theme the app by color with a few different UI options, including Dice color, table color in the dice roll animations
+- Allows adding, importing and exporting collections to be added to keep track of all of your cards
+- Add, import, and export your decks, along with some build statistics on each of your decks
+- Settings to theme the app by color with a few different UI options, including dice color, table color in the dice roll animations
 - Links to sorcerytcg, curios, rulebook, and other media
 - Current news feed along with latest YouTube videos that talk about Sorcery
 - This app has a lot of simple 'click to use' features that are not noted in the app to expand images or enlarge text for easier reading that dont show an actual button.
 - Decorative Death's Door Icon in UI
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*
+
+**Working on getting this to a stable version where it is worthy of a release on Google Play Store**
 
 ## Add the App to your phone (PWA).
 There are two ways to accomplish this:<br>
