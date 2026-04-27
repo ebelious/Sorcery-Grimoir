@@ -166,7 +166,7 @@ body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2
 body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b;--hi:#d7c483}
 body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2:#908CAA;--fg3:#6E6A86;--red:#EB6F92;--grn:#31748F;--yel:#F6C177;--cyn:#9CCFD8;--wht:#FAEBD7;--bgrn:#31748F;--bbl:#C4A7E7;--life:#EB6F92;--mana:#C4A7E7;--hi:#F6C177}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-.flip{transform:rotate(180deg);flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.flip{transform:rotate(180deg);flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px;width:100%;box-sizing:border-box}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:17px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
 .stats{display:flex;gap:4px}
@@ -214,7 +214,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:2px solid var(--hi);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:40px;color:var(--hi);font-size:18px;padding:4px 12px}
-.zones{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
+.zones{flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;padding:14px}
 
 .dice-pop{background:var(--bg2);border:1px solid var(--bd);padding:16px 20px;text-align:center;width:100%;max-width:300px}
@@ -802,11 +802,11 @@ function endTurn(pi){
 function turnBtn(pi){
   var p=G.players[pi];
   if(G.mode===1){
-    if(p.phase==='start'||p.phase==='disabled')return '<button class="tb" onclick="startTurn('+pi+')">&#9654; Start</button>';
+    if(p.phase==='start'||p.phase==='disabled')return '<button class="tb" style="width:100%" onclick="startTurn('+pi+')">&#9654; Start</button>';
     if(p.phase==='active')return '<button class="tb end" onclick="endTurn('+pi+')">&#9632; End Turn</button>';
     return '';
   }
-  if(p.phase==='start')   return '<button class="tb" onclick="startTurn('+pi+')">&#9654; Start Turn</button>';
+  if(p.phase==='start')   return '<button class="tb" style="width:100%" onclick="startTurn('+pi+')">&#9654; Start Turn</button>';
   if(p.phase==='active')  return '<button class="tb end" onclick="endTurn('+pi+')">&#9632; End Turn</button>';
   if(p.phase==='disabled')return '<button class="tb dis" disabled>&#9203; Waiting&hellip;</button>';
   return '';
