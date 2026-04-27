@@ -2090,6 +2090,20 @@ function showP1Settings(anchorEl){
   html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:11px">Dice Color &amp; Surface</span></button>';
   html+='</div>';
 
+  // ── Section: Player 2 ──
+  var knownPlayers=Object.keys(G.records||{}).sort();
+  var curP2=G.players[1]?G.players[1].name:(G.cfg.p2||'Player 2');
+  if(knownPlayers.length){
+    html+='<div style="margin-top:12px;font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Player 2</div>';
+    html+='<div style="display:flex;flex-direction:column;gap:4px">';
+    knownPlayers.forEach(function(nm){
+      var on=curP2===nm;
+      var safeNm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      html+='<button style="text-align:left;padding:6px 8px;border:1px solid '+(on?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'transparent')+';color:'+(on?'var(--hi,#22d3ee)':'var(--fg,#e2e8f0)')+';border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%" onclick="setName(1,\''+safeNm+'\');_refreshP1Settings()">'+h(nm)+'</button>';
+    });
+    html+='</div>';
+  }
+
   pop.innerHTML=html;
   document.body.appendChild(pop);
 
@@ -2974,6 +2988,11 @@ function pContent(){
 
     o('<div class="slbl2" style="margin-top:18px">P2 Options</div>');
     o('<div class="set-row"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
+    o('<div class="slbl2" style="margin-top:12px">Which side is Player 2?</div>');
+    o('<div style="display:flex;gap:6px;margin-top:6px">');
+    o('<button class="tgb'+(G.cfg.p2Side!=='top'?' on':'')+'" onclick="G.cfg.p2Side=\'bottom\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p1||'Player 1')+' (bottom)</button>');
+    o('<button class="tgb'+(G.cfg.p2Side==='top'?' on':'')+'" onclick="G.cfg.p2Side=\'top\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p2||'Player 2')+' (top)</button>');
+    o('</div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
@@ -4083,8 +4102,13 @@ function render(){
 
     var _layout=G.cfg&&G.cfg.layout||'standard';
     var _pFn=_layout==='circular'?pCirc:_layout==='tap'?pTap:pHTML;
+    // Swap sides if p2Side is 'bottom'
+    var _topP=G.cfg&&G.cfg.p2Side==='bottom'?p0:p1;
+    var _botP=G.cfg&&G.cfg.p2Side==='bottom'?p1:p0;
+    var _topPI=G.cfg&&G.cfg.p2Side==='bottom'?0:1;
+    var _botPI=G.cfg&&G.cfg.p2Side==='bottom'?1:0;
     // P2 at TOP (flipped 180°)
-    if(p1)o('<div class="flip">'+_pFn(p1,1)+'</div>');
+    if(_topP)o('<div class="flip">'+_pFn(_topP,_topPI)+'</div>');
 
     // Center spacer contains tbar so it floats between both players
     var lr=G.dice&&!G.dice.rolling&&!G.dice.settling&&G.dice.final!=null?'<span class="last-roll">'+G.dice.final+'</span>':'';
@@ -4094,7 +4118,7 @@ function render(){
     o('</div>');
 
     // P1 at BOTTOM
-    o('<div class="zones">'+_pFn(p0,0)+'</div>');
+    o('<div class="zones">'+_pFn(_botP,_botPI)+'</div>');
 
     // ── Overlays ── (dice overlay is now a persistent fullscreen DOM element, not rendered here)
     if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
