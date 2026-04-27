@@ -503,6 +503,14 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 /* Threshold in center stretches to fill remaining space */
 .thresh-center{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:0;padding:2px 4px;background:var(--bg2)}
 .thresh-row{display:flex;flex-direction:row;justify-content:space-around;align-items:center;padding:3px 4px;border-top:1px solid var(--bd)}
+.no-borders .tap-dice-row{border-bottom:none}
+.no-borders .thresh-row{border-top:none}
+.no-borders .tap-row,.no-borders .tap-el-row,.no-borders .tap-name{border-bottom:none}
+.no-borders .tap-tile,.no-borders .tap-el{border-right:none}
+.no-borders .zone,.no-borders .p-tap,.no-borders .p-circ{border:none}
+.no-borders #tbar{border-top:none;border-bottom:none}
+.no-borders .tb-n,.no-borders .tb-s{border:none}
+.no-borders .tb{border-left:none;border-right:none}
 .ei2{display:flex;flex-direction:row;align-items:center;gap:3px}
 .eb2{display:flex;gap:2px;margin-left:auto}
 .eadj2{width:32px;height:32px;border:1px solid var(--bd);background:var(--bg);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:0}
@@ -768,6 +776,7 @@ var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#D
 function _applyBodyClass(){
   var cls=(G.theme||'');
   if(G.cfg.roundedCorners) cls+=' rounded';
+  if(G.cfg.noBorders) cls+=' no-borders';
   if(G.cfg.plainFont){
     var f=G.cfg.plainFont;
     if(f===true||f==='courier') cls+=' plain-font';
@@ -3000,6 +3009,7 @@ function pContent(){
     o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
     if(G.cfg.plainFont){
       var fonts=[['courier','Courier'],['roboto','Roboto'],['opendyslexic','OpenDyslexic']];
@@ -3853,7 +3863,7 @@ function pCirc(p,pi){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
   o('</div>');
-  o('<div style="display:flex;gap:1px;align-items:stretch;width:100%">');
+  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;width:100%;box-sizing:border-box">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
@@ -3918,7 +3928,7 @@ function pTap(p,pi){
 
   o('</div>');
 
-  o('<div style="display:flex;gap:1px;align-items:stretch">');
+  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
@@ -3998,7 +4008,7 @@ function pHTML(p,pi){
   o('</div>');
 
   // Row: Turn button + settings/dice button (side by side)
-  o('<div style="display:flex;gap:1px;align-items:stretch">');
+  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
