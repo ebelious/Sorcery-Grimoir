@@ -214,6 +214,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:2px solid var(--hi);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:40px;color:var(--hi);font-size:18px;padding:4px 12px}
+.menu-left .tb-menu{border-left:none;border-right:2px solid var(--hi)}
 .zones{flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;padding:14px}
 
@@ -777,6 +778,7 @@ function _applyBodyClass(){
   var cls=(G.theme||'');
   if(G.cfg.roundedCorners) cls+=' rounded';
   if(G.cfg.noBorders) cls+=' no-borders';
+  if(G.cfg.menuLeft) cls+=' menu-left';
   if(G.cfg.plainFont){
     var f=G.cfg.plainFont;
     if(f===true||f==='courier') cls+=' plain-font';
@@ -3036,7 +3038,7 @@ function pContent(){
       fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
       o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
