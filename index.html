@@ -166,7 +166,7 @@ body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2
 body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b;--hi:#d7c483}
 body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2:#908CAA;--fg3:#6E6A86;--red:#EB6F92;--grn:#31748F;--yel:#F6C177;--cyn:#9CCFD8;--wht:#FAEBD7;--bgrn:#31748F;--bbl:#C4A7E7;--life:#EB6F92;--mana:#C4A7E7;--hi:#F6C177}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-.flip{transform:rotate(180deg);flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.flip{transform:rotate(180deg);flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px;width:100%;box-sizing:border-box}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:17px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
 .stats{display:flex;gap:4px}
@@ -214,8 +214,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:2px solid var(--hi);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:40px;color:var(--hi);font-size:18px;padding:4px 12px}
-.menu-left .tb-menu{border-left:none;border-right:2px solid var(--hi)}
-.zones{flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
+.zones{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;padding:14px}
 
 .dice-pop{background:var(--bg2);border:1px solid var(--bd);padding:16px 20px;text-align:center;width:100%;max-width:300px}
@@ -246,7 +245,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dhead{padding:8px 10px 7px;border-bottom:1px solid var(--bd);flex-shrink:0}
 .si{position:relative;margin-bottom:5px}
 .si input{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 34px 9px 10px;outline:none;font-size:14px;font-family:'Courier New',monospace;display:block}
-#gs-inp:focus,#card-srch:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
+#gs-inp:focus,#card-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
 .si input::placeholder{color:var(--fg3)}
 .si .sx{position:absolute;right:0;top:0;height:100%;width:36px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--fg2)}
 .sdd{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--bd);z-index:20;max-height:175px;overflow-y:auto;margin-top:1px}
@@ -504,14 +503,6 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 /* Threshold in center stretches to fill remaining space */
 .thresh-center{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:0;padding:2px 4px;background:var(--bg2)}
 .thresh-row{display:flex;flex-direction:row;justify-content:space-around;align-items:center;padding:3px 4px;border-top:1px solid var(--bd)}
-.no-borders .tap-dice-row{border-bottom:none}
-.no-borders .thresh-row{border-top:none}
-.no-borders .tap-row,.no-borders .tap-el-row,.no-borders .tap-name{border-bottom:none}
-.no-borders .tap-tile,.no-borders .tap-el{border-right:none}
-.no-borders .zone,.no-borders .p-tap,.no-borders .p-circ{border:none}
-.no-borders #tbar{border-top:none;border-bottom:none}
-.no-borders .tb-n,.no-borders .tb-s{border:none}
-.no-borders #tbar .tb-n,.no-borders #tbar .tb-s{border:none}
 .ei2{display:flex;flex-direction:row;align-items:center;gap:3px}
 .eb2{display:flex;gap:2px;margin-left:auto}
 .eadj2{width:32px;height:32px;border:1px solid var(--bd);background:var(--bg);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:0}
@@ -576,8 +567,6 @@ var SETS={'Alpha':{sym:'\u03b1',c:'#FBB829'},'Beta':{sym:'\u03b2',c:'#68A8E4'},'
 var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
-// Index 0 is a special "theme color" slot — always returns the current --hi accent
-function getDieCol(i){var idx=(i==null?0:i)%DIE_COLS.length;if(idx===0){return (G&&G.cfg&&G.cfg.hi)?G.cfg.hi:(document.body.style.getPropertyValue('--hi')||'#FBB829');}return DIE_COLS[idx];}
 var MENU_S={
   Settings:['Starting Life','Dice Settings','Player Names','Theme'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
@@ -593,12 +582,14 @@ var YT_CHS=[
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
   {id:'cg',   n:'Cardboard Guide',      url:'https://www.youtube.com/@cardboardguide/videos',      cid:'UCkI76BFK6-hKNI1nndQSp9A'},
   {id:'css',  n:'Common Sense Sorcery', url:'https://www.youtube.com/@commonsensesorcery/videos',  cid:'UCrCpAOPrsn3iSH7xMyEvwsg'},
+  {id:'fi',   n:'Frogimago',            url:'https://www.youtube.com/channel/UC4QnfAM-7vpxc4yElHpQoqg/videos', cid:'UC4QnfAM-7vpxc4yElHpQoqg'},
   {id:'gec',  n:'Golden Eagle Cards',   url:'https://www.youtube.com/@goldeneagle1833/videos',     cid:'UCzWglR4ytbyq0aAfWrNaMHw'},
   {id:'loi',  n:'Lord of Itza',         url:'https://www.youtube.com/@lord_of_itza/videos',        cid:'UC598IUEN4qp8N_KAPkTvx0w'},
   {id:'ofn',  n:'OldFashionedNerds',    url:'https://www.youtube.com/@oldfashionednerds/videos',   cid:'UCRZw6WkGb5O34JCUTPCFvDQ'},
   {id:'rt',   n:'Roaring Turkey',       url:'https://www.youtube.com/@roaringturkey/videos',       cid:'UCcS-iAfvSn1Dub-fpTCFASQ'},
   {id:'stcg', n:'Sorcery TCG',          url:'https://www.youtube.com/@sorcerytcg/videos',          cid:'UCqmv-SKT0_SO5FbP3vGZ_uQ'},
   {id:'aa',   n:'The Assorted Animals', url:'https://www.youtube.com/@theassortedanimals/videos',  cid:'UCaO-qqRZVlaGvF5AE0EmbNg'},
+  {id:'wof',  n:'Wizards of Fun!',      url:'https://www.youtube.com/channel/UCFYl70hUINiNPPt-e30v79g/videos', cid:'UCFYl70hUINiNPPt-e30v79g'},
 ];
 var YT_SEED=[
   {channel:'Sorcery TCG',title:'SorceryCon 2026 Live Stream',videoId:'Wv4pCs3QxYc',date:'Feb 2026'},
@@ -777,8 +768,6 @@ var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#D
 function _applyBodyClass(){
   var cls=(G.theme||'');
   if(G.cfg.roundedCorners) cls+=' rounded';
-  if(G.cfg.noBorders) cls+=' no-borders';
-  if(G.cfg.menuLeft) cls+=' menu-left';
   if(G.cfg.plainFont){
     var f=G.cfg.plainFont;
     if(f===true||f==='courier') cls+=' plain-font';
@@ -813,11 +802,11 @@ function endTurn(pi){
 function turnBtn(pi){
   var p=G.players[pi];
   if(G.mode===1){
-    if(p.phase==='start'||p.phase==='disabled')return '<button class="tb" style="width:100%" onclick="startTurn('+pi+')">&#9654; Start</button>';
+    if(p.phase==='start'||p.phase==='disabled')return '<button class="tb" onclick="startTurn('+pi+')">&#9654; Start</button>';
     if(p.phase==='active')return '<button class="tb end" onclick="endTurn('+pi+')">&#9632; End Turn</button>';
     return '';
   }
-  if(p.phase==='start')   return '<button class="tb" style="width:100%" onclick="startTurn('+pi+')">&#9654; Start Turn</button>';
+  if(p.phase==='start')   return '<button class="tb" onclick="startTurn('+pi+')">&#9654; Start Turn</button>';
   if(p.phase==='active')  return '<button class="tb end" onclick="endTurn('+pi+')">&#9632; End Turn</button>';
   if(p.phase==='disabled')return '<button class="tb dis" disabled>&#9203; Waiting&hellip;</button>';
   return '';
@@ -1893,7 +1882,7 @@ function rollDice(sides,count,colIdx,pi){
   // Defer texture generation + physics kick to next frame
   var _sides=sides, _pi=pi;
   // Die color is always the player's selected color — fixedColor only affects the felt surface
-  var _col=getDieCol(_diceCI);
+  var _col=DIE_COLS[_diceCI%DIE_COLS.length];
   setTimeout(function(){
     _diceUpdateSceneBg(_pi===1?(G.diceTexture2||'felt'):undefined);
     _diceBuildForSides(_sides,_col);
@@ -1934,8 +1923,7 @@ function showDiceColorPop2(anchorEl){
   html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI2%DIE_COLS.length)===i;
-    var swatchCol=getDieCol(i);
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'#fff':'transparent')+';box-sizing:border-box" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');_refreshP2Popup()"></div>';
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+col+';border:2px solid '+(on?'#fff':'transparent')+';box-sizing:border-box" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');_refreshP2Popup()"></div>';
   });
   html+='</div>';
 
@@ -2009,8 +1997,7 @@ function showDiceColorPop1(anchorEl){
   html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI%DIE_COLS.length)===i;
-    var swatchCol=getDieCol(i);
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_refreshP1Popup()"></div>';
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+col+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_refreshP1Popup()"></div>';
   });
   html+='</div>';
 
@@ -2088,23 +2075,9 @@ function showP1Settings(anchorEl){
   // ── Section: Dice Theme ──
   html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Dice Theme</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
-  var p1Col=getDieCol(G.dieCI);
+  var p1Col=DIE_COLS[G.dieCI%DIE_COLS.length];
   html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:11px">Dice Color &amp; Surface</span></button>';
   html+='</div>';
-
-  // ── Section: Player 2 ──
-  var knownPlayers=Object.keys(G.records||{}).sort();
-  var curP2=G.players[1]?G.players[1].name:(G.cfg.p2||'Player 2');
-  if(knownPlayers.length){
-    html+='<div style="margin-top:12px;font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Player 2</div>';
-    html+='<div style="display:flex;flex-direction:column;gap:4px">';
-    knownPlayers.forEach(function(nm){
-      var on=curP2===nm;
-      var safeNm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      html+='<button style="text-align:left;padding:6px 8px;border:1px solid '+(on?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'transparent')+';color:'+(on?'var(--hi,#22d3ee)':'var(--fg,#e2e8f0)')+';border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%" onclick="setName(1,\''+safeNm+'\');_refreshP1Settings()">'+h(nm)+'</button>';
-    });
-    html+='</div>';
-  }
 
   pop.innerHTML=html;
   document.body.appendChild(pop);
@@ -2975,8 +2948,8 @@ function pContent(){
   if(p==='dice'){o('<div style="font-size:12px;color:var(--fg2);margin-bottom:6px">Toggle dice:</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+(d.c>1?'2d6':'d'+d.s)+'</button>');});
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     var _p2TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
-    o('</div><div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">P2 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var on2=(G.dieCI2%DIE_COLS.length)===i;var swatchCol2=getDieCol(i);o('<div class="dcb'+(on2?' on':'')+'" style="background:'+swatchCol2+';border-color:'+(on2?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');render()"></div>');});o('</div>');
+    o('</div><div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+col+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
+    o('<div class="slbl2" style="margin-top:18px">P2 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var on2=(G.dieCI2%DIE_COLS.length)===i;o('<div class="dcb'+(on2?' on':'')+'" style="background:'+col+';border-color:'+(on2?'#fff':'transparent')+'" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');render()"></div>');});o('</div>');
     o('<div class="slbl2" style="margin-top:18px">P1 Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
@@ -2990,11 +2963,6 @@ function pContent(){
 
     o('<div class="slbl2" style="margin-top:18px">P2 Options</div>');
     o('<div class="set-row"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
-    o('<div class="slbl2" style="margin-top:12px">Which side is Player 2?</div>');
-    o('<div style="display:flex;gap:6px;margin-top:6px">');
-    o('<button class="tgb'+(G.cfg.p2Side!=='top'?' on':'')+'" onclick="G.cfg.p2Side=\'bottom\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p1||'Player 1')+' (bottom)</button>');
-    o('<button class="tgb'+(G.cfg.p2Side==='top'?' on':'')+'" onclick="G.cfg.p2Side=\'top\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p2||'Player 2')+' (top)</button>');
-    o('</div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
@@ -3030,7 +2998,6 @@ function pContent(){
     o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
     if(G.cfg.plainFont){
       var fonts=[['courier','Courier'],['roboto','Roboto'],['opendyslexic','OpenDyslexic']];
@@ -3038,7 +3005,7 @@ function pContent(){
       fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
       o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
@@ -3799,7 +3766,7 @@ function pCirc(p,pi){
   var lifeColor=p.dead?'var(--red)':'var(--life)';
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var diceCol=pi===1?getDieCol(G.dieCI2):null;
+  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
 
   // Available space: half screen minus turnbar(32) minus name(22) minus dice(60) minus turn(32) minus padding
   var screenH=typeof window!=='undefined'?window.innerHeight:700;
@@ -3884,7 +3851,7 @@ function pCirc(p,pi){
     o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
   o('</div>');
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;width:100%;box-sizing:border-box">');
+  o('<div style="display:flex;gap:1px;align-items:stretch;width:100%">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
@@ -3899,7 +3866,7 @@ function pTap(p,pi){
   var lifeColor=p.dead?'var(--red)':'var(--life)';
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var diceCol=pi===1?getDieCol(G.dieCI2):null;
+  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
 
   o('<div class="p-tap">');
   o('<div class="tap-name">'+h(p.name)+'</div>');
@@ -3949,7 +3916,7 @@ function pTap(p,pi){
 
   o('</div>');
 
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
+  o('<div style="display:flex;gap:1px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
@@ -4019,7 +3986,7 @@ function pHTML(p,pi){
 
   // Row 5: Dice strip + (P1 only) menu button
   var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
-  var diceCol=pi===1?getDieCol(G.dieCI2):null;
+  var diceCol=pi===1?DIE_COLS[G.dieCI2%DIE_COLS.length]:null;
   o('<div class="dice-strip" style="padding:2px 2px 1px">');
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
   visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
@@ -4029,7 +3996,7 @@ function pHTML(p,pi){
   o('</div>');
 
   // Row: Turn button + settings/dice button (side by side)
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
+  o('<div style="display:flex;gap:1px;align-items:stretch">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
@@ -4056,7 +4023,7 @@ function turnBar(){
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
 function smallDieSVG(sides,count,colOverride){
-  var col=colOverride||getDieCol(G.dieCI);
+  var col=colOverride||DIE_COLS[G.dieCI%DIE_COLS.length];
   if(sides===6&&count===1)return '<svg width="20" height="20" viewBox="0 0 20 20"><rect x="1" y="1" width="18" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="'+col+'"/><circle cx="14" cy="14" r="2" fill="'+col+'"/><circle cx="14" cy="6" r="2" fill="'+col+'"/><circle cx="6" cy="14" r="2" fill="'+col+'"/></svg>';
   if(sides===6&&count===2)return '<svg width="24" height="20" viewBox="0 0 26 20"><rect x="1" y="1" width="11" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/><rect x="14" y="1" width="11" height="18" rx="2" fill="var(--bg3)" stroke="'+col+'" stroke-width="1.5"/></svg>';
   var shapes={4:'<polygon points="10,1 19,17 1,17"',8:'<polygon points="10,1 19,10 10,19 1,10"',10:'<polygon points="10,1 18,7 19,15 10,19 1,15 2,7"',12:'<polygon points="10,1 17,4 19,11 17,18 10,19 3,18 1,11 3,4"',20:'<polygon points="10,1 18,6 19,14 14,19 6,19 1,14 2,6"'};
@@ -4104,13 +4071,8 @@ function render(){
 
     var _layout=G.cfg&&G.cfg.layout||'standard';
     var _pFn=_layout==='circular'?pCirc:_layout==='tap'?pTap:pHTML;
-    // Swap sides if p2Side is 'bottom'
-    var _topP=G.cfg&&G.cfg.p2Side==='bottom'?p0:p1;
-    var _botP=G.cfg&&G.cfg.p2Side==='bottom'?p1:p0;
-    var _topPI=G.cfg&&G.cfg.p2Side==='bottom'?0:1;
-    var _botPI=G.cfg&&G.cfg.p2Side==='bottom'?1:0;
     // P2 at TOP (flipped 180°)
-    if(_topP)o('<div class="flip">'+_pFn(_topP,_topPI)+'</div>');
+    if(p1)o('<div class="flip">'+_pFn(p1,1)+'</div>');
 
     // Center spacer contains tbar so it floats between both players
     var lr=G.dice&&!G.dice.rolling&&!G.dice.settling&&G.dice.final!=null?'<span class="last-roll">'+G.dice.final+'</span>':'';
@@ -4120,7 +4082,7 @@ function render(){
     o('</div>');
 
     // P1 at BOTTOM
-    o('<div class="zones">'+_pFn(_botP,_botPI)+'</div>');
+    o('<div class="zones">'+_pFn(p0,0)+'</div>');
 
     // ── Overlays ── (dice overlay is now a persistent fullscreen DOM element, not rendered here)
     if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
