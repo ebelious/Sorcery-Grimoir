@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.yourname.grimoir",
+      "package_name": "io.github.ebelious.twa",
       "sha256_cert_fingerprints": [
         "93:CE:3D:9D:01:12:08:55:EB:B0:8B:04:A2:E7:C4:83:4D:0A:3A:2C:1B:07:93:F2:E4:00:32:08:32:61:63:7D"
       ]
