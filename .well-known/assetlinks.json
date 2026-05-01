@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.yourname.grimoir",
+      "sha256_cert_fingerprints": [
+        "2A:BC:C1:4F:D6:3C:7B:F2:79:5A:85:F9:A7:B7:27:6B:C0:1D:18:31:FD:24:8F:56:5A:4C:7B:2F:3B:11:AA:65"
+      ]
+    }
+  }
+]
