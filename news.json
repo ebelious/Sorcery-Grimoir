@@ -1,10 +1,17 @@
 {
-  "updated": "2026-05-01T19:19:04.293Z",
+  "updated": "2026-05-02T03:22:56.352Z",
   "articles": [
+    {
+      "title": "The Grand Contest comes to Melbourne",
+      "url": "https://sorcerytcg.com/news/the-grand-contest-comes-to-melbourne",
+      "date": "01 May 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8a5df9cd2d1d422a0f78244467bc8aeb8fe77e2-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Community Spotlight: Explorer Series Season 2 is Underway",
       "url": "https://sorcerytcg.com/news/community-spotlight-explorer-series-season-2",
-      "date": "28 Apr 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f6ab17ad72ef31d1a68662a4b7affb04305dc7c7-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e4af1d0fd6ae128d3bc6557427272b32324a3f1e-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Where the Bones Lead: CJ’s SorceryCon Necromancer",
-      "url": "https://sorcerytcg.com/news/where-the-bones-lead-cj-s-sorcerycon-necromancer",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/52b9a2ab106cc9548b101d42ff470c7da44b1ed6-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
