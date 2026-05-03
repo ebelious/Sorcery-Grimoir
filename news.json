@@ -1,10 +1,17 @@
 {
-  "updated": "2026-05-03T13:21:44.349Z",
+  "updated": "2026-05-03T19:06:57.972Z",
   "articles": [
+    {
+      "title": "Gen Con 2026: Where the Realm Converges",
+      "url": "https://sorcerytcg.com/news/gen-con-2026-where-the-realm-converges",
+      "date": "03 May 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/a23e57645b35f2d789a3aeac2b027f0faecaf4df-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "The Grand Contest comes to Melbourne",
       "url": "https://sorcerytcg.com/news/the-grand-contest-comes-to-melbourne",
-      "date": "01 May 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8a5df9cd2d1d422a0f78244467bc8aeb8fe77e2-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/9bb046e306789d3a3167ccc5d2f3fe8f5382784f-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Where Tables Connect: Sorcery Organized Play 2026",
-      "url": "https://sorcerytcg.com/news/where-tables-connect-sorcery-organized-play-2026",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e4af1d0fd6ae128d3bc6557427272b32324a3f1e-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
