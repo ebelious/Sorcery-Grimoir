@@ -2322,6 +2322,7 @@ function renameDeck(oldKey,newName){
   sv('sg-dk',G.decks);render();
 }
 function delDeck(k){if(!confirm('Delete this deck?'))return;delete G.decks[k];sv('sg-dk',G.decks);render();}
+function removeDkStat(k){if(!confirm('Remove stats for: '+k+'?'))return;delete G.dkstat[k];sv('sg-ds',G.dkstat);render();}
 function exportDeckCSV(k){
   var dv=G.decks[k];if(!dv)return;
   var rows=[['qty','name','type','rarity','cost','threshold','element']];
@@ -2460,28 +2461,32 @@ function importCuriosaUrl(url){
   url=(url||'').trim();
   if(!url||url.indexOf('curiosa.io/decks')<0){G.curiosaErr='Please enter a valid curiosa.io/decks URL';render();return;}
   if(G.curiosaLoading)return;
+  var deckId=url.split('/decks/')[1];
+  if(deckId)deckId=deckId.split('?')[0].split('#')[0].trim();
+  if(!deckId){G.curiosaErr='Could not parse deck ID from URL.';render();return;}
   G.curiosaLoading=true;G.curiosaErr=null;render();
-
-  var prompt='Visit the Curiosa deck page at this URL: '+url+'\n\n'
-    +'Use web search to find or retrieve the deck information from that page.\n'
-    +'Return ONLY a JSON object with no markdown, no explanation, in exactly this format:\n'
-    +'{"name":"deck name","author":"username","cards":[{"name":"Card Name","qty":2},...]}\n'
-    +'Include every card in the deck (spellbook and atlas). The qty field must be a number.\n'
-    +'Return only the raw JSON object, nothing else.';
-
-  apiCall(prompt,2000,function(err,txt){
-    G.curiosaLoading=false;
-    if(err||!txt){G.curiosaErr='Could not reach Curiosa. Try the paste method below.';G.curiosaPasteMode=url;render();return;}
-    var data=extractJSON(txt,'object');
-    if(!data||!data.cards||!data.cards.length){G.curiosaErr='Could not parse deck data. Try the paste method below.';G.curiosaPasteMode=url;render();return;}
-    var deckName=(data.name||'Imported Deck').trim();
-    var author=(data.author||'Community').trim();
-    var cards=data.cards.filter(function(c){return c&&c.name;}).map(function(c){return{name:c.name,qty:parseInt(c.qty)||1};});
-    PUB_DECKS.unshift({name:deckName,author:author,el:'?',av:'?',desc:'',url:url});
-    G.decks[deckName]={name:deckName,cards:cards};sv('sg-dk',G.decks);
-    G.showCuriosaImport=false;
-    render();
-  });
+  var apiPath='https://curiosa.io/api/trpc/deck.getById?batch=1&input='+encodeURIComponent(JSON.stringify({'0':{json:{id:deckId}}}));
+  fetch(apiPath,{headers:{'Accept':'application/json'}})
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(data){
+      var item=null;
+      try{item=(data[0].result&&data[0].result.data&&data[0].result.data.json)||data[0].result.data||null;}catch(e){}
+      if(!item||!item.name)throw new Error('no data');
+      var cards=[];
+      function absorb(arr){if(!Array.isArray(arr))return;arr.forEach(function(entry){var nm=entry.card&&entry.card.name;var qty=entry.quantity||entry.qty||1;if(nm)cards.push({name:nm,qty:qty});});}
+      absorb(item.spellbook);absorb(item.atlas);absorb(item.cards);
+      if(!cards.length)throw new Error('no cards');
+      G.curiosaLoading=false;
+      var deckName=(item.name||'Imported Deck').trim();
+      var author=(item.user&&item.user.username)||(item.author)||'Community';
+      PUB_DECKS.unshift({name:deckName,author:author,el:'?',av:'?',desc:'',url:url});
+      G.decks[deckName]={name:deckName,cards:cards};sv('sg-dk',G.decks);
+      G.showCuriosaImport=false;render();
+    })
+    .catch(function(){
+      G.curiosaLoading=false;
+      G.curiosaErr='Could not reach Curiosa. Check the URL and try again.';render();
+    });
 }
 
 function importCuriosaText(txt){
@@ -3457,7 +3462,7 @@ function pContent(){
     }
     return out.join('');
   }
-  if(p==='sd'){var entries=Object.entries(G.dkstat);if(entries.length){entries.forEach(function(kv){var k=kv[0],d=kv[1];var pct=d.w+d.l>0?Math.round(d.w/(d.w+d.l)*100)+'%':'--';o('<div class="sc"><div class="sn">'+h(k)+'</div><div class="ss"><span class="sw">'+d.w+'W</span><span class="sl_">'+d.l+'L</span><span class="sp_">'+pct+'</span></div></div>');});}else{o('<div class="ld">No deck stats yet.</div>');}return out.join('');}
+  if(p==='sd'){var entries=Object.entries(G.dkstat);if(entries.length){entries.forEach(function(kv){var k=kv[0],d=kv[1];var pct=d.w+d.l>0?Math.round(d.w/(d.w+d.l)*100)+'%':'--';o('<div class="sc"><div class="sn">'+h(k)+'</div><div class="ss"><span class="sw">'+d.w+'W</span><span class="sl_">'+d.l+'L</span><span class="sp_">'+pct+'</span><button class="fb" style="margin-left:8px;font-size:10px;padding:1px 5px;opacity:0.55" onclick="removeDkStat(\''+k.replace(/'/g,"\\'")+'\')" title="Remove">✕</button></div></div>');});}else{o('<div class="ld">No deck stats yet.</div>');}return out.join('');}
   if(p==='sp'){
     o('<div class="fr"><button class="fb gold" onclick="loadPubStats()">Load Stats</button></div>');
     if(G.pubStatsLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
