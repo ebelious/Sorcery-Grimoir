@@ -2981,22 +2981,27 @@ function loadMetaStats(fmt){
   fetch(file+'?_='+Date.now())
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text();})
     .then(function(csv){
+      console.log('[meta] fetched',file,'length:',csv.length,'first 200:',csv.slice(0,200));
       var obj=parseMetaCSV(csv);
+      console.log('[meta] parsed obj:',obj);
       G.metaLoading=false;
       if(obj){G.metaCache[fmt]=obj;render();}
-      else{G.metaErr='Could not parse '+file+'.';render();}
+      else{G.metaErr='Could not parse '+file+'. Check browser console for details.';render();}
     })
-    .catch(function(){
+    .catch(function(e){
+      console.log('[meta] fetch error:',e);
       G.metaLoading=false;
-      G.metaErr=file+' not found. Export from realms.cards/meta and add to repo root.';render();
+      G.metaErr=file+' not found ('+e.message+'). Check browser console.';render();
     });
 }
 function parseMetaCSV(csv){
   var lines=csv.split('\n').map(function(l){return l.trim();}).filter(Boolean);
   if(!lines.length)return null;
-  var obj={updated:'',matchOverview:{},avatarWinRates:[],winRateByElement:[],winRateByCardType:[],winRateByRarity:[],winRateByCost:[],siteWinRates:[],spellbookWinRates:[]};
-  var section='';var headers=[];
-  function parseRow(line){
+  var obj={avatarWinRates:[],siteWinRates:[],spellbookWinRates:[]};
+  // Skip header line(s) — any line starting with "Card Name"
+  var dataLines=lines.filter(function(l){return !/^"?Card Name/i.test(l);});
+  dataLines.forEach(function(line){
+    // Parse CSV row
     var cols=[];var cur='';var inQ=false;
     for(var i=0;i<line.length;i++){
       var c=line[i];
@@ -3004,45 +3009,25 @@ function parseMetaCSV(csv){
       else if(c===','&&!inQ){cols.push(cur.trim());cur='';}
       else cur+=c;
     }
-    cols.push(cur.trim());return cols;
-  }
-  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
-  for(var li=0;li<lines.length;li++){
-    var line=lines[li];
-    var ln=norm(line.replace(/,.*/,''));
-    if(ln==='matchoverview'||ln==='overview'){section='overview';headers=[];continue;}
-    if(ln==='avatarwinrates'||ln==='avatarwinrate'){section='avatar';headers=[];continue;}
-    if(ln==='winratebyelement'||ln==='elementwinrate'){section='element';headers=[];continue;}
-    if(ln==='winratebycardtype'||ln==='cardtype'||ln==='cardtypewinrate'){section='cardtype';headers=[];continue;}
-    if(ln==='winratebyrarity'||ln==='raritywinrate'){section='rarity';headers=[];continue;}
-    if(ln==='winratebycost'||ln==='manacost'||ln==='costwinrate'){section='cost';headers=[];continue;}
-    if(ln==='sitewinrates'||ln==='sites'){section='site';headers=[];continue;}
-    if(ln==='spellbookwinrates'||ln==='spellbook'){section='spellbook';headers=[];continue;}
-    if(ln==='deckcomposition'){section='deck';headers=[];continue;}
-    var cols=parseRow(line);
-    if(!section){
-      var h0=norm(cols[0]);
-      if(h0==='avatar'||h0==='name'){section='avatar';headers=cols;continue;}
-      if(h0==='card'&&cols.length>=5){var hasType=cols.some(function(c){return norm(c)==='type';});section=hasType?'spellbook':'site';headers=cols;continue;}
-      if(h0==='element'){section='element';headers=cols;continue;}
-      if(h0==='type'||h0==='cardtype'){section='cardtype';headers=cols;continue;}
-      if(h0==='rarity'){section='rarity';headers=cols;continue;}
-      if(h0==='cost'||h0==='manacost'){section='cost';headers=cols;continue;}
-      continue;
+    cols.push(cur.trim());
+    if(cols.length<7)return;
+    var name=cols[0];
+    var type=(cols[2]||'').toLowerCase();
+    var plays=parseInt(cols[3])||0;
+    var wins=parseInt(cols[4])||0;
+    var losses=parseInt(cols[5])||0;
+    var draws=parseInt(cols[6])||0;
+    var winRate=cols[7]||'';
+    if(!name||!plays)return;
+    if(type==='avatar'){
+      obj.avatarWinRates.push({rank:obj.avatarWinRates.length+1,name:name,plays:plays,wins:wins,losses:losses,draws:draws,winRate:winRate});
+    } else if(type==='site'){
+      obj.siteWinRates.push({card:name,plays:plays,wins:wins,losses:losses,draws:draws,winRate:winRate});
+    } else {
+      obj.spellbookWinRates.push({card:name,type:cols[2]||'',plays:plays,wins:wins,losses:losses,draws:draws,winRate:winRate});
     }
-    if(!headers.length){headers=cols;continue;}
-    var row={};headers.forEach(function(h,i){row[norm(h)]=cols[i]||'';});
-    function g(k){return row[k]||'';}
-    if(section==='avatar'){obj.avatarWinRates.push({rank:obj.avatarWinRates.length+1,name:g('avatar')||g('name'),element:g('element'),wins:parseInt(g('wins'))||0,losses:parseInt(g('losses'))||0,draws:parseInt(g('draws'))||0,winRate:g('winrate'),games:parseInt(g('games'))||parseInt(g('plays'))||0});}
-    else if(section==='element'){obj.winRateByElement.push({element:g('element'),winRate:g('winrate'),games:parseInt(g('games'))||parseInt(g('plays'))||0});}
-    else if(section==='cardtype'){obj.winRateByCardType.push({type:g('type')||g('cardtype'),winRate:g('winrate'),plays:parseInt(g('plays'))||0});}
-    else if(section==='rarity'){obj.winRateByRarity.push({rarity:g('rarity'),winRate:g('winrate'),plays:parseInt(g('plays'))||0});}
-    else if(section==='cost'){obj.winRateByCost.push({cost:parseInt(g('cost')||g('manacost'))||0,winRate:g('winrate'),plays:parseInt(g('plays'))||0});}
-    else if(section==='site'){obj.siteWinRates.push({card:g('card'),plays:parseInt(g('plays'))||0,wins:parseInt(g('wins'))||0,losses:parseInt(g('losses'))||0,draws:parseInt(g('draws'))||0,winRate:g('winrate')});}
-    else if(section==='spellbook'){obj.spellbookWinRates.push({card:g('card'),type:g('type'),plays:parseInt(g('plays'))||0,wins:parseInt(g('wins'))||0,losses:parseInt(g('losses'))||0,draws:parseInt(g('draws'))||0,winRate:g('winrate')});}
-    else if(section==='overview'){obj.matchOverview={totalGames:parseInt(g('totalgames')||g('games'))||0,activePlayers:parseInt(g('activeplayers')||g('players'))||0,avgGameLength:g('avggamelength')||g('avglength')||''};}
-  }
-  return obj;
+  });
+  return (obj.avatarWinRates.length||obj.siteWinRates.length||obj.spellbookWinRates.length)?obj:null;
 }
 function loadPubStats(){
   if(G.pubStatsLoading)return;G.pubStatsLoading=true;G.pubStatsLoaded=false;G.pubStatsErr=null;render();
@@ -3530,7 +3515,6 @@ function pContent(){
     var fmt=G.metaFmt||'constructed';
     var ms=G.metaCache[fmt]||null;
     if(!ms&&!G.metaLoading&&!G.metaErr){loadMetaStats(fmt);}
-    // Format tabs
     o('<div style="display:flex;gap:3px;margin-bottom:6px">');
     ['constructed','sealed','draft'].forEach(function(f){
       var active=fmt===f;
@@ -3540,53 +3524,39 @@ function pContent(){
     if(G.metaLoading){o('<div class="ld">'+spinIcon()+' Loading Meta&hellip;</div>');}
     else if(G.metaErr){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">'+h(G.metaErr)+'</div>');}
     else if(ms){
-      if(ms.matchOverview&&(ms.matchOverview.totalGames||ms.matchOverview.activePlayers)){
-        o('<div class="sc"><div class="ss">');
-        if(ms.matchOverview.totalGames)o('<span class="sw">'+ms.matchOverview.totalGames+' games</span>');
-        if(ms.matchOverview.activePlayers)o('<span class="sp_">'+ms.matchOverview.activePlayers+' players</span>');
-        if(ms.matchOverview.avgGameLength)o('<span style="font-size:9px;color:var(--fg2)">avg '+h(ms.matchOverview.avgGameLength)+'</span>');
-        o('</div></div>');
-      }
       if(ms.avatarWinRates&&ms.avatarWinRates.length){
-        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Avatar Win Rates</div>');
+        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:4px 0 4px">Avatar Win Rates</div>');
         ms.avatarWinRates.forEach(function(d,i){
           o('<div class="sc" style="display:flex;align-items:center;gap:6px">');
-          o('<div style="font-size:13px;font-weight:700;color:var(--yel);min-width:20px">'+(d.rank||i+1)+'</div>');
-          o('<div style="flex:1"><div class="sn">'+h(d.name||'')+'</div>');
-          o('<div style="font-size:8px;color:var(--fg2)">'+h(d.element||'')+'</div>');
+          o('<div style="font-size:12px;font-weight:700;color:var(--yel);min-width:20px">'+(i+1)+'</div>');
+          o('<div style="flex:1"><div class="sn">'+h(d.name)+'</div>');
           o('<div class="ss">');
-          if(d.winRate)o('<span class="sw">'+h(d.winRate)+'</span>');
-          if(d.games)o('<span style="font-size:9px;color:var(--fg2)">'+d.games+' games</span>');
-          if(d.wins!=null)o('<span style="font-size:9px;color:var(--fg2)">'+d.wins+'W/'+d.losses+'L</span>');
+          o('<span class="sw">'+h(d.winRate)+'</span>');
+          o('<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>');
+          o('<span style="font-size:9px;color:var(--fg2)">'+d.wins+'W/'+d.losses+'L</span>');
           o('</div></div></div>');
         });
       }
-      if(ms.winRateByElement&&ms.winRateByElement.length){
-        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Win Rate by Element</div>');
-        ms.winRateByElement.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><span class="sn">'+h(d.element||'')+'</span><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.games?'<span style="font-size:9px;color:var(--fg2)">'+d.games+' games</span>':'')+'</div></div>');});
-      }
-      if(ms.winRateByCardType&&ms.winRateByCardType.length){
-        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Win Rate by Card Type</div>');
-        ms.winRateByCardType.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><span class="sn">'+h(d.type||'')+'</span><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.plays?'<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>':'')+'</div></div>');});
-      }
-      if(ms.winRateByRarity&&ms.winRateByRarity.length){
-        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Win Rate by Rarity</div>');
-        ms.winRateByRarity.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><span class="sn">'+h(d.rarity||'')+'</span><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.plays?'<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>':'')+'</div></div>');});
-      }
-      if(ms.winRateByCost&&ms.winRateByCost.length){
-        o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Win Rate by Mana Cost</div>');
-        ms.winRateByCost.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><span class="sn">Cost '+h(String(d.cost||''))+'</span><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.plays?'<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>':'')+'</div></div>');});
-      }
       if(ms.siteWinRates&&ms.siteWinRates.length){
         o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Site Win Rates</div>');
-        ms.siteWinRates.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><span class="sn">'+h(d.card||'')+'</span><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.plays?'<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>':'')+'</div></div>');});
+        ms.siteWinRates.forEach(function(d){
+          o('<div class="sc" style="display:flex;justify-content:space-between;align-items:center">');
+          o('<span class="sn">'+h(d.card)+'</span>');
+          o('<div class="ss"><span class="sw">'+h(d.winRate)+'</span><span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span></div>');
+          o('</div>');
+        });
       }
       if(ms.spellbookWinRates&&ms.spellbookWinRates.length){
         o('<div style="font-size:9px;font-weight:700;color:var(--yel);margin:8px 0 4px">Spellbook Win Rates</div>');
-        ms.spellbookWinRates.forEach(function(d){o('<div class="sc" style="display:flex;justify-content:space-between"><div><div class="sn">'+h(d.card||'')+'</div><div style="font-size:8px;color:var(--fg2)">'+h(d.type||'')+'</div></div><div class="ss">'+(d.winRate?'<span class="sw">'+h(d.winRate)+'</span>':'')+(d.plays?'<span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span>':'')+'</div></div>');});
+        ms.spellbookWinRates.forEach(function(d){
+          o('<div class="sc" style="display:flex;justify-content:space-between;align-items:center">');
+          o('<div><div class="sn">'+h(d.card)+'</div><div style="font-size:8px;color:var(--fg2)">'+h(d.type)+'</div></div>');
+          o('<div class="ss"><span class="sw">'+h(d.winRate)+'</span><span style="font-size:9px;color:var(--fg2)">'+d.plays+' plays</span></div>');
+          o('</div>');
+        });
       }
     }
-    o('<a class="ext-lnk" style="margin-top:6px" href="https://realms.cards/meta" target="_blank">realms.cards/meta &rarr;</a>');
+    o('<a class="ext-lnk" style="margin-top:6px" href="https://realms.cards/meta" target="_blank">realms.cards/meta →</a>');
     return out.join('');
   }
     if(p==='sp'){
