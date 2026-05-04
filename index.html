@@ -2461,25 +2461,25 @@ function importCuriosaUrl(url){
   if(!url||url.indexOf('curiosa.io/decks')<0){G.curiosaErr='Please enter a valid curiosa.io/decks URL';render();return;}
   if(G.curiosaLoading)return;
   G.curiosaLoading=true;G.curiosaErr=null;render();
-  // Curiosa uses tRPC/Next.js — the card list is JS-rendered and not in the page HTML.
-  // We can only reliably get the deck name and author from the static HTML.
-  // Prompt Claude to fetch the page and extract what it can, then show a paste fallback.
-  var prompt='Fetch the URL '+url+' and extract whatever deck information is visible. '    +'The page is for a Sorcery Contested Realm deck on Curiosa.io. '    +'Extract the deck name, author username, and any card names and quantities you can see. '    +'Return ONLY raw JSON: {"name":"Deck Name","author":"username","avatar":"","element":"","description":"","cards":[{"name":"Card Name","qty":1}]}. '    +'If no cards are visible in the HTML, return cards as empty array [].';
+
+  var prompt='Visit the Curiosa deck page at this URL: '+url+'\n\n'
+    +'Use web search to find or retrieve the deck information from that page.\n'
+    +'Return ONLY a JSON object with no markdown, no explanation, in exactly this format:\n'
+    +'{"name":"deck name","author":"username","cards":[{"name":"Card Name","qty":2},...]}\n'
+    +'Include every card in the deck (spellbook and atlas). The qty field must be a number.\n'
+    +'Return only the raw JSON object, nothing else.';
+
   apiCall(prompt,2000,function(err,txt){
     G.curiosaLoading=false;
-    if(err||!txt){G.curiosaErr='Could not reach Curiosa. Try the paste method below.';render();return;}
-    var obj=extractJSON(txt,'object');
-    if(!obj||!obj.name){
-      // Show paste fallback
-      G.curiosaErr=null;
-      G.curiosaPasteMode=url;
-      render();return;
-    }
-    PUB_DECKS.unshift({name:obj.name,author:obj.author||'Community',el:obj.element||'?',av:obj.avatar||'?',desc:obj.description||'',url:url});
-    if(obj.cards&&obj.cards.length){
-      var key=obj.name;G.decks[key]={name:obj.name,cards:obj.cards};sv('sg-dk',G.decks);
-    }
-    if(!obj.cards||!obj.cards.length){G.curiosaPasteMode=url;}
+    if(err||!txt){G.curiosaErr='Could not reach Curiosa. Try the paste method below.';G.curiosaPasteMode=url;render();return;}
+    var data=extractJSON(txt,'object');
+    if(!data||!data.cards||!data.cards.length){G.curiosaErr='Could not parse deck data. Try the paste method below.';G.curiosaPasteMode=url;render();return;}
+    var deckName=(data.name||'Imported Deck').trim();
+    var author=(data.author||'Community').trim();
+    var cards=data.cards.filter(function(c){return c&&c.name;}).map(function(c){return{name:c.name,qty:parseInt(c.qty)||1};});
+    PUB_DECKS.unshift({name:deckName,author:author,el:'?',av:'?',desc:'',url:url});
+    G.decks[deckName]={name:deckName,cards:cards};sv('sg-dk',G.decks);
+    G.showCuriosaImport=false;
     render();
   });
 }
@@ -3143,14 +3143,7 @@ function pContent(){
       o('</div>');
       if(G.curiosaLoading){o('<div style="font-size:10px;color:var(--fg2);margin-top:4px">'+spinIcon()+' Fetching&hellip;</div>');}
       if(G.curiosaErr){o('<div style="font-size:10px;color:var(--red);margin-top:4px">'+h(G.curiosaErr)+'</div>');}
-      if(G.curiosaPasteMode){
-        o('<div style="margin-top:6px">');
-        o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Cards not auto-detected. Paste deck list (4x Card Name format):</div>');
-        o('<input class="fi" id="curiosa-deck-name" placeholder="Deck name&hellip;" style="margin-bottom:4px;font-size:11px">');
-        o('<textarea class="fi" id="curiosa-paste-txt" rows="5" placeholder="4x Bosk Troll\n2x Craterize\n..." style="width:100%;font-size:10px;font-family:monospace;resize:vertical"></textarea>');
-        o('<button class="fb gold full" style="margin-top:4px;font-size:11px" onclick="importCuriosaText(document.getElementById(\'curiosa-paste-txt\').value)">Import Pasted List</button>');
-        o('</div>');
-      }
+
       o('</div>');
     }
     if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
