@@ -3239,7 +3239,7 @@ function pContent(){
     o('<div style="font-size:12px;color:var(--fg2);margin-bottom:8px">'+totalCards+' cards total</div>');
     // ── Card search bar with autocomplete ──
     o('<div class="si" style="margin-bottom:10px;position:relative">');
-    o('<input id="dv-srch" placeholder="Search cards&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" oninput="_dvSearch(this.value)" onfocus="_dvSearch(this.value)" onblur="setTimeout(function(){var d=document.getElementById(\'dv-drop\');if(d)d.remove();},200)">');
+    o('<input id="dv-srch" placeholder="Search cards&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" oninput="_dvSearch(this.value)" onfocus="setTimeout(function(){var el=document.getElementById(\'dv-srch\');if(el===document.activeElement)_dvSearch(el.value);},250)" onblur="setTimeout(function(){var d=document.getElementById(\'dv-drop\');if(d)d.remove();},200)">');
     o('<div id="dv-drop" style="display:none"></div>');
     o('</div>');
     typeOrder.forEach(function(t){
@@ -3344,10 +3344,11 @@ function pContent(){
       elSet.forEach(function(el){if(elBins[el])elBins[el][cost]+=qty/elSet.length;});
     });
     // ─── Element stat pills ───
+    var activeStatEls=['a','e','f','w'].filter(function(el){return (elSpells[el]||0)+(elSites[el]||0)>0;});
     o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px">');
     o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+totalSpells+' Spells &middot; '+totalSites+' Sites &middot; Avg Cost '+avgCost+'</div>');
-    o('<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px">');
-    ['a','e','f','w'].forEach(function(el){
+    o('<div style="display:grid;grid-template-columns:repeat('+activeStatEls.length+',1fr);gap:6px;margin-bottom:14px">');
+    activeStatEls.forEach(function(el){
       var spPct=totalSpells>0?Math.round((elSpells[el]||0)/totalSpells*100):0;
       var costPct=totalCost>0?Math.round((elCost[el]||0)/totalCost*100):0;
       var sitePct=totalSites>0?Math.round((elSites[el]||0)/totalSites*100):0;
@@ -3521,6 +3522,7 @@ function pContent(){
       o('<button class="fb'+(active?' gold':'')+'" style="flex:1;font-size:10px" onclick="G.metaFmt=\u0027'+f+'\u0027;G.metaErr=null;loadMetaStats(\u0027'+f+'\u0027)">'+f.charAt(0).toUpperCase()+f.slice(1)+'</button>');
     });
     o('</div>');
+    o('<a class="ext-lnk" style="margin-bottom:4px" href="https://realms.cards/meta" target="_blank">realms.cards/meta →</a>');
     if(G.metaLoading){o('<div class="ld">'+spinIcon()+' Loading Meta&hellip;</div>');}
     else if(G.metaErr){o('<div style="font-size:9px;color:var(--fg2);padding:6px 0">'+h(G.metaErr)+'</div>');}
     else if(ms){
@@ -3556,7 +3558,6 @@ function pContent(){
         });
       }
     }
-    o('<a class="ext-lnk" style="margin-top:6px" href="https://realms.cards/meta" target="_blank">realms.cards/meta →</a>');
     return out.join('');
   }
     if(p==='sp'){
