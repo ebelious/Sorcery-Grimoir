@@ -1,0 +1,112 @@
+Card Name,Card ID,Type,Plays,Wins,Losses,Draws,Win Rate
+"Spellslinger",410,"Avatar",32,17,14,1,54.8%
+"Sorcerer",403,"Avatar",6,2,4,0,33.3%
+"Necromancer",946,"Avatar",6,4,2,0,66.7%
+"Sparkmage",406,"Avatar",4,2,2,0,50.0%
+"Harbinger",857,"Avatar",4,2,2,0,50.0%
+"Geomancer",407,"Avatar",3,2,1,0,66.7%
+"Persecutor",974,"Avatar",3,1,2,0,33.3%
+"Flamecaller",408,"Avatar",3,1,2,0,33.3%
+"Savior",1007,"Avatar",3,0,3,0,0.0%
+"Waveshaper",409,"Avatar",2,0,2,0,0.0%
+"Dragonlord",637,"Avatar",1,0,0,1,0.0%
+"Remote Desert",350,"Site",4,4,0,0,100.0%
+"Haystack",661,"Site",3,3,0,0,100.0%
+"Bonfire",435,"Site",2,2,0,0,100.0%
+"Annual Fair",418,"Site",2,2,0,0,100.0%
+"Babbling Brook",424,"Site",2,1,0,1,100.0%
+"Ruins",368,"Site",2,2,0,0,100.0%
+"Shrike Orchard",1024,"Site",2,2,0,0,100.0%
+"Thin Ice",1066,"Site",2,2,0,0,100.0%
+"Pond",535,"Site",2,2,0,0,100.0%
+"Hunter's Lodge",490,"Site",2,2,0,0,100.0%
+"Updraft Ridge",332,"Site",1,1,0,0,100.0%
+"Accursed Tower",673,"Site",1,1,0,0,100.0%
+"Poisoned Well",534,"Site",1,1,0,0,100.0%
+"Den of Evil",775,"Site",6,5,1,0,83.3%
+"Humble Village",337,"Site",6,5,1,0,83.3%
+"Lookout",511,"Site",4,3,1,0,75.0%
+"Fields of Phyxis",662,"Site",4,3,1,0,75.0%
+"Valley",413,"Site",17,10,5,2,66.7%
+"Open Grave",959,"Site",7,4,2,1,66.7%
+"Spring River",360,"Site",3,2,1,0,66.7%
+"Active Volcano",676,"Site",3,2,1,0,66.7%
+"Dark Tower",327,"Site",5,3,2,0,60.0%
+"Silent Hills",1025,"Site",5,3,2,0,60.0%
+"Spore Spouts",1040,"Site",5,3,2,0,60.0%
+"Spire",411,"Site",25,12,11,2,52.2%
+"Blessed Well",722,"Site",6,3,3,0,50.0%
+"Open Mausoleum",960,"Site",6,3,3,0,50.0%
+"Lone Tower",329,"Site",6,3,3,0,50.0%
+"Valley of Delight",615,"Site",4,2,2,0,50.0%
+"Hillside Chapel",871,"Site",4,2,2,0,50.0%
+"Summer River",361,"Site",4,2,2,0,50.0%
+"Algae Bloom",680,"Site",4,2,2,0,50.0%
+"Desecrated Ground",777,"Site",3,1,1,1,50.0%
+"Wizard's Den",631,"Site",2,1,1,0,50.0%
+"Forlorn Keep",825,"Site",2,1,1,0,50.0%
+"River of Blood",660,"Site",2,1,1,0,50.0%
+"Molten Maar",933,"Site",2,1,1,0,50.0%
+"Fae City",462,"Site",2,1,1,0,50.0%
+"Stream",412,"Site",20,8,10,2,44.4%
+"Desert Bloom",779,"Site",9,4,5,0,44.4%
+"Forge",471,"Site",5,2,3,0,40.0%
+"Stinging Kelp",1044,"Site",5,2,3,0,40.0%
+"Wasteland",414,"Site",21,7,13,1,35.0%
+"Blessed Village",721,"Site",6,2,4,0,33.3%
+"Autumn Bloom",699,"Site",6,2,4,0,33.3%
+"Common Village",452,"Site",3,1,2,0,33.3%
+"Bog",434,"Site",3,1,2,0,33.3%
+"Red Desert",349,"Site",3,1,2,0,33.3%
+"Hamlet",485,"Site",3,1,2,0,33.3%
+"Simple Village",344,"Site",3,1,2,0,33.3%
+"Plumed Pegasus",29,"Minion",4,4,0,0,100.0%
+"Gift of the Wolf",841,"Magic",4,3,0,1,100.0%
+"Moss Troll",937,"Minion",4,4,0,0,100.0%
+"Bosk Troll",78,"Minion",3,2,0,1,100.0%
+"Teleport",62,"Magic",3,2,0,1,100.0%
+"Keening Banshee",499,"Minion",3,2,0,1,100.0%
+"Land Surveyor",89,"Minion",3,3,0,0,100.0%
+"Noisome Twosome",950,"Minion",3,3,0,0,100.0%
+"Lesser Blood Demon",908,"Minion",3,3,0,0,100.0%
+"Border Militia",118,"Magic",3,3,0,0,100.0%
+"Plague Rat",980,"Minion",3,2,0,1,100.0%
+"Cloud Spirit",4,"Minion",3,2,0,1,100.0%
+"Charge",449,"Magic",2,2,0,0,100.0%
+"Beast of Burden",143,"Minion",2,2,0,0,100.0%
+"Shellycoat",558,"Minion",2,2,0,0,100.0%
+"Ribble Boggart",549,"Minion",2,1,0,1,100.0%
+"Wall of Air",70,"Aura",2,2,0,0,100.0%
+"Gift of the Raven",839,"Magic",2,1,0,1,100.0%
+"Abundance",267,"Aura",2,2,0,0,100.0%
+"Clay Golem",751,"Artifact",2,2,0,0,100.0%
+"Swap",659,"Magic",2,2,0,0,100.0%
+"Bound Spirit",732,"Minion",2,2,0,0,100.0%
+"Undead Ambush",1079,"Magic",2,2,0,0,100.0%
+"Vile Imp",175,"Minion",2,2,0,0,100.0%
+"Wall of Fire",204,"Aura",2,2,0,0,100.0%
+"Willing Tribute",1093,"Minion",2,2,0,0,100.0%
+"Sacred Stag",1002,"Minion",2,2,0,0,100.0%
+"Drowned",794,"Minion",2,2,0,0,100.0%
+"Joust!",496,"Magic",2,2,0,0,100.0%
+"Zombie Bruiser",1102,"Minion",2,2,0,0,100.0%
+"Khamaseen Mummy",897,"Minion",2,2,0,0,100.0%
+"Skirmishers of Mu",34,"Minion",2,2,0,0,100.0%
+"Common Sense",122,"Magic",2,2,0,0,100.0%
+"Hauntless Head",860,"Minion",2,2,0,0,100.0%
+"Barging Barghest",705,"Minion",2,2,0,0,100.0%
+"Order of the White Wing",964,"Minion",2,2,0,0,100.0%
+"Goswhit Helmet",479,"Artifact",2,2,0,0,100.0%
+"Saracen Scout",553,"Minion",2,2,0,0,100.0%
+"Saracen Raiders",552,"Minion",1,1,0,0,100.0%
+"Master Tracker",91,"Minion",1,1,0,0,100.0%
+"Scent Hounds",102,"Minion",1,1,0,0,100.0%
+"Silver Valkyries",105,"Minion",1,1,0,0,100.0%
+"Bailey",425,"Artifact",1,1,0,0,100.0%
+"Coy Nixie",453,"Minion",1,1,0,0,100.0%
+"Siege Giant",560,"Minion",1,1,0,0,100.0%
+"Desecrate",776,"Magic",1,1,0,0,100.0%
+"Aquamarine Core",277,"Artifact",1,1,0,0,100.0%
+"Leap Attack",191,"Magic",1,1,0,0,100.0%
+"Wild Boars",114,"Minion",1,1,0,0,100.0%
+"Pendragon Banner",530,"Artifact",1,1,0,0,100.0%

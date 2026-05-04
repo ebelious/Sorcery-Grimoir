@@ -1,0 +1,128 @@
+Card Name,Card ID,Type,Plays,Wins,Losses,Draws,Win Rate
+"Necromancer",946,"Avatar",730,363,359,8,50.3%
+"Interrogator",889,"Avatar",430,208,219,3,48.7%
+"Harbinger",857,"Avatar",360,165,192,3,46.2%
+"Savior",1007,"Avatar",341,167,170,4,49.6%
+"Persecutor",974,"Avatar",308,164,141,3,53.8%
+"Sorcerer",403,"Avatar",286,136,147,2,48.1%
+"Waveshaper",409,"Avatar",264,141,121,2,53.8%
+"Pathfinder",401,"Avatar",212,111,101,0,52.4%
+"Geomancer",407,"Avatar",208,110,96,2,53.4%
+"Deathspeaker",398,"Avatar",192,116,74,2,61.1%
+"Battlemage",397,"Avatar",179,87,90,1,49.2%
+"Witch",630,"Avatar",155,71,83,0,46.1%
+"Animist",686,"Avatar",148,59,85,3,41.0%
+"Flamecaller",408,"Avatar",131,75,56,0,57.3%
+"Archimago",420,"Avatar",128,70,57,1,55.1%
+"Ironclad",893,"Avatar",128,46,80,2,36.5%
+"Enchantress",400,"Avatar",124,71,52,1,57.7%
+"Avatar of Air",393,"Avatar",122,62,60,0,50.8%
+"Sparkmage",406,"Avatar",107,39,68,0,36.4%
+"Realm-Eater",990,"Avatar",105,29,75,1,27.9%
+"Magician",918,"Avatar",91,38,53,0,41.8%
+"Imposter",885,"Avatar",89,53,36,0,59.6%
+"Elementalist",399,"Avatar",85,40,45,0,47.1%
+"Corruptor",756,"Avatar",71,32,39,0,45.1%
+"Druid",459,"Avatar",66,38,26,2,59.4%
+"Templar",594,"Avatar",62,27,34,1,44.3%
+"Dragonlord",637,"Avatar",55,28,26,1,51.9%
+"Pilgrim's Shrine",977,"Site",86,55,30,1,64.7%
+"Forge",471,"Site",150,93,55,2,62.8%
+"Gilman House",842,"Site",85,53,32,0,62.4%
+"Mount Ussar Sanctuary",939,"Site",108,66,41,1,61.7%
+"Kelp Cavern",500,"Site",155,94,60,1,61.0%
+"Hillside Chapel",871,"Site",101,59,39,3,60.2%
+"Pebbled Paths",529,"Site",161,96,64,1,60.0%
+"Bedrock",334,"Site",110,65,44,1,59.6%
+"Silent Hills",1025,"Site",90,53,36,1,59.6%
+"Consecrated Ground",753,"Site",133,76,53,4,58.9%
+"Caerleon-Upon-Usk",443,"Site",98,55,39,4,58.5%
+"Red Desert",349,"Site",291,167,121,3,58.0%
+"Watery Grave",1088,"Site",52,30,22,0,57.7%
+"Shifting Sands",352,"Site",93,53,39,1,57.6%
+"Maelström",359,"Site",140,80,59,1,57.6%
+"The Manor at Daperyll Hill",1061,"Site",107,61,45,1,57.5%
+"Boulevard of Bones",731,"Site",156,89,66,1,57.4%
+"Pond",535,"Site",169,95,71,3,57.2%
+"Smokestacks of Gnaak",353,"Site",96,54,41,1,56.8%
+"Tadpole Pool",362,"Site",97,55,42,0,56.7%
+"Blessed Well",722,"Site",54,30,23,1,56.6%
+"Babbling Brook",424,"Site",260,145,112,3,56.4%
+"Rift Valley",341,"Site",162,89,70,3,56.0%
+"River Rapids",999,"Site",194,107,85,2,55.7%
+"Wormelow Tump",633,"Site",98,54,43,1,55.7%
+"Rustic Village",342,"Site",147,79,63,5,55.6%
+"Common Village",452,"Site",89,49,40,0,55.1%
+"Purgatory",984,"Site",57,29,24,4,54.7%
+"Joyous Garde",497,"Site",155,83,69,3,54.6%
+"Steppe",369,"Site",448,242,203,3,54.4%
+"Thin Ice",1066,"Site",358,193,162,3,54.4%
+"Peculiar Port",972,"Site",163,88,74,1,54.3%
+"Tintagel",607,"Site",130,70,59,1,54.3%
+"Undertow",363,"Site",183,97,83,3,53.9%
+"Blessed Village",721,"Site",170,89,77,4,53.6%
+"Island Leviathan",358,"Site",84,45,39,0,53.6%
+"Crossroads",377,"Site",57,30,26,1,53.6%
+"Valley of Delight",615,"Site",226,119,104,3,53.4%
+"Remote Desert",350,"Site",216,114,100,2,53.3%
+"Fields of Camlann",466,"Site",139,74,65,0,53.2%
+"Oasis",366,"Site",188,99,87,2,53.2%
+"Simple Village",344,"Site",165,86,76,3,53.1%
+"Leadworks",906,"Site",66,35,31,0,53.0%
+"Troll Bridge",613,"Site",538,281,250,7,52.9%
+"Sinkhole",389,"Site",192,100,89,3,52.9%
+"Algae Bloom",680,"Site",116,59,53,4,52.7%
+"Troubled Town",1077,"Site",84,43,39,2,52.4%
+"Watchtower",333,"Site",149,76,69,3,52.4%
+"Croaking Swamp",761,"Site",188,98,89,1,52.4%
+"Haystack",661,"Site",106,55,50,1,52.4%
+"Archangel Michael",691,"Minion",93,68,24,1,73.9%
+"Captain Baldassare",211,"Minion",59,40,19,0,67.8%
+"Paladins of Bazia",968,"Minion",68,45,23,0,66.2%
+"Nightwatchmen",949,"Minion",53,35,18,0,66.0%
+"Algor Omphalos",681,"Artifact",53,35,18,0,66.0%
+"Questing Beast",541,"Minion",96,60,31,5,65.9%
+"Ogre Goons",160,"Minion",55,36,19,0,65.5%
+"Infernal Legion",156,"Minion",85,55,30,0,64.7%
+"Selfsame Simulacrum",238,"Minion",65,42,23,0,64.6%
+"Balor of the Evil Eye",702,"Minion",64,40,23,1,63.5%
+"Aquamarine Core",277,"Artifact",110,68,40,2,63.0%
+"Cemetery Rats",741,"Minion",62,39,23,0,62.9%
+"Lilith",910,"Minion",106,66,39,1,62.9%
+"Nelly Longarms",525,"Minion",79,49,29,1,62.8%
+"Lord of Lies",915,"Minion",163,100,60,3,62.5%
+"Atlantean Fate",268,"Aura",152,94,57,1,62.3%
+"Craterize",123,"Magic",90,56,34,0,62.2%
+"Zap!",1100,"Magic",71,44,27,0,62.0%
+"Order of the Sacred Oak",963,"Minion",168,102,64,2,61.4%
+"Char Omphalos",743,"Artifact",54,33,21,0,61.1%
+"Barging Barghest",705,"Minion",97,58,38,1,60.4%
+"Vampire Bats",1081,"Minion",53,32,21,0,60.4%
+"Silver Bullet",1026,"Artifact",116,70,46,0,60.3%
+"The Green Knight",600,"Minion",95,57,38,0,60.0%
+"Begone!",707,"Magic",66,39,26,1,60.0%
+"Major Explosion",193,"Magic",60,36,24,0,60.0%
+"Wayfaring Pilgrim",176,"Minion",55,33,22,0,60.0%
+"Morgana le Fay",523,"Minion",201,119,80,2,59.8%
+"Jihad",202,"Aura",134,80,54,0,59.7%
+"Màzuj Ifrit",926,"Minion",130,77,52,1,59.7%
+"Autumn Unicorn",75,"Minion",219,129,88,2,59.4%
+"Gift of the Wolf",841,"Magic",173,101,69,3,59.4%
+"Lady Iseult",506,"Minion",65,38,26,1,59.4%
+"Abaddon Succubus",670,"Minion",185,108,74,3,59.3%
+"Boudicca",436,"Minion",92,54,37,1,59.3%
+"Sturmgeist",1046,"Minion",189,112,77,0,59.3%
+"Gargantula",833,"Minion",172,100,69,3,59.2%
+"Infiltrate",190,"Magic",203,118,82,3,59.0%
+"Greater Blood Demon",852,"Minion",92,53,37,2,58.9%
+"Border Militia",118,"Magic",92,53,37,2,58.9%
+"Revered Revenant",998,"Minion",90,51,36,3,58.6%
+"Gigantism",128,"Magic",61,34,24,3,58.6%
+"Hillock Basilisk",155,"Minion",59,34,24,1,58.6%
+"Torrid Omphalos",1072,"Artifact",70,41,29,0,58.6%
+"Shapeshift",556,"Magic",95,55,39,1,58.5%
+"Ring of Morrigan",550,"Artifact",374,216,154,4,58.4%
+"Grandmaster Wizard",8,"Minion",211,122,87,2,58.4%
+"Lord of Unland",223,"Minion",61,35,25,1,58.3%
+"Bosk Troll",78,"Minion",118,67,48,3,58.3%
+"Vile Imp",175,"Minion",434,249,179,5,58.2%
