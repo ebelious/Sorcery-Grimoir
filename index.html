@@ -732,7 +732,7 @@ function boot(){
   G.diceTableColor=ld('sg-table','#0d1117');
   G.diceTexture=ld('sg-dtex','felt');
   G.diceTexture2=ld('sg-dtex2','felt');
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   loadPubDecks();
   // Pre-warm texture cache for both players in idle time so first roll is instant
   setTimeout(function(){
@@ -2309,6 +2309,18 @@ function exportColl(){
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='sorcery_collection.csv';a.click();URL.revokeObjectURL(a.href);
 }
 function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv('sg-co',G.coll);render();}
+function renameDeck(oldKey,newName){
+  newName=(newName||'').trim();
+  if(!newName||newName===oldKey)return;
+  if(G.decks[newName]){alert('A deck with that name already exists.');return;}
+  var dk=G.decks[oldKey];
+  dk.name=newName;
+  G.decks[newName]=dk;
+  delete G.decks[oldKey];
+  if(G.dkstat[oldKey]){G.dkstat[newName]=G.dkstat[oldKey];delete G.dkstat[oldKey];sv('sg-ds',G.dkstat);}
+  G.selDeck=newName;
+  sv('sg-dk',G.decks);render();
+}
 function delDeck(k){if(!confirm('Delete this deck?'))return;delete G.decks[k];sv('sg-dk',G.decks);render();}
 function exportDeckCSV(k){
   var dv=G.decks[k];if(!dv)return;
@@ -2493,7 +2505,7 @@ function importCuriosaText(txt){
   var nm=(deckName&&deckName.value.trim())||'Imported Deck';
   PUB_DECKS.unshift({name:nm,author:'Imported',el:'?',av:'?',desc:url?'Imported from '+url:'',url:url});
   G.decks[nm]={name:nm,cards:cards};sv('sg-dk',G.decks);
-  G.curiosaPasteMode=null;render();
+  G.curiosaPasteMode=null;G.showCuriosaImport=false;render();
   alert('Deck imported: '+nm+' ('+cards.length+' card types)');
 }
 
@@ -3121,11 +3133,30 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb gold" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import CSV</button></div>');
+    o('<div class="fr"><button class="fb gold" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import CSV</button><button class="fb" style="background:linear-gradient(135deg,#1e3a5f,#2a5298)" onclick="G.showCuriosaImport=!G.showCuriosaImport;render()">Import Curiosa</button></div>');
+    if(G.showCuriosaImport){
+      o('<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:6px;padding:10px;margin-bottom:8px">');
+      o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Paste a curiosa.io/decks URL to import a deck</div>');
+      o('<div class="fr" style="gap:4px">');
+      o('<input class="fi" id="curiosa-url-inp" placeholder="https://curiosa.io/decks/..." style="flex:1;font-size:11px">');
+      o('<button class="fb gold" style="font-size:11px" onclick="var u=document.getElementById(\'curiosa-url-inp\').value;importCuriosaUrl(u)">Import</button>');
+      o('</div>');
+      if(G.curiosaLoading){o('<div style="font-size:10px;color:var(--fg2);margin-top:4px">'+spinIcon()+' Fetching&hellip;</div>');}
+      if(G.curiosaErr){o('<div style="font-size:10px;color:var(--red);margin-top:4px">'+h(G.curiosaErr)+'</div>');}
+      if(G.curiosaPasteMode){
+        o('<div style="margin-top:6px">');
+        o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Cards not auto-detected. Paste deck list (4x Card Name format):</div>');
+        o('<input class="fi" id="curiosa-deck-name" placeholder="Deck name&hellip;" style="margin-bottom:4px;font-size:11px">');
+        o('<textarea class="fi" id="curiosa-paste-txt" rows="5" placeholder="4x Bosk Troll\n2x Craterize\n..." style="width:100%;font-size:10px;font-family:monospace;resize:vertical"></textarea>');
+        o('<button class="fb gold full" style="margin-top:4px;font-size:11px" onclick="importCuriosaText(document.getElementById(\'curiosa-paste-txt\').value)">Import Pasted List</button>');
+        o('</div>');
+      }
+      o('</div>');
+    }
     if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     Object.entries(G.decks).forEach(function(kv){
       var k=kv[0],dk=kv[1];
-      var ds=G.dkstat[dk.name]||{w:0,l:0};
+      var ds=G.dkstat[k]||{w:0,l:0};
       var pct2=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';
       var totalCards=dk.cards.reduce(function(s,c){return s+c.qty;},0);
       var safeK=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
@@ -3144,7 +3175,7 @@ function pContent(){
     if(!dv){o('<div class="ld">Deck not found.</div>');return out.join('');}
     // Rename input + delete
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
-    o('<input style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="G.decks[\''+h(dvk)+'\'].name=this.value;sv(\'sg-dk\',G.decks);render()">');
+    o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
     o('<button class="fb gold" style="font-size:9px;padding:2px 7px" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export CSV</button>');
     o('<button class="fb red" style="font-size:9px;padding:2px 7px" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
