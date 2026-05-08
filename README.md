@@ -1,6 +1,9 @@
 # Sorcery Grimoir
 This is Sorcer Grimoir, a Contested Realm Companion application for the seekers and masters of the realm. This app is a multi tool for anyone intersted in playing, understanding, and/or just interested in Sorcery Contested Realm.
 
+
+### [Sorcery Grimoir App](https://ebelious.github.io/Sorcery-Grimoir/)
+
 ## Features
 - Global Search for cards, card key words in the FAQ and Codex for quick answers while playing
 - UI for counters when playing the game with 1 player and 2 player views
