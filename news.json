@@ -1,10 +1,17 @@
 {
-  "updated": "2026-05-27T15:56:24.608Z",
+  "updated": "2026-05-27T20:24:41.607Z",
   "articles": [
+    {
+      "title": "Frost Mage vs. Lavamancer: New Avatars Enter the Contested Realm",
+      "url": "https://sorcerytcg.com/news/frost-mage-vs-lavamancer-new-avatars-enter-the-contested-realm",
+      "date": "27 May 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/47ec9440d4d94f94312c04fb1edff3811f2897ea-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Avatar of the Realm 2026: The Realm Converges in Boston",
       "url": "https://sorcerytcg.com/news/avatar-of-the-realm-2026-the-realm-converges-in-boston",
-      "date": "22 May 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/96560096f08a68d2ddea671057bc2c2670467366-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "2026 Grand Contests: Where the Realm Gathers",
-      "url": "https://sorcerytcg.com/news/2026-grand-contests",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/9f92044dd5c6cd1c4953514d3da8b47e569ad1a3-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
