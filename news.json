@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-03T11:08:48.839Z",
+  "updated": "2026-06-03T16:58:38.536Z",
   "articles": [
+    {
+      "title": "Avatar of the Realm: Weekend at a Glance",
+      "url": "https://sorcerytcg.com/news/avatar-of-the-realm-weekend-at-a-glance",
+      "date": "03 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Where Tables Connected: SCG CON Washington DC Recap",
       "url": "https://sorcerytcg.com/news/where-tables-connected-scg-con-washington-dc-recap",
-      "date": "01 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8c802a2049735c2b969f1fdf83641abe896b0931-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/3e68d1e8b450be9ff460518aa0cde228faf0e2ea-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "SorceryFest 2026 - Grand Contest Event",
-      "url": "https://sorcerytcg.com/news/grand-contest-sorceryfest-2026",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/311c52fade0c4311a7c3d95ebc87d76370c43a05-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
