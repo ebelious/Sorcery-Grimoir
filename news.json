@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-05T15:14:15.130Z",
+  "updated": "2026-06-05T20:01:12.832Z",
   "articles": [
+    {
+      "title": "Are You Ready for Sorcery's Grand Contests?",
+      "url": "https://sorcerytcg.com/news/are-your-ready-for-sorcery-s-grand-contests",
+      "date": "05 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e88715d7c003095b467ebdc1e32bbecc5a180698-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Sorcery's Grand Contest comes to New Zealand",
       "url": "https://sorcerytcg.com/news/sorcery-s-grand-contest-comes-to-new-zealand",
-      "date": "05 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8be3f3a9b4bc90b3d0634fe50fbaa3bbef06dff-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8a5df9cd2d1d422a0f78244467bc8aeb8fe77e2-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Community Spotlight: Explorer Series Season 2 is Underway",
-      "url": "https://sorcerytcg.com/news/community-spotlight-explorer-series-season-2",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f6ab17ad72ef31d1a68662a4b7affb04305dc7c7-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
