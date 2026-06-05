@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-04T20:10:54.653Z",
+  "updated": "2026-06-05T04:10:50.409Z",
   "articles": [
+    {
+      "title": "Sorcery's Grand Contest comes to New Zealand",
+      "url": "https://sorcerytcg.com/news/sorcery-s-grand-contest-comes-to-new-zealand",
+      "date": "05 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8be3f3a9b4bc90b3d0634fe50fbaa3bbef06dff-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Avatar of the Realm: Weekend at a Glance",
       "url": "https://sorcerytcg.com/news/avatar-of-the-realm-weekend-at-a-glance",
-      "date": "03 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f6ab17ad72ef31d1a68662a4b7affb04305dc7c7-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "SCG CON Washington DC: The First Grand Contest of 2026",
-      "url": "https://sorcerytcg.com/news/scg-con-washington-dc-the-first-grand-contest-of-2026",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/3e68d1e8b450be9ff460518aa0cde228faf0e2ea-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
