@@ -1707,7 +1707,7 @@ function _diceInitOverlay(){
   bar.id='dice-3d-bar';
   bar.style.cssText='display:flex;gap:10px;justify-content:center;align-items:center;padding:12px 0;background:var(--bg2);border-top:1px solid var(--bd);order:2;';
   var _diceRnd=document.body.classList.contains('rounded')?'8px':'0';
-  bar.innerHTML='<button id="dice-3d-again" style="background:var(--fg);border:none;color:var(--bg);padding:8px 28px;font-size:14px;font-weight:700;cursor:pointer;display:none;font-family:inherit" onclick="_diceRollAgain()">Roll Again</button><button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
+  bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // Canvas container (fills most of screen)
   var canvasWrap=document.createElement('div');
@@ -1719,16 +1719,28 @@ function _diceInitOverlay(){
   canvasWrap.appendChild(cv);
   _diceCanvas=cv;
 
-  // Result popup — absolutely positioned over the whole overlay, NOT inside canvasWrap
-  // This means it never gets rotated with the canvas
+  // Result displays — one per player in their readable orientation
+  // P1: bottom of screen, normal
   var popup=document.createElement('div');
   popup.id='dice-3d-popup';
-  popup.style.cssText='position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:24px 48px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:180px;';
-  popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;font-family:inherit"></div><div id="dice-3d-num" style="font-size:80px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:22px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
+  popup.style.cssText='position:absolute;bottom:80px;left:50%;transform:translateX(-50%) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
+  popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
+  // P2: top of screen, rotated 180 so P2 can read it right-side-up
+  var popup2=document.createElement('div');
+  popup2.id='dice-3d-popup2';
+  popup2.style.cssText='position:absolute;top:80px;left:50%;transform:translateX(-50%) rotate(180deg) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
+  popup2.innerHTML='<div id="dice-3d-label2" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num2" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk2" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
+
+  // Click canvas area to re-roll when result is showing
+  canvasWrap.style.cursor='pointer';
+  canvasWrap.addEventListener('click',function(){
+    if(_dicePhase==='idle'&&_diceResult!==null) _diceRollAgain();
+  });
 
   wrap.appendChild(bar);
   wrap.appendChild(canvasWrap);
-  wrap.appendChild(popup);  // popup is sibling of canvasWrap, not child
+  wrap.appendChild(popup);
+  wrap.appendChild(popup2);
   document.body.appendChild(wrap);
   _diceOverlay=wrap;
 
@@ -1838,26 +1850,38 @@ function _diceInitOverlay(){
 
 function _diceShowResult(){
   var total=_dicePendingRolls.reduce(function(a,b){return a+b;},0);
+  var label=(_diceCount>1?_diceCount+'x ':'')+'d'+_diceSides;
+  var brk=_diceCount>1?_dicePendingRolls.join(' + '):'';
+  _diceResult=total;
+  // P1 display (bottom)
   var popup=document.getElementById('dice-3d-popup');
-  if(!popup) return;
-  document.getElementById('dice-3d-label').textContent=(_diceCount>1?_diceCount+'x ':'')+'d'+_diceSides;
-  document.getElementById('dice-3d-num').textContent=total;
-  document.getElementById('dice-3d-brk').textContent=_diceCount>1?_dicePendingRolls.join(' + '):'';
-  var isP2=_dicePI===1;
-  popup.style.transform='translate(-50%,-50%) scale(1)'+(isP2?' rotate(180deg)':'');
-  popup.style.pointerEvents='all';
-  var againBtn=document.getElementById('dice-3d-again');
-  if(againBtn) againBtn.style.display='inline-block';
+  if(popup){
+    document.getElementById('dice-3d-label').textContent=label;
+    document.getElementById('dice-3d-num').textContent=total;
+    document.getElementById('dice-3d-brk').textContent=brk;
+    popup.style.transform='translateX(-50%) scale(1)';
+    popup.style.pointerEvents='none';
+  }
+  // P2 display (top, rotated so P2 reads it right-side-up)
+  var popup2=document.getElementById('dice-3d-popup2');
+  if(popup2){
+    document.getElementById('dice-3d-label2').textContent=label;
+    document.getElementById('dice-3d-num2').textContent=total;
+    document.getElementById('dice-3d-brk2').textContent=brk;
+    popup2.style.transform='translateX(-50%) rotate(180deg) scale(1)';
+    popup2.style.pointerEvents='none';
+  }
   // Store final result in G for last-roll display
   G.dice={sides:_diceSides,count:_diceCount,rolling:false,rolls:_dicePendingRolls,final:total,settling:false,ci:_diceCI,pi:_dicePI};
   render(); // update last-roll display in the main UI
 }
 
 function _diceHidePopup(){
+  _diceResult=null;
   var popup=document.getElementById('dice-3d-popup');
-  if(popup){var isP2=_dicePI===1;popup.style.transform='translate(-50%,-50%) scale(0)'+(isP2?' rotate(180deg)':'');popup.style.pointerEvents='none';}
-  var againBtn=document.getElementById('dice-3d-again');
-  if(againBtn) againBtn.style.display='none';
+  if(popup){popup.style.transform='translateX(-50%) scale(0)';popup.style.pointerEvents='none';}
+  var popup2=document.getElementById('dice-3d-popup2');
+  if(popup2){popup2.style.transform='translateX(-50%) rotate(180deg) scale(0)';popup2.style.pointerEvents='none';}
 }
 
 function _diceRollAgain(){
@@ -1891,8 +1915,7 @@ function rollDice(sides,count,colIdx,pi){
     bar2.style.order=(_dicePI===1?'0':'2');
     bar2.style.transform=(_dicePI===1?'rotate(180deg)':'');
   }
-  var popup2=document.getElementById('dice-3d-popup');
-  if(popup2) popup2.style.transform=(_dicePI===1?'translate(-50%,-50%) scale(0) rotate(180deg)':'translate(-50%,-50%) scale(0)');
+  // popups are already hidden by _diceHidePopup() above
 
   // Defer texture generation + physics kick to next frame
   var _sides=sides, _pi=pi;
