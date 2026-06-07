@@ -96,7 +96,7 @@ body.rounded .fi,body.rounded input.fi,body.rounded select.fi{border-radius:8px}
 body.rounded .fbar,body.rounded .stbar,body.rounded .cgrid .ct,body.rounded .coll-it,body.rounded .set-row{border-radius:6px}
 /* Rounded corners: dice color/texture picker popups */
 body.rounded #p2-dice-cpop,body.rounded #p1-dice-cpop{border-radius:8px!important}
-body.rounded #p2-dice-cpop button,body.rounded #p1-dice-cpop button,body.rounded #dice-3d-bar button{border-radius:8px!important}
+body.rounded #p2-dice-cpop button,body.rounded #p1-dice-cpop button,body.rounded #dice-3d-bar button,body.rounded #dice-3d-bar2 button{border-radius:8px!important}
 /* Rounded corners: .cpop-it (card name popup items), .adj button */
 body.rounded .cpop-it,body.rounded .adj,body.rounded .yt-pill,body.rounded .yt-vid,body.rounded .ev-c{border-radius:8px}
 body.rounded .si input,body.rounded .si select{border-radius:8px}
@@ -1747,7 +1747,7 @@ function _diceInitOverlay(){
   _diceOverlay=wrap;
 
   // Init THREE scene
-  var W=cv.offsetWidth||window.innerWidth, H=cv.offsetHeight||(window.innerHeight-80);
+  var W=cv.offsetWidth||window.innerWidth, H=cv.offsetHeight||window.innerHeight;
   _diceScene=new THREE.Scene();
   _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(G.diceTexture||'felt')));
   _diceCamera=new THREE.PerspectiveCamera(50,W/H,0.1,100);
@@ -1778,13 +1778,14 @@ function _diceInitOverlay(){
   var _initTex=_diceMakeTex(G.diceTexture||'felt',_diceEffectiveColor(G.diceTexture||'felt'),256);
   var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',256);
   _initTex.wrapS=_initTex.wrapT=THREE.ClampToEdgeWrapping; _initTex.repeat.set(1,1);
-  // Compute plane dimensions from camera FOV so texture fills view exactly
-  var _camDist=12-(-1.5); // camera Y minus plane Y
+  // Use window dimensions — canvas offsetWidth may be 0 before layout
+  var _camDist=12; // camera Y=12, plane Y=0
   var _fovRad=50*Math.PI/180;
   var _planeH=2*Math.tan(_fovRad/2)*_camDist;
-  var _planeW=_planeH*(W/H);
+  var _aspect=(W>0&&H>0)?(W/H):(window.innerWidth/Math.max(1,window.innerHeight));
+  var _planeW=_planeH*_aspect;
   _diceFelt=new THREE.Mesh(new THREE.PlaneGeometry(_planeW,_planeH),new THREE.MeshBasicMaterial({map:_initTex}));
-  _diceFelt.rotation.x=-Math.PI/2; _diceFelt.position.y=-1.5; _diceFelt.receiveShadow=true; _diceScene.add(_diceFelt);
+  _diceFelt.rotation.x=-Math.PI/2; _diceFelt.position.y=0; _diceFelt.receiveShadow=true; _diceScene.add(_diceFelt);
   _diceFeltB=null;
 
   // Resize handler
@@ -1793,7 +1794,7 @@ function _diceInitOverlay(){
     var W2=cv.offsetWidth||window.innerWidth, H2=cv.offsetHeight||window.innerHeight;
     _diceRenderer.setSize(W2,H2); _diceCamera.aspect=W2/H2; _diceCamera.updateProjectionMatrix();
     if(_diceFelt){
-      var _cd=12-(-1.5), _fr=50*Math.PI/180;
+      var _cd=12, _fr=50*Math.PI/180;
       var _ph=2*Math.tan(_fr/2)*_cd, _pw=_ph*(W2/H2);
       _diceFelt.geometry.dispose();
       _diceFelt.geometry=new THREE.PlaneGeometry(_pw,_ph);
