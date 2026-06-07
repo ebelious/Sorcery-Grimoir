@@ -1661,7 +1661,9 @@ function _diceUpdateSceneBg(texOverride){
   var tex=texOverride||(G.diceTexture||'felt');
   var fc=_diceEffectiveColor(tex);
   var tc=G.diceTableColor||'#0d1117';
-  _diceScene.background=new THREE.Color(_diceHexNum(tc));
+  _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(tex)));
+  var _dw=document.getElementById('dice-overlay');
+  if(_dw) _dw.style.background=_diceEffectiveColor(tex);
   // Per-texture PBR properties — tuned for the new procedural engine
   var nrmScale={felt:1.4,oak:3.2,walnut:3.6,mahogany:2.8,pine:2.6,ebony:3.0,marble:4.2,stone:6.0,lava:7.0,leather:7.5,plaid:1.6,multicolor:0.6,clear:2.8};
   var roughness={felt:0.97,oak:0.52,walnut:0.48,mahogany:0.50,pine:0.55,ebony:0.30,marble:0.18,stone:0.90,lava:0.94,leather:0.93,plaid:0.90,multicolor:0.85,clear:0.05};
@@ -1672,17 +1674,11 @@ function _diceUpdateSceneBg(texOverride){
   var colorMap=_diceMakeTex(tex,fc,256);
   var normalMap=_diceMakeNormalMap(tex,256);
   if(_diceFelt){
-    // Use BasicMaterial so the texture's baked colors show true — scene lights
-    // wash out dark materials like leather and make them unrecognisably bright
-    _diceFelt.material=new THREE.MeshBasicMaterial({map:colorMap});
+    var cm=new THREE.MeshBasicMaterial({map:colorMap});
+    colorMap.wrapS=colorMap.wrapT=THREE.ClampToEdgeWrapping; colorMap.repeat.set(1,1);
+    _diceFelt.material=cm;
   }
-  if(_diceFeltB){
-    // Border strip: use fc directly, just slightly darker for the edge
-    _diceFeltB.material=new THREE.MeshBasicMaterial({color:_diceHexNum(_diceShadeHex(fc,0.55))});
-  }
-  if(_diceTable){
-    _diceTable.material=new THREE.MeshBasicMaterial({color:_diceHexNum(tc)});
-  }
+  // _diceFeltB and _diceTable are not used (set to null at init)
 }
 
 var _diceFelt=null, _diceFeltB=null, _diceTable=null;
@@ -1697,27 +1693,32 @@ function _diceShadeHex(col,factor){
 function _diceInitOverlay(){
   if(_diceOverlay) return; // already created
 
-  // Outer wrapper - fullscreen overlay with solid black mask behind canvas
+  // Outer wrapper - fullscreen overlay
   var wrap=document.createElement('div');
   wrap.id='dice-overlay';
-  wrap.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;display:none;flex-direction:column;background:#000;';
+  wrap.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;display:none;background:'+(_diceEffectiveColor(G.diceTexture||'felt'))+';';
 
-  // Button bar — rendered FIRST in DOM so it sits at top for P2 (order swapped via JS)
-  var bar=document.createElement('div');
-  bar.id='dice-3d-bar';
-  bar.style.cssText='display:flex;gap:10px;justify-content:center;align-items:center;padding:12px 0;background:var(--bg2);border-top:1px solid var(--bd);order:2;';
-  var _diceRnd=document.body.classList.contains('rounded')?'8px':'0';
-  bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
-
-  // Canvas container (fills most of screen)
+  // Canvas fills the entire overlay
   var canvasWrap=document.createElement('div');
-  canvasWrap.style.cssText='flex:1;position:relative;overflow:hidden;order:1;';
+  canvasWrap.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;';
 
   var cv=document.createElement('canvas');
   cv.id='dice-3d-canvas';
   cv.style.cssText='display:block;width:100%;height:100%;';
   canvasWrap.appendChild(cv);
   _diceCanvas=cv;
+
+  // P1 Done button — bottom of screen, normal orientation
+  var bar=document.createElement('div');
+  bar.id='dice-3d-bar';
+  bar.style.cssText='position:absolute;bottom:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;';
+  bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
+
+  // P2 Done button — top of screen, rotated 180° so P2 reads it correctly
+  var bar2=document.createElement('div');
+  bar2.id='dice-3d-bar2';
+  bar2.style.cssText='position:absolute;top:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;transform:rotate(180deg);';
+  bar2.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // Result displays — one per player in their readable orientation
   // P1: bottom of screen, normal
@@ -1737,8 +1738,9 @@ function _diceInitOverlay(){
     if(_dicePhase==='idle'&&_diceResult!==null) _diceRollAgain();
   });
 
-  wrap.appendChild(bar);
   wrap.appendChild(canvasWrap);
+  wrap.appendChild(bar);
+  wrap.appendChild(bar2);
   wrap.appendChild(popup);
   wrap.appendChild(popup2);
   document.body.appendChild(wrap);
@@ -1747,9 +1749,9 @@ function _diceInitOverlay(){
   // Init THREE scene
   var W=cv.offsetWidth||window.innerWidth, H=cv.offsetHeight||(window.innerHeight-80);
   _diceScene=new THREE.Scene();
-  _diceScene.background=new THREE.Color(_diceHexNum(G.diceTableColor||'#0d1117'));
+  _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(G.diceTexture||'felt')));
   _diceCamera=new THREE.PerspectiveCamera(50,W/H,0.1,100);
-  _diceCamera.position.set(0,3.5,8); _diceCamera.lookAt(0,0,0);
+  _diceCamera.position.set(0,12,0); _diceCamera.lookAt(0,0,0); _diceCamera.up.set(0,0,-1);
   _diceRenderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
   _diceRenderer.setSize(W,H);
   _diceRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
@@ -1771,20 +1773,31 @@ function _diceInitOverlay(){
   var pt=new THREE.PointLight(0xfff0cc,1.3,25); pt.position.set(3,7,4); _diceScene.add(pt);
 
   // Table surfaces (textures applied via _diceUpdateSceneBg after init)
-  _diceTable=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshBasicMaterial({color:_diceHexNum(G.diceTableColor||'#0d1117')}));
-  _diceTable.rotation.x=-Math.PI/2; _diceTable.position.y=-2.0; _diceScene.add(_diceTable);
+  // Felt plane sized to exactly fill the camera's view — no tiling, no border
+  _diceTable=null;
   var _initTex=_diceMakeTex(G.diceTexture||'felt',_diceEffectiveColor(G.diceTexture||'felt'),256);
-  var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',256);  // 512 sufficient for normals
-  _diceFelt=new THREE.Mesh(new THREE.PlaneGeometry(14,10),new THREE.MeshBasicMaterial({map:_initTex}));
-  _diceFelt.rotation.x=-Math.PI/2; _diceFelt.position.y=-1.99; _diceFelt.receiveShadow=true; _diceScene.add(_diceFelt);
-  _diceFeltB=new THREE.Mesh(new THREE.PlaneGeometry(14.3,10.3),new THREE.MeshBasicMaterial({color:_diceHexNum(_diceShadeHex(G.diceFeltColor||'#14532d',0.55))}));
-  _diceFeltB.rotation.x=-Math.PI/2; _diceFeltB.position.y=-1.995; _diceScene.add(_diceFeltB);
+  var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',256);
+  _initTex.wrapS=_initTex.wrapT=THREE.ClampToEdgeWrapping; _initTex.repeat.set(1,1);
+  // Compute plane dimensions from camera FOV so texture fills view exactly
+  var _camDist=12-(-1.5); // camera Y minus plane Y
+  var _fovRad=50*Math.PI/180;
+  var _planeH=2*Math.tan(_fovRad/2)*_camDist;
+  var _planeW=_planeH*(W/H);
+  _diceFelt=new THREE.Mesh(new THREE.PlaneGeometry(_planeW,_planeH),new THREE.MeshBasicMaterial({map:_initTex}));
+  _diceFelt.rotation.x=-Math.PI/2; _diceFelt.position.y=-1.5; _diceFelt.receiveShadow=true; _diceScene.add(_diceFelt);
+  _diceFeltB=null;
 
   // Resize handler
   window.addEventListener('resize',function(){
     if(!_diceOverlay||_diceOverlay.style.display==='none') return;
-    var W2=cv.offsetWidth||window.innerWidth, H2=cv.offsetHeight||(window.innerHeight-80);
+    var W2=cv.offsetWidth||window.innerWidth, H2=cv.offsetHeight||window.innerHeight;
     _diceRenderer.setSize(W2,H2); _diceCamera.aspect=W2/H2; _diceCamera.updateProjectionMatrix();
+    if(_diceFelt){
+      var _cd=12-(-1.5), _fr=50*Math.PI/180;
+      var _ph=2*Math.tan(_fr/2)*_cd, _pw=_ph*(W2/H2);
+      _diceFelt.geometry.dispose();
+      _diceFelt.geometry=new THREE.PlaneGeometry(_pw,_ph);
+    }
   });
 
   // Start render loop
@@ -1910,11 +1923,6 @@ function rollDice(sides,count,colIdx,pi){
   // P2 rotation setup (needs overlay visible first)
   var cv2=document.getElementById('dice-3d-canvas');
   if(cv2) cv2.style.transform=(_dicePI===1?'rotate(180deg)':'');
-  var bar2=document.getElementById('dice-3d-bar');
-  if(bar2){
-    bar2.style.order=(_dicePI===1?'0':'2');
-    bar2.style.transform=(_dicePI===1?'rotate(180deg)':'');
-  }
   // popups are already hidden by _diceHidePopup() above
 
   // Defer texture generation + physics kick to next frame
