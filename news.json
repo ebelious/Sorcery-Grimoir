@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-08T16:01:55.066Z",
+  "updated": "2026-06-08T20:24:27.929Z",
   "articles": [
+    {
+      "title": "The Grand Contest Comes to Canada",
+      "url": "https://sorcerytcg.com/news/the-grand-contest-comes-to-canada",
+      "date": "08 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/bac620a0ea7cb51b208257f75a456350bbba6677-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Are You Ready for Sorcery's Grand Contests?",
       "url": "https://sorcerytcg.com/news/are-your-ready-for-sorcery-s-grand-contests",
-      "date": "05 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e88715d7c003095b467ebdc1e32bbecc5a180698-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/a23e57645b35f2d789a3aeac2b027f0faecaf4df-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "The Grand Contest comes to Melbourne",
-      "url": "https://sorcerytcg.com/news/the-grand-contest-comes-to-melbourne",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8a5df9cd2d1d422a0f78244467bc8aeb8fe77e2-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
