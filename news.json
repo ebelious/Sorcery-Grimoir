@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-18T15:36:27.702Z",
+  "updated": "2026-06-18T20:32:48.085Z",
   "articles": [
+    {
+      "title": "Sorcery's Grand Contest Comes to Germany",
+      "url": "https://sorcerytcg.com/news/sorcery-s-grand-contest-comes-to-germany",
+      "date": "18 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f106caf8ada93c2cdf4da6c326b5f2b845226936-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "The Grand Contest Comes to Canada",
       "url": "https://sorcerytcg.com/news/the-grand-contest-comes-to-canada",
-      "date": "08 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/bac620a0ea7cb51b208257f75a456350bbba6677-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8d4d64da2ad3e26e801a226760849c64c3a7073a-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Gen Con 2026: Where the Realm Converges",
-      "url": "https://sorcerytcg.com/news/gen-con-2026-where-the-realm-converges",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/a23e57645b35f2d789a3aeac2b027f0faecaf4df-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
