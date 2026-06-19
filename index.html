@@ -889,6 +889,8 @@ var _diceCamera=null;
 var _diceGroup=null;
 var _diceGroup2=null;   // second die for 2d6
 var _diceVX2=0,_diceVY2=0,_diceVZ2=0;
+var _diceVPX=0,_diceVPZ=0,_diceVPX2=0,_diceVPZ2=0; // screen-plane sliding velocity
+var _diceVY_pos=0,_diceVY_pos2=0; // vertical velocity for physics bounce
 var _diceRAF=null;
 var _diceRolling=false;
 var _dicePhase='idle';   // idle | rolling | settling
@@ -1807,49 +1809,85 @@ function _diceInitOverlay(){
     var dt=Math.min((t-_dicePrevT)/1000,0.05); _dicePrevT=t;
     if(_diceGroup && _diceRolling){
       _diceTimer+=dt;
+      var _dieR=0.7;
+      var _bndH=2*Math.tan(50*Math.PI/180/2)*12;
+      var _bndAsp=(_diceRenderer.domElement.width||window.innerWidth)/Math.max(1,_diceRenderer.domElement.height||window.innerHeight);
+      var _bndX=_bndH*_bndAsp/2-_dieR, _bndZ=_bndH/2-_dieR;
+      var _ground=0.65;
+      var _gravity=28;
       if(_dicePhase==='rolling'){
+        // Gravity
+        _diceVY_pos-=_gravity*dt;
+        _diceGroup.position.y+=_diceVY_pos*dt;
+        // Ground bounce
+        if(_diceGroup.position.y<=_ground){
+          _diceGroup.position.y=_ground;
+          if(_diceVY_pos<-1.5) _diceVY_pos*=-0.52; else _diceVY_pos=0;
+          _diceVX*=0.68; _diceVZ*=0.68;
+        }
+        var _airborne=_diceGroup.position.y>_ground+0.05;
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        var bounce=Math.max(0,Math.sin(_diceTimer*Math.PI*3.5)*(1.0-_diceTimer*1.0));
-        _diceGroup.position.y=Math.max(0,bounce)-0.1;
-        var damp=Math.pow(0.88,dt*60);
-        _diceVX*=damp; _diceVY*=damp; _diceVZ*=damp;
-        if(_diceTimer>0.2&&_diceTimer<0.6){
-          var knock=Math.sin(_diceTimer*20)*Math.max(0,0.4-(_diceTimer-0.2));
-          _diceGroup.position.y=Math.max(-0.1,_diceGroup.position.y+knock*0.12);
-        }
+        var _rdamp=_airborne?Math.pow(0.99,dt*60):Math.pow(0.82,dt*60);
+        _diceVX*=_rdamp; _diceVY*=_rdamp; _diceVZ*=_rdamp;
+        _diceGroup.position.x+=_diceVPX*dt;
+        _diceGroup.position.z+=_diceVPZ*dt;
+        if(_diceGroup.position.x> _bndX){_diceGroup.position.x= _bndX;_diceVPX*=-0.9;}
+        if(_diceGroup.position.x<-_bndX){_diceGroup.position.x=-_bndX;_diceVPX*=-0.9;}
+        if(_diceGroup.position.z> _bndZ){_diceGroup.position.z= _bndZ;_diceVPZ*=-0.9;}
+        if(_diceGroup.position.z<-_bndZ){_diceGroup.position.z=-_bndZ;_diceVPZ*=-0.9;}
+        _diceVPX*=Math.pow(0.98,dt*60); _diceVPZ*=Math.pow(0.98,dt*60);
         if(_diceGroup2){
+          _diceVY_pos2-=_gravity*dt;
+          _diceGroup2.position.y+=_diceVY_pos2*dt;
+          if(_diceGroup2.position.y<=_ground){
+            _diceGroup2.position.y=_ground;
+            if(_diceVY_pos2<-1.5) _diceVY_pos2*=-0.52; else _diceVY_pos2=0;
+            _diceVX2*=0.68; _diceVZ2*=0.68;
+          }
+          var _airborne2=_diceGroup2.position.y>_ground+0.05;
           _diceGroup2.rotation.x+=_diceVX2*dt;
           _diceGroup2.rotation.y+=_diceVY2*dt;
           _diceGroup2.rotation.z+=_diceVZ2*dt;
-          var bounce2=Math.max(0,Math.sin(_diceTimer*Math.PI*3.2)*(1.0-_diceTimer*1.0));
-          _diceGroup2.position.y=Math.max(0,bounce2)-0.1;
-          var damp2=Math.pow(0.88,dt*60);
-          _diceVX2*=damp2; _diceVY2*=damp2; _diceVZ2*=damp2;
-          if(_diceTimer>0.2&&_diceTimer<0.6){
-            var knock2=Math.sin(_diceTimer*22)*Math.max(0,0.4-(_diceTimer-0.2));
-            _diceGroup2.position.y=Math.max(-0.1,_diceGroup2.position.y+knock2*0.12);
-          }
+          var _rdamp2=_airborne2?Math.pow(0.99,dt*60):Math.pow(0.82,dt*60);
+          _diceVX2*=_rdamp2; _diceVY2*=_rdamp2; _diceVZ2*=_rdamp2;
+          _diceGroup2.position.x+=_diceVPX2*dt;
+          _diceGroup2.position.z+=_diceVPZ2*dt;
+          if(_diceGroup2.position.x> _bndX){_diceGroup2.position.x= _bndX;_diceVPX2*=-0.9;}
+          if(_diceGroup2.position.x<-_bndX){_diceGroup2.position.x=-_bndX;_diceVPX2*=-0.9;}
+          if(_diceGroup2.position.z> _bndZ){_diceGroup2.position.z= _bndZ;_diceVPZ2*=-0.9;}
+          if(_diceGroup2.position.z<-_bndZ){_diceGroup2.position.z=-_bndZ;_diceVPZ2*=-0.9;}
+          _diceVPX2*=Math.pow(0.98,dt*60); _diceVPZ2*=Math.pow(0.98,dt*60);
         }
-        if(_diceTimer>0.65&&Math.abs(_diceVX)<0.5&&Math.abs(_diceVY)<0.5) _dicePhase='settling';
+        if(_diceTimer>0.8&&_diceGroup.position.y<=_ground+0.05&&Math.abs(_diceVX)<1.5&&Math.abs(_diceVY)<1.5) _dicePhase='settling';
       }
       if(_dicePhase==='settling'){
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        _diceVX*=0.72; _diceVY*=0.72; _diceVZ*=0.72;
-        _diceGroup.position.y+=(-0.1-_diceGroup.position.y)*0.38;
+        _diceVX*=Math.pow(0.72,dt*60); _diceVY*=Math.pow(0.72,dt*60); _diceVZ*=Math.pow(0.72,dt*60);
+        _diceGroup.position.y+=(_ground-_diceGroup.position.y)*0.3;
+        _diceGroup.position.x+=_diceVPX*dt;
+        _diceGroup.position.z+=_diceVPZ*dt;
+        _diceVPX*=Math.pow(0.75,dt*60); _diceVPZ*=Math.pow(0.75,dt*60);
+        _diceGroup.position.x+=(-_diceGroup.position.x)*0.04;
+        _diceGroup.position.z+=(-_diceGroup.position.z)*0.04;
         if(_diceGroup2){
           _diceGroup2.rotation.x+=_diceVX2*dt;
           _diceGroup2.rotation.y+=_diceVY2*dt;
           _diceGroup2.rotation.z+=_diceVZ2*dt;
-          _diceVX2*=0.72; _diceVY2*=0.72; _diceVZ2*=0.72;
-          _diceGroup2.position.y+=(-0.1-_diceGroup2.position.y)*0.38;
+          _diceVX2*=Math.pow(0.72,dt*60); _diceVY2*=Math.pow(0.72,dt*60); _diceVZ2*=Math.pow(0.72,dt*60);
+          _diceGroup2.position.y+=(_ground-_diceGroup2.position.y)*0.3;
+          _diceGroup2.position.x+=_diceVPX2*dt;
+          _diceGroup2.position.z+=_diceVPZ2*dt;
+          _diceVPX2*=Math.pow(0.75,dt*60); _diceVPZ2*=Math.pow(0.75,dt*60);
+          _diceGroup2.position.x+=(-1.2-_diceGroup2.position.x)*0.04;
+          _diceGroup2.position.z+=(-_diceGroup2.position.z)*0.04;
         }
         if(Math.abs(_diceVX)<0.06&&Math.abs(_diceVY)<0.06){
-          _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=-0.1;
-          if(_diceGroup2) _diceGroup2.position.y=-0.1;
+          _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=_ground;
+          if(_diceGroup2) _diceGroup2.position.y=_ground;
           _diceShowResult();
         }
       }
@@ -1932,18 +1970,32 @@ function rollDice(sides,count,colIdx,pi){
   var _col=getDieCol(_diceCI);
   setTimeout(function(){
     _diceUpdateSceneBg(_pi===1?(G.diceTexture2||'felt'):undefined);
+    // Save end position before rebuild resets it
+    var _prevX=_diceGroup?_diceGroup.position.x:null;
+    var _prevZ=_diceGroup?_diceGroup.position.z:null;
+    var _prevX2=_diceGroup2?_diceGroup2.position.x:null;
+    var _prevZ2=_diceGroup2?_diceGroup2.position.z:null;
     _diceBuildForSides(_sides,_col);
     // Kick physics
     _diceRolling=true; _dicePhase='rolling'; _diceTimer=0;
+  _diceVY_pos=(Math.random()*6+8); // throw upward
+  _diceVY_pos2=(Math.random()*6+8);
   _diceVX=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
   _diceVY=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
   _diceVZ=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
-  if(_diceGroup) _diceGroup.position.set(_diceCount>=2?-1.2:(Math.random()-0.5)*1.0,0.5,(Math.random()-0.5)*0.5);
+  _diceVPX=(Math.random()-0.5)*60+(Math.random()>0.5?20:-20);
+  _diceVPZ=(Math.random()-0.5)*50+(Math.random()>0.5?18:-18);
+  if(_diceGroup) _diceGroup.position.set(
+    _prevX!==null?_prevX:(_diceCount>=2?-1.2:(Math.random()*6-3)),
+    0.5,
+    _prevZ!==null?_prevZ:(Math.random()*4-2));
   if(_diceGroup2){
     _diceVX2=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
     _diceVY2=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
     _diceVZ2=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
-    _diceGroup2.position.set(1.2,0.5,(Math.random()-0.5)*0.5);
+    _diceVPX2=(Math.random()-0.5)*60+(Math.random()>0.5?20:-20);
+    _diceVPZ2=(Math.random()-0.5)*50+(Math.random()>0.5?18:-18);
+    _diceGroup2.position.set(_prevX2!==null?_prevX2:1.2,0.5,_prevZ2!==null?_prevZ2:(Math.random()*4-2));
   }
 
   },0); // end setTimeout — deferred for fast overlay open
