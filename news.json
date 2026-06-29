@@ -1,10 +1,17 @@
 {
-  "updated": "2026-06-29T15:54:45.153Z",
+  "updated": "2026-06-29T20:05:09.049Z",
   "articles": [
+    {
+      "title": "SCG CON Las Vegas: The Second Grand Contest of 2026",
+      "url": "https://sorcerytcg.com/news/scg-con-las-vegas-the-second-grand-contest-of-2026",
+      "date": "29 Jun 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/57d80b4c4057951b9561510a78579283882980a6-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Sorcery at Gen Con 2026: Meet Drew Tucker and Alan Pollack at Booth #3046",
       "url": "https://sorcerytcg.com/news/sorcery-at-gen-con-2026-meet-the-artists-at-booth-3046",
-      "date": "26 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/88003e74d649494ebc03c7c27a62761cc49e5f69-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Gen Con Event Registration Opens This Sunday",
-      "url": "https://sorcerytcg.com/news/gen-con-event-registration-opens-this-sunday",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/5979d46447cbdbd67792e96f92dab1acf4e6a62b-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
