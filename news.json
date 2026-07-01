@@ -1,10 +1,17 @@
 {
-  "updated": "2026-07-01T14:46:01.928Z",
+  "updated": "2026-07-01T20:07:41.903Z",
   "articles": [
+    {
+      "title": "Meet Alan Pollack at Gen Con 2026",
+      "url": "https://sorcerytcg.com/news/meet-alan-pollack-at-gen-con-2026",
+      "date": "01 Jul 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8aa831fe157d274f9cc5f4c017a040717fa5ff3e-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "SCG CON Las Vegas: The Second Grand Contest of 2026",
       "url": "https://sorcerytcg.com/news/scg-con-las-vegas-the-second-grand-contest-of-2026",
-      "date": "29 Jun 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/57d80b4c4057951b9561510a78579283882980a6-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/47ec9440d4d94f94312c04fb1edff3811f2897ea-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Avatar of the Realm 2026: The Realm Converges in Boston",
-      "url": "https://sorcerytcg.com/news/avatar-of-the-realm-2026-the-realm-converges-in-boston",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
