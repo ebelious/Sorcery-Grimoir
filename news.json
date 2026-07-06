@@ -1,10 +1,17 @@
 {
-  "updated": "2026-07-06T15:42:19.260Z",
+  "updated": "2026-07-06T20:04:02.480Z",
   "articles": [
+    {
+      "title": "SorceryFest 2026: The Third Grand Contest of the Year",
+      "url": "https://sorcerytcg.com/news/sorceryfest-2026-the-third-grand-contest-of-the-year",
+      "date": "06 Jul 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e2cc983a197dd1fff36464e306c331cd694471dc-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Meet Alan Pollack at Gen Con 2026",
       "url": "https://sorcerytcg.com/news/meet-alan-pollack-at-gen-con-2026",
-      "date": "01 Jul 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8aa831fe157d274f9cc5f4c017a040717fa5ff3e-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8c802a2049735c2b969f1fdf83641abe896b0931-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Frost Mage vs. Lavamancer: New Avatars Enter the Contested Realm",
-      "url": "https://sorcerytcg.com/news/frost-mage-vs-lavamancer-new-avatars-enter-the-contested-realm",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/47ec9440d4d94f94312c04fb1edff3811f2897ea-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
