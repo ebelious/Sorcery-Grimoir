@@ -2670,11 +2670,11 @@ function removeCardFromDeck(deckKey,cardName){
   _renderKeepScroll();
 }
 function _renderKeepScroll(){
-  var cm=document.querySelector('.cm');
+  var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
   render();
   requestAnimationFrame(function(){
-    var cm2=document.querySelector('.cm');
+    var cm2=document.querySelector('.cm')||document.querySelector('.panel');
     if(cm2)cm2.scrollTop=scrollTop;
   });
 }
@@ -3345,7 +3345,7 @@ function pContent(){
   if(p==='themes'){
     o('<div class="slbl2">Color Theme</div>');
     o('<div class="tgrid">');
-    THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');render()">'+t.l+'</button>');});
+    THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');_renderKeepScroll()">'+t.l+'</button>');});
     o('</div>');
     // ─── Highlight color picker ───
     o('<div class="slbl2" style="margin-top:18px">Highlight Color</div>');
@@ -3361,26 +3361,26 @@ function pContent(){
     _hiOptions.forEach(function(opt){
       var col=opt[0],name=opt[1];
       var active=_curHi.toLowerCase()===col.toLowerCase();
-      o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');render()">'+name+'</button>');
+      o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');_renderKeepScroll()">'+name+'</button>');
     });
     o('</div>');
-    o('<button class="fb" style="font-size:11px;padding:4px 10px" onclick="resetAllTheme();render()">Reset to Default</button>');
+    o('<button class="fb" style="font-size:11px;padding:4px 10px" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
     o('<div class="slbl2" style="margin-top:18px">Layout</div>');
     o('<div class="tgrid">');
-    [['standard','Full'],['circular','Circular'],['tap','Tap']].forEach(function(lv){var active=lv[0]===(G.cfg.layout||'standard');o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.layout=\''+lv[0]+'\';sv(\'sg-cfg\',G.cfg);render()">'+lv[1]+'</button>');});
+    [['standard','Full'],['circular','Circular'],['tap','Tap']].forEach(function(lv){var active=lv[0]===(G.cfg.layout||'standard');o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.layout=\''+lv[0]+'\';sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+lv[1]+'</button>');});
     o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
-    o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
     if(G.cfg.plainFont){
       var fonts=[['courier','Courier'],['roboto','Roboto'],['opendyslexic','OpenDyslexic']];
       o('<div class="tgrid" style="margin-top:4px">');
-      fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+f[1]+'</button>');});
+      fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
-    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');if(_pwaPrompt){
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
+    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
       o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
