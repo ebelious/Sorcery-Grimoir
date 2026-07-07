@@ -19,10 +19,31 @@ This is Sorcer Grimoir, a Contested Realm Companion application for the seekers 
 - Current news feed along with latest YouTube videos that talk about Sorcery
 - This app has a lot of simple 'click to use' features that are not noted in the app to expand images or enlarge text for easier reading that dont show an actual button.
 - Decorative Death's Door Icon in UI
+- Built-in timer for competetive games
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*
 
 **Working on getting this to a stable version where it is worthy of a release on Google Play Store**
+
+## Main Screen
+https://github.com/user-attachments/assets/505debcc-f4c3-4bad-affe-7e1783d51de2
+
+## Main Menu
+https://github.com/user-attachments/assets/6412dee5-be11-445f-a124-7e5f7ea7b0a9
+
+## Quick Search
+https://github.com/user-attachments/assets/0540cca5-f3b7-4a8b-8383-786640548801
+
+## Dice
+https://github.com/user-attachments/assets/6e885a70-acd4-4ffc-89e3-58feec26538b
+
+## Timer
+https://github.com/user-attachments/assets/e8e3c27c-57f2-4962-8a24-3280e675301d
+
+## Theme
+https://github.com/user-attachments/assets/90a9e90f-1e2d-4834-a445-6f155be8a961
+
+--- 
 
 ## Add the App to your phone (PWA).
 There are two ways to accomplish this:<br>
@@ -38,22 +59,4 @@ Im still thinking about how to make this persistent in app
 ## Stats
 Create a deck and select it by using the settings icon in the counter UI. When a player is at DD, -1 more health and the logging option pops to record the stats
 
-## Preview
-[View Screenshots](https://ebelious.github.io/Sorcery-Grimoir/gallery.html)
-
-<details open>
-<summary>Screenshots</summary>
-<table>
-  <tr>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145633_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145641_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145649_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145709_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145742_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145750_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145830_Brave.jpg" width="300"/></td>
-    <td><img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/Screenshots/Screenshot_20260422_145839_Brave.jpg" width="300"/></td>
-  </tr>
-</table>
-</details>
 
