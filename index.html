@@ -210,6 +210,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dice-strip{display:flex;gap:3px;flex:1;overflow-x:auto;scrollbar-width:none;align-items:center;justify-content:center}
 .dice-strip::-webkit-scrollbar{display:none}
 .die-btn{display:flex;flex-direction:column;align-items:center;padding:4px 6px;flex-shrink:0;border:2px solid var(--bd);background:var(--bg3);border-radius:50%;width:44px;height:44px;justify-content:center;box-sizing:border-box}
+.die-btn.lg{width:60px;height:60px}
+.die-btn.lg svg{transform:scale(1.35)}
+.die-btn.lg .die-lbl{font-size:8px}
 .die-btn:active{background:var(--bd)}
 .die-lbl{font-size:6px;color:var(--fg2)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
@@ -232,6 +235,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dice-result{font-size:44px;font-weight:700;margin:6px 0}
 .dice-brk{font-size:11px;color:var(--fg2)}
 .dice-btns{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.timer-inp::-webkit-outer-spin-button,.timer-inp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.timer-inp{-moz-appearance:textfield}
 .dbtn{padding:6px 14px;border:1px solid var(--bd);background:var(--bg3);font-size:11px}
 .dbtn.acc{border-color:var(--cyn);color:var(--cyn)}
 .dc-wrap{display:inline-block;vertical-align:middle}
@@ -674,6 +679,8 @@ var G={
   accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
+  p1TimerMinutes:5,p1TimerEnd:null,p1TimerRunning:false,p1TimerDone:false,p1TimerStoppedRemain:null,
+  p1TimerWarnMin:5,p1TimerCritMin:1,
 };
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
 
@@ -726,7 +733,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false,hideTimerIdle:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
@@ -735,6 +742,9 @@ function boot(){
   G.diceTableColor=ld('sg-table','#0d1117');
   G.diceTexture=ld('sg-dtex','felt');
   G.diceTexture2=ld('sg-dtex2','felt');
+  G.p1TimerMinutes=ld('sg-p1tm',5);
+  G.p1TimerWarnMin=ld('sg-p1tw',5);
+  G.p1TimerCritMin=ld('sg-p1tc',1);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   loadPubDecks();
   // Pre-warm texture cache for both players in idle time so first roll is instant
@@ -816,6 +826,7 @@ function endTurn(pi){
   var opp=G.players[pi===0?1:0];opp.phase='start';G.turnNum++;render();
 }
 function turnBtn(pi){
+  if(G.cfg&&G.cfg.hideTurnBar)return '';
   var p=G.players[pi];
   if(G.mode===1){
     if(p.phase==='start'||p.phase==='disabled')return '<button class="tb" style="width:100%" onclick="startTurn('+pi+')">&#9654; Start</button>';
@@ -2181,6 +2192,12 @@ function showP1Settings(anchorEl){
   html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:11px">Dice Color &amp; Surface</span></button>';
   html+='</div>';
 
+  // ── Section: Timer ──
+  html+='<div style="margin-top:12px;font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Timer</div>';
+  html+='<div style="display:flex;align-items:center;gap:8px">';
+  html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Set match timer"><span>⏱</span><span style="font-size:11px">Timer</span></button>';
+  html+='</div>';
+
   // ── Section: Player 2 ──
   var knownPlayers=Object.keys(G.records||{}).sort();
   var curP2=G.players[1]?G.players[1].name:(G.cfg.p2||'Player 2');
@@ -2210,7 +2227,7 @@ function showP1Settings(anchorEl){
   pop.style.top=Math.max(4,top)+'px';
 
   setTimeout(function(){
-    function onOut(e){if(!pop.contains(e.target)&&!document.getElementById('p1-dice-cpop')){pop.remove();document.removeEventListener('click',onOut,true);}}
+    function onOut(e){if(!pop.contains(e.target)&&!document.getElementById('p1-dice-cpop')&&!document.getElementById('timer-pop')){pop.remove();document.removeEventListener('click',onOut,true);}}
     document.addEventListener('click',onOut,true);
   },0);
 }
@@ -2220,6 +2237,168 @@ function _refreshP1Settings(){
   var anchor=document.querySelector('[onclick*="showP1Settings"]');
   if(pop && anchor){pop.remove();showP1Settings(anchor);}
   render();
+}
+
+function p1TimerSetMinutes(v){
+  var n=Math.max(1,Math.min(180,parseInt(v)||5));
+  G.p1TimerMinutes=n;sv('sg-p1tm',n);
+}
+function p1TimerAdjustMinutes(delta){
+  var n=Math.max(1,Math.min(180,(G.p1TimerMinutes||5)+delta));
+  G.p1TimerMinutes=n;sv('sg-p1tm',n);
+  var inp=document.getElementById('timer-min-input');
+  if(inp)inp.value=n;
+}
+function p1TimerStart(){
+  var startMs=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;
+  G.p1TimerEnd=Date.now()+startMs;
+  G.p1TimerRunning=true;G.p1TimerDone=false;G.p1TimerStoppedRemain=null;
+  _updateTimerDisplays();
+}
+function p1TimerStop(){
+  if(G.p1TimerRunning){
+    G.p1TimerStoppedRemain=Math.max(0,G.p1TimerEnd-Date.now());
+    G.p1TimerRunning=false;
+  }
+  _updateTimerDisplays();
+}
+function p1TimerSetWarnMin(v){
+  var n=Math.max(1,Math.min(179,parseInt(v)||5));
+  G.p1TimerWarnMin=n;sv('sg-p1tw',n);
+  _updateTimerDisplays();
+}
+function p1TimerAdjustWarnMin(delta){
+  var n=Math.max(1,Math.min(179,(G.p1TimerWarnMin||5)+delta));
+  G.p1TimerWarnMin=n;sv('sg-p1tw',n);
+  var inp=document.getElementById('timer-warn-input');
+  if(inp)inp.value=n;
+  _updateTimerDisplays();
+}
+function p1TimerSetCritMin(v){
+  var n=Math.max(0,Math.min(179,parseInt(v)||1));
+  G.p1TimerCritMin=n;sv('sg-p1tc',n);
+  _updateTimerDisplays();
+}
+function p1TimerAdjustCritMin(delta){
+  var n=Math.max(0,Math.min(179,(G.p1TimerCritMin||1)+delta));
+  G.p1TimerCritMin=n;sv('sg-p1tc',n);
+  var inp=document.getElementById('timer-crit-input');
+  if(inp)inp.value=n;
+  _updateTimerDisplays();
+}
+function toggleHideTimerIdle(){
+  G.cfg=G.cfg||{};
+  G.cfg.hideTimerIdle=!G.cfg.hideTimerIdle;
+  sv('sg-cfg',G.cfg);
+  var btn=document.getElementById('timer-hide-idle-btn');
+  if(btn){
+    btn.textContent='Hide Timer From Main Screen When Not In Use: '+(G.cfg.hideTimerIdle?'On':'Off');
+    btn.style.background=G.cfg.hideTimerIdle?'var(--bg3,#374151)':'transparent';
+    btn.style.color=G.cfg.hideTimerIdle?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)';
+  }
+  _updateTimerDisplays();
+}
+function p1TimerReset(){
+  G.p1TimerStoppedRemain=(G.p1TimerMinutes||5)*60000;
+  p1TimerStart();
+}
+function _timerRemStr(rem){
+  rem=Math.max(0,rem);
+  var mm=Math.floor(rem/60000),ss=Math.floor((rem%60000)/1000);
+  return (mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+}
+function _timerColor(rem){
+  var critMs=(G.p1TimerCritMin!=null?G.p1TimerCritMin:1)*60000;
+  var warnMs=(G.p1TimerWarnMin!=null?G.p1TimerWarnMin:5)*60000;
+  if(rem<=critMs)return 'var(--red,#ef4444)';
+  if(rem<=warnMs)return '#f97316';
+  return 'var(--hi,#22d3ee)';
+}
+function _timerFace(){
+  if(G.p1TimerRunning){var rem=G.p1TimerEnd-Date.now();return {txt:_timerRemStr(rem),col:_timerColor(rem)};}
+  if(G.cfg&&G.cfg.hideTimerIdle)return {txt:'',col:''};
+  if(G.p1TimerDone)return {txt:"Time's Up!",col:'var(--red,#ef4444)'};
+  if(G.p1TimerStoppedRemain!=null)return {txt:_timerRemStr(G.p1TimerStoppedRemain),col:_timerColor(G.p1TimerStoppedRemain)};
+  return {txt:'',col:''};
+}
+function timerFaceHTML(pi){
+  var tf=_timerFace();
+  var clickable=tf.txt?' onclick="showTimerPopup(this)"':'';
+  return '<div id="timer-turn-'+pi+'"'+clickable+' style="font-size:22px;font-weight:700;text-align:center;padding:2px 8px;flex-shrink:0'+(tf.col?';color:'+tf.col:'')+(clickable?';cursor:pointer':'')+'">'+tf.txt+'</div>';
+}
+function _updateTimerDisplays(){
+  var tf=_timerFace();
+  [0,1].forEach(function(pi){
+    var el=document.getElementById('timer-turn-'+pi);
+    if(el){
+      el.textContent=tf.txt;el.style.color=tf.col||'';
+      el.style.cursor=tf.txt?'pointer':'';
+      el.onclick=tf.txt?function(){showTimerPopup(this);}:null;
+    }
+  });
+}
+setInterval(function(){
+  if(G.p1TimerRunning){
+    var rem=G.p1TimerEnd-Date.now();
+    if(rem<=0){G.p1TimerRunning=false;G.p1TimerDone=true;}
+  }
+  _updateTimerDisplays();
+},250);
+
+// ── TIMER POPUP ───────────────────────────────────────────────────────────────
+function showTimerPopup(anchorEl){
+  var old=document.getElementById('timer-pop');
+  if(old){old.remove();return;}
+  var pop=document.createElement('div');
+  pop.id='timer-pop';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;';
+
+  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Duration (min)</div>';
+  html+='<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px">';
+  html+='<button onclick="p1TimerAdjustMinutes(-1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<input id="timer-min-input" class="timer-inp" type="number" min="1" max="180" value="'+G.p1TimerMinutes+'" onchange="p1TimerSetMinutes(this.value)" style="width:64px;height:48px;text-align:center;font-size:18px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px">';
+  html+='<button onclick="p1TimerAdjustMinutes(1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px;cursor:pointer">+</button>';
+  html+='</div>';
+
+  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Warning Threshold (min)</div>';
+  html+='<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px">';
+  html+='<button onclick="p1TimerAdjustWarnMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<input id="timer-warn-input" class="timer-inp" type="number" min="1" max="179" value="'+G.p1TimerWarnMin+'" onchange="p1TimerSetWarnMin(this.value)" style="width:56px;height:36px;text-align:center;font-size:15px;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px">';
+  html+='<button onclick="p1TimerAdjustWarnMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer">+</button>';
+  html+='</div>';
+
+  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Critical Threshold (min)</div>';
+  html+='<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px">';
+  html+='<button onclick="p1TimerAdjustCritMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<input id="timer-crit-input" class="timer-inp" type="number" min="0" max="179" value="'+G.p1TimerCritMin+'" onchange="p1TimerSetCritMin(this.value)" style="width:56px;height:36px;text-align:center;font-size:15px;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px">';
+  html+='<button onclick="p1TimerAdjustCritMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px;cursor:pointer">+</button>';
+  html+='</div>';
+
+  html+='<button onclick="p1TimerStart();document.getElementById(\'timer-pop\').remove()" style="width:100%;padding:14px;border:1px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:8px;cursor:pointer;font-size:15px;font-weight:700;margin-bottom:8px">Start Timer</button>';
+  html+='<div style="display:flex;gap:8px">';
+  html+='<button onclick="p1TimerStop();document.getElementById(\'timer-pop\').remove()" style="flex:1;padding:14px;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Stop</button>';
+  html+='<button onclick="p1TimerReset();document.getElementById(\'timer-pop\').remove()" style="flex:1;padding:14px;border:1px solid var(--bd,#374151);background:transparent;color:var(--fg2,#9ca3af);border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Reset</button>';
+  html+='</div>';
+
+  html+='<button id="timer-hide-idle-btn" onclick="toggleHideTimerIdle()" style="width:100%;padding:10px;margin-top:8px;border:1px solid var(--bd,#374151);background:'+(G.cfg&&G.cfg.hideTimerIdle?'var(--bg3,#374151)':'transparent')+';color:'+(G.cfg&&G.cfg.hideTimerIdle?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:8px;cursor:pointer;font-size:12px;font-weight:700">Hide Timer From Main Screen When Not In Use: '+(G.cfg&&G.cfg.hideTimerIdle?'On':'Off')+'</button>';
+
+  pop.innerHTML=html;
+  document.body.appendChild(pop);
+
+  var rect=anchorEl.getBoundingClientRect();
+  var pw=230, ph=440;
+  var left=rect.right-pw;
+  if(left<4) left=4;
+  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
+  var top=rect.bottom+4;
+  if(top+ph>window.innerHeight) top=rect.top-ph-4;
+  pop.style.left=left+'px';
+  pop.style.top=Math.max(4,top)+'px';
+
+  setTimeout(function(){
+    function onOut(e){if(!pop.contains(e.target)&&e.target!==anchorEl){pop.remove();document.removeEventListener('click',onOut,true);}}
+    document.addEventListener('click',onOut,true);
+  },0);
 }
 
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];render();}
@@ -3198,7 +3377,8 @@ function pContent(){
       fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');if(_pwaPrompt){
+    o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();render()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
+    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
       o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
@@ -4089,14 +4269,16 @@ function pCirc(p,pi){
   o('</div>'); // end orbit wrapper
 
   o('<div class="tap-dice-row" style="width:100%;flex-wrap:wrap;justify-content:center">');
+  var _dieLgCls=(G.cfg&&G.cfg.hideTurnBar)?' lg':'';
   visD.forEach(function(d){
-    o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
+    o('<button class="die-btn'+_dieLgCls+'" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
   o('</div>');
   o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;width:100%;box-sizing:border-box">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  o(timerFaceHTML(pi));
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -4152,16 +4334,18 @@ function pTap(p,pi){
 
   // Dice row
   o('<div class="tap-dice-row">');
+  var _dieLgCls=(G.cfg&&G.cfg.hideTurnBar)?' lg':'';
   visD.forEach(function(d){
-    o('<button class="die-btn" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
+    o('<button class="die-btn'+_dieLgCls+'" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+d.s+'</span></button>');
   });
 
   o('</div>');
 
   o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  o(timerFaceHTML(pi));
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
   o('</div>');
   return out.join('');
@@ -4231,7 +4415,8 @@ function pHTML(p,pi){
   var diceCol=pi===1?getDieCol(G.dieCI2):null;
   o('<div class="dice-strip" style="padding:2px 2px 1px">');
   var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  visD.forEach(function(d){o('<button class="die-btn" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
+  var _dieLgCls=(G.cfg&&G.cfg.hideTurnBar)?' lg':'';
+  visD.forEach(function(d){o('<button class="die-btn'+_dieLgCls+'" style="padding:10px 8px" onclick="rollDice('+d.s+','+d.c+','+_pCI+','+pi+')">'+smallDieSVG(d.s,d.c,diceCol)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
     +(d.c>1?d.c:'')+'d'+d.s+'</span></button>');});
 
   // menu button moved to turnBar
@@ -4240,8 +4425,9 @@ function pHTML(p,pi){
   // Row: Turn button + settings/dice button (side by side)
   o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:auto;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:auto;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
+  o(timerFaceHTML(pi));
+  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
+  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
 
   o('</div>'); // end zone
@@ -4257,6 +4443,9 @@ function turnBar(){
   var _ml=G.cfg&&G.cfg.menuLeft;
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<div class="tb-ghost"></div>';
+  if(G.cfg&&G.cfg.hideTurnBar){
+    return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+'<div class="tb-s" style="flex:1"></div>'+(_ml?'':_mbtn)+'</div>';
+  }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
   var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
@@ -4361,7 +4550,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Search cards, FAQ, codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
