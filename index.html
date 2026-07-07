@@ -599,6 +599,7 @@ var YT_CHS=[
   {id:'ofn',  n:'OldFashionedNerds',    url:'https://www.youtube.com/@oldfashionednerds/videos',   cid:'UCRZw6WkGb5O34JCUTPCFvDQ'},
   {id:'rt',   n:'Roaring Turkey',       url:'https://www.youtube.com/@roaringturkey/videos',       cid:'UCcS-iAfvSn1Dub-fpTCFASQ'},
   {id:'rcs',  n:'Rose City Sorcery',   url:'https://www.youtube.com/channel/UCimrNJ_NPy_eb2_Bao7Vpkg/videos', cid:'UCimrNJ_NPy_eb2_Bao7Vpkg'},
+  {id:'r0',   n:'Rule 0',              url:'https://www.youtube.com/channel/UChAaQFWTJbRYMGjiJJKg1TQ/videos', cid:'UChAaQFWTJbRYMGjiJJKg1TQ'},
   {id:'stcg', n:'Sorcery TCG',          url:'https://www.youtube.com/@sorcerytcg/videos',          cid:'UCqmv-SKT0_SO5FbP3vGZ_uQ'},
   {id:'aa',   n:'The Assorted Animals', url:'https://www.youtube.com/@theassortedanimals/videos',  cid:'UCaO-qqRZVlaGvF5AE0EmbNg'},
   {id:'wof',  n:'Wizards of Fun!',      url:'https://www.youtube.com/channel/UCFYl70hUINiNPPt-e30v79g/videos', cid:'UCFYl70hUINiNPPt-e30v79g'},
@@ -659,7 +660,7 @@ var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
   diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',
-  vdice:{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false},
+  vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
   cfg:{maxLife:20,p1:'Player 1',p2:'Player 2'},
   selCard:null,expImg:null,logPopup:null,
@@ -727,7 +728,7 @@ function boot(){
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
   G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false});
   G.matchLog=ld('sg-ml',[]);
-  G.vdice=ld('sg-vd',{4:true,6:true,8:false,10:false,12:false,20:true,'2d6':false});
+  G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false});
   G.dieCI=ld('sg-dc',0);
   G.dieCI2=ld('sg-dc2',4);
   G.diceFeltColor=ld('sg-felt','#14532d');
@@ -3152,13 +3153,8 @@ function pContent(){
     o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();render()"></div>');
     o('</div>');}
 
-    o('<div class="slbl2" style="margin-top:18px">P2 Options</div>');
-    o('<div class="set-row"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
-    o('<div class="slbl2" style="margin-top:12px">Which side is Player 2?</div>');
-    o('<div style="display:flex;gap:6px;margin-top:6px">');
-    o('<button class="tgb'+(G.cfg.p2Side!=='top'?' on':'')+'" onclick="G.cfg.p2Side=\'bottom\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p1||'Player 1')+' (bottom)</button>');
-    o('<button class="tgb'+(G.cfg.p2Side==='top'?' on':'')+'" onclick="G.cfg.p2Side=\'top\';sv(\'sg-cfg\',G.cfg);render()">'+h(G.cfg.p2||'Player 2')+' (top)</button>');
-    o('</div>');
+    o('<div class="slbl2" style="margin-top:18px;margin-bottom:0">P2 Options</div>');
+    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
@@ -3256,7 +3252,7 @@ function pContent(){
     });
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/faqs" target="_blank">Official FAQ on Curiosa &rarr;</a>');return out.join('');
   }
-  if(p==='links'){[{n:'Official Rulebook',u:'https://sorcerytcg.com/how-to-play',d:'How to play'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'SorceryTCG.gg',u:'https://sorcerytcg.gg',d:'Meta reports & prices'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:"Curio's",u:'https://www.collectorarthouse.com/curio-cards',d:'Collector art house'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'}].forEach(function(l){o('<a class="ext-lnk" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
+  if(p==='links'){[{n:'Official Rulebook',u:'https://sorcerytcg.com/how-to-play',d:'How to play'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Codex Changelog',u:'https://curiosa.io/codex/changelog',d:'Site updates & changes'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'SorceryTCG.gg',u:'https://sorcerytcg.gg',d:'Meta reports & prices'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:"Curio's",u:'https://www.collectorarthouse.com/curio-cards',d:'Collector art house'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
   if(p==='cards'){
     var q=S.cS||'';var fil=cFilter(CARDS,G.cF,q);
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
