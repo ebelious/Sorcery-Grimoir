@@ -1,6 +1,6 @@
 # Sorcery Grimoir
 This is Sorcer Grimoir, a Contested Realm Companion application for the seekers and masters of the realm. This app is a multi tool for anyone intersted in playing, understanding, and/or just interested in Sorcery Contested Realm.
-
+This app was designed for readability and minimal feel which can also be customized to your liking 
 
 ### [Sorcery Grimoir App](https://ebelious.github.io/Sorcery-Grimoir/)
 
@@ -25,22 +25,26 @@ This is Sorcer Grimoir, a Contested Realm Companion application for the seekers 
 
 **Working on getting this to a stable version where it is worthy of a release on Google Play Store**
 
-## Main Screen
+## Clips
+Here are some basic clips to show some of the functionality of the app. These can also be found on the YouTube Page [SCRCompanion](https://www.youtube.com/@SCRCompanion)
+
+
+#### Main Screen
 https://github.com/user-attachments/assets/505debcc-f4c3-4bad-affe-7e1783d51de2
 
-## Main Menu
+#### Main Menu
 https://github.com/user-attachments/assets/6412dee5-be11-445f-a124-7e5f7ea7b0a9
 
-## Quick Search
+#### Quick Search
 https://github.com/user-attachments/assets/0540cca5-f3b7-4a8b-8383-786640548801
 
-## Dice
+#### Dice
 https://github.com/user-attachments/assets/6e885a70-acd4-4ffc-89e3-58feec26538b
 
-## Timer
+#### Timer
 https://github.com/user-attachments/assets/e8e3c27c-57f2-4962-8a24-3280e675301d
 
-## Theme
+#### Theme
 https://github.com/user-attachments/assets/90a9e90f-1e2d-4834-a445-6f155be8a961
 
 --- 
