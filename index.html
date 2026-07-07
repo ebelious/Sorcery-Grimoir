@@ -749,12 +749,12 @@ function boot(){
   loadPubDecks();
   // Pre-warm texture cache for both players in idle time so first roll is instant
   setTimeout(function(){
-    _diceMakeTex(G.diceTexture||'felt', _diceEffectiveColor(G.diceTexture||'felt'), 256);
-    _diceMakeNormalMap(G.diceTexture||'felt', 256);
+    _diceMakeTex(G.diceTexture||'felt', _diceEffectiveColor(G.diceTexture||'felt'), 512);
+    _diceMakeNormalMap(G.diceTexture||'felt', 512);
     var t2=G.diceTexture2||'felt';
     if(t2!==(G.diceTexture||'felt')){
-      _diceMakeTex(t2, _diceEffectiveColor(t2), 256);
-      _diceMakeNormalMap(t2, 256);
+      _diceMakeTex(t2, _diceEffectiveColor(t2), 512);
+      _diceMakeNormalMap(t2, 512);
     }
   }, 800);
 }
@@ -1685,8 +1685,8 @@ function _diceUpdateSceneBg(texOverride){
   var ns=nrmScale[tex]||1.5;
   var rg=roughness[tex]||0.85;
   var mt=metalness[tex]||0;
-  var colorMap=_diceMakeTex(tex,fc,256);
-  var normalMap=_diceMakeNormalMap(tex,256);
+  var colorMap=_diceMakeTex(tex,fc,512);
+  var normalMap=_diceMakeNormalMap(tex,512);
   if(_diceFelt){
     var cm=new THREE.MeshBasicMaterial({map:colorMap});
     colorMap.wrapS=colorMap.wrapT=THREE.ClampToEdgeWrapping; colorMap.repeat.set(1,1);
@@ -1789,8 +1789,8 @@ function _diceInitOverlay(){
   // Table surfaces (textures applied via _diceUpdateSceneBg after init)
   // Felt plane sized to exactly fill the camera's view — no tiling, no border
   _diceTable=null;
-  var _initTex=_diceMakeTex(G.diceTexture||'felt',_diceEffectiveColor(G.diceTexture||'felt'),256);
-  var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',256);
+  var _initTex=_diceMakeTex(G.diceTexture||'felt',_diceEffectiveColor(G.diceTexture||'felt'),512);
+  var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',512);
   _initTex.wrapS=_initTex.wrapT=THREE.ClampToEdgeWrapping; _initTex.repeat.set(1,1);
   // Use window dimensions — canvas offsetWidth may be 0 before layout
   var _camDist=12; // camera Y=12, plane Y=0
