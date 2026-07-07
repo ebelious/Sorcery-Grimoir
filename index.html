@@ -2242,12 +2242,14 @@ function _refreshP1Settings(){
 function p1TimerSetMinutes(v){
   var n=Math.max(1,Math.min(180,parseInt(v)||5));
   G.p1TimerMinutes=n;sv('sg-p1tm',n);
+  if(!G.p1TimerRunning){G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();}
 }
 function p1TimerAdjustMinutes(delta){
   var n=Math.max(1,Math.min(180,(G.p1TimerMinutes||5)+delta));
   G.p1TimerMinutes=n;sv('sg-p1tm',n);
   var inp=document.getElementById('timer-min-input');
   if(inp)inp.value=n;
+  if(!G.p1TimerRunning){G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();}
 }
 function p1TimerStart(){
   var startMs=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;
