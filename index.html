@@ -664,7 +664,7 @@ var RULES=[{s:'Setup',c:'60+ card Spellbook, 30+ site Atlas, one Avatar. Draw 4.
 var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
-  diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',
+  diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
   cfg:{maxLife:20,p1:'Player 1',p2:'Player 2'},
@@ -742,6 +742,7 @@ function boot(){
   G.diceTableColor=ld('sg-table','#0d1117');
   G.diceTexture=ld('sg-dtex','felt');
   G.diceTexture2=ld('sg-dtex2','felt');
+  G.diceFastRoll=ld('sg-dfast',false);
   G.p1TimerMinutes=ld('sg-p1tm',5);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
@@ -907,6 +908,7 @@ var _diceRAF=null;
 var _diceRolling=false;
 var _dicePhase='idle';   // idle | rolling | settling
 var _diceTimer=0;
+var _diceRollStartWall=0; // wall-clock ms timestamp when physics kicked (for Quick Roll real-time cap)
 var _diceVX=0,_diceVY=0,_diceVZ=0;
 var _diceResult=null;
 var _diceSides=6;
@@ -1827,6 +1829,11 @@ function _diceInitOverlay(){
       var _bndX=_bndH*_bndAsp/2-_dieR, _bndZ=_bndH/2-_dieR;
       var _ground=0.65;
       var _gravity=28;
+      if(G.diceFastRoll&&(performance.now()-_diceRollStartWall)>=500){
+        _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=_ground;
+        if(_diceGroup2) _diceGroup2.position.y=_ground;
+        _diceShowResult();
+      } else {
       if(_dicePhase==='rolling'){
         // Gravity
         _diceVY_pos-=_gravity*dt;
@@ -1872,7 +1879,8 @@ function _diceInitOverlay(){
           if(_diceGroup2.position.z<-_bndZ){_diceGroup2.position.z=-_bndZ;_diceVPZ2*=-0.9;}
           _diceVPX2*=Math.pow(0.98,dt*60); _diceVPZ2*=Math.pow(0.98,dt*60);
         }
-        if(_diceTimer>0.8&&_diceGroup.position.y<=_ground+0.05&&Math.abs(_diceVX)<1.5&&Math.abs(_diceVY)<1.5) _dicePhase='settling';
+        var _rollThresh=G.diceFastRoll?0.1:0.8;
+        if(_diceTimer>_rollThresh&&_diceGroup.position.y<=_ground+0.05&&Math.abs(_diceVX)<1.5&&Math.abs(_diceVY)<1.5) _dicePhase='settling';
       }
       if(_dicePhase==='settling'){
         _diceGroup.rotation.x+=_diceVX*dt;
@@ -1902,6 +1910,7 @@ function _diceInitOverlay(){
           if(_diceGroup2) _diceGroup2.position.y=_ground;
           _diceShowResult();
         }
+      }
       }
     } else if(_diceGroup && !_diceRolling){
       _diceGroup.rotation.y+=0.006;
@@ -1954,6 +1963,7 @@ function _diceRollAgain(){
 
 function rollDice(sides,count,colIdx,pi){
   _diceInitOverlay();
+  _diceRollStartWall=performance.now(); // Quick Roll real-time cap starts from click, not just physics kick
 
   _diceSides=sides; _diceCount=count||1;
   _diceCI=(colIdx!=null?colIdx:G.dieCI);
@@ -3336,6 +3346,8 @@ function pContent(){
 
     o('<div class="slbl2" style="margin-top:18px;margin-bottom:0">P2 Options</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Show Player 2 dice theme on UI</span><button class="ftag'+((G.cfg.p2Flip!==false)?' on':'')+'" onclick="G.cfg.p2Flip=!G.cfg.p2Flip;sv(\'sg-cfg\',G.cfg);render()">'+(G.cfg.p2Flip!==false?'On':'Off')+'</button></div>');
+    o('<div class="slbl2" style="margin-top:18px;margin-bottom:0">Animation</div>');
+    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);render()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
