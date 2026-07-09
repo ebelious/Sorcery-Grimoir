@@ -26,7 +26,7 @@ This app was designed for readability and minimal feel which can also be customi
 **Working on getting this to a stable version where it is worthy of a release on Google Play Store**
 
 ## Clips
-Here are some basic clips to show some of the functionality of the app. These can also be found on the YouTube Page [SCRCompanion](https://www.youtube.com/@SCRCompanion)
+Here are some basic clips to show some of the functionality of the app. These can also be found on the YouTube Page [SCRCompanion](https://www.youtube.com/@SCRCompanion)<br>**Like and Subscribe!**
 
 
 #### Main Screen
