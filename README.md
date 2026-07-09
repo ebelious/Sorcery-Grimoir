@@ -5,21 +5,21 @@ This app was designed for readability and minimal feel which can also be customi
 ### [Sorcery Grimoir App](https://ebelious.github.io/Sorcery-Grimoir/)
 
 ## Features
-- Global Search for cards, card key words in the FAQ and Codex for quick answers while playing
-- UI for counters when playing the game with 1 player and 2 player views
-- UI extras such as Dice rolling, Turn counter, win/loss tracker
-- All Cards with attached FAQ and Codex keywords for easily understanding how each card is used
-- Expandeable text option for smaller text that may be difficult to read 
-- Direct card links to different trading markets to assess card value for easy lookup to make fair trades
-- All of the amazing artists have the links to see thier awesome work
-- Allows adding, importing and exporting collections to be added to keep track of all of your cards
+- Easily find any Cards, FAQ or Codex entries quickly with the Global Search
+- Simple and easy to read game counters both both 1 player and 2 player
+- Integrated dice rolling with standard D4, D6, D20 with also an option for custom number of sides (Harbinger with Double Dragon mat)
+- All Cards with attached FAQ and Codex, and Keywords for easily understanding how each card is used
+- Expandeable text for individuals with poor eyes 
+- Direct card links to TCGPlayer to assess card value to make fair trades or make purchasing faster
+- All of the amazing artists have the links to see thier awesome work in thier own menu and linked on every card
+- Allows adding, importing and exporting collections via csv filesto be added to keep track of all of your cards
 - Add, import, and export your decks, along with some build statistics on each of your decks
-- Settings to theme the app by color with a few different UI options, including dice color, table color in the dice roll animations
-- Links to sorcerytcg, curios, rulebook, and other media
-- Current news feed along with latest YouTube videos that talk about Sorcery
+- Theme the app by color with a few different UI options, including dice color, table style in the dice roll animations
+- Links to SorceryTCG, Curiosa, Sorcers Summit, Rulebook, and other media
+- Stay up to date with current news feed along with latest YouTube creators that are all about Sorcery
 - This app has a lot of simple 'click to use' features that are not noted in the app to expand images or enlarge text for easier reading that dont show an actual button.
-- Decorative Death's Door Icon in UI
 - Built-in timer for competetive games
+- Simple, easy to use interface
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*
 
