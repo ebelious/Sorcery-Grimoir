@@ -2111,7 +2111,9 @@ function showDiceColorPop1(anchorEl){
   setTimeout(function(){
     function onOut(e){
       var sp=document.getElementById('p1-settings-pop');
-      if(!pop.contains(e.target)&&!(sp&&sp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}
+      var anchorBtn=sp?sp.querySelector('[onclick*="showDiceColorPop1"]'):null;
+      var onAnchor=anchorBtn&&anchorBtn.contains(e.target);
+      if(!pop.contains(e.target)&&!onAnchor){pop.remove();document.removeEventListener('click',onOut,true);}
     }
     document.addEventListener('click',onOut,true);
   },0);
@@ -2143,8 +2145,15 @@ function showP1Settings(anchorEl){
   var p0=G.players[0];
   var curDeck=p0?p0.deck:null;
 
+  // ── Section: Layout Presets ──
+  var html='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Layout</div>';
+  html+='<div style="display:flex;gap:8px;margin-bottom:14px">';
+  html+='<button onclick="p1LayoutCompetitive()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:6px;cursor:pointer;font-size:13px;font-weight:700" title="Enable Turn Button">Competitive</button>';
+  html+='<button onclick="p1LayoutMinimal()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:6px;cursor:pointer;font-size:13px;font-weight:700" title="Hide Start Button, no dice">Minimal</button>';
+  html+='</div>';
+
   // ── Section: Deck ──
-  var html='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Deck</div>';
+  html+='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Deck</div>';
   html+='<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">';
   html+='<button style="text-align:left;padding:8px 10px;border:1px solid '+(curDeck===null?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(curDeck===null?'var(--bg3,#374151)':'transparent')+';color:'+(curDeck===null?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:4px;cursor:pointer;font-size:13px" onclick="setDeck(0,\'\');_refreshP1Settings()">No deck</button>';
   dkKeys.forEach(function(dk){
@@ -2205,6 +2214,18 @@ function showP1Settings(anchorEl){
   },0);
 }
 
+function p1LayoutCompetitive(){
+  G.cfg.hideTurnBar=false;
+  sv('sg-cfg',G.cfg);
+  _refreshP1Settings();
+}
+function p1LayoutMinimal(){
+  G.cfg.hideTurnBar=true;
+  sv('sg-cfg',G.cfg);
+  G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
+  sv('sg-vd',G.vdice);
+  _refreshP1Settings();
+}
 function _refreshP1Settings(){
   var pop=document.getElementById('p1-settings-pop');
   var anchor=document.querySelector('[onclick*="showP1Settings"]');
@@ -2309,7 +2330,7 @@ function _chessResetAllotment(){
 function closeTimeOutPopup(){G.pTimeOutPI=null;render();}
 function chessTimeHTML(pi){
   var ms=G.pTimeEnd[pi]!=null?(G.pTimeEnd[pi]-Date.now()):(G.pTimeRemain[pi]!=null?G.pTimeRemain[pi]:0);
-  return '<div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:140px;box-sizing:border-box;flex-shrink:0"><span style="font-size:14px;font-weight:700;color:var(--fg2,#9ca3af)">P-Time:</span><span id="chess-time-'+pi+'" style="font-size:26px;font-weight:700;color:var(--bbl,#68A8E4)">'+_timerRemStr(ms)+'</span></div>';
+  return '<div style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:140px;box-sizing:border-box;flex-shrink:0"><span style="font-size:14px;font-weight:700;color:var(--fg2,#9ca3af)">P-Time:</span><span id="chess-time-'+pi+'" style="font-size:26px;font-weight:700;color:'+_timerColor(ms,'var(--hi,#22d3ee)')+'">'+_timerRemStr(ms)+'</span></div>';
 }
 function _updateChessDisplays(){
   [0,1].forEach(function(pi){
@@ -2317,6 +2338,7 @@ function _updateChessDisplays(){
     if(el){
       var ms=G.pTimeEnd[pi]!=null?(G.pTimeEnd[pi]-Date.now()):(G.pTimeRemain[pi]!=null?G.pTimeRemain[pi]:0);
       el.textContent=_timerRemStr(ms);
+      el.style.color=_timerColor(ms,'var(--hi,#22d3ee)');
     }
   });
 }
@@ -2325,16 +2347,16 @@ function _timerRemStr(rem){
   var mm=Math.floor(rem/60000),ss=Math.floor((rem%60000)/1000);
   return (mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
 }
-function _timerColor(rem){
+function _timerColor(rem,defCol){
   var critMs=(G.p1TimerCritMin!=null?G.p1TimerCritMin:1)*60000;
   var warnMs=(G.p1TimerWarnMin!=null?G.p1TimerWarnMin:5)*60000;
   if(rem<=critMs)return 'var(--red,#ef4444)';
   if(rem<=warnMs)return '#f97316';
-  return 'var(--hi,#22d3ee)';
+  return defCol;
 }
 function _timerFace(){
-  if(G.p1TimerRunning){var rem=G.p1TimerEnd-Date.now();return {txt:_timerRemStr(rem),col:_timerColor(rem)};}
-  if(G.p1TimerPending){var pRem=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;return {txt:_timerRemStr(pRem),col:_timerColor(pRem)};}
+  if(G.p1TimerRunning){var rem=G.p1TimerEnd-Date.now();return {txt:_timerRemStr(rem),col:_timerColor(rem,'var(--fg,#e2e8f0)')};}
+  if(G.p1TimerPending){var pRem=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;return {txt:_timerRemStr(pRem),col:_timerColor(pRem,'var(--fg,#e2e8f0)')};}
   if(G.p1TimerDone)return {txt:"Time's Up!",col:'var(--red,#ef4444)'};
   return {txt:'',col:''};
 }
@@ -3401,8 +3423,8 @@ function loadPubStats(){
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
-function openPanel(id){G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();}
-function openCat(cat){G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
+function openPanel(id){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();}
+function openCat(cat){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;render();}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}}
 function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();}
 
@@ -4337,17 +4359,16 @@ function pTap(p,pi){
 
   var settingsBtnHTML='';
 
-  var p1BtnHTML='',_p1RowPad='',_p1InlineBtn='',p1Left=false;
+  var p1BtnHTML='',_p1RowPad='',p1Left=false;
   if(pi===0){
     p1Left=!!(G.cfg&&G.cfg.p1BtnLeft);
     p1BtnHTML='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:absolute;'+(p1Left?'left:6px':'right:6px')+';bottom:6px;width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:2" title="P1 Settings">⚙</button>';
     _p1RowPad=p1Left?';padding-left:52px':';padding-right:52px';
-    _p1InlineBtn='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:36px;margin-top:4px;align-self:'+(p1Left?'flex-start':'flex-end')+';border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>';
   }
 
   if(!_turnBarOn){
     o('<div class="tap-dice-row">'+diceBtnsHTML+'</div>');
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+_p1RowPad+'">');
+    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(pi===0?';min-height:56px':'')+_p1RowPad+'">');
     o('<div style="flex:1">'+turnBtn(pi)+'</div>');
     o(timerFaceHTML(pi));
     o(settingsBtnHTML);
@@ -4355,15 +4376,15 @@ function pTap(p,pi){
     o('</div>');
   } else {
     var diceLeft=!(G.cfg&&G.cfg.diceLeft===false);
-    var _sameSide=pi===0&&((diceLeft&&!p1Left)||(!diceLeft&&p1Left));
     var diceBlock='<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-content:center;max-width:44%;flex-shrink:0">'+diceBtnsHTML+'</div>';
-    var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">'+((G.p1TimerRunning||G.p1TimerPending)?chessTimeHTML(pi):'')+timerFaceHTML(pi)+(_sameSide?_p1InlineBtn:'')+'</div>';
+    var _chessOn=(G.p1TimerRunning||G.p1TimerPending);
+    var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="'+(_chessOn?'':'visibility:hidden')+'">'+chessTimeHTML(pi)+'</div>'+timerFaceHTML(pi)+'</div>';
     var timesBlock='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+timesStack+settingsBtnHTML+'</div>';
     var turnBlock='<div style="flex:1;display:flex;min-width:0">'+turnBtn(pi)+'</div>';
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;min-height:0;position:relative'+(_sameSide?'':_p1RowPad)+'">');
+    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;position:relative'+(pi===0?';min-height:56px':';min-height:0')+_p1RowPad+'">');
     if(diceLeft){o(diceBlock);o(turnBlock);o(timesBlock);}
     else{o(timesBlock);o(turnBlock);o(diceBlock);}
-    if(!_sameSide)o(p1BtnHTML);
+    o(p1BtnHTML);
     o('</div>');
   }
   o('</div>');
@@ -4506,7 +4527,7 @@ function render(){
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
-        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';o('<div class="cpop-it" onclick="'+onclick+'">' +item+'</div>');});
+        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';o('<div class="cpop-it" onclick="'+onclick+'">' +item+'</div>');});
         o('<button class="cpop-bk" onclick="goBack()">&larr; Back</button></div></div>');
       }
     }
