@@ -660,7 +660,7 @@ var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
   diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,
-  customDieSides:20,
+  customDieSides:2,
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
   cfg:{maxLife:20,p1:'Player 1',p2:'Player 2'},
@@ -737,7 +737,7 @@ function boot(){
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
-  G.customDieSides=ld('sg-cds',20);
+  G.customDieSides=ld('sg-cds',2);
   G.dieCI=ld('sg-dc',0);
   G.dieCI2=ld('sg-dc2',4);
   G.diceFeltColor=ld('sg-felt','#14532d');
@@ -2193,13 +2193,12 @@ function showP1Settings(anchorEl){
   var curP2=G.players[1]?G.players[1].name:(G.cfg.p2||'Player 2');
   if(knownPlayers.length){
     html+='<div style="margin-top:14px;font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Player 2</div>';
-    html+='<div style="display:flex;flex-direction:column;gap:5px">';
+    html+='<select style="width:100%;padding:8px 10px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:4px;font-size:13px" onchange="setName(1,this.value);_refreshP1Settings()">';
     knownPlayers.forEach(function(nm){
       var on=curP2===nm;
-      var safeNm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      html+='<button style="text-align:left;padding:8px 10px;border:1px solid '+(on?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'transparent')+';color:'+(on?'var(--hi,#22d3ee)':'var(--fg,#e2e8f0)')+';border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%" onclick="setName(1,\''+safeNm+'\');_refreshP1Settings()">'+h(nm)+'</button>';
+      html+='<option value="'+h(nm)+'"'+(on?' selected':'')+'>'+h(nm)+'</option>';
     });
-    html+='</div>';
+    html+='</select>';
   }
 
   pop.innerHTML=html;
@@ -4423,7 +4422,8 @@ function turnBar(){
     var html='';
     visD.forEach(function(d){
       var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
-      html+='<button class="die-btn" style="padding:2px 3px" onclick="rollDice('+sidesVal+','+d.c+','+G.dieCI+',0,'+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'</button>';
+      var lbl=isCustom?'C':((d.c>1?d.c:'')+'d'+sidesVal);
+      html+='<button class="die-btn" style="padding:2px 3px" onclick="rollDice('+sidesVal+','+d.c+','+G.dieCI+',0,'+isCustom+')"><span style="position:relative;display:inline-flex">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:7px;font-weight:700;color:var(--fg,#e2e8f0);pointer-events:none;line-height:1;white-space:nowrap">'+lbl+'</span></span></button>';
     });
     return html;
   }
