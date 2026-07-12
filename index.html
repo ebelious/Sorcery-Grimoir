@@ -202,6 +202,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .die-btn.lg .die-lbl{font-size:8px}
 .die-btn:active{background:var(--bd)}
 .die-lbl{font-size:6px;color:var(--fg2)}
+.die-btn-hdr svg{transform:scale(1.6)}
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:2px solid var(--hi);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:40px;color:var(--hi);font-size:18px;padding:4px 12px}
 .menu-left .tb-menu{border-left:none;border-right:2px solid var(--hi)}
@@ -1769,13 +1770,13 @@ function _diceInitOverlay(){
   var bar=document.createElement('div');
   bar.id='dice-3d-bar';
   bar.style.cssText='position:absolute;bottom:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;';
-  bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
+  bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:14px 34px;font-size:18px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // P2 Done button — top of screen, rotated 180° so P2 reads it correctly
   var bar2=document.createElement('div');
   bar2.id='dice-3d-bar2';
   bar2.style.cssText='position:absolute;top:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;transform:rotate(180deg);';
-  bar2.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:8px 22px;font-size:14px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
+  bar2.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:14px 34px;font-size:18px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // Result displays — one per player in their readable orientation
   // P1: bottom of screen, normal
@@ -4423,7 +4424,7 @@ function turnBar(){
     visD.forEach(function(d){
       var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
       var lbl=isCustom?'C':((d.c>1?d.c:'')+'d'+sidesVal);
-      html+='<button class="die-btn" style="padding:2px 3px" onclick="rollDice('+sidesVal+','+d.c+','+G.dieCI+',0,'+isCustom+')"><span style="position:relative;display:inline-flex">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:7px;font-weight:700;color:var(--fg,#e2e8f0);pointer-events:none;line-height:1;white-space:nowrap">'+lbl+'</span></span></button>';
+      html+='<button class="die-btn die-btn-hdr" style="padding:2px 3px" onclick="rollDice('+sidesVal+','+d.c+','+G.dieCI+',0,'+isCustom+')"><span style="position:relative;display:inline-flex">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;color:var(--fg,#e2e8f0);pointer-events:none;line-height:1;white-space:nowrap">'+lbl+'</span></span></button>';
     });
     return html;
   }
