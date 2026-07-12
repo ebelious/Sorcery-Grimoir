@@ -3470,6 +3470,11 @@ function pContent(){
     o('<button class="fb gold full" onclick="saveNames()">Save Name</button>');
     return out.join('');}
   if(p==='themes'){
+    o('<div class="slbl2">UI Layouts</div>');
+    o('<div style="display:flex;gap:8px;margin-bottom:14px">');
+    o('<button class="fb full" style="flex:1" onclick="p1LayoutCompetitive()">Competitive</button>');
+    o('<button class="fb full" style="flex:1" onclick="p1LayoutMinimal()">Minimal</button>');
+    o('</div>');
     o('<div class="slbl2">Dice</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span>&#8594;</span></button>');
     o('<div class="slbl2" style="margin-top:14px">Color Theme</div>');
