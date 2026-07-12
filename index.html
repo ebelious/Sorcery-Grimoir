@@ -153,7 +153,7 @@ body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2
 body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b;--hi:#d7c483}
 body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2:#908CAA;--fg3:#6E6A86;--red:#EB6F92;--grn:#31748F;--yel:#F6C177;--cyn:#9CCFD8;--wht:#FAEBD7;--bgrn:#31748F;--bbl:#C4A7E7;--life:#EB6F92;--mana:#C4A7E7;--hi:#F6C177}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
-.flip{transform:rotate(180deg);flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.flip{transform:rotate(180deg);flex:1 1 0;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px;width:100%;box-sizing:border-box}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:17px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
 .stats{display:flex;gap:4px}
@@ -205,7 +205,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .last-roll{font-size:12px;font-weight:700;padding:0 3px;color:var(--hi)}
 .menu-btn{padding:4px 10px;border:1px solid var(--bd);background:var(--bg3);font-size:12px}.tb-ghost{padding:4px 10px;border:1px solid transparent;visibility:hidden;font-size:12px;flex-shrink:0;pointer-events:none}.tb-menu{border-left:2px solid var(--hi);border-top:none;border-right:none;border-bottom:none;background:var(--bg2);flex-shrink:0;min-width:40px;color:var(--hi);font-size:18px;padding:4px 12px}
 .menu-left .tb-menu{border-left:none;border-right:2px solid var(--hi)}
-.zones{flex:1 1 auto;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
+.zones{flex:1 1 0;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}
 .ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;padding:14px}
 
 .dice-pop{background:var(--bg2);border:1px solid var(--bd);padding:16px 20px;text-align:center;width:100%;max-width:300px}
@@ -774,14 +774,29 @@ function resetHighlight(){
 }
 function resetAllTheme(){
   // Reset all theming to factory defaults
-  G.cfg.hiOverride=false;
   G.cfg.roundedCorners=true;
+  G.cfg.noBorders=false;
   G.cfg.plainFont=false;
+  G.cfg.vibrate=true;
   G.cfg.menuLeft=false;
+  G.cfg.diceLeft=true;
+  G.cfg.p1BtnLeft=false;
+  G.cfg.hideTurnBar=false;
   G.cfg.layout='tap';
   sv('sg-cfg',G.cfg);
-  applyTheme(''); // default theme, also resets --hi
+  applyTheme(''); // default Sorcery theme
+  applyHighlight('#68A8E4'); // Blue highlight
   _applyBodyClass();
+
+  // Dice Settings defaults
+  G.vdice={4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false};
+  sv('sg-vd',G.vdice);
+  G.dieCI=3; sv('sg-dc',3); // P1 Die Color: Blue
+  G.dieCI2=0; sv('sg-dc2',0); // P2 Die Color: Yellow
+  G.diceTexture='felt'; sv('sg-dtex','felt');
+  G.diceTexture2='felt'; sv('sg-dtex2','felt');
+  G.diceFeltColor='#14532d'; sv('sg-felt','#14532d');
+  G.diceFastRoll=false; sv('sg-dfast',false);
 }
 var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#DBBC7F','tl':'#D4820A','tm':'#EBC06D','ti':'#d7c483','tr':'#F6C177'};
 function _applyBodyClass(){
