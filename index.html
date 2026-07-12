@@ -140,7 +140,7 @@ body.rounded .rd-close{border-radius:6px}
 .tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;min-height:120px;border-right:1px solid var(--bd);overflow:hidden}
 .tap-el:last-child{border-right:none}
 .tap-el-val{font-size:40px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
-.tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:6px;padding:8px;border-bottom:1px solid var(--bd);flex-shrink:0}
+.tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:6px;padding:8px;flex-shrink:0}
 /* ── MINIMAL LAYOUT ── */
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
@@ -421,7 +421,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 @keyframes sp{to{transform:rotate(360deg)}}
 .spin{animation:sp .8s linear infinite;display:inline-flex;align-items:center;justify-content:center;transform-origin:center center;vertical-align:middle}.spin img,.spin svg{display:block;transform-origin:center center}
 .ld{font-size:10px;color:var(--fg2);padding:12px;text-align:center}
-.tb.dis{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.45}
+.tb.dis{border:none;color:var(--fg3);pointer-events:none;opacity:.45}
 /* Site cards display horizontally (landscape) */
 
 
@@ -465,7 +465,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 
 /* Turn buttons larger */
 .tb.end{border-color:var(--red)!important;color:var(--red)!important}
-.tb.dis{border-color:var(--fg3)!important;color:var(--fg3)!important;opacity:.45;pointer-events:none}
+.tb.dis{border:none!important;color:var(--fg3)!important;opacity:.45;pointer-events:none}
 .tb.done{border-color:var(--fg3)!important;color:var(--fg3)!important;opacity:.6}
 
 /* Threshold row centered */
@@ -516,7 +516,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 /* Turn button */
 .tb{width:100%;padding:10px;font-size:14px;font-weight:700;border:2px solid var(--cyn);color:var(--cyn);background:transparent;cursor:pointer;font-family:'Courier New',monospace;border-radius:0}
 .tb.end{border-color:var(--red);color:var(--red)}
-.tb.dis{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.4}
+.tb.dis{border:none;color:var(--fg3);pointer-events:none;opacity:.4}
 .tb:active{opacity:.7}
 /* Bigger adj buttons for main zone */
 .adj{width:40px;height:40px;border:1px solid var(--bd);background:var(--bg);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:0}
@@ -2066,80 +2066,6 @@ function closeDice(){
 }
 
 // ── P2 DICE COLOR + TEXTURE PICKER POPUP ─────────────────────────────────────
-function showDiceColorPop2(anchorEl){
-  var old=document.getElementById('p2-dice-cpop');
-  if(old){old.remove();return;}
-  var pop=document.createElement('div');
-  pop.id='p2-dice-cpop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:10px;box-shadow:0 4px 24px rgba(0,0,0,0.5);min-width:230px;';
-
-  // ── Color section (die face/pip color — always shown) ──
-  var _p2TexObj2=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
-  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Opponent Dice Color</div>';
-  html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
-  DIE_COLS.forEach(function(col,i){
-    var on=(G.dieCI2%DIE_COLS.length)===i;
-    var swatchCol=getDieCol(i);
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'#fff':'transparent')+';box-sizing:border-box" onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');_refreshP2Popup()"></div>';
-  });
-  html+='</div>';
-
-  // ── Texture section ──
-  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Opponent Surface</div>';
-  html+='<div style="display:flex;flex-wrap:wrap;gap:4px">';
-  DICE_TEXTURES.forEach(function(t){
-    var on=(G.diceTexture2||'felt')===t.id;
-    html+='<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:50px;padding:4px 2px;border:2px solid '+(on?'var(--wht,#fff)':'var(--bd,#374151)')+';border-radius:6px;background:'+(on?'var(--bg3,#374151)':'var(--bg2,#1f2937)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht,#fff)':'var(--fg2,#9ca3af)')+'" onclick="G.diceTexture2=\''+t.id+'\';sv(\'sg-dtex2\',\''+t.id+'\');_refreshP2Popup()"><span style="font-size:15px;line-height:1">'+t.icon+'</span>'+t.label+'</button>';
-  });
-  html+='</div>';
-
-  // Detect if anchor is inside a .flip (P2) panel -- rotate popup to face P2
-  var isFlipped=false;
-  var _el=anchorEl;
-  while(_el && _el!==document.body){
-    if(_el.classList && _el.classList.contains('flip')){isFlipped=true;break;}
-    _el=_el.parentElement;
-  }
-
-  pop.innerHTML=html;
-  if(isFlipped) pop.style.transform='rotate(180deg)';
-  document.body.appendChild(pop);
-
-  // Position near anchor; flipped P2 popup opens upward (toward P2's face)
-  var rect=anchorEl.getBoundingClientRect();
-  var pw=250, ph=240;
-  var left=rect.right-pw;
-  if(left<4) left=4;
-  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
-  var top;
-  if(isFlipped){
-    top=rect.top-ph-4;
-    if(top<4) top=rect.bottom+4;
-  } else {
-    top=rect.bottom+4;
-    if(top+ph>window.innerHeight) top=rect.top-ph-4;
-  }
-  pop.style.left=left+'px';
-  pop.style.top=Math.max(4,top)+'px';
-
-  // Close on outside click
-  setTimeout(function(){
-    function onOut(e){if(!pop.contains(e.target)){pop.remove();document.removeEventListener('click',onOut,true);}}
-    document.addEventListener('click',onOut,true);
-  },0);
-}
-
-// Refresh the popup in-place (re-render highlighting without closing)
-function _refreshP2Popup(){
-  var pop=document.getElementById('p2-dice-cpop');
-  var anchor=document.querySelector('[onclick*="showDiceColorPop2"]');
-  if(pop && anchor){
-    pop.remove();
-    showDiceColorPop2(anchor);
-  }
-  render();
-}
-
 // ── P1 DICE COLOR + TEXTURE PICKER POPUP ─────────────────────────────────────
 function showDiceColorPop1(anchorEl){
   var old=document.getElementById('p1-dice-cpop');
@@ -3489,14 +3415,9 @@ function pContent(){
   if(p==='dice'){o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+lbl+'</button>');});
     o('</div><div class="slbl2" style="margin-top:10px">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" style="width:80px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--wht);font-size:14px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;render()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
-    var _p2TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture2||'felt');})||{};
     o('<div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">P2 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var on2=(G.dieCI2%DIE_COLS.length)===i;var swatchCol2=getDieCol(i);o('<div class="dcb'+(on2?' on':'')+'" style="background:'+swatchCol2+';border-color:'+(on2?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI2='+i+';sv(\'sg-dc2\','+i+');render()"></div>');});o('</div>');
     o('<div class="slbl2" style="margin-top:18px">P1 Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
-    o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">P2 Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    DICE_TEXTURES.forEach(function(t){var on2=(G.diceTexture2||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on2?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on2?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on2?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture2=\''+t.id+'\';sv(\'sg-dtex2\',\''+t.id+'\');render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
     if(!_p1TexObj.fixedColor){o('<div class="slbl2" style="margin-top:18px">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
     ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();render()"></div>');});
@@ -4460,12 +4381,12 @@ function turnBar(){
   var _ghost='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
   if(G.cfg&&G.cfg.hideTurnBar){
     var _p0sH='<div class="tb-s"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0?h(p0.name):'')+'</span></div>';
-    var _p1sH=p1?'<div class="tb-s"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
+    var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
     return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_mbtn)+'</div>';
   }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
-  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
+  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
   return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_mbtn)+'</div>';
 }
 
