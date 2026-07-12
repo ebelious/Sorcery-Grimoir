@@ -2236,8 +2236,10 @@ function p1LayoutCompetitive(){
 function p1LayoutMinimal(){
   G.cfg.hideTurnBar=true;
   sv('sg-cfg',G.cfg);
-  G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
-  sv('sg-vd',G.vdice);
+  if(!(G.cfg&&G.cfg.diceInHeader)){
+    G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
+    sv('sg-vd',G.vdice);
+  }
   _refreshP1Settings();
 }
 function _refreshP1Settings(){
