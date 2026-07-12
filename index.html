@@ -2220,6 +2220,7 @@ function showP1Settings(anchorEl){
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
   html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:12px">Dice Color &amp; Surface</span></button>';
+  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
   html+='</div>';
 
   // ── Section: Timer ──
@@ -4400,11 +4401,12 @@ function pTap(p,pi){
 
   var settingsBtnHTML='';
 
-  var p1BtnHTML='',_p1RowPad='';
+  var p1BtnHTML='',_p1RowPad='',_p1InlineBtn='',p1Left=false;
   if(pi===0){
-    var p1Left=!!(G.cfg&&G.cfg.p1BtnLeft);
+    p1Left=!!(G.cfg&&G.cfg.p1BtnLeft);
     p1BtnHTML='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:absolute;'+(p1Left?'left:6px':'right:6px')+';bottom:6px;width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:2" title="P1 Settings">⚙</button>';
     _p1RowPad=p1Left?';padding-left:52px':';padding-right:52px';
+    _p1InlineBtn='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:36px;margin-top:4px;align-self:'+(p1Left?'flex-start':'flex-end')+';border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>';
   }
 
   if(!_turnBarOn){
@@ -4417,14 +4419,15 @@ function pTap(p,pi){
     o('</div>');
   } else {
     var diceLeft=!(G.cfg&&G.cfg.diceLeft===false);
+    var _sameSide=pi===0&&((diceLeft&&!p1Left)||(!diceLeft&&p1Left));
     var diceBlock='<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-content:center;max-width:44%;flex-shrink:0">'+diceBtnsHTML+'</div>';
-    var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">'+((G.p1TimerRunning||G.p1TimerPending)?chessTimeHTML(pi):'')+timerFaceHTML(pi)+'</div>';
+    var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">'+((G.p1TimerRunning||G.p1TimerPending)?chessTimeHTML(pi):'')+timerFaceHTML(pi)+(_sameSide?_p1InlineBtn:'')+'</div>';
     var timesBlock='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+timesStack+settingsBtnHTML+'</div>';
     var turnBlock='<div style="flex:1;display:flex;min-width:0">'+turnBtn(pi)+'</div>';
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;min-height:0;position:relative'+_p1RowPad+'">');
+    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;min-height:0;position:relative'+(_sameSide?'':_p1RowPad)+'">');
     if(diceLeft){o(diceBlock);o(turnBlock);o(timesBlock);}
     else{o(timesBlock);o(turnBlock);o(diceBlock);}
-    o(p1BtnHTML);
+    if(!_sameSide)o(p1BtnHTML);
     o('</div>');
   }
   o('</div>');
@@ -4523,23 +4526,23 @@ function render(){
     if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
       var _wDk=w.deck&&G.decks[w.deck]?G.decks[w.deck].name:(w.deck||'');
       var _loDk=lo.deck&&G.decks[lo.deck]?G.decks[lo.deck].name:(lo.deck||'');
-      o('<div class="ov" onclick="if(event.target===this)cancelLog()"><div class="log-pop" style="max-width:320px;padding:18px"><div class="lp-t" style="font-size:14px;margin-bottom:10px">Log Result</div><div class="lp-b" style="font-size:12px">');
-      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">');
-      o('<span style="color:var(--grn);font-weight:700;font-size:19px">'+h(w.name)+'</span>');
-      o('<span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">WINNER</span>');
+      o('<div class="ov" onclick="if(event.target===this)cancelLog()"><div class="log-pop" style="max-width:340px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Log Result</div><div class="lp-b" style="font-size:14px">');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">');
+      o('<span style="color:var(--grn);font-weight:700;font-size:22px">'+h(w.name)+'</span>');
+      o('<span style="font-size:11px;color:var(--fg3);background:var(--bg);padding:4px 8px;border:1px solid var(--bd)">WINNER</span>');
       o('</div>');
-      if(_wDk)o('<div style="color:var(--cyn);font-size:13px;margin-bottom:10px;padding:4px 7px;background:var(--bg);border-left:2px solid var(--cyn)">&#9660; '+h(_wDk)+'</div>');
-      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">');
-      o('<span style="color:var(--red);font-weight:700;font-size:19px">'+h(lo.name)+'</span>');
-      o('<span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">LOSER</span>');
+      if(_wDk)o('<div style="color:var(--cyn);font-size:15px;margin-bottom:11px;padding:5px 8px;background:var(--bg);border-left:2px solid var(--cyn)">&#9660; '+h(_wDk)+'</div>');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">');
+      o('<span style="color:var(--red);font-weight:700;font-size:22px">'+h(lo.name)+'</span>');
+      o('<span style="font-size:11px;color:var(--fg3);background:var(--bg);padding:4px 8px;border:1px solid var(--bd)">LOSER</span>');
       o('</div>');
-      if(_loDk)o('<div style="color:var(--red);font-size:13px;opacity:.75;margin-bottom:10px;padding:4px 7px;background:var(--bg);border-left:2px solid var(--red)">&#9660; '+h(_loDk)+'</div>');
-      o('<div style="display:flex;gap:8px;justify-content:center;margin-top:8px;font-size:11px;color:var(--fg2)">');
-      o('<span style="background:var(--bg);padding:4px 10px;border:1px solid var(--bd)">&#8635; Turn '+G.turnNum+'</span>');
-      if(G.matchStartTime){var _elapsedMin=Math.round((Date.now()-G.matchStartTime)/60000);o('<span style="background:var(--bg);padding:4px 10px;border:1px solid var(--bd)">&#9200; '+_elapsedMin+'m</span>');}
+      if(_loDk)o('<div style="color:var(--red);font-size:15px;opacity:.75;margin-bottom:11px;padding:5px 8px;background:var(--bg);border-left:2px solid var(--red)">&#9660; '+h(_loDk)+'</div>');
+      o('<div style="display:flex;gap:8px;justify-content:center;margin-top:9px;font-size:13px;color:var(--fg2)">');
+      o('<span style="background:var(--bg);padding:5px 11px;border:1px solid var(--bd)">Turn: '+G.turnNum+'</span>');
+      if(G.matchStartTime){var _elapsedMin=Math.round((Date.now()-G.matchStartTime)/60000);o('<span style="background:var(--bg);padding:5px 11px;border:1px solid var(--bd)">Time: '+_elapsedMin+'m</span>');}
       o('</div>');
-      o('<div style="font-size:10px;color:var(--fg3);text-align:center;margin-top:9px;border-top:1px solid var(--bd);padding-top:7px">&#10003; Saves to Local Stats &amp; Deck Stats</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:11px;font-size:14px" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" style="padding:11px;font-size:14px" onclick="confirmLog()">Confirm</button></div></div></div>');
+      o('<div style="font-size:11px;color:var(--fg3);text-align:center;margin-top:10px;border-top:1px solid var(--bd);padding-top:8px">&#10003; Saves to Local Stats &amp; Deck Stats</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="confirmLog()">Confirm</button></div></div></div>');
     }}
 
     if(G.pTimeOutPI!=null){
