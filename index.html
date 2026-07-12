@@ -104,7 +104,7 @@ body.rounded .qbtn,body.rounded .sx,body.rounded .cpop-bk,body.rounded .p-bk{bor
 /* Rounded corners: card details */
 body.rounded .cm-tag,body.rounded .cm-rt,body.rounded .price-box,body.rounded .qty-row,body.rounded .acc-row{border-radius:6px}
 /* Rounded corners: remaining bordered elements */
-body.rounded .p-tap,body.rounded .p-circ,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
+body.rounded .p-tap,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
 body.rounded .dice-pop,body.rounded .log-pop,body.rounded .dbtn,body.rounded .lp-btn,body.rounded .sdd{border-radius:8px}
 body.rounded .dk-c,body.rounded .dk-tag,body.rounded .art-c,body.rounded .sc,body.rounded .own-b{border-radius:6px}
 body.rounded .p1-settings-btn,body.rounded .p2-dice-theme-btn{border-radius:8px}
@@ -113,8 +113,8 @@ body.rounded .rd-modal{border-radius:10px}
 body.rounded .rd-close{border-radius:6px}
 /* ── CIRCULAR LAYOUT ── */
 .mini-el:last-child{border-right:none}
-.p-tap{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0;user-select:none;width:100%;box-sizing:border-box}
-.tap-name{font-size:20px;font-weight:700;color:var(--fg);text-align:center;padding:5px;border-bottom:1px solid var(--bd)}
+.p-tap{display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--bd);margin:1px;gap:0;user-select:none;width:100%;height:100%;box-sizing:border-box}
+.tap-name{font-size:20px;font-weight:700;color:var(--fg);text-align:center;padding:5px;border-bottom:1px solid var(--bd);flex-shrink:0}
 
 
 .tap-tile:last-child{border-right:none}
@@ -127,7 +127,7 @@ body.rounded .rd-close{border-radius:6px}
 .tap-el:last-child{border-right:none}
 
 
-.tap-row{display:flex;flex-direction:row;border-bottom:1px solid var(--bd)}
+.tap-row{display:flex;flex-direction:row;border-bottom:1px solid var(--bd);flex-shrink:0}
 .tap-tile{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;border-right:1px solid var(--bd);overflow:hidden}
 .tap-tile:last-child{border-right:none}
 .tap-lbl{font-size:11px;font-weight:700;color:var(--fg2);margin-bottom:2px;pointer-events:none;z-index:1}
@@ -136,24 +136,11 @@ body.rounded .rd-close{border-radius:6px}
 .tap-btn-top:active{background:rgba(255,255,255,0.18)}
 .tap-btn-bot{position:absolute;bottom:0;left:0;width:100%;height:50%;background:transparent;border:none;cursor:pointer;z-index:2;-webkit-tap-highlight-color:transparent;transition:background .08s}
 .tap-btn-bot:active{background:rgba(0,0,0,0.18)}
-.tap-el-row{display:flex;border-bottom:1px solid var(--bd)}
+.tap-el-row{display:flex;border-bottom:1px solid var(--bd);flex-shrink:0}
 .tap-el{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;min-height:120px;border-right:1px solid var(--bd);overflow:hidden}
 .tap-el:last-child{border-right:none}
 .tap-el-val{font-size:40px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
-.tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:8px;border-bottom:1px solid var(--bd)}
-.p-circ{display:flex;flex-direction:column;align-items:center;padding:4px;gap:4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;width:100%;box-sizing:border-box;overflow:hidden}
-.circ-orbit{position:relative;width:440px;height:340px;flex-shrink:0;margin:0 auto;transform-origin:top center;transform:scale(var(--co-scale,1))}
-.circ-ring{position:absolute;border-radius:50%;border:4px solid;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
-.circ-main{width:110px;height:110px;top:50%;transform:translateY(-50%);margin:0}
-.circ-life-pos{left:100px}
-.circ-mana-pos{right:100px}
-.circ-el-ring{width:82px;height:82px;position:absolute}
-.circ-life{font-size:46px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
-.circ-mana-val{font-size:46px;font-weight:700;line-height:1;z-index:1;pointer-events:none;color:var(--mana)}
-.circ-lbl{font-size:10px;font-weight:700;z-index:1;pointer-events:none;margin-bottom:1px}
-.circ-name{font-size:12px;color:var(--fg2);text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.circ-el-val{font-size:26px;font-weight:700;line-height:1;z-index:1;pointer-events:none;margin-top:2px}
-.circ-adjs{display:none}
+.tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:6px;padding:8px;border-bottom:1px solid var(--bd);flex:1;min-height:0;overflow-y:auto}
 /* ── MINIMAL LAYOUT ── */
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
@@ -513,7 +500,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .no-borders .thresh-row{border-top:none}
 .no-borders .tap-row,.no-borders .tap-el-row,.no-borders .tap-name{border-bottom:none}
 .no-borders .tap-tile,.no-borders .tap-el{border-right:none}
-.no-borders .zone,.no-borders .p-tap,.no-borders .p-circ{border:none}
+.no-borders .zone,.no-borders .p-tap{border:none}
 .no-borders #tbar{border-top:none;border-bottom:none}
 .no-borders .tb-n,.no-borders .tb-s{border:none}
 .no-borders #tbar .tb-n,.no-borders #tbar .tb-s{border:none}
@@ -587,7 +574,7 @@ var MENU_S={
   Settings:['Starting Life','Dice Settings','Player Names','Theme'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
-  Stats:['Local Stats','Deck Stats','Meta'],
+  Stats:['Local Stats','Deck Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
@@ -680,14 +667,18 @@ var G={
   accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
-  p1TimerMinutes:5,p1TimerEnd:null,p1TimerRunning:false,p1TimerDone:false,p1TimerStoppedRemain:null,
+  p1TimerMinutes:5,p1TimerEnd:null,p1TimerRunning:false,p1TimerDone:false,p1TimerStoppedRemain:null,p1TimerPending:false,
+  p1TimerWarnFired:false,p1TimerCritFired:false,
   p1TimerWarnMin:5,p1TimerCritMin:1,
+  p1ChessMode:false,pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
+  timerLog:[],
 };
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
 
 // ── STORAGE ──────────────────────────────────────────────────────────────────
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function ld(k,d){try{var r=localStorage.getItem(k);return r!==null?JSON.parse(r):d;}catch(e){return d;}}
+function vibrate(pattern){try{if(G.cfg&&G.cfg.vibrate===false)return;if(navigator.vibrate)navigator.vibrate(pattern);}catch(e){}}
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
 var _wakeLock=null;
@@ -734,7 +725,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false,hideTimerIdle:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,p2Flip:true,plainFont:false,hideTimerIdle:true,vibrate:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -749,6 +740,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',5);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
+  G.p1ChessMode=ld('sg-p1chess',false);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
   loadPubDecks();
   // Pre-warm texture cache for both players in idle time so first roll is instant
@@ -815,9 +807,17 @@ function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode
 function startTurn(pi){
   var p=G.players[pi];if(p.phase!=='start')return;
   if(G.turnNum===1&&!G.matchStartTime)G.matchStartTime=Date.now();
+  if(G.p1TimerPending){
+    G.p1TimerPending=false;
+    var startMs=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;
+    G.p1TimerEnd=Date.now()+startMs;
+    G.p1TimerRunning=true;G.p1TimerDone=false;G.p1TimerStoppedRemain=null;
+  }
   p.phase='active';p.manaUsed=0;G.activePI=pi;
   if(G.mode>=2){var opp=G.players[pi===0?1:0];opp.phase='disabled';}
+  if(G.p1ChessMode&&G.p1TimerRunning&&G.pTimeRemain[pi]!=null){G.pTimeEnd[pi]=Date.now()+G.pTimeRemain[pi];}
   G.turnLog.unshift('T'+G.turnNum+': '+p.name+' started');if(G.turnLog.length>30)G.turnLog.length=30;
+  G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr()});if(G.timerLog.length>200)G.timerLog.length=200;
   render();
 }
 function endTurn(pi){
@@ -825,9 +825,11 @@ function endTurn(pi){
   var ev='T'+G.turnNum+': '+p.name+' ended';
   p.tlog.unshift(ev);if(p.tlog.length>3)p.tlog.length=3;
   G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
+  if(G.p1ChessMode&&G.pTimeEnd[pi]!=null){G.pTimeRemain[pi]=Math.max(0,G.pTimeEnd[pi]-Date.now());G.pTimeEnd[pi]=null;}
   p.manaUsed=0;p.hist=[];p.phase='disabled';G.activePI=-1;
   if(G.mode<2){G.turnNum++;p.phase='start';render();return;}
-  var opp=G.players[pi===0?1:0];opp.phase='start';G.turnNum++;render();
+  var opp=G.players[pi===0?1:0];opp.phase='start';G.turnNum++;
+  startTurn(pi===0?1:0);
 }
 function turnBtn(pi){
   if(G.cfg&&G.cfg.hideTurnBar)return '';
@@ -1978,6 +1980,7 @@ function _diceRollAgain(){
 }
 
 function rollDice(sides,count,colIdx,pi,isCustom){
+  vibrate(15);
   _diceInitOverlay();
   _diceRollStartWall=performance.now(); // Quick Roll real-time cap starts from click, not just physics kick
 
@@ -2223,6 +2226,7 @@ function showP1Settings(anchorEl){
   html+='<div style="margin-top:12px;font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Timer</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
   html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="Set match timer"><span>⏱</span><span style="font-size:11px">Timer</span></button>';
+  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:13px;color:var(--hi,#22d3ee)" title="View timer log"><span>📋</span><span style="font-size:11px">Timer Log</span></button>';
   html+='</div>';
 
   // ── Section: Player 2 ──
@@ -2254,7 +2258,7 @@ function showP1Settings(anchorEl){
   pop.style.top=Math.max(4,top)+'px';
 
   setTimeout(function(){
-    function onOut(e){var _dp=document.getElementById('p1-dice-cpop');var _tp=document.getElementById('timer-pop');if(!pop.contains(e.target)&&(!_dp||!_dp.contains(e.target))&&(!_tp||!_tp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}}
+    function onOut(e){var _dp=document.getElementById('p1-dice-cpop');var _tp=document.getElementById('timer-pop');var _tlp=document.getElementById('timer-log-pop');if(!pop.contains(e.target)&&(!_dp||!_dp.contains(e.target))&&(!_tp||!_tp.contains(e.target))&&(!_tlp||!_tlp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}}
     document.addEventListener('click',onOut,true);
   },0);
 }
@@ -2269,27 +2273,62 @@ function _refreshP1Settings(){
 function p1TimerSetMinutes(v){
   var n=Math.max(1,Math.min(180,parseInt(v)||5));
   G.p1TimerMinutes=n;sv('sg-p1tm',n);
-  if(!G.p1TimerRunning){G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();}
+  G.timerLog=[];
+  if(!G.p1TimerRunning){
+    G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();
+    if(G.p1ChessMode){_chessResetAllotment();_updateChessDisplays();}
+  }
 }
 function p1TimerAdjustMinutes(delta){
   var n=Math.max(1,Math.min(180,(G.p1TimerMinutes||5)+delta));
   G.p1TimerMinutes=n;sv('sg-p1tm',n);
+  G.timerLog=[];
   var inp=document.getElementById('timer-min-input');
   if(inp)inp.value=n;
-  if(!G.p1TimerRunning){G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();}
+  if(!G.p1TimerRunning){
+    G.p1TimerStoppedRemain=n*60000;G.p1TimerDone=false;_updateTimerDisplays();
+    if(G.p1ChessMode){_chessResetAllotment();_updateChessDisplays();}
+  }
 }
 function p1TimerStart(){
+  var anyActive=false;for(var j=0;j<G.players.length;j++){if(G.players[j].phase==='active'){anyActive=true;break;}}
+  if(!(G.cfg&&G.cfg.hideTurnBar)&&!anyActive){
+    G.p1TimerPending=true;
+    G.p1TimerRunning=false;G.p1TimerDone=false;
+    G.p1TimerWarnFired=false;G.p1TimerCritFired=false;
+    if(G.p1TimerStoppedRemain==null)G.p1TimerStoppedRemain=G.p1TimerMinutes*60000;
+    if(G.p1ChessMode&&(G.pTimeRemain[0]==null||G.pTimeRemain[1]==null))_chessResetAllotment();
+    _updateTimerDisplays();
+    render();
+    return;
+  }
+  G.p1TimerPending=false;
+  G.p1TimerWarnFired=false;G.p1TimerCritFired=false;
   var startMs=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;
   G.p1TimerEnd=Date.now()+startMs;
   G.p1TimerRunning=true;G.p1TimerDone=false;G.p1TimerStoppedRemain=null;
-  _updateTimerDisplays();
+  if(G.p1ChessMode){
+    if(G.pTimeRemain[0]==null||G.pTimeRemain[1]==null)_chessResetAllotment();
+    var api=-1;for(var i=0;i<G.players.length;i++){if(G.players[i].phase==='active'){api=i;break;}}
+    if(api>=0)G.pTimeEnd[api]=Date.now()+G.pTimeRemain[api];
+    render();
+  } else {
+    _updateTimerDisplays();
+  }
 }
 function p1TimerStop(){
+  G.p1TimerPending=false;
   if(G.p1TimerRunning){
     G.p1TimerStoppedRemain=Math.max(0,G.p1TimerEnd-Date.now());
     G.p1TimerRunning=false;
   }
+  if(G.p1ChessMode){
+    for(var i=0;i<2;i++){
+      if(G.pTimeEnd[i]!=null){G.pTimeRemain[i]=Math.max(0,G.pTimeEnd[i]-Date.now());G.pTimeEnd[i]=null;}
+    }
+  }
   _updateTimerDisplays();
+  _updateChessDisplays();
 }
 function p1TimerSetWarnMin(v){
   var n=Math.max(1,Math.min(179,parseInt(v)||5));
@@ -2329,7 +2368,52 @@ function toggleHideTimerIdle(){
 }
 function p1TimerReset(){
   G.p1TimerStoppedRemain=(G.p1TimerMinutes||5)*60000;
+  G.turnNum=1;
+  G.turnLog=[];
+  G.timerLog=[];
+  if(G.p1ChessMode)_chessResetAllotment();
   p1TimerStart();
+}
+function _chessResetAllotment(){
+  var half=Math.round((G.p1TimerMinutes||5)*60000/2);
+  G.pTimeRemain=[half,half];
+  G.pTimeEnd=[null,null];
+  G.pTimeOutAck=[false,false];
+  G.pTimeOutPI=null;
+}
+function toggleChessMode(){
+  G.p1ChessMode=!G.p1ChessMode;
+  sv('sg-p1chess',G.p1ChessMode);
+  if(G.p1ChessMode){
+    _chessResetAllotment();
+    if(G.p1TimerRunning){
+      var api=-1;for(var i=0;i<G.players.length;i++){if(G.players[i].phase==='active'){api=i;break;}}
+      if(api>=0)G.pTimeEnd[api]=Date.now()+G.pTimeRemain[api];
+    }
+  } else {
+    G.pTimeRemain=[null,null];G.pTimeEnd=[null,null];G.pTimeOutAck=[false,false];G.pTimeOutPI=null;
+  }
+  var btn=document.getElementById('timer-chess-btn');
+  if(btn){
+    btn.textContent='Show Player Time Limit: '+(G.p1ChessMode?'On':'Off');
+    btn.style.background=G.p1ChessMode?'var(--bg3,#374151)':'transparent';
+    btn.style.color=G.p1ChessMode?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)';
+  }
+  render();
+}
+function closeTimeOutPopup(){G.pTimeOutPI=null;render();}
+function chessTimeHTML(pi){
+  var ms=G.pTimeEnd[pi]!=null?(G.pTimeEnd[pi]-Date.now()):(G.pTimeRemain[pi]!=null?G.pTimeRemain[pi]:0);
+  return '<div id="chess-time-'+pi+'" style="font-size:20px;font-weight:700;text-align:center;width:70px;padding:2px 0;box-sizing:border-box;flex-shrink:0;color:var(--bbl,#68A8E4)">'+_timerRemStr(ms)+'</div>';
+}
+function _updateChessDisplays(){
+  [0,1].forEach(function(pi){
+    var el=document.getElementById('chess-time-'+pi);
+    if(el){
+      var ms=G.pTimeEnd[pi]!=null?(G.pTimeEnd[pi]-Date.now()):(G.pTimeRemain[pi]!=null?G.pTimeRemain[pi]:0);
+      el.textContent=_timerRemStr(ms);
+    }
+  });
 }
 function _timerRemStr(rem){
   rem=Math.max(0,rem);
@@ -2349,6 +2433,23 @@ function _timerFace(){
   if(G.p1TimerDone)return {txt:"Time's Up!",col:'var(--red,#ef4444)'};
   if(G.p1TimerStoppedRemain!=null)return {txt:_timerRemStr(G.p1TimerStoppedRemain),col:_timerColor(G.p1TimerStoppedRemain)};
   return {txt:'',col:''};
+}
+function _timerLogTimeStr(){
+  if(G.p1TimerRunning){var rem=G.p1TimerEnd-Date.now();return _timerRemStr(rem);}
+  if(G.matchStartTime)return _timerRemStr(Date.now()-G.matchStartTime);
+  return '--:--';
+}
+function _timerFullTimeStr(){
+  return _timerRemStr((G.p1TimerMinutes||5)*60000);
+}
+function _chessFullTimeStr(){
+  return _timerRemStr(Math.round((G.p1TimerMinutes||5)*60000/2));
+}
+function _chessUsedTimeStr(pi){
+  if(!G.p1ChessMode||G.pTimeRemain[pi]==null)return '--:--';
+  var full=Math.round((G.p1TimerMinutes||5)*60000/2);
+  var used=Math.max(0,full-G.pTimeRemain[pi]);
+  return _timerRemStr(used);
 }
 function timerFaceHTML(pi){
   var tf=_timerFace();
@@ -2370,6 +2471,24 @@ setInterval(function(){
   if(G.p1TimerRunning){
     var rem=G.p1TimerEnd-Date.now();
     if(rem<=0){G.p1TimerRunning=false;G.p1TimerDone=true;}
+    else{
+      var warnMs=(G.p1TimerWarnMin!=null?G.p1TimerWarnMin:5)*60000;
+      var critMs=(G.p1TimerCritMin!=null?G.p1TimerCritMin:1)*60000;
+      if(rem<=critMs){if(!G.p1TimerCritFired){G.p1TimerCritFired=true;G.p1TimerWarnFired=true;vibrate([80,60,80,60,80]);}}
+      else if(rem<=warnMs){if(!G.p1TimerWarnFired){G.p1TimerWarnFired=true;vibrate([80,60,80]);}}
+    }
+  }
+  if(G.p1ChessMode){
+    for(var i=0;i<2;i++){
+      if(G.pTimeEnd[i]!=null){
+        var crem=G.pTimeEnd[i]-Date.now();
+        if(crem<=0){
+          G.pTimeRemain[i]=0;G.pTimeEnd[i]=null;
+          if(!G.pTimeOutAck[i]){G.pTimeOutAck[i]=true;G.pTimeOutPI=i;render();}
+        }
+      }
+    }
+    _updateChessDisplays();
   }
   _updateTimerDisplays();
 },250);
@@ -2411,11 +2530,57 @@ function showTimerPopup(anchorEl){
 
   html+='<button id="timer-hide-idle-btn" onclick="toggleHideTimerIdle()" style="width:100%;padding:10px;margin-top:8px;border:1px solid var(--bd,#374151);background:'+(G.cfg&&G.cfg.hideTimerIdle?'var(--bg3,#374151)':'transparent')+';color:'+(G.cfg&&G.cfg.hideTimerIdle?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:8px;cursor:pointer;font-size:12px;font-weight:700">Hide Timer From Main Screen When Not In Use: '+(G.cfg&&G.cfg.hideTimerIdle?'On':'Off')+'</button>';
 
+  if(!(G.cfg&&G.cfg.hideTurnBar)){
+    html+='<button id="timer-chess-btn" onclick="toggleChessMode()" style="width:100%;padding:10px;margin-top:8px;border:1px solid var(--bd,#374151);background:'+(G.p1ChessMode?'var(--bg3,#374151)':'transparent')+';color:'+(G.p1ChessMode?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:8px;cursor:pointer;font-size:12px;font-weight:700">Show Player Time Limit: '+(G.p1ChessMode?'On':'Off')+'</button>';
+    html+='<div style="font-size:9px;color:#9ca3af;text-align:center;margin-top:6px">Each player gets half the Timer Duration, like a chess clock</div>';
+  }
+
   pop.innerHTML=html;
   document.body.appendChild(pop);
 
   var rect=anchorEl.getBoundingClientRect();
-  var pw=230, ph=440;
+  var pw=230, ph=500;
+  var left=rect.right-pw;
+  if(left<4) left=4;
+  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
+  var top=rect.bottom+4;
+  if(top+ph>window.innerHeight) top=rect.top-ph-4;
+  pop.style.left=left+'px';
+  pop.style.top=Math.max(4,top)+'px';
+
+  setTimeout(function(){
+    function onOut(e){if(!pop.contains(e.target)&&e.target!==anchorEl){pop.remove();document.removeEventListener('click',onOut,true);}}
+    document.addEventListener('click',onOut,true);
+  },0);
+}
+
+// ── TIMER LOG POPUP ───────────────────────────────────────────────────────────
+function showTimerLogPopup(anchorEl){
+  var old=document.getElementById('timer-log-pop');
+  if(old){old.remove();return;}
+  var pop=document.createElement('div');
+  pop.id='timer-log-pop';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;max-width:92vw;max-height:70vh;overflow-y:auto;';
+
+  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Log</div>';
+  if(!G.timerLog||!G.timerLog.length){
+    html+='<div style="font-size:12px;color:var(--fg2,#9ca3af);text-align:center;padding:10px 0">No entries yet</div>';
+  } else {
+    html+='<div style="display:flex;flex-direction:column;gap:2px">';
+    G.timerLog.forEach(function(e){
+      html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
+      html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px"><span style="color:var(--fg,#e2e8f0)">T'+e.turn+' &middot; '+h(e.name)+'</span><span style="flex-shrink:0"><span style="color:var(--hi,#22d3ee);font-weight:700">'+h(e.time)+'</span><span style="color:var(--fg3,#6b7280)"> / </span><span style="color:var(--fg2,#9ca3af)">'+h(e.full||'--:--')+'</span></span></div>';
+      html+='<div style="display:flex;justify-content:flex-end;font-size:10px;color:var(--fg2,#9ca3af);margin-top:2px">Used: '+h(e.used||'--:--')+' / '+h(e.pFull||'--:--')+'</div>';
+      html+='</div>';
+    });
+    html+='</div>';
+  }
+
+  pop.innerHTML=html;
+  document.body.appendChild(pop);
+
+  var rect=anchorEl.getBoundingClientRect();
+  var pw=260, ph=320;
   var left=rect.right-pw;
   if(left<4) left=4;
   if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
@@ -3394,11 +3559,6 @@ function pContent(){
       o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');_renderKeepScroll()">'+name+'</button>');
     });
     o('</div>');
-    o('<button class="fb" style="font-size:11px;padding:4px 10px" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
-    o('<div class="slbl2" style="margin-top:18px">Layout</div>');
-    o('<div class="tgrid">');
-    [['standard','Full'],['circular','Circular'],['tap','Tap']].forEach(function(lv){var active=lv[0]===(G.cfg.layout||'standard');o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.layout=\''+lv[0]+'\';sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+lv[1]+'</button>');});
-    o('</div>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
@@ -3410,7 +3570,9 @@ function pContent(){
       o('</div>');
     }
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
-    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');if(_pwaPrompt){
+    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
+    if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
       o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
@@ -3420,7 +3582,9 @@ function pContent(){
       o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">iOS: Share &rarr; &ldquo;Add to Home Screen&rdquo;</div>');
       o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Android: Menu &rarr; &ldquo;Add to Home Screen&rdquo; or &ldquo;Install App&rdquo;</div>');
       o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Desktop: Address bar install icon &#x2B07;</div>');
-    }return out.join('');}
+    }
+    o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
+    return out.join('');}
   G._rd=G._rd||[];G._faqRd=[];if(p==='rules'){RULES.forEach(function(r){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
   });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
@@ -3464,7 +3628,7 @@ function pContent(){
     });
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/faqs" target="_blank">Official FAQ on Curiosa &rarr;</a>');return out.join('');
   }
-  if(p==='links'){[{n:'Official Rulebook',u:'https://sorcerytcg.com/how-to-play',d:'How to play'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Codex Changelog',u:'https://curiosa.io/codex/changelog',d:'Site updates & changes'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'SorceryTCG.gg',u:'https://sorcerytcg.gg',d:'Meta reports & prices'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:"Curio's",u:'https://www.collectorarthouse.com/curio-cards',d:'Collector art house'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
+  if(p==='links'){[{n:'SorceryTCG.com',u:'https://sorcerytcg.com/',d:'Official site'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Codex Changelog',u:'https://curiosa.io/codex/changelog',d:'Site updates & changes'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:"Curio's",u:'https://www.collectorarthouse.com/curio-cards',d:'Collector art house'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
   if(p==='cards'){
     var q=S.cS||'';var fil=cFilter(CARDS,G.cF,q);
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
@@ -4147,7 +4311,6 @@ function cModal(){
   o('<div class="price-box">');
   o('<div class="slbl2">Markets</div>');
   o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
-  o('<a class="cm-tcg" style="margin-top:3px;border-color:var(--yel);color:var(--yel)" href="https://sorcerycard.io/card/'+nm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'" target="_blank">sorcerycard.io &rarr;</a>');
   o('</div>');
   // Add to Deck section
   var dkKeys=Object.keys(G.decks);
@@ -4215,109 +4378,6 @@ function statBox(label,val,color,adjMinus,adjPlus,small){
   return '<div class="sbox2"><div class="slbl">'+label+'</div>'+display+'<div class="adj-row2"><button class="adj2" onclick="'+adjMinus+'">-</button><button class="adj2" onclick="'+adjPlus+'">+</button></div></div>';
 }
 
-function pCirc(p,pi){
-  var out=[];function o(s){out.push(s);}
-  var lifeColor=p.dead?'var(--red)':'var(--life)';
-  var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
-  var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var diceCol=pi===1?getDieCol(G.dieCI2):null;
-
-  // Available space: half screen minus turnbar(32) minus name(22) minus dice(60) minus turn(32) minus padding
-  var screenH=typeof window!=='undefined'?window.innerHeight:700;
-  var screenW=typeof window!=='undefined'?window.innerWidth:390;
-  var availH=Math.floor(screenH/2)-32-22-60-32-16;
-  var availW=screenW-8;
-  // Orbit aspect ratio is 450:300 = 1.5
-  // Scale to fit both width and height
-  var scaleW=availW/582;
-  var scaleH=availH/390;
-  var scale=Math.min(scaleW,scaleH,1);
-  var orbitW=Math.round(582*scale);
-  var orbitH=Math.round(390*scale);
-
-  // Main circle sizes scale with orbit
-  var mSz=Math.round(170*scale);
-  var eSz=Math.round(155*scale);  // threshold circles — larger than life/mana
-  var fontSize=Math.round(60*scale);
-  var lblSize=Math.round(11*scale);
-  var elValSize=Math.round(50*scale);
-  var elIconSize=Math.round(66*scale);
-
-  // Positions: threshold circles flush to edge, life/mana circles adjacent
-  var elOff=0;
-  var lifeLeft=Math.round(120*scale);  // life/mana stay same distance from edge as before
-  var manaRight=lifeLeft;
-  var elVert=0;  // threshold circles flush to top/bottom edges
-
-  o('<div class="p-circ">');
-  o('<div class="circ-name">'+h(p.name)+'</div>');
-
-  // Scaled orbit wrapper
-  o('<div style="width:'+orbitW+'px;height:'+orbitH+'px;position:relative;flex-shrink:0;overflow:visible">');
-
-  // ── Life circle ──
-  var mTop=Math.round((orbitH-mSz)/2);
-  var bigFont=Math.round(78*scale);
-  o('<div style="position:absolute;width:'+mSz+'px;height:'+mSz+'px;left:'+lifeLeft+'px;top:'+mTop+'px;border-radius:50%;border:3px solid '+lifeColor+';background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
-  if(p.dead){
-    o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;border-radius:50%;z-index:1;pointer-events:none"><img src="DD.jpg" alt="Death\'s Door" style="width:100%;height:100%;object-fit:cover;opacity:.92"></div>');
-    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
-    o('<button class="tap-btn-bot" onclick="showLog('+pi+')"></button>');
-  } else {
-    o('<div style="font-size:'+bigFont+'px;font-weight:700;color:'+lifeColor+';pointer-events:none;z-index:1;line-height:1">'+p.life+'</div>');
-    o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
-    o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
-  }
-  o('</div>');
-
-  // ── Mana circle ──
-  var manaLeft=orbitW-lifeLeft-mSz;
-  o('<div style="position:absolute;width:'+mSz+'px;height:'+mSz+'px;left:'+manaLeft+'px;top:'+mTop+'px;border-radius:50%;border:3px solid var(--mana);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
-  o('<div style="font-size:'+bigFont+'px;font-weight:700;color:var(--mana);pointer-events:none;z-index:1;line-height:1">'+p.mana+'</div>');
-  o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
-  o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
-  o('</div>');
-
-  // ── 4 Threshold circles ──
-  var eTop1=elVert;
-  var eTop2=orbitH-elVert-eSz;
-  var positions=[
-    {k:'fire',  x:elOff,             y:eTop1},
-    {k:'earth', x:elOff,             y:eTop2},
-    {k:'water', x:orbitW-elOff-eSz,  y:eTop1},
-    {k:'air',   x:orbitW-elOff-eSz,  y:eTop2}
-  ];
-  positions.forEach(function(ep){
-    var e=ELEM.find(function(x){return x.k===ep.k;})||ELEM[4];
-    o('<div style="position:absolute;width:'+eSz+'px;height:'+eSz+'px;left:'+ep.x+'px;top:'+ep.y+'px;border-radius:50%;border:2px solid '+e.c+';background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden">');
-    o('<div style="z-index:1;pointer-events:none">'+eSVG(ep.k,elIconSize)+'</div>');
-    o('<div style="font-size:'+elValSize+'px;font-weight:700;color:'+e.c+';pointer-events:none;z-index:1;line-height:1">'+p.thresh[ep.k]+'</div>');
-    o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+ep.k+'\',1)"></button>');
-    o('<button class="tap-btn-bot" onclick="adjEl('+pi+',\''+ep.k+'\',\''+(-1)+'\'-1)"></button>');
-    o('</div>');
-  });
-
-  // All dice in one wrapped row below the orbit
-  o('</div>'); // end orbit wrapper
-
-  o('<div class="tap-dice-row" style="width:100%;flex-wrap:wrap;justify-content:center">');
-  var _dieLgCls=(G.cfg&&G.cfg.hideTurnBar)?' lg':'';
-  visD.forEach(function(d){
-    var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
-    o('<button class="die-btn'+_dieLgCls+'" onclick="rollDice('+sidesVal+','+d.c+','+_pCI+','+pi+','+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+sidesVal+'</span></button>');
-  });
-  o('</div>');
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;width:100%;box-sizing:border-box">');
-  o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  o(timerFaceHTML(pi));
-  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
-  o('</div>');
-  o('</div>');
-  return out.join('');
-}
-
-
 function pTap(p,pi){
   var out=[];function o(s){out.push(s);}
   var lifeColor=p.dead?'var(--red)':'var(--life)';
@@ -4375,96 +4435,14 @@ function pTap(p,pi){
 
   o('</div>');
 
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
+  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0">');
+  if(G.p1ChessMode&&!(G.cfg&&G.cfg.hideTurnBar)){o(chessTimeHTML(pi));}
   o('<div style="flex:1">'+turnBtn(pi)+'</div>');
   o(timerFaceHTML(pi));
   if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
   if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
   o('</div>');
   o('</div>');
-  return out.join('');
-}
-
-
-function pHTML(p,pi){
-  var out=[];function o(s){out.push(s);}
-  var lifeColor='var(--life)';var manaColor='var(--mana)';
-  var dkOpts='<option value="">No deck</option>'+Object.entries(G.decks).map(function(kv){return '<option value="'+h(kv[0])+'"'+(p.deck===kv[0]?' selected':'')+'>'+h(kv[1].name)+'</option>';}).join('');
-
-  o('<div class="zone">');
-
-  // Row 1: name + deck
-  o('<div class="prow-top">');
-  o('<input class="pname" id="pname-'+pi+'" value="'+h(p.name)+'" maxlength="18" onchange="setName('+pi+',this.value)">');
-  o('<select class="dks" onchange="setDeck('+pi+',this.value)">'+dkOpts+'</select>');
-  o('</div>');
-
-  // Row 2: Life LEFT | Mana RIGHT
-  o('<div class="prow-stats">');
-
-  // Life (left)
-  if(p.dead){
-    o('<div class="sbox2 dd-sbox" style="position:relative;padding:0;overflow:hidden">');
-    o('<img src="DD.jpg" alt="Death\'s Door" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.92">');
-    o('<div style="position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0">');
-    o('<div class="adj-row2"><button class="adj2" onclick="adjStat('+pi+',\'life\',-1)">-</button><button class="adj2" onclick="adjStat('+pi+',\'life\',1)">+</button></div>');
-    o('<button class="dd-btn" onclick="showLog('+pi+')">Log</button>');
-    o('</div>');
-    o('</div>');
-  } else {
-    o('<div class="sbox2">');
-    o('<span class="sval" style="color:'+lifeColor+';font-size:52px">'+p.life+'</span>');
-    o('<div class="adj-row2"><button class="adj2" onclick="adjStat('+pi+',\'life\',-1)">-</button><button class="adj2" onclick="adjStat('+pi+',\'life\',1)">+</button></div>');
-    o('</div>');
-  }
-
-  // Mana (right)
-  o('<div class="sbox2">');
-  o('<span class="sval" style="color:'+manaColor+';font-size:52px">'+p.mana+'</span>');
-  o('<div class="adj-row2"><button class="adj2" onclick="adjStat('+pi+',\'mana\',-1)">-</button><button class="adj2" onclick="adjStat('+pi+',\'mana\',1)">+</button></div>');
-  o('<div class="slbl" style="color:var(--mana);margin-top:3px">&#x25c6; used</div><span class="sval" style="color:var(--mana);opacity:.55">'+p.manaUsed+'</span><div class="adj-row2"><button class="adj2" onclick="adjMU('+pi+',-1)">-</button><button class="adj2" onclick="adjMU('+pi+',1)">+</button></div>');
-  o('</div>');
-
-  o('</div>'); // end prow-stats
-
-  // Row 3: Threshold elements horizontal row — [-] icon/count [+]
-  o('<div class="thresh-row">');
-  ELEM.slice(0,4).forEach(function(e){
-    o('<div class="ei2">');
-    o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',-1)">-</button>');
-    o('<div style="display:flex;flex-direction:column;align-items:center;gap:1px">');
-    o(eSVG(e.k,34));
-    o('<span style="color:'+e.c+';font-size:22px;font-weight:700;line-height:1">'+p.thresh[e.k]+'</span>');
-    o('</div>');
-    o('<button class="eadj2" onclick="adjEl('+pi+',\''+e.k+'\',1)">+</button>');
-    o('</div>');
-  });
-  o('</div>');
-
-  // Row 4: History (compact)
-  if(p.hist.length)o('<div class="hist">'+p.hist.slice(0,2).map(function(hh){return '<span class="hp">'+h(hh)+'</span>';}).join('')+'</div>');
-
-  // Row 5: Dice strip + (P1 only) menu button
-  var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
-  var diceCol=pi===1?getDieCol(G.dieCI2):null;
-  o('<div class="dice-strip" style="padding:2px 2px 1px">');
-  var _pCI=pi===1?G.dieCI2%DIE_COLS.length:G.dieCI;
-  var _dieLgCls=(G.cfg&&G.cfg.hideTurnBar)?' lg':'';
-  visD.forEach(function(d){var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;o('<button class="die-btn'+_dieLgCls+'" style="padding:10px 8px" onclick="rollDice('+sidesVal+','+d.c+','+_pCI+','+pi+','+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'
-    +(d.c>1?d.c:'')+'d'+sidesVal+'</span></button>');});
-
-  // menu button moved to turnBar
-  o('</div>');
-
-  // Row: Turn button + settings/dice button (side by side)
-  o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px">');
-  o('<div style="flex:1">'+turnBtn(pi)+'</div>');
-  o(timerFaceHTML(pi));
-  if(pi===0){o('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="P1 Settings">⚙</button>');}
-  if(pi===1&&G.cfg&&G.cfg.p2Flip!==false){o('<button onclick="showDiceColorPop2(this)" class="p2-dice-theme-btn" style="width:40px;height:44px;border:2px solid '+(diceCol||'var(--bd)')+';background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0" title="Change opponent dice color">🎨</button>');}
-  o('</div>');
-
-  o('</div>'); // end zone
   return out.join('');
 }
 
@@ -4535,8 +4513,7 @@ function render(){
     var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
     var out=[];function o(s){out.push(s);}
 
-    var _layout=G.cfg&&G.cfg.layout||'standard';
-    var _pFn=_layout==='circular'?pCirc:_layout==='tap'?pTap:pHTML;
+    var _pFn=pTap;
     // Swap sides if p2Side is 'bottom'
     var _topP=G.cfg&&G.cfg.p2Side==='bottom'?p0:p1;
     var _botP=G.cfg&&G.cfg.p2Side==='bottom'?p1:p0;
@@ -4577,6 +4554,13 @@ function render(){
       o('<div style="font-size:8px;color:var(--fg3);text-align:center;margin-top:7px;border-top:1px solid var(--bd);padding-top:5px">&#10003; Saves to Local Stats &amp; Deck Stats</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" onclick="confirmLog()">Confirm</button></div></div></div>');
     }}
+
+    if(G.pTimeOutPI!=null){
+      var _outP=G.players[G.pTimeOutPI];
+      o('<div class="ov" onclick="if(event.target===this)closeTimeOutPopup()"><div class="log-pop" style="text-align:center"><div class="lp-t">&#9203; Time&#39;s Up</div><div class="lp-b">');
+      o('<div style="font-size:16px;font-weight:700;color:var(--red);margin:6px 0 14px">'+h(_outP?_outP.name:'Player')+' Ran out of Time</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%" onclick="closeTimeOutPopup()">OK</button></div></div></div>');
+    }
 
     // ── Drawer ──
     if(G.menu){
@@ -4663,6 +4647,11 @@ function spinIcon(){
   var e=_randElem();
   return '<span class="spin" style="width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center">'+eSVG(e,18)+'</span>';
 }
+
+document.addEventListener('click',function(e){
+  var btn=e.target&&e.target.closest?e.target.closest('button'):null;
+  if(btn)vibrate(10);
+},true);
 
 boot();
 
