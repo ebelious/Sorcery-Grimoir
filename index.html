@@ -278,6 +278,14 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .fb.gold{color:var(--hi);border-color:var(--hi)}
 .fb.red{color:var(--red);border-color:var(--red)}
 .fb.full{width:100%;margin-top:4px}
+.sl-pop .slbl2{font-size:17px}
+.sl-pop .fi{font-size:16px;padding:11px 12px}
+.sl-pop .fb{font-size:14px;padding:11px 16px}
+.sl-pop .rt{font-size:16px}
+.sl-pop .rt th{font-size:13px;padding:7px}
+.sl-pop .rt td{padding:9px 8px}
+.sl-pop .ml-row{font-size:15px}
+.sl-pop .ml-sep,.sl-pop .ml-meta{font-size:13px}
 .acc{background:var(--bg3);border:1px solid var(--bd);margin-bottom:3px;overflow:hidden}
 .acc-h{display:flex;align-items:center;justify-content:space-between;padding:11px 10px;cursor:pointer;user-select:none}
 .acc-h:active{background:var(--bd)}
@@ -571,15 +579,15 @@ var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8
 // Index 0 is a special "theme color" slot — always returns the current --hi accent
 function getDieCol(i){var idx=(i==null?0:i)%DIE_COLS.length;if(idx===0){return (G&&G.cfg&&G.cfg.hi)?G.cfg.hi:(document.body.style.getPropertyValue('--hi')||'#FBB829');}return DIE_COLS[idx];}
 var MENU_S={
-  Settings:['Starting Life','Player Names','Theme'],
+  Settings:['Starting Life','Player 1 Name','Theme'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
   Content:['YouTube','News'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player Names':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player Names',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player 1 Name':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player 1 Name',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -2076,7 +2084,7 @@ function showDiceColorPop1(anchorEl){
 
   // ── Color section ──
   var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
-  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">P1 Dice Color</div>';
+  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Dice Color</div>';
   html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">';
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI%DIE_COLS.length)===i;
@@ -2086,7 +2094,7 @@ function showDiceColorPop1(anchorEl){
   html+='</div>';
 
   // ── Texture section ──
-  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">P1 Surface</div>';
+  html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Surface</div>';
   html+='<div style="display:flex;flex-wrap:wrap;gap:4px">';
   DICE_TEXTURES.forEach(function(t){
     var on=(G.diceTexture||'felt')===t.id;
@@ -2169,7 +2177,7 @@ function showP1Settings(anchorEl){
   html+='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Dice Theme</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
-  html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Change P1 dice color"><span>🎨</span><span style="font-size:12px">Dice Color &amp; Surface</span></button>';
+  html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Change dice color"><span>🎨</span><span style="font-size:12px">Dice Color &amp; Surface</span></button>';
   html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
   html+='</div>';
 
@@ -2197,16 +2205,22 @@ function showP1Settings(anchorEl){
   pop.innerHTML=html;
   document.body.appendChild(pop);
 
-  // Position above anchor
+  // Position above anchor, fully clamped to viewport
   var rect=anchorEl.getBoundingClientRect();
-  var pw=260, ph=320;
+  var margin=4;
+  pop.style.maxHeight=(window.innerHeight-margin*2)+'px';
+  pop.style.overflowY='auto';
+  var pw=pop.offsetWidth||260, ph=pop.offsetHeight||320;
   var left=rect.right-pw;
-  if(left<4) left=4;
-  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
-  var top=rect.top-ph-4;
-  if(top<4) top=rect.bottom+4;
+  if(left<margin) left=margin;
+  if(left+pw>window.innerWidth-margin) left=window.innerWidth-pw-margin;
+  if(left<margin) left=margin;
+  var top=rect.top-ph-margin;
+  if(top<margin) top=rect.bottom+margin;
+  if(top+ph>window.innerHeight-margin) top=window.innerHeight-ph-margin;
+  if(top<margin) top=margin;
   pop.style.left=left+'px';
-  pop.style.top=Math.max(4,top)+'px';
+  pop.style.top=top+'px';
 
   setTimeout(function(){
     function onOut(e){var _dp=document.getElementById('p1-dice-cpop');var _tp=document.getElementById('timer-pop');var _tlp=document.getElementById('timer-log-pop');if(!pop.contains(e.target)&&(!_dp||!_dp.contains(e.target))&&(!_tp||!_tp.contains(e.target))&&(!_tlp||!_tlp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}}
@@ -3437,8 +3451,8 @@ function pContent(){
   if(p==='dice'){o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+lbl+'</button>');});
     o('</div><div class="slbl2" style="margin-top:10px">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" style="width:80px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--wht);font-size:14px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;render()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
-    o('<div class="slbl2">P1 Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">P1 Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
+    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
+    o('<div class="slbl2" style="margin-top:18px">Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
     if(!_p1TexObj.fixedColor){o('<div class="slbl2" style="margin-top:18px">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
@@ -3451,8 +3465,7 @@ function pContent(){
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
-    o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P2</label><input class="fi" id="ni1" value="'+h(G.cfg.p2)+'"></div>');
-    o('<button class="fb gold full" onclick="saveNames()">Save Names</button>');
+    o('<button class="fb gold full" onclick="saveNames()">Save Name</button>');
     return out.join('');}
   if(p==='themes'){
     o('<div class="slbl2">Dice</div>');
@@ -3489,10 +3502,12 @@ function pContent(){
       o('</div>');
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     o('<div class="slbl2" style="margin-top:10px">UI Buttons</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
-    o('<div class="set-row"><span>P1 Config Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
+    o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
+    o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');
     if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
@@ -3861,10 +3876,11 @@ function pContent(){
     return out.join('');
   }
   if(p==='sl'){
+    o('<div class="sl-pop">');
     var ns=Object.keys(G.records),pO=G.players.map(function(pp){return '<option value="'+h(pp.name)+'">'+h(pp.name)+'</option>';}).join(''),dO='<option value="">No deck</option>'+Object.entries(G.decks).map(function(kv){return '<option value="'+h(kv[0])+'">'+h(kv[1].name)+'</option>';}).join('');
     o('<div class="fr"><input class="fi" id="npp" placeholder="Add player&hellip;" style="flex:1"><button class="fb gold" onclick="addRec(document.getElementById(\'npp\').value);document.getElementById(\'npp\').value=\'\'">Add</button></div>');
     o('<table class="rt"><thead><tr><th>Player</th><th>W</th><th>L</th><th>%</th><th></th></tr></thead><tbody>');
-    if(ns.length){ns.forEach(function(n){var r=G.records[n];var pct=r.w+r.l>0?Math.round(r.w/(r.w+r.l)*100)+'%':'--';o('<tr><td>'+h(n)+'</td><td class="wc">'+r.w+'</td><td class="lc">'+r.l+'</td><td>'+pct+'</td><td><button class="fb red" style="font-size:7px;padding:1px 3px" onclick="delRec(\''+h(n)+'\')">&times;</button></td></tr>');});}else{o('<tr><td colspan="5" style="color:var(--fg2);font-size:9px;padding:6px">No players yet.</td></tr>');}
+    if(ns.length){ns.forEach(function(n){var r=G.records[n];var pct=r.w+r.l>0?Math.round(r.w/(r.w+r.l)*100)+'%':'--';o('<tr><td>'+h(n)+'</td><td class="wc">'+r.w+'</td><td class="lc">'+r.l+'</td><td>'+pct+'</td><td><button class="fb red" style="font-size:11px;padding:4px 8px" onclick="delRec(\''+h(n)+'\')">&times;</button></td></tr>');});}else{o('<tr><td colspan="5" style="color:var(--fg2);font-size:12px;padding:6px">No players yet.</td></tr>');}
     o('</tbody></table><div class="slbl2">Log Match</div><div class="fr"><select class="fi" id="lw" style="flex:1"><option value="">Winner&hellip;</option>'+pO+'</select><select class="fi" id="lwd" style="flex:1"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr"><select class="fi" id="ll" style="flex:1"><option value="">Loser&hellip;</option>'+pO+'</select><select class="fi" id="lld" style="flex:1"><option value="">Deck&hellip;</option>'+dO+'</select></div><button class="fb gold full" onclick="logMatch()">Log Match</button>');
     if(G.matchLog&&G.matchLog.length){
       o('<div class="slbl2" style="margin-top:10px">Match History</div>');
@@ -3879,7 +3895,7 @@ function pContent(){
         o('<span class="ml-meta" style="margin-left:auto;white-space:nowrap">'+h(e.time||'')+dur+turns+'</span>');
         o('</div>');
         if(e.winnerDeck||e.loserDeck){
-          o('<div style="display:flex;gap:6px;font-size:8px;color:var(--fg2);padding-left:2px">');
+          o('<div style="display:flex;gap:6px;font-size:11px;color:var(--fg2);padding-left:2px">');
           if(e.winnerDeck)o('<span style="color:var(--grn)">'+h(e.winnerDeck)+'</span>');
           if(e.winnerDeck&&e.loserDeck)o('<span style="color:var(--fg3)">vs</span>');
           if(e.loserDeck)o('<span style="color:var(--red)">'+h(e.loserDeck)+'</span>');
@@ -3888,6 +3904,7 @@ function pContent(){
         o('</div>');
       });
     }
+    o('</div>');
     return out.join('');
   }
   if(p==='sd'){var entries=Object.entries(G.dkstat);if(entries.length){entries.forEach(function(kv){var k=kv[0],d=kv[1];var pct=d.w+d.l>0?Math.round(d.w/(d.w+d.l)*100)+'%':'--';o('<div class="sc"><div class="sn">'+h(k)+'</div><div class="ss"><span class="sw">'+d.w+'W</span><span class="sl_">'+d.l+'L</span><span class="sp_">'+pct+'</span><button class="fb" style="margin-left:8px;font-size:10px;padding:1px 5px;opacity:0.55" onclick="removeDkStat(\''+k.replace(/'/g,"\\'")+'\')" title="Remove">✕</button></div></div>');});}else{o('<div class="ld">No deck stats yet.</div>');}return out.join('');}
@@ -4351,24 +4368,28 @@ function pTap(p,pi){
   o('</div>');
 
   var _dieLgCls=_turnBarOn?'':' lg';
+  var _diceInHeader=!!(G.cfg&&G.cfg.diceInHeader);
   var diceBtnsHTML='';
-  visD.forEach(function(d){
-    var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
-    diceBtnsHTML+='<button class="die-btn'+_dieLgCls+'" onclick="rollDice('+sidesVal+','+d.c+','+_pCI+','+pi+','+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+sidesVal+'</span></button>';
-  });
+  if(!_diceInHeader){
+    visD.forEach(function(d){
+      var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
+      diceBtnsHTML+='<button class="die-btn'+_dieLgCls+'" onclick="rollDice('+sidesVal+','+d.c+','+_pCI+','+pi+','+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'<span class="die-lbl" style="'+(diceCol?'color:'+diceCol:'')+'">'+(d.c>1?d.c:'')+'d'+sidesVal+'</span></button>';
+    });
+  }
 
   var settingsBtnHTML='';
 
   var p1BtnHTML='',_p1RowPad='',p1Left=false;
-  if(pi===0){
+  var _p1BtnShown=pi===0&&!(G.cfg&&G.cfg.hideConfigBtn);
+  if(_p1BtnShown){
     p1Left=!!(G.cfg&&G.cfg.p1BtnLeft);
-    p1BtnHTML='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:absolute;'+(p1Left?'left:6px':'right:6px')+';bottom:6px;width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:2" title="P1 Settings">⚙</button>';
+    p1BtnHTML='<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:absolute;'+(p1Left?'left:6px':'right:6px')+';bottom:6px;width:40px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:2" title="Configuration">⚙</button>';
     _p1RowPad=p1Left?';padding-left:52px':';padding-right:52px';
   }
 
   if(!_turnBarOn){
-    o('<div class="tap-dice-row">'+diceBtnsHTML+'</div>');
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(pi===0?';min-height:56px':'')+_p1RowPad+'">');
+    if(!_diceInHeader)o('<div class="tap-dice-row">'+diceBtnsHTML+'</div>');
+    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(_p1BtnShown?';min-height:56px':'')+_p1RowPad+'">');
     o('<div style="flex:1">'+turnBtn(pi)+'</div>');
     o(timerFaceHTML(pi));
     o(settingsBtnHTML);
@@ -4381,7 +4402,7 @@ function pTap(p,pi){
     var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="'+(_chessOn?'':'visibility:hidden')+'">'+chessTimeHTML(pi)+'</div>'+timerFaceHTML(pi)+'</div>';
     var timesBlock='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+timesStack+settingsBtnHTML+'</div>';
     var turnBlock='<div style="flex:1;display:flex;min-width:0">'+turnBtn(pi)+'</div>';
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;position:relative'+(pi===0?';min-height:56px':';min-height:0')+_p1RowPad+'">');
+    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;position:relative'+(_p1BtnShown?';min-height:56px':';min-height:0')+_p1RowPad+'">');
     if(diceLeft){o(diceBlock);o(turnBlock);o(timesBlock);}
     else{o(timesBlock);o(turnBlock);o(diceBlock);}
     o(p1BtnHTML);
@@ -4395,11 +4416,26 @@ function pTap(p,pi){
 function turnBar(){
   var p0=G.players[0],p1=G.mode>=2?G.players[1]:null;
   function ph(p){return p&&p.phase==='active'?'&#9654; ':'';}
+  var _diceHdr=!!(G.cfg&&G.cfg.diceInHeader);
+  function diceHdrHTML(){
+    var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
+    var diceCol=getDieCol(G.dieCI);
+    var html='';
+    visD.forEach(function(d){
+      var isCustom=d.s==='custom';var sidesVal=isCustom?G.customDieSides:d.s;
+      html+='<button class="die-btn" style="padding:2px 3px" onclick="rollDice('+sidesVal+','+d.c+','+G.dieCI+',0,'+isCustom+')">'+smallDieSVG(sidesVal,d.c,diceCol,isCustom)+'</button>';
+    });
+    return html;
+  }
   // Layout: [ghost spacer] [P0 flex:1] [T# fixed center] [P1 flex:1] [☰ menu]
   // Ghost spacer matches menu-btn width so T# is truly centered
   var _ml=G.cfg&&G.cfg.menuLeft;
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
+  if(_diceHdr){
+    var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_diceRow+(_ml?'':_mbtn)+'</div>';
+  }
   if(G.cfg&&G.cfg.hideTurnBar){
     var _p0sH='<div class="tb-s"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0?h(p0.name):'')+'</span></div>';
     var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
