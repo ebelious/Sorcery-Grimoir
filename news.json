@@ -1,10 +1,17 @@
 {
-  "updated": "2026-07-13T09:35:33.591Z",
+  "updated": "2026-07-13T14:44:12.880Z",
   "articles": [
+    {
+      "title": "Sorcery's Grand Contest Comes to Italy",
+      "url": "https://sorcerytcg.com/news/sorcery-s-grand-contest-comes-to-italy",
+      "date": "13 Jul 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/4938e73e80359ce46fe8d105974fc82242505075-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Meet Drew Tucker at Gen Con 2026",
       "url": "https://sorcerytcg.com/news/meet-drew-tucker-at-gen-con-2026",
-      "date": "08 Jul 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f0bb98bd8ef84928d2b679b9289e73eba956b297-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8be3f3a9b4bc90b3d0634fe50fbaa3bbef06dff-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Avatar of the Realm: Weekend at a Glance",
-      "url": "https://sorcerytcg.com/news/avatar-of-the-realm-weekend-at-a-glance",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/448e62641ac498d975e4ebc079ef0780154821b4-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
