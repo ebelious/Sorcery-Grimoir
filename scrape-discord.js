@@ -9,17 +9,17 @@
 // Required environment variables (set as GitHub Actions secrets):
 //   DISCORD_BOT_TOKEN   - a bot token for a bot invited to the official Sorcery TCG
 //                          Discord server, with "Read Message History" on the target channel
-//   DISCORD_CHANNEL_ID  - (optional) defaults to 880799333988053013, the specific channel
+//   DISCORD_CHANNEL_ID  - (optional) defaults to 1215448061850034226, the specific channel
 //                          this scraper was set up to pull updates from
-//   DISCORD_GUILD_ID    - (optional) defaults to 769359301466652693, the official Sorcery
+//   DISCORD_GUILD_ID    - (optional) defaults to 278704728999854080, the official Sorcery
 //                          TCG server, used to build a "jump to message" link
 //   DISCORD_CHANNEL_NAME- (optional) display label, e.g. "announcements"
 
 const fs = require('fs');
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
-const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '880799333988053013';
-const GUILD_ID = process.env.DISCORD_GUILD_ID || '769359301466652693';
+const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '1215448061850034226';
+const GUILD_ID = process.env.DISCORD_GUILD_ID || '278704728999854080';
 const CHANNEL_NAME = process.env.DISCORD_CHANNEL_NAME || '';
 const LIMIT = 25;
 
