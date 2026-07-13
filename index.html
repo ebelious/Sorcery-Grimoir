@@ -142,6 +142,9 @@ body.rounded .rd-close{border-radius:6px}
 .tap-el:last-child{border-right:none}
 .tap-el-val{font-size:40px;font-weight:700;line-height:1;z-index:1;pointer-events:none}
 .tap-dice-row{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:6px;padding:8px;flex-shrink:0}
+@media (orientation:landscape) and (max-height:500px){
+  .tap-el-row,.tap-dice-row,.tap-bottom-row,#tbar{display:none!important}
+}
 /* ── MINIMAL LAYOUT ── */
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
@@ -4898,7 +4901,7 @@ function pTap(p,pi){
 
   if(!_turnBarOn){
     if(!_diceInHeader)o('<div class="tap-dice-row">'+diceBtnsHTML+'</div>');
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(_p1BtnShown?';min-height:56px':'')+_p1RowPad+'">');
+    o('<div class="tap-bottom-row" style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(_p1BtnShown?';min-height:56px':'')+_p1RowPad+'">');
     o('<div style="flex:1">'+turnBtn(pi)+'</div>');
     o(timerFaceHTML(pi));
     o(settingsBtnHTML);
@@ -4911,7 +4914,7 @@ function pTap(p,pi){
     var timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="'+(_chessOn?'':'visibility:hidden')+'">'+chessTimeHTML(pi)+'</div>'+timerFaceHTML(pi)+'</div>';
     var timesBlock='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+timesStack+settingsBtnHTML+'</div>';
     var turnBlock='<div style="flex:1;display:flex;min-width:0">'+turnBtn(pi)+'</div>';
-    o('<div style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;position:relative'+(_p1BtnShown?';min-height:56px':';min-height:0')+_p1RowPad+'">');
+    o('<div class="tap-bottom-row" style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex:1;position:relative'+(_p1BtnShown?';min-height:56px':';min-height:0')+_p1RowPad+'">');
     if(diceLeft){o(diceBlock);o(turnBlock);o(timesBlock);}
     else{o(timesBlock);o(turnBlock);o(diceBlock);}
     o(p1BtnHTML);
