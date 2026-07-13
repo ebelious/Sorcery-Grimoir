@@ -153,6 +153,7 @@ body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2
 body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b;--hi:#d7c483}
 body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2:#908CAA;--fg3:#6E6A86;--red:#EB6F92;--grn:#31748F;--yel:#F6C177;--cyn:#9CCFD8;--wht:#FAEBD7;--bgrn:#31748F;--bbl:#C4A7E7;--life:#EB6F92;--mana:#C4A7E7;--hi:#F6C177}
 #app{width:100%;height:100dvh;height:100vh;height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+#board{display:flex;flex-direction:column;flex:1;min-height:0}
 .flip{transform:rotate(180deg);flex:1 1 0;overflow:hidden;overscroll-behavior:contain;min-height:0;-webkit-overflow-scrolling:touch}.flip-spacer{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .zone{padding:2px 4px;background:var(--bg2);border:1px solid var(--bd);margin:1px;display:flex;flex-direction:column;gap:2px;width:100%;box-sizing:border-box}
 .pname{background:transparent;border:none;border-bottom:1px solid var(--bd);outline:none;color:var(--wht);font-size:17px;font-weight:700;text-align:center;display:block;width:100%;padding:1px 0;font-family:'Courier New',monospace}
@@ -225,6 +226,11 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dice-btns{display:flex;gap:8px;justify-content:center;margin-top:12px}
 .timer-inp::-webkit-outer-spin-button,.timer-inp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .timer-inp{-moz-appearance:textfield}
+.bg-range{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--bg3);outline:none;cursor:pointer}
+.bg-range::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--bg3);border:1px solid var(--bd)}
+.bg-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--hi);border:2px solid var(--bg2);margin-top:-6px;cursor:pointer}
+.bg-range::-moz-range-track{height:6px;border-radius:3px;background:var(--bg3);border:1px solid var(--bd)}
+.bg-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--hi);border:2px solid var(--bg2);cursor:pointer}
 .dbtn{padding:6px 14px;border:1px solid var(--bd);background:var(--bg3);font-size:11px}
 .dbtn.acc{border-color:var(--cyn);color:var(--cyn)}
 .dc-wrap{display:inline-block;vertical-align:middle}
@@ -589,7 +595,7 @@ var MENU_S={
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player name',themes:'Theme',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player name',themes:'Theme',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -661,7 +667,7 @@ var RULES=[{s:'Setup',c:'60+ card Spellbook, 30+ site Atlas, one Avatar. Draw 4.
 var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
-  diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,
+  diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,diceBgImage:null,
   customDieSides:2,
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
@@ -736,7 +742,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -748,21 +754,20 @@ function boot(){
   G.diceTexture=ld('sg-dtex','felt');
   G.diceTexture2=ld('sg-dtex2','felt');
   G.diceFastRoll=ld('sg-dfast',false);
+  G.diceBgImage=ld('sg-dbg',null);
   G.p1TimerMinutes=ld('sg-p1tm',5);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   loadPubDecks();
-  // Pre-warm texture cache for both players in idle time so first roll is instant
-  setTimeout(function(){
-    _diceMakeTex(G.diceTexture||'felt', _diceEffectiveColor(G.diceTexture||'felt'), 512);
-    _diceMakeNormalMap(G.diceTexture||'felt', 512);
-    var t2=G.diceTexture2||'felt';
-    if(t2!==(G.diceTexture||'felt')){
-      _diceMakeTex(t2, _diceEffectiveColor(t2), 512);
-      _diceMakeNormalMap(t2, 512);
-    }
-  }, 800);
+  // Pre-warm the dice overlay (renderer, shadow maps, textures) during genuine
+  // browser idle time only — never competes with startup rendering — so the
+  // first dice roll doesn't stall waiting on WebGL/texture setup.
+  var _prewarm=function(){
+    try{ _diceInitOverlay(); }catch(e){}
+  };
+  if(window.requestIdleCallback) requestIdleCallback(_prewarm,{timeout:3000});
+  else setTimeout(_prewarm,1500);
 }
 function applyTheme(t){
   G.theme=t;sv('sg-th',t);_applyBodyClass();
@@ -822,6 +827,90 @@ function _applyBodyClass(){
     else if(f==='opendyslexic') cls+=' font-opendyslexic';
   }
   document.body.className=cls.trim();
+}
+function _bgImgNav(dir){
+  var idx=BG_IMAGES.findIndex(function(b){return b.file===G.cfg.bgImage;});
+  if(idx<0) idx=(dir>0)?0:BG_IMAGES.length-1;
+  else idx=(idx+dir+BG_IMAGES.length)%BG_IMAGES.length;
+  G.cfg.bgImage=BG_IMAGES[idx].file;
+  sv('sg-cfg',G.cfg);
+  _applyBgImage();
+  _renderKeepScroll();
+}
+function _bgImgSelect(file){
+  G.cfg.bgImage=file;
+  sv('sg-cfg',G.cfg);
+  _applyBgImage();
+  _renderKeepScroll();
+}
+function _bgImgToggleNone(){
+  if(G.cfg.bgImage){ G.cfg._lastBg=G.cfg.bgImage; G.cfg.bgImage=null; }
+  else { G.cfg.bgImage=G.cfg._lastBg||BG_IMAGES[0].file; }
+  sv('sg-cfg',G.cfg);
+  _applyBgImage();
+  _renderKeepScroll();
+}
+function _bgImgPickLocal(){
+  var inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';inp.style.display='none';
+  inp.onchange=function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(ev){
+      G.cfg.bgImage=ev.target.result;
+      try{sv('sg-cfg',G.cfg);}catch(err){}
+      _applyBgImage();
+      _renderKeepScroll();
+    };
+    r.readAsDataURL(f);
+    document.body.removeChild(inp);
+  };
+  document.body.appendChild(inp);
+  inp.click();
+}
+function _hexToRgba(hex,a){
+  hex=(hex||'').trim();
+  if(hex.charAt(0)!=='#')return hex;
+  hex=hex.slice(1);
+  if(hex.length===3)hex=hex.split('').map(function(c){return c+c;}).join('');
+  var r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);
+  return 'rgba('+r+','+g+','+b+','+a+')';
+}
+function _boardBgStyle(){
+  if(!G.cfg.bgImage)return '';
+  var vars=['--bg','--bg2','--bg3'];
+  var alpha=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80)/100;
+  var parts=[];
+  vars.forEach(function(v){
+    var cur=getComputedStyle(document.body).getPropertyValue(v);
+    parts.push(v+':'+_hexToRgba(cur,alpha));
+  });
+  return parts.join(';');
+}
+function _bgSetOpacity(v){
+  v=Math.max(0,Math.min(100,parseInt(v)||0));
+  G.cfg.bgOpacity=v;sv('sg-cfg',G.cfg);_renderKeepScroll();
+}
+function _bgSetDarkness(v){
+  v=Math.max(0,Math.min(100,parseInt(v)||0));
+  G.cfg.bgDarkness=v;sv('sg-cfg',G.cfg);_applyBgImage();_renderKeepScroll();
+}
+function _applyBgImage(){
+  var el=document.getElementById('app');
+  if(!el)return;
+  var file=G.cfg.bgImage;
+  if(file){
+    var dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45)/100;
+    el.style.backgroundImage='linear-gradient(rgba(0,0,0,'+dk+'),rgba(0,0,0,'+dk+')), url("'+_bgResolveUrl(file)+'")';
+    el.style.backgroundSize='cover';
+    el.style.backgroundPosition='center';
+    el.style.backgroundAttachment='fixed';
+  } else {
+    el.style.backgroundImage='';
+    el.style.backgroundSize='';
+    el.style.backgroundPosition='';
+    el.style.backgroundAttachment='';
+  }
 }
 
 // ── PLAYERS ───────────────────────────────────────────────────────────────────
@@ -1184,6 +1273,17 @@ function _diceBuildForSides(sides, col, isCustom){
 
 // ── PROCEDURAL SURFACE TEXTURES ──────────────────────────────────────────────
 var _diceTexCache={};
+var _diceImgTexCache={};
+function _diceLoadImgTex(file,cb){
+  if(_diceImgTexCache[file]){cb(_diceImgTexCache[file]);return;}
+  if(typeof THREE==='undefined')return;
+  var loader=new THREE.TextureLoader();
+  loader.load(file,function(tex){
+    tex.wrapS=tex.wrapT=THREE.ClampToEdgeWrapping;
+    _diceImgTexCache[file]=tex;
+    cb(tex);
+  });
+}
 
 // ── Core noise ────────────────────────────────────────────────────────────────
 function _dH(x,y,s){ // hash -> [0,1]
@@ -1708,6 +1808,40 @@ var DICE_TEXTURES=[
   {id:'multicolor',label:'Multi',      icon:'🌈', fixedColor:'#FFFFFF'},
   {id:'clear',     label:'Clear',      icon:'💎'},
 ];
+// Full-art jpg images bundled in the repo, usable as UI/table backgrounds
+var BG_IMG_PATH='https://elaborate-mooncake-835943.netlify.app/backgrounds/';
+function _bgResolveUrl(file){
+  if(!file)return '';
+  if(file.indexOf('data:')===0||file.indexOf('blob:')===0||file.indexOf('http:')===0||file.indexOf('https:')===0)return file;
+  return BG_IMG_PATH+file;
+}
+var BG_IMAGES=[
+  {id:'mist_zombies',  label:'Mist Zombies',    file:'MistZombiesFullArt.jpg'},
+  {id:'lone_tower',    label:'Lone Tower',      file:'LoneTower.jpg'},
+  {id:'mask_of_mayhem',label:'Mask of Mayhem',  file:'MaskOfMayhemFullArt.jpg'},
+  {id:'maelstrom',     label:'Maelström',       file:'MaelstromFullArt.jpg'},
+  {id:'battlefield',   label:'Battlefield',     file:'Battlefield.jpg'},
+  {id:'imperial_road', label:'Imperial Road',   file:'ImperialRoad.jpg'},
+  {id:'sinkhole',      label:'Sinkhole',        file:'SinkholeFullArt.jpg'},
+  {id:'end_of_world',  label:'End of the World',file:'EndOfTheWorldFullArt.jpg'},
+  {id:'phantom_steed', label:'Phantom Steed',   file:'PhantomSteedFullArt.jpg'},
+  {id:'tide_naiads',   label:'Tide Naiads',     file:'TideNaiadsFullArt.jpg'},
+  {id:'remote_desert', label:'Remote Desert',   file:'RemoteDesert.jpg'},
+  {id:'screaming_skull',label:'Screaming Skull',file:'ScreamingSkull.jpg'},
+  {id:'scent_hounds',  label:'Scent Hounds',    file:'ScentHounds.jpg'},
+  {id:'donnybrook_inn',label:'Donnybrook Inn',  file:'DonnybrookInn.jpg'},
+  {id:'mountain_giant',label:'Mountain Giant',  file:'MountainGiantFullArt.jpg'},
+  {id:'river_of_flame',label:'River of Flame',  file:'RiverOfFlame.jpg'},
+  {id:'camelot',       label:'Camelot',           file:'Camelot.png'},
+  {id:'coy_nixie',     label:'Coy Nixie',         file:'CoyNixie.png'},
+  {id:'invasion',      label:'Invasion',          file:'Invasion.png'},
+  {id:'rustic_village',label:'Rustic Village',    file:'RusticVillage.png'},
+  {id:'screamer',      label:'Screamer',          file:'Screamer.png'},
+  {id:'sir_pelleas',   label:'Sir Pelleas',       file:'SirPelleas.png'},
+  {id:'sir_perceval',  label:'Sir Perceval',      file:'SirPerceval.png'},
+  {id:'witch',         label:'Witch',             file:'Witch.png'},
+  {id:'wizards_den',   label:'Wizards Den',       file:'WizardsDen.png'},
+];
 // Helper: resolve effective felt color for a given texture id
 function _diceEffectiveColor(texId){
   var t=DICE_TEXTURES.find(function(x){return x.id===texId;});
@@ -1758,7 +1892,7 @@ function _diceInitPreview(){
     var scene=new THREE.Scene();
     var camera=new THREE.PerspectiveCamera(45,W/H,0.1,50);
     camera.position.set(0,4.2,0); camera.up.set(0,0,-1); camera.lookAt(0,0,0);
-    var renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+    var renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
     renderer.setSize(W,H,false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
     renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -1781,13 +1915,20 @@ function _diceInitPreview(){
 
   var tex=(G.diceTexture||'felt');
   var fc=_diceEffectiveColor(tex);
-  var texKey=tex+'|'+fc;
+  var texKey=G.diceBgImage?('img:'+G.diceBgImage):(tex+'|'+fc);
   if(_dicePreview.texKey!==texKey){
-    var colorMap=_diceMakeTex(tex,fc,512); // cached by _diceMakeTex itself — instant on repeat visits
-    colorMap.wrapS=colorMap.wrapT=THREE.ClampToEdgeWrapping; colorMap.repeat.set(1,1);
-    _dicePreview.plane.material.map=colorMap;
-    _dicePreview.plane.material.needsUpdate=true;
     _dicePreview.texKey=texKey;
+    if(G.diceBgImage){
+      if(_dicePreview.plane.parent) _dicePreview.scene.remove(_dicePreview.plane);
+      holder.style.background='#000 url("'+_bgResolveUrl(G.diceBgImage)+'") center/cover no-repeat';
+    } else {
+      if(!_dicePreview.plane.parent) _dicePreview.scene.add(_dicePreview.plane);
+      holder.style.background='';
+      var colorMap=_diceMakeTex(tex,fc,512); // cached by _diceMakeTex itself — instant on repeat visits
+      colorMap.wrapS=colorMap.wrapT=THREE.ClampToEdgeWrapping; colorMap.repeat.set(1,1);
+      _dicePreview.plane.material.map=colorMap;
+      _dicePreview.plane.material.needsUpdate=true;
+    }
   }
 
   var col=getDieCol(G.dieCI);
@@ -1808,13 +1949,61 @@ function _diceInitPreview(){
     })();
   }
 }
+function _diceBgImgNav(dir){
+  var idx=BG_IMAGES.findIndex(function(b){return b.file===G.diceBgImage;});
+  if(idx<0) idx=(dir>0)?0:BG_IMAGES.length-1;
+  else idx=(idx+dir+BG_IMAGES.length)%BG_IMAGES.length;
+  G.diceBgImage=BG_IMAGES[idx].file;
+  sv('sg-dbg',G.diceBgImage);
+  _diceUpdateSceneBg();
+  _renderKeepScroll();
+}
+function _diceBgImgSelect(file){
+  G.diceBgImage=file;
+  sv('sg-dbg',file);
+  _diceUpdateSceneBg();
+  _renderKeepScroll();
+}
+function _diceBgImgToggleNone(){
+  if(G.diceBgImage){ G._lastDiceBg=G.diceBgImage; G.diceBgImage=null; }
+  else { G.diceBgImage=G._lastDiceBg||BG_IMAGES[0].file; }
+  sv('sg-dbg',G.diceBgImage);
+  _diceUpdateSceneBg();
+  _renderKeepScroll();
+}
+function _diceBgImgPickLocal(){
+  var inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';inp.style.display='none';
+  inp.onchange=function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(ev){
+      G.diceBgImage=ev.target.result;
+      try{sv('sg-dbg',G.diceBgImage);}catch(err){}
+      _diceUpdateSceneBg();
+      _renderKeepScroll();
+    };
+    r.readAsDataURL(f);
+    document.body.removeChild(inp);
+  };
+  document.body.appendChild(inp);
+  inp.click();
+}
 function _diceUpdateSceneBg(texOverride){
   if(!_diceScene) return;
+  var _dw=document.getElementById('dice-overlay');
+  if(G.diceBgImage){
+    // Image is a flat CSS background behind the (now transparent) 3D canvas — fast, no texture upload
+    _diceScene.background=null;
+    if(_diceFelt&&_diceFelt.parent) _diceScene.remove(_diceFelt);
+    if(_dw) _dw.style.background='#000 url("'+_bgResolveUrl(G.diceBgImage)+'") center/cover no-repeat';
+    return;
+  }
+  if(_diceFelt&&!_diceFelt.parent) _diceScene.add(_diceFelt);
   var tex=texOverride||(G.diceTexture||'felt');
   var fc=_diceEffectiveColor(tex);
   var tc=G.diceTableColor||'#0d1117';
   _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(tex)));
-  var _dw=document.getElementById('dice-overlay');
   if(_dw) _dw.style.background=_diceEffectiveColor(tex);
   // Per-texture PBR properties — tuned for the new procedural engine
   var nrmScale={felt:1.4,oak:3.2,walnut:3.6,mahogany:2.8,pine:2.6,ebony:3.0,marble:4.2,stone:6.0,lava:7.0,leather:7.5,plaid:1.6,multicolor:0.6,clear:2.8};
@@ -1904,7 +2093,7 @@ function _diceInitOverlay(){
   _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(G.diceTexture||'felt')));
   _diceCamera=new THREE.PerspectiveCamera(50,W/H,0.1,100);
   _diceCamera.position.set(0,12,0); _diceCamera.lookAt(0,0,0); _diceCamera.up.set(0,0,-1);
-  _diceRenderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+  _diceRenderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
   _diceRenderer.setSize(W,H);
   _diceRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   _diceRenderer.shadowMap.enabled=true;
@@ -3578,24 +3767,48 @@ function pContent(){
   var out=[];function o(s){out.push(s);}
 
   if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--yel);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
-  if(p==='dice'){o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);render()">'+lbl+'</button>');});
-    o('</div><div class="slbl2" style="margin-top:10px">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" style="width:80px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--wht);font-size:14px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;render()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
+  if(p==='dice'){o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
+    o('</div><div class="slbl2" style="margin-top:10px">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
-    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');render()"></div>');});o('</div>');
+    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_renderKeepScroll()"></div>');});o('</div>');
     o('<div class="slbl2" style="margin-top:18px">Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();render()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
+    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
     if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2" style="margin-top:18px">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
-    ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();render()"></div>');});
-    o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();render()"></div>');
+    ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
+    o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();_renderKeepScroll()"></div>');
     o('</div>');}
+
+    o('<div class="slbl2" style="margin-top:18px">Background Image (Table)</div>');
+    o('<div class="set-row"><span>No Image</span><button class="ftag'+(!G.diceBgImage?' on':'')+'" onclick="_diceBgImgToggleNone()">'+(!G.diceBgImage?'On':'Off')+'</button></div>');
+    (function(){
+      var _cur=BG_IMAGES.find(function(b){return b.file===G.diceBgImage;});
+      var _label=G.diceBgImage?(_cur?_cur.label:(G.diceBgImage.indexOf('data:')===0||G.diceBgImage.indexOf('blob:')===0?'Local Image':G.diceBgImage)):'None';
+      var _showFile=G.diceBgImage||(BG_IMAGES[0]&&BG_IMAGES[0].file);
+      o('<div style="display:flex;align-items:flex-start;justify-content:center;gap:10px;margin-top:6px">');
+      o('<div style="display:flex;align-items:center;gap:10px">');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_diceBgImgNav(-1)">&#8592;</button>');
+      o('<div style="width:120px;aspect-ratio:3/4;overflow:hidden;border-radius:8px;border:1px solid var(--bd);flex-shrink:0">'+(G.diceBgImage?'<img src="'+_bgResolveUrl(_showFile)+'" style="width:100%;height:100%;object-fit:cover;display:block">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg2);font-size:24px">🚫</div>')+'</div>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_diceBgImgNav(1)">&#8594;</button>');
+      o('</div>');
+      o('<div id="dicebg-list" style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;width:120px;flex-shrink:0">');
+      BG_IMAGES.forEach(function(b){
+        var on=G.diceBgImage===b.file;
+        o('<div class="bgimg-item'+(on?' on':'')+'" style="padding:5px 6px;font-size:11px;line-height:1.3;border-radius:4px;cursor:pointer;background:'+(on?'var(--bg3)':'transparent')+';color:'+(on?'var(--hi)':'var(--fg2)')+';border:1px solid '+(on?'var(--hi)':'transparent')+'" onclick="_diceBgImgSelect(\''+b.file+'\')">'+h(b.label)+'</div>');
+      });
+      o('</div>');
+      setTimeout(function(){var _l=document.getElementById('dicebg-list');var _s=_l&&_l.querySelector('.on');if(_s)_s.scrollIntoView({block:'nearest'});},0);
+      o('</div>');
+      o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
+      o('<button class="fb gold full" style="margin-top:8px" onclick="_diceBgImgPickLocal()">&#128193; Choose Image from Device</button>');
+    })();
 
     o('<div class="slbl2" style="margin-top:18px">Preview</div>');
     o('<div id="dice-preview-holder" style="width:100%;max-width:220px;aspect-ratio:1/1;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
     setTimeout(function(){_diceInitPreview();},0);
 
     o('<div class="slbl2" style="margin-top:18px;margin-bottom:0">Animation</div>');
-    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);render()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
+    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
@@ -3610,27 +3823,11 @@ function pContent(){
     o('</div>');
     o('<div class="slbl2">Dice</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span>&#8594;</span></button>');
-    o('<div class="slbl2" style="margin-top:14px">Color Theme</div>');
-    o('<div class="tgrid">');
-    THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');_renderKeepScroll()">'+t.l+'</button>');});
-    o('</div>');
-    // ─── Highlight color picker ───
-    o('<div class="slbl2" style="margin-top:18px">Highlight Color</div>');
-    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">Used for buttons, search bar, and labels. Resets when you change theme.</div>');
-    var _hiOptions=[
-      ['#FBB829','Yellow'],['#D79921','Orange'],['#F1FA8C','Lime'],['#EBCB8B','Tan'],
-      ['#EBC06D','Gold'],['#F6C177','Peach'],['#0AAEB3','Teal'],['#8BE9FD','Cyan'],
-      ['#83C092','Green'],['#50FA7B','Mint'],['#EB6F92','Pink'],['#FF5555','Red'],
-      ['#D6ACFF','Violet'],['#C4A7E7','Purple'],['#68A8E4','Blue'],['#88C0D0','Frost']
-    ];
-    var _curHi=G.cfg.hi||(THEME_HI[G.theme||'']||'#FBB829');
-    o('<div class="tgrid" style="margin-bottom:8px">');
-    _hiOptions.forEach(function(opt){
-      var col=opt[0],name=opt[1];
-      var active=_curHi.toLowerCase()===col.toLowerCase();
-      o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');_renderKeepScroll()">'+name+'</button>');
-    });
-    o('</div>');
+    o('<div class="slbl2" style="margin-top:14px">Color</div>');
+    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>Color</span><span>&#8594;</span></button>');
+    o('<div class="slbl2" style="margin-top:14px">Backgrounds</div>');
+    o('<div class="set-row"><span>No Image</span><button class="ftag'+(!G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(!G.cfg.bgImage?'On':'Off')+'</button></div>');
+    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>Backgrounds</span><span>&#8594;</span></button>');
     o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
@@ -3643,6 +3840,12 @@ function pContent(){
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
+    if(G.cfg.bgImage){
+      var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
+      var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
+      o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="width:70px" oninput="_bgSetOpacity(this.value)"><input type="number" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+      o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="width:70px" oninput="_bgSetDarkness(this.value)"><input type="number" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+    }
     o('<div class="slbl2" style="margin-top:10px">UI Buttons</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
@@ -3662,6 +3865,52 @@ function pContent(){
     }
     o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
     o('</div>');
+    return out.join('');}
+  if(p==='color'){
+    o('<div class="slbl2">Color Theme</div>');
+    o('<div class="tgrid">');
+    THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');_renderKeepScroll()">'+t.l+'</button>');});
+    o('</div>');
+    o('<div class="slbl2" style="margin-top:18px">Highlight Color</div>');
+    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">Used for buttons, search bar, and labels. Resets when you change theme.</div>');
+    var _hiOptions=[
+      ['#FBB829','Yellow'],['#D79921','Orange'],['#F1FA8C','Lime'],['#EBCB8B','Tan'],
+      ['#EBC06D','Gold'],['#F6C177','Peach'],['#0AAEB3','Teal'],['#8BE9FD','Cyan'],
+      ['#83C092','Green'],['#50FA7B','Mint'],['#EB6F92','Pink'],['#FF5555','Red'],
+      ['#D6ACFF','Violet'],['#C4A7E7','Purple'],['#68A8E4','Blue'],['#88C0D0','Frost']
+    ];
+    var _curHi=G.cfg.hi||(THEME_HI[G.theme||'']||'#FBB829');
+    o('<div class="tgrid" style="margin-bottom:8px">');
+    _hiOptions.forEach(function(opt){
+      var col=opt[0],name=opt[1];
+      var active=_curHi.toLowerCase()===col.toLowerCase();
+      o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');_renderKeepScroll()">'+name+'</button>');
+    });
+    o('</div>');
+    return out.join('');}
+  if(p==='bgimg'){
+    o('<div class="slbl2">Background Image</div>');
+    (function(){
+      var _cur=BG_IMAGES.find(function(b){return b.file===G.cfg.bgImage;});
+      var _label=G.cfg.bgImage?(_cur?_cur.label:(G.cfg.bgImage.indexOf('data:')===0||G.cfg.bgImage.indexOf('blob:')===0?'Local Image':G.cfg.bgImage)):'None';
+      var _showFile=G.cfg.bgImage||(BG_IMAGES[0]&&BG_IMAGES[0].file);
+      o('<div style="display:flex;align-items:flex-start;justify-content:center;gap:10px;margin-top:6px">');
+      o('<div style="display:flex;align-items:center;gap:10px">');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_bgImgNav(-1)">&#8592;</button>');
+      o('<div style="width:120px;aspect-ratio:3/4;overflow:hidden;border-radius:8px;border:1px solid var(--bd);flex-shrink:0">'+(G.cfg.bgImage?'<img src="'+_bgResolveUrl(_showFile)+'" style="width:100%;height:100%;object-fit:cover;display:block">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg2);font-size:24px">🚫</div>')+'</div>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_bgImgNav(1)">&#8594;</button>');
+      o('</div>');
+      o('<div id="uibg-list" style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;width:120px;flex-shrink:0">');
+      BG_IMAGES.forEach(function(b){
+        var on=G.cfg.bgImage===b.file;
+        o('<div class="bgimg-item'+(on?' on':'')+'" style="padding:5px 6px;font-size:11px;line-height:1.3;border-radius:4px;cursor:pointer;background:'+(on?'var(--bg3)':'transparent')+';color:'+(on?'var(--hi)':'var(--fg2)')+';border:1px solid '+(on?'var(--hi)':'transparent')+'" onclick="_bgImgSelect(\''+b.file+'\')">'+h(b.label)+'</div>');
+      });
+      o('</div>');
+      setTimeout(function(){var _l=document.getElementById('uibg-list');var _s=_l&&_l.querySelector('.on');if(_s)_s.scrollIntoView({block:'nearest'});},0);
+      o('</div>');
+      o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
+      o('<button class="fb gold full" style="margin-top:8px" onclick="_bgImgPickLocal()">&#128193; Choose Image from Device</button>');
+    })();
     return out.join('');}
   G._rd=G._rd||[];G._faqRd=[];if(p==='rules'){RULES.forEach(function(r){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
@@ -4632,6 +4881,7 @@ function render(){
     var _botP=G.cfg&&G.cfg.p2Side==='bottom'?p1:p0;
     var _topPI=G.cfg&&G.cfg.p2Side==='bottom'?0:1;
     var _botPI=G.cfg&&G.cfg.p2Side==='bottom'?1:0;
+    o('<div id="board" style="'+_boardBgStyle()+'">');
     // P2 at TOP (flipped 180°)
     if(_topP)o('<div class="flip">'+_pFn(_topP,_topPI)+'</div>');
 
@@ -4644,6 +4894,7 @@ function render(){
 
     // P1 at BOTTOM
     o('<div class="zones">'+_pFn(_botP,_botPI)+'</div>');
+    o('</div>'); // #board
 
     // ── Overlays ── (dice overlay is now a persistent fullscreen DOM element, not rendered here)
     if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
@@ -4767,12 +5018,6 @@ document.addEventListener('click',function(e){
 },true);
 
 boot();
-
-// Eagerly warm up the dice overlay after the page has painted,
-// so the first roll has no cold-start delay.
-setTimeout(function(){
-  try{ _diceInitOverlay(); }catch(e){}
-}, 800);
 
 </script>
 <div id="rulebook-modal">
