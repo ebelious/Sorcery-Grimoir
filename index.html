@@ -673,6 +673,7 @@ var G={
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
   metaFmt:'constructed',metaCache:{},metaLoading:false,metaErr:null,
   cF:{el:[],type:[],rarity:[],set:[],mana:[]},
+  cSort:null,cSortDir:'asc',
   coF:{el:[],type:[],rarity:[],set:[]},
   accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
@@ -2651,6 +2652,12 @@ function thrIcons(th){
   });
   return out+' ';
 }function cSlug(c){return c.sl||'';}
+function cThrTotal(c){
+  var th=cThr(c);if(!th)return 0;
+  var total=0;
+  th.split(' ').forEach(function(p){var m=p.match(/^(\d+)([fwea])$/i);if(m)total+=parseInt(m[1]);});
+  return total;
+}
 function cSetAbbr(c){
   var slug=cSlug(c);
   if(slug){var pfx=slug.split('-')[0];if(pfx)return pfx.toUpperCase();}
@@ -2762,6 +2769,28 @@ function _toggleF(f,k,v){
 }
 function setCF(k,v){_toggleF(G.cF,k,v);}
 function setCoF(k,v){_toggleF(G.coF,k,v);}
+function setCSort(field){
+  if(G.cSort===field){G.cSortDir=G.cSortDir==='asc'?'desc':'asc';}
+  else{G.cSort=field;G.cSortDir=field==='name'?'asc':'desc';}
+  render();
+}
+function cSortArr(arr){
+  if(!G.cSort)return arr;
+  var field=G.cSort,dir=G.cSortDir==='asc'?1:-1;
+  var out=arr.slice();
+  out.sort(function(a,b){
+    if(field==='name'){
+      return cName(a).localeCompare(cName(b),'en',{sensitivity:'base',numeric:true})*dir;
+    }
+    var av,bv;
+    if(field==='mana'){av=cMana(a);av=av==null?-1:av;bv=cMana(b);bv=bv==null?-1:bv;}
+    else{av=cThrTotal(a);bv=cThrTotal(b);}
+    if(av<bv)return -1*dir;
+    if(av>bv)return 1*dir;
+    return 0;
+  });
+  return out;
+}
 function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],mana:[]};render();}
 function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[]};render();}
 function allSetNames(){var seen={};var out=[];CARDS.forEach(function(c){cSets(c).forEach(function(s){if(!seen[s]){seen[s]=1;out.push(s);}});});return out.sort();}
@@ -3679,10 +3708,18 @@ function pContent(){
   }
   if(p==='links'){[{n:'SorceryTCG.com',u:'https://sorcerytcg.com/',d:'Official site'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Codex Changelog',u:'https://curiosa.io/codex/changelog',d:'Site updates & changes'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:"Curio's",u:'https://www.collectorarthouse.com/curio-cards',d:'Collector art house'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px" href="'+l.u+'" target="_blank"><b>'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
   if(p==='cards'){
-    var q=S.cS||'';var fil=cFilter(CARDS,G.cF,q);
+    var q=S.cS||'';var fil=cSortArr(cFilter(CARDS,G.cF,q));
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
     o('<div id="csrch-wrap" class="si" style="margin:0 0 5px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
-    o(fBar(G.cF,'setCF',true,'resetCF'));o('<div class="cgrid">');
+    o(fBar(G.cF,'setCF',true,'resetCF'));
+    o('<div class="frow"><span class="flbl">Sort</span>');
+    [['mana','Mana'],['thr','Threshold'],['name','A-Z']].forEach(function(s){
+      var on=G.cSort===s[0];
+      var arrow=on?(G.cSortDir==='asc'?' &#8593;':' &#8595;'):'';
+      o('<button class="ftag'+(on?' on':'')+'" onclick="setCSort(\''+s[0]+'\')">'+s[1]+arrow+'</button>');
+    });
+    o('</div>');
+    o('<div class="cgrid">');
     fil.forEach(function(c){
       o('<div class="cimg" data-cn="'+h(cName(c))+'" style="cursor:pointer" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c)+'</div>');
     });
@@ -4271,7 +4308,7 @@ function cModal(){
   var rC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[cRar(c)]||'#918175';
   var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};var isSite=cType(c)==='site';
   var out=[];function o(s){out.push(s);}
-  o('<div class="cm-bg" onclick="if(event.target===this)closeAll()"><div class="cm">');
+  o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
   if(isSite){
     var _siteImgStyle='position:absolute;top:50%;left:50%;width:75.12%;height:133.13%;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover;display:block';
