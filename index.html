@@ -673,6 +673,7 @@ var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
   diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,diceBgImage:null,diceShape:'normal',
+  newsHasNew:false,ytHasNew:false,
   customDieSides:2,
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
@@ -774,6 +775,14 @@ function boot(){
   };
   if(window.requestIdleCallback) requestIdleCallback(_prewarm,{timeout:3000});
   else setTimeout(_prewarm,1500);
+  // Silently check News/YouTube for new content during idle time, so a badge
+  // can appear without the person needing to open those tabs first.
+  var _checkNew=function(){
+    try{ loadNews(); }catch(e){}
+    try{ loadYTVideos(); }catch(e){}
+  };
+  if(window.requestIdleCallback) requestIdleCallback(_checkNew,{timeout:5000});
+  else setTimeout(_checkNew,2500);
 }
 function applyTheme(t){
   G.theme=t;sv('sg-th',t);_applyBodyClass();
@@ -3440,6 +3449,14 @@ function _fetchVideos(cid, chName, cb){
 }
 
 
+function _checkYtForNew(){
+  if(!G.ytVids||!G.ytVids.length)return;
+  var latest=G.ytVids[0].videoId||G.ytVids[0].id;
+  if(!latest)return;
+  var seen=ld('sg-yt-seen',null);
+  if(seen==null){ sv('sg-yt-seen',latest); }
+  else if(seen!==latest){ G.ytHasNew=true; }
+}
 function loadYTVideos(){
   if(G.ytLoading)return;
   G.ytLoading=true;G.ytLoaded=false;G.ytErr=null;
@@ -3461,6 +3478,7 @@ function loadYTVideos(){
       allVids.sort(function(a,b){return (b._ts||0)-(a._ts||0);});
       G.ytVids=allVids.slice();
       if(!G.ytVids.length)G.ytErr='No videos loaded. Proxies may be busy — try again in a moment.';
+      if(selId==='all')_checkYtForNew();
       render();
       return;
     }
@@ -3779,6 +3797,14 @@ function _filterPubDecks(){
   listEl.innerHTML=out.join('');
 }
 
+function _checkNewsForNew(){
+  if(!G.newsItems||!G.newsItems.length)return;
+  var latest=G.newsItems[0].url||G.newsItems[0].title;
+  if(!latest)return;
+  var seen=ld('sg-news-seen',null);
+  if(seen==null){ sv('sg-news-seen',latest); }
+  else if(seen!==latest){ G.newsHasNew=true; }
+}
 function loadNews(){
   if(G.newsLoading)return;
   G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
@@ -3795,6 +3821,7 @@ function loadNews(){
       if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
       G.newsItems=arr;
       G.newsLoading=false;G.newsLoaded=true;
+      _checkNewsForNew();
       render();
     })
     .catch(function(){
@@ -3878,7 +3905,12 @@ function loadPubStats(){
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
-function openPanel(id){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();}
+function openPanel(id){
+  vibrate(10);
+  if(id==='news'){G.newsHasNew=false;if(G.newsItems&&G.newsItems.length){var l=G.newsItems[0].url||G.newsItems[0].title;if(l)sv('sg-news-seen',l);}}
+  if(id==='yt'){G.ytHasNew=false;if(G.ytVids&&G.ytVids.length&&(G.ytCh||'all')==='all'){var lv=G.ytVids[0].videoId||G.ytVids[0].id;if(lv)sv('sg-yt-seen',lv);}}
+  G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();
+}
 function openCat(cat){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;render();}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}}
 function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();}
@@ -5072,14 +5104,15 @@ function render(){
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
+        var _catDot=(cat==='Content'&&(G.newsHasNew||G.ytHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
-        else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
+        else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
       });
       o('</div><div class="dfoot"><a href="https://github.com/ebelious/Sorcery-Grimoir#sorcery-grimoir" target="_blank" style="text-decoration:none"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></a></div></div>');
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
-        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';o('<div class="cpop-it" onclick="'+onclick+'">' +item+'</div>');});
+        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
         o('<button class="cpop-bk" onclick="goBack()">&larr; Back</button></div></div>');
       }
     }
