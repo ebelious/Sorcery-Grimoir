@@ -285,7 +285,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .fb.gold{color:var(--hi);border-color:var(--hi)}
 .fb.red{color:var(--red);border-color:var(--red)}
 .fb.full{width:100%;margin-top:4px}
-.set-pop .slbl2{margin-bottom:14px}
+.set-pop .slbl2{margin-top:22px;margin-bottom:14px}
 .sl-pop .slbl2{font-size:17px}
 .sl-pop .fi{font-size:16px;padding:11px 12px}
 .sl-pop .fb{font-size:14px;padding:11px 16px}
@@ -3884,10 +3884,10 @@ function pContent(){
   var out=[];function o(s){out.push(s);}
 
   if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--yel);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
-  if(p==='dice'){o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
-    o('</div><div class="slbl2" style="margin-top:10px">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
+  if(p==='dice'){o('<div class="set-pop">');o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
+    o('</div><div class="slbl2">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
-    o('<div class="slbl2" style="margin-top:18px">Die Shape</div>');
+    o('<div class="slbl2">Die Shape</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Only applies to the Custom die.</div>');
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     [['normal','Normal','&#x2b21;'],['toad','Toad','&#x1f438;'],['coin','Coin','&#x1fa99;']].forEach(function(s){
@@ -3896,15 +3896,15 @@ function pContent(){
     });
     o('</div>');
     o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_renderKeepScroll()"></div>');});o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
+    o('<div class="slbl2">Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
-    if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2" style="margin-top:18px">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
+    if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
     ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
     o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();_renderKeepScroll()"></div>');
     o('</div>');}
 
-    o('<div class="slbl2" style="margin-top:18px">Background Image (Table)</div>');
+    o('<div class="slbl2">Background Image (Table)</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.diceBgImage?' on':'')+'" onclick="_diceBgImgToggleNone()">'+(G.diceBgImage?'On':'Off')+'</button></div>');
     (function(){
       var _cur=BG_IMAGES.find(function(b){return b.file===G.diceBgImage;});
@@ -3928,12 +3928,13 @@ function pContent(){
       o('<button class="fb gold full" style="margin-top:8px" onclick="_diceBgImgPickLocal()">&#128193; Choose Image from Device</button>');
     })();
 
-    o('<div class="slbl2" style="margin-top:18px">Preview</div>');
+    o('<div class="slbl2">Preview</div>');
     o('<div id="dice-preview-holder" style="width:100%;max-width:220px;aspect-ratio:1/1;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
     setTimeout(function(){_diceInitPreview();},0);
 
-    o('<div class="slbl2" style="margin-top:18px;margin-bottom:0">Animation</div>');
+    o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
+    o('</div>');
     return out.join('');}
   if(p==='names'){
     o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
@@ -3948,12 +3949,12 @@ function pContent(){
     o('</div>');
     o('<div class="slbl2">Dice</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span>&#8594;</span></button>');
-    o('<div class="slbl2" style="margin-top:14px">Color</div>');
+    o('<div class="slbl2">Color</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>Color</span><span>&#8594;</span></button>');
-    o('<div class="slbl2" style="margin-top:14px">Backgrounds</div>');
+    o('<div class="slbl2">Backgrounds</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>Backgrounds</span><span>&#8594;</span></button>');
-    o('<div class="slbl2" style="margin-top:10px">UI Options</div>');
+    o('<div class="slbl2">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
@@ -3971,7 +3972,7 @@ function pContent(){
       o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="width:70px" oninput="_bgSetOpacity(this.value)"><input type="number" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
       o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="width:70px" oninput="_bgSetDarkness(this.value)"><input type="number" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
     }
-    o('<div class="slbl2" style="margin-top:10px">UI Buttons</div>');
+    o('<div class="slbl2">UI Buttons</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
@@ -3992,11 +3993,12 @@ function pContent(){
     o('</div>');
     return out.join('');}
   if(p==='color'){
+    o('<div class="set-pop">');
     o('<div class="slbl2">Color Theme</div>');
     o('<div class="tgrid">');
     THEMES.forEach(function(t){o('<button class="tgb'+(G.theme===t.k?' on':'')+'" onclick="applyTheme(\''+t.k+'\');_renderKeepScroll()">'+t.l+'</button>');});
     o('</div>');
-    o('<div class="slbl2" style="margin-top:18px">Highlight Color</div>');
+    o('<div class="slbl2">Highlight Color</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">Used for buttons, search bar, and labels. Resets when you change theme.</div>');
     var _hiOptions=[
       ['#FBB829','Yellow'],['#D79921','Orange'],['#F1FA8C','Lime'],['#EBCB8B','Tan'],
@@ -4012,8 +4014,10 @@ function pContent(){
       o('<button class="tgb'+(active?' on':'')+'" style="'+(active?'border-color:'+col+';color:'+col:'')+';" onclick="applyHighlight(\''+col+'\');_renderKeepScroll()">'+name+'</button>');
     });
     o('</div>');
+    o('</div>');
     return out.join('');}
   if(p==='bgimg'){
+    o('<div class="set-pop">');
     o('<div class="slbl2">Background Image</div>');
     (function(){
       var _cur=BG_IMAGES.find(function(b){return b.file===G.cfg.bgImage;});
@@ -4036,6 +4040,7 @@ function pContent(){
       o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
       o('<button class="fb gold full" style="margin-top:8px" onclick="_bgImgPickLocal()">&#128193; Choose Image from Device</button>');
     })();
+    o('</div>');
     return out.join('');}
   G._rd=G._rd||[];G._faqRd=[];if(p==='rules'){RULES.forEach(function(r){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
@@ -5058,7 +5063,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Search cards, FAQ, codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);p1TimerStop();G.timerLog=[];G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);p1TimerReset();G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
