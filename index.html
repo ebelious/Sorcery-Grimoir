@@ -595,7 +595,7 @@ var MENU_S={
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
-  Content:['YouTube','News','Discord'],
+  Media:['YouTube','News','Discord'],
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
@@ -5166,7 +5166,7 @@ function render(){
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
-        var _catDot=(cat==='Content'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
+        var _catDot=(cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
       });
