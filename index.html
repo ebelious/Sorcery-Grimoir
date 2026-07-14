@@ -3366,7 +3366,7 @@ function _dvCardFan(cards){
   html+='</div>';
   return html;
 }
-var _dvFanDragging=false,_dvFanLastEl=null,_dvPressTimer=null,_dvSuppressClick=false,_dvPinnedEl=null,_dvHandScrollPos=null;
+var _dvFanDragging=false,_dvFanLastEl=null,_dvPressTimer=null,_dvSuppressClick=false,_dvPinnedEl=null,_dvHandScrollPos=null,_dvXTimer=null;
 var _dvDragStartX=0,_dvDragStartY=0,_dvIsDragging=false;
 function _dvFanClearHi(el){
   if(!el)return;
@@ -3382,12 +3382,26 @@ function _dvFanApplyHi(el){
   el.style.zIndex='99';
 }
 function _dvUnpin(){
+  if(_dvXTimer){clearTimeout(_dvXTimer);_dvXTimer=null;}
   if(_dvPinnedEl){
     _dvFanClearHi(_dvPinnedEl);
     var fan=_dvPinnedEl.closest?_dvPinnedEl.closest('.dv-fan'):null;
     if(fan)fan.querySelectorAll('.dv-x').forEach(function(x){x.style.opacity='0';x.style.pointerEvents='none';});
   }
   _dvPinnedEl=null;
+}
+function _dvPinCard(el){
+  if(_dvPinnedEl===el)return;
+  _dvUnpin();
+  _dvPinnedEl=el;
+  _dvFanApplyHi(el);
+  _dvXTimer=setTimeout(function(){
+    if(_dvPinnedEl===el){
+      var xEl=el.querySelector('.dv-x');
+      if(xEl){xEl.style.opacity='1';xEl.style.pointerEvents='auto';}
+    }
+    _dvXTimer=null;
+  },1500);
 }
 function _dvFanUpdate(ev){
   var el=document.elementFromPoint(ev.clientX,ev.clientY);
@@ -3398,9 +3412,7 @@ function _dvFanUpdate(ev){
     _dvFanLastEl=card;
   }
   if(_dvIsDragging&&card&&card!==_dvPinnedEl){
-    _dvUnpin();
-    _dvPinnedEl=card;
-    _dvFanApplyHi(card);
+    _dvPinCard(card);
   }
 }
 function _dvFanStart(ev){
@@ -3428,15 +3440,9 @@ function _dvCardPressStart(ev,el){
   if(_dvPressTimer)clearTimeout(_dvPressTimer);
   _dvPressTimer=setTimeout(function(){
     _dvSuppressClick=true;
-    if(_dvPinnedEl&&_dvPinnedEl!==el)_dvUnpin();
-    var fan=el.closest('.dv-fan');
-    if(fan)fan.querySelectorAll('.dv-x').forEach(function(x){x.style.opacity='0';x.style.pointerEvents='none';});
-    var xEl=el.querySelector('.dv-x');
-    if(xEl){xEl.style.opacity='1';xEl.style.pointerEvents='auto';}
-    _dvFanApplyHi(el);
-    _dvPinnedEl=el;
+    _dvPinCard(el);
     _dvPressTimer=null;
-  },500);
+  },350);
 }
 function _dvCardPressEnd(ev){
   if(_dvPressTimer){clearTimeout(_dvPressTimer);_dvPressTimer=null;}
