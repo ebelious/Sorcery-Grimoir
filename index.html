@@ -750,7 +750,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,vibrateLevel:'low',diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -812,7 +812,6 @@ function resetAllTheme(){
   G.cfg.noBorders=false;
   G.cfg.plainFont=false;
   G.cfg.vibrate=true;
-  G.cfg.vibrateLevel='low';
   G.cfg.menuLeft=false;
   G.cfg.diceLeft=true;
   G.cfg.p1BtnLeft=false;
@@ -4216,7 +4215,13 @@ function pContent(){
   var out=[];function o(s){out.push(s);}
 
   if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--yel);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
-  if(p==='dice'){o('<div class="set-pop">');o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
+  if(p==='dice'){o('<div class="set-pop">');
+    o('<div style="float:right;position:sticky;top:6px;z-index:5;width:104px;text-align:center;margin:0 0 8px 10px">');
+    o('<div class="slbl2" style="margin-top:0;font-size:11px;margin-bottom:4px">Preview</div>');
+    o('<div id="dice-preview-holder" style="width:100px;height:100px;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
+    o('</div>');
+    setTimeout(function(){_diceInitPreview();},0);
+    o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
     o('</div><div class="slbl2">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     o('<div class="slbl2">Die Shape</div>');
@@ -4260,10 +4265,6 @@ function pContent(){
       o('<button class="fb gold full" style="margin-top:8px" onclick="_diceBgImgPickLocal()">&#128193; Choose Image from Device</button>');
     })();
 
-    o('<div class="slbl2">Preview</div>');
-    o('<div id="dice-preview-holder" style="width:100%;max-width:220px;aspect-ratio:1/1;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
-    setTimeout(function(){_diceInitPreview();},0);
-
     o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     o('</div>');
@@ -4296,10 +4297,7 @@ function pContent(){
       fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="slbl2">Vibration</div>');
-    o('<div class="tgrid">');
-    [['low','Low'],['medium','Medium'],['high','High']].forEach(function(lv){var active=(G.cfg.vibrateLevel||'low')===lv[0];o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.vibrateLevel=\''+lv[0]+'\';G.cfg.vibrate=true;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+lv[1]+'</button>');});
-    o('</div>');
+    o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
@@ -5462,6 +5460,33 @@ function buildGsDrop(){
   CODEX_DATA.filter(function(k){return k.k&&k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" data-codex="'+h(k.k)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(k.k)+'</div><div class="sc">Codex</div></div>');});
   return items.slice(0,8).join('');
 }
+// Patches just the search dropdown + clear button in place (no full app
+// re-render), so the on-screen keyboard isn't dismissed while typing.
+function updateGsDrop(){
+  var inp=document.getElementById('gs-inp');
+  if(!inp)return;
+  var si=inp.parentElement;
+  if(!si)return;
+  var sdd=si.querySelector('.sdd');
+  var dropHtml=S.gsDrop&&S.gs?buildGsDrop():'';
+  if(dropHtml){
+    if(!sdd){sdd=document.createElement('div');sdd.className='sdd';si.appendChild(sdd);}
+    sdd.innerHTML=dropHtml;
+  } else if(sdd){
+    sdd.remove();
+  }
+  var gc=document.getElementById('gs-clr');
+  if(S.gs){
+    if(!gc){
+      gc=document.createElement('button');
+      gc.className='sx';gc.id='gs-clr';gc.innerHTML='&times;';
+      gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
+      si.insertBefore(gc,inp.nextSibling);
+    }
+  } else if(gc){
+    gc.remove();
+  }
+}
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
@@ -5590,7 +5615,13 @@ function schedRender(){
 }
 function bindSearchInputs(){
   function bind(id,cb){var el=document.getElementById(id);if(!el)return;if(el._b)el.removeEventListener('input',el._b);el._b=function(){cb(el.value);schedRender();};el.addEventListener('input',el._b);}
-  bind('gs-inp',function(v){S.gs=v;S.gsDrop=true;});
+  (function(){
+    var el=document.getElementById('gs-inp');
+    if(!el)return;
+    if(el._b)el.removeEventListener('input',el._b);
+    el._b=function(){S.gs=el.value;S.gsDrop=true;updateGsDrop();};
+    el.addEventListener('input',el._b);
+  })();
   bind('card-srch',function(v){S.cS=v;});
   bind('coll-srch',function(v){S.coS=v;});
   bind('faq-srch',function(v){S.faqQ=v;});
