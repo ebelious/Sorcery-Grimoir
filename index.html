@@ -678,7 +678,7 @@ var G={
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
   cfg:{maxLife:20,p1:'Player 1',p2:'Player 2'},
-  selCard:null,expImg:null,logPopup:null,
+  selCard:null,expImg:null,logPopup:null,cmDeckSel:null,dvSort:'name',dvTrack:false,
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
   discordItems:null,discordLoading:false,discordLoaded:false,discordErr:null,
@@ -2966,7 +2966,7 @@ function showTimerLogPopup(anchorEl){
   },0);
 }
 
-function toggleAcc(key){G.accExp[key]=!G.accExp[key];render();}
+function toggleAcc(key){G.accExp[key]=!G.accExp[key];_renderKeepScroll();}
 
 // ── CARD HELPERS ─────────────────────────────────────────────────────────────
 var _cm={};(function(){CARDS.forEach(function(c){_cm[c.n]=c;});})();
@@ -3264,6 +3264,23 @@ function adjDeckColl(deckKey,cardName,delta){
   _renderKeepScroll();
 }
 
+function adjDeckMaybe(deckKey,cardName,delta){
+  var dk=G.decks[deckKey];if(!dk)return;
+  if(!dk.maybe)dk.maybe=[];
+  var existing=dk.maybe.find(function(x){return x.name===cardName;});
+  if(delta>0){
+    var c=cardByName(cardName);
+    var maxMaybe=c?_maxCopies(c):4;
+    var curQty=existing?existing.qty:0;
+    if(curQty>=maxMaybe){alert('Max '+maxMaybe+' cop'+(maxMaybe===1?'y':'ies')+' of this card in maybeboard.');return;}
+    if(existing){existing.qty++;}else{dk.maybe.push({name:cardName,qty:1});}
+  } else {
+    if(!existing)return;
+    if(existing.qty>1){existing.qty--;}else{dk.maybe=dk.maybe.filter(function(x){return x.name!==cardName;});}
+  }
+  sv('sg-dk',G.decks);
+  _renderKeepScroll();
+}
 function removeCardFromDeck(deckKey,cardName){
   var dk=G.decks[deckKey];if(!dk)return;
   var idx=dk.cards.findIndex(function(x){return x.name===cardName;});
@@ -4216,16 +4233,25 @@ function pContent(){
   if(p==='decks'){
     o('<div class="fr"><button class="fb gold" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import CSV</button></div>');
     if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
+    var elMap={f:'fire',w:'water',e:'earth',a:'air'};
     Object.entries(G.decks).forEach(function(kv){
       var k=kv[0],dk=kv[1];
       var ds=G.dkstat[k]||{w:0,l:0};
       var pct2=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';
-      var totalCards=dk.cards.reduce(function(s,c){return s+c.qty;},0);
+      var dkEls={};
+      dk.cards.forEach(function(entry){
+        var c=cardByName(entry.name);if(!c)return;
+        var th=cThr(c)||'';
+        ['a','e','f','w'].forEach(function(el){if(th.indexOf(el)>=0)dkEls[el]=true;});
+      });
       var safeK=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       o('<div class="dk-c" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px" onclick="G.selDeck=\''+safeK+'\';openPanel(\'deckview\')">');
       o('<div style="flex:1;min-width:0">');
-      o('<div style="font-size:17px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+h(dk.name)+'</div>');
-      o('<div class="ss" style="margin-top:3px"><span>'+totalCards+' cards</span><span class="sw">'+ds.w+'W</span><span class="sl_">'+ds.l+'L</span><span class="sp_">'+pct2+'</span></div>');
+      o('<div style="display:flex;align-items:center;gap:8px">');
+      o('<div style="font-size:20px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(dk.name)+'</div>');
+      o('<span style="display:inline-flex;align-items:center;gap:2px;flex-shrink:0">'+['a','e','f','w'].filter(function(el){return dkEls[el];}).map(function(el){return eSVG(elMap[el],14);}).join('')+'</span>');
+      o('</div>');
+      o('<div class="ss" style="margin-top:3px;font-size:15px"><span class="sw">Win '+ds.w+'</span><span class="sl_">Loss '+ds.l+'</span><span class="sp_">'+pct2+'</span></div>');
       o('</div>');
       o('<span style="color:var(--fg2);font-size:16px">&#9656;</span>');
       o('</div>');
@@ -4253,38 +4279,67 @@ function pContent(){
     });
     var totalCards=dv.cards.reduce(function(s,c){return s+c.qty;},0);
     o('<div style="font-size:12px;color:var(--fg2);margin-bottom:8px">'+totalCards+' cards total</div>');
-    // ── Card search bar with autocomplete ──
-    o('<div class="si" style="margin-bottom:10px;position:relative">');
+    // ── Card search bar + sort + track ──
+    var dvSort=G.dvSort||'name';
+    var dvSortLabels={name:'Name',cost:'Cost',power:'Power',rarity:'Rarity'};
+    var dvTrackOn=!!G.dvTrack;
+    o('<div style="display:flex;gap:8px;margin-bottom:10px;align-items:stretch">');
+    o('<div class="si" style="position:relative;flex:1">');
     o('<input id="dv-srch" placeholder="Search cards&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" oninput="_dvSearch(this.value)" onfocus="setTimeout(function(){var el=document.getElementById(\'dv-srch\');if(el===document.activeElement)_dvSearch(el.value);},250)" onblur="setTimeout(function(){var d=document.getElementById(\'dv-drop\');if(d)d.remove();},200)">');
     o('<div id="dv-drop" style="display:none"></div>');
     o('</div>');
+    o('<div style="display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:0 8px;flex-shrink:0">');
+    o('<span style="font-size:13px;color:var(--fg2);pointer-events:none">&#8645;</span>');
+    o('<select style="width:auto;background:transparent;border:none;color:var(--wht);padding:8px 4px;font-size:13px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none" onchange="G.dvSort=this.value;_renderKeepScroll()">');
+    ['name','cost','power','rarity'].forEach(function(k){
+      o('<option value="'+k+'"'+(dvSort===k?' selected':'')+'>'+dvSortLabels[k]+'</option>');
+    });
+    o('</select>');
+    o('</div>');
+    o('<button class="fb'+(dvTrackOn?' gold':'')+'" style="flex-shrink:0" onclick="G.dvTrack=!G.dvTrack;_renderKeepScroll()">Track</button>');
+    o('</div>');
     typeOrder.forEach(function(t){
-      var grp=typeGroups[t]||[];
+      var grp=(typeGroups[t]||[]).slice();
+      var rarOrder={ordinary:0,exceptional:1,elite:2,unique:3};
+      grp.sort(function(a,b){
+        if(dvSort==='cost'){
+          var ca=a.card?cMana(a.card):null,cb=b.card?cMana(b.card):null;
+          ca=ca==null?-1:ca;cb=cb==null?-1:cb;
+          return ca-cb;
+        }
+        if(dvSort==='power'){
+          var pa=a.card?cPow(a.card):null,pb=b.card?cPow(b.card):null;
+          pa=pa==null?-1:pa;pb=pb==null?-1:pb;
+          return pa-pb;
+        }
+        if(dvSort==='rarity'){
+          var ra=a.card?(rarOrder[cRar(a.card)]||0):0,rb=b.card?(rarOrder[cRar(b.card)]||0):0;
+          return ra-rb;
+        }
+        return a.entry.name.localeCompare(b.entry.name);
+      });
       var grpTotal=grp.reduce(function(s,x){return s+x.entry.qty;},0);
       o('<div style="margin-bottom:12px">');
-      o('<div style="font-size:11px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd)">'+typeLabels[t]+' <span style="color:var(--fg2);font-weight:400">('+grpTotal+')</span></div>');
+      o('<div style="font-size:16px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd)">'+typeLabels[t]+' <span style="color:var(--fg2);font-weight:400">('+grpTotal+')</span></div>');
       if(!grp.length){
         o('<div style="font-size:11px;color:var(--fg3);padding:4px 0;font-style:italic">None</div>');
       }
       grp.forEach(function(x){
         var entry=x.entry;var c=x.card;
         var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-        var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
-        var dvColl=dv.collection||[];
-        var dvCollEntry=dvColl.find(function(x){return x.name===entry.name;});
-        var dvInColl=dvCollEntry?dvCollEntry.qty:0;
-        var dvCollTotal=dvColl.reduce(function(s,x){return s+x.qty;},0);
-        var dvMaxInColl=c?_maxCopies(c):4;
-        var dvCollAtMax=dvInColl>=dvMaxInColl||dvCollTotal>=10;
+        var nmColor='var(--wht)';
+        if(dvTrackOn){
+          var dvCollEntry=(dv.collection||[]).find(function(cc){return cc.name===entry.name;});
+          nmColor=(dvCollEntry&&dvCollEntry.qty>0)?'var(--bbl)':'var(--red)';
+        }
         o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
         o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
-        o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
-        o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
-        if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+        o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
+        o('<span style="flex:1;font-size:16px;color:'+nmColor+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
         o('</div>');
-        o('<span style="font-size:9px;color:'+(dvInColl>0?'var(--yel)':'var(--fg3)')+'">C:'+dvInColl+'</span>');
-        o('<button class="eadj" style="'+(dvInColl===0?'opacity:.3':'')+'" '+(dvInColl===0?'disabled':'')+' title="Remove from collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-        o('<button class="eadj" style="'+(dvCollAtMax?'opacity:.3':'')+'" '+(dvCollAtMax?'disabled':'')+' title="Add to collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+        if(c&&cType(c)!=='site'&&cType(c)!=='avatar'){
+          o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'<span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#b8b8b8;font-size:9px;font-weight:700;color:#111;line-height:1">'+(cMana(c)!=null?cMana(c):'&mdash;')+'</span></span>');
+        }
         o('</div>');
       });
       o('</div>');
@@ -4292,10 +4347,14 @@ function pContent(){
     // ─── Collection (max 10 cards) ───
     var deckColl=dv.collection||[];
     var collTotal=deckColl.reduce(function(s,c){return s+c.qty;},0);
+    var collKey='dvcoll_'+dvk;
+    var collExp=G.accExp[collKey]!==false;
     o('<div style="margin-bottom:12px">');
-    o('<div style="font-size:11px;font-weight:700;color:var(--yel);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">');
+    o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--yel);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+collKey+'\')">');
     o('<span>Collection <span style="color:var(--fg2);font-weight:400">('+collTotal+'/10)</span></span>');
+    o('<span style="font-size:12px">'+(collExp?'&#9650;':'&#9660;')+'</span>');
     o('</div>');
+    if(collExp){
     if(!deckColl.length){
       o('<div style="font-size:11px;color:var(--fg3);padding:4px 0;font-style:italic">Empty. Add cards from the card browser (avatars count as Unique for collection limits).</div>');
     }
@@ -4313,6 +4372,38 @@ function pContent(){
       o('<button class="eadj" style="'+(collTotal>=10?'opacity:.3':'')+'" '+(collTotal>=10?'disabled':'')+' onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
       o('</div>');
     });
+    }
+    o('</div>');
+    // ─── Maybeboard ───
+    var deckMaybe=dv.maybe||[];
+    var maybeTotal=deckMaybe.reduce(function(s,c){return s+c.qty;},0);
+    var maybeKey='dvmaybe_'+dvk;
+    var maybeExp=G.accExp[maybeKey]!==false;
+    o('<div style="margin-bottom:12px">');
+    o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--bbl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+maybeKey+'\')">');
+    o('<span>Maybeboard <span style="color:var(--fg2);font-weight:400">('+maybeTotal+')</span></span>');
+    o('<span style="font-size:12px">'+(maybeExp?'&#9650;':'&#9660;')+'</span>');
+    o('</div>');
+    if(maybeExp){
+    if(!deckMaybe.length){
+      o('<div style="font-size:11px;color:var(--fg3);padding:4px 0;font-style:italic">Empty. Add cards from a card\'s detail popup.</div>');
+    }
+    deckMaybe.forEach(function(entry){
+      var c=cardByName(entry.name);
+      var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
+      o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
+      o('<div style="cursor:pointer;flex:1;display:flex;align-items:center;gap:6px;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
+      o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
+      if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+      o('</div>');
+      var maxMaybe=c?_maxCopies(c):4;
+      o('<button class="eadj" onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
+      o('<button class="eadj" style="'+(entry.qty>=maxMaybe?'opacity:.3':'')+'" '+(entry.qty>=maxMaybe?'disabled':'')+' onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      o('</div>');
+    });
+    }
     o('</div>');
     // ─── Element breakdown header ───
     var elColors={a:'var(--cyn)',e:'#8D9B4A',f:'var(--red)',w:'#5BA3C9'};
@@ -4362,7 +4453,7 @@ function pContent(){
     // ─── Element stat pills ───
     var activeStatEls=['a','e','f','w'].filter(function(el){return (elSpells[el]||0)+(elSites[el]||0)>0;});
     o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px">');
-    o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+totalSpells+' Spells &middot; '+totalSites+' Sites &middot; Avg Cost '+avgCost+'</div>');
+    o('<div style="font-size:15px;color:var(--fg2);text-align:center;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+totalSpells+' Spells &middot; '+totalSites+' Atlas &middot; Avg Cost '+avgCost+'</div>');
     o('<div style="display:grid;grid-template-columns:repeat('+activeStatEls.length+',1fr);gap:6px;margin-bottom:14px">');
     activeStatEls.forEach(function(el){
       var spPct=totalSpells>0?Math.round((elSpells[el]||0)/totalSpells*100):0;
@@ -4889,8 +4980,15 @@ function cModal(){
     var cardZone=isAvatar?'Avatar':cType(c)==='site'?'Atlas':'Spellbook';
     var maxColl=isAvatar?1:maxC;
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' in '+cardZone+' &middot; collection max 10 cards</div>');
+    var selDk=(G.cmDeckSel&&G.decks[G.cmDeckSel])?G.cmDeckSel:dkKeys[0];
+    G.cmDeckSel=selDk;
+    o('<select style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--wht);padding:8px;font-size:14px;margin-bottom:10px;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onchange="G.cmDeckSel=this.value;_renderKeepScroll()">');
     dkKeys.forEach(function(dk){
-      var d=G.decks[dk];
+      o('<option value="'+h(dk)+'"'+(dk===selDk?' selected':'')+'>'+h(G.decks[dk].name)+'</option>');
+    });
+    o('</select>');
+    (function(){
+      var dk=selDk;var d=G.decks[dk];
       var safeKey=dk.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       var safeNm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       var entry=d.cards.find(function(x){return x.name===nm;});
@@ -4901,8 +4999,11 @@ function cModal(){
       var inColl=collEntry?collEntry.qty:0;
       var collTotal=coll.reduce(function(s,x){return s+x.qty;},0);
       var collAtMax=inColl>=maxColl||collTotal>=10;
+      var maybe=d.maybe||[];
+      var maybeEntry=maybe.find(function(x){return x.name===nm;});
+      var inMaybe=maybeEntry?maybeEntry.qty:0;
+      var maybeAtMax=inMaybe>=maxC;
       o('<div style="margin-bottom:8px;padding:10px;background:var(--bg3);border-radius:8px">');
-      o('<div style="font-size:17px;font-weight:400;color:var(--wht);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Fantaisie,serif">'+h(d.name)+'</div>');
       // Spellbook / Atlas row
       o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
       o('<span style="font-size:13px;color:var(--fg2);width:72px;flex-shrink:0">'+cardZone+'</span>');
@@ -4911,18 +5012,25 @@ function cModal(){
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(atMax?';opacity:.3':'')+'" '+(atMax?'disabled':'')+' onclick="addCardToDeck(\''+safeKey+'\',\''+safeNm+'\')">+</button>');
       o('</div>');
       // Collection row
-      o('<div style="display:flex;align-items:center;gap:8px">');
+      o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
       o('<span style="font-size:13px;color:var(--yel);width:72px;flex-shrink:0">Collection</span>');
       o('<span style="font-size:13px;font-weight:700;color:'+(collAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inColl+'/'+maxColl+'<br><span style="font-size:10px;font-weight:400;color:var(--fg3)">'+collTotal+'/10</span></span>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inColl===0?';opacity:.3':'')+'" '+(inColl===0?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
       o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(collAtMax?';opacity:.3':'')+'" '+(collAtMax?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
       o('</div>');
+      // Maybeboard row
+      o('<div style="display:flex;align-items:center;gap:8px">');
+      o('<span style="font-size:13px;color:var(--bbl);width:72px;flex-shrink:0">Maybeboard</span>');
+      o('<span style="font-size:13px;font-weight:700;color:'+(maybeAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inMaybe+'/'+maxC+'</span>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inMaybe===0?';opacity:.3':'')+'" '+(inMaybe===0?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(maybeAtMax?';opacity:.3':'')+'" '+(maybeAtMax?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
       o('</div>');
-    });
+      o('</div>');
+    })();
     o('<div id="add-deck-msg" style="font-size:9px;color:var(--bgrn);text-align:center;transition:opacity .4s;opacity:0;height:13px;margin-top:2px"></div>');
   }
   o('</div>');
-  o('<div class="qty-row"><div class="qty-lbl">In collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
+  o('<div class="qty-row"><div class="qty-lbl" style="font-size:15px">Card Collection<br><b style="color:'+(own?'var(--bgrn)':'var(--fg2)')+'">');
   o(own?own+' cop'+(own===1?'y':'ies'):'Not owned');
   o('</b></div><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span class="qty-val">'+own+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div>');
   o('</div></div>');return out.join('');
