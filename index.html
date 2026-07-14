@@ -3146,6 +3146,20 @@ function _discordEmoji(escapedHtml){
     return '<img src="https://cdn.discordapp.com/emojis/'+id+'.'+ext+'" alt=":'+name+':" title=":'+name+':" style="height:1.2em;width:auto;vertical-align:-0.25em">';
   });
 }
+function _discordFormat(escapedHtml){
+  var s=escapedHtml||'';
+  s=s.replace(/(https?:\/\/[^\s<]+)/g,function(url){
+    var clean=url.replace(/[),.!?;:]+$/,'');
+    var trail=url.slice(clean.length);
+    return '<a href="'+clean+'" target="_blank" rel="noopener noreferrer" style="color:var(--bbl);word-break:break-all">'+clean+'</a>'+trail;
+  });
+  s=s.replace(/\*\*([^\*]+)\*\*/g,'<b>$1</b>');
+  s=s.replace(/\*([^\*]+)\*/g,'<i>$1</i>');
+  s=s.replace(/(^|\s)_([^_]+)_(?=\s|$)/g,'$1<i>$2</i>');
+  s=s.replace(/~~([^~]+)~~/g,'<s>$1</s>');
+  s=s.replace(/`([^`]+)`/g,'<code style="background:var(--bg3);padding:1px 4px;border-radius:3px;font-size:0.9em">$1</code>');
+  return s;
+}
 function localDate(s){if(!s||/check|every/i.test(s))return s||'TBD';try{var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});}catch(e){return s;}}
 
 // ── COLLECTION ────────────────────────────────────────────────────────────────
@@ -3346,7 +3360,7 @@ function _dvCardFan(cards){
   var n=cards.length;
   var angleStep=n>1?Math.min(10,44/n):0;
   var maxAngle=(n-1)*angleStep/2;
-  var maxCardW=106,minCardW=38,overlapRatio=52/106;
+  var maxCardW=106,minCardW=38,overlapRatio=60/106;
   var availW=(typeof window!=='undefined'&&window.innerWidth)?Math.max(180,window.innerWidth-80):320;
   var factor=1+(n-1)*(1-overlapRatio);
   var cardW=Math.min(maxCardW,availW/factor);
@@ -4087,6 +4101,9 @@ function loadDiscord(){
       render();
     });
 }
+setInterval(function(){
+  if(G.panel==='discord'&&!G.discordLoading)loadDiscord();
+},60000);
 
 
 // ── PRICE ─────────────────────────────────────────────────────────────────────
@@ -5064,7 +5081,7 @@ function pContent(){
         o('<div class="ev-c">');
         if(m.channel)o('<div class="yt-ch2">#'+h(m.channel)+'</div>');
         o('<div class="ev-nm">'+h(m.author||'')+'</div>');
-        if(m.content)o('<div style="font-size:16px;color:var(--fg);white-space:pre-wrap;margin:2px 0">'+_discordEmoji(h(m.content))+'</div>');
+        if(m.content)o('<div style="font-size:16px;color:var(--fg);white-space:pre-wrap;margin:2px 0">'+_discordFormat(_discordEmoji(h(m.content)))+'</div>');
         if(m.timestamp)o('<div class="ev-mt">'+h(m.timestamp)+'</div>');
         o('</div>');
       });
