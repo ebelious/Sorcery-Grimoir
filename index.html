@@ -5014,6 +5014,7 @@ function pContent(){
       // Exact match on channel name stored during fetch
       return (v.channel||'').toLowerCase()===(selCh.n||'').toLowerCase();
     });
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     // Show selected channel link above cards
     var _selChObj=G.ytSelCh?YT_CHS.find(function(x){return x.id===G.ytSelCh;}):null;
     if(_selChObj&&_selChObj.url){
@@ -5030,9 +5031,11 @@ function pContent(){
     });
     o('</div>');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
-    o('<button class="fb gold" style="font-size:9px;padding:3px 10px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
+    o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
     o('</div>');
+    o('</div>'); // close static header
 
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
     if(G.ytLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(filtVids.length){
       filtVids.forEach(function(v){
@@ -5042,12 +5045,13 @@ function pContent(){
         o('<div class="yt-info"><div class="yt-ch2">'+h(v.channel||'')+'</div><div class="yt-title">'+h(v.title||'')+'</div>'+(v.date?'<div class="yt-date">'+h(v.date)+'</div>':'')+'</div></a>');
       });
     } else if(G.ytLoaded){o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">No videos found.</div>');}
+    o('</div>'); // close scrollable video list
     return out.join('');
   }
   if(p==='news'){
     if(!G.newsLoaded&&!G.newsLoading)loadNews();
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
-    o('<button class="fb gold" style="font-size:9px;padding:3px 10px" onclick="G.newsLoaded=false;G.newsItems=null;loadNews()">Refresh</button>');
+    o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.newsLoaded=false;G.newsItems=null;loadNews()">Refresh</button>');
     o('</div>');
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
@@ -5070,7 +5074,7 @@ function pContent(){
   if(p==='discord'){
     if(!G.discordLoaded&&!G.discordLoading)loadDiscord();
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
-    o('<button class="fb gold" style="font-size:9px;padding:3px 10px" onclick="G.discordLoaded=false;G.discordItems=null;loadDiscord()">Refresh</button>');
+    o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.discordLoaded=false;G.discordItems=null;loadDiscord()">Refresh</button>');
     o('</div>');
 
     if(G.discordLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
@@ -5518,7 +5522,7 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"><div class="phdr"><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':'')+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
@@ -5542,7 +5546,6 @@ function render(){
       out.push(_rmHtml);
     }
     document.getElementById('app').innerHTML=out.join('');
-
 
     bindSearchInputs();
   }catch(e){
