@@ -249,14 +249,15 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dhead{padding:8px 10px 7px;border-bottom:1px solid var(--bd);flex-shrink:0}
 .si{position:relative;margin-bottom:5px}
 .si input{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 34px 9px 10px;outline:none;font-size:14px;font-family:'Courier New',monospace;display:block}
+#gs-inp{padding-top:16px;padding-bottom:16px;font-size:16px}
 #gs-inp:focus,#card-srch:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
 .si input::placeholder{color:var(--fg3)}
 .si .sx{position:absolute;right:0;top:0;height:100%;width:36px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--fg2)}
 .sdd{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--bd);z-index:20;max-height:175px;overflow-y:auto;margin-top:1px}
 .sddi{padding:10px 10px;border-bottom:1px solid var(--bg3)}
 .sddi:active{background:var(--bg3)}
-.sddi .sn{font-size:13px;font-weight:700}
-.sddi .sc{font-size:11px;color:var(--fg2)}
+.sddi .sn{font-size:16px;font-weight:700}
+.sddi .sc{font-size:13px;color:var(--fg2)}
 .qrow{display:flex;gap:3px}
 .qbtn{flex:1;font-size:11px;padding:12px 3px;border:1px solid var(--bd);background:var(--bg);color:var(--fg2);text-transform:uppercase}
 .qbtn.on{background:var(--hi);color:var(--bg);border-color:var(--hi)}
@@ -749,7 +750,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,vibrateLevel:'low',diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -811,6 +812,7 @@ function resetAllTheme(){
   G.cfg.noBorders=false;
   G.cfg.plainFont=false;
   G.cfg.vibrate=true;
+  G.cfg.vibrateLevel='low';
   G.cfg.menuLeft=false;
   G.cfg.diceLeft=true;
   G.cfg.p1BtnLeft=false;
@@ -2586,15 +2588,16 @@ function showP1Settings(anchorEl){
 
   // ── Section: Deck ──
   html+='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Deck</div>';
-  html+='<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px">';
-  html+='<button style="text-align:left;padding:8px 10px;border:1px solid '+(curDeck===null?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(curDeck===null?'var(--bg3,#374151)':'transparent')+';color:'+(curDeck===null?'var(--hi,#22d3ee)':'var(--fg2,#9ca3af)')+';border-radius:4px;cursor:pointer;font-size:13px" onclick="setDeck(0,\'\');_refreshP1Settings()">No deck</button>';
+  html+='<div style="margin-bottom:14px">';
+  html+='<select style="width:100%;padding:8px 10px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:4px;font-size:13px" onchange="setDeck(0,this.value);_refreshP1Settings()">';
+  html+='<option value=""'+(curDeck===null?' selected':'')+'>No deck</option>';
   dkKeys.forEach(function(dk){
     var d=G.decks[dk];
     var on=curDeck===dk;
-    var safeDk=dk.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-    html+='<button style="text-align:left;padding:8px 10px;border:1px solid '+(on?'var(--hi,#22d3ee)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'transparent')+';color:'+(on?'var(--hi,#22d3ee)':'var(--fg,#e2e8f0)')+';border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%" onclick="setDeck(0,\''+safeDk+'\');_refreshP1Settings()">'+h(d.name)+'</button>';
+    html+='<option value="'+h(dk)+'"'+(on?' selected':'')+'>'+h(d.name)+'</option>';
   });
-  if(!dkKeys.length) html+='<div style="font-size:12px;color:var(--fg3,#6b7280)">No decks yet — create one in My Decks</div>';
+  if(!dkKeys.length) html+='</select><div style="font-size:12px;color:var(--fg3,#6b7280);margin-top:5px">No decks yet — create one in My Decks</div>';
+  else html+='</select>';
   html+='</div>';
 
   // ── Section: Dice Theme ──
@@ -4293,7 +4296,10 @@ function pContent(){
       fonts.forEach(function(f){var active=G.cfg.plainFont===f[0]||(f[0]==='courier'&&G.cfg.plainFont===true);o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.plainFont=\''+f[0]+'\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+f[1]+'</button>');});
       o('</div>');
     }
-    o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">Vibration</div>');
+    o('<div class="tgrid">');
+    [['low','Low'],['medium','Medium'],['high','High']].forEach(function(lv){var active=(G.cfg.vibrateLevel||'low')===lv[0];o('<button class="tgb'+(active?' on':'')+'" onclick="G.cfg.vibrateLevel=\''+lv[0]+'\';G.cfg.vibrate=true;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+lv[1]+'</button>');});
+    o('</div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
