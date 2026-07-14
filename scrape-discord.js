@@ -21,7 +21,7 @@ const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '1215448061850034226';
 const GUILD_ID = process.env.DISCORD_GUILD_ID || '278704728999854080';
 const CHANNEL_NAME = process.env.DISCORD_CHANNEL_NAME || '';
-const LIMIT = 25;
+const LIMIT = 10;
 
 (async () => {
   if (!TOKEN || !CHANNEL_ID) {
