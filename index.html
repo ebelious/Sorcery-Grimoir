@@ -2057,20 +2057,20 @@ function _diceInitPreview(){
   var tex=(G.diceTexture||'felt');
   var fc=_diceEffectiveColor(tex);
   var texKey=G.diceBgImage?('img:'+G.diceBgImage):(tex+'|'+fc);
-  if(_dicePreview.texKey!==texKey){
-    _dicePreview.texKey=texKey;
-    if(G.diceBgImage){
-      if(_dicePreview.plane.parent) _dicePreview.scene.remove(_dicePreview.plane);
-      holder.style.background='#000 url("'+_bgResolveUrl(G.diceBgImage)+'") center/cover no-repeat';
-    } else {
-      if(!_dicePreview.plane.parent) _dicePreview.scene.add(_dicePreview.plane);
-      holder.style.background='';
+  if(G.diceBgImage){
+    if(_dicePreview.plane.parent) _dicePreview.scene.remove(_dicePreview.plane);
+    holder.style.background='#000 url("'+_bgResolveUrl(G.diceBgImage)+'") center/cover no-repeat';
+  } else {
+    if(!_dicePreview.plane.parent) _dicePreview.scene.add(_dicePreview.plane);
+    holder.style.background='';
+    if(_dicePreview.texKey!==texKey){
       var colorMap=_diceMakeTex(tex,fc,512); // cached by _diceMakeTex itself — instant on repeat visits
       colorMap.wrapS=colorMap.wrapT=THREE.ClampToEdgeWrapping; colorMap.repeat.set(1,1);
       _dicePreview.plane.material.map=colorMap;
       _dicePreview.plane.material.needsUpdate=true;
     }
   }
+  _dicePreview.texKey=texKey;
 
   var col=getDieCol(G.dieCI)+'|'+(G.diceShape||'normal');
   if(_dicePreview.colKey!==col){
@@ -4233,16 +4233,18 @@ function pContent(){
     });
     o('</div>');
     o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_renderKeepScroll()"></div>');});o('</div>');
-    o('<div class="slbl2">Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
+    var _texDisabled=!!G.diceBgImage;
+    o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
-    if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2">Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px">');
+    if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
     ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
     o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();_renderKeepScroll()"></div>');
     o('</div>');}
 
     o('<div class="slbl2">Background Image (Table)</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.diceBgImage?' on':'')+'" onclick="_diceBgImgToggleNone()">'+(G.diceBgImage?'On':'Off')+'</button></div>');
+    o('<div'+(G.diceBgImage?'':' style="opacity:.4;pointer-events:none"')+'>');
     (function(){
       var _cur=BG_IMAGES.find(function(b){return b.file===G.diceBgImage;});
       var _label=G.diceBgImage?(_cur?_cur.label:(G.diceBgImage.indexOf('data:')===0||G.diceBgImage.indexOf('blob:')===0?'Local Image':G.diceBgImage)):'None';
@@ -4264,6 +4266,7 @@ function pContent(){
       o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
       o('<button class="fb gold full" style="margin-top:8px" onclick="_diceBgImgPickLocal()">&#128193; Choose Image from Device</button>');
     })();
+    o('</div>');
 
     o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
