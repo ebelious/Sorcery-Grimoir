@@ -2815,10 +2815,9 @@ function timerFaceHTML(pi){
   var tf=_timerFace();
   var clickable=tf.txt?' onclick="showTimerPopup(this)"':'';
   var _w=tf.txt?(tf.txt.length>6?'190px':'140px'):'0';
-  return '<div id="timer-wrap-'+pi+'" style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:'+_w+';padding:2px 0;box-sizing:border-box;overflow:visible;flex-shrink:0">'+
-    '<span style="font-size:14px;font-weight:700;color:var(--fg2,#9ca3af)">M-Time:</span>'+
-    '<span id="timer-turn-'+pi+'"'+clickable+' style="font-size:26px;font-weight:700'+(tf.col?';color:'+tf.col:'')+(clickable?';cursor:pointer':'')+'">'+tf.txt+'</span>'+
-  '</div>';
+  var _inner=tf.txt?('<span style="font-size:14px;font-weight:700;color:var(--fg2,#9ca3af)">M-Time:</span>'+
+    '<span id="timer-turn-'+pi+'"'+clickable+' style="font-size:26px;font-weight:700'+(tf.col?';color:'+tf.col:'')+(clickable?';cursor:pointer':'')+'">'+tf.txt+'</span>'):'';
+  return '<div id="timer-wrap-'+pi+'" style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:'+_w+';padding:2px 0;box-sizing:border-box;overflow:hidden;flex-shrink:0">'+_inner+'</div>';
 }
 function _updateTimerDisplays(){
   var tf=_timerFace();
