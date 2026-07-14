@@ -814,15 +814,16 @@ function resetAllTheme(){
   G.cfg.menuLeft=false;
   G.cfg.diceLeft=true;
   G.cfg.p1BtnLeft=false;
-  G.cfg.hideTurnBar=false;
+  G.cfg.hideTurnBar=true;
   G.cfg.layout='tap';
+  G.cfg.bgImage=null;
   sv('sg-cfg',G.cfg);
   applyTheme(''); // default Sorcery theme
   applyHighlight('#68A8E4'); // Blue highlight
   _applyBodyClass();
 
   // Dice Settings defaults
-  G.vdice={4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false};
+  G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
   sv('sg-vd',G.vdice);
   G.dieCI=3; sv('sg-dc',3); // P1 Die Color: Blue
   G.dieCI2=0; sv('sg-dc2',0); // P2 Die Color: Yellow
@@ -830,6 +831,7 @@ function resetAllTheme(){
   G.diceTexture2='felt'; sv('sg-dtex2','felt');
   G.diceFeltColor='#14532d'; sv('sg-felt','#14532d');
   G.diceFastRoll=false; sv('sg-dfast',false);
+  G.diceBgImage=null; sv('sg-dbg',null); // Dice table background: off
 }
 var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#DBBC7F','tl':'#D4820A','tm':'#EBC06D','ti':'#d7c483','tr':'#F6C177'};
 function _applyBodyClass(){
