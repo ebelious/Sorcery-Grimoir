@@ -194,7 +194,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .tb.wait{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.5}
 .tb.done{border-color:var(--fg3);color:var(--fg3);pointer-events:none;opacity:.4}
 #tbar{display:flex;align-items:stretch;flex-shrink:0;background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
-.tb-n{font-weight:700;color:var(--hi);padding:3px 10px;flex-shrink:0;border-left:1px solid var(--bd);border-right:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px}
+.tb-n{font-weight:700;color:var(--hi);padding:3px 10px;flex-shrink:0;border-left:1px solid var(--bd);border-right:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:17px}
 .tb-s{flex:1;width:0;padding:3px 5px;text-align:center;font-size:14px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--bd);overflow:hidden;min-width:0;white-space:nowrap}
 .tb-s.act{background:var(--hi);color:var(--bg);font-weight:700}
 .tb-e{font-size:8px;color:var(--fg2);padding:3px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;max-width:90px}
@@ -950,7 +950,7 @@ function startTurn(pi){
   if(G.mode>=2){var opp=G.players[pi===0?1:0];opp.phase='disabled';}
   if(G.p1TimerRunning&&G.pTimeRemain[pi]!=null){G.pTimeEnd[pi]=Date.now()+G.pTimeRemain[pi];}
   G.turnLog.unshift('T'+G.turnNum+': '+p.name+' started');if(G.turnLog.length>30)G.turnLog.length=30;
-  G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr()});if(G.timerLog.length>200)G.timerLog.length=200;
+  G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr(),lives:G.players.map(function(pl,i){return{name:pl.name,life:pl.life,expired:(G.pTimeRemain[i]!=null&&G.pTimeRemain[i]<=0)};})});if(G.timerLog.length>200)G.timerLog.length=200;
   render();
 }
 function endTurn(pi){
@@ -2849,7 +2849,11 @@ setInterval(function(){
       var crem=G.pTimeEnd[i]-Date.now();
       if(crem<=0){
         G.pTimeRemain[i]=0;G.pTimeEnd[i]=null;
-        if(!G.pTimeOutAck[i]){G.pTimeOutAck[i]=true;G.pTimeOutPI=i;render();}
+        if(!G.pTimeOutAck[i]){
+          G.pTimeOutAck[i]=true;G.pTimeOutPI=i;
+          G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:G.players[i].name,outOfTime:true,used:_chessUsedTimeStr(i),pFull:_chessFullTimeStr()});if(G.timerLog.length>200)G.timerLog.length=200;
+          render();
+        }
       }
     }
   }
@@ -2918,17 +2922,27 @@ function showTimerLogPopup(anchorEl){
   if(old){old.remove();return;}
   var pop=document.createElement('div');
   pop.id='timer-log-pop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;max-width:92vw;max-height:70vh;overflow-y:auto;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);width:360px;min-width:320px;max-width:92vw;max-height:70vh;overflow-y:auto;';
 
-  var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Log</div>';
+  var html='<div style="font-size:14px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Log</div>';
   if(!G.timerLog||!G.timerLog.length){
-    html+='<div style="font-size:12px;color:var(--fg2,#9ca3af);text-align:center;padding:10px 0">No entries yet</div>';
+    html+='<div style="font-size:17px;color:var(--fg2,#9ca3af);text-align:center;padding:10px 0">No entries yet</div>';
   } else {
     html+='<div style="display:flex;flex-direction:column;gap:2px">';
     G.timerLog.forEach(function(e){
+      if(e.outOfTime){
+        html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px"><span style="color:var(--red,#ef4444);font-weight:700"><span style="color:var(--yel,#eab308)">T'+e.turn+'</span> &middot; '+h(e.name)+' &mdash; Out of Time</span></div>';
+        html+='<div style="display:flex;justify-content:flex-end;font-size:15px;color:var(--red,#ef4444);margin-top:2px">Player Time: '+h(e.used||'--:--')+' / '+h(e.pFull||'--:--')+'</div>';
+        html+='</div>';
+        return;
+      }
       html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
-      html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px"><span style="color:var(--fg,#e2e8f0)">T'+e.turn+' &middot; '+h(e.name)+'</span><span style="flex-shrink:0"><span style="color:var(--hi,#22d3ee);font-weight:700">'+h(e.time)+'</span><span style="color:var(--fg3,#6b7280)"> / </span><span style="color:var(--fg2,#9ca3af)">'+h(e.full||'--:--')+'</span></span></div>';
-      html+='<div style="display:flex;justify-content:flex-end;font-size:10px;color:var(--fg2,#9ca3af);margin-top:2px">Used: '+h(e.used||'--:--')+' / '+h(e.pFull||'--:--')+'</div>';
+      html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px"><span style="color:var(--fg,#e2e8f0)"><span style="color:var(--yel,#eab308)">T'+e.turn+'</span> &middot; '+h(e.name)+'</span><span style="flex-shrink:0"><span style="color:var(--fg2,#9ca3af);font-size:15px">Match Time: </span><span style="color:var(--hi,#22d3ee);font-weight:700">'+h(e.time)+'</span><span style="color:var(--fg3,#6b7280)"> / </span><span style="color:var(--fg2,#9ca3af)">'+h(e.full||'--:--')+'</span></span></div>';
+      html+='<div style="display:flex;justify-content:flex-end;font-size:15px;color:var(--fg2,#9ca3af);margin-top:2px">Player Time: '+h(e.used||'--:--')+' / '+h(e.pFull||'--:--')+'</div>';
+      if(e.lives&&e.lives.length){
+        html+='<div style="display:flex;justify-content:flex-end;gap:10px;font-size:16px;margin-top:2px">'+e.lives.map(function(pl){return '<span style="color:var(--bbl,#68A8E4)">'+h(pl.name)+'</span>: <span style="color:var(--life,#f87171)">'+pl.life+'</span>'+(pl.expired?' <span style="color:var(--red,#ef4444);font-weight:700">&#9203; Time Expired</span>':'');}).join(' &middot; ')+'</div>';
+      }
       html+='</div>';
     });
     html+='</div>';
@@ -2937,15 +2951,9 @@ function showTimerLogPopup(anchorEl){
   pop.innerHTML=html;
   document.body.appendChild(pop);
 
-  var rect=anchorEl.getBoundingClientRect();
-  var pw=260, ph=320;
-  var left=rect.right-pw;
-  if(left<4) left=4;
-  if(left+pw>window.innerWidth) left=window.innerWidth-pw-4;
-  var top=rect.bottom+4;
-  if(top+ph>window.innerHeight) top=rect.top-ph-4;
-  pop.style.left=left+'px';
-  pop.style.top=Math.max(4,top)+'px';
+  pop.style.left='50%';
+  pop.style.top='50%';
+  pop.style.transform='translate(-50%,-50%)';
 
   setTimeout(function(){
     function onOut(e){if(!pop.contains(e.target)&&e.target!==anchorEl){pop.remove();document.removeEventListener('click',onOut,true);}}
@@ -5259,7 +5267,7 @@ boot();
 </script>
 <div id="rulebook-modal">
   <div class="rb-header">
-    <span class="rb-title">📖 Official Rulebook</span>
+    <span class="rb-title"> Official Rulebook</span>
     <button class="rb-close" onclick="closeRulebook()" title="Close">&times;</button>
   </div>
   <iframe id="rulebook-frame" src="" allowfullscreen></iframe>
