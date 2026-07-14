@@ -4068,7 +4068,6 @@ function pContent(){
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
-    o('<div class="set-row"><span>Hide Start Turn Buttons / Turn Counter</span><button class="ftag'+(G.cfg.hideTurnBar?' on':'')+'" onclick="G.cfg.hideTurnBar=!G.cfg.hideTurnBar;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideTurnBar?'On':'Off')+'</button></div>');
     if(_pwaPrompt){
       o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
     } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
@@ -4234,8 +4233,8 @@ function pContent(){
     // Rename input + delete
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
     o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
-    o('<button class="fb gold" style="font-size:9px;padding:2px 7px" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export CSV</button>');
-    o('<button class="fb red" style="font-size:9px;padding:2px 7px" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
+    o('<button class="fb gold" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export CSV</button>');
+    o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
     // Group cards by type
     var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
@@ -4279,8 +4278,8 @@ function pContent(){
         if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
         o('</div>');
         o('<span style="font-size:9px;color:'+(dvInColl>0?'var(--yel)':'var(--fg3)')+'">C:'+dvInColl+'</span>');
-        o('<button class="eadj" style="width:20px;height:20px;font-size:11px'+(dvInColl===0?';opacity:.3':'')+'" '+(dvInColl===0?'disabled':'')+' title="Remove from collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-        o('<button class="eadj" style="width:20px;height:20px;font-size:11px'+(dvCollAtMax?';opacity:.3':'')+'" '+(dvCollAtMax?'disabled':'')+' title="Add to collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+        o('<button class="eadj" style="'+(dvInColl===0?'opacity:.3':'')+'" '+(dvInColl===0?'disabled':'')+' title="Remove from collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
+        o('<button class="eadj" style="'+(dvCollAtMax?'opacity:.3':'')+'" '+(dvCollAtMax?'disabled':'')+' title="Add to collection" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
         o('</div>');
       });
       o('</div>');
@@ -4305,8 +4304,8 @@ function pContent(){
       o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
       o('</div>');
-      o('<button class="eadj" style="width:22px;height:22px;font-size:13px" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="width:22px;height:22px;font-size:13px'+(collTotal>=10?';opacity:.3':'')+'" '+(collTotal>=10?'disabled':'')+' onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      o('<button class="eadj" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
+      o('<button class="eadj" style="'+(collTotal>=10?'opacity:.3':'')+'" '+(collTotal>=10?'disabled':'')+' onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
       o('</div>');
     });
     o('</div>');
