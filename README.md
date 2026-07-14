@@ -4,6 +4,7 @@ This app was designed for readability and minimal feel which can also be customi
 
 ### [Sorcery Grimoir App](https://ebelious.github.io/Sorcery-Grimoir/)
 
+### [Discord](https://discord.gg/nHu6fWpBA)
 ## Features
 - Easily find any Cards, FAQ or Codex entries quickly with the Global Search
 - Simple and easy to read game counters both both 1 player and 2 player
