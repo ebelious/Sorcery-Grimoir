@@ -939,7 +939,10 @@ function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode
 // ── TURN SYSTEM ───────────────────────────────────────────────────────────────
 function startTurn(pi){
   var p=G.players[pi];if(p.phase!=='start')return;
-  if(G.turnNum===1&&!G.matchStartTime)G.matchStartTime=Date.now();
+  if(G.turnNum===1&&!G.matchStartTime){
+    G.matchStartTime=Date.now();
+    G.timerLog=G.timerLog||[];G.timerLog.unshift({matchStart:true,localTime:_fmtTime12(new Date())});if(G.timerLog.length>200)G.timerLog.length=200;
+  }
   if(G.p1TimerPending){
     G.p1TimerPending=false;
     var startMs=G.p1TimerStoppedRemain!=null?G.p1TimerStoppedRemain:G.p1TimerMinutes*60000;
@@ -950,7 +953,6 @@ function startTurn(pi){
   if(G.mode>=2){var opp=G.players[pi===0?1:0];opp.phase='disabled';}
   if(G.p1TimerRunning&&G.pTimeRemain[pi]!=null){G.pTimeEnd[pi]=Date.now()+G.pTimeRemain[pi];}
   G.turnLog.unshift('T'+G.turnNum+': '+p.name+' started');if(G.turnLog.length>30)G.turnLog.length=30;
-  G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr(),lives:G.players.map(function(pl,i){return{name:pl.name,life:pl.life,expired:(G.pTimeRemain[i]!=null&&G.pTimeRemain[i]<=0)};})});if(G.timerLog.length>200)G.timerLog.length=200;
   render();
 }
 function endTurn(pi){
@@ -959,6 +961,7 @@ function endTurn(pi){
   p.tlog.unshift(ev);if(p.tlog.length>3)p.tlog.length=3;
   G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
   if(G.pTimeEnd[pi]!=null){G.pTimeRemain[pi]=Math.max(0,G.pTimeEnd[pi]-Date.now());G.pTimeEnd[pi]=null;}
+  G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr(),lives:G.players.map(function(pl,i){return{name:pl.name,life:pl.life,expired:(G.pTimeRemain[i]!=null&&G.pTimeRemain[i]<=0)};})});if(G.timerLog.length>200)G.timerLog.length=200;
   p.manaUsed=0;p.hist=[];p.phase='disabled';G.activePI=-1;
   if(G.mode<2){G.turnNum++;p.phase='start';render();return;}
   var opp=G.players[pi===0?1:0];opp.phase='start';G.turnNum++;
@@ -1002,6 +1005,7 @@ function saveNames(){
 }
 function showLog(li){G.logPopup={li:li,wi:li===0?1:0};render();}
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
+function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
 function confirmLog(){
   var wi=G.logPopup.wi,li=G.logPopup.li,w=G.players[wi],lo=G.players[li];
   var now=new Date();
@@ -1020,6 +1024,7 @@ function confirmLog(){
   if(!G.matchLog)G.matchLog=[];
   G.matchLog.unshift(entry);if(G.matchLog.length>50)G.matchLog.length=50;
   sv('sg-ml',G.matchLog);
+  G.timerLog=G.timerLog||[];G.timerLog.unshift({winnerConfirmed:true,winner:w.name,loser:lo.name,time:_fmtTime12(now)});if(G.timerLog.length>200)G.timerLog.length=200;
   if(!G.records[w.name])G.records[w.name]={w:0,l:0};if(!G.records[lo.name])G.records[lo.name]={w:0,l:0};
   G.records[w.name].w++;G.records[lo.name].l++;
   var _wDkN=w.deck?(G.decks[w.deck]?G.decks[w.deck].name:w.deck):'';
@@ -2751,6 +2756,7 @@ function p1TimerReset(noStart){
   G.turnNum=1;
   G.turnLog=[];
   G.timerLog=[];
+  G.matchStartTime=null;
   _chessResetAllotment();
   if(noStart){
     G.p1TimerPending=false;G.p1TimerRunning=false;G.p1TimerDone=false;
@@ -2927,7 +2933,7 @@ function showTimerLogPopup(anchorEl){
   if(old){old.remove();return;}
   var pop=document.createElement('div');
   pop.id='timer-log-pop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);width:360px;min-width:320px;max-width:92vw;max-height:70vh;overflow-y:auto;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);width:360px;min-width:320px;max-width:92vw;max-height:88vh;overflow-y:auto;';
 
   var html='<div style="font-size:14px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Log</div>';
   if(!G.timerLog||!G.timerLog.length){
@@ -2935,6 +2941,19 @@ function showTimerLogPopup(anchorEl){
   } else {
     html+='<div style="display:flex;flex-direction:column;gap:2px">';
     G.timerLog.forEach(function(e){
+      if(e.winnerConfirmed){
+        html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px"><span style="color:var(--grn,#22c55e);font-weight:700">&#127942; '+h(e.winner)+' wins!</span><span style="color:var(--fg2,#9ca3af);font-size:15px">'+h(e.time||'')+'</span></div>';
+        html+='<div style="display:flex;justify-content:flex-end;font-size:15px;color:var(--fg2,#9ca3af);margin-top:2px">vs '+h(e.loser||'')+'</div>';
+        html+='</div>';
+        return;
+      }
+      if(e.matchStart){
+        html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px"><span style="color:var(--hi,#22d3ee);font-weight:700">Match Started</span><span style="color:var(--fg2,#9ca3af);font-size:15px">'+h(e.localTime||'')+'</span></div>';
+        html+='</div>';
+        return;
+      }
       if(e.outOfTime){
         html+='<div style="padding:5px 6px;border-bottom:1px solid var(--bd,#374151)">';
         html+='<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:18px"><span style="color:var(--red,#ef4444);font-weight:700"><span style="color:var(--yel,#eab308)">T'+e.turn+'</span> &middot; '+h(e.name)+' &mdash; Out of Time</span></div>';
