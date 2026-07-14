@@ -362,7 +362,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .art-c{background:var(--bg3);border:1px solid var(--bd);margin-bottom:3px;overflow:hidden}
 .art-h{display:flex;align-items:center;justify-content:space-between;padding:11px 10px;cursor:pointer}
 .art-h:active{background:var(--bd)}
-.art-nm{font-size:14px;font-weight:700}
+.art-nm{font-size:16px;font-weight:700}
 .art-kn{font-size:11px;color:var(--fg2)}
 .art-body{padding:4px 8px 6px;border-top:1px solid var(--bd);font-size:8px;color:var(--fg2)}
 .set-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bg3);font-size:16px}
@@ -2598,10 +2598,8 @@ function showP1Settings(anchorEl){
   html+='</div>';
 
   // ── Section: Dice Theme ──
-  html+='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Dice Theme</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
-  html+='<button onclick="showDiceColorPop1(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Change dice color"><span>🎨</span><span style="font-size:12px">Dice Color &amp; Surface</span></button>';
   html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
   html+='</div>';
 
@@ -3443,7 +3441,7 @@ function _dvPinCard(el){
       if(xEl){xEl.style.opacity='1';xEl.style.pointerEvents='auto';}
     }
     _dvXTimer=null;
-  },1500);
+  },1000);
 }
 function _dvFanUpdate(ev){
   var el=document.elementFromPoint(ev.clientX,ev.clientY);
