@@ -2814,7 +2814,8 @@ function _chessUsedTimeStr(pi){
 function timerFaceHTML(pi){
   var tf=_timerFace();
   var clickable=tf.txt?' onclick="showTimerPopup(this)"':'';
-  return '<div id="timer-wrap-'+pi+'" style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:'+(tf.txt?'140px':'0')+';padding:2px 0;box-sizing:border-box;overflow:hidden;flex-shrink:0">'+
+  var _w=tf.txt?(tf.txt.length>6?'190px':'140px'):'0';
+  return '<div id="timer-wrap-'+pi+'" style="display:flex;align-items:baseline;justify-content:center;gap:4px;white-space:nowrap;width:'+_w+';padding:2px 0;box-sizing:border-box;overflow:visible;flex-shrink:0">'+
     '<span style="font-size:14px;font-weight:700;color:var(--fg2,#9ca3af)">M-Time:</span>'+
     '<span id="timer-turn-'+pi+'"'+clickable+' style="font-size:26px;font-weight:700'+(tf.col?';color:'+tf.col:'')+(clickable?';cursor:pointer':'')+'">'+tf.txt+'</span>'+
   '</div>';
@@ -2829,7 +2830,7 @@ function _updateTimerDisplays(){
       el.style.cursor=tf.txt?'pointer':'';
       el.onclick=tf.txt?function(){showTimerPopup(this);}:null;
     }
-    if(wrap){wrap.style.width=tf.txt?'140px':'0';}
+    if(wrap){wrap.style.width=tf.txt?(tf.txt.length>6?'190px':'140px'):'0';}
   });
 }
 setInterval(function(){
@@ -5165,9 +5166,9 @@ function render(){
 
     if(G.pTimeOutPI!=null){
       var _outP=G.players[G.pTimeOutPI];
-      o('<div class="ov" onclick="if(event.target===this)closeTimeOutPopup()"><div class="log-pop" style="text-align:center"><div class="lp-t">&#9203; Time&#39;s Up</div><div class="lp-b">');
-      o('<div style="font-size:16px;font-weight:700;color:var(--red);margin:6px 0 14px">'+h(_outP?_outP.name:'Player')+' Ran out of Time</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%" onclick="closeTimeOutPopup()">OK</button></div></div></div>');
+      o('<div class="ov" onclick="if(event.target===this)closeTimeOutPopup()"><div class="log-pop" style="text-align:center"><div class="lp-t" style="font-size:22px">&#9203; Time&#39;s Up</div><div class="lp-b">');
+      o('<div style="font-size:22px;font-weight:700;color:var(--red);margin:6px 0 14px">'+h(_outP?_outP.name:'Player')+' Ran out of Time</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:18px;font-size:20px" onclick="closeTimeOutPopup()">OK</button></div></div></div>');
     }
 
     // ── Drawer ──
@@ -5267,7 +5268,7 @@ boot();
 </script>
 <div id="rulebook-modal">
   <div class="rb-header">
-    <span class="rb-title"> Official Rulebook</span>
+    <span class="rb-title">📖 Official Rulebook</span>
     <button class="rb-close" onclick="closeRulebook()" title="Close">&times;</button>
   </div>
   <iframe id="rulebook-frame" src="" allowfullscreen></iframe>
