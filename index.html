@@ -3346,14 +3346,14 @@ function _dvCardFan(cards){
   var n=cards.length;
   var angleStep=n>1?Math.min(10,44/n):0;
   var maxAngle=(n-1)*angleStep/2;
-  var maxCardW=106,minCardW=38,overlapRatio=42/106;
+  var maxCardW=106,minCardW=38,overlapRatio=52/106;
   var availW=(typeof window!=='undefined'&&window.innerWidth)?Math.max(180,window.innerWidth-80):320;
   var factor=1+(n-1)*(1-overlapRatio);
   var cardW=Math.min(maxCardW,availW/factor);
   cardW=Math.max(minCardW,cardW);
   var overlap=cardW*overlapRatio;
   var cardH=cardW*4/3;
-  var containerH=Math.round(cardH+60);
+  var containerH=Math.round(cardH+100);
   var xSize=Math.max(16,Math.min(26,Math.round(cardW*0.26)));
   var html='<div class="dv-fan" style="position:relative;height:'+containerH+'px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:36px;margin:6px 0 26px;overflow:hidden;touch-action:none" onpointerdown="_dvFanStart(event)" onpointermove="_dvFanMove(event)" onpointerup="_dvFanEnd(event)" onpointerleave="_dvFanEnd(event)" onpointercancel="_dvFanEnd(event)">';
   cards.forEach(function(item,i){
@@ -4728,7 +4728,7 @@ function pContent(){
     var hp=G.dvHand||{spells:[],sites:[]};
     var hpAll=hp.spells.map(function(nm,i){return {name:nm,src:'spell',idx:i};})
       .concat(hp.sites.map(function(nm,i){return {name:nm,src:'site',idx:i};}));
-    o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-top:12px;overflow:hidden">');
+    o('<div style="background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:22px 12px;margin-top:12px;overflow:hidden">');
     o(_dvCardFan(hpAll));
     o('<div style="display:flex;gap:8px;margin-top:6px">');
     o('<button class="fb" style="flex:1" onclick="dvDraw(\'spell\')">Draw Spell</button>');
