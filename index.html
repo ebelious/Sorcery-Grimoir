@@ -3125,6 +3125,12 @@ function fBar(f,fn,mana,resetFn,hideReset){
   return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','relic','site','artifact'])+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function _discordEmoji(escapedHtml){
+  return (escapedHtml||'').replace(/&lt;(a?):(\w+):(\d+)&gt;/g,function(full,anim,name,id){
+    var ext=anim?'gif':'png';
+    return '<img src="https://cdn.discordapp.com/emojis/'+id+'.'+ext+'" alt=":'+name+':" title=":'+name+':" style="height:1.2em;width:auto;vertical-align:-0.25em">';
+  });
+}
 function localDate(s){if(!s||/check|every/i.test(s))return s||'TBD';try{var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});}catch(e){return s;}}
 
 // ── COLLECTION ────────────────────────────────────────────────────────────────
@@ -4754,13 +4760,12 @@ function pContent(){
     if(G.discordErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.discordErr)+'</div>');
 
     if(G.discordItems&&G.discordItems.length){
-      G.discordItems.forEach(function(m){
+      G.discordItems.slice(0,10).forEach(function(m){
         o('<div class="ev-c">');
         if(m.channel)o('<div class="yt-ch2">#'+h(m.channel)+'</div>');
         o('<div class="ev-nm">'+h(m.author||'')+'</div>');
-        if(m.content)o('<div style="font-size:10px;color:var(--fg);white-space:pre-wrap;margin:2px 0">'+h(m.content)+'</div>');
+        if(m.content)o('<div style="font-size:16px;color:var(--fg);white-space:pre-wrap;margin:2px 0">'+_discordEmoji(h(m.content))+'</div>');
         if(m.timestamp)o('<div class="ev-mt">'+h(m.timestamp)+'</div>');
-        if(m.url)o('<a class="ext-lnk" style="padding:3px 0;font-weight:700" href="'+h(m.url)+'" target="_blank">Open in Discord &rarr;</a>');
         o('</div>');
       });
     } else if(!G.discordLoading){
