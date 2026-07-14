@@ -5593,9 +5593,18 @@ function render(){
       _rmHtml+='</div></div>';
       out.push(_rmHtml);
     }
+    var _fi=(document.activeElement&&document.activeElement.tagName==='INPUT'&&document.activeElement.id)||null;
+    var _fp=_fi?document.activeElement.selectionStart:0;
     document.getElementById('app').innerHTML=out.join('');
 
     bindSearchInputs();
+    if(_fi){
+      var _fel=document.getElementById(_fi);
+      if(_fel&&_fel.tagName==='INPUT'){
+        _fel.focus();
+        try{_fel.setSelectionRange(_fp,_fp);}catch(e){}
+      }
+    }
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
