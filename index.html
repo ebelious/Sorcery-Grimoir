@@ -2746,13 +2746,18 @@ function p1TimerAdjustCritMin(delta){
   if(inp)inp.value=n;
   _updateTimerDisplays();
 }
-function p1TimerReset(){
+function p1TimerReset(noStart){
   G.p1TimerStoppedRemain=(G.p1TimerMinutes||5)*60000;
   G.turnNum=1;
   G.turnLog=[];
   G.timerLog=[];
   _chessResetAllotment();
-  p1TimerStart();
+  if(noStart){
+    G.p1TimerPending=false;G.p1TimerRunning=false;G.p1TimerDone=false;
+    _updateTimerDisplays();
+  } else {
+    p1TimerStart();
+  }
 }
 function _chessResetAllotment(){
   var half=Math.round((G.p1TimerMinutes||5)*60000/2);
@@ -5176,7 +5181,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Search cards, FAQ, codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);p1TimerReset();G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
