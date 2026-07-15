@@ -5603,6 +5603,8 @@ function render(){
     }
     var _fi=(document.activeElement&&document.activeElement.tagName==='INPUT'&&document.activeElement.id)||null;
     var _fp=_fi?document.activeElement.selectionStart:0;
+    var _scEl=document.querySelector('.cm')||document.querySelector('.panel');
+    var _scTop=_scEl?_scEl.scrollTop:null;
     document.getElementById('app').innerHTML=out.join('');
 
     bindSearchInputs();
@@ -5612,6 +5614,12 @@ function render(){
         _fel.focus();
         try{_fel.setSelectionRange(_fp,_fp);}catch(e){}
       }
+    }
+    if(_scTop!==null){
+      requestAnimationFrame(function(){
+        var _scEl2=document.querySelector('.cm')||document.querySelector('.panel');
+        if(_scEl2)_scEl2.scrollTop=_scTop;
+      });
     }
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
