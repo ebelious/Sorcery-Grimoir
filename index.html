@@ -4131,7 +4131,9 @@ setInterval(function(){
 },60000);
 // Merge any newly-released cards (scraped nightly from curiosa.io by GitHub
 // Actions into cards.json) into the built-in CARDS array. Silent — no panel,
-// no loading state; existing cards (matched by slug) are left untouched.
+// no loading state; existing cards (matched by slug OR name, since a
+// scraped slug that doesn't exactly match the built-in one would otherwise
+// let the same card get added twice) are left untouched.
 function loadNewCards(){
   var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/cards.json?t='+Date.now();
   fetch(jsonUrl,{cache:'no-store'})
@@ -4142,11 +4144,13 @@ function loadNewCards(){
     .then(function(d){
       var incoming=(d&&d.cards)||[];
       if(!Array.isArray(incoming)||!incoming.length)return;
-      var known={};
-      CARDS.forEach(function(c){known[c.sl]=true;});
+      var knownSl={},knownN={};
+      CARDS.forEach(function(c){knownSl[c.sl]=true;knownN[c.n]=true;});
       var added=0;
       incoming.forEach(function(c){
-        if(c&&c.sl&&!known[c.sl]){CARDS.push(c);known[c.sl]=true;added++;}
+        if(c&&c.sl&&c.n&&!knownSl[c.sl]&&!knownN[c.n]){
+          CARDS.push(c);_cm[c.n]=c;knownSl[c.sl]=true;knownN[c.n]=true;added++;
+        }
       });
       if(added>0)render();
     })
