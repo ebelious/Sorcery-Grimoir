@@ -45,19 +45,80 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     // 1) Top-level slug, if it's already complete.
     if (looksComplete(item.slug)) return item.slug;
     // 2) Look inside common nested collections of per-set printings.
-    const buckets = [item.printings, item.editions, item.prints, item.versions];
+    const buckets = [item.printings, item.editions, item.prints, item.versions, item.variants];
     for (const arr of buckets) {
       if (!Array.isArray(arr) || !arr.length) continue;
-      const withSlug = arr.find(p => looksComplete(p && (p.slug || p.imageSlug)));
-      if (withSlug) return withSlug.slug || withSlug.imageSlug;
+      const withSlug = arr.find(p => looksComplete(p && (p.slug || p.imageSlug || p.fullSlug)));
+      if (withSlug) return withSlug.slug || withSlug.imageSlug || withSlug.fullSlug;
     }
-    // 3) Some APIs expose a direct imageSlug/fullSlug field.
+    // 3) Singular nested printing/card objects (some APIs nest one, not an array).
+    const singles = [item.printing, item.card, item.defaultPrinting, item.primaryPrinting];
+    for (const obj of singles) {
+      if (obj && looksComplete(obj.slug || obj.imageSlug)) return obj.slug || obj.imageSlug;
+    }
+    // 4) Some APIs expose a direct imageSlug/fullSlug field.
     if (looksComplete(item.imageSlug)) return item.imageSlug;
     if (looksComplete(item.fullSlug)) return item.fullSlug;
-    // 4) Give up — return whatever we have (may be partial) so the card
-    // still shows up in search; imgErr()'s variant-guessing in index.html
-    // may still recover an image, and _cm/click-through works regardless.
+    // 5) Give up — log it so we can see exactly what curiosa sent for this
+    // card, and return whatever we have (may be partial) so the card still
+    // shows up in search; _cm/click-through works regardless of the image.
+    console.warn('Could not resolve a complete image slug for "' + (item.name || '?') + '" (type: ' + (item.type || item.category || '?') + '). Raw item:');
+    console.warn(JSON.stringify(item, null, 2));
     return item.slug || '';
+  }
+
+  // Sites are rendered landscape on curiosa and are served from a different
+  // CDN/path than every other card type (which use images.sorcerycard.io):
+  //   https://d27a44hjr9gen3.cloudfront.net/rotated/{slug}.png
+  // Confirmed from a real download: "999-overflowing_court-d-s.png".
+  const SITE_CDN = 'https://d27a44hjr9gen3.cloudfront.net/rotated/';
+
+  // curiosa serves images through Next.js's image proxy:
+  //   https://curiosa.io/_next/image?url=<encoded-real-url>&w=...&q=...
+  // Decode that wrapper down to the real CDN URL, same trick scrape-news.js
+  // uses for article cover images.
+  function unwrapNextImage(u) {
+    if (!u || typeof u !== 'string') return u;
+    try {
+      const parsed = new URL(u, 'https://curiosa.io');
+      const inner = parsed.searchParams.get('url');
+      return inner ? decodeURIComponent(inner) : u;
+    } catch (e) {
+      return u;
+    }
+  }
+
+  function findImageUrl(item, fullSlug, type) {
+    // 1) A direct image URL field on the card itself, or nested printings.
+    const direct = item.image || item.imageUrl || item.art || item.artUrl || item.artworkUrl;
+    if (direct) return unwrapNextImage(direct);
+    const buckets = [item.printings, item.editions, item.prints, item.versions, item.variants];
+    for (const arr of buckets) {
+      if (!Array.isArray(arr) || !arr.length) continue;
+      const withImg = arr.find(p => p && (p.image || p.imageUrl || p.art));
+      if (withImg) return unwrapNextImage(withImg.image || withImg.imageUrl || withImg.art);
+    }
+    // 2) Sites: build the known rotated-CDN URL directly from the slug.
+    if (type === 'site' && fullSlug) return SITE_CDN + fullSlug + '.png';
+    // 3) Nothing found — index.html will fall back to its own slug-based
+    // images.sorcerycard.io construction.
+    return '';
+  }
+
+  // Prefer whatever curiosa marks as the card's current/errata'd text over
+  // the original printed text, matching the "UPDATED: ..." convention
+  // already used throughout index.html's built-in CARDS array.
+  function findText(item) {
+    const updated = item.updatedText || item.currentText || item.officialText || item.errataText || item.rulingText;
+    const original = item.text || item.rulesText || item.ruleText || item.cardText || item.description || '';
+    const isFlaggedUpdated = !!(item.isUpdated || item.updated || item.hasErrata || item.hasUpdate);
+    if (updated && updated !== original) {
+      return updated.indexOf('UPDATED:') === 0 ? updated : 'UPDATED: ' + updated;
+    }
+    if (isFlaggedUpdated && original && original.indexOf('UPDATED:') !== 0) {
+      return 'UPDATED: ' + original;
+    }
+    return original;
   }
 
   function norm(item) {
@@ -71,6 +132,7 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       ? item.sets.map(s => (typeof s === 'string' ? s : (s && (s.name || s.setName)))).filter(Boolean)
       : (setName ? [setName] : []);
     const fullSlug = findFullSlug(item);
+    const img = findImageUrl(item, fullSlug, t);
 
     let th = '';
     if (Array.isArray(item.thresholds)) {
@@ -93,10 +155,11 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       r,
       s:  setName || (allSets[0] || ''),
       ss: allSets.length ? allSets : (setName ? [setName] : []),
-      txt: item.text || item.rulesText || item.ruleText || item.cardText || item.description || '',
+      txt: findText(item),
       ar: item.artist || item.illustrator || item.artistName || '',
       th,
       sl: fullSlug,
+      img: img || undefined,
     };
   }
 
