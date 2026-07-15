@@ -5566,8 +5566,8 @@ function render(){
       
       Object.keys(MENU_S).forEach(function(cat){
         var _catDot=(cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
-        if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
-        else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--fg2)">&rsaquo;</div></div>');}
+        if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
+        else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
       o('</div><div class="dfoot"><a href="https://github.com/ebelious/Sorcery-Grimoir#sorcery-grimoir" target="_blank" style="text-decoration:none"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></a></div></div>');
 
