@@ -4256,9 +4256,9 @@ function pContent(){
       var _showFile=G.diceBgImage||(BG_IMAGES[0]&&BG_IMAGES[0].file);
       o('<div style="display:flex;align-items:flex-start;justify-content:center;gap:10px;margin-top:6px">');
       o('<div style="display:flex;align-items:center;gap:10px">');
-      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_diceBgImgNav(-1)">&#8592;</button>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px;color:var(--hi)" onclick="_diceBgImgNav(-1)">&#8592;</button>');
       o('<div style="width:120px;aspect-ratio:3/4;overflow:hidden;border-radius:8px;border:1px solid var(--bd);flex-shrink:0">'+(G.diceBgImage?'<img src="'+_bgResolveUrl(_showFile)+'" style="width:100%;height:100%;object-fit:cover;display:block">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg2);font-size:24px">🚫</div>')+'</div>');
-      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_diceBgImgNav(1)">&#8594;</button>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px;color:var(--hi)" onclick="_diceBgImgNav(1)">&#8594;</button>');
       o('</div>');
       o('<div id="dicebg-list" style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;width:120px;flex-shrink:0">');
       BG_IMAGES.forEach(function(b){
@@ -4289,12 +4289,12 @@ function pContent(){
     o('<button class="fb full" style="flex:1" onclick="p1LayoutMinimal()">Minimal</button>');
     o('</div>');
     o('<div class="slbl2">Dice</div>');
-    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span>&#8594;</span></button>');
+    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span style="color:var(--hi)">&#8594;</span></button>');
     o('<div class="slbl2">Color</div>');
-    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>Color</span><span>&#8594;</span></button>');
+    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>Color</span><span style="color:var(--hi)">&#8594;</span></button>');
     o('<div class="slbl2">Backgrounds</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
-    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>Backgrounds</span><span>&#8594;</span></button>');
+    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>Backgrounds</span><span style="color:var(--hi)">&#8594;</span></button>');
     o('<div class="slbl2">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
@@ -4365,9 +4365,9 @@ function pContent(){
       var _showFile=G.cfg.bgImage||(BG_IMAGES[0]&&BG_IMAGES[0].file);
       o('<div style="display:flex;align-items:flex-start;justify-content:center;gap:10px;margin-top:6px">');
       o('<div style="display:flex;align-items:center;gap:10px">');
-      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_bgImgNav(-1)">&#8592;</button>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px;color:var(--hi)" onclick="_bgImgNav(-1)">&#8592;</button>');
       o('<div style="width:120px;aspect-ratio:3/4;overflow:hidden;border-radius:8px;border:1px solid var(--bd);flex-shrink:0">'+(G.cfg.bgImage?'<img src="'+_bgResolveUrl(_showFile)+'" style="width:100%;height:100%;object-fit:cover;display:block">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg2);font-size:24px">🚫</div>')+'</div>');
-      o('<button class="fb" style="font-size:16px;padding:8px 12px" onclick="_bgImgNav(1)">&#8594;</button>');
+      o('<button class="fb" style="font-size:16px;padding:8px 12px;color:var(--hi)" onclick="_bgImgNav(1)">&#8594;</button>');
       o('</div>');
       o('<div id="uibg-list" style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;width:120px;flex-shrink:0">');
       BG_IMAGES.forEach(function(b){
@@ -5574,11 +5574,11 @@ function render(){
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
         MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew)||(item==='Discord'&&G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
-        o('<button class="cpop-bk" onclick="goBack()">&larr; Back</button></div></div>');
+        o('<button class="cpop-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button></div></div>');
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':'')+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()">&larr; Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':'')+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
