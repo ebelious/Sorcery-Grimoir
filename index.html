@@ -3048,6 +3048,7 @@ function _imgUrl(slug){
 }
 function cImgTag(c, style){
   style = style||'width:100%;height:100%;object-fit:cover;display:block';
+  if(c&&c.img) return '<img src="'+c.img+'" style="'+style+'" loading="lazy" onerror="this.onerror=null;this.src=\''+cSVGfb(c)+'\'">';
   var s = cSlug(c);
   if(!s) return '<img src="'+cSVGfb(c)+'" style="'+style+'">';
   return '<img src="'+_imgUrl(s)+'"'
@@ -3064,6 +3065,7 @@ function _expandImg(el){
   render();
 }
 function imgURL(c){
+  if(c&&c.img) return c.img;
   var s=cSlug(c);
   if(!s) return cSVGfb(c);
   return _imgUrl(s);
