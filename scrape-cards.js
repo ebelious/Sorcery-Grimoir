@@ -30,40 +30,77 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
   // ── Helpers ───────────────────────────────────────────────────────────────
   function lower(s) { return (s || '').toString().toLowerCase(); }
 
+  // A "complete" image slug looks like setcode-cardname-product-finish,
+  // e.g. "got-abaddon_succubus-b-s" — four hyphen-separated parts, where
+  // the first is a short (2-4 char) set code. A bare card slug like
+  // "abaddon_succubus" or "got-abaddon_succubus" is NOT enough to build
+  // a working images.sorcerycard.io URL.
+  function looksComplete(slug) {
+    if (!slug || typeof slug !== 'string') return false;
+    const parts = slug.split('-');
+    return parts.length >= 4 && parts[0].length <= 4;
+  }
+
+  function findFullSlug(item) {
+    // 1) Top-level slug, if it's already complete.
+    if (looksComplete(item.slug)) return item.slug;
+    // 2) Look inside common nested collections of per-set printings.
+    const buckets = [item.printings, item.editions, item.prints, item.versions];
+    for (const arr of buckets) {
+      if (!Array.isArray(arr) || !arr.length) continue;
+      const withSlug = arr.find(p => looksComplete(p && (p.slug || p.imageSlug)));
+      if (withSlug) return withSlug.slug || withSlug.imageSlug;
+    }
+    // 3) Some APIs expose a direct imageSlug/fullSlug field.
+    if (looksComplete(item.imageSlug)) return item.imageSlug;
+    if (looksComplete(item.fullSlug)) return item.fullSlug;
+    // 4) Give up — return whatever we have (may be partial) so the card
+    // still shows up in search; imgErr()'s variant-guessing in index.html
+    // may still recover an image, and _cm/click-through works regardless.
+    return item.slug || '';
+  }
+
   function norm(item) {
     if (!item?.name || !item?.slug) return null;
 
-    const el = EL_MAP[lower(item.element || item.elements?.[0])] || 'neutral';
-    const t = TYPE_MAP[lower(item.type || item.category)] || 'minion';
-    const r = RARITY_MAP[lower(item.rarity)] || 'ordinary';
-    const setName = item.set?.name || item.setName || item.edition || '';
+    const el = EL_MAP[lower(item.element || item.elements?.[0] || item.affinity)] || 'neutral';
+    const t = TYPE_MAP[lower(item.type || item.category || item.cardType)] || 'minion';
+    const r = RARITY_MAP[lower(item.rarity || item.rarityName)] || 'ordinary';
+    const setName = item.set?.name || item.setName || item.edition || item.editionName || '';
     const allSets = Array.isArray(item.sets)
-      ? item.sets.map(s => (typeof s === 'string' ? s : s.name)).filter(Boolean)
+      ? item.sets.map(s => (typeof s === 'string' ? s : (s && (s.name || s.setName)))).filter(Boolean)
       : (setName ? [setName] : []);
+    const fullSlug = findFullSlug(item);
 
     let th = '';
     if (Array.isArray(item.thresholds)) {
       th = item.thresholds.map(x => (typeof x === 'string' ? x : `${x.count || 1}${(x.element || '')[0] || ''}`)).join(' ');
     } else if (typeof item.threshold === 'string') {
       th = item.threshold;
+    } else if (typeof item.thresholdText === 'string') {
+      th = item.thresholdText;
     }
+
+    const cost = item.cost ?? item.manaCost ?? item.mana_cost;
+    const power = item.power ?? item.pow;
 
     return {
       n:  item.name,
       el,
       t,
-      c:  (item.cost === undefined || item.cost === null) ? null : Number(item.cost),
-      pw: (item.power === undefined || item.power === null) ? null : Number(item.power),
+      c:  (cost === undefined || cost === null) ? null : Number(cost),
+      pw: (power === undefined || power === null) ? null : Number(power),
       r,
       s:  setName || (allSets[0] || ''),
       ss: allSets.length ? allSets : (setName ? [setName] : []),
-      txt: item.text || item.rulesText || item.description || '',
-      ar: item.artist || item.illustrator || '',
+      txt: item.text || item.rulesText || item.ruleText || item.cardText || item.description || '',
+      ar: item.artist || item.illustrator || item.artistName || '',
       th,
-      sl: item.slug,
+      sl: fullSlug,
     };
   }
 
+  var _loggedSample = false;
   const seen  = new Set();
   const cards = [];
 
@@ -71,6 +108,11 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     if (!obj || typeof obj !== 'object' || depth > 14) return;
     if (Array.isArray(obj)) {
       if (obj.length && obj[0]?.slug && obj[0]?.name !== undefined) {
+        if (!_loggedSample) {
+          _loggedSample = true;
+          console.log('Sample raw card object (for debugging slug/field mapping):');
+          console.log(JSON.stringify(obj[0], null, 2));
+        }
         obj.forEach(item => {
           const c = norm(item);
           if (c && !seen.has(c.sl)) { seen.add(c.sl); cards.push(c); }
