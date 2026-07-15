@@ -2655,11 +2655,13 @@ function showP1Settings(anchorEl){
 
 function p1LayoutCompetitive(){
   G.cfg.hideTurnBar=false;
+  G.cfg.diceInHeader=false;
   sv('sg-cfg',G.cfg);
   _refreshP1Settings();
 }
 function p1LayoutMinimal(){
   G.cfg.hideTurnBar=true;
+  G.cfg.diceInHeader=true;
   sv('sg-cfg',G.cfg);
   if(!(G.cfg&&G.cfg.diceInHeader)){
     G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
