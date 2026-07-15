@@ -2,7 +2,7 @@ name: Scrape Discord Updates
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # runs every 30 minutes
+    - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 jobs:
@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Run scraper
-        run: node scrape-discord.js
+      - name: Run scraper (twice, 30s apart)
+        run: |
+          node scrape-discord.js
+          sleep 30
+          node scrape-discord.js
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 
