@@ -786,6 +786,7 @@ function boot(){
     try{ loadNews(); }catch(e){}
     try{ loadYTVideos(); }catch(e){}
     try{ loadDiscord(); }catch(e){}
+    try{ loadNewCards(); }catch(e){}
   };
   if(window.requestIdleCallback) requestIdleCallback(_checkNew,{timeout:5000});
   else setTimeout(_checkNew,2500);
@@ -4128,6 +4129,29 @@ function loadDiscord(){
 setInterval(function(){
   if(G.panel==='discord'&&!G.discordLoading)loadDiscord();
 },60000);
+// Merge any newly-released cards (scraped nightly from curiosa.io by GitHub
+// Actions into cards.json) into the built-in CARDS array. Silent — no panel,
+// no loading state; existing cards (matched by slug) are left untouched.
+function loadNewCards(){
+  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/cards.json?t='+Date.now();
+  fetch(jsonUrl,{cache:'no-store'})
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      var incoming=(d&&d.cards)||[];
+      if(!Array.isArray(incoming)||!incoming.length)return;
+      var known={};
+      CARDS.forEach(function(c){known[c.sl]=true;});
+      var added=0;
+      incoming.forEach(function(c){
+        if(c&&c.sl&&!known[c.sl]){CARDS.push(c);known[c.sl]=true;added++;}
+      });
+      if(added>0)render();
+    })
+    .catch(function(){});
+}
 
 
 // ── PRICE ─────────────────────────────────────────────────────────────────────
