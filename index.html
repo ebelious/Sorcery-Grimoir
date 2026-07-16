@@ -4563,7 +4563,7 @@ function openPanel(id){
   if(id==='discord'){G.discordHasNew=false;if(G.discordItems&&G.discordItems.length){var ld2=G.discordItems[0].id;if(ld2)sv('sg-discord-seen',ld2);}}
   if(id==='deckview'){_dvInitHand(G.selDeck);}
   var _rb0=document.querySelector('.rd-body');
-  G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu,readModal:G.readModal,rdScroll:_rb0?_rb0.scrollTop:0});G.panel=id;G.cat=null;G.readModal=null;render();
+  G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu,readModal:G.readModal,rdScroll:_rb0?_rb0.scrollTop:0,selCard:G.selCard});G.panel=id;G.cat=null;G.readModal=null;render();
   if(id==='card'){
     requestAnimationFrame(function(){requestAnimationFrame(function(){
       var el=document.querySelector('.cm');
@@ -4574,7 +4574,7 @@ function openPanel(id){
 function openCat(cat){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){
   var _leavingCard=(G.panel==='card');
-  if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;G.readModal=prev.readModal||null;render();if(prev.readModal){requestAnimationFrame(function(){requestAnimationFrame(function(){var _rb1=document.querySelector('.rd-body');if(_rb1)_rb1.scrollTop=prev.rdScroll||0;});});}if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
+  if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;G.readModal=prev.readModal||null;G.selCard=('selCard' in prev)?prev.selCard:G.selCard;render();if(prev.readModal){requestAnimationFrame(function(){requestAnimationFrame(function(){var _rb1=document.querySelector('.rd-body');if(_rb1)_rb1.scrollTop=prev.rdScroll||0;});});}if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
 }
 function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();}
 
@@ -5889,9 +5889,9 @@ function openCodexTermPopup(term){
 
 function buildGsDrop(){
   var q=S.gs.toLowerCase();if(!q)return '';var items=[];
-  CARDS.filter(function(c){return cName(c).toLowerCase().indexOf(q)>=0;}).slice(0,5).forEach(function(c){items.push('<div class="sddi" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}"><div class="sn">'+h(cName(c))+'</div><div class="sc">'+cEl(c)+' '+cType(c)+'</div></div>');});
-  FAQ_DATA.filter(function(f){return f.card&&f.card.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(f){items.push('<div class="sddi" data-faq="'+h(f.card)+'" onclick="gsOpenFaq(this.dataset.faq)"><div class="sn">'+h(f.card)+'</div><div class="sc">FAQ</div></div>');});
-  CODEX_DATA.filter(function(k){return k.k&&k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" data-codex="'+h(k.k)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(k.k)+'</div><div class="sc">Codex</div></div>');});
+  CARDS.filter(function(c){return cName(c).toLowerCase().indexOf(q)>=0;}).slice(0,5).forEach(function(c){items.push('<div class="sddi" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}"><div class="sn">'+h(cName(c))+'</div><div class="sc"><span class="cm-tag">Card</span></div></div>');});
+  FAQ_DATA.filter(function(f){return f.card&&f.card.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(f){items.push('<div class="sddi" data-faq="'+h(f.card)+'" onclick="gsOpenFaq(this.dataset.faq)"><div class="sn">'+h(f.card)+'</div><div class="sc"><span class="cm-tag">FAQ</span></div></div>');});
+  CODEX_DATA.filter(function(k){return k.k&&k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" data-codex="'+h(k.k)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(k.k)+'</div><div class="sc"><span class="cm-tag">Codex</span></div></div>');});
   return items.slice(0,8).join('');
 }
 // Patches just the search dropdown + clear button in place (no full app
