@@ -395,19 +395,32 @@ const CODEX_URL = 'https://curiosa.io/codex';
       // the app, and we grab the parent object alongside it to look for a
       // title/date field to label that entry with.
       const found = [];
+      let excludedCount = 0;
       const seen = new Set();
       (function walk(node, parent, depth) {
         if (!node || typeof node !== 'object' || depth > 20) return;
         if (Array.isArray(node)) {
           if (node.length && node[0] && node[0]._type === 'block' && !seen.has(node)) {
             seen.add(node);
-            found.push({ blocks: node, parent });
+            // Skip content belonging to codex/FAQ documents — the changelog
+            // page's embedded page data appears to still carry the full
+            // codex/FAQ dataset (shared/cached across pages), and those
+            // entries' own `content` fields also start with block-type
+            // objects, so without this they'd get misidentified as
+            // changelog entries too.
+            const parentType = parent && parent._type;
+            if (parentType !== 'codex' && parentType !== 'faq') {
+              found.push({ blocks: node, parent });
+            } else {
+              excludedCount++;
+            }
           }
           node.forEach(v => walk(v, node, depth + 1));
         } else {
           Object.keys(node).forEach(k => walk(node[k], node, depth + 1));
         }
       })(nextData, null, 0);
+      console.log(`Changelog: excluded ${excludedCount} codex/FAQ content block(s) found alongside the changelog data.`);
       if (found.length) {
         changelogEntries = found.map((f, i) => {
           const p = f.parent || {};
