@@ -43,6 +43,14 @@ const LIMIT = 10;
 
   const raw = await res.json();
 
+  let previousMessageId = null;
+  try {
+    const existing = JSON.parse(fs.readFileSync('discord.json', 'utf8'));
+    if (existing.messages && existing.messages[0]) previousMessageId = existing.messages[0].id;
+  } catch (e) {
+    console.log('No existing discord.json -- first run, will not notify');
+  }
+
   const messages = raw
     // Skip empty messages (e.g. embed-only or attachment-only with no text)
     .filter(m => (m.content && m.content.trim()) || (m.embeds && m.embeds.length) || (m.attachments && m.attachments.length))
@@ -67,4 +75,29 @@ const LIMIT = 10;
 
   fs.writeFileSync('discord.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + messages.length + ' messages to discord.json');
+
+  // Notify subscribers via Firebase Cloud Messaging if the newest message
+  // changed since the last run. `previousMessageId` is null on the very
+  // first run (no discord.json yet) -- skip notifying in that case so setup
+  // doesn't blast everyone with every existing message at once.
+  if (previousMessageId && messages[0] && messages[0].id !== previousMessageId) {
+    try {
+      const admin = require('firebase-admin');
+      if (!admin.apps.length) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+      }
+      await admin.messaging().send({
+        topic: 'discord',
+        notification: {
+          title: 'New Discord Message',
+          body: (messages[0].content || 'A new message is available.').slice(0, 150)
+        },
+        webpush: { fcmOptions: { link: messages[0].url } }
+      });
+      console.log('Sent FCM notification for new message: ' + messages[0].id);
+    } catch (e) {
+      console.log('FCM notification failed (non-fatal): ' + e.message);
+    }
+  }
 })();
