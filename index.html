@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io /.netlify; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com /.netlify; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -36,6 +36,90 @@
 // ─────────────────────────────────────────────────────────────────────────────
 var YT_PROXY_URL = 'https://sorcery-grimoir.ebel2590.workers.dev';
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-messaging-compat.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// FIREBASE CLOUD MESSAGING CONFIG
+// Fill these in from your Firebase project (Project Settings → General → Your
+// apps → Web app). The same object must also be pasted into sw.js. The VAPID
+// key is under Project Settings → Cloud Messaging → Web Push certificates →
+// "Generate key pair".
+// ─────────────────────────────────────────────────────────────────────────────
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAnTZ_8Ya-l9lWEG2CIw6OAR0X8dvQziys",
+  authDomain: "sorcery-grimoir.firebaseapp.com",
+  projectId: "sorcery-grimoir",
+  storageBucket: "sorcery-grimoir.firebasestorage.app",
+  messagingSenderId: "58533506214",
+  appId: "1:58533506214:web:ce8917b858d9da0e211867",
+  measurementId: "G-34SMF7DB6S"
+};
+var FIREBASE_VAPID_KEY = "BLk9It1CgnCXO5oNBkGPF6SgE3sKwQBFmpvwph33gvWN2xPUVPmTLAbogi4fTrbcaXerB9WIvmORXfksEAsRG90";
+
+// Real push notifications (News/Discord/YouTube) via Firebase Cloud Messaging —
+// these arrive even when the app/tab is fully closed, unlike the local
+// Notification-API alerts above (timer, etc.) which only fire while the tab
+// is open or backgrounded.
+var _fcmMessaging=null,_fcmToken=null,_fcmReady=false;
+function _initFirebaseMessaging(){
+  if(_fcmReady)return;
+  if(typeof firebase==='undefined'||FIREBASE_CONFIG.apiKey==='YOUR_FIREBASE_API_KEY')return;
+  try{
+    firebase.initializeApp(FIREBASE_CONFIG);
+    _fcmMessaging=firebase.messaging();
+    // Foreground messages (tab open & focused) don't trigger the service
+    // worker's background handler, so show them ourselves.
+    _fcmMessaging.onMessage(function(payload){
+      var n=(payload&&payload.notification)||{};
+      _sendNotification(n.title||'Sorcery Grimoire',n.body||'');
+    });
+    _fcmReady=true;
+  }catch(e){console.warn('Firebase init failed:',e);}
+}
+function _fcmActiveTopics(){
+  var t=[];
+  if(G.cfg&&G.cfg.pushNews)t.push('news');
+  if(G.cfg&&G.cfg.pushDiscord)t.push('discord');
+  if(G.cfg&&G.cfg.pushYoutube)t.push('youtube');
+  return t;
+}
+// Fetches (or refreshes) this device's FCM token and tells our Netlify
+// function which topics it should be subscribed to, based on the current
+// News/Discord/YouTube push toggles in settings.
+function _fcmSyncTopics(){
+  if(!_fcmReady||!_fcmMessaging||!('serviceWorker' in navigator))return;
+  navigator.serviceWorker.ready.then(function(reg){
+    _fcmMessaging.getToken({vapidKey:FIREBASE_VAPID_KEY,serviceWorkerRegistration:reg}).then(function(token){
+      if(!token)return;
+      _fcmToken=token;sv('sg-fcm-token',token);
+      fetch('/.netlify/functions/subscribe-topic',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({token:token,topics:_fcmActiveTopics()})
+      }).catch(function(){});
+    }).catch(function(e){console.warn('FCM getToken failed:',e);});
+  });
+}
+// Toggles push notifications for one topic ('news'|'discord'|'youtube'),
+// requesting OS notification permission the first time it's turned on.
+function togglePushTopic(topic){
+  var key='push'+topic.charAt(0).toUpperCase()+topic.slice(1);
+  if(!G.cfg[key]){
+    if(typeof Notification==='undefined'){alert('Push notifications are not supported in this browser.');return;}
+    Notification.requestPermission().then(function(perm){
+      if(perm!=='granted')return;
+      G.cfg[key]=true;sv('sg-cfg',G.cfg);
+      _initFirebaseMessaging();_fcmSyncTopics();
+      _renderKeepScroll();
+    });
+  } else {
+    G.cfg[key]=false;sv('sg-cfg',G.cfg);
+    _fcmSyncTopics();
+    _renderKeepScroll();
+  }
+}
+</script>
 <script>
 // Register external service worker
 if('serviceWorker' in navigator){
@@ -46,10 +130,10 @@ if('serviceWorker' in navigator){
   });
 }
 // Notifications: OS-level notifications for in-app events (timer alerts, new
-// content). Shown via the service worker registration when available (works
-// even while the tab is backgrounded), falling back to a plain Notification.
-// Note: this app is static (no push server), so this can't wake up a fully
-// closed browser — only works while the tab/browser is open or backgrounded.
+// content while the app is open). Shown via the service worker registration
+// when available, falling back to a plain Notification. Real push (News,
+// Discord, YouTube) that can wake up a fully closed browser is handled
+// separately via Firebase Cloud Messaging above/in sw.js.
 function _sendNotification(title, body){
   if(!G.cfg||!G.cfg.notifications)return;
   if(typeof Notification==='undefined'||Notification.permission!=='granted')return;
@@ -833,7 +917,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,pushNews:false,pushDiscord:false,pushYoutube:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -851,6 +935,9 @@ function boot(){
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
+    _initFirebaseMessaging();_fcmSyncTopics();
+  }
   loadPubDecks();
   // Cards now come entirely from the scraper (no built-in CARDS data), so
   // fetch them immediately rather than waiting for idle time — fetch() is
@@ -4584,6 +4671,11 @@ function pContent(){
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">Push Notifications</div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
+    o('<div class="set-row"><span>News</span><button class="ftag'+(G.cfg.pushNews?' on':'')+'" onclick="togglePushTopic(\'news\')">'+(G.cfg.pushNews?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Discord</span><button class="ftag'+(G.cfg.pushDiscord?' on':'')+'" onclick="togglePushTopic(\'discord\')">'+(G.cfg.pushDiscord?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>YouTube</span><button class="ftag'+(G.cfg.pushYoutube?' on':'')+'" onclick="togglePushTopic(\'youtube\')">'+(G.cfg.pushYoutube?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
@@ -4656,7 +4748,7 @@ function pContent(){
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
     o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io &rarr;</a>');
     if(G.codexChangelog&&G.codexChangelog.length){
-      o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="showChangelogList()">Codex Changelog</button>');
+      o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="showChangelogList()">Changelog</button>');
     }
     o('</div>');
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
