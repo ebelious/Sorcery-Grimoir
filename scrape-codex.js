@@ -369,6 +369,51 @@ const CODEX_URL = 'https://curiosa.io/codex';
     console.log('\n"Range of Motion" entry not found in scraped codex data.');
   }
 
+  console.log('\nLoading codex changelog page...');
+  let changelogSegments = [];
+  try {
+    await page.goto('https://curiosa.io/codex/changelog', { waitUntil: 'networkidle', timeout: 60000 });
+    await page.waitForTimeout(2000);
+    const nextData = await page.evaluate(() => {
+      try {
+        const el = document.getElementById('__NEXT_DATA__');
+        return el ? JSON.parse(el.textContent) : null;
+      } catch (e) { return null; }
+    });
+    if (nextData) {
+      // Search the SSG-embedded page data for any portable-text block
+      // arrays (same shape as codex/FAQ content), rather than assuming a
+      // specific query key, since the changelog's exact data shape hasn't
+      // been confirmed yet.
+      const blockArrays = [];
+      const seen = new Set();
+      (function walk(node, depth) {
+        if (!node || typeof node !== 'object' || depth > 20) return;
+        if (Array.isArray(node)) {
+          if (node.length && node[0] && node[0]._type === 'block' && !seen.has(node)) {
+            seen.add(node);
+            blockArrays.push(node);
+          }
+          node.forEach(v => walk(v, depth + 1));
+        } else {
+          Object.values(node).forEach(v => walk(v, depth + 1));
+        }
+      })(nextData, 0);
+      if (blockArrays.length) {
+        blockArrays.forEach(arr => { changelogSegments = changelogSegments.concat(portableTextSegments(arr)); });
+        console.log(`Changelog: found ${blockArrays.length} content block array(s), extracted ${changelogSegments.length} total segments.`);
+        console.log('Sample of first changelog block array (for debugging field mapping):');
+        console.log(JSON.stringify(blockArrays[0].slice(0, 3), null, 2));
+      } else {
+        console.log('Changelog: no portable-text block array found in __NEXT_DATA__.');
+      }
+    } else {
+      console.log('Changelog: could not read __NEXT_DATA__ from the page.');
+    }
+  } catch (e) {
+    console.log('Changelog: failed to load/parse changelog page: ' + e.message);
+  }
+
   await browser.close();
 
   if (!codex.length && !faq.length) {
@@ -380,7 +425,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
 
   fs.writeFileSync(
     'codex.json',
-    JSON.stringify({ updated: new Date().toISOString(), codex, faq }, null, 2)
+    JSON.stringify({ updated: new Date().toISOString(), codex, faq, changelog: changelogSegments.length ? changelogSegments : undefined }, null, 2)
   );
   console.log('✓ Wrote codex.json');
 })();
