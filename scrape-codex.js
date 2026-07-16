@@ -267,9 +267,13 @@ const CODEX_URL = 'https://curiosa.io/codex';
     const qText = portableTextToPlain(qRaw);
     const aText = portableTextToPlain(aRaw);
     if (!qText || !aText) return [];
-    // The example table lived inside the question content, not the answer —
-    // so build segments from both, question first (matching source order).
-    const segments = portableTextSegments(qRaw).concat(portableTextSegments(aRaw));
+    // The question's own plain text (q) is already shown as its own header
+    // in the app, so only pull non-text segments (tables/images — e.g. the
+    // oversized-minion grid example that lives inside the question) out of
+    // it, not its paragraph text, to avoid the question being displayed
+    // twice. The answer's segments are kept in full.
+    const qSegs = portableTextSegments(qRaw).filter(s => s.t === 'tbl' || s.t === 'img');
+    const segments = qSegs.concat(portableTextSegments(aRaw));
     let names = [];
     if (Array.isArray(o.cardNames) && o.cardNames.length) names = o.cardNames;
     else if (Array.isArray(o.cards) && o.cards.length) names = o.cards;
