@@ -58,11 +58,13 @@ const fs = require('fs');
 
   // Load existing news.json to avoid re-fetching images we already have
   let existingImages = {};
+  let previousFirstUrl = null;
   try {
     const existing = JSON.parse(fs.readFileSync('news.json', 'utf8'));
     (existing.articles || []).forEach(a => {
       if (a.url && a.image) existingImages[a.url] = a.image;
     });
+    if (existing.articles && existing.articles[0]) previousFirstUrl = existing.articles[0].url;
     console.log('Loaded ' + Object.keys(existingImages).length + ' cached images from existing news.json');
   } catch (e) {
     console.log('No existing news.json -- fetching all images fresh');
@@ -127,4 +129,29 @@ const fs = require('fs');
 
   fs.writeFileSync('news.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + articles.length + ' articles to news.json');
+
+  // Notify subscribers via Firebase Cloud Messaging if the newest article
+  // changed since the last run. `previousFirstUrl` is null on the very first
+  // run (no news.json yet) -- skip notifying in that case so setup doesn't
+  // blast everyone with every existing article at once.
+  if (previousFirstUrl && articles[0] && articles[0].url !== previousFirstUrl) {
+    try {
+      const admin = require('firebase-admin');
+      if (!admin.apps.length) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+      }
+      await admin.messaging().send({
+        topic: 'news',
+        notification: {
+          title: 'New Sorcery News',
+          body: articles[0].title || 'A new article is available.'
+        },
+        webpush: { fcmOptions: { link: articles[0].url } }
+      });
+      console.log('Sent FCM notification for new article: ' + articles[0].url);
+    } catch (e) {
+      console.log('FCM notification failed (non-fatal): ' + e.message);
+    }
+  }
 })();
