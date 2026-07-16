@@ -45,6 +45,42 @@ if('serviceWorker' in navigator){
     });
   });
 }
+// Notifications: OS-level notifications for in-app events (timer alerts, new
+// content). Shown via the service worker registration when available (works
+// even while the tab is backgrounded), falling back to a plain Notification.
+// Note: this app is static (no push server), so this can't wake up a fully
+// closed browser — only works while the tab/browser is open or backgrounded.
+function _sendNotification(title, body){
+  if(!G.cfg||!G.cfg.notifications)return;
+  if(typeof Notification==='undefined'||Notification.permission!=='granted')return;
+  var opts={body:body,icon:'icons/icon-192.png',badge:'icons/icon-192.png'};
+  if('serviceWorker' in navigator && navigator.serviceWorker.ready){
+    navigator.serviceWorker.ready.then(function(reg){
+      reg.showNotification(title,opts).catch(function(){
+        try{new Notification(title,opts);}catch(e){}
+      });
+    });
+  } else {
+    try{new Notification(title,opts);}catch(e){}
+  }
+}
+function toggleNotifications(){
+  if(!G.cfg.notifications){
+    if(typeof Notification==='undefined'){
+      G.cfg.notifications=false;sv('sg-cfg',G.cfg);_renderKeepScroll();
+      return;
+    }
+    Notification.requestPermission().then(function(perm){
+      G.cfg.notifications=(perm==='granted');
+      sv('sg-cfg',G.cfg);
+      _renderKeepScroll();
+    });
+  } else {
+    G.cfg.notifications=false;
+    sv('sg-cfg',G.cfg);
+    _renderKeepScroll();
+  }
+}
 // PWA install prompt
 var _pwaPrompt = null;
 window.addEventListener('beforeinstallprompt', function(e){
@@ -592,15 +628,15 @@ var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8
 // Index 0 is a special "theme color" slot — always returns the current --hi accent
 function getDieCol(i){var idx=(i==null?0:i)%DIE_COLS.length;if(idx===0){return (G&&G.cfg&&G.cfg.hi)?G.cfg.hi:(document.body.style.getPropertyValue('--hi')||'#FBB829');}return DIE_COLS[idx];}
 var MENU_S={
-  Settings:['Starting Life','Player name','Theme'],
+  Settings:['Starting Life','Player name','Interface'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
   Media:['YouTube','News','Discord'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Theme':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player name',themes:'Theme',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Player name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -2857,11 +2893,11 @@ setInterval(function(){
   var _timerJustEnded=false;
   if(G.p1TimerRunning){
     var rem=G.p1TimerEnd-Date.now();
-    if(rem<=0){G.p1TimerRunning=false;G.p1TimerDone=true;_timerJustEnded=true;}
+    if(rem<=0){G.p1TimerRunning=false;G.p1TimerDone=true;_timerJustEnded=true;_sendNotification("Time's Up!","Your timer has run out.");}
     else{
       var warnMs=(G.p1TimerWarnMin!=null?G.p1TimerWarnMin:5)*60000;
       var critMs=(G.p1TimerCritMin!=null?G.p1TimerCritMin:1)*60000;
-      if(rem<=critMs){if(!G.p1TimerCritFired){G.p1TimerCritFired=true;G.p1TimerWarnFired=true;vibrate([80,60,80,60,80]);}}
+      if(rem<=critMs){if(!G.p1TimerCritFired){G.p1TimerCritFired=true;G.p1TimerWarnFired=true;vibrate([80,60,80,60,80]);_sendNotification('Timer Critical','Less than '+(G.p1TimerCritMin||1)+' minute remaining.');}}
       else if(rem<=warnMs){if(!G.p1TimerWarnFired){G.p1TimerWarnFired=true;vibrate([80,60,80]);}}
     }
   }
@@ -3752,7 +3788,7 @@ function _checkYtForNew(){
   if(!latest)return;
   var seen=ld('sg-yt-seen',null);
   if(seen==null){ sv('sg-yt-seen',latest); }
-  else if(seen!==latest){ G.ytHasNew=true; }
+  else if(seen!==latest){ G.ytHasNew=true; _sendNotification('New YouTube Video','A new video is available.'); }
 }
 function loadYTVideos(){
   if(G.ytLoading)return;
@@ -4100,7 +4136,7 @@ function _checkNewsForNew(){
   if(!latest)return;
   var seen=ld('sg-news-seen',null);
   if(seen==null){ sv('sg-news-seen',latest); }
-  else if(seen!==latest){ G.newsHasNew=true; }
+  else if(seen!==latest){ G.newsHasNew=true; _sendNotification('New Sorcery News','A new article is available.'); }
 }
 function loadNews(){
   if(G.newsLoading)return;
@@ -4135,7 +4171,7 @@ function _checkDiscordForNew(){
   if(!latest)return;
   var seen=ld('sg-discord-seen',null);
   if(seen==null){ sv('sg-discord-seen',latest); }
-  else if(seen!==latest){ G.discordHasNew=true; }
+  else if(seen!==latest){ G.discordHasNew=true; _sendNotification('New Discord Message','A new message is available.'); }
 }
 function loadDiscord(){
   if(G.discordLoading)return;
@@ -4417,6 +4453,7 @@ function pContent(){
       o('</div>');
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
