@@ -228,8 +228,24 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
   }
 
   var _loggedSample = false;
-  const seen  = new Set();
-  const cards = [];
+  const rawByKey = new Map();
+
+  // Fill gaps in `a` using `b`: keep whichever value is non-null/defined,
+  // and for the threshold/power fields specifically, prefer a real non-zero
+  // value over a zero/null one from a different occurrence of the same card.
+  function mergeRaw(a, b) {
+    const out = Object.assign({}, a);
+    Object.keys(b).forEach(function(k) {
+      if (out[k] === undefined || out[k] === null) out[k] = b[k];
+    });
+    ['waterThreshold', 'earthThreshold', 'fireThreshold', 'airThreshold'].forEach(function(k) {
+      if ((!a[k]) && b[k]) out[k] = b[k];
+    });
+    ['attack', 'defense', 'life', 'power', 'pow'].forEach(function(k) {
+      if ((a[k] === null || a[k] === undefined) && b[k] !== null && b[k] !== undefined) out[k] = b[k];
+    });
+    return out;
+  }
 
   function absorb(obj, depth) {
     if (!obj || typeof obj !== 'object' || depth > 14) return;
@@ -241,8 +257,10 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
           console.log(JSON.stringify(obj[0], null, 2));
         }
         obj.forEach(item => {
-          const c = norm(item);
-          if (c && !seen.has(c.sl)) { seen.add(c.sl); cards.push(c); }
+          if (!item || !item.name) return;
+          const key = item.id || item.name;
+          const existing = rawByKey.get(key);
+          rawByKey.set(key, existing ? mergeRaw(existing, item) : item);
         });
       } else {
         obj.forEach(v => absorb(v, depth + 1));
@@ -299,7 +317,14 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
   for (const resp of rawResponses) {
     absorb(resp, 0);
   }
-  console.log(`Cards after absorbing all responses: ${cards.length}`);
+  console.log(`Unique raw cards after merging duplicates: ${rawByKey.size}`);
+
+  const cards = [];
+  rawByKey.forEach(item => {
+    const c = norm(item);
+    if (c) cards.push(c);
+  });
+  console.log(`Cards after normalizing: ${cards.length}`);
 
   await browser.close();
 
