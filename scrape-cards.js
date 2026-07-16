@@ -121,6 +121,63 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return original;
   }
 
+  // Element name/letter -> the single-letter code used in "th" tokens
+  // (e.g. "2w" = two water threshold), matching index.html's cThr()/thrIcons().
+  const ELETTER = { air: 'a', earth: 'e', fire: 'f', water: 'w', a: 'a', e: 'e', f: 'f', w: 'w' };
+
+  function buildThToken(elName, count) {
+    const letter = ELETTER[lower(elName)];
+    const n = parseInt(count, 10) || 1;
+    return letter ? `${n}${letter}` : '';
+  }
+
+  function findThreshold(item) {
+    const candidates = [item.thresholds, item.threshold, item.thresholdText, item.affinity, item.affinities];
+    for (const val of candidates) {
+      if (val === undefined || val === null) continue;
+
+      // Already a correctly-formatted string, e.g. "2w" or "1a 1e".
+      if (typeof val === 'string' && /^(\d+[aefw]\s*)+$/i.test(val.trim())) return val.trim();
+
+      // Array of strings like ["W","W"] or ["water","water"] or ["2w"].
+      if (Array.isArray(val) && val.every(v => typeof v === 'string')) {
+        const counts = {};
+        val.forEach(v => {
+          const m = v.match(/^(\d+)?\s*([aefw])$/i);
+          if (m) { const l = m[2].toLowerCase(); counts[l] = (counts[l] || 0) + (parseInt(m[1], 10) || 1); return; }
+          const letter = ELETTER[lower(v)];
+          if (letter) counts[letter] = (counts[letter] || 0) + 1;
+        });
+        const tokens = Object.keys(counts).map(l => `${counts[l]}${l}`);
+        if (tokens.length) return tokens.join(' ');
+      }
+
+      // Array of {element, count} (or {type, amount}, etc.) objects.
+      if (Array.isArray(val) && val.every(v => v && typeof v === 'object')) {
+        const tokens = val.map(x => buildThToken(x.element || x.type || x.name, x.count || x.amount || 1)).filter(Boolean);
+        if (tokens.length) return tokens.join(' ');
+      }
+
+      // Object map like {air:1, fire:2} or {A:1, F:2}.
+      if (!Array.isArray(val) && typeof val === 'object') {
+        const tokens = Object.keys(val).map(k => buildThToken(k, val[k])).filter(Boolean);
+        if (tokens.length) return tokens.join(' ');
+      }
+    }
+    return '';
+  }
+
+  function findPower(item) {
+    const candidates = [item.power, item.pow, item.basePower, item.stats?.power, item.attackPower, item.powerAttack];
+    for (const v of candidates) {
+      if (v !== undefined && v !== null && v !== '') {
+        const n = Number(v);
+        if (!Number.isNaN(n)) return n;
+      }
+    }
+    return null;
+  }
+
   function norm(item) {
     if (!item?.name || !item?.slug) return null;
 
@@ -134,24 +191,22 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     const fullSlug = findFullSlug(item);
     const img = findImageUrl(item, fullSlug, t);
 
-    let th = '';
-    if (Array.isArray(item.thresholds)) {
-      th = item.thresholds.map(x => (typeof x === 'string' ? x : `${x.count || 1}${(x.element || '')[0] || ''}`)).join(' ');
-    } else if (typeof item.threshold === 'string') {
-      th = item.threshold;
-    } else if (typeof item.thresholdText === 'string') {
-      th = item.thresholdText;
+    const th = findThreshold(item);
+    const powerVal = findPower(item);
+
+    if (!th && powerVal === null) {
+      console.warn('No threshold or power found for "' + (item.name || '?') + '". Raw item:');
+      console.warn(JSON.stringify(item, null, 2));
     }
 
     const cost = item.cost ?? item.manaCost ?? item.mana_cost;
-    const power = item.power ?? item.pow;
 
     return {
       n:  item.name,
       el,
       t,
       c:  (cost === undefined || cost === null) ? null : Number(cost),
-      pw: (power === undefined || power === null) ? null : Number(power),
+      pw: powerVal,
       r,
       s:  setName || (allSets[0] || ''),
       ss: allSets.length ? allSets : (setName ? [setName] : []),
