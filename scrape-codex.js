@@ -86,6 +86,86 @@ const CODEX_URL = 'https://curiosa.io/codex';
       return block.text || '';
     }).join('\n').trim();
   }
+
+  // Walks the block array in original document order and returns a mixed
+  // sequence of segments — { t:'p', text } for paragraphs, { t:'h', text }
+  // for short bold standalone lines (e.g. "Example 1"), { t:'tbl', rows }
+  // for grids, { t:'img', url } for images — so tables/images render at the
+  // exact position they appear in the source text instead of all at the end.
+  function portableTextSegments(val) {
+    if (!Array.isArray(val)) return [];
+    const segs = [];
+    let textBuf = [];
+    function flushText() {
+      if (textBuf.length) {
+        const joined = textBuf.join('\n').trim();
+        if (joined) segs.push({ t: 'p', text: joined });
+        textBuf = [];
+      }
+    }
+    val.forEach(block => {
+      if (!block || typeof block !== 'object') return;
+      const isTable = /table|grid/i.test(block._type || '');
+      const isImageBlock = (block._type === 'image' || block._type === 'figure' || !!block.asset) && !isTable;
+
+      if (isTable) {
+        flushText();
+        if (!_loggedTableSample) {
+          _loggedTableSample = true;
+          console.log('Sample portable-text table block (for debugging table field mapping):');
+          console.log(JSON.stringify(block, null, 2));
+        }
+        const rowsRaw = block.grid?.rows || block.rows || block.table?.rows || block.data;
+        if (Array.isArray(rowsRaw)) {
+          const grid = rowsRaw.map(row => {
+            const cellsRaw = Array.isArray(row) ? row : (row && (row.cells || row.row));
+            if (!Array.isArray(cellsRaw)) return [];
+            return cellsRaw.map(cell => {
+              if (typeof cell === 'string') return cell;
+              if (cell && typeof cell === 'object') {
+                return portableTextToPlain(cell.content || cell.text || cell.children || [cell]) || (cell.text || '');
+              }
+              return String(cell ?? '');
+            });
+          }).filter(row => row.length);
+          if (grid.length) segs.push({ t: 'tbl', rows: grid });
+        }
+        return;
+      }
+
+      if (isImageBlock) {
+        flushText();
+        if (!_loggedImageSample) {
+          _loggedImageSample = true;
+          console.log('Sample portable-text image block (for debugging image field mapping):');
+          console.log(JSON.stringify(block, null, 2));
+        }
+        const ref = block.asset && (block.asset._ref || block.asset.ref);
+        const url = sanityAssetUrl(ref);
+        if (url) segs.push({ t: 'img', url });
+        return;
+      }
+
+      if (Array.isArray(block.children)) {
+        const text = block.children.map(_inlineChildText).join('').trim();
+        if (!text) return;
+        const isBoldHeading = block.children.length === 1
+          && Array.isArray(block.children[0].marks)
+          && block.children[0].marks.includes('strong')
+          && text.length < 60;
+        if (isBoldHeading) {
+          flushText();
+          segs.push({ t: 'h', text });
+        } else {
+          const prefix = block.listItem === 'bullet' ? '• ' : '';
+          textBuf.push(prefix + text);
+        }
+      }
+    });
+    flushText();
+    return segs;
+  }
+
   function portableTextImages(val) {
     if (!Array.isArray(val)) return [];
     const urls = [];
@@ -157,17 +237,16 @@ const CODEX_URL = 'https://curiosa.io/codex';
     const k = portableTextToPlain(kRaw);
     const def = portableTextToPlain(defRaw);
     if (!k || !def) return null;
-    let images = portableTextImages(defRaw).concat(portableTextImages(kRaw));
-    let tables = portableTextTables(defRaw).concat(portableTextTables(kRaw));
+    let segments = portableTextSegments(defRaw);
     if (Array.isArray(o.subcodexes)) {
       o.subcodexes.forEach(sc => {
         if (sc && Array.isArray(sc.content)) {
-          images = images.concat(portableTextImages(sc.content));
-          tables = tables.concat(portableTextTables(sc.content));
+          if (sc.title) segments.push({ t: 'h', text: sc.title });
+          segments = segments.concat(portableTextSegments(sc.content));
         }
       });
     }
-    return { k, def, sub: portableTextToPlain(o.sub || o.subDef) || '', id: o._id || o.id || '', images: images.length ? images : undefined, tables: tables.length ? tables : undefined };
+    return { k, def, sub: portableTextToPlain(o.sub || o.subDef) || '', id: o._id || o.id || '', segments: segments.length ? segments : undefined };
   }
 
   // Returns an array — a Sanity FAQ entry can apply to multiple cards via
@@ -179,9 +258,8 @@ const CODEX_URL = 'https://curiosa.io/codex';
     const aText = portableTextToPlain(aRaw);
     if (!qText || !aText) return [];
     // The example table lived inside the question content, not the answer —
-    // so check both, preferring whichever actually has one.
-    const images = portableTextImages(qRaw).concat(portableTextImages(aRaw));
-    const tables = portableTextTables(qRaw).concat(portableTextTables(aRaw));
+    // so build segments from both, question first (matching source order).
+    const segments = portableTextSegments(qRaw).concat(portableTextSegments(aRaw));
     let names = [];
     if (Array.isArray(o.cardNames) && o.cardNames.length) names = o.cardNames;
     else if (Array.isArray(o.cards) && o.cards.length) names = o.cards;
@@ -189,8 +267,9 @@ const CODEX_URL = 'https://curiosa.io/codex';
     else if (cardNameHint) names = [cardNameHint];
     else names = [''];
     const id = o._id || o.id || '';
-    return names.map(nm => ({ card: nm || '', q: qText, a: aText, id: id, images: images.length ? images : undefined, tables: tables.length ? tables : undefined }));
+    return names.map(nm => ({ card: nm || '', q: qText, a: aText, id: id, segments: segments.length ? segments : undefined }));
   }
+
 
   var _loggedSample = false;
   const codexByKey = new Map();
@@ -273,10 +352,10 @@ const CODEX_URL = 'https://curiosa.io/codex';
   console.log(`Codex entries: ${codex.length}`);
   console.log(`FAQ entries: ${faq.length}`);
   console.log(`Sanity project/dataset detected: ${sanityProjectId || '(none)'} / ${sanityDataset || '(none)'}`);
-  console.log(`Codex entries with an image: ${codex.filter(c => c.images).length}`);
-  console.log(`FAQ entries with an image: ${faq.filter(f => f.images).length}`);
-  console.log(`Codex entries with a table: ${codex.filter(c => c.tables).length}`);
-  console.log(`FAQ entries with a table: ${faq.filter(f => f.tables).length}`);
+  console.log(`Codex entries with an image: ${codex.filter(c => c.segments && c.segments.some(s => s.t === 'img')).length}`);
+  console.log(`FAQ entries with an image: ${faq.filter(f => f.segments && f.segments.some(s => s.t === 'img')).length}`);
+  console.log(`Codex entries with a table: ${codex.filter(c => c.segments && c.segments.some(s => s.t === 'tbl')).length}`);
+  console.log(`FAQ entries with a table: ${faq.filter(f => f.segments && f.segments.some(s => s.t === 'tbl')).length}`);
 
   await browser.close();
 
