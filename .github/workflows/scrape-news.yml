@@ -18,12 +18,15 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Install Playwright
+      - name: Install dependencies
         run: |
+          npm install
           npm install playwright
           npx playwright install chromium --with-deps
 
       - name: Run scraper
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: node scrape-news.js
 
       - name: Commit news.json if changed
