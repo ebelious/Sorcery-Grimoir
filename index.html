@@ -3775,7 +3775,7 @@ function trigUpDecks(){
     var qi=-1;for(var i=0;i<hd.length;i++){if(hd[i].indexOf('qty')>=0||hd[i].indexOf('quantity')>=0||hd[i].indexOf('count')>=0){qi=i;break;}}
     if(ni<0)return;var cards=[];
     lines.slice(1).forEach(function(line){var cols=line.split(',').map(function(v){return v.trim().replace(/^"|"$/g,'');});var nm=cols[ni];if(!nm)return;cards.push({name:nm,qty:qi>=0?parseInt(cols[qi])||1:1});});
-    var fileName=(f.name||'').replace(/\.[^/.]+$/,'').trim();
+    var fileName=(f.name||'').replace(/\.[^/.]+$/,'').replace(/_/g,' ').trim();
     var deckName=fileName||('Deck '+(Object.keys(G.decks).length+1));
     var key=deckName;var n=2;while(G.decks[key]){key=deckName+' ('+n+')';n++;}
     G.decks[key]={name:deckName,cards:cards};sv('sg-dk',G.decks);render();
@@ -4652,13 +4652,13 @@ function pContent(){
     o('</div>');
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
     o('<div id="codex-srch-wrap" class="si" style="margin:0 0 6px"><input id="codex-srch" placeholder="Search codex&hellip;" value="'+h(S.codexQ||'')+'">');if(S.codexQ)o('<button class="sx" onclick="S.codexQ=\'\';render()">&times;</button>');o('</div>');
-    fil.forEach(function(k,i){var key='cod_'+i;var exp=!!G.accExp[key];
+    fil.forEach(function(k,i){
       o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
-        return '<div class="acc rd-entry"><div class="acc-h" data-k="'+key+'" onclick="toggleAcc(\''+key+'\')">'
+        return '<div class="acc rd-entry" onclick="rdPopIdx('+_i+')">'
+          +'<div class="acc-h" style="pointer-events:none">'
           +'<div class="acc-nm" style="flex:1">'+h(k.k)+'</div>'
-          +'<span class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</span>'
+          +'<span class="acc-arr" style="color:var(--fg2)">&#9656;</span>'
           +'</div>'
-          +(exp?'<div class="acc-body"><div class="cod-def">'+(k.segments&&k.segments.length?_segmentsHtml(k.segments):h(k.def))+'</div></div>':'')
           +'</div>';
       })());
     });
