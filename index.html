@@ -3182,7 +3182,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
   return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','relic','site','artifact'])+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
-function h(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _discordEmoji(escapedHtml){
   return (escapedHtml||'').replace(/&lt;(a?):(\w+):(\d+)&gt;/g,function(full,anim,name,id){
     var ext=anim?'gif':'png';
@@ -3354,6 +3354,19 @@ function _renderKeepScroll(){
     var cm2=document.querySelector('.cm')||document.querySelector('.panel');
     if(cm2)cm2.scrollTop=scrollTop;
   });
+}
+// Shows the card-search "back to top" button only once the search bar/filter
+// controls have scrolled out of view (i.e. scrollTop has passed the top of
+// the card grid itself), and scrolls smoothly back to top when tapped.
+function _csAttachScrollBtn(){
+  var panel=document.querySelector('.panel');
+  var grid=document.getElementById('cs-grid');
+  var btn=document.getElementById('cs-top-btn');
+  if(!panel||!grid||!btn)return;
+  var threshold=grid.offsetTop;
+  var toggle=function(){ btn.style.display=panel.scrollTop>=threshold?'block':'none'; };
+  panel.addEventListener('scroll',toggle);
+  toggle();
 }
 // ── DECK HAND PREVIEW (draw simulator) ──────────────────────────────────────
 function _dvShuffle(arr){
@@ -4532,13 +4545,17 @@ function pContent(){
     });
     if(_cfActive)o('<button class="fb red" style="font-size:13px;padding:6px 14px" onclick="resetCF()">&#x2715; Reset Filters</button>');
     o('</div>');
-    o('<div class="cgrid">');
+    o('<div class="cgrid" id="cs-grid">');
     fil.forEach(function(c){
       var _imgStyle=(c.t==='site'&&c.img)?'position:absolute;top:50%;left:50%;width:133.13%;height:75.12%;transform:translate(-50%,-50%) rotate(-90deg);object-fit:cover;display:block':undefined;
       o('<div class="cimg" data-cn="'+h(cName(c))+'" style="cursor:pointer" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c,_imgStyle)+'</div>');
     });
     if(!fil.length)o('<div class="ld">No cards match.</div>');
-    o('</div>');return out.join('');
+    o('</div>');
+    o('<div style="position:sticky;bottom:0;display:flex;justify-content:flex-end;pointer-events:none;padding-top:8px">');
+    o('<button id="cs-top-btn" onclick="document.querySelector(\'.panel\').scrollTo({top:0,behavior:\'smooth\'})" style="display:none;pointer-events:auto;width:40px;height:40px;border-radius:50%;background:var(--bg2);border:1px solid var(--hi);color:var(--hi);font-size:18px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.5);cursor:pointer;margin-bottom:10px">&#8593;</button>');
+    o('</div>');
+    return out.join('');
   }
   if(p==='coll'){
     var q=S.coS||'';
@@ -5749,6 +5766,9 @@ function render(){
         var _scEl2=document.querySelector('.cm')||document.querySelector('.panel');
         if(_scEl2)_scEl2.scrollTop=_scTop;
       });
+    }
+    if(G.panel==='cards'){
+      requestAnimationFrame(function(){ _csAttachScrollBtn(); });
     }
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
