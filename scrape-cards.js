@@ -105,6 +105,29 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return '';
   }
 
+  // Summarize every printing of a card (standard, foil, promo, etc.) from
+  // item.variants, so the card detail popup can list them all.
+  function findPrintings(item) {
+    const buckets = [item.variants, item.printings, item.editions, item.prints];
+    for (const arr of buckets) {
+      if (!Array.isArray(arr) || !arr.length) continue;
+      const out = arr.map(v => {
+        if (!v) return null;
+        const sc = v.setCard || v;
+        const setName = sc.set?.name || sc.setName || '';
+        const vSlug = sc.slug || v.slug || '';
+        const finishRaw = v.finish || sc.finish || (vSlug.match(/-f$/) ? 'Foil' : (vSlug.match(/-s$/) ? 'Standard' : ''));
+        const rarity = sc.rarity || '';
+        const direct = v.src || v.image || v.imageUrl || v.art;
+        const img = direct ? unwrapNextImage(direct) : '';
+        if (!setName && !finishRaw && !rarity) return null;
+        return { set: setName, finish: finishRaw, rarity, img };
+      }).filter(Boolean);
+      if (out.length) return out;
+    }
+    return [];
+  }
+
   // Prefer whatever curiosa marks as the card's current/errata'd text over
   // the original printed text, matching the "UPDATED: ..." convention
   // already used throughout index.html's built-in CARDS array.
@@ -210,6 +233,8 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
 
     const cost = item.cost ?? item.manaCost ?? item.mana_cost;
 
+    const printings = findPrintings(item);
+
     return {
       n:  item.name,
       el,
@@ -224,6 +249,7 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       th,
       sl: fullSlug,
       img: img || undefined,
+      prints: printings.length ? printings : undefined,
     };
   }
 
