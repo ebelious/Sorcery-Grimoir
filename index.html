@@ -4161,7 +4161,7 @@ function loadNewCards(){
         var existing=byName[c.n];
         if(existing){
           var changed=false;
-          ['el','t','c','pw','r','s','ss','txt','ar','th','sl','img'].forEach(function(k){
+          ['el','t','c','pw','r','s','ss','txt','ar','th','sl','img','prints'].forEach(function(k){
             if(c[k]===undefined)return;
             if(JSON.stringify(existing[k])!==JSON.stringify(c[k])){existing[k]=c[k];changed=true;}
           });
@@ -5212,6 +5212,15 @@ function cModal(){
     })());
   }
   var allSets=cSets(c);if(allSets.length>1)o('<div style="font-size:8px;color:var(--fg2);margin-bottom:4px">Also in: '+allSets.filter(function(s){return s!==cSet(c);}).map(h).join(', ')+'</div>');
+  if(c.prints&&c.prints.length>1){
+    o('<div style="margin-bottom:4px"><div style="font-size:8px;color:var(--fg2);margin-bottom:2px">Printings</div><div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px">');
+    c.prints.forEach(function(p){
+      var label=(p.set||'')+(p.finish?' ('+p.finish+')':'');
+      var thumb=p.img?'<img src="'+p.img+'" style="width:36px;height:48px;object-fit:cover;border-radius:3px;display:block;margin:0 auto 2px">':'';
+      o('<div style="flex-shrink:0;text-align:center;width:44px">'+thumb+'<div style="font-size:7px;color:var(--fg2);line-height:1.1">'+h(label)+'</div></div>');
+    });
+    o('</div></div>');
+  }
   // FAQ for this card
   var cardFaqs=[];var _lastFC='';
   FAQ_DATA.forEach(function(f){if(f.card)_lastFC=f.card;var cn=f.card||_lastFC;if(cn===nm)cardFaqs.push(f);});
