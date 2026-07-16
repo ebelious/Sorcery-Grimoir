@@ -17,8 +17,18 @@ const CODEX_URL = 'https://curiosa.io/codex';
   // query text — so match on that domain too, not just keyword URLs.
   const rawResponses = [];
   const rawUrls = [];
+  // Sanity's image CDN URLs need the project ID + dataset, which live in the
+  // query API's own URL (https://<projectId>.apicdn.sanity.io/.../data/query/<dataset>?...).
+  // Capture them from whatever Sanity request we see so we can build real
+  // image URLs from the asset references embedded in portable text blocks.
+  let sanityProjectId = null;
+  let sanityDataset = null;
   page.on('response', async (response) => {
     const url = response.url();
+    if (!sanityProjectId) {
+      const m = url.match(/https?:\/\/([a-z0-9]+)\.api(?:cdn)?\.sanity\.io\/v\d[\w-]*\/data\/query\/([a-z0-9_-]+)/i);
+      if (m) { sanityProjectId = m[1]; sanityDataset = m[2]; }
+    }
     if (!/codex|faq|glossary|rules|sanity/i.test(url)) return;
     try {
       const json = await response.json();
@@ -29,8 +39,23 @@ const CODEX_URL = 'https://curiosa.io/codex';
 
   function lower(s) { return (s || '').toString().toLowerCase(); }
 
+  // Sanity image asset refs look like "image-<hash>-<width>x<height>-<format>".
+  // Convert one into a real CDN URL once we know the project/dataset.
+  function sanityAssetUrl(ref) {
+    if (!ref || !sanityProjectId || !sanityDataset) return '';
+    const m = String(ref).match(/^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/i);
+    if (!m) return '';
+    return `https://cdn.sanity.io/images/${sanityProjectId}/${sanityDataset}/${m[1]}-${m[2]}.${m[3]}`;
+  }
+
+  var _loggedImageSample = false;
+  var _loggedTableSample = false;
   // Sanity stores rich text as "Portable Text": an array of block objects,
-  // each with a `children` array of spans carrying the actual `text`.
+  // each with a `children` array of spans carrying the actual `text` — or,
+  // for embedded diagrams/graphics, a block with `_type:'image'` and an
+  // `asset._ref` pointing at the image, OR (confirmed from a real example: a
+  // 3x3 numbered site grid) a `_type:'table'`-style block with row/cell data
+  // that the frontend renders as an actual HTML <table>, not an image.
   function portableTextToPlain(val) {
     if (typeof val === 'string') return val.trim();
     if (!Array.isArray(val)) return '';
@@ -42,6 +67,57 @@ const CODEX_URL = 'https://curiosa.io/codex';
       }
       return block.text || '';
     }).join('\n').trim();
+  }
+  function portableTextImages(val) {
+    if (!Array.isArray(val)) return [];
+    const urls = [];
+    val.forEach(block => {
+      if (!block || typeof block !== 'object') return;
+      const isImage = block._type === 'image' || block._type === 'figure' || !!block.asset;
+      const ref = block.asset && (block.asset._ref || block.asset.ref);
+      if (isImage && ref) {
+        if (!_loggedImageSample) {
+          _loggedImageSample = true;
+          console.log('Sample portable-text image block (for debugging image field mapping):');
+          console.log(JSON.stringify(block, null, 2));
+        }
+        const url = sanityAssetUrl(ref);
+        if (url) urls.push(url);
+      }
+    });
+    return urls;
+  }
+  // Extracts grid/table blocks as a 2D array of cell text, e.g.
+  // [["1","2","3"],["4","5","6"],["7","8","9"]]. Handles a few plausible
+  // Sanity table-plugin shapes since the exact one hasn't been confirmed yet.
+  function portableTextTables(val) {
+    if (!Array.isArray(val)) return [];
+    const tables = [];
+    val.forEach(block => {
+      if (!block || typeof block !== 'object') return;
+      const isTable = /table|grid/i.test(block._type || '');
+      if (!isTable) return;
+      if (!_loggedTableSample) {
+        _loggedTableSample = true;
+        console.log('Sample portable-text table block (for debugging table field mapping):');
+        console.log(JSON.stringify(block, null, 2));
+      }
+      let rowsRaw = block.grid?.rows || block.rows || block.table?.rows || block.data;
+      if (!Array.isArray(rowsRaw)) return;
+      const grid = rowsRaw.map(row => {
+        const cellsRaw = Array.isArray(row) ? row : (row && (row.cells || row.row));
+        if (!Array.isArray(cellsRaw)) return [];
+        return cellsRaw.map(cell => {
+          if (typeof cell === 'string') return cell;
+          if (cell && typeof cell === 'object') {
+            return portableTextToPlain(cell.content || cell.text || cell.children || [cell]) || (cell.text || '');
+          }
+          return String(cell ?? '');
+        });
+      }).filter(row => row.length);
+      if (grid.length) tables.push(grid);
+    });
+    return tables;
   }
 
   // ── Shape detection ─────────────────────────────────────────────────────
@@ -58,18 +134,28 @@ const CODEX_URL = 'https://curiosa.io/codex';
   }
 
   function normCodex(o) {
-    const k = portableTextToPlain(o.k || o.keyword || o.term || o.title || o.name);
-    const def = portableTextToPlain(o.def || o.definition || o.text || o.content || o.description);
+    const kRaw = o.k || o.keyword || o.term || o.title || o.name;
+    const defRaw = o.def || o.definition || o.text || o.content || o.description;
+    const k = portableTextToPlain(kRaw);
+    const def = portableTextToPlain(defRaw);
     if (!k || !def) return null;
-    return { k, def, sub: portableTextToPlain(o.sub || o.subDef) || '', id: o._id || o.id || '' };
+    const images = portableTextImages(defRaw).concat(portableTextImages(kRaw));
+    const tables = portableTextTables(defRaw).concat(portableTextTables(kRaw));
+    return { k, def, sub: portableTextToPlain(o.sub || o.subDef) || '', id: o._id || o.id || '', img: images[0] || undefined, table: tables[0] || undefined };
   }
 
   // Returns an array — a Sanity FAQ entry can apply to multiple cards via
   // cardNames, and the app's schema expects one { card, q, a } row per card.
   function normFaq(o, cardNameHint) {
-    const qText = portableTextToPlain(o.q || o.question);
-    const aText = portableTextToPlain(o.a || o.answer);
+    const qRaw = o.q || o.question;
+    const aRaw = o.a || o.answer;
+    const qText = portableTextToPlain(qRaw);
+    const aText = portableTextToPlain(aRaw);
     if (!qText || !aText) return [];
+    // The example table lived inside the question content, not the answer —
+    // so check both, preferring whichever actually has one.
+    const images = portableTextImages(qRaw).concat(portableTextImages(aRaw));
+    const tables = portableTextTables(qRaw).concat(portableTextTables(aRaw));
     let names = [];
     if (Array.isArray(o.cardNames) && o.cardNames.length) names = o.cardNames;
     else if (Array.isArray(o.cards) && o.cards.length) names = o.cards;
@@ -77,7 +163,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
     else if (cardNameHint) names = [cardNameHint];
     else names = [''];
     const id = o._id || o.id || '';
-    return names.map(nm => ({ card: nm || '', q: qText, a: aText, id: id }));
+    return names.map(nm => ({ card: nm || '', q: qText, a: aText, id: id, img: images[0] || undefined, table: tables[0] || undefined }));
   }
 
   var _loggedSample = false;
@@ -160,6 +246,11 @@ const CODEX_URL = 'https://curiosa.io/codex';
   const faq = Array.from(faqByKey.values());
   console.log(`Codex entries: ${codex.length}`);
   console.log(`FAQ entries: ${faq.length}`);
+  console.log(`Sanity project/dataset detected: ${sanityProjectId || '(none)'} / ${sanityDataset || '(none)'}`);
+  console.log(`Codex entries with an image: ${codex.filter(c => c.img).length}`);
+  console.log(`FAQ entries with an image: ${faq.filter(f => f.img).length}`);
+  console.log(`Codex entries with a table: ${codex.filter(c => c.table).length}`);
+  console.log(`FAQ entries with a table: ${faq.filter(f => f.table).length}`);
 
   await browser.close();
 
