@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16T00:57:06.948Z",
+  "updated": "2026-07-16T01:12:21.467Z",
   "total": 1100,
   "cards": [
     {
@@ -32,7 +32,7 @@
     },
     {
       "n": "A Midsummer Night's Dream",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -60,7 +60,7 @@
     },
     {
       "n": "Aaj-kegon Ghost Crabs",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 0,
@@ -88,7 +88,7 @@
     },
     {
       "n": "Abaddon Succubus",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -116,7 +116,7 @@
     },
     {
       "n": "Abundance",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 5,
       "pw": null,
@@ -156,7 +156,7 @@
     },
     {
       "n": "Abyssal Assault",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": 20,
@@ -184,7 +184,7 @@
     },
     {
       "n": "Accursed Albatross",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -224,7 +224,7 @@
     },
     {
       "n": "Accursed Desert",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": 20,
@@ -253,7 +253,7 @@
     },
     {
       "n": "Accursed Tower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": 20,
@@ -282,7 +282,7 @@
     },
     {
       "n": "Accusation",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": 20,
@@ -310,7 +310,7 @@
     },
     {
       "n": "Acid Rain",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 3,
       "pw": 20,
@@ -338,7 +338,7 @@
     },
     {
       "n": "Active Volcano",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": 20,
@@ -367,7 +367,7 @@
     },
     {
       "n": "Adept Illusionist",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -407,7 +407,7 @@
     },
     {
       "n": "Adtonitum",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -435,7 +435,7 @@
     },
     {
       "n": "Aethermoeba",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 0,
@@ -463,7 +463,7 @@
     },
     {
       "n": "Aino",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -519,7 +519,7 @@
     },
     {
       "n": "Albespine Pikemen",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -559,7 +559,7 @@
     },
     {
       "n": "Algae Bloom",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": 20,
@@ -616,7 +616,7 @@
     },
     {
       "n": "All Mortals Gone",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": 20,
@@ -713,7 +713,7 @@
     },
     {
       "n": "Älvalinne Dryads",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -753,7 +753,7 @@
     },
     {
       "n": "Amazon Warriors",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -867,7 +867,7 @@
     },
     {
       "n": "Ancient Dragon",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -907,7 +907,7 @@
     },
     {
       "n": "Angel Ascendant",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -975,7 +975,7 @@
     },
     {
       "n": "Angry Mob",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -1060,7 +1060,7 @@
     },
     {
       "n": "Anui Undine",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 0,
@@ -1100,7 +1100,7 @@
     },
     {
       "n": "Apostles of Thamariel",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -1128,7 +1128,7 @@
     },
     {
       "n": "Apply Alkahest",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -1156,7 +1156,7 @@
     },
     {
       "n": "Apprentice Wizard",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -1248,7 +1248,7 @@
     },
     {
       "n": "Aqueduct",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -1289,7 +1289,7 @@
     },
     {
       "n": "Aramos Mercenaries",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -1329,7 +1329,7 @@
     },
     {
       "n": "Arc Lightning",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -1385,7 +1385,7 @@
     },
     {
       "n": "Arcane Barrage",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": null,
       "pw": null,
@@ -1413,7 +1413,7 @@
     },
     {
       "n": "Archangel Gabriel",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -1441,7 +1441,7 @@
     },
     {
       "n": "Archangel Michael",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -1469,7 +1469,7 @@
     },
     {
       "n": "Archangel Raphael",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -1497,7 +1497,7 @@
     },
     {
       "n": "Archangel Samael",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -1559,7 +1559,7 @@
     },
     {
       "n": "Arid Desert",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -1600,7 +1600,7 @@
     },
     {
       "n": "Arjaro Exorcist",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -1628,7 +1628,7 @@
     },
     {
       "n": "Armageddon",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 10,
       "pw": null,
@@ -1656,7 +1656,7 @@
     },
     {
       "n": "Army of the Dead",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 8,
@@ -1684,7 +1684,7 @@
     },
     {
       "n": "Askelon Phoenix",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -1724,7 +1724,7 @@
     },
     {
       "n": "Asmodeus",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -1752,7 +1752,7 @@
     },
     {
       "n": "Assimilator Snail",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 0,
@@ -1780,7 +1780,7 @@
     },
     {
       "n": "Assorted Animals",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": null,
       "pw": null,
@@ -1861,7 +1861,7 @@
     },
     {
       "n": "Atlantean Fate",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 5,
       "pw": null,
@@ -1901,7 +1901,7 @@
     },
     {
       "n": "Atlas Wanderers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -1941,7 +1941,7 @@
     },
     {
       "n": "Attack by Night",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -1969,7 +1969,7 @@
     },
     {
       "n": "Autumn Bloom",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -1998,7 +1998,7 @@
     },
     {
       "n": "Autumn River",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -2039,7 +2039,7 @@
     },
     {
       "n": "Autumn Unicorn",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -2079,7 +2079,7 @@
     },
     {
       "n": "Avalon",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -2244,7 +2244,7 @@
     },
     {
       "n": "Avenging Angel",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -2272,7 +2272,7 @@
     },
     {
       "n": "Awakened Mummies",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 3,
@@ -2312,7 +2312,7 @@
     },
     {
       "n": "Azuridge Caravan",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -2381,7 +2381,7 @@
     },
     {
       "n": "Babbling Brook",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -2410,7 +2410,7 @@
     },
     {
       "n": "Backstab",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -2478,7 +2478,7 @@
     },
     {
       "n": "Ball Lightning",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -2506,7 +2506,7 @@
     },
     {
       "n": "Balor of the Evil Eye",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -2534,7 +2534,7 @@
     },
     {
       "n": "Band of Thieves",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -2562,7 +2562,7 @@
     },
     {
       "n": "Bane of Aventis",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -2590,7 +2590,7 @@
     },
     {
       "n": "Bane Widow",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 1,
@@ -2630,7 +2630,7 @@
     },
     {
       "n": "Baptize",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -2658,7 +2658,7 @@
     },
     {
       "n": "Barging Barghest",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -2686,7 +2686,7 @@
     },
     {
       "n": "Barrow Wight",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -2841,7 +2841,7 @@
     },
     {
       "n": "Beacon",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -2870,7 +2870,7 @@
     },
     {
       "n": "Beast of Burden",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -2910,7 +2910,7 @@
     },
     {
       "n": "Bedrock",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -2951,7 +2951,7 @@
     },
     {
       "n": "Begone!",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -3019,7 +3019,7 @@
     },
     {
       "n": "Belmotte Longbowmen",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -3059,7 +3059,7 @@
     },
     {
       "n": "Betrayal",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -3087,7 +3087,7 @@
     },
     {
       "n": "Bind Evil",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -3115,7 +3115,7 @@
     },
     {
       "n": "Bitten",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -3143,7 +3143,7 @@
     },
     {
       "n": "Bitter Departed",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -3171,7 +3171,7 @@
     },
     {
       "n": "Black Cat",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 1,
@@ -3199,7 +3199,7 @@
     },
     {
       "n": "Black Knight",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -3227,7 +3227,7 @@
     },
     {
       "n": "Black Mass",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -3323,7 +3323,7 @@
     },
     {
       "n": "Bladderblimp",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -3407,7 +3407,7 @@
     },
     {
       "n": "Blasphemy",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -3475,7 +3475,7 @@
     },
     {
       "n": "Blaze",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -3515,7 +3515,7 @@
     },
     {
       "n": "Blaze of Glory",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -3571,7 +3571,7 @@
     },
     {
       "n": "Bless",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -3599,7 +3599,7 @@
     },
     {
       "n": "Blessed Village",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -3628,7 +3628,7 @@
     },
     {
       "n": "Blessed Well",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -3685,7 +3685,7 @@
     },
     {
       "n": "Blink",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -3725,7 +3725,7 @@
     },
     {
       "n": "Blizzard",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 1,
       "pw": null,
@@ -3765,7 +3765,7 @@
     },
     {
       "n": "Blood Mana",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -3793,7 +3793,7 @@
     },
     {
       "n": "Blood Ravens",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -3833,7 +3833,7 @@
     },
     {
       "n": "Blue Knight",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -3861,7 +3861,7 @@
     },
     {
       "n": "Bluecap Knockers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -3889,7 +3889,7 @@
     },
     {
       "n": "Blunderbore",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -3917,7 +3917,7 @@
     },
     {
       "n": "Bodach Bogeyman",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -3945,7 +3945,7 @@
     },
     {
       "n": "Bog",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -3974,7 +3974,7 @@
     },
     {
       "n": "Boil",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -4014,7 +4014,7 @@
     },
     {
       "n": "Bone Jumble",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -4042,7 +4042,7 @@
     },
     {
       "n": "Bone Rabble",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -4094,7 +4094,7 @@
     },
     {
       "n": "Bone Spear",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -4163,7 +4163,7 @@
     },
     {
       "n": "Bonfire",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -4192,7 +4192,7 @@
     },
     {
       "n": "Book Burners",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -4276,7 +4276,7 @@
     },
     {
       "n": "Border Militia",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -4316,7 +4316,7 @@
     },
     {
       "n": "Bosk Troll",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -4397,7 +4397,7 @@
     },
     {
       "n": "Boudicca",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -4425,7 +4425,7 @@
     },
     {
       "n": "Boulevard of Bones",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -4454,7 +4454,7 @@
     },
     {
       "n": "Bound Spirit",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -4511,7 +4511,7 @@
     },
     {
       "n": "Briar Patch",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -4546,7 +4546,7 @@
     },
     {
       "n": "Bridge Troll",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -4586,7 +4586,7 @@
     },
     {
       "n": "Brobdingnag Bullfrog",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -4655,7 +4655,7 @@
     },
     {
       "n": "Broomstick Witch",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -4683,7 +4683,7 @@
     },
     {
       "n": "Brother Knight",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -4711,7 +4711,7 @@
     },
     {
       "n": "Brown Bears",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -4739,7 +4739,7 @@
     },
     {
       "n": "Browse",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -4807,7 +4807,7 @@
     },
     {
       "n": "Bull Demons of Adum",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -4904,7 +4904,7 @@
     },
     {
       "n": "Buried Alive",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -4972,7 +4972,7 @@
     },
     {
       "n": "Burning Hands",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -5000,7 +5000,7 @@
     },
     {
       "n": "Bury",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -5040,7 +5040,7 @@
     },
     {
       "n": "Caelestis",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 5,
@@ -5068,7 +5068,7 @@
     },
     {
       "n": "Caerleon-Upon-Usk",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -5125,7 +5125,7 @@
     },
     {
       "n": "Call of the Sea",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -5153,7 +5153,7 @@
     },
     {
       "n": "Call to War",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -5228,7 +5228,7 @@
     },
     {
       "n": "Candlemas Monks",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -5268,7 +5268,7 @@
     },
     {
       "n": "Captain Baldassare",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -5308,7 +5308,7 @@
     },
     {
       "n": "Carrion Beetles",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -5336,7 +5336,7 @@
     },
     {
       "n": "Carrionette",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -5364,7 +5364,7 @@
     },
     {
       "n": "Cast into Exile",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -5392,7 +5392,7 @@
     },
     {
       "n": "Castle Haunt",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -5448,7 +5448,7 @@
     },
     {
       "n": "Castle's Ablaze!",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -5476,7 +5476,7 @@
     },
     {
       "n": "Cauldron Crones",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -5516,7 +5516,7 @@
     },
     {
       "n": "Cave Trolls",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -5556,7 +5556,7 @@
     },
     {
       "n": "Cave-In",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -5596,7 +5596,7 @@
     },
     {
       "n": "Cemetery Rats",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -5624,7 +5624,7 @@
     },
     {
       "n": "Cerberus in Chains",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 5,
@@ -5664,7 +5664,7 @@
     },
     {
       "n": "Chain Lightning",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -5744,7 +5744,7 @@
     },
     {
       "n": "Chaos Twister",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -5784,7 +5784,7 @@
     },
     {
       "n": "Chaoswish",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -5840,7 +5840,7 @@
     },
     {
       "n": "Charge",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -5868,7 +5868,7 @@
     },
     {
       "n": "Cherubim",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -5896,7 +5896,7 @@
     },
     {
       "n": "Chorus of Condemnation",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -6046,7 +6046,7 @@
     },
     {
       "n": "Clairvoyant",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -6074,7 +6074,7 @@
     },
     {
       "n": "Clamor of Harpies",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -6142,7 +6142,7 @@
     },
     {
       "n": "Cloud City",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -6189,7 +6189,7 @@
     },
     {
       "n": "Cloud Spirit",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -6257,7 +6257,7 @@
     },
     {
       "n": "Colicky Dragonettes",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -6325,7 +6325,7 @@
     },
     {
       "n": "Common Sense",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -6365,7 +6365,7 @@
     },
     {
       "n": "Common Village",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -6394,7 +6394,7 @@
     },
     {
       "n": "Cone of Flame",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -6434,7 +6434,7 @@
     },
     {
       "n": "Conqueror Worm",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 8,
       "pw": 8,
@@ -6474,7 +6474,7 @@
     },
     {
       "n": "Consecrate",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -6502,7 +6502,7 @@
     },
     {
       "n": "Consecrated Ground",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -6531,7 +6531,7 @@
     },
     {
       "n": "Coral-Reef Kelpie",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -6640,7 +6640,7 @@
     },
     {
       "n": "Corpse Explosion",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -6696,7 +6696,7 @@
     },
     {
       "n": "Corruptor Freak",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -6724,7 +6724,7 @@
     },
     {
       "n": "Court Jester",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -6764,7 +6764,7 @@
     },
     {
       "n": "Court of Equity",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -6793,7 +6793,7 @@
     },
     {
       "n": "Courtesan Thaïs",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 0,
@@ -6833,7 +6833,7 @@
     },
     {
       "n": "Coy Nixie",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -6889,7 +6889,7 @@
     },
     {
       "n": "Cranky Overseer",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -6917,7 +6917,7 @@
     },
     {
       "n": "Craterize",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 8,
       "pw": null,
@@ -6997,7 +6997,7 @@
     },
     {
       "n": "Crawler",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -7025,7 +7025,7 @@
     },
     {
       "n": "Crawling Congregation",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -7053,7 +7053,7 @@
     },
     {
       "n": "Critical Strike",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -7099,7 +7099,7 @@
     },
     {
       "n": "Croaking Swamp",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7128,7 +7128,7 @@
     },
     {
       "n": "Croll Morlocks",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -7237,7 +7237,7 @@
     },
     {
       "n": "Crown Prince",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -7305,7 +7305,7 @@
     },
     {
       "n": "Crusade",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -7345,7 +7345,7 @@
     },
     {
       "n": "Cursed Iron",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -7373,7 +7373,7 @@
     },
     {
       "n": "Cursed Land",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7402,7 +7402,7 @@
     },
     {
       "n": "Dalcean Phalanx",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 5,
@@ -7442,7 +7442,7 @@
     },
     {
       "n": "Dame Britomart",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -7498,7 +7498,7 @@
     },
     {
       "n": "Daperyll Vampire",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -7538,7 +7538,7 @@
     },
     {
       "n": "Dark Alley",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7567,7 +7567,7 @@
     },
     {
       "n": "Dark Tower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7643,7 +7643,7 @@
     },
     {
       "n": "Day of Judgment",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -7705,7 +7705,7 @@
     },
     {
       "n": "Dead of Night Demon",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -7745,7 +7745,7 @@
     },
     {
       "n": "Death Dealer",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 4,
@@ -7785,7 +7785,7 @@
     },
     {
       "n": "Death Knight",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -7859,7 +7859,7 @@
     },
     {
       "n": "Deathwish",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -7887,7 +7887,7 @@
     },
     {
       "n": "Deep Sea",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7916,7 +7916,7 @@
     },
     {
       "n": "Deep-Sea Mermaids",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -7956,7 +7956,7 @@
     },
     {
       "n": "Defiler Spire",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -7985,7 +7985,7 @@
     },
     {
       "n": "Degradation",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8013,7 +8013,7 @@
     },
     {
       "n": "Deliverance",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -8041,7 +8041,7 @@
     },
     {
       "n": "Demon Hunter",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -8069,7 +8069,7 @@
     },
     {
       "n": "Demonic Contract",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8097,7 +8097,7 @@
     },
     {
       "n": "Den of Evil",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -8126,7 +8126,7 @@
     },
     {
       "n": "Desecrate",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8154,7 +8154,7 @@
     },
     {
       "n": "Desecrated Ground",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -8183,7 +8183,7 @@
     },
     {
       "n": "Desecrator Kite",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -8211,7 +8211,7 @@
     },
     {
       "n": "Desert Bloom",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -8240,7 +8240,7 @@
     },
     {
       "n": "Detonate",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -8308,7 +8308,7 @@
     },
     {
       "n": "Dhol Chants",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -8336,7 +8336,7 @@
     },
     {
       "n": "Diluvian Kraken",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 8,
       "pw": 8,
@@ -8376,7 +8376,7 @@
     },
     {
       "n": "Dirium Fomorians",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -8404,7 +8404,7 @@
     },
     {
       "n": "Disenchant",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8444,7 +8444,7 @@
     },
     {
       "n": "Disintegrate",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -8484,7 +8484,7 @@
     },
     {
       "n": "Dispel",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8536,7 +8536,7 @@
     },
     {
       "n": "Displace",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -8564,7 +8564,7 @@
     },
     {
       "n": "Divine Healing",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -8604,7 +8604,7 @@
     },
     {
       "n": "Divine Intervention",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -8632,7 +8632,7 @@
     },
     {
       "n": "Divine Lance",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -8660,7 +8660,7 @@
     },
     {
       "n": "Doctor Demetrius",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -8688,7 +8688,7 @@
     },
     {
       "n": "Dodge Roll",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 0,
       "pw": null,
@@ -8810,7 +8810,7 @@
     },
     {
       "n": "Doomsday Cult",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -8878,7 +8878,7 @@
     },
     {
       "n": "Doomsday Prophet",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 1,
@@ -8918,7 +8918,7 @@
     },
     {
       "n": "Dormant Monstrosity",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -8946,7 +8946,7 @@
     },
     {
       "n": "Dozmary Pool",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -8975,7 +8975,7 @@
     },
     {
       "n": "Draco Corvus",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 5,
@@ -9003,7 +9003,7 @@
     },
     {
       "n": "Draconian Bonekite",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 7,
@@ -9094,7 +9094,7 @@
     },
     {
       "n": "Dread Thicket",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -9123,7 +9123,7 @@
     },
     {
       "n": "Dreadwing",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -9151,7 +9151,7 @@
     },
     {
       "n": "Dream-Quest",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -9191,7 +9191,7 @@
     },
     {
       "n": "Dredge",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -9247,7 +9247,7 @@
     },
     {
       "n": "Drought",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -9287,7 +9287,7 @@
     },
     {
       "n": "Drown",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -9327,7 +9327,7 @@
     },
     {
       "n": "Drowned",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -9429,7 +9429,7 @@
     },
     {
       "n": "Duel",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -9485,7 +9485,7 @@
     },
     {
       "n": "Dwarven Digging Team",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -9525,7 +9525,7 @@
     },
     {
       "n": "Dwarven Forge",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -9566,7 +9566,7 @@
     },
     {
       "n": "Earl of the Ivory Towers",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -9594,7 +9594,7 @@
     },
     {
       "n": "Earthquake",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -9634,7 +9634,7 @@
     },
     {
       "n": "East-West Dragon",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -9674,7 +9674,7 @@
     },
     {
       "n": "Eclipse",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -9771,7 +9771,7 @@
     },
     {
       "n": "Elder Ruins",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -9846,7 +9846,7 @@
     },
     {
       "n": "Eltham Townsfolk",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -9920,7 +9920,7 @@
     },
     {
       "n": "Endless Fence",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -9949,7 +9949,7 @@
     },
     {
       "n": "Enduring Faith",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -9977,7 +9977,7 @@
     },
     {
       "n": "Enraged Familiar",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -10005,7 +10005,7 @@
     },
     {
       "n": "Entangle Terrain",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -10045,7 +10045,7 @@
     },
     {
       "n": "Entombed",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -10130,7 +10130,7 @@
     },
     {
       "n": "Escyllion Cyclops",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -10170,7 +10170,7 @@
     },
     {
       "n": "Estranged Loner",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -10226,7 +10226,7 @@
     },
     {
       "n": "Evil Presence",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -10266,7 +10266,7 @@
     },
     {
       "n": "Evil Twin",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": null,
@@ -10322,7 +10322,7 @@
     },
     {
       "n": "Exhume",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -10350,7 +10350,7 @@
     },
     {
       "n": "Exorcism",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -10390,7 +10390,7 @@
     },
     {
       "n": "Extinguish",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -10430,7 +10430,7 @@
     },
     {
       "n": "Fade",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -10470,7 +10470,7 @@
     },
     {
       "n": "Fae City",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -10527,7 +10527,7 @@
     },
     {
       "n": "Failed Mutation",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -10555,7 +10555,7 @@
     },
     {
       "n": "Faith Incarnate",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 0,
@@ -10583,7 +10583,7 @@
     },
     {
       "n": "Fallen Angel",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -10611,7 +10611,7 @@
     },
     {
       "n": "Falling Star",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -10667,7 +10667,7 @@
     },
     {
       "n": "Far East Assassin",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -10707,7 +10707,7 @@
     },
     {
       "n": "Fatality",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -10735,7 +10735,7 @@
     },
     {
       "n": "Feast for Crows",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -10763,7 +10763,7 @@
     },
     {
       "n": "Feign Death",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -10791,7 +10791,7 @@
     },
     {
       "n": "Felbog Frog Men",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -10831,7 +10831,7 @@
     },
     {
       "n": "Fenvale Muse",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 0,
@@ -10899,7 +10899,7 @@
     },
     {
       "n": "Fertile Earth",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -10928,7 +10928,7 @@
     },
     {
       "n": "Fey Changeling",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -10968,7 +10968,7 @@
     },
     {
       "n": "Field Laborers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -10996,7 +10996,7 @@
     },
     {
       "n": "Fields of Camlann",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11025,7 +11025,7 @@
     },
     {
       "n": "Fields of Phyxis",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11066,7 +11066,7 @@
     },
     {
       "n": "Fine Courser",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -11094,7 +11094,7 @@
     },
     {
       "n": "Finwife",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -11122,7 +11122,7 @@
     },
     {
       "n": "Fire Harpoons!",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -11162,7 +11162,7 @@
     },
     {
       "n": "Fireball",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -11202,7 +11202,7 @@
     },
     {
       "n": "Firebolts",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -11242,7 +11242,7 @@
     },
     {
       "n": "Firebreathing",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -11298,7 +11298,7 @@
     },
     {
       "n": "Flagellant",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -11354,7 +11354,7 @@
     },
     {
       "n": "Flame Strike",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -11382,7 +11382,7 @@
     },
     {
       "n": "Flame Wave",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -11456,7 +11456,7 @@
     },
     {
       "n": "Flaming Skull",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -11524,7 +11524,7 @@
     },
     {
       "n": "Flanking Maneuver",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -11564,7 +11564,7 @@
     },
     {
       "n": "Flayer",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -11592,7 +11592,7 @@
     },
     {
       "n": "Flood",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -11632,7 +11632,7 @@
     },
     {
       "n": "Floodplain",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11673,7 +11673,7 @@
     },
     {
       "n": "Font of Life",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -11801,7 +11801,7 @@
     },
     {
       "n": "Forge",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11830,7 +11830,7 @@
     },
     {
       "n": "Forgotten Tomb",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11859,7 +11859,7 @@
     },
     {
       "n": "Forlorn Keep",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11888,7 +11888,7 @@
     },
     {
       "n": "Forsaken",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -11916,7 +11916,7 @@
     },
     {
       "n": "Forsaken Crypt",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -11945,7 +11945,7 @@
     },
     {
       "n": "Four Fat Frogs",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -12029,7 +12029,7 @@
     },
     {
       "n": "Fowl Bones",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -12098,7 +12098,7 @@
     },
     {
       "n": "Freeze",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -12126,7 +12126,7 @@
     },
     {
       "n": "Frisky Red Squirrel",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -12212,7 +12212,7 @@
     },
     {
       "n": "Frontier Settlers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -12252,7 +12252,7 @@
     },
     {
       "n": "Frost Nova",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -12292,7 +12292,7 @@
     },
     {
       "n": "Frozen Horror",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -12320,7 +12320,7 @@
     },
     {
       "n": "Funeral Pyre",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -12349,7 +12349,7 @@
     },
     {
       "n": "Garden of Eden",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -12378,7 +12378,7 @@
     },
     {
       "n": "Gargantula",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -12440,7 +12440,7 @@
     },
     {
       "n": "Geyser",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -12480,7 +12480,7 @@
     },
     {
       "n": "Ghost Ship",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -12549,7 +12549,7 @@
     },
     {
       "n": "Ghostfire",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -12577,7 +12577,7 @@
     },
     {
       "n": "Ghoul",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -12605,7 +12605,7 @@
     },
     {
       "n": "Giant Killer",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -12633,7 +12633,7 @@
     },
     {
       "n": "Giant Shark",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -12673,7 +12673,7 @@
     },
     {
       "n": "Gibbous Nightgaunts",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -12701,7 +12701,7 @@
     },
     {
       "n": "Gift of the Frog",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -12729,7 +12729,7 @@
     },
     {
       "n": "Gift of the Raven",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -12757,7 +12757,7 @@
     },
     {
       "n": "Gift of the Serpent",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -12785,7 +12785,7 @@
     },
     {
       "n": "Gift of the Wolf",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -12813,7 +12813,7 @@
     },
     {
       "n": "Gigantism",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -12893,7 +12893,7 @@
     },
     {
       "n": "Gilman House",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -12922,7 +12922,7 @@
     },
     {
       "n": "Glastonbury Tor",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -12951,7 +12951,7 @@
     },
     {
       "n": "Gloam Toads",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 6,
@@ -12979,7 +12979,7 @@
     },
     {
       "n": "Gnarled Wendigo",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -13007,7 +13007,7 @@
     },
     {
       "n": "Gneissgnath Gnomes",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -13047,7 +13047,7 @@
     },
     {
       "n": "Gnome Hollows",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -13088,7 +13088,7 @@
     },
     {
       "n": "Goat for Azazel",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 0,
@@ -13116,7 +13116,7 @@
     },
     {
       "n": "Golden Dawn",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -13172,7 +13172,7 @@
     },
     {
       "n": "Golgor",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 7,
@@ -13200,7 +13200,7 @@
     },
     {
       "n": "Gossamer Ghost",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -13256,7 +13256,7 @@
     },
     {
       "n": "Gothic Tower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -13303,7 +13303,7 @@
     },
     {
       "n": "Grain Sparrow",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -13331,7 +13331,7 @@
     },
     {
       "n": "Granary Rats",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -13359,7 +13359,7 @@
     },
     {
       "n": "Grand Old Boar",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -13387,7 +13387,7 @@
     },
     {
       "n": "Grandmaster Wizard",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 0,
@@ -13439,7 +13439,7 @@
     },
     {
       "n": "Grapple Shot",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -13479,7 +13479,7 @@
     },
     {
       "n": "Grasping Ground",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -13507,7 +13507,7 @@
     },
     {
       "n": "Gravedigger",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -13535,7 +13535,7 @@
     },
     {
       "n": "Great Old One",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 8,
       "pw": 16,
@@ -13616,7 +13616,7 @@
     },
     {
       "n": "Greater Blood Demon",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 6,
@@ -13644,7 +13644,7 @@
     },
     {
       "n": "Grey Wolves",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -13684,7 +13684,7 @@
     },
     {
       "n": "Grief Larvae",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -13712,7 +13712,7 @@
     },
     {
       "n": "Grievous Insult",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -13740,7 +13740,7 @@
     },
     {
       "n": "Grigori Rasputin",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -13796,7 +13796,7 @@
     },
     {
       "n": "Grim Reaper",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -13836,7 +13836,7 @@
     },
     {
       "n": "Grösse Poltergeist",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -13876,7 +13876,7 @@
     },
     {
       "n": "Guardian Angel",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -13904,7 +13904,7 @@
     },
     {
       "n": "Guards!",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -13932,7 +13932,7 @@
     },
     {
       "n": "Guile Sirens",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -13978,7 +13978,7 @@
     },
     {
       "n": "Gyre Hippogriffs",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -14018,7 +14018,7 @@
     },
     {
       "n": "Haast Eagle",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -14087,7 +14087,7 @@
     },
     {
       "n": "Hamlet's Ablaze!",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -14143,7 +14143,7 @@
     },
     {
       "n": "Harassing Ruffians",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -14211,7 +14211,7 @@
     },
     {
       "n": "Harpyon Urge",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -14239,7 +14239,7 @@
     },
     {
       "n": "Harvest Festival",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -14267,7 +14267,7 @@
     },
     {
       "n": "Hauntless Head",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -14295,7 +14295,7 @@
     },
     {
       "n": "Haystack",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -14336,7 +14336,7 @@
     },
     {
       "n": "Headless Haunt",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -14382,7 +14382,7 @@
     },
     {
       "n": "Hearkening Kraken",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -14410,7 +14410,7 @@
     },
     {
       "n": "Heat Ray",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -14479,7 +14479,7 @@
     },
     {
       "n": "Hellfire",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -14507,7 +14507,7 @@
     },
     {
       "n": "Hellhounds",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -14535,7 +14535,7 @@
     },
     {
       "n": "Hellmouth",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -14564,7 +14564,7 @@
     },
     {
       "n": "Hellstar",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 7,
@@ -14592,7 +14592,7 @@
     },
     {
       "n": "Helpful Hob",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 1,
@@ -14648,7 +14648,7 @@
     },
     {
       "n": "Hemogoblin",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -14704,7 +14704,7 @@
     },
     {
       "n": "Heretics of Seth",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -14732,7 +14732,7 @@
     },
     {
       "n": "Highland Clansmen",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 5,
@@ -14772,7 +14772,7 @@
     },
     {
       "n": "Highland Falconer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -14812,7 +14812,7 @@
     },
     {
       "n": "Highland Princess",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -14852,7 +14852,7 @@
     },
     {
       "n": "Hillock Basilisk",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -14892,7 +14892,7 @@
     },
     {
       "n": "Hillside Chapel",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -14921,7 +14921,7 @@
     },
     {
       "n": "Hollow One",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -14949,7 +14949,7 @@
     },
     {
       "n": "Holy Ground",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -14990,7 +14990,7 @@
     },
     {
       "n": "Holy Nova",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -15018,7 +15018,7 @@
     },
     {
       "n": "Holy Warrior",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -15074,7 +15074,7 @@
     },
     {
       "n": "Homecoming",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -15130,7 +15130,7 @@
     },
     {
       "n": "Horns of Behemoth",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": 6,
@@ -15159,7 +15159,7 @@
     },
     {
       "n": "Horrible Hybrids",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -15187,7 +15187,7 @@
     },
     {
       "n": "Hotwheel",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -15215,7 +15215,7 @@
     },
     {
       "n": "Hounds of Ondaros",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -15255,7 +15255,7 @@
     },
     {
       "n": "House Arn Bannerman",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -15295,7 +15295,7 @@
     },
     {
       "n": "Howl from Beyond",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -15323,7 +15323,7 @@
     },
     {
       "n": "Humble Village",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -15364,7 +15364,7 @@
     },
     {
       "n": "Hunter's Lodge",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -15393,7 +15393,7 @@
     },
     {
       "n": "Hunting Party",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -15421,7 +15421,7 @@
     },
     {
       "n": "Hyperparasite",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -15449,7 +15449,7 @@
     },
     {
       "n": "Hyter Sprites",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -15505,7 +15505,7 @@
     },
     {
       "n": "Ice Lance",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -15545,7 +15545,7 @@
     },
     {
       "n": "Ice Shards",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -15573,7 +15573,7 @@
     },
     {
       "n": "Iceberg",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -15614,7 +15614,7 @@
     },
     {
       "n": "Ignis Rex",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -15642,7 +15642,7 @@
     },
     {
       "n": "Ignited",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -15670,7 +15670,7 @@
     },
     {
       "n": "Immolation",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -15710,7 +15710,7 @@
     },
     {
       "n": "Impenetrable Copse",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -15808,7 +15808,7 @@
     },
     {
       "n": "Incinerate",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -15848,7 +15848,7 @@
     },
     {
       "n": "Infernal Legion",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -15888,7 +15888,7 @@
     },
     {
       "n": "Infiltrate",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -15957,7 +15957,7 @@
     },
     {
       "n": "Innsmouth Dock",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -15986,7 +15986,7 @@
     },
     {
       "n": "Instigator Imp",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -16042,7 +16042,7 @@
     },
     {
       "n": "Into the Abyss",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -16070,7 +16070,7 @@
     },
     {
       "n": "Intrepid Hero",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -16098,7 +16098,7 @@
     },
     {
       "n": "Invasion",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 6,
       "pw": null,
@@ -16126,7 +16126,7 @@
     },
     {
       "n": "Invigorate",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -16278,7 +16278,7 @@
     },
     {
       "n": "Island Leviathan",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": 8,
@@ -16319,7 +16319,7 @@
     },
     {
       "n": "Jack the Ripper",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -16347,7 +16347,7 @@
     },
     {
       "n": "Jihad",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -16387,7 +16387,7 @@
     },
     {
       "n": "Joust!",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -16415,7 +16415,7 @@
     },
     {
       "n": "Joyous Garde",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -16500,7 +16500,7 @@
     },
     {
       "n": "Karkemish Chimera",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -16540,7 +16540,7 @@
     },
     {
       "n": "Keening Banshee",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -16568,7 +16568,7 @@
     },
     {
       "n": "Kelp Cavern",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -16597,7 +16597,7 @@
     },
     {
       "n": "Kettletop Leprechaun",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -16653,7 +16653,7 @@
     },
     {
       "n": "Khamaseen Mummy",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -16681,7 +16681,7 @@
     },
     {
       "n": "King Arthur",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 5,
@@ -16715,7 +16715,7 @@
     },
     {
       "n": "King of the Realm",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 3,
@@ -16755,7 +16755,7 @@
     },
     {
       "n": "King's Council",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -16783,7 +16783,7 @@
     },
     {
       "n": "Kingdom of Agartha",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -16824,7 +16824,7 @@
     },
     {
       "n": "Kingswood Poachers",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -16852,7 +16852,7 @@
     },
     {
       "n": "Kiss of Death",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -16880,7 +16880,7 @@
     },
     {
       "n": "Kiss of Judas",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -16908,7 +16908,7 @@
     },
     {
       "n": "Kissers of Wounds",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -16936,7 +16936,7 @@
     },
     {
       "n": "Kite Archer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -16976,7 +16976,7 @@
     },
     {
       "n": "Knighthood",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -17004,7 +17004,7 @@
     },
     {
       "n": "Kor Crematory",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -17101,7 +17101,7 @@
     },
     {
       "n": "Lacuna Entity",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -17129,7 +17129,7 @@
     },
     {
       "n": "Lady Iseult",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -17157,7 +17157,7 @@
     },
     {
       "n": "Lake Afanc",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -17247,7 +17247,7 @@
     },
     {
       "n": "Land Surveyor",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -17287,7 +17287,7 @@
     },
     {
       "n": "Landmass",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -17315,7 +17315,7 @@
     },
     {
       "n": "Lash",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -17343,7 +17343,7 @@
     },
     {
       "n": "Lava Flow",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -17371,7 +17371,7 @@
     },
     {
       "n": "Lava Salamander",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -17411,7 +17411,7 @@
     },
     {
       "n": "Leadworks",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -17440,7 +17440,7 @@
     },
     {
       "n": "Leap Attack",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -17480,7 +17480,7 @@
     },
     {
       "n": "Led Astray",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -17508,7 +17508,7 @@
     },
     {
       "n": "Legion of Gall",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -17536,7 +17536,7 @@
     },
     {
       "n": "Lesser Blood Demon",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 3,
@@ -17593,7 +17593,7 @@
     },
     {
       "n": "Lifewish",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -17621,7 +17621,7 @@
     },
     {
       "n": "Lighthouse",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -17662,7 +17662,7 @@
     },
     {
       "n": "Lightning Bolt",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -17708,7 +17708,7 @@
     },
     {
       "n": "Lilith",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -17736,7 +17736,7 @@
     },
     {
       "n": "Locusts of Illyria",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 2,
@@ -17764,7 +17764,7 @@
     },
     {
       "n": "Lone Tower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -17811,7 +17811,7 @@
     },
     {
       "n": "Lookout",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -17840,7 +17840,7 @@
     },
     {
       "n": "Lord of Destruction",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -17868,7 +17868,7 @@
     },
     {
       "n": "Lord of Fear",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -17896,7 +17896,7 @@
     },
     {
       "n": "Lord of Greed",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -17924,7 +17924,7 @@
     },
     {
       "n": "Lord of Lies",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -17952,7 +17952,7 @@
     },
     {
       "n": "Lord of the Void",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 9,
       "pw": 0,
@@ -17992,7 +17992,7 @@
     },
     {
       "n": "Lord of Unland",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -18060,7 +18060,7 @@
     },
     {
       "n": "Lucid Dreamers",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -18128,7 +18128,7 @@
     },
     {
       "n": "Lugbog Cat",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -18156,7 +18156,7 @@
     },
     {
       "n": "Lumbering Giant",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -18184,7 +18184,7 @@
     },
     {
       "n": "Lure",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -18212,7 +18212,7 @@
     },
     {
       "n": "Mad Dash",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -18292,7 +18292,7 @@
     },
     {
       "n": "Maelström",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -18333,7 +18333,7 @@
     },
     {
       "n": "Mage Slayer",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -18413,7 +18413,7 @@
     },
     {
       "n": "Magic Missiles",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -18509,7 +18509,7 @@
     },
     {
       "n": "Maiden, Mother, Crone",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -18566,7 +18566,7 @@
     },
     {
       "n": "Major Explosion",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -18634,7 +18634,7 @@
     },
     {
       "n": "Malakhim",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -18690,7 +18690,7 @@
     },
     {
       "n": "Marine Voyage",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -18730,7 +18730,7 @@
     },
     {
       "n": "Mariner's Curse",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -18770,7 +18770,7 @@
     },
     {
       "n": "Martyrs of Tomorrow",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -18838,7 +18838,7 @@
     },
     {
       "n": "Master Necromancer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 2,
@@ -18866,7 +18866,7 @@
     },
     {
       "n": "Master Tracker",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -18906,7 +18906,7 @@
     },
     {
       "n": "Mayor of Milborne",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -18934,7 +18934,7 @@
     },
     {
       "n": "Maze Minotaur",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -18974,7 +18974,7 @@
     },
     {
       "n": "Màzuj Ifrit",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -19030,7 +19030,7 @@
     },
     {
       "n": "Megalurker",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -19058,7 +19058,7 @@
     },
     {
       "n": "Megamoeba",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 0,
@@ -19098,7 +19098,7 @@
     },
     {
       "n": "Men of Leng",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -19138,7 +19138,7 @@
     },
     {
       "n": "Mephistopheles",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -19166,7 +19166,7 @@
     },
     {
       "n": "Merlin",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -19222,7 +19222,7 @@
     },
     {
       "n": "Merlin's Tower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -19251,7 +19251,7 @@
     },
     {
       "n": "Mesmer Demon",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -19279,7 +19279,7 @@
     },
     {
       "n": "Mesmerism",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -19307,7 +19307,7 @@
     },
     {
       "n": "Mester Stoor Worm",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 7,
@@ -19335,7 +19335,7 @@
     },
     {
       "n": "Meteor Shower",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 9,
       "pw": null,
@@ -19375,7 +19375,7 @@
     },
     {
       "n": "Midland Army",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 8,
       "pw": 8,
@@ -19415,7 +19415,7 @@
     },
     {
       "n": "Midnight Rogue",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -19455,7 +19455,7 @@
     },
     {
       "n": "Mimic",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -19483,7 +19483,7 @@
     },
     {
       "n": "Minecart Madness",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -19523,7 +19523,7 @@
     },
     {
       "n": "Minor Explosion",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -19563,7 +19563,7 @@
     },
     {
       "n": "Miracle Workers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -19603,7 +19603,7 @@
     },
     {
       "n": "Mirage",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -19874,7 +19874,7 @@
     },
     {
       "n": "Mobbed Court",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -19903,7 +19903,7 @@
     },
     {
       "n": "Mock Court",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -19932,7 +19932,7 @@
     },
     {
       "n": "Molten Maar",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -19961,7 +19961,7 @@
     },
     {
       "n": "Monastery Gargoyle",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -20001,7 +20001,7 @@
     },
     {
       "n": "Monks of Kobalsa",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -20029,7 +20029,7 @@
     },
     {
       "n": "Monster Hunter",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -20069,7 +20069,7 @@
     },
     {
       "n": "Monstermorphosis",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -20097,7 +20097,7 @@
     },
     {
       "n": "Monstrous Lion",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -20125,7 +20125,7 @@
     },
     {
       "n": "Moon Clan Werewolf",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -20165,7 +20165,7 @@
     },
     {
       "n": "Moonsong Talagelum",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -20193,7 +20193,7 @@
     },
     {
       "n": "Mordric Druids",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -20233,7 +20233,7 @@
     },
     {
       "n": "Morgana le Fay",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -20261,7 +20261,7 @@
     },
     {
       "n": "Mortal Soil",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 5,
       "pw": null,
@@ -20289,7 +20289,7 @@
     },
     {
       "n": "Mortality",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -20329,7 +20329,7 @@
     },
     {
       "n": "Moss Troll",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -20357,7 +20357,7 @@
     },
     {
       "n": "Mother Nature",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 3,
@@ -20397,7 +20397,7 @@
     },
     {
       "n": "Mount Ussar Sanctuary",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -20426,7 +20426,7 @@
     },
     {
       "n": "Mountain Giant",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 8,
       "pw": 8,
@@ -20466,7 +20466,7 @@
     },
     {
       "n": "Mountain Pass",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -20507,7 +20507,7 @@
     },
     {
       "n": "Mountain Peaks",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -20536,7 +20536,7 @@
     },
     {
       "n": "Mover of Mountains",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -20564,7 +20564,7 @@
     },
     {
       "n": "Muck Lampreys",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -20604,7 +20604,7 @@
     },
     {
       "n": "Muddy Pigs",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -20673,7 +20673,7 @@
     },
     {
       "n": "Mudslide",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -20702,7 +20702,7 @@
     },
     {
       "n": "Muirid Fomorians",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -20730,7 +20730,7 @@
     },
     {
       "n": "Murder of Crows",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -20855,7 +20855,7 @@
     },
     {
       "n": "Necronomiconcert",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -20883,7 +20883,7 @@
     },
     {
       "n": "Necropotence",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -20911,7 +20911,7 @@
     },
     {
       "n": "Nelly Longarms",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -20939,7 +20939,7 @@
     },
     {
       "n": "Nightmare",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -20979,7 +20979,7 @@
     },
     {
       "n": "Nightwatchmen",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21007,7 +21007,7 @@
     },
     {
       "n": "Nimbus Jinn",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -21047,7 +21047,7 @@
     },
     {
       "n": "No Man's Land",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21076,7 +21076,7 @@
     },
     {
       "n": "Noisome Twosome",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -21104,7 +21104,7 @@
     },
     {
       "n": "Nommo Monitor",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21132,7 +21132,7 @@
     },
     {
       "n": "Nosferatu",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -21160,7 +21160,7 @@
     },
     {
       "n": "Novice Necromancer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -21188,7 +21188,7 @@
     },
     {
       "n": "Noxious Corpse",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -21216,7 +21216,7 @@
     },
     {
       "n": "Oasis",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21257,7 +21257,7 @@
     },
     {
       "n": "Observatory",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21298,7 +21298,7 @@
     },
     {
       "n": "Occult Ritual",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -21344,7 +21344,7 @@
     },
     {
       "n": "Ogre Goons",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21413,7 +21413,7 @@
     },
     {
       "n": "Old Salt Anchorman",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -21453,7 +21453,7 @@
     },
     {
       "n": "Ominous Owl",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -21481,7 +21481,7 @@
     },
     {
       "n": "One-shot Wizard",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -21509,7 +21509,7 @@
     },
     {
       "n": "Onslaught",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -21577,7 +21577,7 @@
     },
     {
       "n": "Open Grave",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21606,7 +21606,7 @@
     },
     {
       "n": "Open Mausoleum",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21635,7 +21635,7 @@
     },
     {
       "n": "Ophanim",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -21703,7 +21703,7 @@
     },
     {
       "n": "Order of the Pale Worm",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21731,7 +21731,7 @@
     },
     {
       "n": "Order of the Sacred Oak",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21759,7 +21759,7 @@
     },
     {
       "n": "Order of the White Wing",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21787,7 +21787,7 @@
     },
     {
       "n": "Orm Infestor",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -21815,7 +21815,7 @@
     },
     {
       "n": "Ormund Harpooneers",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -21855,7 +21855,7 @@
     },
     {
       "n": "Orpheus' Crossing",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -21884,7 +21884,7 @@
     },
     {
       "n": "Outback Strider",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -21924,7 +21924,7 @@
     },
     {
       "n": "Overbearing Bailiff",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 0,
@@ -21952,7 +21952,7 @@
     },
     {
       "n": "Overflow",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -21980,7 +21980,7 @@
     },
     {
       "n": "Overflowing Court",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -22009,7 +22009,7 @@
     },
     {
       "n": "Overpower",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -22049,7 +22049,7 @@
     },
     {
       "n": "Pact with the Devil",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -22089,7 +22089,7 @@
     },
     {
       "n": "Paladins of Bazia",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -22117,7 +22117,7 @@
     },
     {
       "n": "Palliburrie Bats",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -22157,7 +22157,7 @@
     },
     {
       "n": "Panorama Manticore",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -22311,7 +22311,7 @@
     },
     {
       "n": "Peace Offering",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 0,
@@ -22367,7 +22367,7 @@
     },
     {
       "n": "Peasant Revolt",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -22395,7 +22395,7 @@
     },
     {
       "n": "Pebbled Paths",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -22424,7 +22424,7 @@
     },
     {
       "n": "Peculiar Port",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -22481,7 +22481,7 @@
     },
     {
       "n": "Pendragon Legacy",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -22549,7 +22549,7 @@
     },
     {
       "n": "Penitent Knight",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -22577,7 +22577,7 @@
     },
     {
       "n": "Peregrine Apparition",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -22617,7 +22617,7 @@
     },
     {
       "n": "Perilous Bridge",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -22686,7 +22686,7 @@
     },
     {
       "n": "Petrosian Cavalry",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -22726,7 +22726,7 @@
     },
     {
       "n": "Phantasmal Shade",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -22766,7 +22766,7 @@
     },
     {
       "n": "Phantom Steed",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -22806,7 +22806,7 @@
     },
     {
       "n": "Phase Assassin",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -22886,7 +22886,7 @@
     },
     {
       "n": "Pied Piper of Hameln",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -22914,7 +22914,7 @@
     },
     {
       "n": "Pigs of the Sounder",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -22970,7 +22970,7 @@
     },
     {
       "n": "Pilgrim's Shrine",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -22999,7 +22999,7 @@
     },
     {
       "n": "Pillar of Zeiros",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -23040,7 +23040,7 @@
     },
     {
       "n": "Pirate Ship",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 5,
@@ -23080,7 +23080,7 @@
     },
     {
       "n": "Pit Vipers",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -23120,7 +23120,7 @@
     },
     {
       "n": "Pith Imp",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -23148,7 +23148,7 @@
     },
     {
       "n": "Plague of Frogs",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -23188,7 +23188,7 @@
     },
     {
       "n": "Plague Pits",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -23217,7 +23217,7 @@
     },
     {
       "n": "Plague Rat",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -23314,7 +23314,7 @@
     },
     {
       "n": "Plumed Pegasus",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -23394,7 +23394,7 @@
     },
     {
       "n": "Poison Nova",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -23434,7 +23434,7 @@
     },
     {
       "n": "Poisoned Well",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -23503,7 +23503,7 @@
     },
     {
       "n": "Polar Bears",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -23543,7 +23543,7 @@
     },
     {
       "n": "Polar Explorers",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -23583,7 +23583,7 @@
     },
     {
       "n": "Pollimorph",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -23623,7 +23623,7 @@
     },
     {
       "n": "Pond",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -23652,7 +23652,7 @@
     },
     {
       "n": "Pookas",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -23680,7 +23680,7 @@
     },
     {
       "n": "Porcupine Pufferfish",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -23749,7 +23749,7 @@
     },
     {
       "n": "Power of Flight",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -23777,7 +23777,7 @@
     },
     {
       "n": "Powerwish",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -23846,7 +23846,7 @@
     },
     {
       "n": "Pristine Paradise",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -23887,7 +23887,7 @@
     },
     {
       "n": "Profane Revenant",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 3,
@@ -23915,7 +23915,7 @@
     },
     {
       "n": "Psionic Blast",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -23955,7 +23955,7 @@
     },
     {
       "n": "Pudge Butcher",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 5,
@@ -24001,7 +24001,7 @@
     },
     {
       "n": "Puppet Master",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 1,
@@ -24041,7 +24041,7 @@
     },
     {
       "n": "Purgatory",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -24110,7 +24110,7 @@
     },
     {
       "n": "Purple Knight",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -24138,7 +24138,7 @@
     },
     {
       "n": "Putrid Presence",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 1,
@@ -24166,7 +24166,7 @@
     },
     {
       "n": "Quagmire",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -24207,7 +24207,7 @@
     },
     {
       "n": "Quarrelsome Kobolds",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -24247,7 +24247,7 @@
     },
     {
       "n": "Queen Guinevere",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 1,
@@ -24275,7 +24275,7 @@
     },
     {
       "n": "Queen of Midland",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 1,
@@ -24315,7 +24315,7 @@
     },
     {
       "n": "Questing Beast",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 5,
@@ -24343,7 +24343,7 @@
     },
     {
       "n": "Raal Dromedary",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -24383,7 +24383,7 @@
     },
     {
       "n": "Rain of Arrows",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -24423,7 +24423,7 @@
     },
     {
       "n": "Raise Dead",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -24463,7 +24463,7 @@
     },
     {
       "n": "Raise Militia",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -24491,7 +24491,7 @@
     },
     {
       "n": "Rat King",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -24519,7 +24519,7 @@
     },
     {
       "n": "Ravenous Werewolf",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -24547,7 +24547,7 @@
     },
     {
       "n": "Raze",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -24603,7 +24603,7 @@
     },
     {
       "n": "Rebecks",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -24631,7 +24631,7 @@
     },
     {
       "n": "Recall",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -24671,7 +24671,7 @@
     },
     {
       "n": "Reckless Squire",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -24699,7 +24699,7 @@
     },
     {
       "n": "Recurring Specter",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -24739,7 +24739,7 @@
     },
     {
       "n": "Red Desert",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -24808,7 +24808,7 @@
     },
     {
       "n": "Redbreast Robin",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -24836,7 +24836,7 @@
     },
     {
       "n": "Redcap Powries",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -24864,7 +24864,7 @@
     },
     {
       "n": "Redmane Hyena",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -24892,7 +24892,7 @@
     },
     {
       "n": "Regurgitator",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -24920,7 +24920,7 @@
     },
     {
       "n": "Release the Hounds",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -24948,7 +24948,7 @@
     },
     {
       "n": "Relentless Crowd",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -24970,7 +24970,7 @@
     },
     {
       "n": "Remote Desert",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25011,7 +25011,7 @@
     },
     {
       "n": "Renatus Trueblood",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -25039,7 +25039,7 @@
     },
     {
       "n": "Replication",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -25079,7 +25079,7 @@
     },
     {
       "n": "Rescue",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -25107,7 +25107,7 @@
     },
     {
       "n": "Rest in Peace",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 5,
       "pw": null,
@@ -25147,7 +25147,7 @@
     },
     {
       "n": "Return to Nature",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -25175,7 +25175,7 @@
     },
     {
       "n": "Returned King",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 3,
@@ -25203,7 +25203,7 @@
     },
     {
       "n": "Revered Revenant",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 3,
@@ -25231,7 +25231,7 @@
     },
     {
       "n": "Rhitta Gawr of Snowdonia",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -25287,7 +25287,7 @@
     },
     {
       "n": "Ribble Boggart",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -25315,7 +25315,7 @@
     },
     {
       "n": "Riddle Sphinx",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -25355,7 +25355,7 @@
     },
     {
       "n": "Rift Valley",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25396,7 +25396,7 @@
     },
     {
       "n": "Rimland Nomads",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -25464,7 +25464,7 @@
     },
     {
       "n": "Riptide",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -25504,7 +25504,7 @@
     },
     {
       "n": "River of Blood",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25545,7 +25545,7 @@
     },
     {
       "n": "River of Flame",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25586,7 +25586,7 @@
     },
     {
       "n": "River Rapids",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25615,7 +25615,7 @@
     },
     {
       "n": "Road to Perdition",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -25644,7 +25644,7 @@
     },
     {
       "n": "Roaming Monster",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -25724,7 +25724,7 @@
     },
     {
       "n": "Root Spider",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -25805,7 +25805,7 @@
     },
     {
       "n": "Rowdy Boys",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -25833,7 +25833,7 @@
     },
     {
       "n": "Royal Bodyguard",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -25960,7 +25960,7 @@
     },
     {
       "n": "Ruins",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -26001,7 +26001,7 @@
     },
     {
       "n": "Ruler of Thul",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -26041,7 +26041,7 @@
     },
     {
       "n": "Rustic Village",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -26082,7 +26082,7 @@
     },
     {
       "n": "Sacred Scarabs",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -26122,7 +26122,7 @@
     },
     {
       "n": "Sacred Stag",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -26150,7 +26150,7 @@
     },
     {
       "n": "Saint of Redemption",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -26207,7 +26207,7 @@
     },
     {
       "n": "Salmon of Knowledge",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 0,
@@ -26235,7 +26235,7 @@
     },
     {
       "n": "Salt the Earth",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -26263,7 +26263,7 @@
     },
     {
       "n": "Sand Worm",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -26303,7 +26303,7 @@
     },
     {
       "n": "Sandstorm",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 1,
       "pw": null,
@@ -26343,7 +26343,7 @@
     },
     {
       "n": "Saracen Raiders",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -26371,7 +26371,7 @@
     },
     {
       "n": "Saracen Scout",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -26399,7 +26399,7 @@
     },
     {
       "n": "Satanic Panic",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -26467,7 +26467,7 @@
     },
     {
       "n": "Sawbones",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -26535,7 +26535,7 @@
     },
     {
       "n": "Scatter",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -26563,7 +26563,7 @@
     },
     {
       "n": "Scavenging Fiend",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -26603,7 +26603,7 @@
     },
     {
       "n": "Scent Hounds",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -26643,7 +26643,7 @@
     },
     {
       "n": "Scorched Earth",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -26683,7 +26683,7 @@
     },
     {
       "n": "Scourge Zombies",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -26723,7 +26723,7 @@
     },
     {
       "n": "Screamer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -26820,7 +26820,7 @@
     },
     {
       "n": "Sea Raider",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -26860,7 +26860,7 @@
     },
     {
       "n": "Sea Serpent",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -26900,7 +26900,7 @@
     },
     {
       "n": "Sea Witch",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -26928,7 +26928,7 @@
     },
     {
       "n": "Search Party",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -26956,7 +26956,7 @@
     },
     {
       "n": "Searing Truth",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -26984,7 +26984,7 @@
     },
     {
       "n": "Seasoned Sellsword",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 4,
@@ -27024,7 +27024,7 @@
     },
     {
       "n": "Second Wind",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -27052,7 +27052,7 @@
     },
     {
       "n": "Secret Tunnel",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -27093,7 +27093,7 @@
     },
     {
       "n": "Sedge Crabs",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 3,
@@ -27133,7 +27133,7 @@
     },
     {
       "n": "Seelie Court",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -27207,7 +27207,7 @@
     },
     {
       "n": "Seirawan Hydra",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -27247,7 +27247,7 @@
     },
     {
       "n": "Selfsame Simulacrum",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 0,
@@ -27343,7 +27343,7 @@
     },
     {
       "n": "Seraphim",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -27371,7 +27371,7 @@
     },
     {
       "n": "Serava Townsfolk",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -27439,7 +27439,7 @@
     },
     {
       "n": "Sewer Rats",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -27467,7 +27467,7 @@
     },
     {
       "n": "Shackled Demon",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 5,
@@ -27495,7 +27495,7 @@
     },
     {
       "n": "Shallow Grave",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -27524,7 +27524,7 @@
     },
     {
       "n": "Shameless Squire",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -27552,7 +27552,7 @@
     },
     {
       "n": "Shapeshift",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -27580,7 +27580,7 @@
     },
     {
       "n": "Shatter Strike",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -27608,7 +27608,7 @@
     },
     {
       "n": "Shellycoat",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -27636,7 +27636,7 @@
     },
     {
       "n": "Sherwood Huntress",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -27664,7 +27664,7 @@
     },
     {
       "n": "Shield Maidens",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -27704,7 +27704,7 @@
     },
     {
       "n": "Shield Wall",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -27744,7 +27744,7 @@
     },
     {
       "n": "Shifting Sands",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -27785,7 +27785,7 @@
     },
     {
       "n": "Shoggoth",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -27813,7 +27813,7 @@
     },
     {
       "n": "Shrike Orchard",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -27870,7 +27870,7 @@
     },
     {
       "n": "Shrink",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -27950,7 +27950,7 @@
     },
     {
       "n": "Siege Giant",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -27978,7 +27978,7 @@
     },
     {
       "n": "Silence",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -28018,7 +28018,7 @@
     },
     {
       "n": "Silent Hills",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -28075,7 +28075,7 @@
     },
     {
       "n": "Silver Valkyries",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -28115,7 +28115,7 @@
     },
     {
       "n": "Simple Village",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -28156,7 +28156,7 @@
     },
     {
       "n": "Sinister Pond",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -28226,7 +28226,7 @@
     },
     {
       "n": "Sinterfee",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -28254,7 +28254,7 @@
     },
     {
       "n": "Sir Agravaine",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -28282,7 +28282,7 @@
     },
     {
       "n": "Sir Balin",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28310,7 +28310,7 @@
     },
     {
       "n": "Sir Bedivere",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28338,7 +28338,7 @@
     },
     {
       "n": "Sir Bors the Younger",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -28366,7 +28366,7 @@
     },
     {
       "n": "Sir Gaheris",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28394,7 +28394,7 @@
     },
     {
       "n": "Sir Galahad",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -28422,7 +28422,7 @@
     },
     {
       "n": "Sir Gareth",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28450,7 +28450,7 @@
     },
     {
       "n": "Sir Gawain",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28478,7 +28478,7 @@
     },
     {
       "n": "Sir Ironside",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -28506,7 +28506,7 @@
     },
     {
       "n": "Sir Kay",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -28534,7 +28534,7 @@
     },
     {
       "n": "Sir Lamorak",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -28562,7 +28562,7 @@
     },
     {
       "n": "Sir Lancelot",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -28596,7 +28596,7 @@
     },
     {
       "n": "Sir Mordred",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -28624,7 +28624,7 @@
     },
     {
       "n": "Sir Morien",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -28652,7 +28652,7 @@
     },
     {
       "n": "Sir Pelleas",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -28680,7 +28680,7 @@
     },
     {
       "n": "Sir Pellinore",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -28708,7 +28708,7 @@
     },
     {
       "n": "Sir Perceval",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -28736,7 +28736,7 @@
     },
     {
       "n": "Sir Priamus",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -28764,7 +28764,7 @@
     },
     {
       "n": "Sir Tom Thumb",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -28792,7 +28792,7 @@
     },
     {
       "n": "Sir Tristan",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 2,
@@ -28820,7 +28820,7 @@
     },
     {
       "n": "Sir Yvain",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -28848,7 +28848,7 @@
     },
     {
       "n": "Sirian Templar",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -28894,7 +28894,7 @@
     },
     {
       "n": "Sirocco Scorpions",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -28934,7 +28934,7 @@
     },
     {
       "n": "Sister Stefánia",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -28962,7 +28962,7 @@
     },
     {
       "n": "Sisters of Avalon",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -28990,7 +28990,7 @@
     },
     {
       "n": "Sisters of Silence",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -29030,7 +29030,7 @@
     },
     {
       "n": "Sjaelström",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -29092,7 +29092,7 @@
     },
     {
       "n": "Skeleton Mage",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -29120,7 +29120,7 @@
     },
     {
       "n": "Skirmishers of Mu",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -29160,7 +29160,7 @@
     },
     {
       "n": "Sky Baron",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -29200,7 +29200,7 @@
     },
     {
       "n": "Sleep",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -29240,7 +29240,7 @@
     },
     {
       "n": "Slimy Mutants",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -29268,7 +29268,7 @@
     },
     {
       "n": "Sling Pixies",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -29308,7 +29308,7 @@
     },
     {
       "n": "Slobbermaw",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 4,
@@ -29336,7 +29336,7 @@
     },
     {
       "n": "Slumbering Giantess",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 5,
@@ -29376,7 +29376,7 @@
     },
     {
       "n": "Sly Fox",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -29404,7 +29404,7 @@
     },
     {
       "n": "Smite",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -29432,7 +29432,7 @@
     },
     {
       "n": "Smokestacks of Gnaak",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -29473,7 +29473,7 @@
     },
     {
       "n": "Snallygaster",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -29501,7 +29501,7 @@
     },
     {
       "n": "Sneak Thief",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -29541,7 +29541,7 @@
     },
     {
       "n": "Snow Leopard",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -29581,7 +29581,7 @@
     },
     {
       "n": "Snowball",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -29609,7 +29609,7 @@
     },
     {
       "n": "Sold-out Cemetery",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -29714,7 +29714,7 @@
     },
     {
       "n": "Sow the Earth",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -29816,7 +29816,7 @@
     },
     {
       "n": "Spearmarshal",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -29844,7 +29844,7 @@
     },
     {
       "n": "Spectral Stalker",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -29918,7 +29918,7 @@
     },
     {
       "n": "Sphere of Animosity",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 3,
       "pw": null,
@@ -29975,7 +29975,7 @@
     },
     {
       "n": "Spin Attack",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -30015,7 +30015,7 @@
     },
     {
       "n": "Spire",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30050,7 +30050,7 @@
     },
     {
       "n": "Spire Lich",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -30090,7 +30090,7 @@
     },
     {
       "n": "Spore Spouts",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30119,7 +30119,7 @@
     },
     {
       "n": "Spring River",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30160,7 +30160,7 @@
     },
     {
       "n": "Squeakers",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -30188,7 +30188,7 @@
     },
     {
       "n": "Squirming Mass",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 0,
@@ -30228,7 +30228,7 @@
     },
     {
       "n": "Stagecoach",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -30297,7 +30297,7 @@
     },
     {
       "n": "Star-seeds of Uhr",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -30337,7 +30337,7 @@
     },
     {
       "n": "Stargazer",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 2,
@@ -30365,7 +30365,7 @@
     },
     {
       "n": "Static Servant",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -30393,7 +30393,7 @@
     },
     {
       "n": "Steppe",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30434,7 +30434,7 @@
     },
     {
       "n": "Stinging Kelp",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30463,7 +30463,7 @@
     },
     {
       "n": "Stitched Abomination",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 7,
       "pw": null,
@@ -30491,7 +30491,7 @@
     },
     {
       "n": "Stone Rain",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -30519,7 +30519,7 @@
     },
     {
       "n": "Stone-gaze Gorgons",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -30559,7 +30559,7 @@
     },
     {
       "n": "Stormy Seas",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -30599,7 +30599,7 @@
     },
     {
       "n": "Stream",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30634,7 +30634,7 @@
     },
     {
       "n": "Sturmgeist",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -30662,7 +30662,7 @@
     },
     {
       "n": "Stygian Archers",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -30690,7 +30690,7 @@
     },
     {
       "n": "Sugarplum Pixies",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -30718,7 +30718,7 @@
     },
     {
       "n": "Summer River",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -30759,7 +30759,7 @@
     },
     {
       "n": "Summoning Sphere",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 1,
       "pw": null,
@@ -30839,7 +30839,7 @@
     },
     {
       "n": "Survivors of Serava",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -30867,7 +30867,7 @@
     },
     {
       "n": "Swamp Buffalo",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -30907,7 +30907,7 @@
     },
     {
       "n": "Swan Maidens",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -30947,7 +30947,7 @@
     },
     {
       "n": "Swap",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -30981,7 +30981,7 @@
     },
     {
       "n": "Swindler Troupe",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -31009,7 +31009,7 @@
     },
     {
       "n": "Swiven Scout",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -31077,7 +31077,7 @@
     },
     {
       "n": "Sylvan Splendor",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -31105,7 +31105,7 @@
     },
     {
       "n": "Symmetric Suffering",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -31161,7 +31161,7 @@
     },
     {
       "n": "Tactical Move",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -31189,7 +31189,7 @@
     },
     {
       "n": "Tadpole Pool",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -31230,7 +31230,7 @@
     },
     {
       "n": "Talamh Dreig",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -31286,7 +31286,7 @@
     },
     {
       "n": "Tax Collector",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -31314,7 +31314,7 @@
     },
     {
       "n": "Telekinesis",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -31354,7 +31354,7 @@
     },
     {
       "n": "Teleport",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -31428,7 +31428,7 @@
     },
     {
       "n": "Temple of Moloch",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -31457,7 +31457,7 @@
     },
     {
       "n": "Ten-tonne Slug",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 7,
       "pw": 7,
@@ -31485,7 +31485,7 @@
     },
     {
       "n": "Thankless Squire",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 1,
@@ -31513,7 +31513,7 @@
     },
     {
       "n": "The Apex of Babel",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -31542,7 +31542,7 @@
     },
     {
       "n": "The Base of Babel",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -31571,7 +31571,7 @@
     },
     {
       "n": "The Black Plague",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -31599,7 +31599,7 @@
     },
     {
       "n": "The Colour Out of Space",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -31646,7 +31646,7 @@
     },
     {
       "n": "The Doom of Dilmun",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 8,
       "pw": 6,
@@ -31703,7 +31703,7 @@
     },
     {
       "n": "The Faerie Queene",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -31731,7 +31731,7 @@
     },
     {
       "n": "The Flood",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 6,
       "pw": null,
@@ -31800,7 +31800,7 @@
     },
     {
       "n": "The Great Drowning of Men",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 7,
       "pw": null,
@@ -31828,7 +31828,7 @@
     },
     {
       "n": "The Great Famine",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -31856,7 +31856,7 @@
     },
     {
       "n": "The Green Knight",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 6,
       "pw": 3,
@@ -31884,7 +31884,7 @@
     },
     {
       "n": "The Hexham Haunts",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -31952,7 +31952,7 @@
     },
     {
       "n": "The Inquisition",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -31980,7 +31980,7 @@
     },
     {
       "n": "The Lady of the Lake",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -32036,7 +32036,7 @@
     },
     {
       "n": "The Manor at Daperyll Hill",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -32065,7 +32065,7 @@
     },
     {
       "n": "The Ninth Legion",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 6,
@@ -32206,7 +32206,7 @@
     },
     {
       "n": "The Wild Hunt",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -32234,7 +32234,7 @@
     },
     {
       "n": "Thieving Magpie",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -32262,7 +32262,7 @@
     },
     {
       "n": "Thin Ice",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -32291,7 +32291,7 @@
     },
     {
       "n": "Thing in the Ice",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 6,
@@ -32319,7 +32319,7 @@
     },
     {
       "n": "Those Who Linger",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -32375,7 +32375,7 @@
     },
     {
       "n": "Thundering Giant",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 4,
@@ -32403,7 +32403,7 @@
     },
     {
       "n": "Thunderstorm",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -32443,7 +32443,7 @@
     },
     {
       "n": "Tide Naiads",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -32483,7 +32483,7 @@
     },
     {
       "n": "Tintagel",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -32512,7 +32512,7 @@
     },
     {
       "n": "Tithe",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -32596,7 +32596,7 @@
     },
     {
       "n": "Tooth Faeries",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -32778,7 +32778,7 @@
     },
     {
       "n": "Town Priest",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -32835,7 +32835,7 @@
     },
     {
       "n": "Tragedy Worrywart",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -32875,7 +32875,7 @@
     },
     {
       "n": "Treetop Hideout",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -32904,7 +32904,7 @@
     },
     {
       "n": "Trial by Fire",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -32932,7 +32932,7 @@
     },
     {
       "n": "Trial by Water",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -32960,7 +32960,7 @@
     },
     {
       "n": "Tringh Constrictor",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -33000,7 +33000,7 @@
     },
     {
       "n": "Troll Bridge",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": 3,
@@ -33098,7 +33098,7 @@
     },
     {
       "n": "Tufted Turtles",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -33138,7 +33138,7 @@
     },
     {
       "n": "Tvinnax Berserker",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -33178,7 +33178,7 @@
     },
     {
       "n": "Twilight Bloom",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -33207,7 +33207,7 @@
     },
     {
       "n": "Twist of Fate",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": null,
       "pw": null,
@@ -33247,7 +33247,7 @@
     },
     {
       "n": "Ultimate Horror",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 8,
       "pw": 6,
@@ -33287,7 +33287,7 @@
     },
     {
       "n": "Undead Ambush",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -33355,7 +33355,7 @@
     },
     {
       "n": "Undertow",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -33396,7 +33396,7 @@
     },
     {
       "n": "Undesirables",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -33424,7 +33424,7 @@
     },
     {
       "n": "Unland Angler",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -33464,7 +33464,7 @@
     },
     {
       "n": "Unland Eel",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -33504,7 +33504,7 @@
     },
     {
       "n": "Unlikely Alliance",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -33544,7 +33544,7 @@
     },
     {
       "n": "Unravel",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -33584,7 +33584,7 @@
     },
     {
       "n": "Unseelie Court",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -33612,7 +33612,7 @@
     },
     {
       "n": "Updraft Ridge",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -33653,7 +33653,7 @@
     },
     {
       "n": "Upwelling",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 4,
       "pw": null,
@@ -33693,7 +33693,7 @@
     },
     {
       "n": "Valley",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -33757,7 +33757,7 @@
     },
     {
       "n": "Valor",
-      "el": "neutral",
+      "el": "earth",
       "t": "magic",
       "c": 0,
       "pw": null,
@@ -33785,7 +33785,7 @@
     },
     {
       "n": "Vampire Bats",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -33813,7 +33813,7 @@
     },
     {
       "n": "Vandal Imp",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -33841,7 +33841,7 @@
     },
     {
       "n": "Vanguard Knights",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -33881,7 +33881,7 @@
     },
     {
       "n": "Vanishment",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -33909,7 +33909,7 @@
     },
     {
       "n": "Vantage Hills",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -33950,7 +33950,7 @@
     },
     {
       "n": "Varistus the Evictor",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -33978,7 +33978,7 @@
     },
     {
       "n": "Varmint Warrens",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34007,7 +34007,7 @@
     },
     {
       "n": "Vast Desert",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34036,7 +34036,7 @@
     },
     {
       "n": "Vatn Draconis",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -34105,7 +34105,7 @@
     },
     {
       "n": "Vengeful Heir",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -34133,7 +34133,7 @@
     },
     {
       "n": "Verdant Knight",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -34161,7 +34161,7 @@
     },
     {
       "n": "Vesper Swarm",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -34189,7 +34189,7 @@
     },
     {
       "n": "Vesuvius",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34230,7 +34230,7 @@
     },
     {
       "n": "Vikings",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -34258,7 +34258,7 @@
     },
     {
       "n": "Vile Imp",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -34298,7 +34298,7 @@
     },
     {
       "n": "Vindictive Nation",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34327,7 +34327,7 @@
     },
     {
       "n": "Virgin in Prayer",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -34355,7 +34355,7 @@
     },
     {
       "n": "Vivien the Enchantress",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 1,
@@ -34383,7 +34383,7 @@
     },
     {
       "n": "Vril Revenant",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -34423,7 +34423,7 @@
     },
     {
       "n": "Wall of Air",
-      "el": "neutral",
+      "el": "air",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -34463,7 +34463,7 @@
     },
     {
       "n": "Wall of Brambles",
-      "el": "neutral",
+      "el": "earth",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -34491,7 +34491,7 @@
     },
     {
       "n": "Wall of Fire",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -34531,7 +34531,7 @@
     },
     {
       "n": "Wall of Ice",
-      "el": "neutral",
+      "el": "water",
       "t": "aura",
       "c": 2,
       "pw": null,
@@ -34571,7 +34571,7 @@
     },
     {
       "n": "War Horse",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -34605,7 +34605,7 @@
     },
     {
       "n": "Warp Spasm",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -34645,7 +34645,7 @@
     },
     {
       "n": "Wasteland",
-      "el": "neutral",
+      "el": "fire",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34680,7 +34680,7 @@
     },
     {
       "n": "Watchtower",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34721,7 +34721,7 @@
     },
     {
       "n": "Watery Grave",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34750,7 +34750,7 @@
     },
     {
       "n": "Wave of Eviction",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -34812,7 +34812,7 @@
     },
     {
       "n": "Wayfaring Pilgrim",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -34852,7 +34852,7 @@
     },
     {
       "n": "Waypoint Portal",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -34898,7 +34898,7 @@
     },
     {
       "n": "Weathered Trunks",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -34926,7 +34926,7 @@
     },
     {
       "n": "Wedding Hall",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -34955,7 +34955,7 @@
     },
     {
       "n": "Weightless Squire",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 3,
       "pw": 1,
@@ -34983,7 +34983,7 @@
     },
     {
       "n": "Whirling Blades",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -35023,7 +35023,7 @@
     },
     {
       "n": "Whirlwind",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -35051,7 +35051,7 @@
     },
     {
       "n": "White Hart",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 2,
@@ -35079,7 +35079,7 @@
     },
     {
       "n": "White Knight",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 5,
       "pw": 3,
@@ -35135,7 +35135,7 @@
     },
     {
       "n": "Wicked Witch",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 2,
@@ -35215,7 +35215,7 @@
     },
     {
       "n": "Wild Boars",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 1,
       "pw": 2,
@@ -35255,7 +35255,7 @@
     },
     {
       "n": "Wild Fanatic",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -35283,7 +35283,7 @@
     },
     {
       "n": "Wildfire",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 4,
       "pw": null,
@@ -35323,7 +35323,7 @@
     },
     {
       "n": "Willing Tribute",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -35351,7 +35351,7 @@
     },
     {
       "n": "Wills-o'-the-Wisp",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 1,
       "pw": 1,
@@ -35391,7 +35391,7 @@
     },
     {
       "n": "Wind Sylph",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 2,
       "pw": 1,
@@ -35431,7 +35431,7 @@
     },
     {
       "n": "Windblast",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 2,
       "pw": null,
@@ -35471,7 +35471,7 @@
     },
     {
       "n": "Windmill",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -35552,7 +35552,7 @@
     },
     {
       "n": "Winter Nymph",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 2,
       "pw": 2,
@@ -35580,7 +35580,7 @@
     },
     {
       "n": "Winter River",
-      "el": "neutral",
+      "el": "water",
       "t": "site",
       "c": null,
       "pw": null,
@@ -35643,7 +35643,7 @@
     },
     {
       "n": "Witching Hour",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 3,
       "pw": null,
@@ -35671,7 +35671,7 @@
     },
     {
       "n": "Witherwing Hero",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -35746,7 +35746,7 @@
     },
     {
       "n": "Wolpertinger",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 0,
@@ -35774,7 +35774,7 @@
     },
     {
       "n": "Wormelow Tump",
-      "el": "neutral",
+      "el": "earth",
       "t": "site",
       "c": null,
       "pw": null,
@@ -35803,7 +35803,7 @@
     },
     {
       "n": "Wraetannis Titan",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 7,
       "pw": 6,
@@ -35843,7 +35843,7 @@
     },
     {
       "n": "Wrath of the Sea",
-      "el": "neutral",
+      "el": "water",
       "t": "magic",
       "c": 7,
       "pw": null,
@@ -35883,7 +35883,7 @@
     },
     {
       "n": "Wreathed in Righteousness",
-      "el": "neutral",
+      "el": "fire",
       "t": "magic",
       "c": 5,
       "pw": null,
@@ -35911,7 +35911,7 @@
     },
     {
       "n": "Wuthering Heights",
-      "el": "neutral",
+      "el": "air",
       "t": "site",
       "c": null,
       "pw": null,
@@ -35940,7 +35940,7 @@
     },
     {
       "n": "Wyvern",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 6,
       "pw": 5,
@@ -35968,7 +35968,7 @@
     },
     {
       "n": "Xeraphine Konrul",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 7,
       "pw": 5,
@@ -35996,7 +35996,7 @@
     },
     {
       "n": "Year of the Blaze",
-      "el": "neutral",
+      "el": "fire",
       "t": "aura",
       "c": 7,
       "pw": null,
@@ -36024,7 +36024,7 @@
     },
     {
       "n": "Yellow Knight",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -36052,7 +36052,7 @@
     },
     {
       "n": "Yog-Sothoth",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 7,
       "pw": 10,
@@ -36080,7 +36080,7 @@
     },
     {
       "n": "Yokai Kappas",
-      "el": "neutral",
+      "el": "water",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -36120,7 +36120,7 @@
     },
     {
       "n": "Young Master Damion",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 6,
       "pw": 2,
@@ -36148,7 +36148,7 @@
     },
     {
       "n": "Yourke Crossbowmen",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 3,
       "pw": 3,
@@ -36188,7 +36188,7 @@
     },
     {
       "n": "Zap!",
-      "el": "neutral",
+      "el": "air",
       "t": "magic",
       "c": 1,
       "pw": null,
@@ -36216,7 +36216,7 @@
     },
     {
       "n": "Zephyranne Airship",
-      "el": "neutral",
+      "el": "air",
       "t": "minion",
       "c": 4,
       "pw": 3,
@@ -36256,7 +36256,7 @@
     },
     {
       "n": "Zeppelin of Zealots",
-      "el": "neutral",
+      "el": "fire",
       "t": "minion",
       "c": 5,
       "pw": 4,
@@ -36284,7 +36284,7 @@
     },
     {
       "n": "Zombie Bruiser",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 4,
       "pw": 4,
@@ -36312,7 +36312,7 @@
     },
     {
       "n": "Zombie Horde",
-      "el": "neutral",
+      "el": "earth",
       "t": "minion",
       "c": 5,
       "pw": 5,
