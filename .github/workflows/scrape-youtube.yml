@@ -2,7 +2,7 @@ name: Scrape YouTube & Notify
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # every 30 minutes
+    - cron: '*/5 * * * *'   # every 5 minutes
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 jobs:
