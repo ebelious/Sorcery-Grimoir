@@ -4356,6 +4356,12 @@ function openPanel(id){
   if(id==='discord'){G.discordHasNew=false;if(G.discordItems&&G.discordItems.length){var ld2=G.discordItems[0].id;if(ld2)sv('sg-discord-seen',ld2);}}
   if(id==='deckview'){_dvInitHand(G.selDeck);}
   G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();
+  if(id==='card'){
+    requestAnimationFrame(function(){requestAnimationFrame(function(){
+      var el=document.querySelector('.cm');
+      if(el)el.scrollTop=0;
+    });});
+  }
 }
 function openCat(cat){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;render();if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}}
