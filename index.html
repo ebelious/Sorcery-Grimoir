@@ -794,13 +794,22 @@ function showReadModal(title, sections){
   G.readModal={title:title, sections:sections};
   render();
 }
+// Formats an ISO-like date string as "13 Jul 2025" (short month name). Falls
+// back to the original string unchanged if it isn't a parseable date.
+function _fmtChangelogDate(str){
+  if(!str)return str;
+  var d=new Date(str);
+  if(isNaN(d.getTime()))return str;
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+}
 // Shows each changelog entry as a clickable row; tapping one opens that
 // entry's own popup (via rdPopIdx), instead of dumping every entry into a
 // single wall of text.
 function showChangelogList(){
   if(!G.codexChangelog||!G.codexChangelog.length)return;
   var items=G.codexChangelog.map(function(entry,i){
-    var title=entry.title||('Update '+(i+1));
+    var title=_fmtChangelogDate(entry.title)||('Update '+(i+1));
     var idx=(G._rd=G._rd||[]).push({t:title,b:'',segments:entry.segments})-1;
     return {listTitle:title,rdIdx:idx};
   });
@@ -843,6 +852,7 @@ function boot(){
   // async and non-blocking, so this doesn't delay first render.
   try{ loadNewCards(); }catch(e){}
   try{ loadCodex(); }catch(e){}
+  try{ loadChangelog(); }catch(e){}
   // Pre-warm the dice overlay (renderer, shadow maps, textures) during genuine
   // browser idle time only — never competes with startup rendering — so the
   // first dice roll doesn't stall waiting on WebGL/texture setup.
@@ -4349,10 +4359,28 @@ function loadCodex(){
           }
         });
       }
-      if(Array.isArray(d&&d.changelog)&&d.changelog.length){
-        if(JSON.stringify(G.codexChangelog)!==JSON.stringify(d.changelog)){G.codexChangelog=d.changelog;changed=true;}
-      }
       if(changed)render();
+    })
+    .catch(function(){});
+}
+
+// Codex changelog is scraped and stored separately from codex/FAQ content
+// (different update cadence, different page), so it's fetched independently
+// here rather than bundled into loadCodex().
+function loadChangelog(){
+  var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/changelog.json?t='+Date.now();
+  fetch(jsonUrl,{cache:'no-store'})
+    .then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      var changelog=(d&&d.changelog)||[];
+      if(!Array.isArray(changelog)||!changelog.length)return;
+      if(JSON.stringify(G.codexChangelog)!==JSON.stringify(changelog)){
+        G.codexChangelog=changelog;
+        render();
+      }
     })
     .catch(function(){});
 }
