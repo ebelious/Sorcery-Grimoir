@@ -3046,9 +3046,14 @@ function _imgUrl(slug){
   var set=slug.split('-')[0];
   return IMG_PATH+set+'/'+slug+'.webp';
 }
+function cSVGfb(c){
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 266"><rect width="200" height="266" fill="#1C1B19"/><text x="100" y="140" text-anchor="middle" font-size="12" fill="#918175" font-family="monospace">No Image</text></svg>');
+}
 function cImgTag(c, style){
   style = style||'width:100%;height:100%;object-fit:cover;display:block';
-  if(c&&c.img) return '<img src="'+c.img+'" style="'+style+'" loading="lazy" onerror="this.onerror=null;this.src=\''+cSVGfb(c)+'\'">';
+  if(c&&c.img){
+    return '<img src="'+c.img+'" style="'+style+'" loading="lazy" onerror="this.onerror=null;this.src=\''+cSVGfb(c)+'\'">';
+  }
   var s = cSlug(c);
   if(!s) return '<img src="'+cSVGfb(c)+'" style="'+style+'">';
   return '<img src="'+_imgUrl(s)+'"'
@@ -3061,7 +3066,7 @@ function _expandImg(el){
   var im=el.querySelector('img');
   if(!im&&el.tagName==='CANVAS') im=el;
   G.expImg=im&&im.src?im.src:(el.dataset&&el.dataset.src?el.dataset.src:imgURL(G.selCard));
-  G.expImgSite=G.selCard&&cType(G.selCard)==='site';
+  G.expImgSite=G.selCard&&cType(G.selCard)==='site'&&!(G.selCard&&G.selCard.img);
   render();
 }
 function imgURL(c){
@@ -4131,11 +4136,13 @@ function loadDiscord(){
 setInterval(function(){
   if(G.panel==='discord'&&!G.discordLoading)loadDiscord();
 },60000);
-// Merge any newly-released cards (scraped nightly from curiosa.io by GitHub
-// Actions into cards.json) into the built-in CARDS array. Silent — no panel,
-// no loading state; existing cards (matched by slug OR name, since a
-// scraped slug that doesn't exactly match the built-in one would otherwise
-// let the same card get added twice) are left untouched.
+// Sync card data scraped nightly from curiosa.io by GitHub Actions into
+// cards.json: updates every field (text, cost, power, image, etc.) on
+// existing built-in cards (matched by name) to whatever curiosa currently
+// has — so errata/text updates and new artwork show up automatically
+// without needing a manual hardcoded fix — and adds any brand-new cards
+// that aren't in the built-in CARDS array yet. Silent — no panel, no
+// loading state.
 function loadNewCards(){
   var jsonUrl='https://ebelious.github.io/Sorcery-Grimoir/cards.json?t='+Date.now();
   fetch(jsonUrl,{cache:'no-store'})
@@ -4146,15 +4153,24 @@ function loadNewCards(){
     .then(function(d){
       var incoming=(d&&d.cards)||[];
       if(!Array.isArray(incoming)||!incoming.length)return;
-      var knownSl={},knownN={};
-      CARDS.forEach(function(c){knownSl[c.sl]=true;knownN[c.n]=true;});
-      var added=0;
+      var byName={};
+      CARDS.forEach(function(c){byName[c.n]=c;});
+      var added=0,updated=0;
       incoming.forEach(function(c){
-        if(c&&c.sl&&c.n&&!knownSl[c.sl]&&!knownN[c.n]){
-          CARDS.push(c);_cm[c.n]=c;knownSl[c.sl]=true;knownN[c.n]=true;added++;
+        if(!c||!c.n)return;
+        var existing=byName[c.n];
+        if(existing){
+          var changed=false;
+          ['el','t','c','pw','r','s','ss','txt','ar','th','sl','img'].forEach(function(k){
+            if(c[k]===undefined)return;
+            if(JSON.stringify(existing[k])!==JSON.stringify(c[k])){existing[k]=c[k];changed=true;}
+          });
+          if(changed)updated++;
+        } else if(c.sl){
+          CARDS.push(c);_cm[c.n]=c;byName[c.n]=c;added++;
         }
       });
-      if(added>0)render();
+      if(added>0||updated>0)render();
     })
     .catch(function(){});
 }
@@ -4472,7 +4488,8 @@ function pContent(){
     o('</div>');
     o('<div class="cgrid">');
     fil.forEach(function(c){
-      o('<div class="cimg" data-cn="'+h(cName(c))+'" style="cursor:pointer" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c)+'</div>');
+      var _imgStyle=(c.t==='site'&&c.img)?'position:absolute;top:50%;left:50%;width:133.13%;height:75.12%;transform:translate(-50%,-50%) rotate(-90deg);object-fit:cover;display:block':undefined;
+      o('<div class="cimg" data-cn="'+h(cName(c))+'" style="cursor:pointer" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c,_imgStyle)+'</div>');
     });
     if(!fil.length)o('<div class="ld">No cards match.</div>');
     o('</div>');return out.join('');
@@ -5176,7 +5193,9 @@ function cModal(){
   o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
   if(isSite){
-    var _siteImgStyle='position:absolute;top:50%;left:50%;width:75.12%;height:133.13%;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover;display:block';
+    var _siteImgStyle=(c&&c.img)
+      ?'position:absolute;top:50%;left:50%;width:100%;height:100%;transform:translate(-50%,-50%);object-fit:cover;display:block'
+      :'position:absolute;top:50%;left:50%;width:75.12%;height:133.13%;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover;display:block';
     o('<div class="cm-img" style="max-width:213px;aspect-ratio:4/3;position:relative" onclick="_expandImg(this)">'+cImgTag(c,_siteImgStyle)+'</div>');
   } else {
     o('<div class="cm-img" onclick="_expandImg(this)">'+cImgTag(c)+'</div>');
