@@ -361,6 +361,14 @@ const CODEX_URL = 'https://curiosa.io/codex';
   console.log(`Codex entries with a table: ${codex.filter(c => c.segments && c.segments.some(s => s.t === 'tbl')).length}`);
   console.log(`FAQ entries with a table: ${faq.filter(f => f.segments && f.segments.some(s => s.t === 'tbl')).length}`);
 
+  const romEntry = codex.find(c => c.k === 'Range of Motion');
+  if (romEntry) {
+    console.log('\n"Range of Motion" extracted segments (for debugging heading/bold placement):');
+    console.log(JSON.stringify(romEntry.segments, null, 2));
+  } else {
+    console.log('\n"Range of Motion" entry not found in scraped codex data.');
+  }
+
   await browser.close();
 
   if (!codex.length && !faq.length) {
