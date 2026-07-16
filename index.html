@@ -6017,7 +6017,7 @@ function spinIcon(){
 }
 
 document.addEventListener('click',function(e){
-  var btn=e.target&&e.target.closest?e.target.closest('button'):null;
+  var btn=e.target&&e.target.closest?e.target.closest('button,[onclick],a[href]'):null;
   if(btn)vibrate(10);
 },true);
 
