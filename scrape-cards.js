@@ -213,7 +213,29 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
   function norm(item) {
     if (!item?.name || !item?.slug) return null;
 
-    const el = EL_MAP[lower(item.element || item.elements?.[0] || item.affinity)] || 'neutral';
+    const th = findThreshold(item);
+    const powerVal = findPower(item);
+
+    if (!th && powerVal === null) {
+      console.warn('No threshold or power found for "' + (item.name || '?') + '". Raw item:');
+      console.warn(JSON.stringify(item, null, 2));
+    }
+
+    // item.elements is an array of {id, name} objects (e.g. [{"id":"water","name":"Water"}]),
+    // not a plain string — pull the id/name out before mapping. Fall back to
+    // inferring the element from a single-element threshold (e.g. "2w" -> water)
+    // when the elements field just says "none"/neutral but a threshold exists.
+    const elemsArr = Array.isArray(item.elements) ? item.elements : null;
+    const elemRaw = item.element || item.affinity || (elemsArr && elemsArr[0] && (elemsArr[0].id || elemsArr[0].name));
+    let el = EL_MAP[lower(elemRaw)] || 'neutral';
+    if (el === 'neutral' && th) {
+      const single = th.trim().match(/^(\d+)([aefw])$/i);
+      if (single) {
+        const letterToEl = { a: 'air', e: 'earth', f: 'fire', w: 'water' };
+        el = letterToEl[single[2].toLowerCase()] || el;
+      }
+    }
+
     const t = TYPE_MAP[lower(item.type || item.category || item.cardType)] || 'minion';
     const r = RARITY_MAP[lower(item.rarity || item.rarityName)] || 'ordinary';
     const setName = item.set?.name || item.setName || item.edition || item.editionName || '';
@@ -222,14 +244,6 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       : (setName ? [setName] : []);
     const fullSlug = findFullSlug(item);
     const img = findImageUrl(item, fullSlug, t);
-
-    const th = findThreshold(item);
-    const powerVal = findPower(item);
-
-    if (!th && powerVal === null) {
-      console.warn('No threshold or power found for "' + (item.name || '?') + '". Raw item:');
-      console.warn(JSON.stringify(item, null, 2));
-    }
 
     const cost = item.cost ?? item.manaCost ?? item.mana_cost;
 
