@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16T02:42:54.215Z",
+  "updated": "2026-07-16T04:48:47.317Z",
   "codex": [
     {
       "k": "Abilities that Reference the Card's Own Name",
@@ -30,21 +30,40 @@
       "def": "Adjacent refers to the current square and the four orthogonal squares that share a border with it (not diagonals). For example, the middle square has 5 adjacent squares - itself and four others.\n\nIf a square is in the corner of the realm, it will have fewer adjacent squares. For example, the bottom right square has only 3 adjacent squares - itself and two others.\n\nWhen referring to adjacent sites, adjacent voids, or adjacent squares, the effect can cross the boundaries of regions. For example, [[Lord of the Void]] can be in the void and still banish an adjacent site, even though sites and voids are in different regions. [[Frontier Settlers]] can be on a site and still play your top site to an adjacent void, even though sites and voids are in different regions.\nFor all other references to adjacent, such as adjacent locations, adjacent minions, adjacent artifact, etc., regional boundaries must be respected and cannot be crossed. For example, if a minion with Voidwalk was attacked while at a site and then played [[Dodge Roll]], it could not move to a void square because \"adjacent location\" cannot cross a regional boundary.",
       "sub": "",
       "id": "1d3363e4-3b12-46fb-99d9-f4319967f484",
-      "table": [
+      "tables": [
         [
-          "",
-          "X",
-          ""
+          [
+            "",
+            "X",
+            ""
+          ],
+          [
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "",
+            "X",
+            ""
+          ]
         ],
         [
-          "X",
-          "X",
-          "X"
-        ],
-        [
-          "",
-          "X",
-          ""
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "X"
+          ],
+          [
+            "",
+            "X",
+            "X"
+          ]
         ]
       ]
     },
@@ -323,34 +342,36 @@
       "def": "The corners of the realm are squares 1, 5, 16, and 20.",
       "sub": "",
       "id": "8ea4ca44-ea21-4dd0-94a0-02ffee19b2d9",
-      "table": [
+      "tables": [
         [
-          "X",
-          "",
-          "",
-          "",
-          "X"
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "X",
-          "",
-          "",
-          "",
-          "X"
+          [
+            "X",
+            "",
+            "",
+            "",
+            "X"
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "X",
+            "",
+            "",
+            "",
+            "X"
+          ]
         ]
       ]
     },
@@ -485,16 +506,18 @@
       "def": "A unit \"enters\" a location or site when it is summoned there, or when it moves there from somewhere else. \"Somewhere else\" means \"a different location\" for entering locations, and it means \"a different site\" for entering sites.\nThe method of movement doesn't matter; it can be any type of movement, including the Move and Attack basic ability, effects that cause a unit to \"take a step,\" teleportation, or other forced movement. The relevant questions are:\nWas it summoned there, OR\nDid it move there from somewhere else?\nIf either of those are true, then the unit \"entered\" that location or site.\nFurther notes:\nIf a site is placed under an existing unit, the unit did not enter the site. The unit didn't move, and it wasn't just summoned, so it didn't enter.\nThis can happen if Rubble was replaced by a site, or it was a voidwalk minion in the void and a site was played there.\nIf a non-minion occupies a location or site and then becomes a minion without moving (e.g. [[Enchantress]]), the minion did not enter. The minion didn't move and wasn't just summoned.\nIf a minion moves between levels of a site (e.g. surface to subsurface, or subsurface to surface), it does not enter the site, since it was already occupying the site. (It does enter the specific location of surface or subsurface.)\nFor oversized units, they only enter a location or site if they didn't previously occupy it. For example:\n\nThe [[Mountain Giant]] occupies the four left squares, and then takes a step to the east. It enters the two sites in the right column, but it does not enter the two sites in the middle column, since it already occupied those sites before the move. See the \"((Oversized Units))\" codex entry for more details.",
       "sub": "",
       "id": "5b927a70-2900-4f83-bcf3-595f5a5f4212",
-      "table": [
+      "tables": [
         [
-          "M",
-          "M",
-          "."
-        ],
-        [
-          "M",
-          "M",
-          "."
+          [
+            "M",
+            "M",
+            "."
+          ],
+          [
+            "M",
+            "M",
+            "."
+          ]
         ]
       ]
     },
@@ -616,7 +639,65 @@
       "k": "Intercept",
       "def": "Intercept is a basic ability that allows you to fight your opponent's units who \"Move and Attack\" without actually attacking. A unit must be untapped to intercept, and it's one of two basic abilities that you can use on your opponent’s turn (the other is Defend). Intercept is a triggered ability with the following text:\nWhen an enemy using its Move and Attack ability finishes its movement and does not attack, any of your units there may tap to intercept and fight that enemy.\nUnits cannot move when they intercept; they must already be at the enemy's final location.\nThe timing for an attack and the timing for intercept are the same; if the enemy attacks, you may defend. If the enemy doesn't attack, you may intercept. In summary, if both of the following are true, you can intercept:\nThe enemy used Move and Attack, AND\nThey chose not attack.\nUnits with Stealth cannot be intercepted, and units with Airborne can only be intercepted by enemies with Airborne or Ranged.\nIf multiple allied units intercept the same enemy, they all fight that enemy together.\nOnly the enemy's final location is relevant for interception. See the examples below for more details.",
       "sub": "",
-      "id": "eb6018eb-554d-44af-9627-7c636cef7583"
+      "id": "eb6018eb-554d-44af-9627-7c636cef7583",
+      "tables": [
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            ""
+          ],
+          [
+            "D",
+            ""
+          ]
+        ],
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            ""
+          ],
+          [
+            "D",
+            ""
+          ]
+        ],
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            ""
+          ],
+          [
+            "D",
+            ""
+          ]
+        ],
+        [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            ""
+          ],
+          [
+            "D",
+            ""
+          ]
+        ]
+      ]
     },
     {
       "k": "Its Location",
@@ -772,7 +853,21 @@
       "k": "Moves Freely",
       "def": "A unit with Moves Freely spends no steps moving via the Move and Attack or Defend basic abilities, as long as the starting and ending locations of the step satisfy the Moves Freely condition.\nMoves Freely only applies to basic movement, which is movement from the Move and Attack basic ability and the Defend basic ability.\nA unit can combine free steps with regular steps, up to its movement limit. See the examples below for more details.",
       "sub": "",
-      "id": "20b77492-0f14-47a6-86be-075526af3018"
+      "id": "20b77492-0f14-47a6-86be-075526af3018",
+      "tables": [
+        [
+          [
+            "w1",
+            "w2",
+            "A"
+          ],
+          [
+            "B",
+            "",
+            "w3"
+          ]
+        ]
+      ]
     },
     {
       "k": "Must Be Cast",
@@ -791,21 +886,40 @@
       "def": "Nearby refers to the current square and the eight squares that surround it (including diagonals). For example, the middle square has 9 nearby squares - itself and eight others.\n\nIf a square is in the corner of the realm, it will have fewer nearby squares. For example, the bottom right square has only 4 nearby squares - itself and three others.\n\nWhen referring to nearby sites, nearby voids, or nearby squares the effect can cross the boundaries of regions. For example, [[Ultimate Horror]] can be in the void and still summon to a nearby site, even though sites and voids are in different regions.\nFor all other references to nearby, such as nearby locations, nearby minions, nearby artifact, etc., regional boundaries must be respected and cannot be crossed. For example, if [[Belfry]] is on a site, it will not untap allies in a nearby void, because \"nearby ally\" cannot cross a regional boundary.",
       "sub": "",
       "id": "7de60b0a-855c-4bab-95a7-7e6f172ba4a0",
-      "table": [
+      "tables": [
         [
-          "X",
-          "X",
-          "X"
+          [
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X"
+          ],
+          [
+            "X",
+            "X",
+            "X"
+          ]
         ],
         [
-          "X",
-          "X",
-          "X"
-        ],
-        [
-          "X",
-          "X",
-          "X"
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "X",
+            "X"
+          ],
+          [
+            "",
+            "X",
+            "X"
+          ]
         ]
       ]
     },
@@ -850,30 +964,500 @@
       "def": "Normally, units occupy only one location while in the realm. However, some oversized units occupy multiple locations simultaneously due to their size, e.g. [[Mountain Giant]]. To represent the minion’s locations, place the card at the intersection of the sites.\n))Casting(( an ))Oversized Unit((\nWhen you cast such a minion, declare the area it will occupy when summoned, which must include at least one of your sites, per normal minion casting rules. It may include some of your opponent’s sites, but couldn’t include the void (without Voidwalk) nor [[Gnome Hollows]] (unless its power was low enough).\nDetermining Size and Occupying Locations\nA card's size is determined as it enters the realm (or via other effects, e.g. [[Megamoeba]] or [[The Rack]]) and becomes one of its characteristics. Therefore, even if a [[Mountain Giant]] were disabled or in a [[Silence]] aura, it would continue to occupy a 2x2 area.\nOversized units occupy each of their locations. Therefore, if grid damage is dealt to multiple such locations, oversized units take damage at each of those locations. For example, a [[Major Explosion]] centered on a Mountain Giant would deal 7 + 5 + 5 + 3 = 20 damage to it.\nAn oversized unit could simultaneously occupy both land and water sites, as well as void squares if it had voidwalk. It cannot occupy the surface and subsurface simultaneously, unless it has specific text allowing it, e.g. [[Megamoeba]].\n))Moving((\nWhen an oversized unit moves, you choose a direction and all parts of it move that direction. If any part of it cannot move in the chosen direction, then it cannot move in that direction at all. All parts of this movement are considered its movement path.\nFor example: If you cast [[Whirling Blades]] on an animated [[Drought]] aura, it can move two steps and then will strike enemies at any of the 8 locations it occupied, since all 8 locations are part of its movement path. (If it moved forward and back, then only 6 locations would be part of its movement path.)\nWhen moving, an oversized unit only \"((enters))\" locations it did not occupy before taking each step.\n))Attacking((\nWhen attacking, oversized units must target a single enemy unit or site surface that shares a location with it.\nFor example, a Mountain Giant occupying sites in the squares marked with \"M\" is attacking. It must choose an enemy unit or site surface in one of those locations. The attack is then happening at that location, and defenders must reach that specific location to defend.\n\n))Nearby(( and ))Adjacent((\nWhen determining if a card is near or adjacent to an oversized unit, you check to see if it is near or adjacent to any location the oversized unit occupies. For instance, the following locations marked \"a\" are adjacent to the Mountain Giant, marked \"M\":\n\nAs a further example, the locations marked \"n\" are nearby an oversized avatar, marked \"A,\" that has been stretched into an L-shape by [[The Rack]]:\n\nIn the ))above(( diagrams, the locations occupied by the oversized unit are also nearby/adjacent to the unit.\nFor more detailed and specific rulings, see the subcodex entries below:",
       "sub": "",
       "id": "7f57fe26-eac3-45a4-b449-994fef47d872",
-      "table": [
+      "tables": [
         [
-          "",
-          "",
-          "",
-          ""
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M1",
+            "M2",
+            ""
+          ],
+          [
+            "",
+            "M3",
+            "M4",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
         ],
         [
-          "",
-          "M1",
-          "M2",
-          ""
+          [
+            "",
+            "a",
+            "a",
+            ""
+          ],
+          [
+            "a",
+            "M",
+            "M",
+            "a"
+          ],
+          [
+            "a",
+            "M",
+            "M",
+            "a"
+          ],
+          [
+            "",
+            "a",
+            "a",
+            ""
+          ]
         ],
         [
-          "",
-          "M3",
-          "M4",
-          ""
+          [
+            "n",
+            "n",
+            "n",
+            ""
+          ],
+          [
+            "n",
+            "A",
+            "n",
+            "n"
+          ],
+          [
+            "n",
+            "A",
+            "A",
+            "n"
+          ],
+          [
+            "n",
+            "n",
+            "n",
+            "n"
+          ]
         ],
         [
-          "",
-          "",
-          "",
-          ""
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "MA",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "M",
+            "MA"
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "M",
+            "MA"
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "1",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M2",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "MP",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "M1",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "M2",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "P",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "M",
+            "M",
+            "",
+            ""
+          ],
+          [
+            "M",
+            "M",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "X",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ],
+          [
+            "",
+            "",
+            "M",
+            "M"
+          ]
+        ],
+        [
+          [
+            "",
+            "A",
+            "",
+            ""
+          ],
+          [
+            "A",
+            "Ax",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "X",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "A",
+            ""
+          ],
+          [
+            "",
+            "A",
+            "Ax",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "A",
+            ""
+          ],
+          [
+            "",
+            "",
+            "Ax",
+            "A"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "Ax",
+            "A"
+          ],
+          [
+            "",
+            "",
+            "A",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "A",
+            "Ax",
+            ""
+          ],
+          [
+            "",
+            "",
+            "A",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "",
+            "B",
+            ""
+          ],
+          [
+            "",
+            "V",
+            "",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "m",
+            ""
+          ],
+          [
+            "",
+            "M",
+            "M",
+            ""
+          ]
         ]
       ]
     },
@@ -893,7 +1477,23 @@
       "k": "Path",
       "def": "A path for a card that's moving involves 1 or more steps, and each step has a starting and ending location that's different. If your step is from a location to that same location, you didn't actually move anywhere. If you occupied multiple locations while moving, all of those locations are included in your path, including for oversized units.\nSteps resolve one at a time. Because some abilities may change as your unit moves through the realm, you may declare seemingly-illegal movement paths. That is, the legality of the movement path is only checked step by step, as each individual step is about to happen. If the step is not legal at the moment you try to take it, you do not take that step, and you continue resolving anything remaining. See the examples below for further details.\nWhen you declare movement, the only restriction is that you may not repeat specific steps. This means that a unit may move from location A, to location B, then back to location A (assuming it has enough movement), but it cannot then repeat the step of \"A to B.\" Note that steps \"A to B\" and \"B to A\" are different steps.\nIf your unit takes at least one step, it has moved; if it takes zero steps, it has not moved.\nA path for projectiles is a bit different, and can include just the starting location. See \"((projectiles))\" for more details.",
       "sub": "",
-      "id": "2ba56532-3ac0-41e8-a73f-1005cbefe8db"
+      "id": "2ba56532-3ac0-41e8-a73f-1005cbefe8db",
+      "tables": [
+        [
+          [
+            "",
+            "A",
+            "B",
+            "C"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
+        ]
+      ]
     },
     {
       "k": "Pay Life",
@@ -960,20 +1560,34 @@
       "def": "A unit's range of motion is every location it could reach if it used the Move and Attack basic ability, ignoring all triggered abilities. If a unit can't use the Move and Attack basic ability (e.g. Disabled), then it has no range of motion.\nWhen determining which locations the unit can reach (and thus Defend there, or be forced to attack there via [[The Green Knight]], for example), the game looks ahead, considering all ongoing effects (including passive abilities) and ignoring all triggered abilities. Below are some examples to help illuminate these rules.\nExample 1\n\nAn [[Apprentice Wizard]] is in square A and the attack is happening in square E. The game foresees that the Apprentice Wizard can't reach square E and thus he can't tap to Defend.\nExample 2\nSame as Example 1, but [[Magellan Globe]] is in the realm or [[Waypoint Portal]] is in effect. Now, the game notices the ongoing effect and allows the Defend ability.\nExample 3\nThe attack's location is [[Gnome Hollows]] and a [[Bosk Troll]] is at an adjacent site. The game foresee that the Bosk Troll won't be able to move into the Gnome Hollows because that's a passive effect, and thus the Troll can't tap to Defend.\nExample 4\nThe attack's location is [[Bottomless Pit]] and the Bosk Troll is adjacent. The game will allow the Defend ability, because the Troll can actually move there. Of course, the Bosk Troll will die upon arrival due to Bottomless Pit, but the Defend ability would be allowed.\nExample 5\n\nThe attack is happening at A. I have [[Rimland Nomads]] at N. There is a [[Giant Shark]] at S, which is a water site. As soon as the Rimland Nomads move toward A to Defend, the Shark will fight them at S via its mandatory triggered ability. There is no way that the Nomads could actually reach A in two steps. Nonetheless, the game will allow the Rimland Nomads to use the Defend ability because when the game looks ahead to see which locations the Nomads can reach, the game ignores all triggered abilities.\nExample 6\nSame as Example 5, but instead of a Shark at S, it's a [[Bog]], having targeted itself. In this case, the game will not allow the Nomads to use the Defend ability, because the game considers all ongoing effects (including the Bog) and foresees that the Nomads can't reach the attack's location. The difference is that Giant Shark is a triggered ability (which is ignored during lookahead) and Bog is an ongoing ability (which is considered during lookahead).\nLookahead Summary\nIn summary, if the player can demonstrate a movement path that would reach the attack's location, ignoring all triggered abilities, then the Defend ability is allowed.\nExplanation\nIf you're reading this deeply into the Codex, you might be wondering why the game ignores triggered abilities for the lookahead. One reason is that there are some cases where the lookahead for triggered abilities yields an unknown outcome. For example, in Example 5, instead of Nomads, if it were a [[Phantom Steed]] with a [[Poisonous Dagger]] carrying [[Amazon Warriors]], can the Phantom Steed reach A or not? It depends if the Shark chooses to fight the Warriors first or the Steed first. The second reason is that this approach allows the lookahead for mandatory actions like \"must attack\" (e.g. [[Mask of Mayhem]]) to use the same rules, since players' intuition in those cases is to force an attack even into a Shark or [[Mariner's Curse]]. Therefore, we consistently ignore triggered abilities when considering a unit's range of motion.",
       "sub": "",
       "id": "baf60fbb-dcd9-4bb5-a2b4-158f8df5cbb1",
-      "table": [
+      "tables": [
         [
-          "A",
-          "B",
-          "C",
-          "D",
-          "E"
+          [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ]
         ],
         [
-          "",
-          "",
-          "",
-          "",
-          ""
+          [
+            "A",
+            "S",
+            "N"
+          ],
+          [
+            "",
+            "",
+            ""
+          ]
         ]
       ]
     },
@@ -1018,34 +1632,36 @@
       "def": "The realm is divided into Rows and Columns. Rows are each contiguous set of squares directly left and right of one another, and Columns are contiguous sets of squares directly in front of or behind one another. \nThis diagram shows the default shape of the realm, with an example of a Row (marked with \"R\") and a Column (marked with \"C\").",
       "sub": "",
       "id": "b7cf02ba-497b-4ec2-a596-14c636024868",
-      "table": [
+      "tables": [
         [
-          "",
-          "C",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "C",
-          "",
-          "",
-          ""
-        ],
-        [
-          "R",
-          "C/R",
-          "R",
-          "R",
-          "R"
-        ],
-        [
-          "",
-          "C",
-          "",
-          "",
-          ""
+          [
+            "",
+            "C",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "C",
+            "",
+            "",
+            ""
+          ],
+          [
+            "R",
+            "C/R",
+            "R",
+            "R",
+            "R"
+          ],
+          [
+            "",
+            "C",
+            "",
+            "",
+            ""
+          ]
         ]
       ]
     },
@@ -1167,7 +1783,26 @@
       "k": "Storyline",
       "def": "When the story being told during a game of Sorcery starts to get complicated, particularly when multiple abilities trigger at the same time, use the storyline to resolve them.",
       "sub": "",
-      "id": "081fc13c-49fb-4893-90c1-1ba5324e6241"
+      "id": "081fc13c-49fb-4893-90c1-1ba5324e6241",
+      "tables": [
+        [
+          [
+            "",
+            "I",
+            ""
+          ],
+          [
+            "",
+            "R",
+            ""
+          ],
+          [
+            "",
+            "A",
+            ""
+          ]
+        ]
+      ]
     },
     {
       "k": "Strike",
@@ -1446,14 +2081,16 @@
       "q": "What does \"closer\" mean?",
       "a": "Determine which location it could step to using its normal movement that would be closest to the caster that triggered it.\nFor instance, assume the Sturmgeist is at location S, and the spellcaster is at location C:\n\nBecause the Sturmgeist has the airborne ability, it is able to get from S to C in one step, so it must do so, leaving it zero steps away from the caster.  It cannot move to A or B, because those locations are still one step away from the caster, which is further than zero steps.",
       "id": "a4f32845-d1f0-49fa-8759-b890072557de",
-      "table": [
+      "tables": [
         [
-          "C",
-          "B"
-        ],
-        [
-          "A",
-          "S"
+          [
+            "C",
+            "B"
+          ],
+          [
+            "A",
+            "S"
+          ]
         ]
       ]
     },
@@ -3070,16 +3707,30 @@
       "q": "When moving sites around, does Vindictive Nation protect the nearby sites before or after the move?",
       "a": "Vindictive Nation protects the sites it was nearby before the move. For example:\n\nI = Vindictive Nation\nR = Rubble\nA = Allied Site\nMy opponent casts Earthquake and rearranges the two rightmost sites:\n\nEven though site A moved and is now nearby Vindictive Nation, my opponent doesn't lose any life because A wasn't nearby Vindictive Nation before the move.\nAlternately, if we started from the second situation and Earthquake moved sites into the first situation, my opponent would lose 3 life because they moved a site that was nearby Vindictive Nation (even though the site ended up no longer nearby).",
       "id": "47ab1758-1153-4c88-9ddc-71a605ffcc95",
-      "table": [
+      "tables": [
         [
-          "I",
-          "R",
-          "A"
+          [
+            "I",
+            "R",
+            "A"
+          ],
+          [
+            "",
+            "",
+            ""
+          ]
         ],
         [
-          "",
-          "",
-          ""
+          [
+            "I",
+            "A",
+            "R"
+          ],
+          [
+            "",
+            "",
+            ""
+          ]
         ]
       ]
     },
@@ -4822,21 +5473,23 @@
       "q": "All the empty boxes are void and the letters are sites. If the spell is cast from the surface of X, is Z affected?",
       "a": "Yes, because it's the same region as the spell effect, even though it's separated by void.",
       "id": "eXfZjLHocReFQIApZdIDWC",
-      "table": [
+      "tables": [
         [
-          "",
-          "X",
-          ""
-        ],
-        [
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "Z"
+          [
+            "",
+            "X",
+            ""
+          ],
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "Z"
+          ]
         ]
       ]
     },
@@ -4845,21 +5498,23 @@
       "q": "All the empty boxes are void and the letters are sites. If the spell is cast from the surface of X, is Z affected?",
       "a": "Yes, because it's the same region as the spell effect, even though it's separated by void.",
       "id": "eXfZjLHocReFQIApZdIDWC",
-      "table": [
+      "tables": [
         [
-          "",
-          "X",
-          ""
-        ],
-        [
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "Z"
+          [
+            "",
+            "X",
+            ""
+          ],
+          [
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "Z"
+          ]
         ]
       ]
     },
@@ -5162,16 +5817,18 @@
       "q": "Do the locations need to be in the same region?",
       "a": "No. Teleport effects ignore regional boundaries unless otherwise specified, and the only restriction on this effect is that the locations be a chess knight's move apart on the board.\nFor example, if A is a void square, and B contains a site, Flanking Maneuver can move units from that void location to either the surface or subsurface of the site.",
       "id": "eXfZjLHocReFQIApZdNPz6",
-      "table": [
+      "tables": [
         [
-          "A",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "B"
+          [
+            "A",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "B"
+          ]
         ]
       ]
     },
@@ -5210,21 +5867,23 @@
       "q": "Consider the group of sites below. An oversized minion occupies 1-2-4-5. Guile Sirens is #5. Can the oversized minion be pulled in any way?",
       "a": "Yes. When pulling or pushing an oversized unit, choose a single location the oversized unit occupies (and meets the requirement of the effect), and push/pull from there. So, you could choose Site 2: Oversized minion is pulled South, and ends up at 4-5-7-8. OR, choose Site 4: Oversized minion is pulled East, and ends up at 2-3-5-6. OR, choose Site 5: Oversized minion isn’t pulled at all.",
       "id": "eXfZjLHocReFQIApZdNkUO",
-      "table": [
+      "tables": [
         [
-          "1",
-          "2",
-          "3"
-        ],
-        [
-          "4",
-          "5",
-          "6"
-        ],
-        [
-          "7",
-          "8",
-          "9"
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "4",
+            "5",
+            "6"
+          ],
+          [
+            "7",
+            "8",
+            "9"
+          ]
         ]
       ]
     },
@@ -6115,21 +6774,23 @@
       "q": "Consider the group of sites below. An oversized minion occupies 1-2-4-5. Maelström is #5. Can the oversized minion be pulled in any way?",
       "a": "Yes. When pulling or pushing an oversized unit, choose a single location the oversized unit occupies (and meets the requirement of the effect), and push/pull from there. So, assuming Sites 2 and 4 are water sites as well, you could choose Site 2: Oversized minion is pulled South, and ends up at 4-5-7-8. OR, choose Site 4: Oversized minion is pulled East, and ends up at 2-3-5-6. OR, choose Site 5: Oversized minion isn’t pulled at all.",
       "id": "ygoDG8fb7HS97qCW69tHt3",
-      "table": [
+      "tables": [
         [
-          "1",
-          "2",
-          "3"
-        ],
-        [
-          "4",
-          "5",
-          "6"
-        ],
-        [
-          "7",
-          "8",
-          "9"
+          [
+            "1",
+            "2",
+            "3"
+          ],
+          [
+            "4",
+            "5",
+            "6"
+          ],
+          [
+            "7",
+            "8",
+            "9"
+          ]
         ]
       ]
     },
@@ -6324,11 +6985,13 @@
       "q": "If an effect grants this free movement (e.g. Arcade of Bones), can I spawn infinite Skeleton tokens?",
       "a": "No. Whenever you declare a movement path, you cannot repeat specific steps. Lets say we have sites arranged like this in a row, with Army of the Dead starting on site A, along with an [[Arcade of Bones]]:\n\nYou could declare the following movement path for the Army:\nA to B\nB to C\nC to B\nB to A\nNone of those steps repeat exactly, so it's all perfectly legal, and you would spawn a Skeleton for each of those steps, for a total of 4 Skeletons spawned. You cannot, however, put another A to B step on the path, since that would be a repeat of the first step.",
       "id": "d2a9128c-4e59-4871-8b7c-e66dab5f3809",
-      "table": [
+      "tables": [
         [
-          "A",
-          "B",
-          "C"
+          [
+            "A",
+            "B",
+            "C"
+          ]
         ]
       ]
     },
