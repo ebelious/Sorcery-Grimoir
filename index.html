@@ -3273,7 +3273,7 @@ function _runsHtml(runs){
   if(!runs||!runs.length)return '';
   return runs.map(function(r){
     var t=h(r.text).replace(/\n/g,'<br>');
-    if(r.cardRef)return '<span class="ext-lnk" style="cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();G.readModal=null;var _c=cardByName(this.dataset.card);if(_c){G.selCard=_c;openPanel(\'card\');}">'+t+'</span>';
+    if(r.cardRef)return '<span style="color:var(--yel);cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();G.readModal=null;var _c=cardByName(this.dataset.card);if(_c){G.selCard=_c;openPanel(\'card\');}">'+t+'</span>';
     if(r.italic)t='<em>'+t+'</em>';
     if(r.bold)t='<strong>'+t+'</strong>';
     var col=r.bold?'var(--wht)':(r.link?'var(--bbl)':'');
@@ -5902,7 +5902,8 @@ function render(){
     if(G.readModal){
       var _rm=G.readModal;
       var _rmHtml='<div class="rd-overlay" onclick="if(event.target===this.parentElement||event.target===this)closeReadModal()">'
-        +'<div class="rd-hdr"><span class="rd-title">'+h(_rm.title)+'</span></div>'
+        +'<div class="rd-hdr"><span class="rd-title">'+h(_rm.title)+'</span>'
+        +'<button class="rd-close" onclick="closeReadModal()">&times;</button></div>'
         +'<div class="rd-body">';
       (_rm.sections||[]).forEach(function(sec){
         if(sec.hdr)_rmHtml+='<div class="rd-section-hdr">'+h(sec.hdr)+'</div>';
