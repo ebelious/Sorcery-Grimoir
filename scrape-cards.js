@@ -210,6 +210,32 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return null;
   }
 
+  // Real shape confirmed from live data: each printing's set info lives at
+  // item.variants[].setCard.set.name, not a top-level item.set field. A card
+  // can appear in multiple sets, so collect the unique set names across all
+  // its variants rather than just the first one found.
+  function findSets(item) {
+    const names = [];
+    const seen = new Set();
+    if (Array.isArray(item.variants)) {
+      item.variants.forEach(v => {
+        const nm = v && v.setCard && v.setCard.set && v.setCard.set.name;
+        if (nm && !seen.has(nm)) { seen.add(nm); names.push(nm); }
+      });
+    }
+    if (!names.length) {
+      const fallback = item.set?.name || item.setName || item.edition || item.editionName;
+      if (fallback) names.push(fallback);
+    }
+    if (Array.isArray(item.sets)) {
+      item.sets.forEach(s => {
+        const nm = typeof s === 'string' ? s : (s && (s.name || s.setName));
+        if (nm && !seen.has(nm)) { seen.add(nm); names.push(nm); }
+      });
+    }
+    return names;
+  }
+
   function norm(item) {
     if (!item?.name || !item?.slug) return null;
 
@@ -221,27 +247,33 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       console.warn(JSON.stringify(item, null, 2));
     }
 
-    // item.elements is an array of {id, name} objects (e.g. [{"id":"water","name":"Water"}]),
-    // not a plain string — pull the id/name out before mapping. Fall back to
-    // inferring the element from a single-element threshold (e.g. "2w" -> water)
-    // when the elements field just says "none"/neutral but a threshold exists.
-    const elemsArr = Array.isArray(item.elements) ? item.elements : null;
-    const elemRaw = item.element || item.affinity || (elemsArr && elemsArr[0] && (elemsArr[0].id || elemsArr[0].name));
-    let el = EL_MAP[lower(elemRaw)] || 'neutral';
-    if (el === 'neutral' && th) {
-      const single = th.trim().match(/^(\d+)([aefw])$/i);
-      if (single) {
-        const letterToEl = { a: 'air', e: 'earth', f: 'fire', w: 'water' };
-        el = letterToEl[single[2].toLowerCase()] || el;
-      }
+    // Element is derived primarily from the raw threshold counts (confirmed
+    // reliable field names: airThreshold/earthThreshold/fireThreshold/
+    // waterThreshold), picking whichever element has the highest count —
+    // this is the actual game-accurate signal and works for both single-
+    // and multi-threshold cards. item.elements (an array of {id,name}
+    // objects) is only used as a fallback for genuinely elementless cards.
+    const sc = item.setCard || item;
+    const thCounts = {
+      air:   Number(sc.airThreshold)   || 0,
+      earth: Number(sc.earthThreshold) || 0,
+      fire:  Number(sc.fireThreshold)  || 0,
+      water: Number(sc.waterThreshold) || 0,
+    };
+    let el = 'neutral', bestCount = 0;
+    Object.keys(thCounts).forEach(k => {
+      if (thCounts[k] > bestCount) { bestCount = thCounts[k]; el = k; }
+    });
+    if (el === 'neutral') {
+      const elemsArr = Array.isArray(item.elements) ? item.elements : null;
+      const elemRaw = item.element || item.affinity || (elemsArr && elemsArr[0] && (elemsArr[0].id || elemsArr[0].name));
+      el = EL_MAP[lower(elemRaw)] || 'neutral';
     }
 
     const t = TYPE_MAP[lower(item.type || item.category || item.cardType)] || 'minion';
     const r = RARITY_MAP[lower(item.rarity || item.rarityName)] || 'ordinary';
-    const setName = item.set?.name || item.setName || item.edition || item.editionName || '';
-    const allSets = Array.isArray(item.sets)
-      ? item.sets.map(s => (typeof s === 'string' ? s : (s && (s.name || s.setName)))).filter(Boolean)
-      : (setName ? [setName] : []);
+    const allSets = findSets(item);
+    const setName = allSets[0] || '';
     const fullSlug = findFullSlug(item);
     const img = findImageUrl(item, fullSlug, t);
 
