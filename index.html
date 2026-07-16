@@ -3064,12 +3064,19 @@ function cImgTag(c, style){
     +' onerror="imgErr(this)">';
 }
 
+// Sites are landscape, but their source art comes from two different CDNs:
+// the pre-rotated one (.../rotated/...) needs no extra transform, while the
+// original portrait art (.../cards/... — used by individual print variants)
+// still needs the same rotate(90deg) treatment as built-in site cards.
+function _srcIsPreRotated(url){
+  return !!url && url.indexOf('/rotated/')!==-1;
+}
 
 function _expandImg(el){
   var im=el.querySelector('img');
   if(!im&&el.tagName==='CANVAS') im=el;
   G.expImg=im&&im.src?im.src:(el.dataset&&el.dataset.src?el.dataset.src:imgURL(G.selCard));
-  G.expImgSite=G.selCard&&cType(G.selCard)==='site'&&!(G.selCard&&G.selCard.img);
+  G.expImgSite=G.selCard&&cType(G.selCard)==='site'&&!_srcIsPreRotated(G.expImg);
   render();
 }
 function imgURL(c){
@@ -5210,7 +5217,7 @@ function cModal(){
     +'<button type="button" onclick="event.stopPropagation();cmPrintNav(1)" style="position:absolute;right:2px;top:50%;transform:translateY(-50%);z-index:2;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:14px;line-height:1;cursor:pointer">&#8250;</button>'
   ):'';
   if(isSite){
-    var _siteImgStyle=(_dispCard&&_dispCard.img)
+    var _siteImgStyle=_srcIsPreRotated(_dispCard&&_dispCard.img)
       ?'position:absolute;top:50%;left:50%;width:100%;height:100%;transform:translate(-50%,-50%);object-fit:cover;display:block'
       :'position:absolute;top:50%;left:50%;width:75.12%;height:133.13%;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover;display:block';
     o('<div class="cm-img" style="max-width:213px;aspect-ratio:4/3;position:relative" onclick="_expandImg(this)">'+cImgTag(_dispCard,_siteImgStyle)+_navArrows+'</div>');
@@ -5230,13 +5237,24 @@ function cModal(){
   }
   var allSets=cSets(c);if(allSets.length>1)o('<div style="font-size:8px;color:var(--fg2);margin-bottom:4px">Also in: '+allSets.filter(function(s){return s!==cSet(c);}).map(h).join(', ')+'</div>');
   if(c.prints&&c.prints.length>1){
-    o('<div style="margin-bottom:4px"><div style="font-size:8px;color:var(--fg2);margin-bottom:2px">Printings</div><div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:2px">');
-    c.prints.forEach(function(p){
-      var label=(p.set||'')+(p.finish?' ('+p.finish+')':'');
-      var thumb=p.img?'<img src="'+p.img+'" style="width:36px;height:48px;object-fit:cover;border-radius:3px;display:block;margin:0 auto 2px">':'';
-      o('<div style="flex-shrink:0;text-align:center;width:44px">'+thumb+'<div style="font-size:7px;color:var(--fg2);line-height:1.1">'+h(label)+'</div></div>');
-    });
-    o('</div></div>');
+    var pKey='cm_prints_'+nm.replace(/[^a-z0-9]/gi,'_');
+    var pExp=!!G.accExp[pKey];
+    var pCurIdx=((G.cardPrintIdx||0)%c.prints.length+c.prints.length)%c.prints.length;
+    o('<div class="acc" style="margin-bottom:4px">');
+    o('<div class="acc-h" data-k="'+pKey+'" onclick="toggleAcc(this.dataset.k)">');
+    o('<div class="acc-nm" style="font-size:13px">Printings ('+c.prints.length+')</div>');
+    o('<span class="acc-arr">'+(pExp?'&#9650;':'&#9660;')+'</span>');
+    o('</div>');
+    if(pExp){
+      o('<div class="acc-body">');
+      c.prints.forEach(function(p,pi){
+        var label=(p.set||'Unknown Set')+(p.finish?' — '+p.finish:'')+(p.rarity?' ('+p.rarity+')':'');
+        var isCur=pi===pCurIdx;
+        o('<div class="acc-row" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center'+(isCur?';color:var(--hi);font-weight:700':'')+'" onclick="G.cardPrintIdx='+pi+';render()"><span>'+h(label)+'</span>'+(isCur?'<span>&#10003;</span>':'')+'</div>');
+      });
+      o('</div>');
+    }
+    o('</div>');
   }
   // FAQ for this card
   var cardFaqs=[];var _lastFC='';
