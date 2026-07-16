@@ -3592,7 +3592,7 @@ function _dvPinCard(el){
       if(xEl){xEl.style.opacity='1';xEl.style.pointerEvents='auto';}
     }
     _dvXTimer=null;
-  },1000);
+  },500);
 }
 function _dvFanUpdate(ev){
   var el=document.elementFromPoint(ev.clientX,ev.clientY);
@@ -3775,7 +3775,10 @@ function trigUpDecks(){
     var qi=-1;for(var i=0;i<hd.length;i++){if(hd[i].indexOf('qty')>=0||hd[i].indexOf('quantity')>=0||hd[i].indexOf('count')>=0){qi=i;break;}}
     if(ni<0)return;var cards=[];
     lines.slice(1).forEach(function(line){var cols=line.split(',').map(function(v){return v.trim().replace(/^"|"$/g,'');});var nm=cols[ni];if(!nm)return;cards.push({name:nm,qty:qi>=0?parseInt(cols[qi])||1:1});});
-    var key='Deck '+(Object.keys(G.decks).length+1);G.decks[key]={name:key,cards:cards};sv('sg-dk',G.decks);render();
+    var fileName=(f.name||'').replace(/\.[^/.]+$/,'').trim();
+    var deckName=fileName||('Deck '+(Object.keys(G.decks).length+1));
+    var key=deckName;var n=2;while(G.decks[key]){key=deckName+' ('+n+')';n++;}
+    G.decks[key]={name:deckName,cards:cards};sv('sg-dk',G.decks);render();
   };r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();
 }
 function addRec(n){n=(n||'').trim();if(!n)return;if(!G.records[n])G.records[n]={w:0,l:0};sv('sg-rec',G.records);render();}
@@ -4771,10 +4774,8 @@ function pContent(){
       if(!typeGroups[t])t='minion';
       typeGroups[t].push({entry:entry,card:c});
     });
-    var totalCards=dv.cards.reduce(function(s,c){return s+c.qty;},0);
-    o('<div style="font-size:12px;color:var(--fg2);margin-bottom:8px">'+totalCards+' cards total</div>');
     // ── Card search bar + sort + track ──
-    var dvSort=G.dvSort||'name';
+    var dvSort=G.dvSort||'cost';
     var dvSortLabels={name:'Name',cost:'Cost',power:'Power',rarity:'Rarity'};
     var dvTrackOn=!!G.dvTrack;
     o('<div style="display:flex;gap:8px;margin-bottom:10px;align-items:stretch">');
@@ -5422,7 +5423,7 @@ function cModal(){
   var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};var isSite=cType(c)==='site';
   var out=[];function o(s){out.push(s);}
   o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
-  o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div><button class="p-cl" onclick="goBack()">&times;</button></div>');
+  o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div></div>');
   var _pList=(c.prints&&c.prints.length)?c.prints:null;
   var _curPrint=_pList?_pList[((G.cardPrintIdx||0)%_pList.length+_pList.length)%_pList.length]:null;
   var _dispCard=(_curPrint&&_curPrint.img)?Object.assign({},c,{img:_curPrint.img}):c;
@@ -5892,7 +5893,7 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':''))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div><button class="p-cl" onclick="closeAll()">&times;</button></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':''))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
@@ -5901,8 +5902,7 @@ function render(){
     if(G.readModal){
       var _rm=G.readModal;
       var _rmHtml='<div class="rd-overlay" onclick="if(event.target===this.parentElement||event.target===this)closeReadModal()">'
-        +'<div class="rd-hdr"><span class="rd-title">'+h(_rm.title)+'</span>'
-        +'<button class="rd-close" onclick="closeReadModal()">&times;</button></div>'
+        +'<div class="rd-hdr"><span class="rd-title">'+h(_rm.title)+'</span></div>'
         +'<div class="rd-body">';
       (_rm.sections||[]).forEach(function(sec){
         if(sec.hdr)_rmHtml+='<div class="rd-section-hdr">'+h(sec.hdr)+'</div>';
