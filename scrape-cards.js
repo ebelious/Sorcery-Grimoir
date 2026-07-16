@@ -131,15 +131,25 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return letter ? `${n}${letter}` : '';
   }
 
+  // Real shape confirmed from a live diagnostic dump: printing-specific data
+  // (threshold, power, cost, rarity, rulesText) lives under item.setCard,
+  // with one numeric field per element rather than a combined array/string.
   function findThreshold(item) {
+    const sc = item.setCard || item;
+    const map = [['airThreshold', 'a'], ['earthThreshold', 'e'], ['fireThreshold', 'f'], ['waterThreshold', 'w']];
+    const tokens = [];
+    map.forEach(([key, letter]) => {
+      const n = Number(sc[key]);
+      if (n > 0) tokens.push(`${n}${letter}`);
+    });
+    if (tokens.length) return tokens.join(' ');
+
+    // Fall back to the more generic shapes in case a different card type
+    // (e.g. avatar) doesn't use the four *Threshold fields.
     const candidates = [item.thresholds, item.threshold, item.thresholdText, item.affinity, item.affinities];
     for (const val of candidates) {
       if (val === undefined || val === null) continue;
-
-      // Already a correctly-formatted string, e.g. "2w" or "1a 1e".
       if (typeof val === 'string' && /^(\d+[aefw]\s*)+$/i.test(val.trim())) return val.trim();
-
-      // Array of strings like ["W","W"] or ["water","water"] or ["2w"].
       if (Array.isArray(val) && val.every(v => typeof v === 'string')) {
         const counts = {};
         val.forEach(v => {
@@ -148,27 +158,26 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
           const letter = ELETTER[lower(v)];
           if (letter) counts[letter] = (counts[letter] || 0) + 1;
         });
-        const tokens = Object.keys(counts).map(l => `${counts[l]}${l}`);
-        if (tokens.length) return tokens.join(' ');
+        const toks = Object.keys(counts).map(l => `${counts[l]}${l}`);
+        if (toks.length) return toks.join(' ');
       }
-
-      // Array of {element, count} (or {type, amount}, etc.) objects.
       if (Array.isArray(val) && val.every(v => v && typeof v === 'object')) {
-        const tokens = val.map(x => buildThToken(x.element || x.type || x.name, x.count || x.amount || 1)).filter(Boolean);
-        if (tokens.length) return tokens.join(' ');
+        const toks = val.map(x => buildThToken(x.element || x.type || x.name, x.count || x.amount || 1)).filter(Boolean);
+        if (toks.length) return toks.join(' ');
       }
-
-      // Object map like {air:1, fire:2} or {A:1, F:2}.
       if (!Array.isArray(val) && typeof val === 'object') {
-        const tokens = Object.keys(val).map(k => buildThToken(k, val[k])).filter(Boolean);
-        if (tokens.length) return tokens.join(' ');
+        const toks = Object.keys(val).map(k => buildThToken(k, val[k])).filter(Boolean);
+        if (toks.length) return toks.join(' ');
       }
     }
     return '';
   }
 
   function findPower(item) {
-    const candidates = [item.power, item.pow, item.basePower, item.stats?.power, item.attackPower, item.powerAttack];
+    const sc = item.setCard || item;
+    // Built-in CARDS data stores a split-power card's "attack" value as its
+    // single pw (e.g. White Knight's printed 3/5 split power is pw:3).
+    const candidates = [sc.attack, sc.defense, sc.power, sc.pow, sc.life];
     for (const v of candidates) {
       if (v !== undefined && v !== null && v !== '') {
         const n = Number(v);
