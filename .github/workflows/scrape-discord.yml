@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Run scraper (twice, 30s apart)
         run: |
           node scrape-discord.js
@@ -25,6 +28,7 @@ jobs:
           node scrape-discord.js
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
 
       - name: Commit discord.json if changed
         run: |
