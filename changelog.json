@@ -1,0 +1,4279 @@
+{
+  "updated": "2026-07-16T18:04:35.426Z",
+  "changelog": [
+    {
+      "title": "2026-07-15T17:00:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "Updated Cards",
+          "runs": [
+            {
+              "text": "Updated Cards",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "We are extremely judicious in updating cards, but sometimes it is necessary to do so. The ((Updated Cards)) codex entry is updated accordingly.",
+          "runs": [
+            {
+              "text": "We are extremely judicious in updating cards, but sometimes it is necessary to do so. The ((Updated Cards)) codex entry is updated accordingly.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lord of Lies]] -  Don’t trust his words, it’s in the name! He won’t dirty his own hands in the fight any more. Causes two other units to fight.",
+          "runs": [
+            {
+              "text": "• [[Lord of Lies]] -  Don’t trust his words, it’s in the name! He won’t dirty his own hands in the fight any more. Causes two ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            },
+            {
+              "text": "other",
+              "bold": true,
+              "italic": true,
+              "link": false
+            },
+            {
+              "text": " units to fight.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mirage]] - The site you return to your hand must be one you own and control. This matches design intent and avoids Desecrate and Heirloom Lost shenanigans where you could steal sites from your opponent.",
+          "runs": [
+            {
+              "text": "• [[Mirage]] - The site you return to your hand must be one you own ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            },
+            {
+              "text": "and",
+              "bold": true,
+              "italic": true,
+              "link": false
+            },
+            {
+              "text": " control. This matches design intent and avoids Desecrate and Heirloom Lost shenanigans where you could steal sites from your opponent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Plague of Frogs]] reversed previous FAQ that said Frogs could be summoned to different locations. Now, all seven Frogs must be summoned to the same location. This addresses a speed of play issue.",
+          "runs": [
+            {
+              "text": "• [[Plague of Frogs]] reversed previous FAQ that said Frogs could be summoned to different locations. Now, all seven Frogs must be summoned to the same location. This addresses a speed of play issue.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Vindictive Nation]] reversed previous FAQ that said this ability doesn't trigger when Vindictive Nation is silenced. Now, Vindictive Nation will trigger as it's being silenced, which matches design intent. Clarified a specific interaction with Atlantean Fate as well.",
+          "runs": [
+            {
+              "text": "• [[Vindictive Nation]] reversed previous FAQ that said this ability doesn't trigger when Vindictive Nation is silenced. Now, Vindictive Nation will trigger as it's being silenced, which matches design intent. Clarified a specific interaction with Atlantean Fate as well.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Young Master Damion]] clarified that if you [[Poison Nova]] Damion and his Ghouls, the Ghouls will survive. Special thanks to everyone in the judge channels who weighed in on this interaction!",
+          "runs": [
+            {
+              "text": "• [[Young Master Damion]] clarified that if you [[Poison Nova]] Damion and his Ghouls, the Ghouls will survive. Special thanks to everyone in the judge channels who weighed in on this interaction!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Inquisition]] clarified how to resolve this effect when this card is named by [[Feast for Crows]], and clarified that your opponent cannot choose to fail to see it when searching.",
+          "runs": [
+            {
+              "text": "• [[The Inquisition]] clarified how to resolve this effect when this card is named by [[Feast for Crows]], and clarified that your opponent cannot choose to fail to see it when searching.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Call of the Sea]] clarified that this will not affect minions which are in the void or underground.",
+          "runs": [
+            {
+              "text": "• [[Call of the Sea]] clarified that this will not affect minions which are in the void or underground.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mimic]] clarified that if this is summoned from a ((cemetery)) by [[Deathspeaker]], it will still be banished.",
+          "runs": [
+            {
+              "text": "• [[Mimic]] clarified that if this is summoned from a ((cemetery)) by [[Deathspeaker]], it will still be banished.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Accursed Albatross]] clarified that it is minions near the killer which are killed by this ability.",
+          "runs": [
+            {
+              "text": "• [[Accursed Albatross]] clarified that it is minions near the killer which are killed by this ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Troubled Town]] clarified that named Townsfolk are included in the special limited rules for summoning from outside your collection, e.g. [[Eltham Townsfolk]] and [[Serava Townsfolk]].",
+          "runs": [
+            {
+              "text": "• [[Troubled Town]] clarified that named Townsfolk are included in the special limited rules for summoning from outside your collection, e.g. [[Eltham Townsfolk]] and [[Serava Townsfolk]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Order of the White Wing]] clarified that if it's summoned along with other minions simultaneously, they are all summoned successfully.",
+          "runs": [
+            {
+              "text": "• [[Order of the White Wing]] clarified that if it's summoned along with other minions simultaneously, they are all summoned successfully.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Boulevard of Bones]] vs. silence effect clarified that if the adjacent site silences the Boulevard (e.g. Smokestacks of Gnaak, Fields of Phyxis), a skeleton token is not summoned.",
+          "runs": [
+            {
+              "text": "• [[Boulevard of Bones]] vs. silence effect clarified that if the adjacent site silences the Boulevard (e.g. Smokestacks of Gnaak, Fields of Phyxis), a skeleton token is not summoned.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mirage]] + [[Pathfinder]] updated an old FAQ that is now moot, given Mirage's updated text. These effects combine as you would expect.",
+          "runs": [
+            {
+              "text": "• [[Mirage]] + [[Pathfinder]] updated an old FAQ that is now moot, given Mirage's updated text. These effects combine as you would expect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Overflowing Court]] clarified that it affects any card with the exact word \"Court\" in the card name.",
+          "runs": [
+            {
+              "text": "• [[Overflowing Court]] clarified that it affects any card with the exact word \"Court\" in the card name.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mock Court]], [[Court of Equity]], and [[Mobbed Court]] clarified that these effects stack if multiple copies are in the realm.",
+          "runs": [
+            {
+              "text": "• [[Mock Court]], [[Court of Equity]], and [[Mobbed Court]] clarified that these effects stack if multiple copies are in the realm.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mock Court]] clarified that this is an additional summoning cost, not casting cost. It is paid at the moment the Ordinary minion would be summoned into the realm. It applies to ordinary token minions (e.g. Skeletons, Frogs, Foot Soldiers) that are summoned without being cast, as well as ordinary minions that you cast normally (e.g. Apprentice Wizard).",
+          "runs": [
+            {
+              "text": "• [[Mock Court]] clarified that this is an additional summoning cost, not casting cost. It is paid at the moment the Ordinary minion would be summoned into the realm. It applies to ordinary token minions (e.g. Skeletons, Frogs, Foot Soldiers) that are summoned without being cast, as well as ordinary minions that you cast normally (e.g. Apprentice Wizard).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Army of the Dead]] clarified that the skeletons spawned by this ability are summoned, and that they enter the location where they are summoned.",
+          "runs": [
+            {
+              "text": "• [[Army of the Dead]] clarified that the skeletons spawned by this ability are summoned, and that they enter the location where they are summoned.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Oversized Units)) entry for clarity and to collect all of the relevant rulings in one place. No rulings regarding oversized units have changed, but they can be more easily referenced and are accompanied by more examples to hopefully help with comprehension.",
+          "runs": [
+            {
+              "text": "• Updated the ((Oversized Units)) entry for clarity and to collect all of the relevant rulings in one place. No rulings regarding oversized units have changed, but they can be more easily referenced and are accompanied by more examples to hopefully help with comprehension.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Stronger, Strongest, Weaker, Weakest)) to define these terms.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Stronger, Strongest, Weaker, Weakest)) to define these terms.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Attack)) entry to specify that \"successfully attacking\" a site refers to striking a site during step 5.a of the Attack sequence.",
+          "runs": [
+            {
+              "text": "• Updated the ((Attack)) entry to specify that \"successfully attacking\" a site refers to striking a site during step 5.a of the Attack sequence.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Triggered Ability)) entry to clarify that if the act of removing an ability satisfies the trigger condition, it is still triggered. This is relevant for Vindictive Nation being silenced.",
+          "runs": [
+            {
+              "text": "• Updated the ((Triggered Ability)) entry to clarify that if the act of removing an ability satisfies the trigger condition, it is still triggered. This is relevant for Vindictive Nation being silenced.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the entry for ((Site)) to clarify how effects move sites. There's no change to any rulings, just collecting information from various FAQs to make it easier to find.",
+          "runs": [
+            {
+              "text": "• Updated the entry for ((Site)) to clarify how effects move sites. There's no change to any rulings, just collecting information from various FAQs to make it easier to find.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the entry for ((Here)) to clarify how \"entering here\" works for sites.",
+          "runs": [
+            {
+              "text": "• Updated the entry for ((Here)) to clarify how \"entering here\" works for sites.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that if you draw a card but it ends up in a different zone (e.g. Morgana, Omphalos), it still counts as you (the player) drawing it.",
+          "runs": [
+            {
+              "text": "• Clarified that if you draw a card but it ends up in a different zone (e.g. Morgana, Omphalos), it still counts as you (the player) drawing it.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated several entries to update terminology regarding ((Stealth)) and ((Ward)). The term used to track these abilities has been changed from \"token\" to \"mark\" to avoid confusion with token cards in the realm.",
+          "runs": [
+            {
+              "text": "• Updated several entries to update terminology regarding ((Stealth)) and ((Ward)). The term used to track these abilities has been changed from \"token\" to \"mark\" to avoid confusion with token cards in the realm.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Removed \"current life\" as a ((characteristic)) of Avatars. Max Life remains a characteristic, but current life for Avatars is analogous to current damage for a minion; it's something you track, but it's not a characteristic. This change maintains the proper mirroring of rules between avatars and minions (and fixes an unintended interaction with [[Tabula Rasa]]).",
+          "runs": [
+            {
+              "text": "• Removed \"current life\" as a ((characteristic)) of Avatars. Max Life remains a characteristic, but current life for Avatars is analogous to current damage for a minion; it's something you track, but it's not a characteristic. This change maintains the proper mirroring of rules between avatars and minions (and fixes an unintended interaction with [[Tabula Rasa]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Minor update to the ((Mana)) article to say that mana leaves your mana pool during step 3 of your end phase.",
+          "runs": [
+            {
+              "text": "• Minor update to the ((Mana)) article to say that mana leaves your mana pool during step 3 of your end phase.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2026-05-19T19:00:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[King Arthur]] clarified how to handle this effect when your opponent would control a card you own.",
+          "runs": [
+            {
+              "text": "• [[King Arthur]] clarified how to handle this effect when your opponent would control a card you own.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Khamaseen Mummy]] and [[Fenvale Muse]] clarified that the controller of the site is the one resolving the Genesis ability from these triggers.",
+          "runs": [
+            {
+              "text": "• [[Khamaseen Mummy]] and [[Fenvale Muse]] clarified that the controller of the site is the one resolving the Genesis ability from these triggers.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Realm-Eater]] clarified that an effect like [[Tabula Rasa]] will indeed allow ))Realm((-Eater to move around without digesting.",
+          "runs": [
+            {
+              "text": "• [[Realm-Eater]] clarified that an effect like [[Tabula Rasa]] will indeed allow ))Realm((-Eater to move around without digesting.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Rack]] clarified that an avatar stretched by the rack enters the new location it is stretched to (though it does not \"move\"). Additionally clarified that when a site moves, an oversized avatar (like any other oversized unit) will stay in place and not move with the site. This can result in an avatar occupying a void location if the site which moved was [[Cloud City]], at which point the rules around ((mandatory actions)) will apply to your avatar. (You must play a site if you can while you're in the void.)",
+          "runs": [
+            {
+              "text": "• [[The Rack]] clarified that an avatar stretched by the rack enters the new location it is stretched to (though it does not \"move\"). Additionally clarified that when a site moves, an oversized avatar (like any other oversized unit) will stay in place and not move with the site. This can result in an avatar occupying a void location if the site which moved was [[Cloud City]], at which point the rules around ((mandatory actions)) will apply to your avatar. (You must play a site if you can while you're in the void.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Old Salt Anchorman]] clarified that this ability does not prevent \"lure\" effects from causing an ally to move itself.",
+          "runs": [
+            {
+              "text": "• [[Old Salt Anchorman]] clarified that this ability does not prevent \"lure\" effects from causing an ally to move itself.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lacuna Entity]] clarified that if the Entity pulls a minion with a passive ability into the void, that ability will briefly apply to the Entity before the minion is banished.",
+          "runs": [
+            {
+              "text": "• [[Lacuna Entity]] clarified that if the Entity pulls a minion with a passive ability into the void, that ability will briefly apply to the Entity before the minion is banished.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Army of the Dead]] added a FAQ to remind players that movement paths cannot have repeating steps, so this cannot create \"infinite Skeletons\" when combined with an effect like [[Arcade of Bones]]. Though \"infinite Skeletons\" does sound like a lot of fun...",
+          "runs": [
+            {
+              "text": "• [[Army of the Dead]] added a FAQ to remind players that movement paths cannot have repeating steps, so this cannot create \"infinite Skeletons\" when combined with an effect like [[Arcade of Bones]]. Though \"infinite Skeletons\" does sound like a lot of fun...",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Deathspeaker]] clarified that passive abilities on the summoned minion are applied momentarily, even though only Genesis abilities are referenced in the updated card text.",
+          "runs": [
+            {
+              "text": "• [[Deathspeaker]] clarified that passive abilities on the summoned minion are applied momentarily, even though only Genesis abilities are referenced in the updated card text.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Orb of Ba'al Berith]] clarified that the copy of the Magic created by the Orb is controlled by the caster of the original Magic, matching design intent.",
+          "runs": [
+            {
+              "text": "• [[Orb of Ba'al Berith]] clarified that the copy of the Magic created by the Orb is controlled by the caster of the original Magic, matching design intent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Archangel Gabriel]] clarified that the chosen minion does not need to have the Spellcaster ability already to cast the spell they draw.",
+          "runs": [
+            {
+              "text": "• [[Archangel Gabriel]] clarified that the chosen minion does not need to have the Spellcaster ability already to cast the spell they draw.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Grandmaster Wizard]] and [[Apprentice Wizard]] clarified that the (much cuter) promotional versions of these cards should be treated as having the same name as the normal versions for deck building and gameplay purposes.",
+          "runs": [
+            {
+              "text": "• [[Grandmaster Wizard]] and [[Apprentice Wizard]] clarified that the (much cuter) promotional versions of these cards should be treated as having the same name as the normal versions for deck building and gameplay purposes.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• The \"Layer System\" was updated, improving how the game handles ongoing effects. These changes match player intuition more closely. It's described in the ((Ordering Ongoing Effects - The Layer System)) article. Notable mentions:",
+          "runs": [
+            {
+              "text": "• The \"Layer System\" was updated, improving how the game handles ongoing effects. These changes match player intuition more closely. It's described in the ((Ordering Ongoing Effects - The Layer System)) article. Notable mentions:",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Pied Piper of Hameln]] now looks at the power of a minion after it may have been modified, meaning that a [[Death Knight]] will protect your Skeletons from the hypnotic piping.",
+          "runs": [
+            {
+              "text": "• [[Pied Piper of Hameln]] now looks at the power of a minion after it may have been modified, meaning that a [[Death Knight]] will protect your Skeletons from the hypnotic piping.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• The rules now support [[Tombstone Wardens]] and animated auras being properly disabled.",
+          "runs": [
+            {
+              "text": "• The rules now support [[Tombstone Wardens]] and animated auras being properly disabled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bound Spirit]] will now see an ally (including itself!) holding an artifact which grants them the spellcaster ability (e.g. [[Eerie Coral]]).",
+          "runs": [
+            {
+              "text": "• [[Bound Spirit]] will now see an ally (including itself!) holding an artifact which grants them the spellcaster ability (e.g. [[Eerie Coral]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified ((Interact)) with the realm for damage-dealing triggered abilities. For example, if a [[Colicky Dragonettes]] shoots a projectile that doesn't actually hit anything, it has not interacted with the realm.",
+          "runs": [
+            {
+              "text": "• Clarified ((Interact)) with the realm for damage-dealing triggered abilities. For example, if a [[Colicky Dragonettes]] shoots a projectile that doesn't actually hit anything, it has not interacted with the realm.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified the ((Defend)) basic ability to make it clear that the controller of the unit using the Defend ability is the player who decides if the original attack target stays in the fight. This is relevant to allow effective defending during a [[Crave Golem]] attack against its own ally.",
+          "runs": [
+            {
+              "text": "• Clarified the ((Defend)) basic ability to make it clear that the controller of the unit using the Defend ability is the player who decides if the original attack target stays in the fight. This is relevant to allow effective defending during a [[Crave Golem]] attack against its own ally.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Discard)) to clarify common questions about the mechanic. For instance, if an effect tells you to discard a card, it must come from your hand, unless the effect specifies it comes from somewhere else.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Discard)) to clarify common questions about the mechanic. For instance, if an effect tells you to discard a card, it must come from your hand, unless the effect specifies it comes from somewhere else.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Replace)) to clarify what happens when a site is replaced. The old site is banished and the new site is immediately played in its square, with no time in between for a void to exist in that square.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Replace)) to clarify what happens when a site is replaced. The old site is banished and the new site is immediately played in its square, with no time in between for a void to exist in that square.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Fly Over)) to clarify that this means projectiles can't hit the unit, and can continue past the unit to hit something else.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Fly Over)) to clarify that this means projectiles can't hit the unit, and can continue past the unit to hit something else.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Row and Column)) to help players understand those terms.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Row and Column)) to help players understand those terms.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Abilities that Reference the Card's Own Name)) to clarify that when another card gains or copies such an ability, it now references the new card's name.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Abilities that Reference the Card's Own Name)) to clarify that when another card gains or copies such an ability, it now references the new card's name.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Defend)) article to clarify that minions that become disabled while moving do not successfully Defend.",
+          "runs": [
+            {
+              "text": "• Updated the ((Defend)) article to clarify that minions that become disabled while moving do not successfully Defend.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Attack)) article to clarify that a unit must occupy the attack's location to participate in the fight.",
+          "runs": [
+            {
+              "text": "• Updated the ((Attack)) article to clarify that a unit must occupy the attack's location to participate in the fight.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified the ((Copy)) entry, properly handling copies of copies, and clarifying how to handle copies of Magics.",
+          "runs": [
+            {
+              "text": "• Clarified the ((Copy)) entry, properly handling copies of copies, and clarifying how to handle copies of Magics.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified the ((As If Connected)) article by removing an incorrect and confusing example regarding Maelstrom.",
+          "runs": [
+            {
+              "text": "• Clarified the ((As If Connected)) article by removing an incorrect and confusing example regarding Maelstrom.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added a small clarification to the ((Lasts 3 of Your Turns)) article. The aura is still dispelled if it somehow accumulates more than 3 counters.",
+          "runs": [
+            {
+              "text": "• Added a small clarification to the ((Lasts 3 of Your Turns)) article. The aura is still dispelled if it somehow accumulates more than 3 counters.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added a small clarification to the ((Damage Grid)) article, changing its language to refer to \"origin of effects\" rather than \"spellcaster,\" since there are damage grids that come from special abilities and not just Magic.",
+          "runs": [
+            {
+              "text": "• Added a small clarification to the ((Damage Grid)) article, changing its language to refer to \"origin of effects\" rather than \"spellcaster,\" since there are damage grids that come from special abilities and not just Magic.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified ((Ownership and Control)) to properly handle [[King Arthur]].",
+          "runs": [
+            {
+              "text": "• Clarified ((Ownership and Control)) to properly handle [[King Arthur]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added a small clarification to the ((Only It Can Cast)) article to make it clear that this rule causes the unit to gain the ((Spellcaster)) ability while casting the spell.",
+          "runs": [
+            {
+              "text": "• Added a small clarification to the ((Only It Can Cast)) article to make it clear that this rule causes the unit to gain the ((Spellcaster)) ability while casting the spell.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2026-03-25T18:00:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Key to the City]] added life gain, life loss, and healing effects to the list of site abilities ignored by the ((bearer)), and to say that site abilities cannot directly prevent the bearer from attacking.",
+          "runs": [
+            {
+              "text": "• [[Key to the City]] added life gain, life loss, and healing effects to the list of site abilities ignored by the ((bearer)), and to say that site abilities cannot directly prevent the bearer from attacking.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Darkest Dungeon]] reversed a previous ruling that the units can be dragged along different paths to the Dungeon, and clarified that if you cannot ((drag)) both of them (because one of them is dead, for example) you cannot drag either of them.",
+          "runs": [
+            {
+              "text": "• [[Darkest Dungeon]] reversed a previous ruling that the units can be dragged along different paths to the Dungeon, and clarified that if you cannot ((drag)) both of them (because one of them is dead, for example) you cannot drag either of them.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lord of Greed]] reversed a previous FAQ that said ((artifacts)) carried by ((minions)) with ((stealth)) were safe. It's more consistent with targeting rules, and more fun for Lord of Greed, if he can snatch any artifact, even those carried by minions with stealth (since his ability doesn't actually ((target))).",
+          "runs": [
+            {
+              "text": "• [[Lord of Greed]] reversed a previous FAQ that said ((artifacts)) carried by ((minions)) with ((stealth)) were safe. It's more consistent with targeting rules, and more fun for Lord of Greed, if he can snatch any artifact, even those carried by minions with stealth (since his ability doesn't actually ((target))).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Order of the White Wing]] reversed a previous FAQ stating that ((minions)) could be ((summoned)) from Morgana's ((hand)), or by an Omphalos, to a ((location)) ((nearby)) the Order. The Order stop minions being summoned that did not originate specifically in a player's hand ((zone)). Also clarified that the minion never enters the realm at all (e.g. doesn't trigger Genesis, no Lance, doesn't trigger Mariner's Curse, etc.)",
+          "runs": [
+            {
+              "text": "• [[Order of the White Wing]] reversed a previous FAQ stating that ((minions)) could be ((summoned)) from Morgana's ((hand)), or by an Omphalos, to a ((location)) ((nearby)) the Order. The Order stop minions being summoned that did not originate specifically in a player's hand ((zone)). Also clarified that the minion never enters the realm at all (e.g. doesn't trigger Genesis, no Lance, doesn't trigger Mariner's Curse, etc.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Flanking Maneuver]] reversed a previous FAQ stating that this effect could not cross regional boundaries. Teleportation effects can now cross regional boundaries unless otherwise specified in their text. See the Codex section of this changelog below for more information about this change.",
+          "runs": [
+            {
+              "text": "• [[Flanking Maneuver]] reversed a previous FAQ stating that this effect could not cross regional boundaries. Teleportation effects can now cross regional boundaries unless otherwise specified in their text. See the Codex section of this changelog below for more information about this change.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Displace]] clarified that, even with the change to Teleportation effects, this effect cannot cause a minion or artifact to change regions. It can, however, move auras from the surface to the void, and vice versa.",
+          "runs": [
+            {
+              "text": "• [[Displace]] clarified that, even with the change to Teleportation effects, this effect cannot cause a minion or artifact to change regions. It can, however, move auras from the surface to the void, and vice versa.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Blaze of Glory]] clarified that you would win the game if you played this when you and your opponent were both on Death's Door. Also clarified the exact timing for resolving the ((fights)), and what happens if control of the ally changes during the resolution of this effect.",
+          "runs": [
+            {
+              "text": "• [[Blaze of Glory]] clarified that you would win the game if you played this when you and your opponent were both on Death's Door. Also clarified the exact timing for resolving the ((fights)), and what happens if control of the ally changes during the resolution of this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lava Salamander]] clarified that this lil' guy is effectively only immune to fire Magics.",
+          "runs": [
+            {
+              "text": "• [[Lava Salamander]] clarified that this lil' guy is effectively only immune to fire Magics.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Magellan Globe]] + [[The Rack]] updated one of the FAQ entries to clarify what happens in crazy situations with super stretched avatars.",
+          "runs": [
+            {
+              "text": "• [[Magellan Globe]] + [[The Rack]] updated one of the FAQ entries to clarify what happens in crazy situations with super stretched avatars.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Onslaught]] clarified that this Magic creates an ((ongoing effect)) which will still affect minions you ((summon)) after casting it. Also clarified that the effect does not permanently remove disable/silence/immobilize effects, but suppresses them for the current turn.",
+          "runs": [
+            {
+              "text": "• [[Onslaught]] clarified that this Magic creates an ((ongoing effect)) which will still affect minions you ((summon)) after casting it. Also clarified that the effect does not permanently remove disable/silence/immobilize effects, but suppresses them for the current turn. ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[River Rapids]] clarified that minions submerged at connected Rivers can be pushed. Additional small clarification that River Rapids is connected to itself.",
+          "runs": [
+            {
+              "text": "• [[River Rapids]] clarified that minions submerged at connected Rivers can be pushed. Additional small clarification that River Rapids is connected to itself.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Pilgrim's Shrine]] clarified that the ((Ward)) will stay on the site if it can't be transferred (due to the minion being ((Evil)) or already having a ((Ward)), for example).",
+          "runs": [
+            {
+              "text": "• [[Pilgrim's Shrine]] clarified that the ((Ward)) will stay on the site if it can't be transferred (due to the minion being ((Evil)) or already having a ((Ward)), for example).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bureau of Occult Control]] added several FAQs and updated an existing one to clarify the timing of this effect, and how it interacts with various other spells and abilities.",
+          "runs": [
+            {
+              "text": "• [[Bureau of Occult Control]] added several FAQs and updated an existing one to clarify the timing of this effect, and how it interacts with various other spells and abilities.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Cursed Land]] clarified that if you play a ((site)) near to this which would ((silence)) this site, you do not lose life.",
+          "runs": [
+            {
+              "text": "• [[Cursed Land]] clarified that if you play a ((site)) near to this which would ((silence)) this site, you do not lose life.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Feign Death]] clarified that if the minion doesn't have a ((Deathrite)) ability, it will still gain ((stealth)).",
+          "runs": [
+            {
+              "text": "• [[Feign Death]] clarified that if the minion doesn't have a ((Deathrite)) ability, it will still gain ((stealth)). ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Watery Grave]] clarified that \"drowns\" means dying while underwater due to not having the submerge ability.",
+          "runs": [
+            {
+              "text": "• [[Watery Grave]] clarified that \"drowns\" means dying while underwater due to not having the submerge ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Orb of Ba'al Berith]] clarified that costs are already paid by the time the Orb copies a spell.",
+          "runs": [
+            {
+              "text": "• [[Orb of Ba'al Berith]] clarified that costs are already paid by the time the Orb copies a spell.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Orb of Ba'al Berith]] clarified what happens if you try to target the same site twice with a copied Craterize.",
+          "runs": [
+            {
+              "text": "• [[Orb of Ba'al Berith]] clarified what happens if you try to target the same site twice with a copied Craterize.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Fields of Camlann]] specified the timing and the order in which players make choices when resolving this ability.",
+          "runs": [
+            {
+              "text": "• [[Fields of Camlann]] specified the timing and the order in which players make choices when resolving this ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Candlemas Monks]] clarified that if this dies during an ((end phase)), the game does not skip forward to the next end phase.",
+          "runs": [
+            {
+              "text": "• [[Candlemas Monks]] clarified that if this dies during an ((end phase)), the game does not skip forward to the next end phase.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Whirling Blades]] clarified that you cannot ((strike)) a single ((enemy)) more than once when resolving this effect.",
+          "runs": [
+            {
+              "text": "• [[Whirling Blades]] clarified that you cannot ((strike)) a single ((enemy)) more than once when resolving this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Shrike Orchard]] clarified that ((subsurface)) minions can be targeted by this effect.",
+          "runs": [
+            {
+              "text": "• [[Shrike Orchard]] clarified that ((subsurface)) minions can be targeted by this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bind Evil]] clarified that the ((target)) ((minion)) continues to be ((disabled)) by this effect even if it stops being Evil.",
+          "runs": [
+            {
+              "text": "• [[Bind Evil]] clarified that the ((target)) ((minion)) continues to be ((disabled)) by this effect even if it stops being Evil.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Jack the Ripper]] added a clarification on the interaction between Jack and the [[King of the Realm]], and made minor edits for clarity to the entry regarding playing Jack into a ((silence)) effect.",
+          "runs": [
+            {
+              "text": "• [[Jack the Ripper]] added a clarification on the interaction between Jack and the [[King of the Realm]], and made minor edits for clarity to the entry regarding playing Jack into a ((silence)) effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bower of Bliss]] clarified that Mortals lose the Mortal type and become Beasts instead while this effect is in play.",
+          "runs": [
+            {
+              "text": "• [[Bower of Bliss]] clarified that Mortals lose the Mortal type and become Beasts instead while this effect is in play.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Release the Hounds]] clarified that this can be cast with only one [[Hellhound]] in your collection.",
+          "runs": [
+            {
+              "text": "• [[Release the Hounds]] clarified that this can be cast with only one [[Hellhound]] in your collection.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[False Idol]] clarified that you do not draw when a minion enters the realm tapped.",
+          "runs": [
+            {
+              "text": "• [[False Idol]] clarified that you do not draw when a minion enters the realm tapped.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Moonsong Talagelum]] clarified that you can only include one copy of this card in your spellbook.",
+          "runs": [
+            {
+              "text": "• [[Moonsong Talagelum]] clarified that you can only include one copy of this card in your spellbook.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Tactical Move]] clarified the exact timing for resolving this effect.",
+          "runs": [
+            {
+              "text": "• [[Tactical Move]] clarified the exact timing for resolving this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Geomancer]] added the \"Bloom\" sites to the example for Geomancer's rubble creation ability.",
+          "runs": [
+            {
+              "text": "• [[Geomancer]] added the \"Bloom\" sites to the example for Geomancer's rubble creation ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mountain Pass]] fixed an inconsistency between the explanation of \"((on the ground))\" in this card's FAQ, which stated it only prevented movement from ((adjacent)) ((sites)), and the definition given in the Codex, which states that movement from the ((surface)) of any site to this site's surface was considered \"on the ground.\" The Codex definition is correct. Also corrected an out of date FAQ stating that you could technically tap to activate the ((defend)) ability but not move in to the Mountain Pass. The defend ability now relies on ((range of motion)), so you cannot even activate it if you cannot move to the location of the attack due to a ((passive ability)).",
+          "runs": [
+            {
+              "text": "• [[Mountain Pass]] fixed an inconsistency between the explanation of \"((on the ground))\" in this card's FAQ, which stated it only prevented movement from ((adjacent)) ((sites)), and the definition given in the Codex, which states that movement from the ((surface)) of ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            },
+            {
+              "text": "any ",
+              "bold": false,
+              "italic": true,
+              "link": false
+            },
+            {
+              "text": "site to this site's surface was considered \"on the ground.\" The Codex definition is correct. Also corrected an out of date FAQ stating that you could technically tap to activate the ((defend)) ability but not move in to the Mountain Pass. The defend ability now relies on ((range of motion)), so you cannot even activate it if you cannot move to the location of the attack due to a ((passive ability)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hounds of Ondaros]], [[Master Tracker]], [[Scent Hounds]], [[Watchtower]] clarified that to \"permanently\" lose ((stealth)) simply means \"remove the stealth token from this minion.\"",
+          "runs": [
+            {
+              "text": "• [[Hounds of Ondaros]], [[Master Tracker]], [[Scent Hounds]], [[Watchtower]] clarified that to \"permanently\" lose ((stealth)) simply means \"remove the stealth token from this minion.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Aino]] clarified that she can step across the top and bottom edges of the realm even if she already has Stealth.",
+          "runs": [
+            {
+              "text": "• [[Aino]] clarified that she can step across the top and bottom edges of the realm even if she already has Stealth.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Flame of the First Ones]] clarified that a \"new site\" is a site the Flame hasn't stopped at before.",
+          "runs": [
+            {
+              "text": "• [[Flame of the First Ones]] clarified that a \"new site\" is a site the Flame hasn't stopped at before.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Void]] clarified that, yes, forced movement can move a minion from a surface location to the surface of this site.",
+          "runs": [
+            {
+              "text": "• [[The Void]] clarified that, yes, forced movement can move a minion from a surface location to the surface of this site.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Troll Bridge]] clarified what a \"lone enemy\" is.",
+          "runs": [
+            {
+              "text": "• [[Troll Bridge]] clarified what a \"lone enemy\" is.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Pillar of Zeiros]] clarified that this is one instance of healing for an amount equal to the number of dead minions which were banished.",
+          "runs": [
+            {
+              "text": "• [[Pillar of Zeiros]] clarified that this is one instance of healing for an amount equal to the number of dead minions which were banished.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Black Cat]] updated a FAQ to clarify that when the cat loses one of it's lives, it fully heals, removing all damage.",
+          "runs": [
+            {
+              "text": "• [[Black Cat]] updated a FAQ to clarify that when the cat loses one of it's lives, it fully heals, removing all damage.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Amulet of Niniane]], [[Arcade of Bones]], [[Failed Mutation]], [[Thing in the Ice]] very minor clarification to explain that this ability only prevents ((Magic)) from targeting the card in question. It does not prevent other effects from targeting it.",
+          "runs": [
+            {
+              "text": "• [[Amulet of Niniane]], [[Arcade of Bones]], [[Failed Mutation]], [[Thing in the Ice]] very minor clarification to explain that this ability only prevents ((Magic)) from targeting the card in question. It does not prevent other effects from targeting it.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Teleport)) and ((Forced Movement)) entries to match design intent and player intuition. Teleportation effects are forced movement, and they can cross regional boundaries by default. Note that many Teleportation effects have restrictions that prevent crossing regional boundaries.",
+          "runs": [
+            {
+              "text": "• Updated the ((Teleport)) and ((Forced Movement)) entries to match design intent and player intuition. Teleportation effects are forced movement, and they can cross regional boundaries by default. Note that many Teleportation effects have restrictions that prevent crossing regional boundaries. ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• For example, [[Blink]] requires that the unit teleport to a nearby location, and locations can only be nearby when in the same region. Cannot cross regional boundaries with Blink!",
+          "runs": [
+            {
+              "text": "• For example, [[Blink]] requires that the unit teleport to a nearby location, and locations can only be nearby when in the same region. Cannot cross regional boundaries with Blink!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Displace]] requires that the teleport location be a diagonal step away, and steps are always measured within the same region. Cannot cross regional boundaries with Displace, though note the exception below for auras.",
+          "runs": [
+            {
+              "text": "• [[Displace]] requires that the teleport location be a diagonal step away, and steps are always measured within the same region. Cannot cross regional boundaries with Displace, though note the exception below for auras.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Cards like [[Flanking Maneuver]], [[Teleport]], [[Recall]], and [[Shrine of the Dragonlord]] allow the unit to cross regional boundaries.",
+          "runs": [
+            {
+              "text": "• Cards like [[Flanking Maneuver]], [[Teleport]], [[Recall]], and [[Shrine of the Dragonlord]] allow the unit to cross regional boundaries.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Aura)) entry to clarify that movement effects can cause auras to move between void and surface locations, ignoring region boundaries.",
+          "runs": [
+            {
+              "text": "• Updated the ((Aura)) entry to clarify that movement effects can cause auras to move between void and surface locations, ignoring region boundaries.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Collection)) so card backs in your collection are hidden from your opponent. This is important for tournaments so you can use a 3rd sleeve type for your collection, minimizing the chances it accidentally gets shuffled into your deck after the game. (In the unlikely event it would actually be shuffled into your deck during the game, bring extra Spellbook sleeves to use in that case.) When a card leaves your collection, your opponent gets to know the card back, regardless of what other zone it moves to.",
+          "runs": [
+            {
+              "text": "• Updated ((Collection)) so card backs in your collection are hidden from your opponent. This is important for tournaments so you can use a 3rd sleeve type for your collection, minimizing the chances it accidentally gets shuffled into your deck after the game. (In the unlikely event it would actually be shuffled into your deck during the game, bring extra Spellbook sleeves to use in that case.) When a card leaves your collection, your opponent gets to know the card back, regardless of what other zone it moves to.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((When it Arrives)) to clarify that effects with this wording do not require a card to move to be considered to have \"arrived.\"",
+          "runs": [
+            {
+              "text": "• Added an entry for ((When it Arrives)) to clarify that effects with this wording do not require a card to move to be considered to have \"arrived.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Bearer)) to explain artifact control, how to identify a \"bearer,\" and to clarify that a unit carrying an automaton or monument is not considered its \"bearer.\"",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Bearer)) to explain artifact control, how to identify a \"bearer,\" and to clarify that a unit carrying an automaton or monument is not considered its \"bearer.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added an entry for ((Draw)) to clarify that cards are always drawn one at a time.",
+          "runs": [
+            {
+              "text": "• Added an entry for ((Draw)) to clarify that cards are always drawn one at a time.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Card)) entry to remove the rules about drawing, since that is now its own entry.",
+          "runs": [
+            {
+              "text": "• Updated the ((Card)) entry to remove the rules about drawing, since that is now its own entry.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Stealth)) entry to clarify that only carriable artifacts cannot be targeted when carried by a Stealthed unit.",
+          "runs": [
+            {
+              "text": "• Updated the ((Stealth)) entry to clarify that only carriable artifacts cannot be targeted when carried by a Stealthed unit.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Disabled)) entry to explain that artifacts and auras can be disabled.",
+          "runs": [
+            {
+              "text": "• Updated the ((Disabled)) entry to explain that artifacts and auras can be disabled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Damage Grid)) entry to explain that grids do not inherently target the sites or locations that they cover.",
+          "runs": [
+            {
+              "text": "• Updated the ((Damage Grid)) entry to explain that grids do not inherently target the sites or locations that they cover.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Minor addition to the ((Break Stealth)) entry to clearly state that the ability is not activated if the minion loses Stealth for any other reason than as the cost to activate the Break Stealth ability.",
+          "runs": [
+            {
+              "text": "• Minor addition to the ((Break Stealth)) entry to clearly state that the ability is not activated if the minion loses Stealth for any other reason than as the cost to activate the Break Stealth ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Performed some basic bookkeeping on the ((Move and Attack)) and ((Path)) entries to move relevant information about paths out of the sub-entry of Move and Attack and into the appropriate article.",
+          "runs": [
+            {
+              "text": "• Performed some basic bookkeeping on the ((Move and Attack)) and ((Path)) entries to move relevant information about paths out of the sub-entry of Move and Attack and into the appropriate article.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Removed [[Island Leviathan]] as an example of a type-changing effect in the ((Ongoing Effects)) entry because it's a transform effect. Put in ((Corruptor)) as an example instead.",
+          "runs": [
+            {
+              "text": "• Removed [[Island Leviathan]] as an example of a type-changing effect in the ((Ongoing Effects)) entry because it's a transform effect. Put in ((Corruptor)) as an example instead.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added some examples to the ((Kill Credit)) entry.",
+          "runs": [
+            {
+              "text": "• Added some examples to the ((Kill Credit)) entry.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Slightly polished the ((Target)) entry to highlight the importance of the word \"target.\"",
+          "runs": [
+            {
+              "text": "• Slightly polished the ((Target)) entry to highlight the importance of the word \"target.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Slightly polished the ((Lethal)) entry to make it clear that damage caused by a Magic cast by a Lethal spellcaster does not gain the Lethal keyword.",
+          "runs": [
+            {
+              "text": "• Slightly polished the ((Lethal)) entry to make it clear that damage caused by a Magic cast by a Lethal spellcaster does not gain the Lethal keyword.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2026-02-09T18:00:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Key to the City]] clarified that this ability means that site abilities cannot ((target)), ((damage)), ((destroy)), ((banish)), ((modify)), ((move)), or impede the movement of the bearer.",
+          "runs": [
+            {
+              "text": "• [[Key to the City]] clarified that this ability means that site abilities cannot ((target)), ((damage)), ((destroy)), ((banish)), ((modify)), ((move)), or impede the movement of the bearer.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Realm-Eater]] clarified that it must digest each site individually.",
+          "runs": [
+            {
+              "text": "• [[Realm-Eater]] clarified that it must digest each site individually.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Imposter]] clarified that if you impersonate the Realm-Eater and then lose that mask before digesting a site, you will be unable to remove the immobilizing effect.",
+          "runs": [
+            {
+              "text": "• [[Imposter]] clarified that if you impersonate the Realm-Eater and then lose that mask before digesting a site, you will be unable to remove the immobilizing effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Ironclad]] clarified that life loss is not affected by this Avatar's ability.",
+          "runs": [
+            {
+              "text": "• [[Ironclad]] clarified that life loss is not affected by this Avatar's ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Gargantula]] clarified that tapping to release a trapped minion is ((interacting)) with the realm (and will thus break stealth, etc). Clarified that if the minion is not dragged successfully, it will not be ((disabled)).",
+          "runs": [
+            {
+              "text": "• [[Gargantula]] clarified that tapping to release a trapped minion is ((interacting)) with the realm (and will thus break stealth, etc). Clarified that if the minion is not dragged successfully, it will not be ((disabled)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Megalurker]] clarified that this effect can drag a minion into another ((region)), but that if an ((avatar)) is dragged it will not change regions.",
+          "runs": [
+            {
+              "text": "• [[Megalurker]] clarified that this effect can drag a minion into another ((region)), but that if an ((avatar)) is dragged it will not change regions.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Saint of Redemption]] clarified that Persecutor's brand cannot make a minion be treated as ((Evil)) while under the effect of the Saint, and that all minions enter the realm tapped. Clarified that ((minions)) do not lose their subtype even if they are no longer \"Evil,\" and that this ability affects all minions everywhere, even in other zones.",
+          "runs": [
+            {
+              "text": "• [[Saint of Redemption]] clarified that Persecutor's brand cannot make a minion be treated as ((Evil)) while under the effect of the Saint, and that all minions enter the realm tapped. Clarified that ((minions)) do not lose their subtype even if they are no longer \"Evil,\" and that this ability affects all minions everywhere, even in other zones.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Searing Truth]] clarified that the ((caster)) of this spell must be able to target a player's ((Avatar)), and that ((damage)) ((prevention effects)) on that Avatar apply to the damage caused by this spell. Clarified that X-cost spells are considered zero cost unless resolving.",
+          "runs": [
+            {
+              "text": "• [[Searing Truth]] clarified that the ((caster)) of this spell must be able to target a player's ((Avatar)), and that ((damage)) ((prevention effects)) on that Avatar apply to the damage caused by this spell. Clarified that X-cost spells are considered zero cost unless resolving.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Shackled Demon]] clarified that only units can tap to release the demon.",
+          "runs": [
+            {
+              "text": "• [[Shackled Demon]] clarified that only units can tap to release the demon.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Sentinel Trap]] clarified that you choose which direction the trap is facing when you conjure it, that you can change its facing when ((teleporting)) it, and that its facing is not affected by being animated and operates normally.",
+          "runs": [
+            {
+              "text": "• [[Sentinel Trap]] clarified that you choose which direction the trap is facing when you conjure it, that you can change its facing when ((teleporting)) it, and that its facing is not affected by being animated and operates normally.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Stitched Abomination]] clarified that the player dealing damage can choose which parts of the Abomination to destroy.",
+          "runs": [
+            {
+              "text": "• [[Stitched Abomination]] clarified that the player dealing damage can choose which parts of the Abomination to destroy.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Dream-Quest]] clarified that an Omphalos, River of Flame, or other restricted spellcaster (e.g. Lava Salamander) can be put to sleep by this effect.",
+          "runs": [
+            {
+              "text": "• [[Dream-Quest]] clarified that an Omphalos, River of Flame, or other restricted spellcaster (e.g. Lava Salamander) can be put to sleep by this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Balor of the Evil Eye]] clarified that this effect can cross ((region)) boundaries.",
+          "runs": [
+            {
+              "text": "• [[Balor of the Evil Eye]] clarified that this effect can cross ((region)) boundaries.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[City of Glass]] clarified that the source of the damage is responsible for destroying the City when its ability triggers, and will thus trigger Vindictive Nation and be prevented by Order of the Sacred Oak if that source is your opponent.",
+          "runs": [
+            {
+              "text": "• [[City of Glass]] clarified that the source of the damage is responsible for destroying the City when its ability triggers, and will thus trigger Vindictive Nation and be prevented by Order of the Sacred Oak if that source is your opponent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Dhol Chants]] clarified that tapping allies for this effect is not strictly a cost, so units with ((summoning sickness)) can be tapped for this, as long as they begin untapped.",
+          "runs": [
+            {
+              "text": "• [[Dhol Chants]] clarified that tapping allies for this effect is not strictly a cost, so units with ((summoning sickness)) can be tapped for this, as long as they begin untapped.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Flanking Maneuver]] updated to align with the ruling that ((teleport)) effects cannot change ((regions)) unless specified.",
+          "runs": [
+            {
+              "text": "• [[Flanking Maneuver]] updated to align with the ruling that ((teleport)) effects cannot change ((regions)) unless specified.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Frozen Horror]] clarified that only ((minions)) near the Horror when the ability is activated are affected.",
+          "runs": [
+            {
+              "text": "• [[Frozen Horror]] clarified that only ((minions)) near the Horror when the ability is activated are affected.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Garden of Eden]] clarified that this does, in fact, prevent Morgana and the Omphaloi from drawing ((spells)).",
+          "runs": [
+            {
+              "text": "• [[Garden of Eden]] clarified that this does, in fact, prevent Morgana and the Omphaloi from drawing ((spells)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Geomancer]] + [[Boulevard of Bones]] clarified that Geomancer's ability to create ((rubble)) tokens does not qualify as \"playing\" a site.",
+          "runs": [
+            {
+              "text": "• [[Geomancer]] + [[Boulevard of Bones]] clarified that Geomancer's ability to create ((rubble)) tokens does not qualify as \"playing\" a site.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Geyser]] clarified that minions must be at the ((target)) ((site)) when Geyser resolves to be granted ((airborne)).",
+          "runs": [
+            {
+              "text": "• [[Geyser]] clarified that minions must be at the ((target)) ((site)) when Geyser resolves to be granted ((airborne)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Harpyon Urge]] clarified that this is not ((forced movement)).",
+          "runs": [
+            {
+              "text": "• [[Harpyon Urge]] clarified that this is not ((forced movement)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Island Leviathan]], [[Horns of Behemoth]] added relevant FAQs for Horns, and clarified that if one of these is copied after being ((transformed)), the ((copy)) takes on the characteristics of the transformed minion.",
+          "runs": [
+            {
+              "text": "• [[Island Leviathan]], [[Horns of Behemoth]] added relevant FAQs for Horns, and clarified that if one of these is copied after being ((transformed)), the ((copy)) takes on the characteristics of the transformed minion.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Jack the Ripper]] clarified that Jack's ability is put on the ((storyline)) when he is cast, so it will still resolve if he is ((silenced)) as soon as he enters the realm. Also clarified that he can be ((summoned)) to a mortal which is in a region other than the surface, but will usually die before he can kill his prey.",
+          "runs": [
+            {
+              "text": "• [[Jack the Ripper]] clarified that Jack's ability is put on the ((storyline)) when he is cast, so it will still resolve if he is ((silenced)) as soon as he enters the realm. Also clarified that he can be ((summoned)) to a mortal which is in a region other than the surface, but will usually die before he can kill his prey.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lilith]] clarified that if her end of turn ability ((summons)) a ((minion)) with its own ((end of turn)) ability, that minion's ability will not trigger. Clarified that the ((controller)) of Lilith controls the minion ((summoned)) by this ability.",
+          "runs": [
+            {
+              "text": "• [[Lilith]] clarified that if her end of turn ability ((summons)) a ((minion)) with its own ((end of turn)) ability, that minion's ability will not trigger. Clarified that the ((controller)) of Lilith controls the minion ((summoned)) by this ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mask of Mayhem]] clarified that the ((unit)) being struck must be near the Mask for the ((damage)) to be doubled (relevant in cases like the ((Ranged)) ability, Quarrelsome Kobolds, etc). Clarified that if a minion steps out of the range of this effect during it's ((Move and Attack)) ((mandatory action)), it is not forced to declare an attack.",
+          "runs": [
+            {
+              "text": "• [[Mask of Mayhem]] clarified that the ((unit)) being struck must be near the Mask for the ((damage)) to be doubled (relevant in cases like the ((Ranged)) ability, Quarrelsome Kobolds, etc). Clarified that if a minion steps out of the range of this effect during it's ((Move and Attack)) ((mandatory action)), it is not forced to declare an attack.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Morgana le Fay]] clarified that if another player takes control of Morgana, they can have her ((cast)) spells from her ((hand)). Additionally, clarified that Morgana's hand remains if she is ((silenced)), ((disabled)), or ((transformed)), and that she can still cast spells from it as long as she has the ((spellcaster)) ability.",
+          "runs": [
+            {
+              "text": "• [[Morgana le Fay]] clarified that if another player takes control of Morgana, they can have her ((cast)) spells from her ((hand)). Additionally, clarified that Morgana's hand remains if she is ((silenced)), ((disabled)), or ((transformed)), and that she can still cast spells from it as long as she has the ((spellcaster)) ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Panpipes of Pnom]] clarified that this will increase ((damage)) done by zero power units.",
+          "runs": [
+            {
+              "text": "• [[Panpipes of Pnom]] clarified that this will increase ((damage)) done by zero power units.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Peace Offering]] clarified that if you did not successfully give this to your opponent, they're not prevented from attacking you. Also clarified that the other player cannot target your ((avatar)), ((sites)), or ((minions)) with their ((attacks)) while under this effect.",
+          "runs": [
+            {
+              "text": "• [[Peace Offering]] clarified that if you did not successfully give this to your opponent, they're not prevented from attacking you. Also clarified that the other player cannot target your ((avatar)), ((sites)), or ((minions)) with their ((attacks)) while under this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Regurgitator]] clarified that you are required to fill its belly if you can, and that nothing happens if you can neither fill nor empty its belly.",
+          "runs": [
+            {
+              "text": "• [[Regurgitator]] clarified that you are required to fill its belly if you can, and that nothing happens if you can neither fill nor empty its belly.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Clamor of Harpies]], [[Guardian Angel]], [[Harpyon Urge]], [[Lacuna Entity]] clarified that the target only has to be weaker when selected as a ((target)), and it does not matter if relative power changes during resolution.",
+          "runs": [
+            {
+              "text": "• [[Clamor of Harpies]], [[Guardian Angel]], [[Harpyon Urge]], [[Lacuna Entity]] clarified that the target only has to be weaker when selected as a ((target)), and it does not matter if relative power changes during resolution.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Amulet of Niniane]] clarified that ((Magic)) that causes an ((ally)) to ((target)) can still target the bearer.",
+          "runs": [
+            {
+              "text": "• [[Amulet of Niniane]] clarified that ((Magic)) that causes an ((ally)) to ((target)) can still target the bearer.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Annual Fair]] clarified that the ability can be activated multiple times per turn, and that the ((affinity)) is provided directly to the controlling avatar.",
+          "runs": [
+            {
+              "text": "• [[Annual Fair]] clarified that the ability can be activated multiple times per turn, and that the ((affinity)) is provided directly to the controlling avatar.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bane of Aventis]] clarified that the ((control)) change is permanent.",
+          "runs": [
+            {
+              "text": "• [[Bane of Aventis]] clarified that the ((control)) change is permanent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Black Mass]] clarified that you can reveal up to 3 ((minions)) for this effect.",
+          "runs": [
+            {
+              "text": "• [[Black Mass]] clarified that you can reveal up to 3 ((minions)) for this effect.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Blaze of Glory]] clarified that the ((ally)) will not die if the ((fights)) wouldn't kill it.",
+          "runs": [
+            {
+              "text": "• [[Blaze of Glory]] clarified that the ((ally)) will not die if the ((fights)) wouldn't kill it.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Bodach Bogeyman]] clarified that relative ((power)) is only checked upon ((targeting)), and that the minions are dropped when the Bogeyman is ((disabled)) or ((silenced)).",
+          "runs": [
+            {
+              "text": "• [[Bodach Bogeyman]] clarified that relative ((power)) is only checked upon ((targeting)), and that the minions are dropped when the Bogeyman is ((disabled)) or ((silenced)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Brobdingnag Bullfrog]] clarified that the Bullfrog will continue to carry a minion even if ((disabled)).",
+          "runs": [
+            {
+              "text": "• [[Brobdingnag Bullfrog]] clarified that the Bullfrog will continue to carry a minion even if ((disabled)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Brobdingnag Bullfrog]] and [[Cage of Sidrak]] clarified that only teleportation-based forced movement effects will allow the disabled minions to escape.",
+          "runs": [
+            {
+              "text": "• [[Brobdingnag Bullfrog]] and [[Cage of Sidrak]] clarified that only teleportation-based forced movement effects will allow the disabled minions to escape.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Consecrate]], [[Desecrate]] clarified that when you ((transform)) an uncontrolled site, it remains uncontrolled.",
+          "runs": [
+            {
+              "text": "• [[Consecrate]], [[Desecrate]] clarified that when you ((transform)) an uncontrolled site, it remains uncontrolled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Darkest Dungeon]] clarified that if there is no legal ((path)) to drag one of the units to the Dungeon, they will not move at all.",
+          "runs": [
+            {
+              "text": "• [[Darkest Dungeon]] clarified that if there is no legal ((path)) to drag one of the units to the Dungeon, they will not move at all.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Detonate]] clarified that the ((damage)) comes from Detonate itself, and how to resolve the effect with a ((Warded)) minion.",
+          "runs": [
+            {
+              "text": "• [[Detonate]] clarified that the ((damage)) comes from Detonate itself, and how to resolve the effect with a ((Warded)) minion.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Dreadwing]] clarified that your avatar will be struck even if it does not share a ((location)).",
+          "runs": [
+            {
+              "text": "• [[Dreadwing]] clarified that your avatar will be struck even if it does not share a ((location)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Driftwood Marrows]] clarified that this ability only prevents ((allies)) from being moved underwater by force.",
+          "runs": [
+            {
+              "text": "• [[Driftwood Marrows]] clarified that this ability only prevents ((allies)) from being moved underwater by force.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Drums of Doom]] clarified that if ((damage)) is redirected outside of the range of the Drums, it is not ((Lethal)).",
+          "runs": [
+            {
+              "text": "• [[Drums of Doom]] clarified that if ((damage)) is redirected outside of the range of the Drums, it is not ((Lethal)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Ether Core]] clarified that this ((artifact)) must be held by a unit to provide mana.",
+          "runs": [
+            {
+              "text": "• [[Ether Core]] clarified that this ((artifact)) must be held by a unit to provide mana.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Evil Twin]] clarified that you cannot ((summon)) the Twin to other ((regions)) when copying a ((minion)) with abilities that would allow it to enter those regions.",
+          "runs": [
+            {
+              "text": "• [[Evil Twin]] clarified that you cannot ((summon)) the Twin to other ((regions)) when copying a ((minion)) with abilities that would allow it to enter those regions.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Falling Star]] clarified what is meant by \"when the star falls.\"",
+          "runs": [
+            {
+              "text": "• [[Falling Star]] clarified what is meant by \"when the star falls.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Flame of the First Ones]] clarified that being conjured into play does not involve moving, so it does not involve ((stopping)).",
+          "runs": [
+            {
+              "text": "• [[Flame of the First Ones]] clarified that being conjured into play does not involve moving, so it does not involve ((stopping)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Forsaken]] clarified that the ability is a casting restriction, and does not allow ((summoning)) this minion to ((sites)) you do not ((control)).",
+          "runs": [
+            {
+              "text": "• [[Forsaken]] clarified that the ability is a casting restriction, and does not allow ((summoning)) this minion to ((sites)) you do not ((control)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Gift of the Raven]] clarified that multiple instances of this effect stack.",
+          "runs": [
+            {
+              "text": "• [[Gift of the Raven]] clarified that multiple instances of this effect stack.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Golden Dawn]] updated the answer to clarify where the minions are ((summoned)).",
+          "runs": [
+            {
+              "text": "• [[Golden Dawn]] updated the answer to clarify where the minions are ((summoned)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Golgor]] clarified that all minions with 2 or less power must be ((banished)) when this ability is activated.",
+          "runs": [
+            {
+              "text": "• [[Golgor]] clarified that all minions with 2 or less power must be ((banished)) when this ability is activated.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Grasping Ground]] clarified that the ((caster)) of the ((spell)) is doing the ((targeting)).",
+          "runs": [
+            {
+              "text": "• [[Grasping Ground]] clarified that the ((caster)) of the ((spell)) is doing the ((targeting)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Grigori Rasputin]] clarified that only ((minions)) in the realm can be ((banished)) by this ability.",
+          "runs": [
+            {
+              "text": "• [[Grigori Rasputin]] clarified that only ((minions)) in the realm can be ((banished)) by this ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Harbinger]] clarified that your random ((summoning)) ((squares)) are determined in step 2 of the ((setup)) process.",
+          "runs": [
+            {
+              "text": "• [[Harbinger]] clarified that your random ((summoning)) ((squares)) are determined in step 2 of the ((setup)) process.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Haystack]] clarified that this ability only limits effects which specifically use the word \"search\".",
+          "runs": [
+            {
+              "text": "• [[Haystack]] clarified that this ability only limits effects which specifically use the word \"search\".",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Heirloom Lost]] clarified that the site which is replaced is ((banished)), and it need not be adjacent to your existing sites.",
+          "runs": [
+            {
+              "text": "• [[Heirloom Lost]] clarified that the site which is replaced is ((banished)), and it need not be adjacent to your existing sites.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hemogoblet]] clarified that the minion's ((power)) is calculated when it is ((sacrificed)) for this effect, and that it cannot be filled again if already full.",
+          "runs": [
+            {
+              "text": "• [[Hemogoblet]] clarified that the minion's ((power)) is calculated when it is ((sacrificed)) for this effect, and that it cannot be filled again if already full.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hillock Basilisk]] clarified that ((Genesis)) abilities of ((minions)) ((summoned)) to ((locations)) affected by the Basilisk will still resolve.",
+          "runs": [
+            {
+              "text": "• [[Hillock Basilisk]] clarified that ((Genesis)) abilities of ((minions)) ((summoned)) to ((locations)) affected by the Basilisk will still resolve.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hillside Chapel]] clarified that the minion will still receive a ((Ward)) even if it was tapped before this ability resolves.",
+          "runs": [
+            {
+              "text": "• [[Hillside Chapel]] clarified that the minion will still receive a ((Ward)) even if it was tapped before this ability resolves.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hotwheel]] clarified that no unit is ((struck)) at the ((location)) it is ((summoned)) to.",
+          "runs": [
+            {
+              "text": "• [[Hotwheel]] clarified that no unit is ((struck)) at the ((location)) it is ((summoned)) to.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Hyperparasite]] clarified that the minion is only ((disabled)) while being carried, and it stops being carried if the Hyperparasite loses its ability. Additionally, clarified that this can ((pick up)) a new minion if it stops carrying one, and that it cannot take its own steps while carrying a ((minion)), but can still be moved by force.",
+          "runs": [
+            {
+              "text": "• [[Hyperparasite]] clarified that the minion is only ((disabled)) while being carried, and it stops being carried if the Hyperparasite loses its ability. Additionally, clarified that this can ((pick up)) a new minion if it stops carrying one, and that it cannot take its own steps while carrying a ((minion)), but can still be moved by force.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Iron Shackles]] clarified that when ((targeting)) a ((Warded)) minion, the the ((Ward)) protects the minion, breaking, and the Shackles end up at the same location, not carried.",
+          "runs": [
+            {
+              "text": "• [[Iron Shackles]] clarified that when ((targeting)) a ((Warded)) minion, the the ((Ward)) protects the minion, breaking, and the Shackles end up at the same location, not carried.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Legion of Gall]] clarified that if there are not enough cards in the collection you are looking at, you ((banish)) all the remaining cards.",
+          "runs": [
+            {
+              "text": "• [[Legion of Gall]] clarified that if there are not enough cards in the collection you are looking at, you ((banish)) all the remaining cards.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Lure]] clarified that the caster of Lure determines what route the tempted minion takes if there are multiple equal routes, and that minions in other ((regions)) can be affected.",
+          "runs": [
+            {
+              "text": "• [[Lure]] clarified that the caster of Lure determines what route the tempted minion takes if there are multiple equal routes, and that minions in other ((regions)) can be affected.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Maddening Bells]] updated an answer to account for things which are free to cast costing zero regardless of modifiers.",
+          "runs": [
+            {
+              "text": "• [[Maddening Bells]] updated an answer to account for things which are free to cast costing zero regardless of modifiers.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mimic]] clarified how this ability works. That ((artifact)) was a Mimic in disguise all along!",
+          "runs": [
+            {
+              "text": "• [[Mimic]] clarified how this ability works. That ((artifact)) was a Mimic in disguise all along!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Mirror Realm]] clarified that if it copies a Rubble, you gain no mana but still control the Mirror-Realm-turned-Rubble.",
+          "runs": [
+            {
+              "text": "• [[Mirror Realm]] clarified that if it copies a Rubble, you gain no mana but still control the Mirror-Realm-turned-Rubble.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Monstermorphosis]] clarified that ((control)) of a ((minion)) does not change when it is ((transformed)).",
+          "runs": [
+            {
+              "text": "• [[Monstermorphosis]] clarified that ((control)) of a ((minion)) does not change when it is ((transformed)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Order of the White Wing]] clarified that this will not prevent a ((minion)) being ((cast)) from zones like Morgana le Fay's hand.",
+          "runs": [
+            {
+              "text": "• [[Order of the White Wing]] clarified that this will not prevent a ((minion)) being ((cast)) from zones like Morgana le Fay's hand.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Pathfinder]] clarified that Pathfinder can still play ((sites)) to ((squares)) even if it would be prevented from moving to them, and that it cannot use its Avatar ability to play a site to Ersatz Platz.",
+          "runs": [
+            {
+              "text": "• [[Pathfinder]] clarified that Pathfinder can still play ((sites)) to ((squares)) even if it would be prevented from moving to them, and that it cannot use its Avatar ability to play a site to Ersatz Platz.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Perilous Bridge]] clarified that non-Airborne units cannot be moved through the top border by force.",
+          "runs": [
+            {
+              "text": "• [[Perilous Bridge]] clarified that non-Airborne units cannot be moved through the top border by force.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Pied Piper of Hameln]] clarified that if a second Piper enters play, it will win against the first Piper by playing even louder songs.",
+          "runs": [
+            {
+              "text": "• [[Pied Piper of Hameln]] clarified that if a second Piper enters play, it will win against the first Piper by playing even louder songs.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Questing Beast]] clarified that its ((end of turn)) movement will not cause it to lose ((stealth)).",
+          "runs": [
+            {
+              "text": "• [[Questing Beast]] clarified that its ((end of turn)) movement will not cause it to lose ((stealth)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Raze]] clarified that ((artifacts)) both above and below the ((site)) are ((destroyed)).",
+          "runs": [
+            {
+              "text": "• [[Raze]] clarified that ((artifacts)) both above and below the ((site)) are ((destroyed)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Red Rock of Ravannis]] clarified what exactly is meant by \"artifacts can't be carried here\", and what happens if something cannot be pulled.",
+          "runs": [
+            {
+              "text": "• [[Red Rock of Ravannis]] clarified what exactly is meant by \"artifacts can't be carried here\", and what happens if something cannot be pulled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Redmane Hyena]] clarified that the Hyena will be both a Demon and a Beast if a Demon is ((banished)).",
+          "runs": [
+            {
+              "text": "• [[Redmane Hyena]] clarified that the Hyena will be both a Demon and a Beast if a Demon is ((banished)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Ring of Morrigan]] clarified that you will not ((heal)) if the ((damage)) from this ability is ((prevented)).",
+          "runs": [
+            {
+              "text": "• [[Ring of Morrigan]] clarified that you will not ((heal)) if the ((damage)) from this ability is ((prevented)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[River Rapids]] explained what a \"connected river'' is, and clarified how the ability works.",
+          "runs": [
+            {
+              "text": "• [[River Rapids]] explained what a \"connected river'' is, and clarified how the ability works.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Scatter]] clarified that this cannot cause things to change ((regions)), and that it can push ((oversized units)).",
+          "runs": [
+            {
+              "text": "• [[Scatter]] clarified that this cannot cause things to change ((regions)), and that it can push ((oversized units)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Screamer]] clarified that the controller of Screamer decides where the minion steps (if there are multiple options) and that this effect is not ((forced movement)).",
+          "runs": [
+            {
+              "text": "• [[Screamer]] clarified that the controller of Screamer decides where the minion steps (if there are multiple options) and that this effect is not ((forced movement)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Sinister Pond]] clarified how to calculate the cost of this ability, and that you can ((transform)) Mortals you do not ((control)) (but you probably don't want to), and that your opponent can use this effect too.",
+          "runs": [
+            {
+              "text": "• [[Sinister Pond]] clarified how to calculate the cost of this ability, and that you can ((transform)) Mortals you do not ((control)) (but you probably don't want to), and that your opponent can use this effect too.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Snowball]] clarified that ((minions)) with ((stealth)) are picked up by the Snowball!",
+          "runs": [
+            {
+              "text": "• [[Snowball]] clarified that ((minions)) with ((stealth)) are picked up by the Snowball!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Sphere of Animosity]] clarified that Avatars cannot move or be moved by force out of the Sphere, but a site moving and carrying an Avatar will take the Avatar out of the Sphere.",
+          "runs": [
+            {
+              "text": "• [[Sphere of Animosity]] clarified that Avatars cannot move or be moved by force out of the Sphere, but a site moving and carrying an Avatar will take the Avatar out of the Sphere.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Spore Spouts]] clarified that the ((power)) of the ((minion)) is only checked at the time of ((casting)).",
+          "runs": [
+            {
+              "text": "• [[Spore Spouts]] clarified that the ((power)) of the ((minion)) is only checked at the time of ((casting)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Stagecoach]] clarified that this can carry ((enemy)) ((minions)).",
+          "runs": [
+            {
+              "text": "• [[Stagecoach]] clarified that this can carry ((enemy)) ((minions)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Sturmgeist]] clarified that this ability ((triggers)) before the Magic resolves, and that only Magic ((cast)) by units will trigger this ability. Also clarified that it must move as close as possible when its ability triggers, and how to determine that.",
+          "runs": [
+            {
+              "text": "• [[Sturmgeist]] clarified that this ability ((triggers)) before the Magic resolves, and that only Magic ((cast)) by units will trigger this ability. Also clarified that it must move as close as possible when its ability triggers, and how to determine that.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Swap]] clarified that this cannot cause things to change ((regions)).",
+          "runs": [
+            {
+              "text": "• [[Swap]] clarified that this cannot cause things to change ((regions)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Flood]] clarified common questions about ((minion)) types being determined.",
+          "runs": [
+            {
+              "text": "• [[The Flood]] clarified common questions about ((minion)) types being determined.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Inquisition]] clarified what situations can cause this ability to trigger.",
+          "runs": [
+            {
+              "text": "• [[The Inquisition]] clarified what situations can cause this ability to trigger.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Manor at Daperyll Hill]] clarified that if the ((damage)) is redirected or ((prevented)), you will not ((heal)).",
+          "runs": [
+            {
+              "text": "• [[The Manor at Daperyll Hill]] clarified that if the ((damage)) is redirected or ((prevented)), you will not ((heal)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Rack]] clarified that this effect causes an ((Avatar)) to become an ((oversized unit)).",
+          "runs": [
+            {
+              "text": "• [[The Rack]] clarified that this effect causes an ((Avatar)) to become an ((oversized unit)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Trade Encampment]] clarified that the traded ((artifacts)) must be revealed.",
+          "runs": [
+            {
+              "text": "• [[Trade Encampment]] clarified that the traded ((artifacts)) must be revealed.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Varmint Warrens]] clarified that it is the ((enemy)) of the Beasts that cannot ((target)) them, not enemies of the site.",
+          "runs": [
+            {
+              "text": "• [[Varmint Warrens]] clarified that it is the ((enemy)) of the Beasts that cannot ((target)) them, not enemies of the site.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Vesper Swarm]] clarified how this \"flies to\" a ((minion)).",
+          "runs": [
+            {
+              "text": "• [[Vesper Swarm]] clarified how this \"flies to\" a ((minion)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[White Hart]] clarified that this ability prevents the Hart's ((site)) from being ((attacked)).",
+          "runs": [
+            {
+              "text": "• [[White Hart]] clarified that this ability prevents the Hart's ((site)) from being ((attacked)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Yog-Sothoth]] clarified that this exists in all ((locations)) once in play, and that ((silence))/((disable)) effects do not cause it to change size.",
+          "runs": [
+            {
+              "text": "• [[Yog-Sothoth]] clarified that this exists in all ((locations)) once in play, and that ((silence))/((disable)) effects do not cause it to change size.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added ((Skeleton Token)).",
+          "runs": [
+            {
+              "text": "• Added ((Skeleton Token)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added ((Look At)). Specified that you choose the order of cards returned to a private zone by default.",
+          "runs": [
+            {
+              "text": "• Added ((Look At)). Specified that you choose the order of cards returned to a private zone by default.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Search)) entry to clarify that only effects which use the word \"search\" are considered searches. Specified that you choose the order of cards returned to a private zone by default when searching (but most effects will tell you to shuffle). Clarified what \"shuffle if needed\" means.",
+          "runs": [
+            {
+              "text": "• Updated the ((Search)) entry to clarify that only effects which use the word \"search\" are considered searches. Specified that you choose the order of cards returned to a private zone by default when searching (but most effects will tell you to shuffle). Clarified what \"shuffle if needed\" means.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Site)) entry to specify what happens to ((minions)) and ((artifacts)) that are already in a ((square)) when a ((site)) is played there.",
+          "runs": [
+            {
+              "text": "• Updated the ((Site)) entry to specify what happens to ((minions)) and ((artifacts)) that are already in a ((square)) when a ((site)) is played there.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Disabled)) entry to clarify that disabled units cannot take actions granted by other cards or effects (e.g. Raze, Trial by Water).",
+          "runs": [
+            {
+              "text": "• Updated the ((Disabled)) entry to clarify that disabled units cannot take actions granted by other cards or effects (e.g. Raze, Trial by Water).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Ward)) entry to clarify that the Ward will prevent a ((location)) at the Warded ((site)) from being ((targeted)) by your opponent's ((spells)) and ((special abilities)).",
+          "runs": [
+            {
+              "text": "• Updated the ((Ward)) entry to clarify that the Ward will prevent a ((location)) at the Warded ((site)) from being ((targeted)) by your opponent's ((spells)) and ((special abilities)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Tap)) entry to clarify that only units can tap. Updated the ((Untap)) entry to clarify that all types of cards can untap.",
+          "runs": [
+            {
+              "text": "• Updated the ((Tap)) entry to clarify that only units can tap. Updated the ((Untap)) entry to clarify that all types of cards can untap.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Carrying Units)) entry to clarify that if an ability allows a unit to ((pick up)) another unit, it also allows them to ((drop)) that other unit.",
+          "runs": [
+            {
+              "text": "• Updated the ((Carrying Units)) entry to clarify that if an ability allows a unit to ((pick up)) another unit, it also allows them to ((drop)) that other unit.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Strike)) entry to clarify that the strike occurs at the location of the unit/site being struck. Relevant for effects like Mask of Mayhem. Also added a sub-entry for ((Multiple Simultaneous Strikes)) to clarify that all of those strikes are affected by something which affects the \"next strike.\"",
+          "runs": [
+            {
+              "text": "• Updated the ((Strike)) entry to clarify that the strike occurs at the location of the unit/site being struck. Relevant for effects like Mask of Mayhem. Also added a sub-entry for ((Multiple Simultaneous Strikes)) to clarify that all of those strikes are affected by something which affects the \"next strike.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the ((Submerge)) and ((Burrowing)) entries to clarify that a minion with both abilities can move directly from one region to the other.",
+          "runs": [
+            {
+              "text": "• Updated the ((Submerge)) and ((Burrowing)) entries to clarify that a minion with both abilities can move directly from one region to the other.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-12-21T07:01:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Corruptor]] corrected to match design intent: minions gain the new type, and retain their original type as well. For example, a [[Lugbog Cat]] will be a Beast Monster and thus [[Pond]] will still function even with [[Corruptor]], and [[Bower of Bliss]] will still silence a Mortal Undead [[Grandmaster Wizard]].",
+          "runs": [
+            {
+              "text": "• [[Corruptor]] corrected to match design intent: minions gain the new type, and retain their original type as well. For example, a [[Lugbog Cat]] will be a Beast Monster and thus [[Pond]] will still function even with [[Corruptor]], and [[Bower of Bliss]] will still silence a Mortal Undead [[Grandmaster Wizard]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Imposter]] clarified that it can wear masks of avatars with pre-game or setup abilities, and those setup abilities do not trigger since the game has already begun (e.g. [[Pathfinder]] is fine even though your atlas has duplicates, you don't get to pick a Dragon for [[Dragonlord]] or roll for summoning portals as [[Harbinger]], your decks remain as-is for [[Magician]], etc.)",
+          "runs": [
+            {
+              "text": "• [[Imposter]] clarified that it can wear masks of avatars with pre-game or setup abilities, and those setup abilities do not trigger since the game has already begun (e.g. [[Pathfinder]] is fine even though your atlas has duplicates, you don't get to pick a Dragon for [[Dragonlord]] or roll for summoning portals as [[Harbinger]], your decks remain as-is for [[Magician]], etc.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Fixed the [[Persecutor]] FAQ and ((Ward)) definition that gave an example of Persecutor branding its own minion (which is not possible).",
+          "runs": [
+            {
+              "text": "• Fixed the [[Persecutor]] FAQ and ((Ward)) definition that gave an example of Persecutor branding its own minion (which is not possible).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that [[Pith Imp]] steals the card to a separate zone, not to your hand. You can only cast it if Pith Imp becomes a spellcaster.",
+          "runs": [
+            {
+              "text": "• Clarified that [[Pith Imp]] steals the card to a separate zone, not to your hand. You can only cast it if Pith Imp becomes a spellcaster.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[The Void]] clarified targeting while occupying this site, and your opponent casting Voidwalk minions to this site.",
+          "runs": [
+            {
+              "text": "• [[The Void]] clarified targeting while occupying this site, and your opponent casting Voidwalk minions to this site.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Castle Haunt]] clarified what happens if it survives leaving its summoning site, and what happens if it's not summoned to a site in the first place (e.g. [[Lucid Dreamers]]).",
+          "runs": [
+            {
+              "text": "• [[Castle Haunt]] clarified what happens if it survives leaving its summoning site, and what happens if it's not summoned to a site in the first place (e.g. [[Lucid Dreamers]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that when [[Dragonlord]] gains [[Ignis Rex]]'s ability, the Dragonlord will indeed deal fire damage (and same for [[Adtonitum]] and air damage).",
+          "runs": [
+            {
+              "text": "• Clarified that when [[Dragonlord]] gains [[Ignis Rex]]'s ability, the Dragonlord will indeed deal fire damage (and same for [[Adtonitum]] and air damage).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Removed superfluous comment in [[Bodach Bogeyman]]'s FAQ; minions are dropped in the Bogeyman's location, not adjacent.",
+          "runs": [
+            {
+              "text": "• Removed superfluous comment in [[Bodach Bogeyman]]'s FAQ; minions are dropped in the Bogeyman's location, not adjacent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Locusts of Illyria]] clarifying that you get one copy the first turn they're summoned; \"new Locusts\" refers to Locusts summoned by the triggered ability.",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Locusts of Illyria]] clarifying that you get one copy the first turn they're summoned; \"new Locusts\" refers to Locusts summoned by the triggered ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Jack the Ripper]] clarifying he's a Monster (and Mortal).",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Jack the Ripper]] clarifying he's a Monster (and Mortal).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Animist]] casting a Magic as a Minion spell plus [[Orb of Ba'al Berith]]. (Orb doesn't copy it, because it's effectively a Minion spell, not Magic.)",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Animist]] casting a Magic as a Minion spell plus [[Orb of Ba'al Berith]]. (Orb doesn't copy it, because it's effectively a Minion spell, not Magic.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Gilman House]] clarifying multiple uses per turn is allowed.",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Gilman House]] clarifying multiple uses per turn is allowed.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Sow the Earth]] clarifying mana from effects like a [[Lone Tower]]'s genesis or [[Abundance]] will also be doubled.",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Sow the Earth]] clarifying mana from effects like a [[Lone Tower]]'s genesis or [[Abundance]] will also be doubled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Symmetric Suffering]] clarifying how to handle cards with multiple types (e.g. an Automaton that is a minion and an artifact).",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Symmetric Suffering]] clarifying how to handle cards with multiple types (e.g. an Automaton that is a minion and an artifact).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Mismanaged Mortuary]] clarifying that you always put cards into the cemetery you own.",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Mismanaged Mortuary]] clarifying that you always put cards into the cemetery you own.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added FAQ for [[Lord of Greed]] clarifying how his effect works.",
+          "runs": [
+            {
+              "text": "• Added FAQ for [[Lord of Greed]] clarifying how his effect works.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Sacrifice)), changing the way destruction prevention effects and sacrifice interact. Now, sacrifice takes priority and effects that prevent destruction (e.g. Ward, Lady Iseult, etc.) will not save a sacrificed card! Also reminded players that sacrificed cards count as dying (which was already noted in the \"((die))\" entry). Updated [[The Doom of Dilmun]] FAQ to match.",
+          "runs": [
+            {
+              "text": "• Updated ((Sacrifice)), changing the way destruction prevention effects and sacrifice interact. Now, sacrifice takes priority and effects that prevent destruction (e.g. Ward, Lady Iseult, etc.) will not save a sacrificed card! Also reminded players that sacrificed cards count as dying (which was already noted in the \"((die))\" entry). Updated [[The Doom of Dilmun]] FAQ to match.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Disabled)) to clarify that disabled minions cannot deal damage (e.g. [[Abyssal Assault]]).",
+          "runs": [
+            {
+              "text": "• Updated ((Disabled)) to clarify that disabled minions cannot deal damage (e.g. [[Abyssal Assault]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Fixed \"((Oversized Units))\" section that previously said there were exceptions to size being a characteristic; it's always a characteristic now and won't change if silenced or disabled.",
+          "runs": [
+            {
+              "text": "• Fixed \"((Oversized Units))\" section that previously said there were exceptions to size being a characteristic; it's always a characteristic now and won't change if silenced or disabled.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added Ward as an example of a replacement effect that can protect from death in the \"((Die))\" entry.",
+          "runs": [
+            {
+              "text": "• Added Ward as an example of a replacement effect that can protect from death in the \"((Die))\" entry.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified how to order multiple cards with passive abilities entering the realm simultaneously, e.g. [[Boneyard]]. See \"((Apply Ongoing Effects in Order)).\"",
+          "runs": [
+            {
+              "text": "• Clarified how to order multiple cards with passive abilities entering the realm simultaneously, e.g. [[Boneyard]]. See \"((Apply Ongoing Effects in Order)).\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified \"((How to Handle Dependencies))\" when applying ongoing effects.",
+          "runs": [
+            {
+              "text": "• Clarified \"((How to Handle Dependencies))\" when applying ongoing effects.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Zone)) to include ((Collection)).",
+          "runs": [
+            {
+              "text": "• Updated ((Zone)) to include ((Collection)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified \"((Stops))\" to include rules for units being carried by other units, matching player intuition.",
+          "runs": [
+            {
+              "text": "• Clarified \"((Stops))\" to include rules for units being carried by other units, matching player intuition.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified \"((Cost))\" when casting using alternate costs other than \"for free,\" like [[De Vermis Mysteriis]], and added FAQ too!",
+          "runs": [
+            {
+              "text": "• Clarified \"((Cost))\" when casting using alternate costs other than \"for free,\" like [[De Vermis Mysteriis]], and added FAQ too!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-12-05T17:00:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added Gothic FAQs! Have fun!",
+          "runs": [
+            {
+              "text": "• Added Gothic FAQs! Have fun!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Land Deed]] when carried by an oversized unit now only affects a single site, which matches design intent.",
+          "runs": [
+            {
+              "text": "• [[Land Deed]] when carried by an oversized unit now only affects a single site, which matches design intent.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that [[Twist of Fate]] is not healing.",
+          "runs": [
+            {
+              "text": "• Clarified that [[Twist of Fate]] is not healing.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Spellbook)), which must contain 60 or more spells.",
+          "runs": [
+            {
+              "text": "• Updated ((Spellbook)), which must contain 60 or more spells.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added ((Collection)).",
+          "runs": [
+            {
+              "text": "• Added ((Collection)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added ((Evil)).",
+          "runs": [
+            {
+              "text": "• Added ((Evil)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added ((Ward)).",
+          "runs": [
+            {
+              "text": "• Added ((Ward)).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Transform)) to clarify that Ward tokens carry over just like Stealth tokens when a minion is transformed.",
+          "runs": [
+            {
+              "text": "• Updated ((Transform)) to clarify that Ward tokens carry over just like Stealth tokens when a minion is transformed.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Stealth)) so that artifacts cannot be targeted while they're carried by a minion with Stealth.",
+          "runs": [
+            {
+              "text": "• Updated ((Stealth)) so that artifacts cannot be targeted while they're carried by a minion with Stealth.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that if you're on ((Death's Door)) without actually being at 0 life (e.g. [[Orpheus' Crossing]]), you can still take damage and lose life.",
+          "runs": [
+            {
+              "text": "• Clarified that if you're on ((Death's Door)) without actually being at 0 life (e.g. [[Orpheus' Crossing]]), you can still take damage and lose life.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that you can still take damage the turn you go to Death's Door, you just won't die. For example, if you put me on Death's Door and then later that same turn you strike my Avatar with a [[Daperyll Vampire]], I still take the 4 damage and you could heal.",
+          "runs": [
+            {
+              "text": "• Clarified that you can still take damage the turn you go to Death's Door, you just won't die. For example, if you put me on Death's Door and then later that same turn you strike my Avatar with a [[Daperyll Vampire]], I still take the 4 damage and you could heal.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• The Pick Up basic ability now targets the picked up unit. This is relevant for [[Bodach Bogeyman]] when trying to pick up Stealth minions. Note that Warded minions can still be picked up by the Bogeyman, since Pick Up is a basic ability, not a special ability (and then their Ward would go away when they're disabled).",
+          "runs": [
+            {
+              "text": "• The Pick Up basic ability now targets the picked up unit. This is relevant for [[Bodach Bogeyman]] when trying to pick up Stealth minions. Note that Warded minions can still be picked up by the Bogeyman, since Pick Up is a basic ability, not a special ability (and then their Ward would go away when they're disabled).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Also clarified that an Oversized Unit may simultaneously Pick Up from all locations it occupies.",
+          "runs": [
+            {
+              "text": "• Also clarified that an Oversized Unit may simultaneously Pick Up from all locations it occupies.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Changed \"takes X less damage\" to be considered an effect ((preventing damage)) and thus always gets applied after effects ((modifying damage)). (This isn't really a change, just a correction to make the rules function as we intended all along and to match player intuition.)",
+          "runs": [
+            {
+              "text": "• Changed \"takes X less damage\" to be considered an effect ((preventing damage)) and thus always gets applied after effects ((modifying damage)). (This isn't really a change, just a correction to make the rules function as we intended all along and to match player intuition.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that size is a characteristic and thus isn't silenced. Relevant to only a few cards, e.g. [[Megamoeba]] and [[Yog Sothoth]].",
+          "runs": [
+            {
+              "text": "• Clarified that size is a characteristic and thus isn't silenced. Relevant to only a few cards, e.g. [[Megamoeba]] and [[Yog Sothoth]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Cost)) and added \"((For Free))\" to clarify how to cast spells ((for free)). This is a minor powerup to a [[Deathspeaker]] on Death's Door while also nearby [[Maddening Bells]], so that (0) really means (0)!",
+          "runs": [
+            {
+              "text": "• Updated ((Cost)) and added \"((For Free))\" to clarify how to cast spells ((for free)). This is a minor powerup to a [[Deathspeaker]] on Death's Door while also nearby [[Maddening Bells]], so that (0) really means (0)!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Can't Be Modified)) to clarify how it applies to minions like [[Monks of Kobalsa]].",
+          "runs": [
+            {
+              "text": "• Updated ((Can't Be Modified)) to clarify how it applies to minions like [[Monks of Kobalsa]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Moving to a Specific Location Via a Special Ability or Magic))\" as a subcodex of ((Move)) to provide a consistent way to deal with effects like [[Giant Shark]], [[Mount Ussar Sanctuary]], [[Guardian Angel]], [[Darkest Dungeon]], [[Harpyon Urge]], etc.",
+          "runs": [
+            {
+              "text": "• Added \"((Moving to a Specific Location Via a Special Ability or Magic))\" as a subcodex of ((Move)) to provide a consistent way to deal with effects like [[Giant Shark]], [[Mount Ussar Sanctuary]], [[Guardian Angel]], [[Darkest Dungeon]], [[Harpyon Urge]], etc.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added a Codex entry for \"((Must Be Cast))\" (which also covers \"Must be Summoned\") to clarify that it's an additional restriction, and you still must choose your own site as well. Relevant for cards like [[Mephistopheles]], [[Weathered Trunks]], [[Cerberus in Chains]], [[Algor Omphalos]], etc.",
+          "runs": [
+            {
+              "text": "• Added a Codex entry for \"((Must Be Cast))\" (which also covers \"Must be Summoned\") to clarify that it's an additional restriction, and you still must choose your own site as well. Relevant for cards like [[Mephistopheles]], [[Weathered Trunks]], [[Cerberus in Chains]], [[Algor Omphalos]], etc.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((fully heal))\" to clarify that it wins over [[River of Blood]], and really does fully heal.",
+          "runs": [
+            {
+              "text": "• Added \"((fully heal))\" to clarify that it wins over [[River of Blood]], and really does fully heal.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that when you ((transform)) a card, control of that card doesn't change by default. E.g. if you [[Pollimorph]] my minion, I still control the resulting Frog token. If you [[Desecrate]] my site, I still control the resulting [[Desecrated Ground]].",
+          "runs": [
+            {
+              "text": "• Clarified that when you ((transform)) a card, control of that card doesn't change by default. E.g. if you [[Pollimorph]] my minion, I still control the resulting Frog token. If you [[Desecrate]] my site, I still control the resulting [[Desecrated Ground]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Lasts 3 of Your Turns))\" so that it applies consistently to [[Entangle Terrain]], [[Falling Star]], etc.",
+          "runs": [
+            {
+              "text": "• Added \"((Lasts 3 of Your Turns))\" so that it applies consistently to [[Entangle Terrain]], [[Falling Star]], etc.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that \"((allied)) Ward\" means \"a Ward on a card you control.\"",
+          "runs": [
+            {
+              "text": "• Clarified that \"((allied)) Ward\" means \"a Ward on a card you control.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that \"((Forced Movement))\" cannot cause a card to change regions.",
+          "runs": [
+            {
+              "text": "• Clarified that \"((Forced Movement))\" cannot cause a card to change regions.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"shoot\" and \"throw\" (in the context of a projectile) to \"((Phrases that are Synonymous)).\"",
+          "runs": [
+            {
+              "text": "• Added \"shoot\" and \"throw\" (in the context of a projectile) to \"((Phrases that are Synonymous)).\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Closest))\" for [[Persecutor]] (and [[Crave Golem]]).",
+          "runs": [
+            {
+              "text": "• Added \"((Closest))\" for [[Persecutor]] (and [[Crave Golem]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Can't Drop))\" for cards like [[Blade of Thorns]], [[Tabula Rasa]], etc.",
+          "runs": [
+            {
+              "text": "• Added \"((Can't Drop))\" for cards like [[Blade of Thorns]], [[Tabula Rasa]], etc.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified ((End Phase)) to specify when \"after each turn\" effects resolve. Just for you, updated [[Torshammar Trinket]]!",
+          "runs": [
+            {
+              "text": "• Clarified ((End Phase)) to specify when \"after each turn\" effects resolve. Just for you, updated [[Torshammar Trinket]]!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated \"((Atop))\" to acknowledge the alternate meaning from [[The Base of Babel]].",
+          "runs": [
+            {
+              "text": "• Updated \"((Atop))\" to acknowledge the alternate meaning from [[The Base of Babel]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated \"((Disabled))\" to include disabled sites, e.g. [[Blightstone]].",
+          "runs": [
+            {
+              "text": "• Updated \"((Disabled))\" to include disabled sites, e.g. [[Blightstone]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Only It Can Cast))\" to unify how to handle cards like [[Char Omphalos]], [[Morgana Le Fay]], and [[Archangel Gabriel]].",
+          "runs": [
+            {
+              "text": "• Added \"((Only It Can Cast))\" to unify how to handle cards like [[Char Omphalos]], [[Morgana Le Fay]], and [[Archangel Gabriel]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Empty Site)).\"",
+          "runs": [
+            {
+              "text": "• Added \"((Empty Site)).\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Pay Life)).\"",
+          "runs": [
+            {
+              "text": "• Added \"((Pay Life)).\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated ((Avatar Characteristics)) to clarify that Avatars can only enter surface locations (instead of preventing them from entering non-surface regions). That is, they can enter other regions as long as those regions are also part of the surface region, e.g. [[The Void]].",
+          "runs": [
+            {
+              "text": "• Updated ((Avatar Characteristics)) to clarify that Avatars can only enter surface locations (instead of preventing them from entering non-surface regions). That is, they can enter other regions as long as those regions are also part of the surface region, e.g. [[The Void]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that ((Wounded)) for minions means having damage (this turn).",
+          "runs": [
+            {
+              "text": "• Clarified that ((Wounded)) for minions means having damage (this turn).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Added \"((Break Stealth)).\"",
+          "runs": [
+            {
+              "text": "• Added \"((Break Stealth)).\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-11-25T19:00:00.000Z",
+      "segments": [
+        {
+          "t": "p",
+          "text": "• Cards with updated text now show that updated text immediately when you click on them.",
+          "runs": [
+            {
+              "text": "• Cards with updated text now show that updated text immediately when you click on them.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• FAQs with \"treat it as\" text have been removed, since the updated text now serves that purpose.",
+          "runs": [
+            {
+              "text": "• FAQs with \"treat it as\" text have been removed, since the updated text now serves that purpose.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• The most significant updated card is [[Druid]].",
+          "runs": [
+            {
+              "text": "• The most significant updated card is [[Druid]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• The majority of updated cards are minor updates for rules clarity or design intent, e.g. [[Magnetic Muzzle]] uses the keyword \"silence\" now.",
+          "runs": [
+            {
+              "text": "• The majority of updated cards are minor updates for rules clarity or design intent, e.g. [[Magnetic Muzzle]] uses the keyword \"silence\" now.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• You can see all the updated cards in the \"((Updated Cards))\" Codex entry, as well as doing a card search for the word \"updated.\"",
+          "runs": [
+            {
+              "text": "• You can see all the updated cards in the \"((Updated Cards))\" Codex entry, as well as doing a card search for the word \"updated.\"",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Note that [[Skirmishers of Mu]] are played as-written. See its FAQs for clarity.",
+          "runs": [
+            {
+              "text": "• Note that [[Skirmishers of Mu]] are played as-written. See its FAQs for clarity.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Updated the definition of ((basic movement)) to include all basic abilities, i.e. Move and Attack, and Defend.",
+          "runs": [
+            {
+              "text": "• Updated the definition of ((basic movement)) to include all basic abilities, i.e. Move and Attack, and Defend.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-08-03T21:00:00.000Z",
+      "segments": [
+        {
+          "t": "p",
+          "text": "Added Dragonlord FAQs!",
+          "runs": [
+            {
+              "text": "Added Dragonlord FAQs!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-07-14T04:26:00.000Z",
+      "segments": [
+        {
+          "t": "h",
+          "text": "Codex",
+          "runs": [
+            {
+              "text": "Codex",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Fixed the order of layers in \"((Apply Ongoing Effects In Order))\" so that disabling and silencing effects apply before control changing effects, so that [[King of the Realm]]'s ability can be properly disabled and silenced!",
+          "runs": [
+            {
+              "text": "• Fixed the order of layers in \"((Apply Ongoing Effects In Order))\" so that disabling and silencing effects apply before control changing effects, so that [[King of the Realm]]'s ability can be properly disabled and silenced!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "FAQ",
+          "runs": [
+            {
+              "text": "FAQ",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that [[Silence]], [[Sisters of Silence]], and [[Magnetic Muzzle]] are silence effects.",
+          "runs": [
+            {
+              "text": "• Clarified that [[Silence]], [[Sisters of Silence]], and [[Magnetic Muzzle]] are silence effects.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Yes, that confirms Magnetic Muzzle has no effect on Avatars.",
+          "runs": [
+            {
+              "text": "• Yes, that confirms Magnetic Muzzle has no effect on Avatars.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2025-07-10T16:21:00.000Z",
+      "segments": [
+        {
+          "t": "p",
+          "text": "First release of the codex! Notable rule updates include:",
+          "runs": [
+            {
+              "text": "First release of the codex! Notable rule updates include:",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• When attacking undefended sites, the attacking unit strikes the site, damaging it. When a site is damaged, the controlling avatar loses life equal to the damage dealt.",
+          "runs": [
+            {
+              "text": "• When attacking undefended sites, the attacking unit strikes the site, damaging it. When a site is damaged, the controlling avatar loses life equal to the damage dealt.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• This impacts cards like [[Mask of Mayhem]], [[Daperyll Vampire]], and [[Free City]], among others.",
+          "runs": [
+            {
+              "text": "• This impacts cards like [[Mask of Mayhem]], [[Daperyll Vampire]], and [[Free City]], among others.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• For Move and Attack, you don't declare your attack target in advance; you simply resolve your movement (and any triggered abilities), and then choose to attack if you want.",
+          "runs": [
+            {
+              "text": "• For Move and Attack, you don't declare your attack target in advance; you simply resolve your movement (and any triggered abilities), and then choose to attack if you want.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• \"Attack\" triggers only happen once, based on the initial target of the attack (e.g. [[Dodge Roll]] only works if the target was directly attacked, not if they Defend.)",
+          "runs": [
+            {
+              "text": "• \"Attack\" triggers only happen once, based on the initial target of the attack (e.g. [[Dodge Roll]] only works if the target was directly attacked, not if they Defend.)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• \"Attack and kill\" triggers (e.g. [[Battlemage]], [[Sea Raider]]) resolve as long as there was an attack, for each minion killed, based on kill credit.",
+          "runs": [
+            {
+              "text": "• \"Attack and kill\" triggers (e.g. [[Battlemage]], [[Sea Raider]]) resolve as long as there was an attack, for each minion killed, based on kill credit.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• When a unit defends, it automatically becomes a legal target for the attack, superseding the silver rule. (e.g. If I attack [[White Hart]] and you defend with a different minion, that minion is now a legal target for the attack)",
+          "runs": [
+            {
+              "text": "• When a unit defends, it automatically becomes a legal target for the attack, superseding the silver rule. (e.g. If I attack [[White Hart]] and you defend with a different minion, that minion is now a legal target for the attack)",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Intercept triggers when an attack doesn't happen, not when a unit enters a location.",
+          "runs": [
+            {
+              "text": "• Intercept triggers when an attack doesn't happen, not when a unit enters a location.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Therefore, movement never gets stopped by intercept, and speedy units with Movement +X can slip by defenses.",
+          "runs": [
+            {
+              "text": "• Therefore, movement never gets stopped by intercept, and speedy units with Movement +X can slip by defenses.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• \"You\" means the player, so for [[Deathspeaker]], [[Enchantress]], [[Templar]], and [[Sparkmage]], any of your spellcasters can cast the spell, not just your avatar.",
+          "runs": [
+            {
+              "text": "• \"You\" means the player, so for [[Deathspeaker]], [[Enchantress]], [[Templar]], and [[Sparkmage]], any of your spellcasters can cast the spell, not just your avatar.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Stealth breaks when you interact with the realm. Non-minions can't have stealth.",
+          "runs": [
+            {
+              "text": "• Stealth breaks when you interact with the realm. Non-minions can't have stealth.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• A unit can't activate the Drop ability after they interact with the realm in a given turn.",
+          "runs": [
+            {
+              "text": "• A unit can't activate the Drop ability after they interact with the realm in a given turn.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Airborne works on avatars!",
+          "runs": [
+            {
+              "text": "• Airborne works on avatars!",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Immobile means can't move itself. Immobile units can now attack and defend at their location.",
+          "runs": [
+            {
+              "text": "• Immobile means can't move itself. Immobile units can now attack and defend at their location.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Units that carry other units - if the carried unit can't move in the chosen direction, the unit doing the carrying still moves. If the two units then don't share a location, the carried unit is automatically dropped.",
+          "runs": [
+            {
+              "text": "• Units that carry other units - if the carried unit can't move in the chosen direction, the unit doing the carrying still moves. If the two units then don't share a location, the carried unit is automatically dropped.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Auras can be cast to anywhere, including all void if desired.",
+          "runs": [
+            {
+              "text": "• Auras can be cast to anywhere, including all void if desired.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Oversized units (often called large units in the past) have an official term. Also, effects that specify \"its site\" or \"its location\" mean \"a site it occupies\" or \"a location it occupies\" for oversized units. This is relevant for cards like [[Spin Attack]].",
+          "runs": [
+            {
+              "text": "• Oversized units (often called large units in the past) have an official term. Also, effects that specify \"its site\" or \"its location\" mean \"a site it occupies\" or \"a location it occupies\" for oversized units. This is relevant for cards like [[Spin Attack]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified how ((cost)) is calculated, including alternate costs like [[Aramos Mercenaries]] combined with [[Maddening Bells]].",
+          "runs": [
+            {
+              "text": "• Clarified how ((cost)) is calculated, including alternate costs like [[Aramos Mercenaries]] combined with [[Maddening Bells]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified the application of ongoing effects, which changed some previous FAQs, like [[King of the Realm]] vs. [[King of the Realm]].",
+          "runs": [
+            {
+              "text": "• Clarified the application of ongoing effects, which changed some previous FAQs, like [[King of the Realm]] vs. [[King of the Realm]].",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified application of damage replacement and damage prevention effects.",
+          "runs": [
+            {
+              "text": "• Clarified application of damage replacement and damage prevention effects.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Replacement effects always go first (e.g. Lance, [[Critical Strike]], [[Golden Harp]], and get ordered by the controlling player as they wish. Damage prevention effects (e.g. [[Shield Maidens]], [[Tufted Turtles]]) always go last.",
+          "runs": [
+            {
+              "text": "• Replacement effects always go first (e.g. Lance, [[Critical Strike]], [[Golden Harp]], and get ordered by the controlling player as they wish. Damage prevention effects (e.g. [[Shield Maidens]], [[Tufted Turtles]]) always go last.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• As if adjacent effects allow the controller to choose the cardinal direction.",
+          "runs": [
+            {
+              "text": "• As if adjacent effects allow the controller to choose the cardinal direction.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified kill credit.",
+          "runs": [
+            {
+              "text": "• Clarified kill credit.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "h",
+          "text": "FAQ Changes",
+          "runs": [
+            {
+              "text": "FAQ Changes",
+              "bold": true,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Removed many superfluous FAQs that are covered directly by the codex.",
+          "runs": [
+            {
+              "text": "• Removed many superfluous FAQs that are covered directly by the codex.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Battlemage]] and [[Sea Raider]] abilities trigger for each minion they attack and kill, even if multiple minions defend the attack, or they get kill credit in other ways during the attack (e.g. [[Flaming Sword]]).",
+          "runs": [
+            {
+              "text": "• [[Battlemage]] and [[Sea Raider]] abilities trigger for each minion they attack and kill, even if multiple minions defend the attack, or they get kill credit in other ways during the attack (e.g. [[Flaming Sword]]).",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Seirawan Hydra]] is immune to non-lethal damage, as in the keyword. So even a [[Major Explosion]] or a strike from [[Great Old One]] isn't enough to kill it. Of course, a single point of damage from [[Pit Vipers]] or [[Poison Nova]] will still kill it, or being underwater, underground, etc., and it's still vulnerable to [[Mesmerism]], [[Infiltrate]], etc.",
+          "runs": [
+            {
+              "text": "• [[Seirawan Hydra]] is immune to non-lethal damage, as in the keyword. So even a [[Major Explosion]] or a strike from [[Great Old One]] isn't enough to kill it. Of course, a single point of damage from [[Pit Vipers]] or [[Poison Nova]] will still kill it, or being underwater, underground, etc., and it's still vulnerable to [[Mesmerism]], [[Infiltrate]], etc.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Merlin]]'s ability is clarified to be a passive ability, so you can look at your top spell any time on your turn, but you can still only cast a spell when it's normally allowed.",
+          "runs": [
+            {
+              "text": "• [[Merlin]]'s ability is clarified to be a passive ability, so you can look at your top spell any time on your turn, but you can still only cast a spell when it's normally allowed.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Typically you can only cast spells during your main phase.",
+          "runs": [
+            {
+              "text": "• Typically you can only cast spells during your main phase.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• If a [[Crave Golem]] were attacking during your Start Phase, you could use Merlin's ability to cast a [[Dodge Roll]] then. Let me know if you ever do that in a real game! -Ira",
+          "runs": [
+            {
+              "text": "• If a [[Crave Golem]] were attacking during your Start Phase, you could use Merlin's ability to cast a [[Dodge Roll]] then. Let me know if you ever do that in a real game! -Ira",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified that [[Awakened Mummies]] cause a fight when they unburrow.",
+          "runs": [
+            {
+              "text": "• Clarified that [[Awakened Mummies]] cause a fight when they unburrow.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Clarified [[Crave Golem]]'s ability.",
+          "runs": [
+            {
+              "text": "• Clarified [[Crave Golem]]'s ability.",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• Some cards were updated, including:",
+          "runs": [
+            {
+              "text": "• Some cards were updated, including:",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Askelon Phoenix]]",
+          "runs": [
+            {
+              "text": "• [[Askelon Phoenix]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Druid]]",
+          "runs": [
+            {
+              "text": "• [[Druid]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Updraft Ridge]]",
+          "runs": [
+            {
+              "text": "• [[Updraft Ridge]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Archimago]]",
+          "runs": [
+            {
+              "text": "• [[Archimago]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Geomancer]]",
+          "runs": [
+            {
+              "text": "• [[Geomancer]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        },
+        {
+          "t": "p",
+          "text": "• [[Vivien the Enchantress]]",
+          "runs": [
+            {
+              "text": "• [[Vivien the Enchantress]]",
+              "bold": false,
+              "italic": false,
+              "link": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
