@@ -62,9 +62,19 @@ const CODEX_URL = 'https://curiosa.io/codex';
   // `.text` field, so their name is pulled from whichever field actually
   // holds it, with a few plausible names tried since the exact one hasn't
   // been confirmed yet.
+  // Curiosa's raw text embeds cross-references as literal bracket markup
+  // within plain text — [[Card Name]] for cards, ((Term)) or ))Term(( for
+  // codex entries — rather than as structured Sanity marks/inline objects.
+  function _stripBrackets(str) {
+    if (typeof str !== 'string') return str;
+    return str
+      .replace(/\[\[([^\]]+)\]\]/g, '$1')
+      .replace(/\(\(([^)]+)\)\)/g, '$1')
+      .replace(/\)\)([^(]+)\(\(/g, '$1');
+  }
   function _inlineChildText(c) {
     if (!c) return '';
-    if (typeof c.text === 'string') return c.text;
+    if (typeof c.text === 'string') return _stripBrackets(c.text);
     var name = c.cardName || c.card || c.name || c.title || c.value || c.label;
     if (typeof name === 'string') return name;
     if (!_loggedRefSample) {
@@ -73,6 +83,30 @@ const CODEX_URL = 'https://curiosa.io/codex';
       console.log(JSON.stringify(c, null, 2));
     }
     return '';
+  }
+  // Splits a single run's text on [[Card Name]] / ((Term)) / ))Term(( bracket
+  // markup into multiple sub-runs, tagging the matched portions as cardRef
+  // or link and stripping the brackets from the displayed text, while
+  // preserving the run's existing bold/italic/link flags on the surrounding
+  // plain-text portions.
+  function _expandBracketRefs(run) {
+    if (!run || typeof run.text !== 'string' || run.cardRef) return [run];
+    const text = run.text;
+    const re = /\[\[([^\]]+)\]\]|\(\(([^)]+)\)\)|\)\)([^(]+)\(\(/g;
+    const out = [];
+    let last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      if (m.index > last) out.push(Object.assign({}, run, { text: text.slice(last, m.index) }));
+      if (m[1] !== undefined) {
+        out.push({ text: m[1], cardRef: m[1] });
+      } else {
+        const term = m[2] !== undefined ? m[2] : m[3];
+        out.push(Object.assign({}, run, { text: term, link: true }));
+      }
+      last = re.lastIndex;
+    }
+    if (last < text.length) out.push(Object.assign({}, run, { text: text.slice(last) }));
+    return out.length ? out : [run];
   }
   // Builds a formatted run { text, bold, italic, cardRef } from an inline
   // child instead of collapsing straight to plain text, so bold/italic marks
@@ -97,7 +131,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
     return null;
   }
   function portableTextToPlain(val) {
-    if (typeof val === 'string') return val.trim();
+    if (typeof val === 'string') return _stripBrackets(val.trim());
     if (!Array.isArray(val)) return '';
     return val.map(block => {
       if (!block) return '';
@@ -105,7 +139,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
       if (Array.isArray(block.children)) {
         return block.children.map(_inlineChildText).join('');
       }
-      return block.text || '';
+      return _stripBrackets(block.text || '');
     }).join('\n').trim();
   }
 
@@ -164,7 +198,8 @@ const CODEX_URL = 'https://curiosa.io/codex';
       if (Array.isArray(block.children)) {
         const markDefsByKey = {};
         (block.markDefs || []).forEach(md => { if (md && md._key) markDefsByKey[md._key] = md; });
-        const runs = block.children.map(c => _runFromChild(c, markDefsByKey)).filter(Boolean);
+        const runs = block.children.map(c => _runFromChild(c, markDefsByKey)).filter(Boolean)
+          .reduce((acc, r) => acc.concat(_expandBracketRefs(r)), []);
         const text = runs.map(r => r.text).join('').trim();
         if (!text) return;
         const isBoldHeading = runs.length === 1 && runs[0].bold && !runs[0].cardRef && text.length < 60;
