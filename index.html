@@ -735,7 +735,7 @@ var G={
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
   cfg:{maxLife:20,p1:'Player 1',p2:'Player 2'},
-  selCard:null,expImg:null,logPopup:null,cmDeckSel:null,dvSort:'name',dvTrack:false,
+  selCard:null,expImg:null,logPopup:null,cmDeckSel:null,dvSort:'cost',dvTrack:false,
   artExp:{},ytCh:'all',ytSelCh:null,ytVids:null,ytLoading:false,ytLoaded:false,ytErr:null,
   newsItems:null,newsLoading:false,newsLoaded:false,newsErr:null,
   discordItems:null,discordLoading:false,discordLoaded:false,discordErr:null,
@@ -819,10 +819,15 @@ function showChangelogList(){
 function closeReadModal(){
   var _panel=document.querySelector('.panel');
   var _scrollTop=_panel?_panel.scrollTop:0;
-  G.readModal=null;
+  var _popped=(G.readModalStack&&G.readModalStack.length)?G.readModalStack.pop():null;
+  G.readModal=_popped?_popped.modal:null;
   render();
   var _panelAfter=document.querySelector('.panel');
   if(_panelAfter&&_scrollTop)_panelAfter.scrollTop=_scrollTop;
+  if(_popped){
+    var _rb=document.querySelector('.rd-body');
+    if(_rb)_rb.scrollTop=_popped.scroll||0;
+  }
 }
 
 function boot(){
@@ -3267,16 +3272,19 @@ function _faqTableHtml(grid){
   }).join('');
   return '<table style="border-collapse:collapse;margin:16px 0">'+rows+'</table>';
 }
-// Renders a paragraph's formatted runs: bold/italic marks, and card-name
-// references as clickable links that open that card's detail popup.
+// Renders a paragraph's formatted runs: bold/italic marks, card-name
+// references as clickable links that open that card's detail popup, and
+// codex-glossary-term references (the blue links) as clickable links that
+// open that term's codex entry popup.
 function _runsHtml(runs){
   if(!runs||!runs.length)return '';
   return runs.map(function(r){
     var t=h(r.text).replace(/\n/g,'<br>');
-    if(r.cardRef)return '<span style="color:var(--yel);cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();G.readModal=null;var _c=cardByName(this.dataset.card);if(_c){G.selCard=_c;openPanel(\'card\');}">'+t+'</span>';
+    if(r.cardRef)return '<span style="color:var(--yel);cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();var _c=cardByName(this.dataset.card);if(_c){G.selCard=_c;openPanel(\'card\');}">'+t+'</span>';
     if(r.italic)t='<em>'+t+'</em>';
     if(r.bold)t='<strong>'+t+'</strong>';
-    var col=r.bold?'var(--wht)':(r.link?'var(--bbl)':'');
+    if(r.link)return '<span style="color:var(--bbl);cursor:pointer" data-term="'+h(r.text)+'" onclick="event.stopPropagation();openCodexTermPopup(this.dataset.term);">'+t+'</span>';
+    var col=r.bold?'var(--wht)':'';
     if(col)t='<span style="color:'+col+'">'+t+'</span>';
     return t;
   }).join('');
@@ -4467,7 +4475,8 @@ function openPanel(id){
   if(id==='yt'){G.ytHasNew=false;if(G.ytVids&&G.ytVids.length&&(G.ytCh||'all')==='all'){var lv=G.ytVids[0].videoId||G.ytVids[0].id;if(lv)sv('sg-yt-seen',lv);}}
   if(id==='discord'){G.discordHasNew=false;if(G.discordItems&&G.discordItems.length){var ld2=G.discordItems[0].id;if(ld2)sv('sg-discord-seen',ld2);}}
   if(id==='deckview'){_dvInitHand(G.selDeck);}
-  G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.panel=id;G.cat=null;render();
+  var _rb0=document.querySelector('.rd-body');
+  G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu,readModal:G.readModal,rdScroll:_rb0?_rb0.scrollTop:0});G.panel=id;G.cat=null;G.readModal=null;render();
   if(id==='card'){
     requestAnimationFrame(function(){requestAnimationFrame(function(){
       var el=document.querySelector('.cm');
@@ -4478,7 +4487,7 @@ function openPanel(id){
 function openCat(cat){vibrate(10);G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){
   var _leavingCard=(G.panel==='card');
-  if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;render();if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
+  if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;G.readModal=prev.readModal||null;render();if(prev.readModal){requestAnimationFrame(function(){requestAnimationFrame(function(){var _rb1=document.querySelector('.rd-body');if(_rb1)_rb1.scrollTop=prev.rdScroll||0;});});}if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
 }
 function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();}
 
@@ -5767,6 +5776,23 @@ function gsOpenCodex(key){
     else break;
   }
   showReadModal(key,[{items:items}]);
+}
+// Looks up a codex glossary term by name (case-insensitive) and shows its
+// entry popup — used by the blue codex-term links rendered inside FAQ,
+// Codex, and Codex Changelog entries, mirroring the card-name click popup.
+function openCodexTermPopup(term){
+  if(!term)return;
+  var entry=null,lc=String(term).toLowerCase();
+  for(var i=0;i<CODEX_DATA.length;i++){if(CODEX_DATA[i].k&&CODEX_DATA[i].k.toLowerCase()===lc){entry=CODEX_DATA[i];break;}}
+  if(!entry)return;
+  var idx=CODEX_DATA.indexOf(entry);
+  var items=[{def:entry.def,segments:entry.segments}];
+  for(var j=idx+1;j<CODEX_DATA.length;j++){
+    if(!CODEX_DATA[j].k)items.push({q:CODEX_DATA[j].sub||'',a:CODEX_DATA[j].def,segments:CODEX_DATA[j].segments});
+    else break;
+  }
+  if(G.readModal){var _rb2=document.querySelector('.rd-body');(G.readModalStack=G.readModalStack||[]).push({modal:G.readModal,scroll:_rb2?_rb2.scrollTop:0});}
+  showReadModal(entry.k,[{items:items}]);
 }
 
 function buildGsDrop(){
