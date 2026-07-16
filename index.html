@@ -303,7 +303,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .si{position:relative;margin-bottom:5px}
 .si input{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 34px 9px 10px;outline:none;font-size:14px;font-family:'Courier New',monospace;display:block}
 #gs-inp{padding-top:16px;padding-bottom:16px;font-size:16px}
-#gs-inp:focus,#card-srch:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
+.si input:focus,#gs-inp:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
 .si input::placeholder{color:var(--fg3)}
 .si .sx{position:absolute;right:0;top:0;height:100%;width:36px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--fg2)}
 .sdd{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--bd);z-index:20;max-height:175px;overflow-y:auto;margin-top:1px}
@@ -653,7 +653,7 @@ var MENU_S={
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Player name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -2663,7 +2663,7 @@ function showP1Settings(anchorEl){
   // ── Section: Dice Theme ──
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
-  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
+  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
   html+='</div>';
 
   // ── Section: Timer ──
@@ -4335,6 +4335,9 @@ function loadCodex(){
           }
         });
       }
+      if(Array.isArray(d&&d.changelog)&&d.changelog.length){
+        if(JSON.stringify(G.codexChangelog)!==JSON.stringify(d.changelog)){G.codexChangelog=d.changelog;changed=true;}
+      }
       if(changed)render();
     })
     .catch(function(){});
@@ -4498,8 +4501,8 @@ function pContent(){
     o('</div>');
     return out.join('');}
   if(p==='names'){
-    o('<div class="fr"><label style="font-size:13px;color:var(--fg2);width:28px">P1</label><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'"></div>');
-    o('<button class="fb gold full" onclick="saveNames()">Save Name</button>');
+    o('<div class="fr"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:18px;padding:14px 12px"></div>');
+    o('<button class="fb gold full" style="font-size:16px;padding:14px" onclick="saveNames()">Save</button>');
     return out.join('');}
   if(p==='themes'){
     o('<div class="set-pop">');
@@ -4596,8 +4599,11 @@ function pContent(){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
   });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
   if(p==='codex'){
+    o('<a class="fb full" style="margin-bottom:8px;display:block;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io &rarr;</a>');
+    if(G.codexChangelog&&G.codexChangelog.length){
+      o('<button class="fb full" style="margin-bottom:8px" onclick="showEntryPopup(\'Codex Changelog\',\'\',G.codexChangelog)">Codex Changelog</button>');
+    }
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
-    o('<div class="stbar">'+fil.length+' / '+codexMain.length+' keywords</div>');
     o('<div id="codex-srch-wrap" class="si" style="margin:0 0 6px"><input id="codex-srch" placeholder="Search codex&hellip;" value="'+h(S.codexQ||'')+'">');if(S.codexQ)o('<button class="sx" onclick="S.codexQ=\'\';render()">&times;</button>');o('</div>');
     fil.forEach(function(k,i){var key='cod_'+i;var exp=!!G.accExp[key];
       o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
@@ -4609,7 +4615,7 @@ function pContent(){
           +'</div>';
       })());
     });
-    o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/codex" target="_blank">Full Codex on Curiosa &rarr;</a>');return out.join('');
+    return out.join('');
   }
   if(p==='faq'){
     var q=(S.faqQ||'').toLowerCase();var grouped={};
@@ -4622,7 +4628,6 @@ function pContent(){
       grouped[cardName].push(Object.assign({},f,{card:cardName}));
     });
     var cardNames=Object.keys(grouped).sort();var total=Object.values(grouped).reduce(function(s,a){return s+a.length;},0);
-    o('<div class="stbar">'+total+' entries &mdash; '+cardNames.length+' cards</div>');
     o('<div id="faq-srch-wrap" class="si" style="margin:0 0 6px"><input id="faq-srch" placeholder="Search FAQ&hellip;" value="'+h(S.faqQ||'')+'">');if(S.faqQ)o('<button class="sx" onclick="S.faqQ=\'\';render()">&times;</button>');o('</div>');
     cardNames.forEach(function(card,i){var faqs=grouped[card];
       var _items=faqs.map(function(f){return {q:f.q,a:f.a,segments:f.segments};});
@@ -4636,7 +4641,7 @@ function pContent(){
     });
     o('<a class="ext-lnk" style="margin-top:4px" href="https://curiosa.io/faqs" target="_blank">Official FAQ on Curiosa &rarr;</a>');return out.join('');
   }
-  if(p==='links'){[{n:'SorceryTCG.com',u:'https://sorcerytcg.com/',d:'Official site'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Codex Changelog',u:'https://curiosa.io/codex/changelog',d:'Site updates & changes'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:'Collector Arthouse',u:'https://www.collectorarthouse.com/curio-cards',d:'Artwork and Curios'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'},{n:'Ruby Coreier',u:'https://www.patreon.com/therubycoreier',d:'Uniquely Retro Magazine'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px;margin-bottom:10px;color:var(--fg)" href="'+l.u+'" target="_blank"><b style="color:var(--hi)">'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
+  if(p==='links'){[{n:'SorceryTCG.com',u:'https://sorcerytcg.com/',d:'Official site'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:'Collector Arthouse',u:'https://www.collectorarthouse.com/curio-cards',d:'Artwork and Curios'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'},{n:'Ruby Coreier',u:'https://www.patreon.com/therubycoreier',d:'Uniquely Retro Magazine'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px;margin-bottom:10px;color:var(--fg)" href="'+l.u+'" target="_blank"><b style="color:var(--hi)">'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
   if(p==='cards'){
     var q=S.cS||'';var fil=cSortArr(cFilter(CARDS,G.cF,q));
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
@@ -5342,12 +5347,15 @@ function pContent(){
     return out.join('');
   }
   if(p==='art'){
-    o('<div class="stbar">'+ARTISTS.length+' artists</div>');
-    ARTISTS.forEach(function(a,i){
+    o('<div id="art-srch-wrap" class="si" style="margin:0 0 6px"><input id="art-srch" placeholder="Search artists&hellip;" value="'+h(S.artQ||'')+'">');if(S.artQ)o('<button class="sx" onclick="S.artQ=\'\';render()">&times;</button>');o('</div>');
+    var artQ=(S.artQ||'').toLowerCase();
+    var artFil=artQ?ARTISTS.filter(function(a){return a.n.toLowerCase().indexOf(artQ)>=0;}):ARTISTS;
+    artFil.forEach(function(a,i){
       var slug=a.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
       var artUrl='https://www.collectorarthouse.com/sorcery-artists/'+slug;
       o('<div class="art-c"><div class="art-h" onclick="window.open(\''+artUrl+'\',\'_blank\')" style="cursor:pointer"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--bbl);font-size:9px">&rarr;</span></div></div>');
     });
+    if(artQ&&!artFil.length)o('<div class="ld">No artists match.</div>');
     return out.join('');
   }
   return '';
@@ -5432,13 +5440,13 @@ function cModal(){
     var _rdData=JSON.stringify(_rdSecs).replace(/'/g,"\\'").replace(/"/g,'&quot;');
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" style="display:flex;align-items:center" data-k="'+faqKey+'" onclick="toggleAcc(this.dataset.k)">');
-    o('<div class="acc-nm" style="font-size:13px;flex:1">Rules, FAQ & Codex</div>');
+    o('<div class="acc-nm" style="font-size:13px;flex:1">FAQ & Codex</div>');
      o('<span class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</span>');
     o('</div>');
     if(exp){
       o('<div class="acc-body">');
       if(cardFaqs.length){
-        o('<div style="font-size:10px;font-weight:700;color:var(--cyn);margin:4px 0 2px">FAQ</div>');
+        o('<div style="font-size:12px;font-weight:700;color:var(--cyn);margin:4px 0 2px">FAQ</div>');
         cardFaqs.forEach(function(f){
         o((function(){var _i=(G._rd=G._rd||[]).push({t:f.q,b:f.a,segments:f.segments})-1;
           return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
@@ -5449,7 +5457,7 @@ function cModal(){
       });
       }
       if(cardCodex.length){
-        o('<div style="font-size:10px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex</div>');
+        o('<div style="font-size:12px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex</div>');
         cardCodex.forEach(function(k){
         o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
           return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
@@ -5919,6 +5927,7 @@ function bindSearchInputs(){
   bind('coll-srch',function(v){S.coS=v;});
   bind('faq-srch',function(v){S.faqQ=v;});
   bind('codex-srch',function(v){S.codexQ=v;});
+  bind('art-srch',function(v){S.artQ=v;});
   var gc=document.getElementById('gs-clr');if(gc)gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
 }
 
