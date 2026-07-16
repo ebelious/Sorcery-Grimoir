@@ -98,6 +98,23 @@ function installPWA(){
     _pwaPrompt.userChoice.then(function(){ _pwaPrompt = null; });
   }
 }
+// Detects the browser/platform so the manual install instructions (for
+// browsers with no native install prompt, e.g. iOS Safari) can show only
+// the relevant steps instead of a list for every platform.
+function _installPlatform(){
+  var ua=navigator.userAgent||'';
+  if(/iPad|iPhone|iPod/.test(ua)&&!window.MSStream)return 'ios';
+  if(/Android/.test(ua))return 'android';
+  return 'desktop';
+}
+function showInstallHelp(){
+  var plat=_installPlatform();
+  var body;
+  if(plat==='ios')body='Tap the Share icon in Safari\'s toolbar, then choose "Add to Home Screen".';
+  else if(plat==='android')body='Open your browser\'s menu (usually three dots), then choose "Add to Home Screen" or "Install App".';
+  else body='Look for an install icon in your browser\'s address bar, or check the browser menu for an "Install" option.';
+  showEntryPopup('Install as App',body);
+}
 </script>
 <title>Sorcery Grimoire</title>
 <style>
@@ -297,7 +314,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .qrow{display:flex;gap:3px}
 .qbtn{flex:1;font-size:11px;padding:12px 3px;border:1px solid var(--bd);background:var(--bg);color:var(--fg2);text-transform:uppercase}
 .qbtn.on{background:var(--hi);color:var(--bg);border-color:var(--hi)}
-.dbody{flex:1;overflow-y:auto}
+.dbody{flex:1;overflow-y:auto;display:flex;flex-direction:column}
 .cro{display:flex;align-items:center;justify-content:space-between;padding:14px 13px;border-bottom:1px solid var(--bd);cursor:pointer}
 .cro:active{background:var(--bg3)}
 .crn{font-size:18px;font-weight:700}
@@ -803,7 +820,7 @@ function boot(){
   G.diceFastRoll=ld('sg-dfast',false);
   G.diceBgImage=ld('sg-dbg',null);
   G.diceShape=ld('sg-dshape','normal');
-  G.p1TimerMinutes=ld('sg-p1tm',5);
+  G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
@@ -2640,8 +2657,7 @@ function showP1Settings(anchorEl){
     var on=curDeck===dk;
     html+='<option value="'+h(dk)+'"'+(on?' selected':'')+'>'+h(d.name)+'</option>';
   });
-  if(!dkKeys.length) html+='</select><div style="font-size:12px;color:var(--fg3,#6b7280);margin-top:5px">No decks yet — create one in My Decks</div>';
-  else html+='</select>';
+  html+='</select>';
   html+='</div>';
 
   // ── Section: Dice Theme ──
@@ -2700,6 +2716,7 @@ function p1LayoutCompetitive(){
   G.cfg.hideTurnBar=false;
   G.cfg.diceInHeader=false;
   sv('sg-cfg',G.cfg);
+  if(!G.p1TimerRunning&&!G.p1TimerDone)p1TimerStart();
   _refreshP1Settings();
 }
 function p1LayoutMinimal(){
@@ -2710,6 +2727,7 @@ function p1LayoutMinimal(){
     G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
     sv('sg-vd',G.vdice);
   }
+  if(!G.p1TimerRunning)G.p1TimerPending=false;
   _refreshP1Settings();
 }
 function _refreshP1Settings(){
@@ -4521,17 +4539,6 @@ function pContent(){
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
-    if(_pwaPrompt){
-      o('<button class="fb full" style="margin-top:8px" onclick="installPWA()">&#x2B07; Install as App</button>');
-    } else if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){
-      o('<div style="font-size:9px;color:var(--bgrn);text-align:center;margin-top:8px">&#x2713; Running as installed app</div>');
-      o('<div style="font-size:8px;color:var(--fg2);text-align:center">Switch to browser: open in Safari/Chrome and tap &ldquo;Open in Browser&rdquo;</div>');
-    } else {
-      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin-top:8px;font-weight:700">Install as app:</div>');
-      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">iOS: Share &rarr; &ldquo;Add to Home Screen&rdquo;</div>');
-      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Android: Menu &rarr; &ldquo;Add to Home Screen&rdquo; or &ldquo;Install App&rdquo;</div>');
-      o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:2px 0">Desktop: Address bar install icon &#x2B07;</div>');
-    }
     o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
     o('</div>');
     return out.join('');}
@@ -5421,7 +5428,7 @@ function cModal(){
     // Build sections for popout
     var _rdSecs=[];
     if(cardFaqs.length)_rdSecs.push({hdr:'FAQ',items:cardFaqs.map(function(f){return{q:f.q,a:f.a};})});
-    if(cardCodex.length)_rdSecs.push({hdr:'Codex Keywords',items:cardCodex.map(function(k){return{q:k.k,def:k.def};})});
+    if(cardCodex.length)_rdSecs.push({hdr:'Codex',items:cardCodex.map(function(k){return{q:k.k,def:k.def};})});
     var _rdData=JSON.stringify(_rdSecs).replace(/'/g,"\\'").replace(/"/g,'&quot;');
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" style="display:flex;align-items:center" data-k="'+faqKey+'" onclick="toggleAcc(this.dataset.k)">');
@@ -5431,7 +5438,7 @@ function cModal(){
     if(exp){
       o('<div class="acc-body">');
       if(cardFaqs.length){
-        o('<div style="font-size:8px;font-weight:700;color:var(--cyn);margin:4px 0 2px">FAQ</div>');
+        o('<div style="font-size:10px;font-weight:700;color:var(--cyn);margin:4px 0 2px">FAQ</div>');
         cardFaqs.forEach(function(f){
         o((function(){var _i=(G._rd=G._rd||[]).push({t:f.q,b:f.a,segments:f.segments})-1;
           return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
@@ -5442,7 +5449,7 @@ function cModal(){
       });
       }
       if(cardCodex.length){
-        o('<div style="font-size:8px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex Keywords</div>');
+        o('<div style="font-size:10px;font-weight:700;color:var(--cyn);margin:6px 0 2px">Codex</div>');
         cardCodex.forEach(function(k){
         o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
           return '<div class="acc-row rd-entry" onclick="rdPopIdx('+_i+')">'
@@ -5816,6 +5823,13 @@ function render(){
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
+      if(!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){
+        if(_pwaPrompt){
+          o('<div style="margin-top:auto;text-align:center"><button class="fb" style="margin:12px 0 0" onclick="installPWA()">&#x2B07; Install as App</button></div>');
+        } else {
+          o('<div style="margin-top:auto;text-align:center"><button class="fb" style="margin:12px 0 0" onclick="showInstallHelp()">&#x2B07; Install as App</button></div>');
+        }
+      }
       o('</div><div class="dfoot"><a href="https://github.com/ebelious/Sorcery-Grimoir#sorcery-grimoir" target="_blank" style="text-decoration:none"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></a></div></div>');
 
       if(G.cat&&!G.panel){
