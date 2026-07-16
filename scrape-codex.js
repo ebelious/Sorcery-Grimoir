@@ -10,41 +10,74 @@ const CODEX_URL = 'https://curiosa.io/codex';
   });
   const page = await context.newPage();
 
-  // ── Intercept every response that looks codex/FAQ-related ─────────────────
+  // ── Intercept every response that could carry codex/FAQ data ──────────────
+  // Confirmed the backend is Sanity CMS (fields like _id/_type/_createdAt),
+  // whose generic query API domain (sanity.io / apicdn.sanity.io) won't
+  // necessarily have "codex" or "faq" in the URL itself — only in the GROQ
+  // query text — so match on that domain too, not just keyword URLs.
   const rawResponses = [];
+  const rawUrls = [];
   page.on('response', async (response) => {
     const url = response.url();
-    if (!/codex|faq|glossary|rules/i.test(url)) return;
+    if (!/codex|faq|glossary|rules|sanity/i.test(url)) return;
     try {
       const json = await response.json();
       rawResponses.push(json);
+      rawUrls.push(url);
     } catch (e) {}
   });
 
   function lower(s) { return (s || '').toString().toLowerCase(); }
 
+  // Sanity stores rich text as "Portable Text": an array of block objects,
+  // each with a `children` array of spans carrying the actual `text`.
+  function portableTextToPlain(val) {
+    if (typeof val === 'string') return val.trim();
+    if (!Array.isArray(val)) return '';
+    return val.map(block => {
+      if (!block) return '';
+      if (typeof block === 'string') return block;
+      if (Array.isArray(block.children)) {
+        return block.children.map(c => (c && c.text) || '').join('');
+      }
+      return block.text || '';
+    }).join('\n').trim();
+  }
+
   // ── Shape detection ─────────────────────────────────────────────────────
   function looksLikeCodex(o) {
-    return !!o && typeof o === 'object'
-      && (o.k || o.keyword || o.term || o.title || o.name)
+    if (!o || typeof o !== 'object') return false;
+    if (o._type && /codex|glossary|term|keyword/i.test(o._type)) return true;
+    return !!(o.k || o.keyword || o.term || o.title || o.name)
       && (o.def !== undefined || o.definition !== undefined || o.text !== undefined || o.content !== undefined || o.description !== undefined);
   }
   function looksLikeFaq(o) {
-    return !!o && typeof o === 'object' && (o.q || o.question) && (o.a || o.answer);
+    if (!o || typeof o !== 'object') return false;
+    if (o._type && /faq/i.test(o._type)) return true;
+    return !!(o.q || o.question) && !!(o.a || o.answer);
   }
 
   function normCodex(o) {
-    const k = o.k || o.keyword || o.term || o.title || o.name || '';
-    const def = o.def || o.definition || o.text || o.content || o.description || '';
+    const k = portableTextToPlain(o.k || o.keyword || o.term || o.title || o.name);
+    const def = portableTextToPlain(o.def || o.definition || o.text || o.content || o.description);
     if (!k || !def) return null;
-    return { k, def, sub: o.sub || o.subDef || '', id: o.id || '' };
+    return { k, def, sub: portableTextToPlain(o.sub || o.subDef) || '', id: o._id || o.id || '' };
   }
+
+  // Returns an array — a Sanity FAQ entry can apply to multiple cards via
+  // cardNames, and the app's schema expects one { card, q, a } row per card.
   function normFaq(o, cardNameHint) {
-    const q = o.q || o.question || '';
-    const a = o.a || o.answer || '';
-    if (!q || !a) return null;
-    const card = o.card || o.cardName || o.cardTitle || cardNameHint || '';
-    return { card, q, a, id: o.id || '' };
+    const qText = portableTextToPlain(o.q || o.question);
+    const aText = portableTextToPlain(o.a || o.answer);
+    if (!qText || !aText) return [];
+    let names = [];
+    if (Array.isArray(o.cardNames) && o.cardNames.length) names = o.cardNames;
+    else if (Array.isArray(o.cards) && o.cards.length) names = o.cards;
+    else if (o.card || o.cardName || o.cardTitle) names = [o.card || o.cardName || o.cardTitle];
+    else if (cardNameHint) names = [cardNameHint];
+    else names = [''];
+    const id = o._id || o.id || '';
+    return names.map(nm => ({ card: nm || '', q: qText, a: aText, id: id }));
   }
 
   var _loggedSample = false;
@@ -61,22 +94,19 @@ const CODEX_URL = 'https://curiosa.io/codex';
           console.log(JSON.stringify(obj[0], null, 2));
         }
         obj.forEach(item => {
-          if (looksLikeCodex(item)) {
+          if (looksLikeFaq(item)) {
+            normFaq(item).forEach(f => faqByKey.set((f.id ? f.id + '|' : '') + f.card + '|' + f.q, f));
+          } else if (looksLikeCodex(item)) {
             const c = normCodex(item);
             if (c) codexByKey.set(c.id || c.k, c);
-          } else if (looksLikeFaq(item)) {
-            const f = normFaq(item);
-            if (f) faqByKey.set(f.id || (f.card + '|' + f.q), f);
           } else if (item && Array.isArray(item.questions)) {
             // Possible card-grouped shape: { card, questions: [{q,a}, ...] }
             item.questions.forEach(sub => {
-              const f = normFaq(sub, item.card || item.name);
-              if (f) faqByKey.set(f.id || (f.card + '|' + f.q), f);
+              normFaq(sub, item.card || item.name).forEach(f => faqByKey.set((f.id ? f.id + '|' : '') + f.card + '|' + f.q, f));
             });
           } else if (item && Array.isArray(item.faqs)) {
             item.faqs.forEach(sub => {
-              const f = normFaq(sub, item.card || item.name);
-              if (f) faqByKey.set(f.id || (f.card + '|' + f.q), f);
+              normFaq(sub, item.card || item.name).forEach(f => faqByKey.set((f.id ? f.id + '|' : '') + f.card + '|' + f.q, f));
             });
           }
         });
@@ -119,6 +149,8 @@ const CODEX_URL = 'https://curiosa.io/codex';
   }
 
   console.log(`\nDone scrolling. Total intercepted responses: ${rawResponses.length}`);
+  console.log('Intercepted URLs:');
+  rawUrls.forEach((u, i) => console.log(`  [${i}] ${u}`));
 
   for (const resp of rawResponses) {
     absorb(resp, 0);
