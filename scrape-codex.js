@@ -422,15 +422,25 @@ const CODEX_URL = 'https://curiosa.io/codex';
       })(nextData, null, 0);
       console.log(`Changelog: excluded ${excludedCount} codex/FAQ content block(s) found alongside the changelog data.`);
       if (found.length) {
-        changelogEntries = found.map((f, i) => {
+        const rejectedTitles = [];
+        changelogEntries = found.map((f) => {
           const p = f.parent || {};
           const titleRaw = p.title || p.date || p.name || p.version || p._createdAt || p._updatedAt || '';
-          const title = portableTextToPlain(titleRaw) || (typeof titleRaw === 'string' ? titleRaw : '') || `Update ${i + 1}`;
+          const title = portableTextToPlain(titleRaw) || (typeof titleRaw === 'string' ? titleRaw : '');
           return { title, segments: portableTextSegments(f.blocks) };
-        }).filter(e => e.segments.length);
-        console.log(`Changelog: found ${changelogEntries.length} separate entr${changelogEntries.length === 1 ? 'y' : 'ies'}.`);
-        console.log('Sample changelog entry (for debugging title/field mapping):');
-        console.log(JSON.stringify({ title: changelogEntries[0]?.title, parentKeys: Object.keys(found[0].parent || {}) }, null, 2));
+        }).filter(e => {
+          const isDate = !!e.title && !isNaN(Date.parse(e.title));
+          if (e.segments.length && !isDate) rejectedTitles.push(e.title || '(blank)');
+          return e.segments.length && isDate;
+        });
+        console.log(`Changelog: found ${changelogEntries.length} entr${changelogEntries.length === 1 ? 'y' : 'ies'} with a valid date title.`);
+        if (rejectedTitles.length) {
+          console.log(`Changelog: rejected ${rejectedTitles.length} entr${rejectedTitles.length === 1 ? 'y' : 'ies'} without a valid date title (likely codex/FAQ leakage), e.g.: ${rejectedTitles.slice(0, 5).join(', ')}`);
+        }
+        if (changelogEntries[0]) {
+          console.log('Sample changelog entry (for debugging title/field mapping):');
+          console.log(JSON.stringify({ title: changelogEntries[0].title }, null, 2));
+        }
       } else {
         console.log('Changelog: no portable-text block array found in __NEXT_DATA__.');
       }
@@ -452,7 +462,13 @@ const CODEX_URL = 'https://curiosa.io/codex';
 
   fs.writeFileSync(
     'codex.json',
-    JSON.stringify({ updated: new Date().toISOString(), codex, faq, changelog: changelogEntries.length ? changelogEntries : undefined }, null, 2)
+    JSON.stringify({ updated: new Date().toISOString(), codex, faq }, null, 2)
   );
   console.log('✓ Wrote codex.json');
+
+  fs.writeFileSync(
+    'changelog.json',
+    JSON.stringify({ updated: new Date().toISOString(), changelog: changelogEntries }, null, 2)
+  );
+  console.log('✓ Wrote changelog.json');
 })();
