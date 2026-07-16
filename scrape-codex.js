@@ -74,6 +74,24 @@ const CODEX_URL = 'https://curiosa.io/codex';
     }
     return '';
   }
+  // Builds a formatted run { text, bold, italic, cardRef } from an inline
+  // child instead of collapsing straight to plain text, so bold/italic marks
+  // and card cross-references survive into the app for real rendering.
+  function _runFromChild(c) {
+    if (!c) return null;
+    if (typeof c.text === 'string') {
+      const marks = Array.isArray(c.marks) ? c.marks : [];
+      return { text: c.text, bold: marks.includes('strong'), italic: marks.includes('em') };
+    }
+    const name = c.cardName || c.card || c.name || c.title || c.value || c.label;
+    if (typeof name === 'string') return { text: name, cardRef: name };
+    if (!_loggedRefSample) {
+      _loggedRefSample = true;
+      console.log('Sample non-text inline child (for debugging card-reference field mapping):');
+      console.log(JSON.stringify(c, null, 2));
+    }
+    return null;
+  }
   function portableTextToPlain(val) {
     if (typeof val === 'string') return val.trim();
     if (!Array.isArray(val)) return '';
@@ -88,28 +106,22 @@ const CODEX_URL = 'https://curiosa.io/codex';
   }
 
   // Walks the block array in original document order and returns a mixed
-  // sequence of segments — { t:'p', text } for paragraphs, { t:'h', text }
+  // sequence of segments — { t:'p', text, runs } for paragraphs (runs
+  // preserve bold/italic and card-reference links), { t:'h', text, runs }
   // for short bold standalone lines (e.g. "Example 1"), { t:'tbl', rows }
   // for grids, { t:'img', url } for images — so tables/images render at the
   // exact position they appear in the source text instead of all at the end.
+  // Each source paragraph block becomes its own segment (matching curiosa's
+  // own per-<p> structure) rather than merging consecutive ones together.
   function portableTextSegments(val) {
     if (!Array.isArray(val)) return [];
     const segs = [];
-    let textBuf = [];
-    function flushText() {
-      if (textBuf.length) {
-        const joined = textBuf.join('\n').trim();
-        if (joined) segs.push({ t: 'p', text: joined });
-        textBuf = [];
-      }
-    }
     val.forEach(block => {
       if (!block || typeof block !== 'object') return;
       const isTable = /table|grid/i.test(block._type || '');
       const isImageBlock = (block._type === 'image' || block._type === 'figure' || !!block.asset) && !isTable;
 
       if (isTable) {
-        flushText();
         if (!_loggedTableSample) {
           _loggedTableSample = true;
           console.log('Sample portable-text table block (for debugging table field mapping):');
@@ -134,7 +146,6 @@ const CODEX_URL = 'https://curiosa.io/codex';
       }
 
       if (isImageBlock) {
-        flushText();
         if (!_loggedImageSample) {
           _loggedImageSample = true;
           console.log('Sample portable-text image block (for debugging image field mapping):');
@@ -147,22 +158,15 @@ const CODEX_URL = 'https://curiosa.io/codex';
       }
 
       if (Array.isArray(block.children)) {
-        const text = block.children.map(_inlineChildText).join('').trim();
+        const runs = block.children.map(_runFromChild).filter(Boolean);
+        const text = runs.map(r => r.text).join('').trim();
         if (!text) return;
-        const isBoldHeading = block.children.length === 1
-          && Array.isArray(block.children[0].marks)
-          && block.children[0].marks.includes('strong')
-          && text.length < 60;
-        if (isBoldHeading) {
-          flushText();
-          segs.push({ t: 'h', text });
-        } else {
-          const prefix = block.listItem === 'bullet' ? '• ' : '';
-          textBuf.push(prefix + text);
-        }
+        const isBoldHeading = runs.length === 1 && runs[0].bold && !runs[0].cardRef && text.length < 60;
+        const prefix = block.listItem === 'bullet' ? '• ' : '';
+        if (prefix && runs.length) runs[0] = Object.assign({}, runs[0], { text: prefix + runs[0].text });
+        segs.push({ t: isBoldHeading ? 'h' : 'p', text: prefix + text, runs });
       }
     });
-    flushText();
     return segs;
   }
 
