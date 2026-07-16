@@ -77,11 +77,15 @@ const CODEX_URL = 'https://curiosa.io/codex';
   // Builds a formatted run { text, bold, italic, cardRef } from an inline
   // child instead of collapsing straight to plain text, so bold/italic marks
   // and card cross-references survive into the app for real rendering.
-  function _runFromChild(c) {
+  function _runFromChild(c, markDefsByKey) {
     if (!c) return null;
     if (typeof c.text === 'string') {
       const marks = Array.isArray(c.marks) ? c.marks : [];
-      return { text: c.text, bold: marks.includes('strong'), italic: marks.includes('em') };
+      const isLink = !!markDefsByKey && marks.some(mk => {
+        const def = markDefsByKey[mk];
+        return def && (def._type === 'link' || def.href);
+      });
+      return { text: c.text, bold: marks.includes('strong'), italic: marks.includes('em'), link: isLink };
     }
     const name = c.cardName || c.card || c.name || c.title || c.value || c.label;
     if (typeof name === 'string') return { text: name, cardRef: name };
@@ -158,7 +162,9 @@ const CODEX_URL = 'https://curiosa.io/codex';
       }
 
       if (Array.isArray(block.children)) {
-        const runs = block.children.map(_runFromChild).filter(Boolean);
+        const markDefsByKey = {};
+        (block.markDefs || []).forEach(md => { if (md && md._key) markDefsByKey[md._key] = md; });
+        const runs = block.children.map(c => _runFromChild(c, markDefsByKey)).filter(Boolean);
         const text = runs.map(r => r.text).join('').trim();
         if (!text) return;
         const isBoldHeading = runs.length === 1 && runs[0].bold && !runs[0].cardRef && text.length < 60;
@@ -370,7 +376,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
   }
 
   console.log('\nLoading codex changelog page...');
-  let changelogSegments = [];
+  let changelogEntries = [];
   try {
     await page.goto('https://curiosa.io/codex/changelog', { waitUntil: 'networkidle', timeout: 60000 });
     await page.waitForTimeout(2000);
@@ -384,26 +390,34 @@ const CODEX_URL = 'https://curiosa.io/codex';
       // Search the SSG-embedded page data for any portable-text block
       // arrays (same shape as codex/FAQ content), rather than assuming a
       // specific query key, since the changelog's exact data shape hasn't
-      // been confirmed yet.
-      const blockArrays = [];
+      // been confirmed yet. Each block array is kept as its own separate
+      // entry (not merged) so each change/update can be its own popup in
+      // the app, and we grab the parent object alongside it to look for a
+      // title/date field to label that entry with.
+      const found = [];
       const seen = new Set();
-      (function walk(node, depth) {
+      (function walk(node, parent, depth) {
         if (!node || typeof node !== 'object' || depth > 20) return;
         if (Array.isArray(node)) {
           if (node.length && node[0] && node[0]._type === 'block' && !seen.has(node)) {
             seen.add(node);
-            blockArrays.push(node);
+            found.push({ blocks: node, parent });
           }
-          node.forEach(v => walk(v, depth + 1));
+          node.forEach(v => walk(v, node, depth + 1));
         } else {
-          Object.values(node).forEach(v => walk(v, depth + 1));
+          Object.keys(node).forEach(k => walk(node[k], node, depth + 1));
         }
-      })(nextData, 0);
-      if (blockArrays.length) {
-        blockArrays.forEach(arr => { changelogSegments = changelogSegments.concat(portableTextSegments(arr)); });
-        console.log(`Changelog: found ${blockArrays.length} content block array(s), extracted ${changelogSegments.length} total segments.`);
-        console.log('Sample of first changelog block array (for debugging field mapping):');
-        console.log(JSON.stringify(blockArrays[0].slice(0, 3), null, 2));
+      })(nextData, null, 0);
+      if (found.length) {
+        changelogEntries = found.map((f, i) => {
+          const p = f.parent || {};
+          const titleRaw = p.title || p.date || p.name || p.version || p._createdAt || p._updatedAt || '';
+          const title = portableTextToPlain(titleRaw) || (typeof titleRaw === 'string' ? titleRaw : '') || `Update ${i + 1}`;
+          return { title, segments: portableTextSegments(f.blocks) };
+        }).filter(e => e.segments.length);
+        console.log(`Changelog: found ${changelogEntries.length} separate entr${changelogEntries.length === 1 ? 'y' : 'ies'}.`);
+        console.log('Sample changelog entry (for debugging title/field mapping):');
+        console.log(JSON.stringify({ title: changelogEntries[0]?.title, parentKeys: Object.keys(found[0].parent || {}) }, null, 2));
       } else {
         console.log('Changelog: no portable-text block array found in __NEXT_DATA__.');
       }
@@ -425,7 +439,7 @@ const CODEX_URL = 'https://curiosa.io/codex';
 
   fs.writeFileSync(
     'codex.json',
-    JSON.stringify({ updated: new Date().toISOString(), codex, faq, changelog: changelogSegments.length ? changelogSegments : undefined }, null, 2)
+    JSON.stringify({ updated: new Date().toISOString(), codex, faq, changelog: changelogEntries.length ? changelogEntries : undefined }, null, 2)
   );
   console.log('✓ Wrote codex.json');
 })();
