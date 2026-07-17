@@ -3345,8 +3345,8 @@ function _updateOfflineCacheCount(){
 // recreates every DOM node (including whatever had focus), so scroll
 // position alone isn't enough to keep a button looking/behaving pressed.
 var _rksfPending={};
-function _renderKeepScrollFocus(anchorId){
-  if(_rksfPending[anchorId])return; // a render+restore cycle is already in flight for this anchor -- skip to avoid racing it
+function _renderKeepScrollFocus(anchorId,force){
+  if(_rksfPending[anchorId]&&!force)return; // a render+restore cycle is already in flight for this anchor -- skip to avoid racing it
   _rksfPending[anchorId]=true;
   var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
@@ -3372,7 +3372,7 @@ function downloadForOffline(scope){
       var url=urls[idx++];
       fetch(url,{mode:'no-cors'}).catch(function(){}).then(function(){
         G.offlineDownloadDone++;
-        if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-anchor');}
+        if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-anchor',true);}
         else{ if(G.offlineDownloadDone%5===0)_renderKeepScrollFocus('offline-cache-anchor'); next(); }
       });
     }
@@ -3403,7 +3403,7 @@ function cacheAppData(){
   G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-anchor');
   var idx=0;
   function next(){
-    if(idx>=dataFiles.length+bgFiles.length){G.appDataCaching=false;_renderKeepScrollFocus('appdata-cache-anchor');return;}
+    if(idx>=dataFiles.length+bgFiles.length){G.appDataCaching=false;_renderKeepScrollFocus('appdata-cache-anchor',true);return;}
     if(idx<dataFiles.length){
       var url=dataFiles[idx++];
       var withBuster=url+(url.indexOf('?')>=0?'&':'?')+'t='+Date.now();
