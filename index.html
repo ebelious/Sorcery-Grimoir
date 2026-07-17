@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com https://elaborate-mooncake-835943.netlify.app https://nominatim.openstreetmap.org; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com https://elaborate-mooncake-835943.netlify.app https://nominatim.openstreetmap.org https://images.sorcerycard.io https://storage.googleapis.com; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -88,6 +88,7 @@ function _fcmActiveTopics(){
   if(G.cfg&&G.cfg.pushNews)t.push('news');
   if(G.cfg&&G.cfg.pushDiscord)t.push('discord');
   if(G.cfg&&G.cfg.pushYoutube)t.push('youtube');
+  if(G.cfg&&G.cfg.pushRewards)t.push('rewards');
   return t;
 }
 // Fetches (or refreshes) this device's FCM token and tells our Netlify
@@ -132,7 +133,7 @@ function togglePushTopic(topic){
 // Register external service worker
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('./sw.js').catch(function(e){
+    navigator.serviceWorker.register('./sw.js', {updateViaCache: 'none'}).catch(function(e){
       console.log('SW registration failed:', e);
     });
   });
@@ -161,7 +162,7 @@ function _sendNotification(title, body, section){
 // message from the service worker (showNotification click, possibly after
 // the page was backgrounded).
 function _openNotificationSection(section){
-  if(section==='news'||section==='discord'||section==='yt')openPanel(section);
+  if(section==='news'||section==='discord'||section==='yt'||section==='rewards')openPanel(section);
 }
 if('serviceWorker' in navigator){
   navigator.serviceWorker.addEventListener('message',function(ev){
@@ -835,7 +836,7 @@ var G={
   theme:'',mode:2,menu:false,cat:null,panel:null,navStack:[],selDeck:null,
   dice:null,dieCI:0,dieCI2:4,
   diceFeltColor:'#14532d',diceTableColor:'#0d1117',diceTexture:'felt',diceTexture2:'felt',diceFastRoll:false,diceBgImage:null,diceShape:'normal',
-  newsHasNew:false,ytHasNew:false,discordHasNew:false,
+  newsHasNew:false,ytHasNew:false,discordHasNew:false,rewardsHasNew:false,
   customDieSides:2,
   vdice:{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false},
   players:[],records:{},coll:{},decks:{},dkstat:{},
@@ -938,7 +939,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -956,19 +957,20 @@ function boot(){
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
-  if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)){
+  if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
-        G.cfg.notifications=false;G.cfg.pushNews=false;G.cfg.pushDiscord=false;G.cfg.pushYoutube=false;
+        G.cfg.notifications=false;G.cfg.pushNews=false;G.cfg.pushDiscord=false;G.cfg.pushYoutube=false;G.cfg.pushRewards=false;
         sv('sg-cfg',G.cfg);_renderKeepScroll();
         return;
       }
-      if(G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube){_initFirebaseMessaging();_fcmSyncTopics();}
+      if(G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards){_initFirebaseMessaging();_fcmSyncTopics();}
       _renderKeepScroll();
     });
-  } else if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
+  } else if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
     _initFirebaseMessaging();_fcmSyncTopics();
   }
+  _updateOfflineCacheCount();
   var _openParam=new URLSearchParams(location.search).get('open');
   if(_openParam){
     _openNotificationSection(_openParam);
@@ -3286,6 +3288,111 @@ function _expandImg(el){
   G.expImgSite=G.selCard&&cType(G.selCard)==='site'&&!_srcIsPreRotated(G.expImg);
   render();
 }
+// Gathers unique card image URLs for everything in the user's Collection
+// and Decks, then fetches each one so the service worker's cache-first
+// image handler (see sw.js) stores a local copy for offline use.
+function _offlineImageUrls(scope,rewardsData){
+  var urls=[];
+  if(scope==='all'){
+    CARDS.forEach(function(c){urls.push(imgURL(c));});
+    (rewardsData||G.rewardsItems||[]).forEach(function(r){if(r.image)urls.push(r.image);});
+    return urls;
+  }
+  var names={};
+  Object.keys(G.coll||{}).forEach(function(n){if((G.coll[n].qty||0)>0)names[n]=true;});
+  Object.keys(G.decks||{}).forEach(function(dk){
+    (G.decks[dk].cards||[]).forEach(function(entry){names[entry.name]=true;});
+  });
+  Object.keys(names).forEach(function(n){
+    var c=cardByName(n);
+    if(c)urls.push(imgURL(c));
+  });
+  return urls;
+}
+// Queries the service worker's image cache directly (the Cache API is
+// available from the page too, not just inside sw.js) so the Offline
+// Access screen can show how many images are actually cached right now.
+function _updateOfflineCacheCount(){
+  if(!('caches' in window)){G.offlineCacheCount=0;return;}
+  caches.open('sg-card-images-v1').then(function(c){return c.keys();}).then(function(keys){
+    G.offlineCacheCount=keys.length;render();
+  }).catch(function(){G.offlineCacheCount=0;render();});
+}
+// Same idea as _renderKeepScroll(), but also explicitly restores keyboard
+// focus to a given button by id afterward -- re-rendering destroys and
+// recreates every DOM node (including whatever had focus), so scroll
+// position alone isn't enough to keep a button looking/behaving pressed.
+function _renderKeepScrollFocus(btnId){
+  var cm=document.querySelector('.cm')||document.querySelector('.panel');
+  var scrollTop=cm?cm.scrollTop:0;
+  var hadFocus=document.activeElement&&document.activeElement.id===btnId;
+  render();
+  requestAnimationFrame(function(){
+    var cm2=document.querySelector('.cm')||document.querySelector('.panel');
+    if(cm2)cm2.scrollTop=scrollTop;
+    if(hadFocus){var btn=document.getElementById(btnId);if(btn)btn.focus();}
+  });
+}
+function downloadForOffline(scope){
+  if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
+  function start(rewardsData){
+    var urls=_offlineImageUrls(scope,rewardsData);
+    if(!urls.length){alert('No cards to cache yet.');return;}
+    G.offlineDownloading=true;G.offlineDownloadTotal=urls.length;G.offlineDownloadDone=0;_renderKeepScrollFocus('offline-cache-btn');
+    var idx=0;
+    var CONCURRENCY=4; // a few in parallel for speed, without hammering the image CDN
+    function next(){
+      if(idx>=urls.length)return;
+      var url=urls[idx++];
+      fetch(url,{mode:'no-cors'}).catch(function(){}).then(function(){
+        G.offlineDownloadDone++;
+        if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-btn');}
+        else{ if(G.offlineDownloadDone%5===0)_renderKeepScrollFocus('offline-cache-btn'); next(); }
+      });
+    }
+    for(var i=0;i<CONCURRENCY;i++)next();
+  }
+  // "All" also includes Rewards images -- fetch rewards.json first if it
+  // isn't already loaded, so those get swept in too.
+  if(scope==='all'&&!G.rewardsItems){
+    fetch('https://ebelious.github.io/Sorcery-Grimoir/rewards.json?t='+Date.now())
+      .then(function(r){return r.ok?r.json():{rewards:[]};})
+      .then(function(d){start(d.rewards||[]);})
+      .catch(function(){start([]);});
+  } else {
+    start();
+  }
+}
+// Caches everything else the app needs to run offline: the app shell
+// (index.html/manifest.json) and every JSON data feed (cards, codex, news,
+// discord, events, rewards). Each fetch below is intercepted by sw.js's
+// network-first data-cache handler, which stores a copy for next time.
+// Separate from downloadForOffline(), which only handles images.
+function cacheAppData(){
+  if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
+  var base='https://ebelious.github.io/Sorcery-Grimoir/';
+  var dataFiles=['./','./manifest.json',base+'cards.json',base+'codex.json',base+'news.json',base+'discord.json',base+'events.json',base+'rewards.json'];
+  var bgFiles=BG_IMAGES.map(function(b){return BG_IMG_PATH+b.file;});
+  var total=dataFiles.length+bgFiles.length;
+  G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-btn');
+  var idx=0;
+  function next(){
+    if(idx>=dataFiles.length+bgFiles.length){G.appDataCaching=false;_renderKeepScrollFocus('appdata-cache-btn');return;}
+    if(idx<dataFiles.length){
+      var url=dataFiles[idx++];
+      var withBuster=url+(url.indexOf('?')>=0?'&':'?')+'t='+Date.now();
+      fetch(withBuster,{cache:'no-store'})
+        .catch(function(){})
+        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-btn'); next(); });
+    } else {
+      var bgUrl=bgFiles[idx++ -dataFiles.length];
+      fetch(bgUrl,{mode:'no-cors'})
+        .catch(function(){})
+        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-btn'); next(); });
+    }
+  }
+  next();
+}
 function imgURL(c){
   if(c&&c.img) return c.img;
   var s=cSlug(c);
@@ -4109,6 +4216,14 @@ function evUnsave(idx){
   sv('sg-evsaved',G.evSaved);render();
 }
 
+function _checkRewardsForNew(){
+  if(!G.rewardsItems||!G.rewardsItems.length)return;
+  var latest=G.rewardsItems[0].name;
+  if(!latest)return;
+  var seen=ld('sg-rewards-seen',null);
+  if(seen==null){ sv('sg-rewards-seen',latest); }
+  else if(seen!==latest){ G.rewardsHasNew=true; _sendNotification('New Reward Available','A new item is in the Rewards catalogue.','rewards'); }
+}
 function loadRewards(){
   if(G.rewardsLoading)return;
   G.rewardsLoading=true;G.rewardsLoaded=false;G.rewardsErr=null;render();
@@ -4118,6 +4233,7 @@ function loadRewards(){
       G.rewardsLoading=false;G.rewardsLoaded=true;
       G.rewardsItems=d.rewards||[];
       if(!G.rewardsItems.length)G.rewardsErr='No rewards found. Try the Play Network link above.';
+      _checkRewardsForNew();
       render();
     })
     .catch(function(){
@@ -4673,6 +4789,7 @@ function openPanel(id){
   if(id==='news'){G.newsHasNew=false;if(G.newsItems&&G.newsItems.length){var l=G.newsItems[0].url||G.newsItems[0].title;if(l)sv('sg-news-seen',l);}}
   if(id==='yt'){G.ytHasNew=false;if(G.ytVids&&G.ytVids.length&&(G.ytCh||'all')==='all'){var lv=G.ytVids[0].videoId||G.ytVids[0].id;if(lv)sv('sg-yt-seen',lv);}}
   if(id==='discord'){G.discordHasNew=false;if(G.discordItems&&G.discordItems.length){var ld2=G.discordItems[0].id;if(ld2)sv('sg-discord-seen',ld2);}}
+  if(id==='rewards'){G.rewardsHasNew=false;if(G.rewardsItems&&G.rewardsItems.length){var lr=G.rewardsItems[0].name;if(lr)sv('sg-rewards-seen',lr);}}
   if(id==='deckview'){_dvInitHand(G.selDeck);}
   var _rb0=document.querySelector('.rd-body');
   G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu,readModal:G.readModal,rdScroll:_rb0?_rb0.scrollTop:0,selCard:G.selCard});G.panel=id;G.cat=null;G.readModal=null;render();
@@ -4784,12 +4901,29 @@ function pContent(){
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">Offline Access</div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
+    if(G.offlineDownloading){
+      var _pct1=G.offlineDownloadTotal?Math.round(100*G.offlineDownloadDone/G.offlineDownloadTotal):0;
+      o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching images&hellip; ('+G.offlineDownloadDone+'/'+G.offlineDownloadTotal+')</div>');
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct1+'%;transition:width .2s"></div></div>');
+    } else {
+      o('<button id="offline-cache-btn" class="fb" style="width:100%;margin-bottom:6px" onclick="if(confirm(\'This downloads every card image in the game (1000+ images, likely several hundred MB or more). It may take a while and use significant mobile data if not on Wi-Fi. Continue?\'))downloadForOffline(\'all\')">Cache Card Data</button>');
+    }
+    if(G.appDataCaching){
+      var _pct2=G.appDataCacheTotal?Math.round(100*G.appDataCacheDone/G.appDataCacheTotal):0;
+      o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching app data&hellip; ('+G.appDataCacheDone+'/'+G.appDataCacheTotal+')</div>');
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct2+'%;transition:width .2s"></div></div>');
+    } else {
+      o('<button id="appdata-cache-btn" class="fb" style="width:100%" onclick="cacheAppData()">Cache App Data</button>');
+    }
     o('<div class="slbl2">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>News</span><button class="ftag'+(G.cfg.pushNews?' on':'')+'" onclick="togglePushTopic(\'news\')">'+(G.cfg.pushNews?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Discord</span><button class="ftag'+(G.cfg.pushDiscord?' on':'')+'" onclick="togglePushTopic(\'discord\')">'+(G.cfg.pushDiscord?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>YouTube</span><button class="ftag'+(G.cfg.pushYoutube?' on':'')+'" onclick="togglePushTopic(\'youtube\')">'+(G.cfg.pushYoutube?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Rewards</span><button class="ftag'+(G.cfg.pushRewards?' on':'')+'" onclick="togglePushTopic(\'rewards\')">'+(G.cfg.pushRewards?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
       var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
@@ -6179,7 +6313,7 @@ function render(){
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
-        var _catDot=(cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
+        var _catDot=((cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))||(cat==='Play Network'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
@@ -6194,7 +6328,7 @@ function render(){
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
-        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew)||(item==='Discord'&&G.discordHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
+        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew)||(item==='Discord'&&G.discordHasNew)||(item==='Rewards'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
         o('<button class="cpop-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button></div></div>');
       }
     }
