@@ -23,7 +23,7 @@ const APP_SHELL_CACHE = 'sg-app-shell-v1';
 // from network and store a copy for next time. Only applies to the card
 // image CDN -- everything else passes through untouched.
 const IMG_CACHE = 'sg-card-images-v1';
-const IMG_HOST_RE = /images\.sorcerycard\.io/;
+const IMG_HOST_RE = /images\.sorcerycard\.io|storage\.googleapis\.com\/cardeio-images/;
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
