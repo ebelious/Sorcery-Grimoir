@@ -3292,12 +3292,17 @@ function _expandImg(el){
 // Gathers unique card image URLs for everything in the user's Collection
 // and Decks, then fetches each one so the service worker's cache-first
 // image handler (see sw.js) stores a local copy for offline use.
+function _dedupeUrls(urls){
+  var seen={},out=[];
+  urls.forEach(function(u){if(u&&!seen[u]){seen[u]=true;out.push(u);}});
+  return out;
+}
 function _offlineImageUrls(scope,rewardsData){
   var urls=[];
   if(scope==='all'){
     CARDS.forEach(function(c){urls.push(imgURL(c));});
     (rewardsData||G.rewardsItems||[]).forEach(function(r){if(r.image)urls.push(r.image);});
-    return urls;
+    return _dedupeUrls(urls);
   }
   var names={};
   Object.keys(G.coll||{}).forEach(function(n){if((G.coll[n].qty||0)>0)names[n]=true;});
@@ -3308,7 +3313,7 @@ function _offlineImageUrls(scope,rewardsData){
     var c=cardByName(n);
     if(c)urls.push(imgURL(c));
   });
-  return urls;
+  return _dedupeUrls(urls);
 }
 // Queries the service worker's image cache directly (the Cache API is
 // Tells the service worker whether it should opportunistically cache
