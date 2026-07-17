@@ -35,6 +35,35 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
   // item" before falling back to just scanning for point-amount text.
   await page.waitForSelector('img', { timeout: 15000 }).catch(() => {});
 
+  // The catalogue almost certainly has more items than a single initial
+  // render shows (confirmed: only 24 were being found despite the site
+  // having more). Repeatedly scroll to the bottom and/or click any "Load
+  // More"/"Show More" button until the page stops growing, so pagination or
+  // infinite-scroll gets fully exhausted before we extract anything.
+  let previousHeight = 0;
+  let scrollIterations = 0;
+  for (let i = 0; i < 25; i++) {
+    const currentHeight = await page.evaluate(() => document.body.scrollHeight);
+    if (currentHeight === previousHeight) break;
+    previousHeight = currentHeight;
+    scrollIterations++;
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    // Click a "Load More"/"Show More" button if one exists and is visible.
+    const clicked = await page.evaluate(() => {
+      const btn = Array.from(document.querySelectorAll('button, a')).find(el => {
+        const t = (el.innerText || '').trim().toLowerCase();
+        return (t === 'load more' || t === 'show more' || t.includes('load more') || t.includes('show more'))
+          && el.offsetParent !== null;
+      });
+      if (btn) { btn.click(); return true; }
+      return false;
+    });
+
+    await page.waitForTimeout(clicked ? 1500 : 1000);
+  }
+
   const { rewards, diagnostics } = await page.evaluate(() => {
     // Known non-reward UI text to skip (nav, filters, headers, etc.)
     const SKIP = new Set([
@@ -147,6 +176,7 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
     };
   });
 
+  console.log('Scroll/load-more iterations performed:', scrollIterations);
   console.log('Diagnostics:', JSON.stringify(diagnostics, null, 2));
 
   await browser.close();
