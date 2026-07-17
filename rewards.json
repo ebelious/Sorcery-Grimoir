@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17T03:19:54.168Z",
+  "updated": "2026-07-17T03:51:41.220Z",
   "source": "https://play.sorcerytcg.com/rewards",
   "rewards": [
     {
@@ -10,10 +10,38 @@
       "url": ""
     },
     {
+      "name": "AL - Promo - Briar Patch (Foil, 3 Pack)",
+      "points": 500,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_briar_patch_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "AL - Promo - Camelot (Foil)",
+      "points": 1500,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_camelot_foil.webp",
+      "url": ""
+    },
+    {
       "name": "AL - Promo - Druid (Foil, 4 Pack)",
       "points": 1000,
       "soldOut": true,
       "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_druid_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "AL - Promo - King Arthur (Foil)",
+      "points": 2000,
+      "soldOut": true,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_king_arthur_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "AL - Promo - Warhorse (Foil)",
+      "points": 1000,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_warhorse_foil.webp",
       "url": ""
     },
     {
@@ -52,10 +80,45 @@
       "url": ""
     },
     {
+      "name": "Playmat - Mirror Realm",
+      "points": 800,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_mirror_realm.webp",
+      "url": ""
+    },
+    {
+      "name": "Playmat - Primordial Spring",
+      "points": 800,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_primordial_spring.webp",
+      "url": ""
+    },
+    {
+      "name": "Playmat - Roots of Yggdrasil",
+      "points": 800,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_roots_of_ydrassil.webp",
+      "url": ""
+    },
+    {
+      "name": "Playmat - Watchtower",
+      "points": 800,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_watchtower.webp",
+      "url": ""
+    },
+    {
       "name": "Preconstructed Decks (Alpha)",
       "points": 8000,
       "soldOut": true,
       "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Box-AlphaPrecon.png",
+      "url": ""
+    },
+    {
+      "name": "Promo - Cloud City (Foil)",
+      "points": 1400,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_cloud_city_foil.webp",
       "url": ""
     },
     {
@@ -84,6 +147,13 @@
       "points": 500,
       "soldOut": false,
       "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_draft_sites_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "Promo - Foot Soldier (3 Pack)",
+      "points": 400,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_foot_soldier_pack.webp",
       "url": ""
     },
     {
@@ -150,10 +220,45 @@
       "url": ""
     },
     {
+      "name": "Promo - Pudge Butcher",
+      "points": 200,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_pudge_butcher.webp",
+      "url": ""
+    },
+    {
+      "name": "Promo - Rubble (Foil, 4 Pack)",
+      "points": 500,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_rubble_pack.webp",
+      "url": ""
+    },
+    {
       "name": "Promo - Savior (Foil) (Precon)",
       "points": 1000,
       "soldOut": true,
       "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-SaviorFoil.png",
+      "url": ""
+    },
+    {
+      "name": "Promo - Sorcerer - Foil",
+      "points": 300,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_sorcerer_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "Promo - The Colour out of Space (Foil)",
+      "points": 1800,
+      "soldOut": true,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_the_colour_out_of_space_foil.webp",
+      "url": ""
+    },
+    {
+      "name": "Promo - Waypoint Portal",
+      "points": 400,
+      "soldOut": false,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_waypoint_portal.webp",
       "url": ""
     },
     {
@@ -168,6 +273,13 @@
       "points": 1200,
       "soldOut": true,
       "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-RiverOfBloodAltFOIL.png",
+      "url": ""
+    },
+    {
+      "name": "Sorcery: Contested Realm - Alpha Box",
+      "points": 12000,
+      "soldOut": true,
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/alpha_booster_box.webp",
       "url": ""
     }
   ]
