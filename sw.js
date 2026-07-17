@@ -9,6 +9,7 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   console.log('Service worker active');
+  event.waitUntil(self.clients.claim());
 });
 
 // Caches the app shell (the page itself) so it still loads with no network
@@ -71,7 +72,30 @@ self.addEventListener('fetch', (event) => {
   // everything else passes through normally
 });
 
-// Handles clicks on notifications sent locally by _sendNotification() (the
+// Caches the core JSON data files the app actually runs on. CARDS,
+// FAQ_DATA, and CODEX_DATA all start as empty arrays in index.html and are
+// populated entirely by fetching these at startup -- without caching them
+// too, the app shell would load offline but show no cards at all. Same
+// network-first strategy as the app shell: freshest data when online,
+// last-known-good data when offline.
+const DATA_CACHE = 'sg-data-v1';
+const DATA_FILE_RE = /\/(cards|codex|news|discord|events|rewards)\.json(\?|$)/;
+
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  if (req.method === 'GET' && DATA_FILE_RE.test(req.url)) {
+    event.respondWith(
+      fetch(req)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.ok) {
+            caches.open(DATA_CACHE).then((cache) => cache.put(req.url.split('?')[0], networkResponse.clone()));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(req.url.split('?')[0]))
+    );
+  }
+});
 // in-app "Notifications" toggle -- timer alerts, new-content alerts). Only
 // acts when a `section` was tagged on the notification's data (news/discord/
 // yt); Firebase push notifications (the separate News/Discord/YouTube push
