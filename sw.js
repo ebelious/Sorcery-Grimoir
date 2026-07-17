@@ -7,6 +7,20 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+// Controls whether images/data get opportunistically cached as they're
+// viewed (the "cache by default" behavior, toggleable in Settings ->
+// Offline Access). Defaults on. The page tells us the current setting via
+// postMessage on load and whenever it changes, since a service worker can't
+// read the page's own settings/localStorage directly. This does NOT affect
+// the manual "Cache Card Data"/"Cache App Data" buttons, which are explicit
+// user actions independent of this default.
+let autoCacheEnabled = true;
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'set-auto-cache') {
+    autoCacheEnabled = !!event.data.enabled;
+  }
+});
+
 self.addEventListener('activate', (event) => {
   console.log('Service worker active');
   event.waitUntil(self.clients.claim());
@@ -58,7 +72,7 @@ self.addEventListener('fetch', (event) => {
           if (cached) return cached;
           return fetch(req)
             .then((networkResponse) => {
-              if (networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
+              if (autoCacheEnabled && networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
                 return cache.put(req, networkResponse.clone()).then(() => networkResponse);
               }
               return networkResponse;
@@ -87,7 +101,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(req)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.ok) {
+          if (autoCacheEnabled && networkResponse && networkResponse.ok) {
             caches.open(DATA_CACHE).then((cache) => cache.put(req.url.split('?')[0], networkResponse.clone()));
           }
           return networkResponse;
