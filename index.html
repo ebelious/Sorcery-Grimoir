@@ -5686,7 +5686,6 @@ function cModal(){
     o('<div class="cm-img" style="position:relative" onclick="_expandImg(this)">'+cImgTag(_dispCard)+_navArrows+'</div>');
   }
   o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
-  o('<div class="cm-tags"><span class="cm-tag" style="color:'+si.c+';border-color:'+si.c+'">'+si.sym+' '+cSetAbbr(c)+'</span></div>');
   if(cArt(c)){
     var _artObj=ARTISTS.find(function(a){return a.n===cArt(c);});
     var _artUrl=_artObj&&_artObj.url?_artObj.url:'https://www.collectorarthouse.com/sorcery-artists/'+cArt(c).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
