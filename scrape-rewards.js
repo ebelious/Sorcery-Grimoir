@@ -46,7 +46,7 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
 
     // Images that are clearly site chrome, not reward art -- exclude these
     // from both the direct lookup and the positional fallback below.
-    const NON_REWARD_IMG_RE = /sorcery_logo|cardeio-logo|brand\//i;
+    const NON_REWARD_IMG_RE = /sorcery_logo|cardeio-logo|brand\/|dust/i;
     // Confirmed real reward-image CDN pattern (e.g.
     // https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_arthurian_legends_foot_soldier_pack.webp)
     // -- used to prefer high-confidence matches when multiple candidates exist.
