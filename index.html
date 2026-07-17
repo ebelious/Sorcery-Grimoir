@@ -939,7 +939,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -971,6 +971,7 @@ function boot(){
     _initFirebaseMessaging();_fcmSyncTopics();
   }
   _updateOfflineCacheCount();
+  _syncAutoCacheSetting();
   var _openParam=new URLSearchParams(location.search).get('open');
   if(_openParam){
     _openNotificationSection(_openParam);
@@ -3310,6 +3311,21 @@ function _offlineImageUrls(scope,rewardsData){
   return urls;
 }
 // Queries the service worker's image cache directly (the Cache API is
+// Tells the service worker whether it should opportunistically cache
+// images/data as they're viewed (see the matching listener in sw.js -- a
+// service worker can't read the page's own settings directly).
+function _syncAutoCacheSetting(){
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.ready.then(function(reg){
+      if(reg.active)reg.active.postMessage({type:'set-auto-cache',enabled:G.cfg.autoCache!==false});
+    }).catch(function(){});
+  }
+}
+function toggleAutoCache(){
+  G.cfg.autoCache=!G.cfg.autoCache;sv('sg-cfg',G.cfg);
+  _syncAutoCacheSetting();
+  _renderKeepScroll();
+}
 // available from the page too, not just inside sw.js) so the Offline
 // Access screen can show how many images are actually cached right now.
 function _updateOfflineCacheCount(){
@@ -4902,6 +4918,7 @@ function pContent(){
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     o('<div class="slbl2">Offline Access</div>');
+    o('<div class="set-row"><span>Cache by Default</span><button class="ftag'+(G.cfg.autoCache!==false?' on':'')+'" onclick="toggleAutoCache()">'+(G.cfg.autoCache!==false?'On':'Off')+'</button></div>');
     o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
     if(G.offlineDownloading){
       var _pct1=G.offlineDownloadTotal?Math.round(100*G.offlineDownloadDone/G.offlineDownloadTotal):0;
