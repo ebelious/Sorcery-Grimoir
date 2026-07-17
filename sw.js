@@ -58,7 +58,7 @@ self.addEventListener('fetch', (event) => {
           if (cached) return cached;
           return fetch(req)
             .then((networkResponse) => {
-              if (networkResponse && networkResponse.ok) {
+              if (networkResponse && (networkResponse.ok || networkResponse.type === 'opaque')) {
                 cache.put(req, networkResponse.clone());
               }
               return networkResponse;
