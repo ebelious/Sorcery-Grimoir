@@ -3338,15 +3338,15 @@ function _updateOfflineCacheCount(){
 // focus to a given button by id afterward -- re-rendering destroys and
 // recreates every DOM node (including whatever had focus), so scroll
 // position alone isn't enough to keep a button looking/behaving pressed.
-function _renderKeepScrollFocus(btnId){
+function _renderKeepScrollFocus(anchorId){
   var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
-  var hadFocus=document.activeElement&&document.activeElement.id===btnId;
   render();
   requestAnimationFrame(function(){
     var cm2=document.querySelector('.cm')||document.querySelector('.panel');
     if(cm2)cm2.scrollTop=scrollTop;
-    if(hadFocus){var btn=document.getElementById(btnId);if(btn)btn.focus();}
+    var anchor=document.getElementById(anchorId);
+    if(anchor)anchor.focus();
   });
 }
 function downloadForOffline(scope){
@@ -3354,7 +3354,7 @@ function downloadForOffline(scope){
   function start(rewardsData){
     var urls=_offlineImageUrls(scope,rewardsData);
     if(!urls.length){alert('No cards to cache yet.');return;}
-    G.offlineDownloading=true;G.offlineDownloadTotal=urls.length;G.offlineDownloadDone=0;_renderKeepScrollFocus('offline-cache-btn');
+    G.offlineDownloading=true;G.offlineDownloadTotal=urls.length;G.offlineDownloadDone=0;_renderKeepScrollFocus('offline-cache-anchor');
     var idx=0;
     var CONCURRENCY=4; // a few in parallel for speed, without hammering the image CDN
     function next(){
@@ -3362,8 +3362,8 @@ function downloadForOffline(scope){
       var url=urls[idx++];
       fetch(url,{mode:'no-cors'}).catch(function(){}).then(function(){
         G.offlineDownloadDone++;
-        if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-btn');}
-        else{ if(G.offlineDownloadDone%5===0)_renderKeepScrollFocus('offline-cache-btn'); next(); }
+        if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-anchor');}
+        else{ if(G.offlineDownloadDone%5===0)_renderKeepScrollFocus('offline-cache-anchor'); next(); }
       });
     }
     for(var i=0;i<CONCURRENCY;i++)next();
@@ -3390,21 +3390,21 @@ function cacheAppData(){
   var dataFiles=['./','./manifest.json',base+'cards.json',base+'codex.json',base+'news.json',base+'discord.json',base+'events.json',base+'rewards.json'];
   var bgFiles=BG_IMAGES.map(function(b){return BG_IMG_PATH+b.file;});
   var total=dataFiles.length+bgFiles.length;
-  G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-btn');
+  G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-anchor');
   var idx=0;
   function next(){
-    if(idx>=dataFiles.length+bgFiles.length){G.appDataCaching=false;_renderKeepScrollFocus('appdata-cache-btn');return;}
+    if(idx>=dataFiles.length+bgFiles.length){G.appDataCaching=false;_renderKeepScrollFocus('appdata-cache-anchor');return;}
     if(idx<dataFiles.length){
       var url=dataFiles[idx++];
       var withBuster=url+(url.indexOf('?')>=0?'&':'?')+'t='+Date.now();
       fetch(withBuster,{cache:'no-store'})
         .catch(function(){})
-        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-btn'); next(); });
+        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-anchor'); next(); });
     } else {
       var bgUrl=bgFiles[idx++ -dataFiles.length];
       fetch(bgUrl,{mode:'no-cors'})
         .catch(function(){})
-        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-btn'); next(); });
+        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-anchor'); next(); });
     }
   }
   next();
@@ -4920,20 +4920,24 @@ function pContent(){
     o('<div class="slbl2">Offline Access</div>');
     o('<div class="set-row"><span>Cache by Default</span><button class="ftag'+(G.cfg.autoCache!==false?' on':'')+'" onclick="toggleAutoCache()">'+(G.cfg.autoCache!==false?'On':'Off')+'</button></div>');
     o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
+    o('<div id="offline-cache-anchor" tabindex="-1" style="outline:none">');
     if(G.offlineDownloading){
       var _pct1=G.offlineDownloadTotal?Math.round(100*G.offlineDownloadDone/G.offlineDownloadTotal):0;
       o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching images&hellip; ('+G.offlineDownloadDone+'/'+G.offlineDownloadTotal+')</div>');
       o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct1+'%;transition:width .2s"></div></div>');
     } else {
-      o('<button id="offline-cache-btn" class="fb" style="width:100%;margin-bottom:6px" onclick="if(confirm(\'This downloads every card image in the game (1000+ images, likely several hundred MB or more). It may take a while and use significant mobile data if not on Wi-Fi. Continue?\'))downloadForOffline(\'all\')">Cache Card Data</button>');
+      o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="if(confirm(\'This downloads every card image in the game (1000+ images, likely several hundred MB or more). It may take a while and use significant mobile data if not on Wi-Fi. Continue?\'))downloadForOffline(\'all\')">Cache Card Data</button>');
     }
+    o('</div>');
+    o('<div id="appdata-cache-anchor" tabindex="-1" style="outline:none">');
     if(G.appDataCaching){
       var _pct2=G.appDataCacheTotal?Math.round(100*G.appDataCacheDone/G.appDataCacheTotal):0;
       o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching app data&hellip; ('+G.appDataCacheDone+'/'+G.appDataCacheTotal+')</div>');
       o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct2+'%;transition:width .2s"></div></div>');
     } else {
-      o('<button id="appdata-cache-btn" class="fb" style="width:100%" onclick="cacheAppData()">Cache App Data</button>');
+      o('<button class="fb" style="width:100%" onclick="cacheAppData()">Cache App Data</button>');
     }
+    o('</div>');
     o('<div class="slbl2">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
