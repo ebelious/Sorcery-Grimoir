@@ -134,7 +134,7 @@ function isUpcoming(e, todayStart) {
   await page.waitForTimeout(3000);
   await page.waitForSelector('a[href*="/events/"]', { timeout: 15000 }).catch(() => {});
 
-  const { parsed, urlsByName, listDiagnostics } = await page.evaluate((rangePattern, singlePattern) => {
+  const { parsed, urlsByName, listDiagnostics } = await page.evaluate(({ rangePattern, singlePattern }) => {
     const dateRangeRe = new RegExp(rangePattern, 'i');
     const singleDateRe = new RegExp(singlePattern, 'i');
     const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
@@ -169,7 +169,7 @@ function isUpcoming(e, todayStart) {
         bodyTextSample: document.body.innerText.slice(0, 1200)
       }
     };
-  }, DATE_RANGE_RE.source, SINGLE_DATE_RE.source);
+  }, { rangePattern: DATE_RANGE_RE.source, singlePattern: SINGLE_DATE_RE.source });
 
   console.log('List page diagnostics:', JSON.stringify(listDiagnostics, null, 2));
 
