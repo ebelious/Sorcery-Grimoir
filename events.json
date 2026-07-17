@@ -1,5 +1,45 @@
 {
-  "updated": "2026-07-17T03:33:32.463Z",
+  "updated": "2026-07-17T03:47:06.108Z",
   "source": "https://play.sorcerytcg.com/events?radius=250",
-  "events": []
+  "events": [
+    {
+      "name": "Complete",
+      "date": "Apr 30, 2026 - Dec 31, 2026",
+      "time": "6:00 AM UTC",
+      "type": "Constructed Tournament",
+      "location": "Dunedin, Otago",
+      "city": "Dunedin",
+      "state": "Otago",
+      "address": "",
+      "description": "",
+      "storeName": "Card Merchant Dunedin",
+      "url": ""
+    },
+    {
+      "name": "Complete",
+      "date": "Jun 8, 2026 - Jul 23, 2026",
+      "time": "11:06 PM UTC",
+      "type": "Casual Meetup",
+      "location": "Roseville, MN",
+      "city": "Roseville",
+      "state": "MN",
+      "address": "",
+      "description": "",
+      "storeName": "Gamezenter",
+      "url": ""
+    },
+    {
+      "name": "Upcoming",
+      "date": "Jul 16, 2026 - Jul 17, 2026",
+      "time": "8:00 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Madison Heights, MI",
+      "city": "Madison Heights",
+      "state": "MI",
+      "address": "",
+      "description": "",
+      "storeName": "Mythic Forge Gaming",
+      "url": ""
+    }
+  ]
 }
