@@ -145,7 +145,7 @@ if('serviceWorker' in navigator){
 function _sendNotification(title, body, section){
   if(!G.cfg||!G.cfg.notifications)return;
   if(typeof Notification==='undefined'||Notification.permission!=='granted')return;
-  var opts={body:body,icon:'icons/icon-192.png',badge:'icons/icon-192.png',data:{section:section||null}};
+  var opts={body:body,icon:'icons/icon-192.png',data:{section:section||null}};
   if('serviceWorker' in navigator && navigator.serviceWorker.ready){
     navigator.serviceWorker.ready.then(function(reg){
       reg.showNotification(title,opts).catch(function(){
