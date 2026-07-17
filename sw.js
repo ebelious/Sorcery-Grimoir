@@ -1,4 +1,9 @@
 self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(APP_SHELL_CACHE)
+      .then((cache) => cache.addAll(['./', './index.html', './manifest.json']))
+      .catch(() => {}) // don't block install if one of these can't be fetched yet
+  );
   self.skipWaiting();
 });
 
@@ -6,8 +11,64 @@ self.addEventListener('activate', (event) => {
   console.log('Service worker active');
 });
 
+// Caches the app shell (the page itself) so it still loads with no network
+// connection at all, not just the card images. Network-first: always try to
+// get the freshest version when online (and update the cache with it), only
+// falling back to the cached copy when the network request fails.
+const APP_SHELL_CACHE = 'sg-app-shell-v1';
+
+// Caches card art (and similar static images) the first time they're
+// viewed, so they're available offline afterward without the user doing
+// anything. Cache-first: serve from cache if we have it, otherwise fetch
+// from network and store a copy for next time. Only applies to the card
+// image CDN -- everything else passes through untouched.
+const IMG_CACHE = 'sg-card-images-v1';
+const IMG_HOST_RE = /images\.sorcerycard\.io/;
+
 self.addEventListener('fetch', (event) => {
-  // Basic pass-through (you can enhance later)
+  const req = event.request;
+  const url = req.url;
+
+  if (req.method !== 'GET') return;
+
+  // App shell: the page navigation itself, or a direct request for
+  // index.html/manifest.json.
+  if (req.mode === 'navigate' || url.endsWith('/index.html') || url.endsWith('/manifest.json')) {
+    event.respondWith(
+      fetch(req)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.ok) {
+            caches.open(APP_SHELL_CACHE).then((cache) => cache.put(req, networkResponse.clone()));
+          }
+          return networkResponse;
+        })
+        .catch(() =>
+          caches.match(req).then((cached) => cached || caches.match('./index.html') || caches.match('./'))
+        )
+    );
+    return;
+  }
+
+  // Card images: cache-first.
+  if (IMG_HOST_RE.test(url)) {
+    event.respondWith(
+      caches.open(IMG_CACHE).then((cache) =>
+        cache.match(req).then((cached) => {
+          if (cached) return cached;
+          return fetch(req)
+            .then((networkResponse) => {
+              if (networkResponse && networkResponse.ok) {
+                cache.put(req, networkResponse.clone());
+              }
+              return networkResponse;
+            })
+            .catch(() => cached); // offline and never cached -- nothing we can do, request just fails
+        })
+      )
+    );
+    return;
+  }
+  // everything else passes through normally
 });
 
 // Handles clicks on notifications sent locally by _sendNotification() (the
