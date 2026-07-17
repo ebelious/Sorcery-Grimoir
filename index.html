@@ -3345,8 +3345,12 @@ function _updateOfflineCacheCount(){
 // recreates every DOM node (including whatever had focus), so scroll
 // position alone isn't enough to keep a button looking/behaving pressed.
 var _rksfPending={};
+var _rksfQueued={};
 function _renderKeepScrollFocus(anchorId,force){
-  if(_rksfPending[anchorId]&&!force)return; // a render+restore cycle is already in flight for this anchor -- skip to avoid racing it
+  if(_rksfPending[anchorId]){
+    if(force)_rksfQueued[anchorId]=true; // run again once the in-flight cycle has actually settled
+    return;
+  }
   _rksfPending[anchorId]=true;
   var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
@@ -3357,6 +3361,10 @@ function _renderKeepScrollFocus(anchorId,force){
     var anchor=document.getElementById(anchorId);
     if(anchor)anchor.focus({preventScroll:true});
     _rksfPending[anchorId]=false;
+    if(_rksfQueued[anchorId]){
+      _rksfQueued[anchorId]=false;
+      _renderKeepScrollFocus(anchorId,true);
+    }
   });
 }
 function downloadForOffline(scope){
