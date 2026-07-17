@@ -36,6 +36,7 @@ jobs:
           for i in 1 2 3 4 5; do
             git push && break
             echo "Push rejected, pulling and retrying ($i)..."
+            git checkout -- .
             git pull --rebase origin main
             sleep 3
           done
