@@ -3338,7 +3338,10 @@ function _updateOfflineCacheCount(){
 // focus to a given button by id afterward -- re-rendering destroys and
 // recreates every DOM node (including whatever had focus), so scroll
 // position alone isn't enough to keep a button looking/behaving pressed.
+var _rksfPending={};
 function _renderKeepScrollFocus(anchorId){
+  if(_rksfPending[anchorId])return; // a render+restore cycle is already in flight for this anchor -- skip to avoid racing it
+  _rksfPending[anchorId]=true;
   var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
   render();
@@ -3346,7 +3349,8 @@ function _renderKeepScrollFocus(anchorId){
     var cm2=document.querySelector('.cm')||document.querySelector('.panel');
     if(cm2)cm2.scrollTop=scrollTop;
     var anchor=document.getElementById(anchorId);
-    if(anchor)anchor.focus();
+    if(anchor)anchor.focus({preventScroll:true});
+    _rksfPending[anchorId]=false;
   });
 }
 function downloadForOffline(scope){
