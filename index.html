@@ -142,19 +142,31 @@ if('serviceWorker' in navigator){
 // when available, falling back to a plain Notification. Real push (News,
 // Discord, YouTube) that can wake up a fully closed browser is handled
 // separately via Firebase Cloud Messaging above/in sw.js.
-function _sendNotification(title, body){
+function _sendNotification(title, body, section){
   if(!G.cfg||!G.cfg.notifications)return;
   if(typeof Notification==='undefined'||Notification.permission!=='granted')return;
-  var opts={body:body,icon:'icons/icon-192.png',badge:'icons/icon-192.png'};
+  var opts={body:body,icon:'icons/icon-192.png',badge:'icons/icon-192.png',data:{section:section||null}};
   if('serviceWorker' in navigator && navigator.serviceWorker.ready){
     navigator.serviceWorker.ready.then(function(reg){
       reg.showNotification(title,opts).catch(function(){
-        try{new Notification(title,opts);}catch(e){}
+        try{var _n=new Notification(title,opts);_n.onclick=function(){window.focus();if(section)_openNotificationSection(section);_n.close();};}catch(e){}
       });
     });
   } else {
-    try{new Notification(title,opts);}catch(e){}
+    try{var _n2=new Notification(title,opts);_n2.onclick=function(){window.focus();if(section)_openNotificationSection(section);_n2.close();};}catch(e){}
   }
+}
+// Navigates to the app section a notification was about ('news'|'discord'|'yt').
+// Called either directly (plain Notification click, same page) or via a
+// message from the service worker (showNotification click, possibly after
+// the page was backgrounded).
+function _openNotificationSection(section){
+  if(section==='news'||section==='discord'||section==='yt')openPanel(section);
+}
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.addEventListener('message',function(ev){
+    if(ev.data&&ev.data.type==='notification-click'&&ev.data.section)_openNotificationSection(ev.data.section);
+  });
 }
 function toggleNotifications(){
   if(!G.cfg.notifications){
@@ -945,6 +957,11 @@ function boot(){
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
     _initFirebaseMessaging();_fcmSyncTopics();
+  }
+  var _openParam=new URLSearchParams(location.search).get('open');
+  if(_openParam){
+    _openNotificationSection(_openParam);
+    history.replaceState(null,'',location.pathname);
   }
   loadPubDecks();
   // Cards now come entirely from the scraper (no built-in CARDS data), so
@@ -3964,7 +3981,7 @@ function _checkYtForNew(){
   if(!latest)return;
   var seen=ld('sg-yt-seen',null);
   if(seen==null){ sv('sg-yt-seen',latest); }
-  else if(seen!==latest){ G.ytHasNew=true; _sendNotification('New YouTube Video','A new video is available.'); }
+  else if(seen!==latest){ G.ytHasNew=true; _sendNotification('New YouTube Video','A new video is available.','yt'); }
 }
 function loadYTVideos(){
   if(G.ytLoading)return;
@@ -4312,7 +4329,7 @@ function _checkNewsForNew(){
   if(!latest)return;
   var seen=ld('sg-news-seen',null);
   if(seen==null){ sv('sg-news-seen',latest); }
-  else if(seen!==latest){ G.newsHasNew=true; _sendNotification('New Sorcery News','A new article is available.'); }
+  else if(seen!==latest){ G.newsHasNew=true; _sendNotification('New Sorcery News','A new article is available.','news'); }
 }
 function loadNews(){
   if(G.newsLoading)return;
@@ -4347,7 +4364,7 @@ function _checkDiscordForNew(){
   if(!latest)return;
   var seen=ld('sg-discord-seen',null);
   if(seen==null){ sv('sg-discord-seen',latest); }
-  else if(seen!==latest){ G.discordHasNew=true; _sendNotification('New Discord Message','A new message is available.'); }
+  else if(seen!==latest){ G.discordHasNew=true; _sendNotification('New Discord Message','A new message is available.','discord'); }
 }
 function loadDiscord(){
   if(G.discordLoading)return;
