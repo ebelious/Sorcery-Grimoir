@@ -47,30 +47,45 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
     // Images that are clearly site chrome, not reward art -- exclude these
     // from both the direct lookup and the positional fallback below.
     const NON_REWARD_IMG_RE = /sorcery_logo|cardeio-logo|brand\//i;
+    // Confirmed real reward-image CDN pattern (e.g.
+    // https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_arthurian_legends_foot_soldier_pack.webp)
+    // -- used to prefer high-confidence matches when multiple candidates exist.
+    const REWARD_IMG_RE = /cardeio-images\/sorcery\/rewards\//i;
     const catalogueImgs = Array.from(document.querySelectorAll('img')).filter(img => {
       const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
       return src && !NON_REWARD_IMG_RE.test(src);
+    });
+    // For the positional fallback, prefer confirmed-pattern images if there
+    // are enough of them; otherwise fall back to the broader candidate list.
+    const confirmedImgs = catalogueImgs.filter(img => {
+      const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+      return REWARD_IMG_RE.test(src);
     });
 
     function findImageForName(nameLine) {
       // Broaden beyond exact-leaf-node matching: any element whose full
       // (possibly nested) text content equals the name, walking up several
-      // ancestor levels looking for the nearest <img>.
+      // ancestor levels looking for the nearest <img>. Among any images
+      // found, prefer ones matching the confirmed reward-image CDN pattern.
       const candidates = Array.from(document.querySelectorAll('body *')).filter(
         el => el.textContent && el.textContent.trim() === nameLine && el.children.length <= 2
       );
+      let fallback = '';
       for (const start of candidates) {
         let node = start;
         for (let depth = 0; depth < 6 && node; depth++) {
           const img = node.querySelector ? node.querySelector('img') : null;
           if (img) {
             const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
-            if (src && !NON_REWARD_IMG_RE.test(src)) return src;
+            if (src && !NON_REWARD_IMG_RE.test(src)) {
+              if (REWARD_IMG_RE.test(src)) return src; // high confidence, use immediately
+              if (!fallback) fallback = src;
+            }
           }
           node = node.parentElement;
         }
       }
-      return '';
+      return fallback;
     }
 
     const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
@@ -106,12 +121,15 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
 
     // Positional fallback: if a reward still has no image but the number of
     // catalogue images lines up closely with the number of rewards found,
-    // assume DOM order matches display order and pair them by index.
+    // assume DOM order matches display order and pair them by index. Prefer
+    // the confirmed-CDN-pattern image list when it's plausible (close to the
+    // reward count); otherwise fall back to the broader candidate list.
     const missingCount = results.filter(r => !r.image).length;
-    if (missingCount && Math.abs(catalogueImgs.length - results.length) <= 3) {
+    const fallbackImgs = Math.abs(confirmedImgs.length - results.length) <= 3 ? confirmedImgs : catalogueImgs;
+    if (missingCount && Math.abs(fallbackImgs.length - results.length) <= 3) {
       results.forEach((r, idx) => {
-        if (!r.image && catalogueImgs[idx]) {
-          r.image = catalogueImgs[idx].getAttribute('src') || catalogueImgs[idx].getAttribute('data-src') || '';
+        if (!r.image && fallbackImgs[idx]) {
+          r.image = fallbackImgs[idx].getAttribute('src') || fallbackImgs[idx].getAttribute('data-src') || '';
         }
       });
     }
@@ -122,6 +140,7 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
         totalLines: lines.length,
         rewardsParsed: results.length,
         catalogueImagesFound: catalogueImgs.length,
+        confirmedPatternImagesFound: confirmedImgs.length,
         rewardsWithImage: results.filter(r => r.image).length,
         bodyTextSample: document.body.innerText.slice(0, 500)
       }
