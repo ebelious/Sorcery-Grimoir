@@ -44,6 +44,35 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
     ]);
     const NUM_RE = /^[\d,]+$/;
 
+    // Images that are clearly site chrome, not reward art -- exclude these
+    // from both the direct lookup and the positional fallback below.
+    const NON_REWARD_IMG_RE = /sorcery_logo|cardeio-logo|brand\//i;
+    const catalogueImgs = Array.from(document.querySelectorAll('img')).filter(img => {
+      const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+      return src && !NON_REWARD_IMG_RE.test(src);
+    });
+
+    function findImageForName(nameLine) {
+      // Broaden beyond exact-leaf-node matching: any element whose full
+      // (possibly nested) text content equals the name, walking up several
+      // ancestor levels looking for the nearest <img>.
+      const candidates = Array.from(document.querySelectorAll('body *')).filter(
+        el => el.textContent && el.textContent.trim() === nameLine && el.children.length <= 2
+      );
+      for (const start of candidates) {
+        let node = start;
+        for (let depth = 0; depth < 6 && node; depth++) {
+          const img = node.querySelector ? node.querySelector('img') : null;
+          if (img) {
+            const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+            if (src && !NON_REWARD_IMG_RE.test(src)) return src;
+          }
+          node = node.parentElement;
+        }
+      }
+      return '';
+    }
+
     const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
     const results = [];
 
@@ -57,16 +86,13 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
       const points = parseInt(nextLine.replace(/,/g, ''), 10);
       const soldOut = lines[i + 2] === 'Sold Out';
 
-      // Best-effort: find a DOM element containing this exact name text to
-      // pull an image/link from, if one exists nearby.
-      let image = '', url = '';
+      let image = findImageForName(nameLine);
+      let url = '';
       const nameEls = Array.from(document.querySelectorAll('body *')).filter(
         el => el.children.length === 0 && el.innerText && el.innerText.trim() === nameLine
       );
       if (nameEls.length) {
         const card = nameEls[0].closest('[class]') || nameEls[0];
-        const img = card.querySelector('img');
-        if (img) image = img.getAttribute('src') || img.getAttribute('data-src') || '';
         const link = card.tagName === 'A' ? card : card.closest('a[href]') || card.querySelector('a[href]');
         if (link) {
           const href = link.getAttribute('href');
@@ -78,11 +104,25 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
       i += soldOut ? 2 : 1; // skip past the consumed points (and "Sold Out") line(s)
     }
 
+    // Positional fallback: if a reward still has no image but the number of
+    // catalogue images lines up closely with the number of rewards found,
+    // assume DOM order matches display order and pair them by index.
+    const missingCount = results.filter(r => !r.image).length;
+    if (missingCount && Math.abs(catalogueImgs.length - results.length) <= 3) {
+      results.forEach((r, idx) => {
+        if (!r.image && catalogueImgs[idx]) {
+          r.image = catalogueImgs[idx].getAttribute('src') || catalogueImgs[idx].getAttribute('data-src') || '';
+        }
+      });
+    }
+
     return {
       rewards: results.slice(0, 300),
       diagnostics: {
         totalLines: lines.length,
         rewardsParsed: results.length,
+        catalogueImagesFound: catalogueImgs.length,
+        rewardsWithImage: results.filter(r => r.image).length,
         bodyTextSample: document.body.innerText.slice(0, 500)
       }
     };
