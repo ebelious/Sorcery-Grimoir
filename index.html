@@ -937,7 +937,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,pushNews:false,pushDiscord:false,pushYoutube:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -955,7 +955,17 @@ function boot(){
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
   applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
-  if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
+  if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)){
+    Notification.requestPermission().then(function(perm){
+      if(perm!=='granted'){
+        G.cfg.notifications=false;G.cfg.pushNews=false;G.cfg.pushDiscord=false;G.cfg.pushYoutube=false;
+        sv('sg-cfg',G.cfg);_renderKeepScroll();
+        return;
+      }
+      if(G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube){_initFirebaseMessaging();_fcmSyncTopics();}
+      _renderKeepScroll();
+    });
+  } else if((G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube)&&typeof Notification!=='undefined'&&Notification.permission==='granted'){
     _initFirebaseMessaging();_fcmSyncTopics();
   }
   var _openParam=new URLSearchParams(location.search).get('open');
