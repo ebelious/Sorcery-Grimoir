@@ -36,48 +36,53 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
   await page.waitForSelector('img', { timeout: 15000 }).catch(() => {});
 
   const { rewards, diagnostics } = await page.evaluate(() => {
+    // Known non-reward UI text to skip (nav, filters, headers, etc.)
+    const SKIP = new Set([
+      'Events', 'Rewards', 'Login', 'Reward Store', 'Catalogue:', 'Filters',
+      'Tags', 'Min', 'Max', 'TagsMinMax', 'Point Amount', 'Powered By',
+      'Give us a Follow!', 'Links', 'Policies', 'Sold Out'
+    ]);
+    const NUM_RE = /^[\d,]+$/;
+
+    const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
     const results = [];
-    const seen = new Set();
 
-    // Reward catalogue items typically show an image, a name, and a point
-    // cost (e.g. "5,000 pts" or "5,000 Points"). Find text nodes matching a
-    // point-amount pattern and walk up to the nearest card-like container.
-    const pointPattern = /([\d,]{3,})\s*(pts?|points?)\b/i;
-    const allEls = Array.from(document.querySelectorAll('body *'));
-    const pointEls = allEls.filter(el =>
-      el.children.length === 0 && pointPattern.test(el.innerText || '')
-    );
+    for (let i = 0; i < lines.length; i++) {
+      const nameLine = lines[i];
+      const nextLine = lines[i + 1];
+      if (SKIP.has(nameLine) || NUM_RE.test(nameLine)) continue;
+      if (!nextLine || !NUM_RE.test(nextLine)) continue;
+      // nameLine is immediately followed by a bare number -- treat as a
+      // reward: name + points cost.
+      const points = parseInt(nextLine.replace(/,/g, ''), 10);
+      const soldOut = lines[i + 2] === 'Sold Out';
 
-    pointEls.forEach(el => {
-      const card = el.closest('[class]') || el;
-      if (seen.has(card)) return;
-      seen.add(card);
+      // Best-effort: find a DOM element containing this exact name text to
+      // pull an image/link from, if one exists nearby.
+      let image = '', url = '';
+      const nameEls = Array.from(document.querySelectorAll('body *')).filter(
+        el => el.children.length === 0 && el.innerText && el.innerText.trim() === nameLine
+      );
+      if (nameEls.length) {
+        const card = nameEls[0].closest('[class]') || nameEls[0];
+        const img = card.querySelector('img');
+        if (img) image = img.getAttribute('src') || img.getAttribute('data-src') || '';
+        const link = card.tagName === 'A' ? card : card.closest('a[href]') || card.querySelector('a[href]');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href) url = href.startsWith('http') ? href : 'https://play.sorcerytcg.com' + href;
+        }
+      }
 
-      const fullText = (card.innerText || '').trim();
-      if (!fullText) return;
-
-      const pointsMatch = fullText.match(pointPattern);
-      const points = pointsMatch ? parseInt(pointsMatch[1].replace(/,/g, ''), 10) : null;
-
-      const heading = card.querySelector('h1,h2,h3,h4,h5,strong');
-      const lines = fullText.split('\n').map(l => l.trim()).filter(Boolean);
-      const name = (heading ? heading.innerText.trim() : '') || lines.find(l => !pointPattern.test(l)) || '';
-      if (!name) return;
-
-      const img = card.querySelector('img');
-      const image = img ? (img.getAttribute('src') || img.getAttribute('data-src') || '') : '';
-
-      const link = card.tagName === 'A' ? card : card.querySelector('a[href]');
-      const href = link ? link.getAttribute('href') : '';
-      const url = href ? (href.startsWith('http') ? href : 'https://play.sorcerytcg.com' + href) : '';
-
-      results.push({ name, points, image, url });
-    });
+      results.push({ name: nameLine, points, soldOut, image, url });
+      i += soldOut ? 2 : 1; // skip past the consumed points (and "Sold Out") line(s)
+    }
 
     return {
-      rewards: results.slice(0, 200),
+      rewards: results.slice(0, 300),
       diagnostics: {
-        pointTextElementsFound: pointEls.length,
+        totalLines: lines.length,
+        rewardsParsed: results.length,
         bodyTextSample: document.body.innerText.slice(0, 500)
       }
     };
