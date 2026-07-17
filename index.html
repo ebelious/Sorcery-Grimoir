@@ -310,6 +310,7 @@ body.tg{--bg:#282828;--bg2:#32302F;--bg3:#3C3836;--bd:#504945;--fg:#EBDBB2;--fg2
 body.td{--bg:#282A36;--bg2:#323442;--bg3:#44475A;--bd:#6272A4;--fg:#F8F8F2;--fg2:#BFBFBF;--fg3:#6272A4;--red:#FF5555;--grn:#50FA7B;--yel:#F1FA8C;--cyn:#8BE9FD;--wht:#FFF;--bgrn:#69FF94;--bbl:#D6ACFF;--life:#FF6E6E;--mana:#8BE9FD;--hi:#F1FA8C}
 body.tn{--bg:#2E3440;--bg2:#3B4252;--bg3:#434C5E;--bd:#4C566A;--fg:#ECEFF4;--fg2:#D8DEE9;--fg3:#B0BAC8;--red:#BF616A;--grn:#A3BE8C;--yel:#EBCB8B;--cyn:#8FBCBB;--wht:#E5E9F0;--bgrn:#A3BE8C;--bbl:#88C0D0;--life:#BF616A;--mana:#88C0D0;--hi:#EBCB8B}
 body.te{--bg:#272E33;--bg2:#2E383C;--bg3:#374145;--bd:#495156;--fg:#D3C6AA;--fg2:#859289;--fg3:#4F5B58;--red:#E67E80;--grn:#A7C080;--yel:#DBBC7F;--cyn:#83C092;--wht:#D3C6AA;--bgrn:#A7C080;--bbl:#7FBBB3;--life:#E67E80;--mana:#7FBBB3;--hi:#DBBC7F}
+body.tf{--bg:#000000;--bg2:#140F0A;--bg3:#241B12;--bd:#7F6A55;--fg:#FFEAA3;--fg2:#DDC265;--fg3:#7F6A55;--red:#D6262B;--grn:#919C00;--yel:#FFCB1B;--cyn:#7CC9CF;--wht:#FFEAA3;--bgrn:#BFC65A;--bbl:#4699A3;--life:#D6262B;--mana:#7CC9CF;--hi:#FFCB1B}
 body.tl{--bg:#F5F0E8;--bg2:#EDE8DE;--bg3:#E0D9CC;--bd:#C8C0B0;--fg:#3A3020;--fg2:#6B5B45;--fg3:#9A8B75;--red:#C0392B;--grn:#27AE60;--yel:#D4820A;--cyn:#16A085;--wht:#1A1008;--bgrn:#2ECC71;--bbl:#2980B9;--life:#E74C3C;--mana:#2980B9;--hi:#D4820A}
 body.tm{--bg:#292522;--bg2:#34302C;--bg3:#403A36;--bd:#867462;--fg:#ECE1D7;--fg2:#C1A78E;--fg3:#867462;--red:#D47766;--grn:#85B695;--yel:#EBC06D;--cyn:#89B3B6;--wht:#ECE1D7;--bgrn:#85B695;--bbl:#A3A9CE;--life:#D47766;--mana:#89B3B6;--hi:#EBC06D}
 body.ti{--bg:#222222;--bg2:#1c1c1c;--bg3:#2a2a2a;--bd:#444444;--fg:#c2c9a0;--fg2:#888b67;--fg3:#666666;--red:#bb7744;--grn:#78834b;--yel:#d7c483;--cyn:#6e9b7b;--wht:#c2c9a0;--bgrn:#78834b;--bbl:#6e9b7b;--life:#bb7744;--mana:#6e9b7b;--hi:#d7c483}
@@ -744,7 +745,7 @@ function eSVG(el,sz){
 }
 
 var SETS={'Alpha':{sym:'\u03b1',c:'#FBB829',abbr:'ALP'},'Beta':{sym:'\u03b2',c:'#68A8E4',abbr:'BET'},'Arthurian Legends':{sym:'\u2720',c:'#98BC37',abbr:'ARL'},'Gothic':{sym:'\u2629',c:'#E02C6D',abbr:'GOT'},'Dragonlord':{sym:'\u27e1',c:'#F75341',abbr:'DGL'},'Promotional':{sym:'\u2605',c:'#D699B6',abbr:'PRO'}};
-var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
+var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tf',l:'Forest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2},{s:'custom',c:1}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
 // Index 0 is a special "theme color" slot — always returns the current --hi accent
