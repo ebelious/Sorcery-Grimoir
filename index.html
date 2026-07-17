@@ -5147,12 +5147,23 @@ function pContent(){
       }
     });
     var avgCost=totalSpells>0?(totalCost/totalSpells).toFixed(1):'0';
-    // Per-element mana curves
-    var elBins={a:new Array(9).fill(0),e:new Array(9).fill(0),f:new Array(9).fill(0),w:new Array(9).fill(0),total:new Array(9).fill(0)};
+    // Per-element mana curves. Size the bins dynamically so decks with cards
+    // costing more than 8 still get their own column instead of everything
+    // above 8 being lumped together.
+    var maxCostSeen=0;
     dv.cards.forEach(function(entry){
       var c=cardByName(entry.name);if(!c)return;
       var t=cType(c);if(t==='site'||t==='avatar')return;
-      var cost=Math.min(cMana(c)||0,8);
+      var cost=cMana(c)||0;
+      if(cost>maxCostSeen)maxCostSeen=cost;
+    });
+    var binCap=Math.max(8,maxCostSeen); // always show at least 0..8, like before
+    var binCount=binCap+1;
+    var elBins={a:new Array(binCount).fill(0),e:new Array(binCount).fill(0),f:new Array(binCount).fill(0),w:new Array(binCount).fill(0),total:new Array(binCount).fill(0)};
+    dv.cards.forEach(function(entry){
+      var c=cardByName(entry.name);if(!c)return;
+      var t=cType(c);if(t==='site'||t==='avatar')return;
+      var cost=Math.min(cMana(c)||0,binCap);
       var qty=entry.qty;
       var th=cThr(c)||'';
       var elSet=[];
@@ -5189,24 +5200,29 @@ function pContent(){
     var W=300,H=110,padL=32,padR=10,padT=10,padB=22;
     var plotW=W-padL-padR,plotH=H-padT-padB;
     var maxAll=Math.max.apply(null,elBins.total)||1;
-    var xCount=9; // 0..8
+    var xCount=binCount; // 0..binCap
     var yMin=padT, yMax=padT+plotH;
+    // Static Y-axis scale: always 0, 6, 12, 18, 24.
+    var yStep=6;
+    var yTop=24;
+    var ySteps=4;
     function bx(i){return padL+i*(plotW/(xCount-1));}
-    function by(v){return Math.min(yMax,Math.max(yMin,padT+plotH-Math.round((v/maxAll)*plotH)));}
+    function by(v){return Math.min(yMax,Math.max(yMin,padT+plotH-Math.round((v/yTop)*plotH)));}
     function clampY(y){return Math.min(yMax,Math.max(yMin,y));}
     function smoothPoints(bins){
-      // cardinal spline with clamped control points so lines never go below 0
+      // Quadratic curve through each point's midpoint to the next -- this
+      // method can't overshoot past the data points (unlike a cardinal
+      // spline), so there's never a need to clamp/correct it, which is what
+      // was causing visible sharp kinks before.
       var pts=bins.map(function(v,i){return [bx(i),by(v)];});
+      var n=pts.length;
       var d='M'+pts[0][0]+','+pts[0][1];
-      for(var i=0;i<pts.length-1;i++){
-        var p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
-        var t=0.5;
-        var cp1x=p1[0]+(p2[0]-p0[0])*t;
-        var cp1y=clampY(p1[1]+(p2[1]-p0[1])*t);
-        var cp2x=p2[0]-(p3[0]-p1[0])*t;
-        var cp2y=clampY(p2[1]-(p3[1]-p1[1])*t);
-        d+=' C'+cp1x+','+cp1y+' '+cp2x+','+cp2y+' '+p2[0]+','+p2[1];
+      for(var i=0;i<n-1;i++){
+        var xc=(pts[i][0]+pts[i+1][0])/2;
+        var yc=(pts[i][1]+pts[i+1][1])/2;
+        d+=' Q'+pts[i][0]+','+pts[i][1]+' '+xc+','+yc;
       }
+      d+=' L'+pts[n-1][0]+','+pts[n-1][1];
       return d;
     }
     function areaPath(pathD,bins){
@@ -5217,16 +5233,15 @@ function pContent(){
       o('<div style="margin-top:4px">');
       o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'"  preserveAspectRatio="none">');
       // grid lines + y-axis labels
-      var ySteps=4;
       for(var gi=0;gi<=ySteps;gi++){
         var gy=padT+gi*(plotH/ySteps);
-        var gv=Math.round(maxAll*(1-gi/ySteps));
+        var gv=Math.round(yTop*(1-gi/ySteps));
         o('<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="var(--bd)" stroke-width="0.5"/>');
         if(gv>0)o('<text x="'+(padL-3)+'" y="'+(gy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+gv+'</text>');
       }
       // x-axis labels
       for(var xi=0;xi<xCount;xi++){
-        o('<text x="'+bx(xi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(xi===8?'8+':String(xi))+'</text>');
+        o('<text x="'+bx(xi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(xi===xCount-1?xi+'+':String(xi))+'</text>');
       }
       // x-axis line
       o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
