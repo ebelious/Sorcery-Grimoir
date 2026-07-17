@@ -5542,7 +5542,7 @@ function pContent(){
         if(r.image)o('<div style="width:100%;aspect-ratio:1/1;overflow:hidden;flex-shrink:0"><img src="'+h(r.image)+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"></div>');
         o('<div style="padding:6px">');
         o('<div class="ev-nm" style="font-size:11px;line-height:1.3">'+h(r.name||'')+'</div>');
-        if(r.points!=null)o('<div class="ev-mt" style="color:var(--yel);font-weight:700;font-size:10px">'+r.points.toLocaleString()+' pts'+(r.soldOut?' &middot; <span style="color:var(--red)">Sold Out</span>':'')+'</div>');
+        if(r.points!=null)o('<div class="ev-mt" style="color:var(--hi);font-weight:700;font-size:10px">'+r.points.toLocaleString()+' pts'+(r.soldOut?' &middot; <span style="color:var(--red)">Sold Out</span>':'')+'</div>');
         o('</div></a>');
       });
       o('</div>');
