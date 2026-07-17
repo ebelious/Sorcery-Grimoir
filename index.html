@@ -430,13 +430,13 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cpop-t{font-size:20px;font-weight:700;text-align:center;margin-bottom:10px;text-transform:uppercase;color:var(--hi)}
 .cpop-it{padding:13px 12px;border:1px solid var(--bd);margin-bottom:4px;font-size:17px;cursor:pointer;border-radius:0}
 .cpop-it:active{background:var(--bg3)}
-.cpop-bk{width:100%;padding:10px;border:1px solid var(--cyn);color:var(--cyn);font-size:13px;margin-top:3px;text-transform:uppercase}
+.cpop-bk{width:100%;padding:10px;border:1px solid var(--hi);color:var(--fg);font-size:13px;margin-top:3px;text-transform:uppercase}
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
 .pbg.pbg-center{align-items:center;justify-content:center}
 .panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto}
 .pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
 .phdr{display:flex;align-items:center;gap:6px;margin-bottom:9px}
-.p-bk{font-size:11px;padding:8px 10px;border:1px solid var(--cyn);color:var(--cyn);text-transform:uppercase}
+.p-bk{font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
 .p-ttl{font-size:19px;font-weight:700;flex:1;text-transform:uppercase;color:var(--hi)}
 .p-cl{font-size:11px;padding:3px 6px;border:1px solid var(--bd);color:var(--fg2);text-transform:uppercase}
 .slbl2{font-size:14px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px}
@@ -445,7 +445,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .fr{display:flex;gap:4px;align-items:center;margin-bottom:6px}
 .fb{font-size:11px;padding:6px 12px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);text-transform:uppercase;cursor:pointer}
 .fb.gold{color:var(--hi);border-color:var(--hi)}
-.fb.red{color:var(--red);border-color:var(--red)}
+.fb.red{color:var(--fg);border-color:var(--red)}
 .fb.full{width:100%;margin-top:4px}
 .set-pop .slbl2{margin-top:22px;margin-bottom:14px}
 .sl-pop .slbl2{font-size:17px}
@@ -541,8 +541,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .sw{color:var(--grn);font-weight:700}.sl_{color:var(--red);font-weight:700}.sp_{color:var(--fg2)}
 .yt-sel{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:5px 6px;outline:none;margin-bottom:8px;font-size:10px;font-family:'Courier New',monospace}
 .yt-pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:9px}
-.yt-pill{font-size:10px;padding:5px 10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg2);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;border-radius:0}
-.yt-pill.on{border-color:var(--red);color:var(--red);background:var(--bg)}
+.yt-pill{font-size:10px;padding:5px 10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;border-radius:0}
+.yt-pill.on{border-color:var(--hi);color:var(--fg);background:var(--bg)}
 .yt-ch-banner{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--red);padding:8px 10px;margin-bottom:8px;text-decoration:none}
 .yt-ch-banner:active{opacity:.8}
 .yt-ch-banner-nm{font-size:11px;font-weight:700;color:var(--fg)}
@@ -4696,7 +4696,7 @@ function pContent(){
   var p=G.panel;if(!p||p==='card')return '';
   var out=[];function o(s){out.push(s);}
 
-  if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--yel);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
+  if(p==='life'){o('<div style="padding:8px 4px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px">Starting Life</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Applied on next Reset</div><div style="display:flex;align-items:center;justify-content:center;gap:18px"><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);render()">-</button><span style="font-size:42px;font-weight:700;color:var(--fg);min-width:60px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:54px;height:54px;font-size:28px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);render()">+</button></div></div>');return out.join('');}
   if(p==='dice'){o('<div class="set-pop">');
     o('<div style="float:right;position:sticky;top:6px;z-index:5;width:104px;text-align:center;margin:0 0 8px 10px">');
     o('<div class="slbl2" style="margin-top:0;font-size:11px;margin-bottom:4px">Preview</div>');
@@ -4934,7 +4934,7 @@ function pContent(){
     var q=S.coS||'';
     var allColl=Object.entries(G.coll).map(function(kv){var nm=kv[0],d=kv[1];var c=d.card||cardByName(nm)||{n:nm,el:'neutral',t:'',r:'ordinary',s:'Alpha',sl:''};return Object.assign({},c,{_qty:d.qty,_nm:nm});});
     var fil=cFilter(allColl,G.coF,q);var total=Object.values(G.coll).reduce(function(s,d){return s+d.qty;},0);
-    o('<div class="fr"><button class="fb" onclick="trigUpColl()">Import CSV</button><button class="fb gold" onclick="exportColl()">Export</button><button class="fb red" onclick="clearColl()">Clear</button></div>');
+    o('<div class="fr"><button class="fb" onclick="trigUpColl()">Import</button><button class="fb" onclick="exportColl()">Export</button><button class="fb red" onclick="clearColl()">Clear</button></div>');
     o('<div class="stbar">'+Object.keys(G.coll).length+' unique &middot; '+total+' total</div>');
     o('<div id="csrch2-wrap" class="si" style="margin:0 0 5px"><input id="coll-srch" placeholder="Search collection&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.coS=\'\';render()">&times;</button>');o('</div>');
     o(fBar(G.coF,'setCoF',false,'resetCoF'));
@@ -4942,7 +4942,7 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb gold" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import CSV</button></div>');
+    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button></div>');
     if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     var elMap={f:'fire',w:'water',e:'earth',a:'air'};
     Object.entries(G.decks).forEach(function(kv){
@@ -4975,7 +4975,7 @@ function pContent(){
     // Rename input + delete
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
     o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
-    o('<button class="fb gold" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export CSV</button>');
+    o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
     o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
     // Group cards by type
@@ -5245,6 +5245,8 @@ function pContent(){
       }
       // x-axis line
       o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+      // y-axis line
+      o('<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
       // draw active element lines (only those with spells)
       var activeEls=['a','e','f','w'].filter(function(el){return elBins[el].some(function(b){return b>0;});});
       // total line always shown
@@ -5574,15 +5576,6 @@ function pContent(){
       return (v.channel||'').toLowerCase()===(selCh.n||'').toLowerCase();
     });
     o('<div style="flex-shrink:0;background:var(--bg2)">');
-    // Show selected channel link above cards
-    var _selChObj=G.ytSelCh?YT_CHS.find(function(x){return x.id===G.ytSelCh;}):null;
-    if(_selChObj&&_selChObj.url){
-      o('<a class="yt-ch-banner" href="'+_selChObj.url+'" target="_blank">');
-      o('<span class="yt-ch-banner-nm">'+h(_selChObj.n)+'</span>');
-      o('<span class="yt-ch-banner-lnk">&#9654; Browse Videos &rarr;</span>');
-      o('</a>');
-    }
-
     o('<div class="yt-pills">');
     YT_CHS.forEach(function(x){
       var isOn=G.ytCh===x.id;
