@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17T13:49:38.253Z",
+  "updated": "2026-07-17T19:18:46.222Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -55,19 +55,6 @@
       "url": "https://play.sorcerytcg.com/events/6a874f3b-6768-431c-a3a2-4efe3dbf0ce6"
     },
     {
-      "name": "17th July Mox Saga sorcery",
-      "date": "Fri. Jul 17, 2026",
-      "time": "12:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Yau Ma Tei, Kowloon",
-      "city": "Yau Ma Tei",
-      "state": "Kowloon",
-      "address": "60 Minutes",
-      "description": "",
-      "storeName": "Mox Saga",
-      "url": "https://play.sorcerytcg.com/events/22c48fda-a42e-4831-8138-b085e516eaf5"
-    },
-    {
       "name": "Friday Afternoon Sorcery",
       "date": "Fri. Jul 17, 2026",
       "time": "3:00 PM UTC",
@@ -120,19 +107,6 @@
       "url": "https://play.sorcerytcg.com/events/83ddd95d-9cd0-40fe-9ee6-c622abe8c937"
     },
     {
-      "name": "Pikazard Constructed",
-      "date": "Fri. Jul 17, 2026",
-      "time": "3:30 PM UTC",
-      "type": "Pikazard.eu",
-      "location": "Bratislava, Bratislavský kraj",
-      "city": "Bratislava",
-      "state": "Bratislavský kraj",
-      "address": "14 Gessayova Bratislava Bratislavský kraj 85103",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/897e7a09-5e68-47c5-854b-2840ff6f9917"
-    },
-    {
       "name": "Spielraum Weekly",
       "date": "Fri. Jul 17, 2026",
       "time": "3:30 PM UTC",
@@ -159,6 +133,19 @@
       "url": "https://play.sorcerytcg.com/events/bc037eca-727f-40f5-b20c-9a0c886f357e"
     },
     {
+      "name": "Sorcery Weekly",
+      "date": "Fri. Jul 17, 2026",
+      "time": "5:29 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Greater London, England",
+      "city": "Greater London",
+      "state": "England",
+      "address": "45 Minutes",
+      "description": "",
+      "storeName": "Spellbound Games",
+      "url": "https://play.sorcerytcg.com/events/cae5de34-cdee-4322-84ef-5170a5c86d73"
+    },
+    {
       "name": "Weekly du Soir",
       "date": "Fri. Jul 17, 2026",
       "time": "5:30 PM UTC",
@@ -175,13 +162,13 @@
       "name": "Monthly Casual Friday",
       "date": "Fri. Jul 17, 2026",
       "time": "5:30 PM UTC",
-      "type": "The Happy Halfling",
+      "type": "Casual Meetup",
       "location": "Eindhoven, NB",
       "city": "Eindhoven",
       "state": "NB",
       "address": "11 Winkelcentrum Woensel Eindhoven NB 5625 AA",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Happy Halfling",
       "url": "https://play.sorcerytcg.com/events/f37efc8b-2f48-47a7-82fd-b300dbc8f1a1"
     },
     {
@@ -196,58 +183,6 @@
       "description": "",
       "storeName": "Mystic Shop",
       "url": "https://play.sorcerytcg.com/events/330a99fa-3507-465f-bd29-b670206f42fc"
-    },
-    {
-      "name": "Friday Afternnon Meet Up",
-      "date": "Jul 17, 2026 - Jul 18, 2026",
-      "time": "9:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Norfolk, NE",
-      "city": "Norfolk",
-      "state": "NE",
-      "address": "1110 South 9th Street Norfolk NE 68701",
-      "description": "",
-      "storeName": "JC Hobby",
-      "url": "https://play.sorcerytcg.com/events/8e59444d-e5a3-4310-aa56-382d51eb8087"
-    },
-    {
-      "name": "Friday Sorcery",
-      "date": "Jul 17, 2026 - Jul 18, 2026",
-      "time": "10:00 PM UTC",
-      "type": "Super Heroes",
-      "location": "Newnan, GA",
-      "city": "Newnan",
-      "state": "GA",
-      "address": "66 Bullsboro Drive Newnan GA 30263",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d74ca2dc-d238-42fe-9d1b-6ac3bc90f4de"
-    },
-    {
-      "name": "Free play",
-      "date": "Fri. Jul 17, 2026",
-      "time": "10:00 PM UTC",
-      "type": "Hobby Addicts",
-      "location": "Livermore, CA",
-      "city": "Livermore",
-      "state": "CA",
-      "address": "1569 Olivina Ave Ste 121 Livermore CA 94551",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/42accf77-30f9-4b17-8f55-e343a26ff39c"
-    },
-    {
-      "name": "Variant Vault",
-      "date": "Fri. Jul 17, 2026",
-      "time": "10:30 PM UTC",
-      "type": "Learn To Play",
-      "location": "Orange Park, FL",
-      "city": "Orange Park",
-      "state": "FL",
-      "address": "",
-      "description": "",
-      "storeName": "Variant",
-      "url": "https://play.sorcerytcg.com/events/a16135ec-0c85-41f1-8d9d-777415848fcb"
     }
   ]
 }
