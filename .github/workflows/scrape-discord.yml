@@ -1,26 +1,23 @@
 name: Scrape Discord Updates
-
+ 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # every 5 minutes -- the fastest interval GitHub Actions actually supports (sub-5-minute schedules are silently ignored, even though the syntax is accepted). The scraper itself still runs twice per invocation, 30s apart, for a bit of extra freshness within each tick.
+    - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
   workflow_dispatch:          # allows manual run from GitHub Actions tab
-
+ 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
+ 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-
-      - name: Install dependencies
-        run: npm install
-
+ 
       - name: Run scraper (twice, 30s apart)
         run: |
           node scrape-discord.js
@@ -28,8 +25,7 @@ jobs:
           node scrape-discord.js
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-
+ 
       - name: Commit discord.json if changed
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -42,3 +38,4 @@ jobs:
             git pull --rebase origin main
             sleep 3
           done
+ 
