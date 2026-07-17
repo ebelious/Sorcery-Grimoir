@@ -1,45 +1,136 @@
 {
-  "updated": "2026-07-17T03:47:06.108Z",
-  "source": "https://play.sorcerytcg.com/events?radius=250",
+  "updated": "2026-07-17T04:08:58.620Z",
+  "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
-      "name": "Complete",
+      "name": "Casual Constructed",
       "date": "Apr 30, 2026 - Dec 31, 2026",
       "time": "6:00 AM UTC",
       "type": "Constructed Tournament",
       "location": "Dunedin, Otago",
       "city": "Dunedin",
       "state": "Otago",
-      "address": "",
+      "address": "23 Princes Street Dunedin Otago 9016",
       "description": "",
       "storeName": "Card Merchant Dunedin",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/b4f4122b-6b0f-411b-bda3-f0e29c067ef6"
     },
     {
-      "name": "Complete",
+      "name": "Casual Meetup",
       "date": "Jun 8, 2026 - Jul 23, 2026",
       "time": "11:06 PM UTC",
       "type": "Casual Meetup",
       "location": "Roseville, MN",
       "city": "Roseville",
       "state": "MN",
-      "address": "",
+      "address": "1975 County Road B2 West Roseville MN 55113",
       "description": "",
       "storeName": "Gamezenter",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/b8ddf9ad-6a2d-4857-9d24-0cac94d95f2a"
     },
     {
-      "name": "Upcoming",
+      "name": "Fellows 平日フリー対戦会",
+      "date": "Thu. Jul 16, 2026",
+      "time": "10:00 AM UTC",
+      "type": "Casual Meetup",
+      "location": "新橋, Tokyo",
+      "city": "新橋",
+      "state": "Tokyo",
+      "address": "",
+      "description": "",
+      "storeName": "Fellows GAME CAFE&BAL",
+      "url": "https://play.sorcerytcg.com/events/26e14ca9-e9cb-427e-b39c-6927aea255e3"
+    },
+    {
+      "name": "Casual Meet Up!",
+      "date": "Thu. Jul 16, 2026",
+      "time": "3:00 PM UTC",
+      "type": "Casual Meetup",
+      "location": "Conway, AR",
+      "city": "Conway",
+      "state": "AR",
+      "address": "690 Shelby Trail Suite 600 Conway AR 72034",
+      "description": "",
+      "storeName": "Roll & Play",
+      "url": "https://play.sorcerytcg.com/events/e030f99e-1422-4d7e-a92a-1dd65eb43617"
+    },
+    {
+      "name": "SpieleNarren Casual",
+      "date": "Thu. Jul 16, 2026",
+      "time": "3:30 PM UTC",
+      "type": "Casual Meetup",
+      "location": "Hamburg, HH",
+      "city": "Hamburg",
+      "state": "HH",
+      "address": "",
+      "description": "",
+      "storeName": "Der SpieleNarr",
+      "url": "https://play.sorcerytcg.com/events/fa7c8b90-c388-43bd-b29e-1e99456af1d8"
+    },
+    {
+      "name": "Sorcery Weekly Play @ JustFreak",
+      "date": "Thu. Jul 16, 2026",
+      "time": "4:00 PM UTC",
+      "type": "JustFreak.es",
+      "location": "Churriana de la Vega, AN",
+      "city": "Churriana de la Vega",
+      "state": "AN",
+      "address": "14 Calle María Pita Local 14 Tienda JustFreak.es Churriana de la Vega AN 18194",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/15b07491-0ab3-429d-8259-687474edcc2d"
+    },
+    {
+      "name": "Weekly Sorcering Tournament",
+      "date": "Thu. Jul 16, 2026",
+      "time": "5:30 PM UTC",
+      "type": "Mox in the Hole",
+      "location": "Edinburgh, Scotland",
+      "city": "Edinburgh",
+      "state": "Scotland",
+      "address": "45 Minutes",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/0884a0bf-772e-490e-aaef-0dfe35339725"
+    },
+    {
+      "name": "Sorcery Constructed Vila Geek Serra",
+      "date": "Thu. Jul 16, 2026",
+      "time": "7:00 PM UTC",
+      "type": "VILA GEEK",
+      "location": "Parque Res. Laranjeiras, ES",
+      "city": "Parque Res. Laranjeiras",
+      "state": "ES",
+      "address": "60 Minutes",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/cbdfea79-4823-43f7-9e71-3fee77dbee3b"
+    },
+    {
+      "name": "Constructed 160726",
+      "date": "Thu. Jul 16, 2026",
+      "time": "7:15 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Roma, RM - Roma",
+      "city": "Roma",
+      "state": "RM - Roma",
+      "address": "45 Minutes",
+      "description": "",
+      "storeName": "Il Covo del Nerd - Roma",
+      "url": "https://play.sorcerytcg.com/events/1fe02198-f891-4518-a9ad-e1e8e2a51828"
+    },
+    {
+      "name": "Sorcery Night at the Forge",
       "date": "Jul 16, 2026 - Jul 17, 2026",
       "time": "8:00 PM UTC",
       "type": "Constructed Tournament",
       "location": "Madison Heights, MI",
       "city": "Madison Heights",
       "state": "MI",
-      "address": "",
+      "address": "26324 John R Road Madison Heights MI 48071",
       "description": "",
       "storeName": "Mythic Forge Gaming",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/c525e105-757c-4431-82aa-ac1d664e1c1d"
     }
   ]
 }
