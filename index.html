@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com /.netlify; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com https://elaborate-mooncake-835943.netlify.app; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -56,6 +56,12 @@ var FIREBASE_CONFIG = {
   measurementId: "G-34SMF7DB6S"
 };
 var FIREBASE_VAPID_KEY = "BLk9It1CgnCXO5oNBkGPF6SgE3sKwQBFmpvwph33gvWN2xPUVPmTLAbogi4fTrbcaXerB9WIvmORXfksEAsRG90";
+// The subscribe-topic function only exists on Netlify. When the app is
+// loaded from the Netlify domain itself, calling it as a relative path
+// would work fine -- but when loaded from GitHub Pages (a different origin),
+// a relative path resolves against github.io and 404s. Always using the
+// absolute Netlify origin makes it work from either host.
+var _NETLIFY_ORIGIN = (location.hostname.indexOf('netlify.app')>=0) ? '' : 'https://elaborate-mooncake-835943.netlify.app';
 
 // Real push notifications (News/Discord/YouTube) via Firebase Cloud Messaging —
 // these arrive even when the app/tab is fully closed, unlike the local
@@ -93,11 +99,13 @@ function _fcmSyncTopics(){
     _fcmMessaging.getToken({vapidKey:FIREBASE_VAPID_KEY,serviceWorkerRegistration:reg}).then(function(token){
       if(!token)return;
       _fcmToken=token;sv('sg-fcm-token',token);
-      fetch('/.netlify/functions/subscribe-topic',{
+      fetch(_NETLIFY_ORIGIN+'/.netlify/functions/subscribe-topic',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({token:token,topics:_fcmActiveTopics()})
-      }).catch(function(){});
+      }).then(function(r){
+        if(!r.ok)console.warn('subscribe-topic returned',r.status);
+      }).catch(function(e){console.warn('subscribe-topic request failed:',e);});
     }).catch(function(e){console.warn('FCM getToken failed:',e);});
   });
 }
@@ -3367,7 +3375,7 @@ function _runsHtml(runs){
   if(!runs||!runs.length)return '';
   return runs.map(function(r){
     var t=h(r.text).replace(/\n/g,'<br>');
-    if(r.cardRef)return '<span style="color:var(--yel);cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();var _c=cardByName(this.dataset.card);if(_c){G.selCard=_c;openPanel(\'card\');}">'+t+'</span>';
+    if(r.cardRef)return '<span style="color:var(--yel);cursor:pointer" data-card="'+h(r.cardRef)+'" onclick="event.stopPropagation();openCardRefPopup(this.dataset.card);">'+t+'</span>';
     if(r.italic)t='<em>'+t+'</em>';
     if(r.bold)t='<strong>'+t+'</strong>';
     if(r.link)return '<span style="color:var(--bbl);cursor:pointer" data-term="'+h(r.text)+'" onclick="event.stopPropagation();openCodexTermPopup(this.dataset.term);">'+t+'</span>';
@@ -4576,7 +4584,7 @@ function goBack(){
   var _leavingCard=(G.panel==='card');
   if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;G.readModal=prev.readModal||null;G.selCard=('selCard' in prev)?prev.selCard:G.selCard;render();if(prev.readModal){requestAnimationFrame(function(){requestAnimationFrame(function(){var _rb1=document.querySelector('.rd-body');if(_rb1)_rb1.scrollTop=prev.rdScroll||0;});});}if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
 }
-function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];render();}
+function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];G.cardPopupStack=[];render();}
 
 // ── PANEL CONTENT ─────────────────────────────────────────────────────────────
 function pContent(){
@@ -5523,7 +5531,7 @@ function cModal(){
   var rC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[cRar(c)]||'#918175';
   var si=SETS[cSet(c)]||{sym:'?',c:'#918175'};var isSite=cType(c)==='site';
   var out=[];function o(s){out.push(s);}
-  o('<div class="cm-bg" onclick="if(event.target===this)goBack()"><div class="cm">');
+  o('<div class="cm-bg" onclick="if(event.target===this){if(G.cardPopupStack&&G.cardPopupStack.length){closeCardRefPopup();}else{goBack();}}"><div class="cm">');
   o('<div class="cm-hdr"><div class="cm-nm">'+h(nm)+'</div></div>');
   var _pList=(c.prints&&c.prints.length)?c.prints:null;
   var _curPrint=_pList?_pList[((G.cardPrintIdx||0)%_pList.length+_pList.length)%_pList.length]:null;
@@ -5885,6 +5893,32 @@ function openCodexTermPopup(term){
   }
   if(G.readModal){var _rb2=document.querySelector('.rd-body');(G.readModalStack=G.readModalStack||[]).push({modal:G.readModal,scroll:_rb2?_rb2.scrollTop:0});}
   showReadModal(entry.k,[{items:items}]);
+}
+// Handles clicking a card-name link inside a FAQ/Codex entry. If that entry
+// is being shown as an overlay on top of the Card Details popup itself
+// (G.panel is already 'card'), use a small dedicated stack instead of the
+// general navigation stack -- this guarantees closing the new card's popup
+// reliably returns to the exact entry/card in a single click. Otherwise
+// (e.g. from the standalone FAQ/Codex/Changelog panels), fall back to the
+// normal panel navigation as before.
+function openCardRefPopup(name){
+  var _c=cardByName(name);
+  if(!_c)return;
+  if(G.panel==='card'){
+    var _rb=document.querySelector('.rd-body');
+    (G.cardPopupStack=G.cardPopupStack||[]).push({selCard:G.selCard,readModal:G.readModal,scroll:_rb?_rb.scrollTop:0});
+    G.selCard=_c;G.readModal=null;render();
+    requestAnimationFrame(function(){requestAnimationFrame(function(){var el=document.querySelector('.cm');if(el)el.scrollTop=0;});});
+  } else {
+    G.selCard=_c;openPanel('card');
+  }
+}
+function closeCardRefPopup(){
+  var prev=G.cardPopupStack.pop();
+  G.selCard=prev.selCard;G.readModal=prev.readModal;render();
+  if(prev.readModal){
+    requestAnimationFrame(function(){requestAnimationFrame(function(){var rb=document.querySelector('.rd-body');if(rb)rb.scrollTop=prev.scroll||0;});});
+  }
 }
 
 function buildGsDrop(){
