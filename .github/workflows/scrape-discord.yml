@@ -2,7 +2,7 @@ name: Scrape Discord Updates
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
+    - cron: '*/5 * * * *'  # every 5 minutes -- the fastest interval GitHub Actions actually supports (sub-5-minute schedules are silently ignored, even though the syntax is accepted). The scraper itself still runs twice per invocation, 30s apart, for a bit of extra freshness within each tick.
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 jobs:
