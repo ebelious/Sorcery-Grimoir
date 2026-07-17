@@ -8,22 +8,89 @@
 // file populated with events shaped to match what that UI reads:
 //   { name, date, time, type, location, city, state, address, description, url }
 //
-// This page renders its event list client-side via JS (no public API is
-// documented for it), so this uses Playwright the same way scrape-news.js
-// does: load the page in a headless browser, wait for it to hydrate, then
-// read the rendered DOM.
+// TWO-PASS APPROACH: the summary cards on the /events listing page are
+// unlikely to include a full description or exact street address -- that
+// kind of detail normally only lives on each event's own detail page. So
+// this scraper first collects event names + URLs from the listing page,
+// then visits each event's individual page to pull the fuller info
+// (store name, address, description) from there.
 //
-// NOTE: I couldn't inspect the live rendered page's exact DOM/class names
+// NOTE: I couldn't inspect the live rendered pages' exact DOM/class names
 // (no browser access in the environment this was written in), so the
-// selectors below are a best-effort guess based on common patterns for
-// this kind of event-listing SPA. If this comes back with 0 events, check
-// the workflow's logs -- diagnostic output below shows what was actually
-// found on the page, which is the fastest way to tell me what to fix.
+// extraction below is a best-effort heuristic pass based on common patterns
+// for this kind of event-listing SPA, not verified selectors. If results
+// come back thin or wrong, check the workflow's logs -- diagnostic output
+// (including one full sample event's raw text) is printed to help pinpoint
+// exactly what needs fixing.
 
 const { chromium } = require('playwright');
 const fs = require('fs');
 
 const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
+const MAX_DETAIL_VISITS = 75; // cap detail-page visits to keep runtime reasonable
+
+const DATE_RE = /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}(,?\s+\d{4})?\b|\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/i;
+const TIME_RE = /\b\d{1,2}:\d{2}\s*(am|pm)\b/i;
+const CITY_STATE_RE = /^(.*?),\s*([A-Z]{2})\b/;
+const ADDRESS_RE = /^\d{1,6}\s+\S+/; // starts with a street number
+
+function extractFields(lines, fallbackName) {
+  const dateLine = lines.find(l => DATE_RE.test(l)) || '';
+  const timeLine = lines.find(l => TIME_RE.test(l)) || '';
+  const cityStateLine = lines.find(l => CITY_STATE_RE.test(l)) || '';
+  const cityMatch = cityStateLine.match(CITY_STATE_RE);
+  const addressLine = lines.find(l => ADDRESS_RE.test(l) && l !== cityStateLine) || '';
+
+  // Description: the longest line that isn't one of the other identified
+  // fields and isn't itself the event name -- descriptions are usually the
+  // one clearly longer block of prose on the page.
+  const excluded = new Set([dateLine, timeLine, cityStateLine, addressLine, fallbackName].filter(Boolean));
+  const prose = lines
+    .filter(l => !excluded.has(l) && l.length > 40)
+    .sort((a, b) => b.length - a.length);
+  const description = prose[0] || '';
+
+  // Store name: a short line, not the event name, not matched above --
+  // often the line immediately after the event name/heading.
+  const storeCandidates = lines.filter(l =>
+    !excluded.has(l) && l !== description && l.length > 1 && l.length < 60
+  );
+  const storeName = storeCandidates[0] || '';
+
+  return {
+    date: dateLine,
+    time: timeLine,
+    location: cityStateLine,
+    city: cityMatch ? cityMatch[1].trim() : '',
+    state: cityMatch ? cityMatch[2].trim() : '',
+    address: addressLine,
+    storeName,
+    description
+  };
+}
+
+// Parses a loosely-formatted event date string (e.g. "Jul 20", "Jul 20,
+// 2026", "07/20/2026") into a Date, for filtering out completed events.
+// Returns null if it can't be parsed with any confidence.
+function parseEventDate(dateStr) {
+  if (!dateStr) return null;
+  const cleaned = dateStr.replace(/^[A-Za-z]+,\s*/, ''); // strip a leading weekday e.g. "Sunday, Jul 20"
+  const d = new Date(cleaned);
+  if (isNaN(d.getTime())) return null;
+  return d;
+}
+
+// True if this event's date is today or in the future (i.e. should be kept).
+// Events with a date we couldn't parse are kept by default (fail open --
+// better to show something with an unclear date than silently hide a real
+// upcoming event because of a parsing miss).
+function isUpcoming(dateStr) {
+  const parsed = parseEventDate(dateStr);
+  if (!parsed) return true;
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  return parsed.getTime() >= todayStart.getTime();
+}
 
 (async () => {
   console.log('Launching browser...');
@@ -31,17 +98,11 @@ const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
   const page = await browser.newPage();
 
   console.log('Fetching ' + EVENTS_URL + '...');
-  await page.goto(EVENTS_URL, {
-    waitUntil: 'networkidle',
-    timeout: 30000
-  });
-
-  // Give the SPA extra time to finish hydrating/rendering event cards after
-  // its network requests settle.
+  await page.goto(EVENTS_URL, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForTimeout(3000);
   await page.waitForSelector('a[href*="/events/"]', { timeout: 15000 }).catch(() => {});
 
-  const { events, diagnostics } = await page.evaluate(() => {
+  const { stubs, listDiagnostics } = await page.evaluate(() => {
     const seen = new Set();
     const results = [];
     const links = Array.from(document.querySelectorAll('a[href*="/events/"]'));
@@ -49,7 +110,6 @@ const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
     links.forEach(a => {
       const href = a.getAttribute('href') || '';
       if (!href || href === '/events' || href.startsWith('/events?')) return;
-
       const url = href.startsWith('http') ? href : 'https://play.sorcerytcg.com' + href;
       if (seen.has(url)) return;
       seen.add(url);
@@ -59,47 +119,95 @@ const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
       const name = (heading ? heading.innerText : a.innerText || '').trim().split('\n')[0];
       if (!name) return;
 
-      const fullText = card.innerText ? card.innerText.trim() : '';
-      const lines = fullText.split('\n').map(l => l.trim()).filter(Boolean);
-
-      // Rough field guesses from the card's raw text.
-      const dateLine = lines.find(l => /\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+\d{1,2}/i.test(l) || /\d{1,2}\/\d{1,2}\/\d{2,4}/.test(l)) || '';
-      const timeLine = lines.find(l => /\d{1,2}:\d{2}\s*(am|pm)/i.test(l)) || '';
-      const cityStateLine = lines.find(l => /,\s*[A-Z]{2}\b/.test(l)) || '';
-      const cityMatch = cityStateLine.match(/^(.*?),\s*([A-Z]{2})\b/);
-
-      results.push({
-        name,
-        date: dateLine,
-        time: timeLine,
-        type: '',
-        location: cityStateLine,
-        city: cityMatch ? cityMatch[1].trim() : '',
-        state: cityMatch ? cityMatch[2].trim() : '',
-        address: '',
-        description: '',
-        url
-      });
+      results.push({ name, url });
     });
 
     return {
-      events: results.slice(0, 200),
-      diagnostics: {
+      stubs: results.slice(0, 300),
+      listDiagnostics: {
         totalEventLinks: links.length,
         bodyTextSample: document.body.innerText.slice(0, 500)
       }
     };
   });
 
-  console.log('Diagnostics:', JSON.stringify(diagnostics, null, 2));
+  console.log('List page diagnostics:', JSON.stringify(listDiagnostics, null, 2));
 
-  await browser.close();
-
-  if (!events.length) {
-    console.error('No events found -- page may not have rendered correctly, or selectors need updating. See diagnostics above.');
+  if (!stubs.length) {
+    await browser.close();
+    console.error('No events found on the listing page -- selectors need updating. See diagnostics above.');
     fs.writeFileSync('events.json', JSON.stringify({ updated: new Date().toISOString(), events: [] }, null, 2));
     process.exit(1);
   }
+
+  console.log('Found ' + stubs.length + ' events on the listing page. Visiting up to ' + MAX_DETAIL_VISITS + ' detail pages...');
+
+  const events = [];
+  let sampleLogged = false;
+  let skippedCompleted = 0;
+
+  for (let i = 0; i < Math.min(stubs.length, MAX_DETAIL_VISITS); i++) {
+    const stub = stubs[i];
+    try {
+      await page.goto(stub.url, { waitUntil: 'networkidle', timeout: 20000 });
+      await page.waitForTimeout(1000);
+
+      const lines = await page.evaluate(() =>
+        document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
+      );
+
+      const fields = extractFields(lines, stub.name);
+
+      if (!isUpcoming(fields.date)) {
+        skippedCompleted++;
+        if (!sampleLogged) {
+          console.log('Sample event detail lines (first event, for debugging):', JSON.stringify(lines.slice(0, 30), null, 2));
+          sampleLogged = true;
+        }
+        continue; // completed event -- don't include it
+      }
+
+      events.push({
+        name: stub.name,
+        date: fields.date,
+        time: fields.time,
+        type: '',
+        location: fields.location,
+        city: fields.city,
+        state: fields.state,
+        address: fields.address,
+        description: fields.description,
+        storeName: fields.storeName,
+        url: stub.url
+      });
+
+      if (!sampleLogged) {
+        console.log('Sample event detail lines (first event, for debugging):', JSON.stringify(lines.slice(0, 30), null, 2));
+        sampleLogged = true;
+      }
+    } catch (e) {
+      console.log('  [' + stub.name + '] detail page failed -- ' + e.message + '; keeping list-page name only');
+      events.push({
+        name: stub.name, date: '', time: '', type: '', location: '',
+        city: '', state: '', address: '', description: '', storeName: '', url: stub.url
+      });
+    }
+  }
+
+  // Any remaining events beyond MAX_DETAIL_VISITS keep just their name/url
+  // from the listing page rather than being dropped entirely (no date was
+  // fetched for these, so they can't be filtered as completed -- kept as-is).
+  for (let i = MAX_DETAIL_VISITS; i < stubs.length; i++) {
+    const stub = stubs[i];
+    events.push({
+      name: stub.name, date: '', time: '', type: '', location: '',
+      city: '', state: '', address: '', description: '', storeName: '', url: stub.url
+    });
+  }
+
+  console.log('Filtered out ' + skippedCompleted + ' completed event(s). Keeping ' + events.length + '.');
+
+  await browser.close();
 
   const output = {
     updated: new Date().toISOString(),
@@ -108,5 +216,5 @@ const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
   };
 
   fs.writeFileSync('events.json', JSON.stringify(output, null, 2));
-  console.log('Done -- scraped ' + events.length + ' events to events.json');
+  console.log('Done -- scraped ' + events.length + ' upcoming events (' + skippedCompleted + ' completed events filtered out; detail pages visited: ' + Math.min(stubs.length, MAX_DETAIL_VISITS) + ') to events.json');
 })();
