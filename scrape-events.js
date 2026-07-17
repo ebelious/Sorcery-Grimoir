@@ -8,89 +8,120 @@
 // file populated with events shaped to match what that UI reads:
 //   { name, date, time, type, location, city, state, address, description, url }
 //
-// APPROACH (v3): live diagnostics showed the /events LISTING page itself
-// already has a clean, consistently-ordered repeating text pattern per
-// event card:
+// APPROACH (v4): live diagnostics revealed each event card on the /events
+// LISTING page follows this exact 9-line repeating pattern:
 //   Event Name
-//   Complete                       <- a publish/listing status, NOT whether
-//                                      the event has occurred (confirmed: it
-//                                      appears on every event including ones
-//                                      running months into the future -- so
-//                                      it is NOT used for filtering)
+//   Complete | Upcoming            <- explicit status (BOTH values seen live)
 //   City, Region
-//   Mon D, YYYY - Mon D, YYYY      <- date RANGE for the whole recurring series
+//   <date>                          <- EITHER a single date ("Thu. Jul 16, 2026")
+//                                      OR a range ("Apr 30, 2026 - Dec 31, 2026")
+//                                      for recurring series -- both formats occur
 //   H:MM AM/PM UTC
-//   N Players                      <- optional
+//   N Players
 //   Store Name
 //   Event Type
 //   FREE / $price
 //
-// This is far more reliable than guessing from a single per-event detail
-// page, and also gives us the full date RANGE (a recurring series is
-// "upcoming" as long as its range hasn't fully ended, even if the range's
-// start date is in the past). Extraction anchors on the date-range line
-// (a very distinctive pattern) and reads fixed offsets around it.
+// Two bugs fixed in this version vs the prior one:
+//   1. Only the date-RANGE format was being matched, so single-date events
+//      (the majority, it turns out) were silently skipped entirely.
+//   2. The name/status/location offsets relative to the date line were
+//      miscounted by one position, so "name" was actually capturing the
+//      status word instead of the real event name.
 //
-// The one thing the listing page does NOT have is the exact street address
-// -- that still requires visiting each event's own detail page, so this
-// keeps a second pass for that specifically (capped, and much lighter than
-// before since it's only pulling one field now).
+// Filtering: for single-date events, the explicit status ("Upcoming" vs
+// "Complete") is trusted directly -- live data confirmed both values are
+// genuinely used to mean whether that occurrence has happened yet. For
+// date-range (recurring series) events, status is NOT trusted for this
+// (both range events sampled showed "Complete" despite running months into
+// the future -- for a series, that label appears to describe the reference
+// occurrence, not the series as a whole) -- the range's END date is used
+// instead, keeping the series as long as it hasn't fully concluded.
 //
-// NOTE: this is still a best-effort heuristic pass, not verified selectors
-// -- I don't have live browser access to inspect the actual DOM. If results
-// come back thin or wrong, check the workflow's logs -- diagnostic output
-// is printed to help pinpoint exactly what needs fixing.
+// The listing page does NOT have the exact street address -- that still
+// requires visiting each event's own detail page.
+//
+// NOTE: still a best-effort heuristic pass, not verified selectors -- no
+// live browser access to inspect the actual DOM directly. If results come
+// back thin or wrong, the workflow's logs include diagnostic output to help
+// pinpoint exactly what needs fixing.
 
 const { chromium } = require('playwright');
 const fs = require('fs');
 
-const EVENTS_URL = 'https://play.sorcerytcg.com/events?radius=250';
+const EVENTS_URL = 'https://play.sorcerytcg.com/events?locationType=in-person&radius=25';
 const MAX_DETAIL_VISITS = 75; // cap detail-page visits (address lookup only) to keep runtime reasonable
 
 const MONTH = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
 const DATE_RANGE_RE = new RegExp('^(' + MONTH + ')\\w*\\.?\\s+\\d{1,2},\\s+\\d{4}\\s*-\\s*(' + MONTH + ')\\w*\\.?\\s+\\d{1,2},\\s+\\d{4}$', 'i');
+const SINGLE_DATE_RE = new RegExp('^([A-Za-z]{2,4}\\.?\\s+)?(' + MONTH + ')\\w*\\.?\\s+\\d{1,2},\\s+\\d{4}$', 'i');
 const TIME_RE = /^\d{1,2}:\d{2}\s*(AM|PM)\b/i;
 const PLAYERS_RE = /^\d+\s+Players?$/i;
-const CITY_REGION_RE = /^[^,]+,\s*[^,]+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
+const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
 const ADDRESS_RE = /^\d{1,6}\s+\S+/; // starts with a street number
+const STATUS_RE = /^(Complete|Completed|Upcoming|Cancelled|Canceled|In Progress|Live)$/i;
+const COMPLETED_STATUS_RE = /^(Complete|Completed|Cancelled|Canceled)$/i;
 
-function parseRangeDate(str) {
+function parseDate(str) {
   const d = new Date(str.trim());
   return isNaN(d.getTime()) ? null : d;
 }
 
-// Extracts one event's fields from the lines immediately surrounding a
-// date-range match at index `i`.
+// Extracts one event's fields from the lines surrounding a date match at
+// index `i` (name is 3 lines before it: name, status, location, date...).
 function extractFromListing(lines, i) {
-  const dateRangeLine = lines[i];
-  const [startStr, endStr] = dateRangeLine.split(/\s*-\s*/);
-  const startDate = parseRangeDate(startStr);
-  const endDate = parseRangeDate(endStr);
+  const dateLine = lines[i];
+  const isRange = DATE_RANGE_RE.test(dateLine);
 
-  const name = lines[i - 2] || '';
+  let startDate = null, endDate = null;
+  if (isRange) {
+    const [startStr, endStr] = dateLine.split(/\s*-\s*/);
+    startDate = parseDate(startStr);
+    endDate = parseDate(endStr);
+  } else {
+    // Strip a leading weekday abbreviation e.g. "Thu. " before parsing.
+    endDate = parseDate(dateLine.replace(/^[A-Za-z]{2,4}\.?\s+/, ''));
+    startDate = endDate;
+  }
+
+  const name = lines[i - 3] || '';
+  const status = lines[i - 2] || '';
   const location = CITY_REGION_RE.test(lines[i - 1] || '') ? lines[i - 1] : '';
   const cityMatch = location.match(/^([^,]+),\s*(.+)$/);
 
   let j = i + 1;
   const time = TIME_RE.test(lines[j] || '') ? lines[j] : '';
   if (time) j++;
-  if (PLAYERS_RE.test(lines[j] || '')) j++; // skip optional player count
+  if (PLAYERS_RE.test(lines[j] || '')) j++; // skip player count if present
   const storeName = lines[j] || '';
   const type = lines[j + 1] || '';
   // (lines[j+2] would be the price -- not needed for our schema)
 
   return {
     name,
+    status,
+    isRange,
     location,
     city: cityMatch ? cityMatch[1].trim() : '',
     state: cityMatch ? cityMatch[2].trim() : '',
-    dateRange: dateRangeLine,
+    dateDisplay: dateLine,
     startDate,
     endDate,
     time,
     storeName,
     type
   };
+}
+
+// For single-date events, trust the site's own explicit status directly.
+// For recurring date-range events, status describes the reference
+// occurrence rather than the series -- use the range's end date instead.
+function isUpcoming(e, todayStart) {
+  if (!e.isRange && e.status && STATUS_RE.test(e.status)) {
+    return !COMPLETED_STATUS_RE.test(e.status);
+  }
+  if (!e.endDate) return true; // can't determine -- fail open
+  return e.endDate.getTime() >= todayStart.getTime();
 }
 
 (async () => {
@@ -103,8 +134,9 @@ function extractFromListing(lines, i) {
   await page.waitForTimeout(3000);
   await page.waitForSelector('a[href*="/events/"]', { timeout: 15000 }).catch(() => {});
 
-  const { parsed, urlsByName, listDiagnostics } = await page.evaluate((datePattern) => {
-    const dateRangeRe = new RegExp(datePattern, 'i');
+  const { parsed, urlsByName, listDiagnostics } = await page.evaluate((rangePattern, singlePattern) => {
+    const dateRangeRe = new RegExp(rangePattern, 'i');
+    const singleDateRe = new RegExp(singlePattern, 'i');
     const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
 
     // Map event name -> URL from the anchor tags (used to attach links to
@@ -123,25 +155,27 @@ function extractFromListing(lines, i) {
       if (name && !urlsByName[name]) urlsByName[name] = url;
     });
 
-    const dateRangeIndexes = [];
-    lines.forEach((l, idx) => { if (dateRangeRe.test(l)) dateRangeIndexes.push(idx); });
+    const dateIndexes = [];
+    lines.forEach((l, idx) => {
+      if (dateRangeRe.test(l) || singleDateRe.test(l)) dateIndexes.push(idx);
+    });
 
     return {
-      parsed: { lines, dateRangeIndexes },
+      parsed: { lines, dateIndexes },
       urlsByName,
       listDiagnostics: {
         totalEventLinks: seenUrls.size,
-        dateRangeLinesFound: dateRangeIndexes.length,
-        bodyTextSample: document.body.innerText.slice(0, 800)
+        dateLinesFound: dateIndexes.length,
+        bodyTextSample: document.body.innerText.slice(0, 1200)
       }
     };
-  }, DATE_RANGE_RE.source);
+  }, DATE_RANGE_RE.source, SINGLE_DATE_RE.source);
 
   console.log('List page diagnostics:', JSON.stringify(listDiagnostics, null, 2));
 
-  if (!listDiagnostics.dateRangeLinesFound) {
+  if (!listDiagnostics.dateLinesFound) {
     await browser.close();
-    console.error('No date-range patterns found on the listing page -- page structure may have changed. See diagnostics above.');
+    console.error('No date patterns found on the listing page -- page structure may have changed. See diagnostics above.');
     fs.writeFileSync('events.json', JSON.stringify({ updated: new Date().toISOString(), events: [] }, null, 2));
     process.exit(1);
   }
@@ -149,20 +183,16 @@ function extractFromListing(lines, i) {
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
 
-  const stubs = parsed.dateRangeIndexes
+  const stubs = parsed.dateIndexes
     .map(i => extractFromListing(parsed.lines, i))
     .filter(e => e.name)
     .map(e => ({ ...e, url: urlsByName[e.name] || '' }));
 
   console.log('Parsed ' + stubs.length + ' events from the listing page.');
 
-  // Filter using the date RANGE's end date -- a recurring series is still
-  // upcoming as long as it hasn't fully ended, even if its start date (and
-  // the "Complete" listing-status label) are in the past. Events whose end
-  // date we couldn't parse are kept (fail open).
-  const upcoming = stubs.filter(e => !e.endDate || e.endDate.getTime() >= todayStart.getTime());
-  const skippedEnded = stubs.length - upcoming.length;
-  console.log('Filtered out ' + skippedEnded + ' event(s) whose date range has fully ended. Keeping ' + upcoming.length + '.');
+  const upcoming = stubs.filter(e => isUpcoming(e, todayStart));
+  const skipped = stubs.length - upcoming.length;
+  console.log('Filtered out ' + skipped + ' completed/ended event(s). Keeping ' + upcoming.length + '.');
 
   console.log('Visiting up to ' + MAX_DETAIL_VISITS + ' detail pages for street addresses...');
 
@@ -194,7 +224,7 @@ function extractFromListing(lines, i) {
 
     events.push({
       name: e.name,
-      date: e.dateRange,
+      date: e.dateDisplay,
       time: e.time,
       type: e.type,
       location: e.location,
