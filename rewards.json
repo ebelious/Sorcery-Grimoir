@@ -1,173 +1,173 @@
 {
-  "updated": "2026-07-17T03:12:54.540Z",
+  "updated": "2026-07-17T03:19:54.168Z",
   "source": "https://play.sorcerytcg.com/rewards",
   "rewards": [
     {
       "name": "AL - Promo - Arthurian Legends Foot Soldier (4 Pack)",
       "points": 200,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_arthurian_legends_foot_soldier_pack.webp",
       "url": ""
     },
     {
       "name": "AL - Promo - Druid (Foil, 4 Pack)",
       "points": 1000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_druid_foil.webp",
       "url": ""
     },
     {
       "name": "Fields of Phyxis (3 Pack)",
       "points": 200,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-FieldsOfPhyxisAlt.png",
       "url": ""
     },
     {
       "name": "Fields of Phyxis (Foil) (3 Pack)",
       "points": 1200,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-FieldsOfPhyxisAltFOIL.png",
       "url": ""
     },
     {
       "name": "Haystack (3 Pack)",
       "points": 200,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HaystackAlt.png",
       "url": ""
     },
     {
       "name": "Haystack (Foil) (3 Pack)",
       "points": 1200,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HaystackAltFOIL.png",
       "url": ""
     },
     {
       "name": "Painting - Briar Patch",
       "points": 25000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/erik_briar_patch_paitning.webp",
       "url": ""
     },
     {
       "name": "Preconstructed Decks (Alpha)",
       "points": 8000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Box-AlphaPrecon.png",
       "url": ""
     },
     {
       "name": "Promo - Court of Equity (2-pack)",
       "points": 300,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtEquity.png",
       "url": ""
     },
     {
       "name": "Promo - Court of Equity Foil (2-pack)",
       "points": 1800,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtEquityFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Druid (Updated)",
       "points": 200,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-DruidUpdate.png",
       "url": ""
     },
     {
       "name": "Promo - Foil Draft Sites (4 Pack)",
       "points": 500,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_draft_sites_foil.webp",
       "url": ""
     },
     {
       "name": "Promo - Harbinger (Foil) (Precon)",
       "points": 1000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HarbingerFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Mobbed Court (2-pack)",
       "points": 300,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMobbed.png",
       "url": ""
     },
     {
       "name": "Promo - Mobbed Court Foil (2-pack)",
       "points": 1800,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMobbedFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Mock Court (2-pack)",
       "points": 300,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMock.png",
       "url": ""
     },
     {
       "name": "Promo - Mock Court Foil (2-pack)",
       "points": 1800,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMockFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Necromancer (Foil) (Precon)",
       "points": 1000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-NecromancerFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Overflowing Court (2-pack)",
       "points": 300,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtOverflowing.png",
       "url": ""
     },
     {
       "name": "Promo - Overflowing Court Foil (2-pack)",
       "points": 1800,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtOverflowingFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Persecutor (Foil) (Precon)",
       "points": 1000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-PersecutorFoil.png",
       "url": ""
     },
     {
       "name": "Promo - Savior (Foil) (Precon)",
       "points": 1000,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-SaviorFoil.png",
       "url": ""
     },
     {
       "name": "River of Blood (3 Pack)",
       "points": 200,
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-RiverOfBloodAlt.png",
       "url": ""
     },
     {
       "name": "River of Blood (Foil) (3 Pack)",
       "points": 1200,
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/dust_symbol.webp",
+      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-RiverOfBloodAltFOIL.png",
       "url": ""
     }
   ]
