@@ -3639,7 +3639,7 @@ function _startDeckUrlImport(url){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({url:url,requestId:requestId})
   })
-    .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to start import');return d;});})
+    .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error((d.error||'Failed to start import')+(d.status?' (HTTP '+d.status+')':'')+(d.detail?'\\n\\n'+d.detail:''));return d;});})
     .then(function(){ _pollDeckUrlImport(requestId,0); })
     .catch(function(e){
       G.deckUrlImporting=false;_renderKeepScroll();
