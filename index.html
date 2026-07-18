@@ -3695,13 +3695,17 @@ function removeCardFromDeck(deckKey,cardName){
   sv('sg-dk',G.decks);
   _renderKeepScroll();
 }
+var _rksPending=false;
 function _renderKeepScroll(){
+  if(_rksPending)return; // a render+restore cycle is already in flight -- skip to avoid racing it
+  _rksPending=true;
   var cm=document.querySelector('.cm')||document.querySelector('.panel');
   var scrollTop=cm?cm.scrollTop:0;
   render();
   requestAnimationFrame(function(){
     var cm2=document.querySelector('.cm')||document.querySelector('.panel');
     if(cm2)cm2.scrollTop=scrollTop;
+    _rksPending=false;
   });
 }
 // Shows the card-search "back to top" button only once the search bar/filter
