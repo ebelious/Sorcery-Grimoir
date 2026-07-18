@@ -1,0 +1,124 @@
+// Scrapes a single Curiosa.io deck page for its card list, given a deck URL
+// (e.g. https://curiosa.io/decks/cmr0zmkay001f04jrwy07jb6r) passed in via
+// the DECK_URL environment variable, and a REQUEST_ID used so the client
+// polling for a result knows which response belongs to its own request.
+//
+// WHY THIS EXISTS: Curiosa deck pages are a Next.js SPA -- confirmed live
+// that the deck's title/author/format render server-side, but the actual
+// card list does not appear anywhere in the raw HTML; it's populated by
+// client-side JS after load. There's also no public deck-lookup API
+// (api.sorcerytcg.com is explicitly card-data-only). So getting the real
+// card list requires an actual rendered browser, same as the events/rewards
+// scrapers.
+//
+// This runs via workflow_dispatch (manually or triggered from the app's
+// Netlify function) rather than on a schedule, since it needs to scrape
+// whatever URL the user just pasted in -- not a fixed page. On-demand
+// GitHub Actions runs get a much larger execution time budget than a
+// Netlify Function would (which is why the triggering function only kicks
+// this off rather than doing the scraping itself).
+//
+// NOTE: this is a best-effort heuristic pass -- I don't have live browser
+// access to inspect Curiosa's actual rendered DOM/class names. The
+// extraction below tries several common deck-list text patterns and logs
+// full diagnostics either way, so if results come back thin or wrong, the
+// workflow's logs should make it fast to fix precisely instead of guessing
+// again.
+
+const { chromium } = require('playwright');
+const fs = require('fs');
+
+const DECK_URL = process.env.DECK_URL;
+const REQUEST_ID = process.env.REQUEST_ID || String(Date.now());
+const RESULT_FILE = 'deck-import-result.json';
+
+function writeResult(obj) {
+  fs.writeFileSync(RESULT_FILE, JSON.stringify(Object.assign({
+    requestId: REQUEST_ID,
+    url: DECK_URL,
+    timestamp: new Date().toISOString()
+  }, obj), null, 2));
+}
+
+if (!DECK_URL) {
+  console.error('No DECK_URL provided.');
+  writeResult({ error: 'No deck URL provided.' });
+  process.exit(1);
+}
+
+// Common deck-list line patterns:
+//   "3x Card Name" / "3 x Card Name" / "3 Card Name"  (quantity first)
+//   "Card Name x3" / "Card Name (3)"                   (quantity last)
+const QTY_FIRST_RE = /^(\d{1,3})\s*[xX]?\s+(.+)$/;
+const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
+
+(async () => {
+  console.log('Launching browser...');
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  try {
+    console.log('Fetching ' + DECK_URL + '...');
+    await page.goto(DECK_URL, { waitUntil: 'networkidle', timeout: 30000 });
+    await page.waitForTimeout(3000); // let the SPA finish rendering the card list
+
+    const { deckName, lines } = await page.evaluate(() => {
+      const h1 = document.querySelector('h1,h2');
+      return {
+        deckName: h1 ? h1.innerText.trim() : '',
+        lines: document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
+      };
+    });
+
+    console.log('Deck name detected: ' + deckName);
+    console.log('Full page text (for debugging):', JSON.stringify(lines, null, 2));
+
+    const cards = [];
+    const seen = new Set();
+
+    lines.forEach(line => {
+      let name = null, qty = null;
+
+      let m = line.match(QTY_FIRST_RE);
+      if (m && parseInt(m[1], 10) > 0 && parseInt(m[1], 10) <= 99 && m[2].length > 1) {
+        qty = parseInt(m[1], 10);
+        name = m[2].trim();
+      } else {
+        m = line.match(QTY_LAST_RE);
+        if (m) {
+          name = m[1].trim();
+          qty = parseInt(m[2] || m[3], 10);
+        }
+      }
+
+      if (name && qty && qty > 0 && qty <= 99) {
+        const key = name.toLowerCase();
+        if (!seen.has(key)) {
+          seen.add(key);
+          cards.push({ name, qty });
+        }
+      }
+    });
+
+    console.log('Parsed ' + cards.length + ' candidate card lines.');
+
+    await browser.close();
+
+    if (!cards.length) {
+      writeResult({
+        error: 'Could not find any card list on that page. It may have failed to load, or the page structure differs from what this scraper expects.',
+        deckName,
+        rawTextSample: lines.slice(0, 60)
+      });
+      process.exit(0);
+    }
+
+    writeResult({ deckName, cards });
+    console.log('Done -- wrote ' + cards.length + ' cards to ' + RESULT_FILE);
+  } catch (err) {
+    await browser.close().catch(() => {});
+    console.error('Scrape failed:', err.message);
+    writeResult({ error: 'Failed to load or parse that deck page: ' + err.message });
+    process.exit(1);
+  }
+})();
