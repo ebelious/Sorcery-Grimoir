@@ -3624,6 +3624,73 @@ function exportDeckCSV(k){
   setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
 }
 function createDeck(){var nm='New Deck '+(Object.keys(G.decks).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
+function showDeckUrlImportPopup(){
+  var url=prompt('Paste a Curiosa deck URL (e.g. https://curiosa.io/decks/...)');
+  if(!url)return;
+  url=url.trim();
+  if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
+  _startDeckUrlImport(url);
+}
+function _startDeckUrlImport(url){
+  var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
+  G.deckUrlImporting=true;G._deckUrlImportReqId=requestId;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/trigger-deck-import',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({url:url,requestId:requestId})
+  })
+    .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to start import');return d;});})
+    .then(function(){ _pollDeckUrlImport(requestId,0); })
+    .catch(function(e){
+      G.deckUrlImporting=false;_renderKeepScroll();
+      alert('Could not start the import: '+e.message);
+    });
+}
+function _pollDeckUrlImport(requestId,attempt){
+  if(requestId!==G._deckUrlImportReqId)return; // a newer import superseded this one
+  if(attempt>36){ // ~6 minutes at 10s intervals
+    G.deckUrlImporting=false;_renderKeepScroll();
+    alert('The import is taking longer than expected. Check the GitHub Actions log, or try again.');
+    return;
+  }
+  fetch('https://ebelious.github.io/Sorcery-Grimoir/deck-import-result.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d||d.requestId!==requestId){
+        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1);},10000);
+        return;
+      }
+      G.deckUrlImporting=false;
+      if(d.error){
+        _renderKeepScroll();
+        alert('Import failed: '+d.error);
+        return;
+      }
+      _finishDeckUrlImport(d);
+    })
+    .catch(function(){
+      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1);},10000);
+    });
+}
+function _finishDeckUrlImport(result){
+  var deckName=result.deckName||'Imported Deck';
+  var baseName=deckName,n=1;
+  while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
+  var matched=[],unmatched=[];
+  (result.cards||[]).forEach(function(entry){
+    var c=cardByName(entry.name);
+    if(c){matched.push({name:cName(c),qty:entry.qty});}
+    else{unmatched.push(entry.name+' x'+entry.qty);}
+  });
+  G.decks[deckName]={name:deckName,cards:matched};
+  sv('sg-dk',G.decks);
+  render();
+  if(unmatched.length){
+    alert('Imported "'+deckName+'" with '+matched.length+' card(s). '+unmatched.length+' line(s) could not be matched to a known card:\\n\\n'+unmatched.join('\\n'));
+  } else {
+    alert('Imported "'+deckName+'" with '+matched.length+' card(s).');
+  }
+}
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
   var c=cardByName(cardName);if(!c)return;
@@ -5108,7 +5175,10 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button></div>');
+    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button><button class="fb" onclick="showDeckUrlImportPopup()">Import from URL</button></div>');
+    if(G.deckUrlImporting){
+      o('<div class="ld" style="margin-top:6px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');
+    }
     if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     var elMap={f:'fire',w:'water',e:'earth',a:'air'};
     Object.entries(G.decks).forEach(function(kv){
