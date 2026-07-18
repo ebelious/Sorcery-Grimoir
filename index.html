@@ -951,7 +951,7 @@ function boot(){
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
   G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true});
   G.matchLog=ld('sg-ml',[]);
-  G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false});
+  G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
   G.customDieSides=ld('sg-cds',2);
   G.dieCI=ld('sg-dc',3);
@@ -1051,7 +1051,7 @@ function resetAllTheme(){
   _applyBgImage();
 
   // Dice Settings defaults
-  G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
+  G.vdice={4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false};
   sv('sg-vd',G.vdice);
   G.dieCI=3; sv('sg-dc',3); // P1 Die Color: Blue
   G.dieCI2=0; sv('sg-dc2',0); // P2 Die Color: Yellow
@@ -2956,7 +2956,7 @@ function showP1Settings(anchorEl){
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
   html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:14px">D20</span></button>';
-  html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
+  html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,true)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
   html+='<input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:56px;height:44px;text-align:center;font-size:14px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:6px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_refreshP1Settings()" title="Custom die sides">';
   html+='</div>';
 
