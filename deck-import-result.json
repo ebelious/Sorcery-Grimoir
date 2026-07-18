@@ -1,0 +1,44 @@
+{
+  "requestId": "1784418981947-y1lo0e0jwjf",
+  "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
+  "timestamp": "2026-07-18T23:57:43.951Z",
+  "deckName": "Scream!",
+  "cards": [
+    {
+      "name": "Avatar",
+      "qty": 1
+    },
+    {
+      "name": "Aura",
+      "qty": 2
+    },
+    {
+      "name": "Artifact",
+      "qty": 5
+    },
+    {
+      "name": "Minion",
+      "qty": 35
+    },
+    {
+      "name": "Magic",
+      "qty": 18
+    },
+    {
+      "name": "Site",
+      "qty": 30
+    },
+    {
+      "name": "Collection",
+      "qty": 10
+    },
+    {
+      "name": "Maybeboard",
+      "qty": 23
+    },
+    {
+      "name": "Spellbook / 30 Atlas / 10 Collection",
+      "qty": 60
+    }
+  ]
+}
