@@ -6219,7 +6219,19 @@ function buildGsDrop(){
     _seenFaqCards[f.card]=true;
     items.push('<div class="sddi" data-faq="'+h(f.card)+'" onclick="gsOpenFaq(this.dataset.faq)"><div class="sn">'+h(f.card)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">FAQ</span></div></div>');
   });
-  CODEX_DATA.filter(function(k){return k.k&&k.k.toLowerCase().indexOf(q)>=0;}).slice(0,2).forEach(function(k){items.push('<div class="sddi" data-codex="'+h(k.k)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(k.k)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Codex</span></div></div>');});
+  var _codexMatches=[];
+  var _curParentKey='';
+  CODEX_DATA.forEach(function(k){
+    if(k.k)_curParentKey=k.k; // track which main entry this sub-entry belongs to
+    var label=k.k||k.sub||'';
+    if(label&&label.toLowerCase().indexOf(q)>=0){
+      var parentKey=k.k||_curParentKey;
+      if(parentKey&&!_codexMatches.some(function(m){return m.parentKey===parentKey&&m.label===label;})){
+        _codexMatches.push({label:label,parentKey:parentKey});
+      }
+    }
+  });
+  _codexMatches.slice(0,2).forEach(function(m){items.push('<div class="sddi" data-codex="'+h(m.parentKey)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(m.label)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Codex</span></div></div>');});
   return items.slice(0,8).join('');
 }
 // Patches just the search dropdown + clear button in place (no full app
