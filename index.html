@@ -3494,7 +3494,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
   function row(lbl,key,opts){return '<div class="frow"><span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>'+opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('')+'</div>';}
   var anyActive=Object.keys(f).some(function(k){return f[k]&&f[k].length>0;});
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','relic','site','artifact'])+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'])+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
