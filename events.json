@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T13:27:18.732Z",
+  "updated": "2026-07-18T19:12:29.982Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -29,19 +29,6 @@
       "url": "https://play.sorcerytcg.com/events/b8ddf9ad-6a2d-4857-9d24-0cac94d95f2a"
     },
     {
-      "name": "Cornerstone Gothic Limited @ Good Games Adelaide",
-      "date": "Sat. Jul 18, 2026",
-      "time": "1:45 AM UTC",
-      "type": "Sealed Tournament",
-      "location": "Adelaide, SA",
-      "city": "Adelaide",
-      "state": "SA",
-      "address": "88 Grenfell Street Adelaide SA 5000",
-      "description": "",
-      "storeName": "Good Games Adelaide",
-      "url": "https://play.sorcerytcg.com/events/ab0108b5-ec8c-4dde-835f-5883d945bb4f"
-    },
-    {
       "name": "7/18 CM奪盒賽",
       "date": "Sat. Jul 18, 2026",
       "time": "6:29 AM UTC",
@@ -53,19 +40,6 @@
       "description": "",
       "storeName": "CardMaster",
       "url": "https://play.sorcerytcg.com/events/793c66ae-0fb8-4c1b-aa86-d2fa2258a7ff"
-    },
-    {
-      "name": "Saturday Sorcery",
-      "date": "Sat. Jul 18, 2026",
-      "time": "8:00 AM UTC",
-      "type": "Learn To Play",
-      "location": "",
-      "city": "",
-      "state": "",
-      "address": "",
-      "description": "",
-      "storeName": "Arcaneforge.gr",
-      "url": "https://play.sorcerytcg.com/events/23c34962-3ff3-45ba-9030-c7e1bf1be1fd"
     },
     {
       "name": "Fantasia Saturday Sorcery",
@@ -92,19 +66,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/21c727d6-30ca-413b-abef-e658fee1047a"
-    },
-    {
-      "name": "On Demand Constructed Event",
-      "date": "Sat. Jul 18, 2026",
-      "time": "10:30 AM UTC",
-      "type": "Constructed Tournament",
-      "location": "Sheffield City Centre, England",
-      "city": "Sheffield City Centre",
-      "state": "England",
-      "address": "97 Mary Street Sheffield City Centre England S1 4RT",
-      "description": "",
-      "storeName": "Patriot Games Ltd",
-      "url": "https://play.sorcerytcg.com/events/103eac50-a8ed-4c69-aafd-c46ac2793182"
     },
     {
       "name": "Sorcery Sundays",
@@ -146,58 +107,6 @@
       "url": "https://play.sorcerytcg.com/events/8a1bdd0b-824c-4167-8e80-e2b2a1cd4f4f"
     },
     {
-      "name": "CENTRUM MTG Cornerstone Championship Constructed",
-      "date": "Sat. Jul 18, 2026",
-      "time": "11:00 AM UTC",
-      "type": "Constructed Tournament",
-      "location": "Warszawa, Województwo mazowieckie",
-      "city": "Warszawa",
-      "state": "Województwo mazowieckie",
-      "address": "1 Mariańska Warszawa Województwo mazowieckie 00-123",
-      "description": "",
-      "storeName": "CENTRUM MTG",
-      "url": "https://play.sorcerytcg.com/events/51ba2d41-fd3e-421a-920d-438b91e17408"
-    },
-    {
-      "name": "Sealed OLD-SCHOOL Beta",
-      "date": "Sat. Jul 18, 2026",
-      "time": "11:30 AM UTC",
-      "type": "Sealed Tournament",
-      "location": "Hamburg, HH",
-      "city": "Hamburg",
-      "state": "HH",
-      "address": "45 Minutes",
-      "description": "",
-      "storeName": "Der SpieleNarr",
-      "url": "https://play.sorcerytcg.com/events/311511f2-a943-4db3-b8e0-e35e93752991"
-    },
-    {
-      "name": "Arturian Legends Draft",
-      "date": "Sat. Jul 18, 2026",
-      "time": "12:00 PM UTC",
-      "type": "Arthurian Legends Draft",
-      "location": "Dublin, Dublin",
-      "city": "Dublin",
-      "state": "Dublin",
-      "address": "58 Francis Street Dublin Dublin D08 YE39",
-      "description": "",
-      "storeName": "Rogue Gaming",
-      "url": "https://play.sorcerytcg.com/events/eda3f4fe-f18d-4ca4-a497-45a11f5b0890"
-    },
-    {
-      "name": "Svarog's Sorcery 014",
-      "date": "Sat. Jul 18, 2026",
-      "time": "12:15 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Varaždin, Varaždinska županija",
-      "city": "Varaždin",
-      "state": "Varaždinska županija",
-      "address": "17 Ulica Ljudevita Gaja Varaždin Varaždinska županija 42000",
-      "description": "",
-      "storeName": "Think Ink d.o.o.",
-      "url": "https://play.sorcerytcg.com/events/48f7bfb9-309d-4f4f-b59a-3e8cea7f674c"
-    },
-    {
       "name": "Casual matches",
       "date": "Sat. Jul 18, 2026",
       "time": "1:00 PM UTC",
@@ -209,19 +118,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2ebf8197-ae66-4b76-aa27-b79f429d246b"
-    },
-    {
-      "name": "Hex Saturday Morning Weekly Play (Constructed)",
-      "date": "Sat. Jul 18, 2026",
-      "time": "3:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "New York, NY",
-      "city": "New York",
-      "state": "NY",
-      "address": "801 Broadway New York NY 10003",
-      "description": "",
-      "storeName": "Hex & Company",
-      "url": "https://play.sorcerytcg.com/events/7576dc09-b99c-4d99-ac57-b679625a2997"
     },
     {
       "name": "July Tournament",
