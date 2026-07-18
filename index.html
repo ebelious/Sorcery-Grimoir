@@ -2072,7 +2072,7 @@ var MODEL_PATH='https://elaborate-mooncake-835943.netlify.app/models/';
 // STL files backing the custom die shapes. STL has no color/material data,
 // so these are colored the same way the hand-built primitive shapes are --
 // a plain material using the die's selected color.
-var STL_MODELS={toad:'frog.stl',coin:'coin.stl',skull:'skull.stl',bullet:'bullet.stl'};
+var STL_MODELS={toad:'frog.stl',coin:'coin.stl',skull:'skull.stl',bullet:'bullet.stl',potion:'potion.stl'};
 var _stlGeoCache={}; // shapeKey -> loaded THREE.BufferGeometry (or 'loading'/'error')
 var _stlLoader=null;
 // Loads (once, then caches) the STL geometry for a shape key. Calls
@@ -4836,7 +4836,7 @@ function pContent(){
     o('<div class="slbl2">Die Shape</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Only applies to the Custom die.</div>');
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    [['normal','Normal'],['toad','Frog'],['coin','Coin'],['skull','Skull'],['bullet','Bullet']].forEach(function(s){
+    [['normal','Normal'],['toad','Frog'],['coin','Coin'],['skull','Skull'],['bullet','Bullet'],['potion','Potion']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
       o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
     });
