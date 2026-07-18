@@ -2072,7 +2072,7 @@ var MODEL_PATH='https://elaborate-mooncake-835943.netlify.app/models/';
 // STL files backing the custom die shapes. STL has no color/material data,
 // so these are colored the same way the hand-built primitive shapes are --
 // a plain material using the die's selected color.
-var STL_MODELS={toad:'frog.stl',coin:'coin.stl',skull:'skull.stl'};
+var STL_MODELS={toad:'frog.stl',coin:'coin.stl',skull:'skull.stl',bullet:'bullet.stl'};
 var _stlGeoCache={}; // shapeKey -> loaded THREE.BufferGeometry (or 'loading'/'error')
 var _stlLoader=null;
 // Loads (once, then caches) the STL geometry for a shape key. Calls
@@ -4820,17 +4820,18 @@ function pContent(){
     o('<div id="dice-preview-holder" style="width:100px;height:100px;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
     o('</div>');
     setTimeout(function(){_diceInitPreview();},0);
-    o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
-    o('</div><div class="slbl2">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
+    o('</div><div class="slbl2">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     o('<div class="slbl2">Die Shape</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Only applies to the Custom die.</div>');
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    [['normal','Normal','&#x2b21;'],['toad','Frog','&#x1f438;'],['coin','Coin','&#x1fa99;'],['skull','Skull','&#x1f480;']].forEach(function(s){
+    [['normal','Normal','&#x2b21;'],['toad','Frog','&#x1f438;'],['coin','Coin','&#x1fa99;'],['skull','Skull','&#x1f480;'],['bullet','Bullet','']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
-      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+s[2]+'</span>'+s[1]+'</button>');
+      var _icon=s[0]==='bullet'?'<span style="display:inline-block;width:11px;height:24px;border-radius:6px 6px 2px 2px;background:linear-gradient(to bottom, #e0c264 0%, #e0c264 55%, #8a6d3b 55%, #8a6d3b 100%)"></span>':'<span style="font-size:24px;line-height:1">'+s[2]+'</span>';
+      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+_icon+s[1]+'</button>');
     });
     o('</div>');
     o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_renderKeepScroll()"></div>');});o('</div>');
