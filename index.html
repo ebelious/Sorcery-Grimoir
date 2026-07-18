@@ -435,7 +435,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cpop-bk{width:100%;padding:10px;border:1px solid var(--hi);color:var(--fg);font-size:13px;margin-top:3px;text-transform:uppercase}
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
 .pbg.pbg-center{align-items:center;justify-content:center}
-.panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto}
+.panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto;overflow-anchor:none}
 .pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
 .phdr{display:flex;align-items:center;gap:6px;margin-bottom:9px}
 .p-bk{font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
@@ -4819,7 +4819,11 @@ function pContent(){
     o('<div class="slbl2" style="margin-top:0;font-size:11px;margin-bottom:4px">Preview</div>');
     o('<div id="dice-preview-holder" style="width:100px;height:100px;margin:0 auto;border:1px solid var(--bd);border-radius:8px;overflow:hidden"></div>');
     o('</div>');
-    setTimeout(function(){_diceInitPreview();},0);
+    setTimeout(function(){
+      _diceInitPreview();
+      var _p=document.querySelector('.panel');
+      if(_p)_p.scrollTop=0;
+    },0);
     o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
     o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
