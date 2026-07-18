@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com https://elaborate-mooncake-835943.netlify.app https://nominatim.openstreetmap.org https://images.sorcerycard.io https://storage.googleapis.com; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://www.googleapis.com https://api.anthropic.com https://api.rss2json.com https://corsproxy.io https://api.allorigins.win https://curiosa.io https://ebelious.github.io https://fcm.googleapis.com https://firebaseinstallations.googleapis.com https://elaborate-mooncake-835943.netlify.app https://nominatim.openstreetmap.org https://images.sorcerycard.io https://storage.googleapis.com; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-src https://ebelious.github.io;">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -712,6 +712,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
 </head>
 <body>
 <div id="app"><div class="ld"><span class="spin" style="font-size:22px">&#9650;</span></div></div>
@@ -750,6 +751,14 @@ var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
 // Index 0 is a special "theme color" slot — always returns the current --hi accent
 function getDieCol(i){var idx=(i==null?0:i)%DIE_COLS.length;if(idx===0){return (G&&G.cfg&&G.cfg.hi)?G.cfg.hi:(document.body.style.getPropertyValue('--hi')||'#FBB829');}return DIE_COLS[idx];}
+// Keeps P1 and P2's die colors from ever matching -- call after either
+// player's die color index changes.
+function _ensureDieColorsDiffer(){
+  if(G.dieCI%DIE_COLS.length===G.dieCI2%DIE_COLS.length){
+    G.dieCI2=(G.dieCI2+1)%DIE_COLS.length;
+    sv('sg-dc2',G.dieCI2);
+  }
+}
 var MENU_S={
   Settings:['Starting Life','Player name','Interface'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
@@ -885,15 +894,15 @@ document.addEventListener('visibilitychange',function(){
   if(document.visibilityState==='visible'&&G.cfg&&G.cfg.keepAwake)_requestWakeLock();
 });
 
-function rdPopIdx(i){var e=(G._rd||[])[i];if(e)showEntryPopup(e.t,e.b,e.segments);}
+function rdPopIdx(i){var e=(G._rd||[])[i];if(e)showEntryPopup(e.t,e.b,e.segments,e.big);}
 function rdPopFaq(i){var e=(G._faqRd||[])[i];if(e)showReadModal(e.t,e.sections);}
 function rdPop(el){
   var t=el.getAttribute('data-t')||'';
   var b=el.getAttribute('data-b')||'';
   showEntryPopup(t,b);
 }
-function showEntryPopup(title, body, segments){
-  G.readModal={title:title, sections:[{items:[{a:body, segments:segments}]}]};
+function showEntryPopup(title, body, segments, big){
+  G.readModal={title:title, sections:[{items:[{a:body, segments:segments}]}], big:!!big};
   render();
 }
 
@@ -917,10 +926,10 @@ function showChangelogList(){
   if(!G.codexChangelog||!G.codexChangelog.length)return;
   var items=G.codexChangelog.map(function(entry,i){
     var title=_fmtChangelogDate(entry.title)||('Update '+(i+1));
-    var idx=(G._rd=G._rd||[]).push({t:title,b:'',segments:entry.segments})-1;
+    var idx=(G._rd=G._rd||[]).push({t:title,b:'',segments:entry.segments,big:true})-1;
     return {listTitle:title,rdIdx:idx};
   });
-  G.readModal={title:'Codex Changelog',sections:[{items:items}]};
+  G.readModal={title:'Codex Changelog',sections:[{items:items}],big:true};
   render();
 }
 function closeReadModal(){
@@ -947,6 +956,7 @@ function boot(){
   G.customDieSides=ld('sg-cds',2);
   G.dieCI=ld('sg-dc',3);
   G.dieCI2=ld('sg-dc2',4);
+  _ensureDieColorsDiffer();
   G.diceFeltColor=ld('sg-felt','#14532d');
   G.diceTableColor=ld('sg-table','#0d1117');
   G.diceTexture=ld('sg-dtex','felt');
@@ -1566,6 +1576,61 @@ function _buildToadGroup(col){
   group.position.y=0.05;
   return group;
 }
+function _buildSkullGroup(col){
+  var group=new THREE.Group();
+  var r=parseInt(col.slice(1,3),16),g=parseInt(col.slice(3,5),16),b=parseInt(col.slice(5,7),16);
+  var _rgb=_diceEnsureVisible(r,g,b);r=_rgb[0];g=_rgb[1];b=_rgb[2];
+  var boneMat=new THREE.MeshStandardMaterial({color:new THREE.Color(r/255,g/255,b/255),roughness:0.55,metalness:0.05});
+  var darkMat=new THREE.MeshStandardMaterial({color:0x0d0d0d,roughness:0.4,metalness:0});
+  var toothMat=new THREE.MeshStandardMaterial({color:0xf2ead9,roughness:0.35,metalness:0});
+
+  // Cranium — domed and wide at the temples, slightly flattened front-to-back
+  var cranium=new THREE.Mesh(new THREE.SphereGeometry(1.1,28,22),boneMat);
+  cranium.scale.set(1.15,1.15,0.95); cranium.position.set(0,0.35,-0.05); cranium.castShadow=true; group.add(cranium);
+
+  // Brow ridge — raised bone bar above the eyes
+  var brow=new THREE.Mesh(new THREE.BoxGeometry(1.35,0.16,0.28),boneMat);
+  brow.position.set(0,0.42,0.92); brow.castShadow=true; group.add(brow);
+
+  // Cheekbones (zygomatic arches) — flanking the eye sockets, forward and low
+  [-0.72,0.72].forEach(function(x){
+    var cheek=new THREE.Mesh(new THREE.SphereGeometry(0.36,16,12),boneMat);
+    cheek.scale.set(0.85,0.7,0.8); cheek.position.set(x,-0.05,0.7); cheek.castShadow=true; group.add(cheek);
+  });
+
+  // Eye sockets — deep-set, vertically-oval hollows
+  [-0.42,0.42].forEach(function(x){
+    var socket=new THREE.Mesh(new THREE.SphereGeometry(0.3,16,12),darkMat);
+    socket.scale.set(0.85,1.15,0.55); socket.position.set(x,0.18,1.0); group.add(socket);
+  });
+
+  // Nasal cavity — inverted teardrop hollow, centered below the brow
+  var nose=new THREE.Mesh(new THREE.ConeGeometry(0.16,0.42,5),darkMat);
+  nose.rotation.x=Math.PI; nose.position.set(0,-0.18,1.08); group.add(nose);
+
+  // Jaw — tapers toward a distinct chin, with hinge bumps at the corners
+  var jaw=new THREE.Mesh(new THREE.CylinderGeometry(0.32,0.5,0.4,8),boneMat);
+  jaw.rotation.x=Math.PI/2; jaw.scale.set(1,0.85,1);
+  jaw.position.set(0,-0.78,0.55); jaw.castShadow=true; group.add(jaw);
+  [-0.55,0.55].forEach(function(x){
+    var hinge=new THREE.Mesh(new THREE.SphereGeometry(0.16,10,8),boneMat);
+    hinge.position.set(x,-0.62,0.15); group.add(hinge);
+  });
+
+  // Teeth — even row following a gentle arc along the jaw
+  for(var i=0;i<7;i++){
+    var t=(i-3)/3;
+    var tx=t*0.42;
+    var tz=0.98-Math.abs(t)*0.08;
+    var tooth=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.15,0.07),toothMat);
+    tooth.position.set(tx,-0.92,tz); group.add(tooth);
+  }
+
+  group.scale.setScalar(1.05/1.4);
+  group.position.y=0.05;
+  return group;
+}
+function _diceBuildSkull(col){ _diceClearMesh(); _diceGroup=_buildSkullGroup(col); _diceScene.add(_diceGroup); }
 function _coinFaceCanvas(colHex){
   var cv=document.createElement('canvas'); cv.width=256; cv.height=256;
   var ctx=cv.getContext('2d');
@@ -1614,8 +1679,14 @@ function _diceBuildCoin(col){ _diceClearMesh(); _diceGroup=_buildCoinGroup(col);
 
 function _diceBuildForSides(sides, col, isCustom){
   var shape=G.diceShape||'normal';
+  if(isCustom&&STL_MODELS[shape]){
+    _stlEnsureLoaded(shape,function(){ if((G.diceShape||'normal')===shape)_diceBuildForSides(sides,col,isCustom); });
+    var stlGroup=_buildStlGroup(shape,col);
+    if(stlGroup){ _diceClearMesh(); _diceGroup=stlGroup; _diceScene.add(_diceGroup); return; }
+  }
   if(isCustom&&shape==='toad'){ _diceBuildToad(col); return; }
   if(isCustom&&shape==='coin'){ _diceBuildCoin(col); return; }
+  if(isCustom&&shape==='skull'){ _diceBuildSkull(col); return; }
   if(isCustom) _diceBuildSphere(col);
   else if(sides===4) _diceBuildD4(col);
   else if(sides===6) _diceBuildD6(col);
@@ -2165,6 +2236,66 @@ var DICE_TEXTURES=[
 ];
 // Full-art jpg images bundled in the repo, usable as UI/table backgrounds
 var BG_IMG_PATH='https://elaborate-mooncake-835943.netlify.app/backgrounds/';
+var MODEL_PATH='https://elaborate-mooncake-835943.netlify.app/models/';
+// STL files backing the custom die shapes. STL has no color/material data,
+// so these are colored the same way the hand-built primitive shapes are --
+// a plain material using the die's selected color.
+var STL_MODELS={toad:'frog.stl',coin:'coin.stl',skull:'skull.stl'};
+var _stlGeoCache={}; // shapeKey -> loaded THREE.BufferGeometry (or 'loading'/'error')
+var _stlLoader=null;
+// Loads (once, then caches) the STL geometry for a shape key. Calls
+// onReady() if/when it finishes loading successfully, so callers can
+// trigger a rebuild -- until then, callers should fall back to the
+// hand-built primitive shape as a placeholder.
+function _stlEnsureLoaded(shapeKey,onReady){
+  var file=STL_MODELS[shapeKey];
+  if(!file)return;
+  var cached=_stlGeoCache[shapeKey];
+  if(cached&&cached!=='loading'&&cached!=='error')return; // already loaded
+  if(cached==='loading')return; // already in flight
+  if(typeof THREE==='undefined'){console.warn('STL load skipped for '+shapeKey+': THREE is not defined (core Three.js script failed to load).');return;}
+  if(typeof THREE.STLLoader==='undefined'){console.warn('STL load skipped for '+shapeKey+': THREE.STLLoader is not defined (STLLoader script failed to load, likely blocked or a CSP/CDN issue).');return;}
+  console.log('Loading STL model for '+shapeKey+' from '+MODEL_PATH+file+'...');
+  _stlGeoCache[shapeKey]='loading';
+  if(!_stlLoader)_stlLoader=new THREE.STLLoader();
+  _stlLoader.load(
+    MODEL_PATH+file,
+    function(geometry){
+      geometry.center();
+      geometry.computeVertexNormals();
+      _stlGeoCache[shapeKey]=geometry;
+      console.log('STL model loaded for '+shapeKey+' ('+geometry.attributes.position.count+' vertices).');
+      if(onReady)onReady();
+    },
+    undefined,
+    function(err){
+      console.warn('STL model failed to load for '+shapeKey+':',err);
+      _stlGeoCache[shapeKey]='error';
+    }
+  );
+}
+// Builds a die group from a loaded STL model, scaled to roughly match the
+// other dice and colored with the die's selected color. Returns null if the
+// model isn't loaded (yet, or failed) -- callers fall back to the
+// hand-built primitive shape in that case.
+function _buildStlGroup(shapeKey,col){
+  var geo=_stlGeoCache[shapeKey];
+  if(!geo||geo==='loading'||geo==='error')return null;
+  var r=parseInt(col.slice(1,3),16),g=parseInt(col.slice(3,5),16),b=parseInt(col.slice(5,7),16);
+  var _rgb=_diceEnsureVisible(r,g,b);r=_rgb[0];g=_rgb[1];b=_rgb[2];
+  var mat=new THREE.MeshStandardMaterial({color:new THREE.Color(r/255,g/255,b/255),roughness:0.5,metalness:0.05});
+  var mesh=new THREE.Mesh(geo,mat);
+  mesh.castShadow=true;
+  // Normalize scale so the model roughly matches the size of the other dice
+  // (~1.1-1.3 unit radius), regardless of what units it was authored in.
+  geo.computeBoundingSphere();
+  var radius=(geo.boundingSphere&&geo.boundingSphere.radius)||1;
+  var targetRadius=1.2;
+  mesh.scale.setScalar(radius>0?targetRadius/radius:1);
+  var group=new THREE.Group();
+  group.add(mesh);
+  return group;
+}
 function _bgResolveUrl(file){
   if(!file)return '';
   if(file.indexOf('data:')===0||file.indexOf('blob:')===0||file.indexOf('http:')===0||file.indexOf('https:')===0)return file;
@@ -2208,8 +2339,14 @@ function _diceEffectiveColor(texId){
 // ── Standalone live 3D preview (Dice Settings) — independent scene, does not touch the main roll overlay ──
 function _dicePreviewBuildDie(col){
   var shape=G.diceShape||'normal';
+  if(STL_MODELS[shape]){
+    _stlEnsureLoaded(shape,function(){ if((G.diceShape||'normal')===shape)_diceInitPreview(); });
+    var stlGroup=_buildStlGroup(shape,col);
+    if(stlGroup)return stlGroup;
+  }
   if(shape==='toad') return _buildToadGroup(col);
   if(shape==='coin') return _buildCoinGroup(col);
+  if(shape==='skull') return _buildSkullGroup(col);
   var group=new THREE.Group();
   var geo=new THREE.IcosahedronGeometry(1.7,0);
   var pos=geo.attributes.position;
@@ -2676,7 +2813,7 @@ function rollDice(sides,count,colIdx,pi,isCustom){
   // Die color is always the player's selected color — fixedColor only affects the felt surface
   var _col=getDieCol(_diceCI);
   setTimeout(function(){
-    _diceUpdateSceneBg(_pi===1?(G.diceTexture2||'felt'):undefined);
+    _diceUpdateSceneBg();
     // Save end position before rebuild resets it
     var _prevX=_diceGroup?_diceGroup.position.x:null;
     var _prevZ=_diceGroup?_diceGroup.position.z:null;
@@ -2731,7 +2868,7 @@ function showDiceColorPop1(anchorEl){
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI%DIE_COLS.length)===i;
     var swatchCol=getDieCol(i);
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_refreshP1Popup()"></div>';
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_refreshP1Popup()"></div>';
   });
   html+='</div>';
 
@@ -2818,14 +2955,16 @@ function showP1Settings(anchorEl){
   // ── Section: Dice Theme ──
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
-  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:12px">D20</span></button>';
+  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:14px">D20</span></button>';
+  html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
+  html+='<input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:56px;height:44px;text-align:center;font-size:14px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:6px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_refreshP1Settings()" title="Custom die sides">';
   html+='</div>';
 
   // ── Section: Timer ──
   html+='<div style="margin-top:14px;font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Timer</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
-  html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Set match timer"><span>⏱</span><span style="font-size:12px">Timer</span></button>';
-  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;gap:7px;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span>📋</span><span style="font-size:12px">Timer Log</span></button>';
+  html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;justify-content:center;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Set match timer"><span style="font-size:14px">Timer</span></button>';
+  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px">Timer Log</span></button>';
   html+='</div>';
 
   // ── Section: Player 2 ──
@@ -2878,10 +3017,8 @@ function p1LayoutMinimal(){
   G.cfg.hideTurnBar=true;
   G.cfg.diceInHeader=true;
   sv('sg-cfg',G.cfg);
-  if(!(G.cfg&&G.cfg.diceInHeader)){
-    G.vdice={4:false,6:false,8:false,10:false,12:false,20:false,'2d6':false,'custom':false};
-    sv('sg-vd',G.vdice);
-  }
+  G.vdice={4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false};
+  sv('sg-vd',G.vdice);
   if(!G.p1TimerRunning)G.p1TimerPending=false;
   _refreshP1Settings();
 }
@@ -3406,7 +3543,7 @@ function cacheAppData(){
   if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
   var base='https://ebelious.github.io/Sorcery-Grimoir/';
   var dataFiles=['./','./manifest.json',base+'cards.json',base+'codex.json',base+'news.json',base+'discord.json',base+'events.json',base+'rewards.json'];
-  var bgFiles=BG_IMAGES.map(function(b){return BG_IMG_PATH+b.file;});
+  var bgFiles=BG_IMAGES.map(function(b){return BG_IMG_PATH+b.file;}).concat(Object.keys(STL_MODELS).map(function(k){return MODEL_PATH+STL_MODELS[k];}));
   var total=dataFiles.length+bgFiles.length;
   G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-anchor');
   var idx=0;
@@ -4856,16 +4993,18 @@ function pContent(){
     setTimeout(function(){_diceInitPreview();},0);
     o('<div class="slbl2">Toggle Dice</div><div class="dtg">');DICE_T.forEach(function(d){var k=d.c>1?'2d6':String(d.s);var on=G.vdice[k]!==false;var lbl=d.c>1?'2d6':(d.s==='custom'?('Custom (d'+G.customDieSides+')'):('d'+d.s));o('<button class="dtb'+(on?' on':'')+'" onclick="G.vdice[\''+k+'\']=!G.vdice[\''+k+'\'];sv(\'sg-vd\',G.vdice);_renderKeepScroll()">'+lbl+'</button>');});
     o('</div><div class="slbl2">Custom Die Sides</div><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:64px;height:40px;text-align:center;font-size:16px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_renderKeepScroll()"><span style="font-size:11px;color:var(--fg2)">sides (2–1000)</span></div>');
+    o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
+    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
     o('<div class="slbl2">Die Shape</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Only applies to the Custom die.</div>');
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    [['normal','Normal','&#x2b21;'],['toad','Toad','&#x1f438;'],['coin','Coin','&#x1fa99;']].forEach(function(s){
+    [['normal','Normal','&#x2b21;'],['toad','Frog','&#x1f438;'],['coin','Coin','&#x1fa99;'],['skull','Skull','&#x1f480;']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
       o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+s[2]+'</span>'+s[1]+'</button>');
     });
     o('</div>');
-    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_renderKeepScroll()"></div>');});o('</div>');
+    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_renderKeepScroll()"></div>');});o('</div>');
     var _texDisabled=!!G.diceBgImage;
     o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
@@ -4899,10 +5038,6 @@ function pContent(){
       o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
       o('<button class="fb gold full" style="margin-top:8px" onclick="_diceBgImgPickLocal()">&#128193; Choose Image from Device</button>');
     })();
-    o('</div>');
-
-    o('<div class="slbl2" style="margin-bottom:0">Animation</div>');
-    o('<div class="set-row" style="padding-top:0"><span style="font-size:13px">Quick Roll</span><button class="ftag'+(G.diceFastRoll?' on':'')+'" onclick="G.diceFastRoll=!G.diceFastRoll;sv(\'sg-dfast\',G.diceFastRoll);_renderKeepScroll()">'+(G.diceFastRoll?'On':'Off')+'</button></div>');
     o('</div>');
     return out.join('');}
   if(p==='names'){
@@ -6383,7 +6518,7 @@ function render(){
       var _rmHtml='<div class="rd-overlay" onclick="if(event.target===this.parentElement||event.target===this)closeReadModal()">'
         +'<div class="rd-hdr"><span class="rd-title">'+h(_rm.title)+'</span>'
         +'<button class="rd-close" onclick="closeReadModal()">&times;</button></div>'
-        +'<div class="rd-body">';
+        +'<div class="rd-body"'+(_rm.big?' style="font-size:17px;line-height:1.5"':'')+'>';
       (_rm.sections||[]).forEach(function(sec){
         if(sec.hdr)_rmHtml+='<div class="rd-section-hdr">'+h(sec.hdr)+'</div>';
         (sec.items||[]).forEach(function(it){
