@@ -2255,7 +2255,9 @@ function _diceInitPreview(){
   }
   _dicePreview.texKey=texKey;
 
-  var col=getDieCol(G.dieCI)+'|'+(G.diceShape||'normal');
+  var _shapeKey=G.diceShape||'normal';
+  var _stlReady=STL_MODELS[_shapeKey]?(function(){var g=_stlGeoCache[_shapeKey];return g&&g!=='loading'&&g!=='error';})():true;
+  var col=getDieCol(G.dieCI)+'|'+_shapeKey+'|'+(_stlReady?'ready':'pending');
   if(_dicePreview.colKey!==col){
     _dicePreview.scene.remove(_dicePreview.group);
     _dicePreview.group=_dicePreviewBuildDie(getDieCol(G.dieCI));
