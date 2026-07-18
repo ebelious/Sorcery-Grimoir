@@ -4828,10 +4828,9 @@ function pContent(){
     o('<div class="slbl2">Die Shape</div>');
     o('<div style="font-size:11px;color:var(--fg2);margin-bottom:6px">Only applies to the Custom die.</div>');
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
-    [['normal','Normal','&#x2b21;'],['toad','Frog','&#x1f438;'],['coin','Coin','&#x1fa99;'],['skull','Skull','&#x1f480;'],['bullet','Bullet','']].forEach(function(s){
+    [['normal','Normal'],['toad','Frog'],['coin','Coin'],['skull','Skull'],['bullet','Bullet']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
-      var _icon=s[0]==='bullet'?'<span style="display:inline-block;width:11px;height:24px;border-radius:6px 6px 2px 2px;background:linear-gradient(to bottom, #e0c264 0%, #e0c264 55%, #8a6d3b 55%, #8a6d3b 100%)"></span>':'<span style="font-size:24px;line-height:1">'+s[2]+'</span>';
-      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+_icon+s[1]+'</button>');
+      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
     });
     o('</div>');
     o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_renderKeepScroll()"></div>');});o('</div>');
