@@ -1,0 +1,53 @@
+name: Import Deck from URL
+
+on:
+  workflow_dispatch:
+    inputs:
+      deck_url:
+        description: 'Curiosa deck URL to import'
+        required: true
+        type: string
+      request_id:
+        description: 'Client-generated ID so the app knows which result belongs to its request'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install playwright
+          npx playwright install chromium --with-deps
+
+      - name: Run deck scraper
+        env:
+          DECK_URL: ${{ inputs.deck_url }}
+          REQUEST_ID: ${{ inputs.request_id }}
+        run: node scrape-deck.js
+
+      - name: Commit deck-import-result.json
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add deck-import-result.json
+          git diff --staged --quiet || git commit -m "chore: deck import result [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "Push rejected, pulling and retrying ($i)..."
+            git checkout -- .
+            git pull --rebase origin main
+            sleep 3
+          done
