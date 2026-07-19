@@ -1,21 +1,23 @@
-// Attempts a FAST path for loading a specific deck's contents: fetches the
-// deck page's raw HTML directly and looks for embedded initial data, which
-// Next.js apps commonly include server-side (either the older Pages
-// Router's `__NEXT_DATA__` script tag, or the newer App Router's streamed
-// `self.__next_f.push(...)` chunks). If found, this is a single sub-second
-// HTTP request -- dramatically faster than the existing scrape-deck.js /
-// GitHub Actions pipeline, which needs a full Playwright browser.
+// Fetches a single deck's data via Curiosa's tRPC API directly, using the
+// confirmed real procedure name and input shape (found in a deck page's
+// __NEXT_DATA__ dehydrated query state):
+//   queryKey: [["deck","getById"], {"input":{"id":"<deckId>"},"type":"query"}]
+// Uses the same origin-spoofing technique already confirmed working for
+// deck.search in search-community-decks.js (Curiosa's API rejects requests
+// that don't look like they're coming from their own frontend).
 //
-// STATUS: experimental / unverified. An earlier plain-text fetch of a deck
-// page didn't show the card list, but that was via a tool that strips
-// <script> tags during extraction -- it never actually confirmed the data
-// isn't embedded, just that it wasn't visible through that specific path.
-// This logs the raw HTML (truncated) either way so it can be confirmed or
-// ruled out from real evidence. If this doesn't pan out, the app falls
-// back to the existing (slower but proven) GitHub Actions pipeline
-// automatically -- this is purely additive, not a replacement.
+// STATUS: the SSR-embedded version of this exact query (seen in a real
+// page's __NEXT_DATA__) only contained metadata (name/format/avatar/
+// elements/like+view counts) -- no card list. Since that dehydrated state
+// should mirror what this live call returns, there's a real chance this
+// still won't include the card list, meaning a different procedure (maybe
+// something like deck.getCards, or nested elsewhere) is what actually
+// fetches it. This logs the complete raw response either way so that can
+// be confirmed definitively rather than guessed at again. If this path
+// doesn't pan out, the app falls back to the existing (slower, proven)
+// GitHub Actions pipeline automatically.
 //
-// Request body: { "url": "https://curiosa.io/decks/..." }
+// Request body: { "url": "https://curiosa.io/decks/<deckId>" }
 
 const ALLOWED_ORIGINS = [
   'https://ebelious.github.io',
@@ -32,13 +34,20 @@ function corsHeaders(event) {
   };
 }
 
-// Tries to find a deck's card list within a parsed Next.js data blob,
-// trying several plausible nesting paths since the actual shape is unknown.
-function findDeckData(obj, depth) {
-  if (!obj || typeof obj !== 'object' || depth > 8) return null;
-  if (Array.isArray(obj.cards) || Array.isArray(obj.mainboard) || Array.isArray(obj.spellbook)) return obj;
+function extractDeckId(url) {
+  const m = url.match(/\/decks\/([a-zA-Z0-9]+)/);
+  return m ? m[1] : null;
+}
+
+// Tries several plausible field names/paths for a card list, since the
+// actual location (if this procedure includes one at all) is unconfirmed.
+function findCardList(obj, depth) {
+  if (!obj || typeof obj !== 'object' || depth > 6) return null;
+  for (const key of ['cards', 'mainboard', 'spellbook', 'deckCards', 'entries']) {
+    if (Array.isArray(obj[key]) && obj[key].length) return obj[key];
+  }
   for (const key of Object.keys(obj)) {
-    const found = findDeckData(obj[key], depth + 1);
+    const found = findCardList(obj[key], depth + 1);
     if (found) return found;
   }
   return null;
@@ -63,57 +72,52 @@ exports.handler = async function (event) {
   }
 
   const url = (payload.url || '').trim();
-  if (!/^https:\/\/curiosa\.io\/decks\//.test(url)) {
-    return { statusCode: 400, headers: jsonHeaders, body: JSON.stringify({ error: 'URL must be a curiosa.io deck link' }) };
+  const deckId = extractDeckId(url);
+  if (!deckId) {
+    return { statusCode: 400, headers: jsonHeaders, body: JSON.stringify({ error: 'Could not extract a deck ID from that URL' }) };
   }
 
+  const wrapped = { '0': { json: { id: deckId } } };
+  const apiUrl = 'https://curiosa.io/api/trpc/deck.getById?batch=1&input=' + encodeURIComponent(JSON.stringify(wrapped));
+
   try {
-    const res = await fetch(url, { headers: { 'Accept': 'text/html' } });
-    const html = await res.text();
-    console.log('Deck page fetch status:', res.status);
-    console.log('Deck page HTML length:', html.length);
+    const res = await fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/json',
+        'Origin': 'https://curiosa.io',
+        'Referer': url,
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      }
+    });
+    const text = await res.text();
+    console.log('deck.getById status:', res.status);
+    console.log('deck.getById raw response:', text.slice(0, 20000));
 
-    // Try the classic Pages Router pattern first.
+    if (!res.ok) {
+      return { statusCode: 502, headers: jsonHeaders, body: JSON.stringify({ error: 'Curiosa API returned an error', status: res.status, detail: text.slice(0, 2000) }) };
+    }
+
+    let parsed;
+    try { parsed = JSON.parse(text); } catch (e) {
+      return { statusCode: 502, headers: jsonHeaders, body: JSON.stringify({ error: 'Response was not valid JSON' }) };
+    }
+
     let deckData = null;
-    let source = '';
-    const nextDataMatch = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
-    if (nextDataMatch) {
-      console.log('Found __NEXT_DATA__ script tag, length:', nextDataMatch[1].length);
-      try {
-        const parsed = JSON.parse(nextDataMatch[1]);
-        deckData = findDeckData(parsed, 0);
-        source = '__NEXT_DATA__';
-      } catch (e) {
-        console.log('__NEXT_DATA__ found but failed to parse:', e.message);
-      }
-    }
-
-    // Fall back to the App Router's streamed self.__next_f.push(...) chunks.
+    try { deckData = parsed[0].result.data.json; } catch (e) {}
     if (!deckData) {
-      const pushMatches = [...html.matchAll(/self\.__next_f\.push\(\[1,\s*"((?:[^"\\]|\\.)*)"\]\)/g)];
-      console.log('Found ' + pushMatches.length + ' self.__next_f.push(...) chunk(s).');
-      for (const m of pushMatches) {
-        try {
-          const chunkText = JSON.parse('"' + m[1] + '"'); // unescape the JS string
-          const jsonStart = chunkText.indexOf('{');
-          const jsonStart2 = chunkText.indexOf('[');
-          const start = jsonStart === -1 ? jsonStart2 : (jsonStart2 === -1 ? jsonStart : Math.min(jsonStart, jsonStart2));
-          if (start === -1) continue;
-          const parsed = JSON.parse(chunkText.slice(start));
-          const found = findDeckData(parsed, 0);
-          if (found) { deckData = found; source = 'next_f chunk'; break; }
-        } catch (e) { /* not every chunk is parseable JSON on its own -- expected, keep trying others */ }
-      }
+      return { statusCode: 502, headers: jsonHeaders, body: JSON.stringify({ error: 'Unrecognized response shape -- see function logs for raw data' }) };
     }
 
-    if (!deckData) {
-      console.log('No embedded deck data found via either pattern. HTML sample (for debugging):', html.slice(0, 5000));
-      return { statusCode: 404, headers: jsonHeaders, body: JSON.stringify({ error: 'No embedded deck data found on the page (fast path unavailable for this page structure).' }) };
+    console.log('deck.getById data keys:', Object.keys(deckData));
+    const cardList = findCardList(deckData, 0);
+
+    if (!cardList) {
+      console.log('No card list found in deck.getById response -- this procedure likely only returns deck metadata, not contents.');
+      return { statusCode: 404, headers: jsonHeaders, body: JSON.stringify({ error: 'deck.getById did not include a card list (metadata only) -- see function logs for the full data shape', deckData }) };
     }
 
-    console.log('Fast path succeeded via ' + source + '. Deck data keys:', Object.keys(deckData));
-    return { statusCode: 200, headers: jsonHeaders, body: JSON.stringify({ ok: true, source, deckData }) };
+    return { statusCode: 200, headers: jsonHeaders, body: JSON.stringify({ ok: true, deckName: deckData.name, cards: cardList }) };
   } catch (err) {
-    return { statusCode: 500, headers: jsonHeaders, body: JSON.stringify({ error: 'Failed to fetch deck page', message: err.message }) };
+    return { statusCode: 500, headers: jsonHeaders, body: JSON.stringify({ error: 'Failed to reach Curiosa', message: err.message }) };
   }
 };
