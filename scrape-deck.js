@@ -109,20 +109,30 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
     ]);
 
     // Section headers look like "Collection (10)" or "Maybeboard (23)".
-    // Cards legitimately appear in more than one section (e.g. a card in
-    // both the main Magic section AND the Collection reference list) --
-    // confirmed directly from real diagnostic output. Deduplication needs
-    // to be scoped per-section, not global, or those repeats get wrongly
-    // treated as duplicate mentions of the same line and dropped.
+    // Confirmed from real diagnostic output that Collection and Maybeboard
+    // are genuinely separate zones from the main deck -- Maybeboard in
+    // particular commonly repeats cards that are ALSO in the main deck
+    // (suggestions/alternates), so its quantities must never be added on
+    // top of the main deck's. Cards legitimately appear more than once
+    // within the SAME zone's sections too, so dedup/merge is scoped per
+    // zone, not globally, and never across zones.
     const SECTION_HEADER_RE = /^[A-Za-z]+\s*\(\d+\)$/;
+    function zoneForSection(sectionHeader) {
+      const h = sectionHeader.toLowerCase();
+      if (h.startsWith('collection')) return 'collection';
+      if (h.startsWith('maybeboard')) return 'maybeboard';
+      return 'main';
+    }
     let currentSection = 'main';
+    let currentZone = 'main';
     const seenPerSection = {};
 
-    const cards = [];
+    const cards = []; // each entry: { name, qty, zone }
 
     lines.forEach(line => {
       if (SECTION_HEADER_RE.test(line)) {
         currentSection = line;
+        currentZone = zoneForSection(line);
         return;
       }
 
@@ -145,32 +155,39 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
         if (!seenPerSection[currentSection]) seenPerSection[currentSection] = new Set();
         if (!seenPerSection[currentSection].has(key)) {
           seenPerSection[currentSection].add(key);
-          cards.push({ name, qty });
+          cards.push({ name, qty, zone: currentZone });
         }
       }
     });
 
-    // Merge same-named entries (from different sections) into one combined
-    // quantity, so the final deck doesn't show the same card as two
-    // separate rows.
-    const merged = {};
-    const mergedOrder = [];
-    cards.forEach(c => {
-      const key = c.name.toLowerCase();
-      if (merged[key]) {
-        merged[key].qty += c.qty;
-      } else {
-        merged[key] = { name: c.name, qty: c.qty };
-        mergedOrder.push(key);
-      }
-    });
-    const finalCards = mergedOrder.map(key => merged[key]);
+    // Merge same-named entries into one combined quantity, but ONLY within
+    // the same zone -- a card repeated across different sections of the
+    // main deck still merges together, but a Maybeboard or Collection copy
+    // of a card must never add onto the main deck's count (or vice versa).
+    function mergeZone(zone) {
+      const merged = {};
+      const order = [];
+      cards.filter(c => c.zone === zone).forEach(c => {
+        const key = c.name.toLowerCase();
+        if (merged[key]) {
+          merged[key].qty += c.qty;
+        } else {
+          merged[key] = { name: c.name, qty: c.qty };
+          order.push(key);
+        }
+      });
+      return order.map(key => merged[key]);
+    }
 
-    console.log('Parsed ' + finalCards.length + ' unique card(s) after merging duplicates across sections.');
+    const finalCards = mergeZone('main');
+    const finalCollection = mergeZone('collection');
+    const finalMaybeboard = mergeZone('maybeboard');
+
+    console.log('Parsed ' + finalCards.length + ' main deck card(s), ' + finalCollection.length + ' collection card(s), ' + finalMaybeboard.length + ' maybeboard card(s).');
 
     await browser.close();
 
-    if (!finalCards.length) {
+    if (!finalCards.length && !finalCollection.length && !finalMaybeboard.length) {
       writeResult({
         error: 'Could not find any card list on that page. It may have failed to load, or the page structure differs from what this scraper expects.',
         deckName,
@@ -179,8 +196,8 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
       process.exit(0);
     }
 
-    writeResult({ deckName, cards: finalCards });
-    console.log('Done -- wrote ' + finalCards.length + ' cards to ' + RESULT_FILE);
+    writeResult({ deckName, cards: finalCards, collection: finalCollection, maybeboard: finalMaybeboard });
+    console.log('Done -- wrote ' + finalCards.length + ' main, ' + finalCollection.length + ' collection, ' + finalMaybeboard.length + ' maybeboard card(s) to ' + RESULT_FILE);
   } catch (err) {
     await browser.close().catch(() => {});
     console.error('Scrape failed:', err.message);
