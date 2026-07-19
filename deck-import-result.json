@@ -1,47 +1,55 @@
 {
-  "requestId": "1784436225197-u5wr30hlxdg",
-  "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
-  "timestamp": "2026-07-19T04:44:55.220Z",
-  "deckName": "Scream!",
+  "requestId": "1784436215579-pi46nixkzb",
+  "url": "https://curiosa.io/decks/cmnt61kta003a04jpvyqoqcpd",
+  "timestamp": "2026-07-19T04:45:19.917Z",
+  "deckName": "Screaming Thunder (Top 8 Summit S2)",
   "cards": [
     {
-      "name": "Necromancer",
+      "name": "Avatar of Air",
       "qty": 1
     },
     {
-      "name": "Crusade",
+      "name": "Sphere of Animosity",
+      "qty": 2
+    },
+    {
+      "name": "The Black Plague",
       "qty": 1
     },
     {
-      "name": "Eclipse",
+      "name": "Ring of Morrigan",
       "qty": 1
     },
     {
-      "name": "Mix Aer",
-      "qty": 1
-    },
-    {
-      "name": "Mix Terra",
-      "qty": 1
+      "name": "Torshammar Trinket",
+      "qty": 2
     },
     {
       "name": "Toolbox",
       "qty": 3
     },
     {
-      "name": "Kettletop Leprechaun",
+      "name": "Iron Shackles",
+      "qty": 2
+    },
+    {
+      "name": "Rolling Boulder",
       "qty": 3
     },
     {
-      "name": "Skeleton Mage",
+      "name": "Highland Princess",
+      "qty": 1
+    },
+    {
+      "name": "Gibbous Nightgaunts",
+      "qty": 3
+    },
+    {
+      "name": "Headless Haunt",
       "qty": 2
     },
     {
-      "name": "Field Laborers",
-      "qty": 2
-    },
-    {
-      "name": "Root Spider",
+      "name": "Phase Assassin",
       "qty": 3
     },
     {
@@ -49,131 +57,115 @@
       "qty": 3
     },
     {
+      "name": "Sturmgeist",
+      "qty": 2
+    },
+    {
       "name": "Stygian Archers",
       "qty": 3
     },
     {
-      "name": "Death Knight",
-      "qty": 3
-    },
-    {
-      "name": "Gargantula",
+      "name": "Avenging Angel",
       "qty": 2
     },
     {
-      "name": "Pudge Butcher",
-      "qty": 3
-    },
-    {
-      "name": "Archangel Michael",
+      "name": "Bane of Aventis",
       "qty": 1
     },
     {
-      "name": "Crawling Congregation",
-      "qty": 2
+      "name": "Gyre Hippogriffs",
+      "qty": 3
+    },
+    {
+      "name": "Skirmishers of Mu",
+      "qty": 3
+    },
+    {
+      "name": "Witherwing Hero",
+      "qty": 1
+    },
+    {
+      "name": "Archangel Gabriel",
+      "qty": 1
     },
     {
       "name": "Daperyll Vampire",
-      "qty": 3
-    },
-    {
-      "name": "Returned King",
-      "qty": 1
-    },
-    {
-      "name": "Army of the Dead",
-      "qty": 1
-    },
-    {
-      "name": "King of the Realm",
-      "qty": 1
-    },
-    {
-      "name": "Conqueror Worm",
       "qty": 2
     },
     {
-      "name": "Dispel",
+      "name": "Hounds of Ondaros",
+      "qty": 2
+    },
+    {
+      "name": "Legion of Gall",
+      "qty": 2
+    },
+    {
+      "name": "Thundering Giant",
+      "qty": 2
+    },
+    {
+      "name": "Arcane Barrage",
+      "qty": 2
+    },
+    {
+      "name": "Browse",
       "qty": 1
     },
     {
-      "name": "Gift of the Wolf",
-      "qty": 3
-    },
-    {
-      "name": "Attack by Night",
+      "name": "Displace",
       "qty": 2
     },
     {
-      "name": "Bury",
+      "name": "Grapple Shot",
       "qty": 2
     },
     {
-      "name": "Landmass",
-      "qty": 3
-    },
-    {
-      "name": "Undead Ambush",
-      "qty": 3
-    },
-    {
-      "name": "Earthquake",
-      "qty": 2
+      "name": "Ball Lightning",
+      "qty": 1
     },
     {
       "name": "Whirling Blades",
-      "qty": 2
-    },
-    {
-      "name": "Bedrock",
       "qty": 3
     },
     {
-      "name": "Boulevard of Bones",
+      "name": "Beacon",
       "qty": 2
     },
     {
-      "name": "Briar Patch",
+      "name": "Bottomless Pit",
+      "qty": 2
+    },
+    {
+      "name": "Cloud City",
       "qty": 1
+    },
+    {
+      "name": "Dark Alley",
+      "qty": 3
     },
     {
       "name": "Dark Tower",
-      "qty": 1
-    },
-    {
-      "name": "Den of Evil",
-      "qty": 1
-    },
-    {
-      "name": "Fertile Earth",
-      "qty": 3
-    },
-    {
-      "name": "Fields of Phyxis",
       "qty": 2
     },
     {
-      "name": "Gothic Tower",
-      "qty": 1
-    },
-    {
-      "name": "Lone Tower",
-      "qty": 1
-    },
-    {
-      "name": "Mirror Realm",
-      "qty": 1
-    },
-    {
-      "name": "Mount Ussar Sanctuary",
-      "qty": 1
-    },
-    {
-      "name": "Mountain Peaks",
+      "name": "Fields of Phyxis",
       "qty": 3
     },
     {
-      "name": "Rift Valley",
+      "name": "Garden of Eden",
+      "qty": 1
+    },
+    {
+      "name": "Gothic Tower",
+      "qty": 2
+    },
+    {
+      "name": "Lone Tower",
+      "qty": 2
+    },
+    {
+      "name": "Perilous Bridge",
       "qty": 2
     },
     {
@@ -181,12 +173,20 @@
       "qty": 2
     },
     {
-      "name": "Temple of Moloch",
+      "name": "The Manor at Daperyll Hill",
       "qty": 1
     },
     {
-      "name": "Windmill",
-      "qty": 3
+      "name": "The Void",
+      "qty": 1
+    },
+    {
+      "name": "Treetop Hideout",
+      "qty": 2
+    },
+    {
+      "name": "Watchtower",
+      "qty": 2
     },
     {
       "name": "Wuthering Heights",
