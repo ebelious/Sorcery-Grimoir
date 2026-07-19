@@ -5358,16 +5358,15 @@ function pContent(){
         o('<div class="slbl2">Results ('+G.comDecksSearchResults.length+')</div>');
         o('<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">');
         G.comDecksSearchResults.forEach(function(d){
-          var elIcons=(d.elements||[]).map(function(e){return eSVG(e,14);}).join('');
+          var elIcons=(d.elements||[]).map(function(e){return eSVG(e,16);}).join('');
           var statsBits=[];
-          if(d.author)statsBits.push('by @'+h(d.author));
           if(typeof d.views==='number')statsBits.push(d.views.toLocaleString()+' views');
           if(typeof d.likes==='number')statsBits.push(d.likes.toLocaleString()+' likes');
           o('<div class="sddi" onclick="previewCommunityDeck(\''+h(d.url).replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:10px">');
           o('<div style="width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg3);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
           o('<div style="flex:1;min-width:0">');
-          o('<div class="sn">'+h(d.name||'Untitled Deck')+'</div>');
-          o('<div class="sc" style="color:var(--fg2);display:flex;align-items:center;gap:5px;flex-wrap:wrap">'+(elIcons?'<span style="display:inline-flex;gap:2px">'+elIcons+'</span>':'')+(statsBits.length?h(statsBits.join(' \u00b7 ')):'')+'</div>');
+          o('<div class="sn" style="font-size:17px">'+h(d.name||'Untitled Deck')+'</div>');
+          o('<div class="sc" style="color:var(--fg2);display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:13px">'+(d.author?'<span>by <span style="color:var(--hi);font-weight:600">@'+h(d.author)+'</span></span>':'')+(elIcons?'<span style="display:inline-flex;gap:2px">'+elIcons+'</span>':'')+(statsBits.length?'<span>'+h(statsBits.join(' \u00b7 '))+'</span>':'')+'</div>');
           o('</div></div>');
         });
         o('</div>');
