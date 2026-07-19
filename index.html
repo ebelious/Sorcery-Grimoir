@@ -435,7 +435,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cpop-bk{width:100%;padding:10px;border:1px solid var(--hi);color:var(--fg);font-size:13px;margin-top:3px;text-transform:uppercase}
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
 .pbg.pbg-center{align-items:center;justify-content:center}
-.panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto;overflow-anchor:none}
+.panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto;overflow-anchor:none;scrollbar-gutter:stable}
 .pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
 .phdr{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:9px;min-height:38px}
 .p-bk{position:absolute;left:0;top:50%;transform:translateY(-50%);font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
@@ -4648,13 +4648,20 @@ function _comDeckApiNormalize(d){
   var elements=[];
   var elSrc=d.elements||d.thresholds||(d.deck&&d.deck.elements)||null;
   if(Array.isArray(elSrc)){
-    elements=elSrc.map(function(e){return (e&&e.id)?e.id:e;});
+    elements=elSrc.map(function(e){
+      if(e&&typeof e==='object')return e.id||e.name||e.key||e.value||e.type||'';
+      return e;
+    });
   } else if(Array.isArray(d.threshold)){
     elements=d.threshold;
   } else if(typeof d.element==='string'){
     elements=[d.element];
   }
-  elements=elements.map(function(e){return String(e).toLowerCase();}).filter(function(e){return ['earth','fire','water','air'].indexOf(e)>=0;});
+  var LETTER_MAP={a:'air',e:'earth',f:'fire',w:'water'};
+  elements=elements.map(function(e){
+    var s=String(e).toLowerCase().trim();
+    return LETTER_MAP[s]||s;
+  }).filter(function(e){return ['earth','fire','water','air'].indexOf(e)>=0;});
   var avatarImg=(d.feature&&d.feature.src)||'';
   var avatarName=(d.feature&&d.feature.card&&d.feature.card.name)||(Array.isArray(d.avatars)&&d.avatars[0]&&d.avatars[0].card&&d.avatars[0].card.name)||(d.avatar&&(d.avatar.name||d.avatar))||d.avatarName||'';
   var format=d.format||d.divider||'';
@@ -5313,6 +5320,8 @@ function pContent(){
     o('</div>');
     o('<button class="fb gold" style="flex-shrink:0"'+(_typedUrlImporting?' disabled':'')+' onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
     o('<button class="fb red" style="flex-shrink:0" onclick="clearCommunityDeckSearch()">Clear</button>');
+    o('</div>');
+    o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
     o('<button class="fb" style="flex-shrink:0" onclick="trigUpDecks()">Import CSV</button>');
     o('<button class="fb" style="flex-shrink:0" onclick="createDeck()">+ New Deck</button>');
     o('</div>');
@@ -5324,7 +5333,7 @@ function pContent(){
         o('<div style="font-size:10px;color:var(--fg2);padding:4px 0 10px">No decks found.</div>');
       } else {
         o('<div class="slbl2">Results ('+G.comDecksSearchResults.length+')</div>');
-        o('<div style="display:flex;flex-direction:column;margin-bottom:10px;border:1px solid var(--bd);border-radius:6px;overflow:hidden">');
+        o('<div style="display:flex;flex-direction:column;margin-bottom:10px">');
         G.comDecksSearchResults.forEach(function(d,idx){
           var elIcons=(d.elements||[]).map(function(e){return eSVG(e,16);}).join('');
           var _importing=!!(G.comDeckImportingUrls&&G.comDeckImportingUrls[d.url]);
