@@ -3659,7 +3659,7 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
     alert('The import is taking longer than expected. Check the GitHub Actions log, or try again.');
     return;
   }
-  fetch('https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/deck-results/deck-import-result.json?t='+Date.now(),{cache:'no-store'})
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/poll-deck-result?t='+Date.now())
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
       if(!d||d.requestId!==requestId){
