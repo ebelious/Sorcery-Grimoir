@@ -1,7 +1,7 @@
 {
-  "requestId": "1784473275107-gxd6pp1biui",
+  "requestId": "1784473771868-dole1ydzzii",
   "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
-  "timestamp": "2026-07-19T15:02:20.409Z",
+  "timestamp": "2026-07-19T15:10:42.820Z",
   "deckName": "Scream!",
   "cards": [
     {
@@ -191,6 +191,98 @@
     {
       "name": "Wuthering Heights",
       "qty": 2
+    },
+    {
+      "name": "Zap!",
+      "qty": 1
+    },
+    {
+      "name": "Blink",
+      "qty": 1
+    },
+    {
+      "name": "Displace",
+      "qty": 1
+    },
+    {
+      "name": "Teleport",
+      "qty": 1
+    },
+    {
+      "name": "Grapple Shot",
+      "qty": 1
+    },
+    {
+      "name": "Murder of Crows",
+      "qty": 1
+    },
+    {
+      "name": "Arc Lightning",
+      "qty": 1
+    },
+    {
+      "name": "Open Grave",
+      "qty": 1
+    },
+    {
+      "name": "Dwarven Digging Team",
+      "qty": 1
+    },
+    {
+      "name": "Grim Reaper",
+      "qty": 1
+    },
+    {
+      "name": "Lady Iseult",
+      "qty": 1
+    },
+    {
+      "name": "Mover of Mountains",
+      "qty": 1
+    },
+    {
+      "name": "Arcade of Bones",
+      "qty": 1
+    },
+    {
+      "name": "Goswhit Helmet",
+      "qty": 1
+    },
+    {
+      "name": "Kiss of Death",
+      "qty": 2
+    },
+    {
+      "name": "Raise Militia",
+      "qty": 1
+    },
+    {
+      "name": "Vanishment",
+      "qty": 1
+    },
+    {
+      "name": "Bane of Aventis",
+      "qty": 1
+    },
+    {
+      "name": "Book of the Dead",
+      "qty": 1
+    },
+    {
+      "name": "Orb of Ba'al Berith",
+      "qty": 1
+    },
+    {
+      "name": "Draconian Bonekite",
+      "qty": 1
+    },
+    {
+      "name": "Craterize",
+      "qty": 1
+    },
+    {
+      "name": "The Doom of Dilmun",
+      "qty": 1
     }
   ]
 }
