@@ -3695,6 +3695,9 @@ function _finishDeckUrlImport(result){
     if(c){matched.push({name:cName(c),qty:entry.qty});}
     else{unmatched.push(entry.name+' x'+entry.qty);}
   });
+  if(unmatched.length){
+    console.log('Deck import: '+unmatched.length+' card(s) from the scrape could not be matched to a known card in the local database:',unmatched);
+  }
   G.decks[deckName]={name:deckName,cards:matched};
   sv('sg-dk',G.decks);
   render();
