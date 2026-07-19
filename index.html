@@ -6125,7 +6125,7 @@ function cModal(){
   } else {
     o('<div class="cm-img" style="position:relative" onclick="_expandImg(this)">'+cImgTag(_dispCard)+_navArrows+'</div>');
   }
-  o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
+  
   if(cArt(c)){
     var _artObj=ARTISTS.find(function(a){return a.n===cArt(c);});
     var _artUrl=_artObj&&_artObj.url?_artObj.url:'https://www.collectorarthouse.com/sorcery-artists/'+cArt(c).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -6221,7 +6221,6 @@ function cModal(){
     var maxC=isAvatar?1:_maxCopies(c);
     var cardZone=isAvatar?'Avatar':cType(c)==='site'?'Atlas':'Spellbook';
     var maxColl=isAvatar?1:maxC;
-    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' in '+cardZone+' &middot; collection max 10 cards</div>');
     var selDk=(G.cmDeckSel&&G.decks[G.cmDeckSel])?G.cmDeckSel:dkKeys[0];
     G.cmDeckSel=selDk;
     o('<select style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--wht);padding:8px;font-size:14px;margin-bottom:10px;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onchange="G.cmDeckSel=this.value;_renderKeepScroll()">');
