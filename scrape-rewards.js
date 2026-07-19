@@ -187,6 +187,18 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
     process.exit(1);
   }
 
+  // Capture the previously-known reward set before overwriting, to detect
+  // genuinely new additions to the catalogue.
+  let previousNames = null;
+  try {
+    const existing = JSON.parse(fs.readFileSync('rewards.json', 'utf8'));
+    if (Array.isArray(existing.rewards)) {
+      previousNames = new Set(existing.rewards.map(r => r.name));
+    }
+  } catch (e) {
+    console.log('No existing rewards.json -- first run, will not notify');
+  }
+
   const output = {
     updated: new Date().toISOString(),
     source: REWARDS_URL,
@@ -195,4 +207,38 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
 
   fs.writeFileSync('rewards.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + rewards.length + ' rewards to rewards.json');
+
+  // Notify subscribers via Firebase Cloud Messaging if any reward wasn't
+  // present last run. `previousNames` is null on the very first run (no
+  // rewards.json yet) -- skip notifying in that case so setup doesn't blast
+  // everyone with every existing reward at once.
+  if (previousNames) {
+    const newRewards = rewards.filter(r => !previousNames.has(r.name));
+    if (newRewards.length) {
+      try {
+        const admin = require('firebase-admin');
+        if (!admin.apps.length) {
+          const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+          admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+        }
+        const first = newRewards[0];
+        await admin.messaging().send({
+          topic: 'rewards',
+          notification: {
+            title: 'New Reward Available',
+            body: newRewards.length === 1
+              ? first.name + (first.points != null ? ' -- ' + first.points.toLocaleString() + ' pts' : '')
+              : newRewards.length + ' new rewards added to the catalogue'
+          },
+          android: { priority: 'high' },
+          webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url || REWARDS_URL } }
+        });
+        console.log('Sent FCM notification for ' + newRewards.length + ' new reward(s)');
+      } catch (e) {
+        console.log('FCM notification failed (non-fatal): ' + e.message);
+      }
+    } else {
+      console.log('No new rewards since last run.');
+    }
+  }
 })();
