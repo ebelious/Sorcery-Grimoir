@@ -58,19 +58,27 @@ jobs:
           REQUEST_ID: ${{ inputs.request_id }}
         run: node scrape-deck.js
 
-      - name: Commit deck-import-result.json
+      - name: Commit deck-import-result.json (to a separate branch, not main -- avoids triggering a GitHub Pages rebuild)
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           cp deck-import-result.json /tmp/deck-import-result.json
+
+          if git fetch origin deck-results 2>/dev/null; then
+            git checkout -B deck-results origin/deck-results
+          else
+            git checkout --orphan deck-results
+            git rm -rf . > /dev/null 2>&1 || true
+          fi
+
           for i in 1 2 3 4 5; do
             cp /tmp/deck-import-result.json deck-import-result.json
             git add deck-import-result.json
             if git diff --staged --quiet; then break; fi
             git commit -m "chore: deck import result [skip ci]"
-            if git push; then break; fi
+            if git push origin deck-results; then break; fi
             echo "Push rejected -- resetting to latest remote and reapplying our own result ($i)..."
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin deck-results
+            git reset --hard origin/deck-results
             sleep 2
           done
