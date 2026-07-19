@@ -5330,24 +5330,23 @@ function pContent(){
     // whether the input+button pair searches Curiosa by name or imports a
     // pasted deck URL directly. Replaces the separate "Import Curiosa.io"
     // button entirely.
-    o('<div class="slbl2" style="margin-top:10px">Search Curiosa Decks</div>');
+    o('<div class="slbl2" style="margin-top:10px">Search Curiosa</div>');
     var _mode=G.comDecksSearchMode||'name';
     var _typedUrl=(G.comDecksSearchDraft||'').trim();
     var _typedUrlImporting=(_mode==='url'&&G.comDeckImportingUrls&&G.comDeckImportingUrls[_typedUrl]);
     o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
-    o('<select id="comdeck-search-mode" class="fb" onchange="G.comDecksSearchMode=this.value;_renderKeepScroll()" style="flex-shrink:0;font-family:inherit">');
+    o('<div style="position:relative;flex-shrink:0;display:inline-flex;align-items:center">');
+    o('<select id="comdeck-search-mode" class="fb" onchange="G.comDecksSearchMode=this.value;_renderKeepScroll()" style="appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:26px;font-family:inherit;height:34px;box-sizing:border-box">');
     o('<option value="name"'+(_mode==='name'?' selected':'')+'>Name</option>');
     o('<option value="url"'+(_mode==='url'?' selected':'')+'>URL</option>');
     o('</select>');
+    o('<span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--hi);pointer-events:none;font-size:11px">&darr;</span>');
+    o('</div>');
     o('<div class="si" style="position:relative;flex:1">');
     o('<input id="comdeck-search-inp" placeholder="'+(_mode==='url'?'Deck URL&hellip;':'Deck name&hellip;')+'" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" value="'+h(G.comDecksSearchDraft||'')+'" oninput="G.comDecksSearchDraft=this.value" onkeydown="if(event.key===\'Enter\'){event.preventDefault();_comDeckSearchOrImportAction();}">');
     o('</div>');
-    o('<button class="fb gold" style="flex-shrink:0"'+(_typedUrlImporting?' disabled':'')+' onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
-    o('<button class="fb red" style="flex-shrink:0" onclick="clearCommunityDeckSearch()">Clear</button>');
-    o('</div>');
-    o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
-    o('<button class="fb" style="flex-shrink:0" onclick="trigUpDecks()">Import CSV</button>');
-    o('<button class="fb" style="flex-shrink:0" onclick="createDeck()">+ New Deck</button>');
+    o('<button class="fb gold" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box"'+(_typedUrlImporting?' disabled':'')+' onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
+    if(G.comDecksSearchActive&&G.comDecksSearchResults&&G.comDecksSearchResults.length)o('<button class="fb red" style="flex-shrink:0;min-width:100px;text-align:center" onclick="clearCommunityDeckSearch()">Clear</button>');
     o('</div>');
     if(_typedUrlImporting){o('<div class="ld" style="margin-bottom:8px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');}
     if(G.comDecksSearching){o('<div class="ld" style="margin-bottom:8px">'+spinIcon()+' Searching Curiosa&hellip;</div>');}
@@ -5368,13 +5367,17 @@ function pContent(){
           if(d.author)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:0">@'+h(d.author)+'</div>');
           if(_importing)o('<div style="font-size:11px;color:var(--fg2);margin-top:2px">'+spinIcon()+' Importing&hellip; this can take up to a couple of minutes.</div>');
           o('</div>');
-          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;font-size:11px;padding:7px 10px"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\',\''+h(d.author||'').replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
+          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;min-width:100px;text-align:center"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\',\''+h(d.author||'').replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
           o('</div>');
         });
         o('</div>');
       }
     }
     o('<div class="slbl2">My Decks</div>');
+    o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
+    o('<button class="fb" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box" onclick="trigUpDecks()">Import CSV</button>');
+    o('<button class="fb" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box" onclick="createDeck()">+ New Deck</button>');
+    o('</div>');
     var _realDeckKeys=Object.keys(G.decks).filter(function(k){return k!=='__preview__';});
     if(!_realDeckKeys.length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     var elMap={f:'fire',w:'water',e:'earth',a:'air'};
