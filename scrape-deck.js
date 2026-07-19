@@ -73,6 +73,16 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
     console.log('Deck name detected: ' + deckName);
     console.log('Full page text (for debugging):', JSON.stringify(lines, null, 2));
 
+    // Deck-builder pages commonly show a composition summary (e.g. "Minion
+    // x35", "Site x30") using the exact same "word xN" text shape as a real
+    // card line -- exclude these known category/section labels so they
+    // don't get mistaken for actual cards.
+    const NON_CARD_LABELS = new Set([
+      'avatar', 'aura', 'artifact', 'minion', 'magic', 'site', 'spell',
+      'collection', 'maybeboard', 'spellbook', 'atlas', 'sideboard',
+      'deck', 'cards', 'total', 'unique'
+    ]);
+
     const cards = [];
     const seen = new Set();
 
@@ -91,7 +101,7 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
         }
       }
 
-      if (name && qty && qty > 0 && qty <= 99) {
+      if (name && qty && qty > 0 && qty <= 99 && !NON_CARD_LABELS.has(name.toLowerCase())) {
         const key = name.toLowerCase();
         if (!seen.has(key)) {
           seen.add(key);
