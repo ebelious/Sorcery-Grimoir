@@ -762,14 +762,14 @@ function _ensureDieColorsDiffer(){
 var MENU_S={
   Settings:['Starting Life','Player name','Interface'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
-  Cards:['Card Search','Collection','My Decks'],
+  Cards:['Card Search','Collection','My Decks','Community Decks'],
   Stats:['Local Stats','Deck Stats'],
   Media:['YouTube','News','Discord'],
   'Play Network':['Rewards'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Community Decks':'comdecks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',comdecks:'Community Decks',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'av',   n:'Ash and Void',         url:'https://www.youtube.com/@ashandvoid/videos',          cid:'UCMHGNiGZo1Isf9cId8FhlXA'},
@@ -3373,7 +3373,7 @@ function downloadForOffline(scope){
 function cacheAppData(){
   if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
   var base='https://ebelious.github.io/Sorcery-Grimoir/';
-  var dataFiles=['./','./manifest.json',base+'cards.json',base+'codex.json',base+'news.json',base+'discord.json',base+'events.json',base+'rewards.json'];
+  var dataFiles=['./','./manifest.json',base+'cards.json',base+'codex.json',base+'news.json',base+'discord.json',base+'events.json',base+'rewards.json',base+'community-decks.json'];
   var bgFiles=BG_IMAGES.map(function(b){return BG_IMG_PATH+b.file;}).concat(Object.keys(STL_MODELS).map(function(k){return MODEL_PATH+STL_MODELS[k];}));
   var total=dataFiles.length+bgFiles.length;
   G.appDataCaching=true;G.appDataCacheTotal=total;G.appDataCacheDone=0;_renderKeepScrollFocus('appdata-cache-anchor');
@@ -3631,7 +3631,12 @@ function showDeckUrlImportPopup(){
   if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
   _startDeckUrlImport(url);
 }
-function _startDeckUrlImport(url){
+function previewCommunityDeck(idx){
+  var d=(G.comDecksItems||[])[idx];
+  if(!d||!d.url)return;
+  _startDeckUrlImport(d.url,true);
+}
+function _startDeckUrlImport(url,previewMode){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
   G.deckUrlImporting=true;G._deckUrlImportReqId=requestId;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/trigger-deck-import',{
@@ -3640,13 +3645,13 @@ function _startDeckUrlImport(url){
     body:JSON.stringify({url:url,requestId:requestId})
   })
     .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error((d.error||'Failed to start import')+(d.status?' (HTTP '+d.status+')':'')+(d.detail?'\\n\\n'+d.detail:''));return d;});})
-    .then(function(){ _pollDeckUrlImport(requestId,0); })
+    .then(function(){ _pollDeckUrlImport(requestId,0,previewMode); })
     .catch(function(e){
       G.deckUrlImporting=false;_renderKeepScroll();
       alert('Could not start the import: '+e.message);
     });
 }
-function _pollDeckUrlImport(requestId,attempt){
+function _pollDeckUrlImport(requestId,attempt,previewMode){
   if(requestId!==G._deckUrlImportReqId)return; // a newer import superseded this one
   if(attempt>36){ // ~6 minutes at 10s intervals
     G.deckUrlImporting=false;_renderKeepScroll();
@@ -3657,7 +3662,7 @@ function _pollDeckUrlImport(requestId,attempt){
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
       if(!d||d.requestId!==requestId){
-        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1);},10000);
+        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},10000);
         return;
       }
       G.deckUrlImporting=false;
@@ -3666,11 +3671,55 @@ function _pollDeckUrlImport(requestId,attempt){
         alert('Import failed: '+d.error);
         return;
       }
-      _finishDeckUrlImport(d);
+      if(previewMode){ _showCommunityDeckPreview(d,requestId); }
+      else{ _finishDeckUrlImport(d); }
     })
     .catch(function(){
-      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1);},10000);
+      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},10000);
     });
+}
+// Shows a not-yet-saved community deck using the same deckview rendering
+// as the user's own decks, via a temporary in-memory entry -- lets someone
+// browse the deck before deciding whether to actually import it.
+function _showCommunityDeckPreview(result,requestId){
+  var matched=[],unmatched=[];
+  (result.cards||[]).forEach(function(entry){
+    var c=cardByName(entry.name);
+    if(c){matched.push({name:cName(c),qty:entry.qty});}
+    else{unmatched.push(entry.name+' x'+entry.qty);}
+  });
+  G.decks['__preview__']={name:result.deckName||'Community Deck',cards:matched};
+  G.previewDeckActive=true;
+  G._previewUnmatched=unmatched;
+  G._previewSourceUrl=result.url;
+  G._previewRequestId=requestId;
+  G.selDeck='__preview__';
+  openPanel('deckview');
+}
+// Saves the currently-previewed community deck into the user's own decks.
+function importPreviewedDeck(){
+  var dv=G.decks['__preview__'];
+  if(!dv)return;
+  var deckName=dv.name,baseName=deckName,n=1;
+  var existing=Object.keys(G.decks).filter(function(k){return k!=='__preview__';});
+  while(existing.indexOf(deckName)>=0){deckName=baseName+' ('+(++n)+')';}
+  G.decks[deckName]={name:deckName,cards:dv.cards.slice()};
+  delete G.decks['__preview__'];
+  G.previewDeckActive=false;
+  sv('sg-dk',G.decks);
+  G.selDeck=deckName;
+  render();
+  if(G._previewUnmatched&&G._previewUnmatched.length){
+    alert('Imported "'+deckName+'" with '+dv.cards.length+' card(s). '+G._previewUnmatched.length+' line(s) could not be matched to a known card:\\n\\n'+G._previewUnmatched.join('\\n'));
+  } else {
+    alert('Imported "'+deckName+'" with '+dv.cards.length+' card(s).');
+  }
+}
+// Discards the currently-previewed community deck without saving it.
+function discardPreviewedDeck(){
+  delete G.decks['__preview__'];
+  G.previewDeckActive=false;
+  goBack();
 }
 function _finishDeckUrlImport(result){
   var deckName=result.deckName||'Imported Deck';
@@ -4619,6 +4668,23 @@ function _checkNewsForNew(){
   if(seen==null){ sv('sg-news-seen',latest); }
   else if(seen!==latest){ G.newsHasNew=true; _sendNotification('New Sorcery News','A new article is available.','news'); }
 }
+function loadCommunityDecks(){
+  if(G.comDecksLoading)return;
+  G.comDecksLoading=true;G.comDecksLoaded=false;G.comDecksErr=null;render();
+  fetch('https://ebelious.github.io/Sorcery-Grimoir/community-decks.json?t='+Date.now())
+    .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
+    .then(function(d){
+      G.comDecksLoading=false;G.comDecksLoaded=true;
+      G.comDecksItems=d.decks||[];
+      if(!G.comDecksItems.length)G.comDecksErr='No community decks found yet.';
+      render();
+    })
+    .catch(function(){
+      G.comDecksLoading=false;G.comDecksLoaded=true;
+      G.comDecksErr='Could not load community decks.';
+      render();
+    });
+}
 function loadNews(){
   if(G.newsLoading)return;
   G.newsLoading=true;G.newsLoaded=false;G.newsErr=null;render();
@@ -5208,12 +5274,22 @@ function pContent(){
   if(p==='deckview'){
     var dvk=G.selDeck;var dv=dvk&&G.decks[dvk];
     if(!dv){o('<div class="ld">Deck not found.</div>');return out.join('');}
-    // Rename input + delete
-    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
-    o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
-    o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
-    o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
-    o('</div>');
+    var isPreview=(dvk==='__preview__');
+    if(isPreview){
+      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+      o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;font-family:\'Courier New\',monospace">'+h(dv.name)+' <span style="font-size:11px;font-weight:400;color:var(--fg2)">(preview)</span></div>');
+      o('<button class="fb gold" onclick="importPreviewedDeck()">Import This Deck</button>');
+      o('<button class="fb" onclick="showDeckUrlImportPopup()">Import Curiosa.io</button>');
+      o('<button class="fb red" onclick="discardPreviewedDeck()">Discard</button>');
+      o('</div>');
+    } else {
+      // Rename input + delete
+      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+      o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
+      o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
+      o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
+      o('</div>');
+    }
     // Group cards by type
     var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
     var typeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
@@ -5777,6 +5853,22 @@ function pContent(){
       }
     }
 
+    return out.join('');
+  }
+  if(p==='comdecks'){
+    if(!G.comDecksLoaded&&!G.comDecksLoading){setTimeout(function(){loadCommunityDecks();},50);}
+    if(G.comDecksLoading){o('<div class="ld">'+spinIcon()+' Loading community decks&hellip;</div>');}
+    else if(G.comDecksErr){o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.comDecksErr)+'</div>');}
+    else if(G.comDecksItems&&G.comDecksItems.length){
+      o('<div class="slbl2">Community Decks ('+G.comDecksItems.length+')</div>');
+      o('<div style="display:flex;flex-direction:column;gap:6px">');
+      G.comDecksItems.forEach(function(d,i){
+        o('<div class="sddi" onclick="previewCommunityDeck('+i+')"><div class="sn">'+h(d.name||'Untitled Deck')+'</div><div class="sc" style="color:var(--fg2)">'+(d.author?'by @'+h(d.author):'')+'</div></div>');
+      });
+      o('</div>');
+    } else {
+      o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">No community decks available yet.</div>');
+    }
     return out.join('');
   }
   if(p==='rewards'){
