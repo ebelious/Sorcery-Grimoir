@@ -93,7 +93,7 @@ self.addEventListener('fetch', (event) => {
 // network-first strategy as the app shell: freshest data when online,
 // last-known-good data when offline.
 const DATA_CACHE = 'sg-data-v1';
-const DATA_FILE_RE = /\/(cards|codex|news|discord|events|rewards|community-decks)\.json(\?|$)/;
+const DATA_FILE_RE = /\/(cards|codex|news|discord|events|rewards)\.json(\?|$)/;
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
