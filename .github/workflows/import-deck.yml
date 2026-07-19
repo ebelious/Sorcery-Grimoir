@@ -62,12 +62,15 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add deck-import-result.json
-          git diff --staged --quiet || git commit -m "chore: deck import result [skip ci]"
+          cp deck-import-result.json /tmp/deck-import-result.json
           for i in 1 2 3 4 5; do
-            git push && break
-            echo "Push rejected, pulling and retrying ($i)..."
-            git checkout -- .
-            git pull --rebase origin main
-            sleep 3
+            cp /tmp/deck-import-result.json deck-import-result.json
+            git add deck-import-result.json
+            if git diff --staged --quiet; then break; fi
+            git commit -m "chore: deck import result [skip ci]"
+            if git push; then break; fi
+            echo "Push rejected -- resetting to latest remote and reapplying our own result ($i)..."
+            git fetch origin main
+            git reset --hard origin/main
+            sleep 2
           done
