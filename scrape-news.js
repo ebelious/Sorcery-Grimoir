@@ -147,7 +147,8 @@ const fs = require('fs');
           title: 'New Sorcery News',
           body: articles[0].title || 'A new article is available.'
         },
-        webpush: { fcmOptions: { link: articles[0].url } }
+        android: { priority: 'high' },
+        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: articles[0].url } }
       });
       console.log('Sent FCM notification for new article: ' + articles[0].url);
     } catch (e) {
