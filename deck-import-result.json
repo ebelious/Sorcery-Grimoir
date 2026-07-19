@@ -1,44 +1,196 @@
 {
-  "requestId": "1784419538337-8dvscklyva9",
+  "requestId": "1784420803103-9mk7gfkoyll",
   "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
-  "timestamp": "2026-07-19T00:07:09.785Z",
+  "timestamp": "2026-07-19T00:28:19.507Z",
   "deckName": "Scream!",
   "cards": [
     {
-      "name": "Avatar",
+      "name": "Necromancer",
       "qty": 1
     },
     {
-      "name": "Aura",
+      "name": "Crusade",
+      "qty": 1
+    },
+    {
+      "name": "Eclipse",
+      "qty": 1
+    },
+    {
+      "name": "Mix Aer",
+      "qty": 1
+    },
+    {
+      "name": "Mix Terra",
+      "qty": 1
+    },
+    {
+      "name": "Toolbox",
+      "qty": 3
+    },
+    {
+      "name": "Kettletop Leprechaun",
+      "qty": 3
+    },
+    {
+      "name": "Skeleton Mage",
       "qty": 2
     },
     {
-      "name": "Artifact",
-      "qty": 5
+      "name": "Field Laborers",
+      "qty": 2
     },
     {
-      "name": "Minion",
-      "qty": 35
+      "name": "Root Spider",
+      "qty": 3
     },
     {
-      "name": "Magic",
-      "qty": 18
+      "name": "Screamer",
+      "qty": 3
     },
     {
-      "name": "Site",
-      "qty": 30
+      "name": "Stygian Archers",
+      "qty": 3
     },
     {
-      "name": "Collection",
-      "qty": 10
+      "name": "Death Knight",
+      "qty": 3
     },
     {
-      "name": "Maybeboard",
-      "qty": 23
+      "name": "Gargantula",
+      "qty": 2
     },
     {
-      "name": "Spellbook / 30 Atlas / 10 Collection",
-      "qty": 60
+      "name": "Pudge Butcher",
+      "qty": 3
+    },
+    {
+      "name": "Archangel Michael",
+      "qty": 1
+    },
+    {
+      "name": "Crawling Congregation",
+      "qty": 2
+    },
+    {
+      "name": "Daperyll Vampire",
+      "qty": 3
+    },
+    {
+      "name": "Returned King",
+      "qty": 1
+    },
+    {
+      "name": "Army of the Dead",
+      "qty": 1
+    },
+    {
+      "name": "King of the Realm",
+      "qty": 1
+    },
+    {
+      "name": "Conqueror Worm",
+      "qty": 2
+    },
+    {
+      "name": "Dispel",
+      "qty": 1
+    },
+    {
+      "name": "Gift of the Wolf",
+      "qty": 3
+    },
+    {
+      "name": "Attack by Night",
+      "qty": 2
+    },
+    {
+      "name": "Bury",
+      "qty": 2
+    },
+    {
+      "name": "Landmass",
+      "qty": 3
+    },
+    {
+      "name": "Undead Ambush",
+      "qty": 3
+    },
+    {
+      "name": "Earthquake",
+      "qty": 2
+    },
+    {
+      "name": "Whirling Blades",
+      "qty": 2
+    },
+    {
+      "name": "Bedrock",
+      "qty": 3
+    },
+    {
+      "name": "Boulevard of Bones",
+      "qty": 2
+    },
+    {
+      "name": "Briar Patch",
+      "qty": 1
+    },
+    {
+      "name": "Dark Tower",
+      "qty": 1
+    },
+    {
+      "name": "Den of Evil",
+      "qty": 1
+    },
+    {
+      "name": "Fertile Earth",
+      "qty": 3
+    },
+    {
+      "name": "Fields of Phyxis",
+      "qty": 2
+    },
+    {
+      "name": "Gothic Tower",
+      "qty": 1
+    },
+    {
+      "name": "Lone Tower",
+      "qty": 1
+    },
+    {
+      "name": "Mirror Realm",
+      "qty": 1
+    },
+    {
+      "name": "Mount Ussar Sanctuary",
+      "qty": 1
+    },
+    {
+      "name": "Mountain Peaks",
+      "qty": 3
+    },
+    {
+      "name": "Rift Valley",
+      "qty": 2
+    },
+    {
+      "name": "Sinkhole",
+      "qty": 2
+    },
+    {
+      "name": "Temple of Moloch",
+      "qty": 1
+    },
+    {
+      "name": "Windmill",
+      "qty": 3
+    },
+    {
+      "name": "Wuthering Heights",
+      "qty": 2
     }
   ]
 }
