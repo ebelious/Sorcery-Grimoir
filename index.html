@@ -3635,6 +3635,8 @@ function _startDeckUrlImport(url,previewMode){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
+  G.comDeckImportStartTimes=G.comDeckImportStartTimes||{};
+  if(!G.comDeckImportStartTimes[url])G.comDeckImportStartTimes[url]=Date.now();
   G._deckUrlImportReqId=requestId;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/trigger-deck-import',{
     method:'POST',
@@ -3678,6 +3680,12 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
 }
 function _finishDeckUrlImport(result){
   if(result.url&&G.comDeckImportingUrls)delete G.comDeckImportingUrls[result.url];
+  var elapsedStr='';
+  if(result.url&&G.comDeckImportStartTimes&&G.comDeckImportStartTimes[result.url]){
+    var elapsedSec=Math.round((Date.now()-G.comDeckImportStartTimes[result.url])/1000);
+    delete G.comDeckImportStartTimes[result.url];
+    elapsedStr=elapsedSec<60?(' ('+elapsedSec+'s)'):(' ('+Math.floor(elapsedSec/60)+'m '+(elapsedSec%60)+'s)');
+  }
   var deckName=result.deckName||'Imported Deck';
   var baseName=deckName,n=1;
   while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
@@ -3690,12 +3698,7 @@ function _finishDeckUrlImport(result){
   G.decks[deckName]={name:deckName,cards:matched};
   sv('sg-dk',G.decks);
   render();
-  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s).','decks');
-  if(unmatched.length){
-    alert('Imported "'+deckName+'" with '+matched.length+' card(s). '+unmatched.length+' line(s) could not be matched to a known card:\\n\\n'+unmatched.join('\\n'));
-  } else {
-    alert('Imported "'+deckName+'" with '+matched.length+' card(s).');
-  }
+  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s)'+elapsedStr+'.','decks');
 }
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
@@ -4687,6 +4690,8 @@ function importCommunityDeckDirect(url){
   if(!url)return;
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
+  G.comDeckImportStartTimes=G.comDeckImportStartTimes||{};
+  if(!G.comDeckImportStartTimes[url])G.comDeckImportStartTimes[url]=Date.now();
   _renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/get-deck-preview-fast',{
     method:'POST',
