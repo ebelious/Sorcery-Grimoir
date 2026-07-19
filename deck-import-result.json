@@ -1,40 +1,36 @@
 {
-  "requestId": "1784426479267-dhtrrzhwkz8",
-  "url": "https://curiosa.io/decks/cmew5bh3c001uju048bj3uk13",
-  "timestamp": "2026-07-19T02:02:35.540Z",
-  "deckName": "Water Good Stuff - Built",
+  "requestId": "1784427179092-4ty6muhpp9g",
+  "url": "https://curiosa.io/decks/cmrr2mlbv00080aki4ghpquxk",
+  "timestamp": "2026-07-19T02:14:14.260Z",
+  "deckName": "Main",
   "cards": [
     {
-      "name": "Necromancer",
+      "name": "Imposter",
       "qty": 1
     },
     {
-      "name": "Mariner's Curse",
+      "name": "Atlantean Fate",
+      "qty": 1
+    },
+    {
+      "name": "Ring of Morrigan",
+      "qty": 1
+    },
+    {
+      "name": "Silver Bullet",
+      "qty": 1
+    },
+    {
+      "name": "Toolbox",
       "qty": 2
     },
     {
-      "name": "Aquamarine Core",
-      "qty": 1
-    },
-    {
-      "name": "Mix Aqua",
-      "qty": 1
-    },
-    {
-      "name": "Aino",
+      "name": "Dank Omphalos",
       "qty": 1
     },
     {
       "name": "Coy Nixie",
       "qty": 3
-    },
-    {
-      "name": "Deep-Sea Mermaids",
-      "qty": 4
-    },
-    {
-      "name": "Guile Sirens",
-      "qty": 2
     },
     {
       "name": "Lugbog Cat",
@@ -46,23 +42,23 @@
     },
     {
       "name": "Order of the Sacred Oak",
-      "qty": 3
-    },
-    {
-      "name": "Failed Mutation",
-      "qty": 3
-    },
-    {
-      "name": "Hyperparasite",
       "qty": 2
     },
     {
-      "name": "Lord of Unland",
+      "name": "Salmon of Knowledge",
+      "qty": 2
+    },
+    {
+      "name": "Sir Pelleas",
       "qty": 1
     },
     {
-      "name": "Mimic",
+      "name": "Abaddon Succubus",
       "qty": 2
+    },
+    {
+      "name": "Hyperparasite",
+      "qty": 1
     },
     {
       "name": "Ruler of Thul",
@@ -70,15 +66,23 @@
     },
     {
       "name": "Sacred Stag",
-      "qty": 1
+      "qty": 2
     },
     {
       "name": "Selfsame Simulacrum",
       "qty": 2
     },
     {
-      "name": "Lacuna Entity",
+      "name": "Archangel Raphael",
       "qty": 1
+    },
+    {
+      "name": "Daperyll Vampire",
+      "qty": 1
+    },
+    {
+      "name": "Lacuna Entity",
+      "qty": 2
     },
     {
       "name": "Lilith",
@@ -86,38 +90,42 @@
     },
     {
       "name": "Gnarled Wendigo",
-      "qty": 1
+      "qty": 3
     },
     {
-      "name": "Seirawan Hydra",
-      "qty": 1
-    },
-    {
-      "name": "The Green Knight",
-      "qty": 1
-    },
-    {
-      "name": "Dormant Monstrosity",
-      "qty": 1
-    },
-    {
-      "name": "Diluvian Kraken",
+      "name": "Lord of Lies",
       "qty": 2
     },
     {
-      "name": "Gift of the Frog",
-      "qty": 4
+      "name": "Mester Stoor Worm",
+      "qty": 2
     },
     {
-      "name": "Grievous Insult",
-      "qty": 3
+      "name": "Dormant Monstrosity",
+      "qty": 2
+    },
+    {
+      "name": "Great Old One",
+      "qty": 1
+    },
+    {
+      "name": "Plague of Frogs",
+      "qty": 1
+    },
+    {
+      "name": "Blink",
+      "qty": 1
+    },
+    {
+      "name": "Pollimorph",
+      "qty": 2
     },
     {
       "name": "Riptide",
-      "qty": 3
+      "qty": 2
     },
     {
-      "name": "Drown",
+      "name": "Grapple Shot",
       "qty": 2
     },
     {
@@ -125,43 +133,51 @@
       "qty": 3
     },
     {
-      "name": "Symmetric Suffering",
+      "name": "Shapeshift",
       "qty": 1
     },
     {
-      "name": "Into the Abyss",
+      "name": "Stormy Seas",
       "qty": 1
     },
     {
-      "name": "Mesmerism",
-      "qty": 1
+      "name": "Whirling Blades",
+      "qty": 3
+    },
+    {
+      "name": "Call of the Sea",
+      "qty": 2
     },
     {
       "name": "The Flood",
       "qty": 1
     },
     {
-      "name": "Autumn River",
-      "qty": 3
+      "name": "Dark Tower",
+      "qty": 1
     },
     {
-      "name": "Babbling Brook",
-      "qty": 3
-    },
-    {
-      "name": "Elder Ruins",
-      "qty": 2
+      "name": "Deep Sea",
+      "qty": 1
     },
     {
       "name": "Floodplain",
-      "qty": 3
-    },
-    {
-      "name": "Island Leviathan",
       "qty": 2
     },
     {
-      "name": "Kelp Cavern",
+      "name": "Gothic Tower",
+      "qty": 1
+    },
+    {
+      "name": "Innsmouth Dock",
+      "qty": 1
+    },
+    {
+      "name": "Lighthouse",
+      "qty": 3
+    },
+    {
+      "name": "Lone Tower",
       "qty": 1
     },
     {
@@ -169,15 +185,23 @@
       "qty": 1
     },
     {
-      "name": "Spring River",
+      "name": "Mirror Realm",
+      "qty": 1
+    },
+    {
+      "name": "Mismanaged Mortuary",
       "qty": 2
     },
     {
-      "name": "Summer River",
-      "qty": 3
+      "name": "River Rapids",
+      "qty": 2
     },
     {
       "name": "Tadpole Pool",
+      "qty": 1
+    },
+    {
+      "name": "The Geistwood",
       "qty": 1
     },
     {
@@ -185,12 +209,16 @@
       "qty": 3
     },
     {
+      "name": "Treetop Hideout",
+      "qty": 4
+    },
+    {
       "name": "Troll Bridge",
       "qty": 3
     },
     {
-      "name": "Undertow",
-      "qty": 3
+      "name": "Wuthering Heights",
+      "qty": 2
     }
   ]
 }
