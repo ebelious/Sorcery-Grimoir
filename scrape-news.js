@@ -134,28 +134,34 @@ const fs = require('fs');
 
   // Notify subscribers about genuinely new articles only -- not on the very
   // first run ever (when existingUrls is empty, everything would look
-  // "new" and blast a notification for the entire backlog at once).
+  // "new" and blast a notification for the entire backlog at once). Same
+  // direct firebase-admin pattern as scrape-youtube.js / scrape-rewards.js.
   const newArticles = articles.filter(a => a.url && !existingUrls.has(a.url));
-  if (newArticles.length && existingUrls.size && process.env.SEND_PUSH_URL && process.env.SEND_PUSH_KEY) {
+  if (newArticles.length && existingUrls.size) {
     const first = newArticles[0];
-    const title = newArticles.length === 1
-      ? first.title
-      : newArticles.length + ' new articles';
+    const title = newArticles.length === 1 ? first.title : newArticles.length + ' new articles';
     const body = newArticles.length === 1
       ? 'New article on sorcerytcg.com/news'
       : [first.title, '+' + (newArticles.length - 1) + ' more'].join(' — ');
     try {
-      const res = await fetch(process.env.SEND_PUSH_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-send-key': process.env.SEND_PUSH_KEY },
-        body: JSON.stringify({ topic: 'news', title, body, url: first.url })
+      const admin = require('firebase-admin');
+      if (!admin.apps.length) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+      }
+      await admin.messaging().send({
+        topic: 'news',
+        notification: { title, body },
+        android: { priority: 'high' },
+        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url } }
       });
-      if (!res.ok) console.warn('send-push returned ' + res.status + ': ' + await res.text());
-      else console.log('Sent push notification for ' + newArticles.length + ' new article(s).');
+      console.log('Sent FCM notification for ' + newArticles.length + ' new article(s).');
     } catch (e) {
-      console.warn('send-push request failed:', e.message);
+      console.log('FCM notification failed (non-fatal): ' + e.message);
     }
   } else if (newArticles.length) {
-    console.log(newArticles.length + ' new article(s) found, but not sending a push (first run, or SEND_PUSH_URL/SEND_PUSH_KEY not set).');
+    console.log(newArticles.length + ' new article(s) found, but not notifying (first run).');
+  } else {
+    console.log('No new articles since last run.');
   }
 })();
