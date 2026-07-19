@@ -3648,14 +3648,16 @@ function previewCommunityDeck(url){
   })
     .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
     .then(function(res){
-      if(!res.ok){console.log('Fast deck preview path unavailable:',res.data&&res.data.error);_startDeckUrlImport(url,true);return;}
-      var dd=res.data.deckData||{};
-      var rawCards=dd.cards||dd.mainboard||dd.spellbook||[];
-      var cards=rawCards.map(_normalizeFastPathCardEntry).filter(Boolean);
-      console.log('Fast deck preview path succeeded via '+res.data.source+' with '+cards.length+' card(s).');
-      if(!cards.length){console.log('Fast path found deck data but no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,true);return;}
+      if(!res.ok||!res.data.ok){
+        console.log('Fast deck preview path unavailable ('+(res.data&&res.data.error)+') -- falling back to slow pipeline.');
+        _startDeckUrlImport(url,true);
+        return;
+      }
+      var cards=(res.data.cards||[]).map(_normalizeFastPathCardEntry).filter(Boolean);
+      console.log('Fast deck preview path succeeded with '+cards.length+' card(s).');
+      if(!cards.length){console.log('Fast path returned a card list but nothing usable came out of it -- falling back to slow pipeline.');_startDeckUrlImport(url,true);return;}
       G.deckUrlImporting=false;
-      _showCommunityDeckPreview({deckName:dd.name||dd.title||'Community Deck',cards:cards,url:url},'fastpath-'+Date.now());
+      _showCommunityDeckPreview({deckName:res.data.deckName||'Community Deck',cards:cards,url:url},'fastpath-'+Date.now());
     })
     .catch(function(e){
       console.log('Fast deck preview path failed ('+e.message+') -- falling back to slow pipeline.');
@@ -4715,18 +4717,24 @@ function _comDeckApiNormalize(d){
   var id=d.id||d.slug||d.deckId||'';
   var url=id?('https://curiosa.io/decks/'+id):(d.url||'');
   var name=d.name||d.title||d.deckName||'Untitled Deck';
-  var author=(d.author&&(d.author.username||d.author.name))||d.username||d.authorName||'';
+  var author=(d.user&&d.user.username)||(d.author&&(d.author.username||d.author.name))||d.username||d.authorName||'';
   var elements=[];
-  if(Array.isArray(d.elements))elements=d.elements;
-  else if(Array.isArray(d.threshold))elements=d.threshold;
-  else if(typeof d.element==='string')elements=[d.element];
+  if(Array.isArray(d.elements)){
+    elements=d.elements.map(function(e){return (e&&e.id)?e.id:e;});
+  } else if(Array.isArray(d.threshold)){
+    elements=d.threshold;
+  } else if(typeof d.element==='string'){
+    elements=[d.element];
+  }
   elements=elements.map(function(e){return String(e).toLowerCase();}).filter(function(e){return ['earth','fire','water','air'].indexOf(e)>=0;});
-  var avatar=(d.avatar&&(d.avatar.name||d.avatar))||d.avatarName||'';
+  var avatarImg=(d.feature&&d.feature.src)||'';
+  var avatarName=(d.feature&&d.feature.card&&d.feature.card.name)||(Array.isArray(d.avatars)&&d.avatars[0]&&d.avatars[0].card&&d.avatars[0].card.name)||(d.avatar&&(d.avatar.name||d.avatar))||d.avatarName||'';
   var format=d.format||d.divider||'';
-  var views=typeof d.views==='number'?d.views:(typeof d.viewCount==='number'?d.viewCount:null);
+  var views=(d._count&&typeof d._count.views==='number')?d._count.views:(typeof d.views==='number'?d.views:(typeof d.viewCount==='number'?d.viewCount:null));
+  var likes=(d._count&&typeof d._count.likes==='number')?d._count.likes:null;
   var timestamp=null;
   if(d.updatedAt)timestamp=new Date(d.updatedAt).getTime()||null;
-  return {name:name,author:author,url:url,format:format,timestamp:timestamp,views:views,elements:elements,avatar:typeof avatar==='string'?avatar:''};
+  return {name:name,author:author,url:url,format:format,timestamp:timestamp,views:views,likes:likes,elements:elements,avatar:typeof avatarName==='string'?avatarName:'',avatarImg:avatarImg};
 }
 function searchCommunityDecksLive(){
   var query=(G.comDecksSearchDraft||'').trim();
@@ -5350,7 +5358,17 @@ function pContent(){
         o('<div class="slbl2">Results ('+G.comDecksSearchResults.length+')</div>');
         o('<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">');
         G.comDecksSearchResults.forEach(function(d){
-          o('<div class="sddi" onclick="previewCommunityDeck(\''+h(d.url).replace(/'/g,"\\'")+'\')"><div class="sn">'+h(d.name||'Untitled Deck')+'</div><div class="sc" style="color:var(--fg2)">'+(d.author?'by @'+h(d.author):'')+'</div></div>');
+          var elIcons=(d.elements||[]).map(function(e){return eSVG(e,14);}).join('');
+          var statsBits=[];
+          if(d.author)statsBits.push('by @'+h(d.author));
+          if(typeof d.views==='number')statsBits.push(d.views.toLocaleString()+' views');
+          if(typeof d.likes==='number')statsBits.push(d.likes.toLocaleString()+' likes');
+          o('<div class="sddi" onclick="previewCommunityDeck(\''+h(d.url).replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:10px">');
+          o('<div style="width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg3);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
+          o('<div style="flex:1;min-width:0">');
+          o('<div class="sn">'+h(d.name||'Untitled Deck')+'</div>');
+          o('<div class="sc" style="color:var(--fg2);display:flex;align-items:center;gap:5px;flex-wrap:wrap">'+(elIcons?'<span style="display:inline-flex;gap:2px">'+elIcons+'</span>':'')+(statsBits.length?h(statsBits.join(' \u00b7 ')):'')+'</div>');
+          o('</div></div>');
         });
         o('</div>');
       }
