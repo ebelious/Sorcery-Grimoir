@@ -5502,15 +5502,16 @@ function pContent(){
     deckColl.forEach(function(entry){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;flex:1;display:flex;align-items:center;gap:6px;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
-      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
-      o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
-      if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
+      o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
-      o('<button class="eadj" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="'+(collTotal>=10?'opacity:.3':'')+'" '+(collTotal>=10?'disabled':'')+' onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      if(c&&cType(c)!=='site'&&cType(c)!=='avatar'){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'<span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#b8b8b8;font-size:9px;font-weight:700;color:#111;line-height:1">'+(cMana(c)!=null?cMana(c):'&mdash;')+'</span></span>');
+      } else if(c&&cType(c)==='site'&&cThr(c)){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'</span>');
+      }
       o('</div>');
     });
     }
@@ -5532,16 +5533,16 @@ function pContent(){
     deckMaybe.forEach(function(entry){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;flex:1;display:flex;align-items:center;gap:6px;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
-      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
-      o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
-      if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
+      o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
-      var maxMaybe=c?_maxCopies(c):4;
-      o('<button class="eadj" onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="'+(entry.qty>=maxMaybe?'opacity:.3':'')+'" '+(entry.qty>=maxMaybe?'disabled':'')+' onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      if(c&&cType(c)!=='site'&&cType(c)!=='avatar'){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'<span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#b8b8b8;font-size:9px;font-weight:700;color:#111;line-height:1">'+(cMana(c)!=null?cMana(c):'&mdash;')+'</span></span>');
+      } else if(c&&cType(c)==='site'&&cThr(c)){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'</span>');
+      }
       o('</div>');
     });
     }
