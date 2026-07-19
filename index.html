@@ -484,6 +484,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .stbar{font-size:12px;color:var(--fg2);text-align:center;padding:4px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:6px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
 .frow{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px;align-items:center}
+.frow-scroll{display:flex;gap:3px;flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.frow-scroll::-webkit-scrollbar{display:none}
 .flbl{font-size:12px;color:var(--hi);width:48px;flex-shrink:0;text-transform:uppercase;white-space:nowrap}
 .ftag{font-size:15px;padding:6px 10px;border:1px solid var(--bd);background:transparent;color:var(--fg2);cursor:pointer;border-radius:0}
 .ftag.on{border-color:var(--hi);color:var(--hi)}
@@ -3492,7 +3494,12 @@ function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[]};render();}
 function fBar(f,fn,mana,resetFn,hideReset){
   var sets=Object.keys(SETS);
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
-  function row(lbl,key,opts,scroll){return '<div class="frow"'+(scroll?' style="flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch"':'')+'><span class="flbl" style="cursor:pointer'+(scroll?';flex-shrink:0':'')+'" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>'+opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('')+'</div>';}
+  function row(lbl,key,opts,scroll){
+    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
+    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('');
+    if(scroll)return '<div class="frow">'+lblHtml+'<div class="frow-scroll">'+btnsHtml+'</div></div>';
+    return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
+  }
   var anyActive=Object.keys(f).some(function(k){return f[k]&&f[k].length>0;});
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
   return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
