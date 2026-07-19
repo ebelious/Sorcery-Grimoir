@@ -61,7 +61,14 @@ exports.handler = async function (event) {
   const apiUrl = 'https://curiosa.io/api/trpc/deck.search?batch=1&input=' + encodeURIComponent(JSON.stringify(wrapped));
 
   try {
-    const res = await fetch(apiUrl, { headers: { 'Accept': 'application/json' } });
+    const res = await fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/json',
+        'Origin': 'https://curiosa.io',
+        'Referer': 'https://curiosa.io/decks',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      }
+    });
     const text = await res.text();
     console.log('Curiosa deck search status:', res.status);
     console.log('Curiosa deck search raw response:', text.slice(0, 20000));
