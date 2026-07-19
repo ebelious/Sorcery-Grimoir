@@ -3623,7 +3623,7 @@ function exportDeckCSV(k){
   document.body.appendChild(a);a.click();
   setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
 }
-function createDeck(){var nm='New Deck '+(Object.keys(G.decks).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
+function createDeck(){var nm='New Deck '+(Object.keys(G.decks).filter(function(k){return k!=='__preview__';}).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
 function showDeckUrlImportPopup(){
   var url=prompt('Paste a Curiosa deck URL (e.g. https://curiosa.io/decks/...)\n\nThis will take a few minutes.');
   if(!url)return;
@@ -4150,7 +4150,7 @@ function trigUpDecks(){
     if(ni<0)return;var cards=[];
     lines.slice(1).forEach(function(line){var cols=line.split(',').map(function(v){return v.trim().replace(/^"|"$/g,'');});var nm=cols[ni];if(!nm)return;cards.push({name:nm,qty:qi>=0?parseInt(cols[qi])||1:1});});
     var fileName=(f.name||'').replace(/\.[^/.]+$/,'').replace(/_/g,' ').trim();
-    var deckName=fileName||('Deck '+(Object.keys(G.decks).length+1));
+    var deckName=fileName||('Deck '+(Object.keys(G.decks).filter(function(k){return k!=='__preview__';}).length+1));
     var key=deckName;var n=2;while(G.decks[key]){key=deckName+' ('+n+')';n++;}
     G.decks[key]={name:deckName,cards:cards};sv('sg-dk',G.decks);render();
   };r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();
@@ -5329,9 +5329,10 @@ function pContent(){
       }
     }
     o('<div class="slbl2">My Decks</div>');
-    if(!Object.keys(G.decks).length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
+    var _realDeckKeys=Object.keys(G.decks).filter(function(k){return k!=='__preview__';});
+    if(!_realDeckKeys.length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     var elMap={f:'fire',w:'water',e:'earth',a:'air'};
-    Object.entries(G.decks).forEach(function(kv){
+    Object.entries(G.decks).filter(function(kv){return kv[0]!=='__preview__';}).forEach(function(kv){
       var k=kv[0],dk=kv[1];
       var ds=G.dkstat[k]||{w:0,l:0};
       var pct2=ds.w+ds.l>0?Math.round(ds.w/(ds.w+ds.l)*100)+'%':'--';
