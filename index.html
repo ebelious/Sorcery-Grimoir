@@ -437,9 +437,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .pbg.pbg-center{align-items:center;justify-content:center}
 .panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-y:auto;overflow-anchor:none}
 .pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
-.phdr{display:flex;align-items:center;gap:6px;margin-bottom:9px}
-.p-bk{font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
-.p-ttl{font-size:19px;font-weight:700;flex:1;text-transform:uppercase;color:var(--hi)}
+.phdr{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:9px;min-height:38px}
+.p-bk{position:absolute;left:0;top:50%;transform:translateY(-50%);font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
+.p-ttl{width:100%;text-align:center;font-size:19px;font-weight:700;text-transform:uppercase;color:var(--hi)}
 .p-cl{font-size:11px;padding:3px 6px;border:1px solid var(--bd);color:var(--fg2);text-transform:uppercase}
 .slbl2{font-size:14px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px}
 .fi{font-size:13px;padding:6px 8px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);outline:none;width:100%;font-family:'Courier New',monospace}
@@ -3624,45 +3624,12 @@ function exportDeckCSV(k){
   setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
 }
 function createDeck(){var nm='New Deck '+(Object.keys(G.decks).filter(function(k){return k!=='__preview__';}).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
-function showDeckUrlImportPopup(){
-  var url=prompt('Paste a Curiosa deck URL (e.g. https://curiosa.io/decks/...)\n\nThis will take a few minutes.');
-  if(!url)return;
-  url=url.trim();
-  if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
-  _startDeckUrlImport(url);
-}
 // Tries several plausible field names for one card entry within the fast
 // path's deck data, since the actual shape is unconfirmed.
 function _normalizeFastPathCardEntry(entry){
   var name=entry.name||entry.cardName||(entry.card&&(entry.card.name||entry.card.title))||'';
   var qty=entry.qty||entry.quantity||entry.count||1;
   return name?{name:String(name),qty:Number(qty)||1}:null;
-}
-function previewCommunityDeck(url){
-  if(!url)return;
-  G.deckUrlImporting=true;G._deckUrlImportPreviewMode=true;_renderKeepScroll();
-  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/get-deck-preview-fast',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({url:url})
-  })
-    .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
-    .then(function(res){
-      if(!res.ok||!res.data.ok){
-        console.log('Fast deck preview path unavailable ('+(res.data&&res.data.error)+') -- falling back to slow pipeline.');
-        _startDeckUrlImport(url,true);
-        return;
-      }
-      var cards=(res.data.cards||[]).map(_normalizeFastPathCardEntry).filter(Boolean);
-      console.log('Fast deck preview path succeeded with '+cards.length+' card(s).');
-      if(!cards.length){console.log('Fast path returned a card list but nothing usable came out of it -- falling back to slow pipeline.');_startDeckUrlImport(url,true);return;}
-      G.deckUrlImporting=false;
-      _showCommunityDeckPreview({deckName:res.data.deckName||'Community Deck',cards:cards,url:url},'fastpath-'+Date.now());
-    })
-    .catch(function(e){
-      console.log('Fast deck preview path failed ('+e.message+') -- falling back to slow pipeline.');
-      _startDeckUrlImport(url,true);
-    });
 }
 function _startDeckUrlImport(url,previewMode){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
@@ -3699,56 +3666,11 @@ function _pollDeckUrlImport(requestId,attempt,previewMode){
         alert('Import failed: '+d.error);
         return;
       }
-      if(previewMode){ _showCommunityDeckPreview(d,requestId); }
-      else{ _finishDeckUrlImport(d); }
+      _finishDeckUrlImport(d);
     })
     .catch(function(){
       setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},5000);
     });
-}
-// Shows a not-yet-saved community deck using the same deckview rendering
-// as the user's own decks, via a temporary in-memory entry -- lets someone
-// browse the deck before deciding whether to actually import it.
-function _showCommunityDeckPreview(result,requestId){
-  var matched=[],unmatched=[];
-  (result.cards||[]).forEach(function(entry){
-    var c=cardByName(entry.name);
-    if(c){matched.push({name:cName(c),qty:entry.qty});}
-    else{unmatched.push(entry.name+' x'+entry.qty);}
-  });
-  G.decks['__preview__']={name:result.deckName||'Community Deck',cards:matched};
-  G.previewDeckActive=true;
-  G._previewUnmatched=unmatched;
-  G._previewSourceUrl=result.url;
-  G._previewRequestId=requestId;
-  G.selDeck='__preview__';
-  openPanel('deckview');
-  _sendNotification('Deck Ready','"'+(result.deckName||'Community Deck')+'" finished loading and is ready to view.','decks');
-}
-// Saves the currently-previewed community deck into the user's own decks.
-function importPreviewedDeck(){
-  var dv=G.decks['__preview__'];
-  if(!dv)return;
-  var deckName=dv.name,baseName=deckName,n=1;
-  var existing=Object.keys(G.decks).filter(function(k){return k!=='__preview__';});
-  while(existing.indexOf(deckName)>=0){deckName=baseName+' ('+(++n)+')';}
-  G.decks[deckName]={name:deckName,cards:dv.cards.slice()};
-  delete G.decks['__preview__'];
-  G.previewDeckActive=false;
-  sv('sg-dk',G.decks);
-  G.selDeck=deckName;
-  render();
-  if(G._previewUnmatched&&G._previewUnmatched.length){
-    alert('Imported "'+deckName+'" with '+dv.cards.length+' card(s). '+G._previewUnmatched.length+' line(s) could not be matched to a known card:\\n\\n'+G._previewUnmatched.join('\\n'));
-  } else {
-    alert('Imported "'+deckName+'" with '+dv.cards.length+' card(s).');
-  }
-}
-// Discards the currently-previewed community deck without saving it.
-function discardPreviewedDeck(){
-  delete G.decks['__preview__'];
-  G.previewDeckActive=false;
-  goBack();
 }
 function _finishDeckUrlImport(result){
   var deckName=result.deckName||'Imported Deck';
@@ -4719,8 +4641,9 @@ function _comDeckApiNormalize(d){
   var name=d.name||d.title||d.deckName||'Untitled Deck';
   var author=(d.user&&d.user.username)||(d.author&&(d.author.username||d.author.name))||d.username||d.authorName||'';
   var elements=[];
-  if(Array.isArray(d.elements)){
-    elements=d.elements.map(function(e){return (e&&e.id)?e.id:e;});
+  var elSrc=d.elements||d.thresholds||(d.deck&&d.deck.elements)||null;
+  if(Array.isArray(elSrc)){
+    elements=elSrc.map(function(e){return (e&&e.id)?e.id:e;});
   } else if(Array.isArray(d.threshold)){
     elements=d.threshold;
   } else if(typeof d.element==='string'){
@@ -4735,6 +4658,39 @@ function _comDeckApiNormalize(d){
   var timestamp=null;
   if(d.updatedAt)timestamp=new Date(d.updatedAt).getTime()||null;
   return {name:name,author:author,url:url,format:format,timestamp:timestamp,views:views,likes:likes,elements:elements,avatar:typeof avatarName==='string'?avatarName:'',avatarImg:avatarImg};
+}
+function _comDeckSearchOrImportAction(){
+  var mode=G.comDecksSearchMode||'name';
+  if(mode==='url'){
+    var url=(G.comDecksSearchDraft||'').trim();
+    if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
+    importCommunityDeckDirect(url);
+  } else {
+    searchCommunityDecksLive();
+  }
+}
+// Imports a deck directly (no preview step) -- tries the fast path first,
+// falling back to the slow GitHub Actions pipeline automatically.
+function importCommunityDeckDirect(url){
+  if(!url)return;
+  G.deckUrlImporting=true;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/get-deck-preview-fast',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({url:url})
+  })
+    .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
+    .then(function(res){
+      if(!res.ok||!res.data.ok){console.log('Fast import path unavailable -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
+      var cards=(res.data.cards||[]).map(_normalizeFastPathCardEntry).filter(Boolean);
+      if(!cards.length){console.log('Fast import path returned no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
+      G.deckUrlImporting=false;
+      _finishDeckUrlImport({deckName:res.data.deckName||'Community Deck',cards:cards,url:url});
+    })
+    .catch(function(e){
+      console.log('Fast import path failed ('+e.message+') -- falling back to slow pipeline.');
+      _startDeckUrlImport(url,false);
+    });
 }
 function searchCommunityDecksLive(){
   var query=(G.comDecksSearchDraft||'').trim();
@@ -5333,20 +5289,26 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button><button class="fb" onclick="showDeckUrlImportPopup()">Import Curiosa.io</button></div>');
+    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button></div>');
     if(G.deckUrlImporting){
-      o('<div class="ld" style="margin-top:6px">'+spinIcon()+(G._deckUrlImportPreviewMode?' Loading deck preview&hellip; this can take up to a couple of minutes.':' Importing deck&hellip; this can take up to a couple of minutes.')+'</div>');
+      o('<div class="ld" style="margin-top:6px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');
     }
-    // Community deck search -- type a name, hit Search (or Enter), pick a
-    // result to preview its full contents (with an Import button in that
-    // preview), same underlying on-demand pipeline as "Import Curiosa.io"
-    // above, just discoverable by name instead of needing a URL already.
+    // Community deck search/import -- a mode dropdown (Name/URL) picks
+    // whether the input+button pair searches Curiosa by name or imports a
+    // pasted deck URL directly. Replaces the separate "Import Curiosa.io"
+    // button entirely.
     o('<div class="slbl2" style="margin-top:10px">Search Curiosa Decks</div>');
+    var _mode=G.comDecksSearchMode||'name';
     o('<div style="display:flex;gap:6px;margin-bottom:6px">');
+    o('<select id="comdeck-search-mode" class="fb" onchange="G.comDecksSearchMode=this.value;_renderKeepScroll()" style="flex-shrink:0">');
+    o('<option value="name"'+(_mode==='name'?' selected':'')+'>Name</option>');
+    o('<option value="url"'+(_mode==='url'?' selected':'')+'>URL</option>');
+    o('</select>');
     o('<div class="si" style="position:relative;flex:1">');
-    o('<input id="comdeck-search-inp" placeholder="Deck name&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" value="'+h(G.comDecksSearchDraft||'')+'" oninput="G.comDecksSearchDraft=this.value" onkeydown="if(event.key===\'Enter\'){event.preventDefault();searchCommunityDecksLive();}">');
+    o('<input id="comdeck-search-inp" placeholder="'+(_mode==='url'?'Deck URL&hellip;':'Deck name&hellip;')+'" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" value="'+h(G.comDecksSearchDraft||'')+'" oninput="G.comDecksSearchDraft=this.value" onkeydown="if(event.key===\'Enter\'){event.preventDefault();_comDeckSearchOrImportAction();}">');
     o('</div>');
-    o('<button class="fb gold" style="flex-shrink:0" onclick="searchCommunityDecksLive()">Search</button>');
+    o('<button class="fb gold" style="flex-shrink:0" onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
+    o('<button class="fb" style="flex-shrink:0" onclick="trigUpDecks()">Import CSV</button>');
     if(G.comDecksSearchActive)o('<button class="fb" style="flex-shrink:0" onclick="clearCommunityDeckSearch()">Clear</button>');
     o('</div>');
     if(G.comDecksSearching){o('<div class="ld" style="margin-bottom:8px">'+spinIcon()+' Searching Curiosa&hellip;</div>');}
@@ -5356,18 +5318,17 @@ function pContent(){
         o('<div style="font-size:10px;color:var(--fg2);padding:4px 0 10px">No decks found.</div>');
       } else {
         o('<div class="slbl2">Results ('+G.comDecksSearchResults.length+')</div>');
-        o('<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">');
-        G.comDecksSearchResults.forEach(function(d){
+        o('<div style="display:flex;flex-direction:column;margin-bottom:10px;border:1px solid var(--bd);border-radius:6px;overflow:hidden">');
+        G.comDecksSearchResults.forEach(function(d,idx){
           var elIcons=(d.elements||[]).map(function(e){return eSVG(e,16);}).join('');
-          var statsBits=[];
-          if(typeof d.views==='number')statsBits.push(d.views.toLocaleString()+' views');
-          if(typeof d.likes==='number')statsBits.push(d.likes.toLocaleString()+' likes');
-          o('<div class="sddi" onclick="previewCommunityDeck(\''+h(d.url).replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:10px">');
-          o('<div style="width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg3);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
-          o('<div style="flex:1;min-width:0">');
-          o('<div class="sn" style="font-size:17px">'+h(d.name||'Untitled Deck')+'</div>');
-          o('<div class="sc" style="color:var(--fg2);display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:13px">'+(d.author?'<span>by <span style="color:var(--hi);font-weight:600">@'+h(d.author)+'</span></span>':'')+(elIcons?'<span style="display:inline-flex;gap:2px">'+elIcons+'</span>':'')+(statsBits.length?'<span>'+h(statsBits.join(' \u00b7 '))+'</span>':'')+'</div>');
-          o('</div></div>');
+          o('<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:'+(idx%2===0?'var(--bg2)':'var(--bg3)')+'">');
+          o('<div style="width:36px;height:36px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
+          o('<div style="flex:1;min-width:0;display:flex;align-items:center;gap:8px">');
+          o('<span class="sn" style="font-size:16px">'+h(d.name||'Untitled Deck')+'</span>');
+          if(elIcons)o('<span style="display:inline-flex;gap:2px;flex-shrink:0">'+elIcons+'</span>');
+          o('</div>');
+          o('<button class="fb gold" style="flex-shrink:0;font-size:11px;padding:7px 10px" onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\')">Import</button>');
+          o('</div>');
         });
         o('</div>');
       }
@@ -5403,22 +5364,12 @@ function pContent(){
   if(p==='deckview'){
     var dvk=G.selDeck;var dv=dvk&&G.decks[dvk];
     if(!dv){o('<div class="ld">Deck not found.</div>');return out.join('');}
-    var isPreview=(dvk==='__preview__');
-    if(isPreview){
-      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
-      o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;font-family:\'Courier New\',monospace">'+h(dv.name)+' <span style="font-size:11px;font-weight:400;color:var(--fg2)">(preview)</span></div>');
-      o('<button class="fb gold" onclick="importPreviewedDeck()">Import This Deck</button>');
-      o('<button class="fb" onclick="showDeckUrlImportPopup()">Import Curiosa.io</button>');
-      o('<button class="fb red" onclick="discardPreviewedDeck()">Discard</button>');
-      o('</div>');
-    } else {
-      // Rename input + delete
-      o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
-      o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
-      o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
-      o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
-      o('</div>');
-    }
+    // Rename input + delete
+    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+    o('<input id="dk-rename" style="font-size:15px;font-weight:700;background:transparent;border:none;outline:none;color:var(--wht);border-bottom:1px solid var(--bd);flex:1;font-family:\'Courier New\',monospace" value="'+h(dv.name)+'" onchange="renameDeck(\''+h(dvk)+'\',this.value)">');
+    o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
+    o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
+    o('</div>');
     // Group cards by type
     var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
     var typeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
