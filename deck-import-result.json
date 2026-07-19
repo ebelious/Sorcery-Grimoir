@@ -1,11 +1,11 @@
 {
-  "requestId": "1784427179092-4ty6muhpp9g",
-  "url": "https://curiosa.io/decks/cmrr2mlbv00080aki4ghpquxk",
-  "timestamp": "2026-07-19T02:14:14.260Z",
-  "deckName": "Main",
+  "requestId": "1784427936390-57iim4mnzkg",
+  "url": "https://curiosa.io/decks/cmqmz8xd601a204lbgc6rh5yo",
+  "timestamp": "2026-07-19T02:27:14.940Z",
+  "deckName": "Out of Bounds",
   "cards": [
     {
-      "name": "Imposter",
+      "name": "Harbinger",
       "qty": 1
     },
     {
@@ -13,15 +13,35 @@
       "qty": 1
     },
     {
-      "name": "Ring of Morrigan",
+      "name": "Mix Aer",
+      "qty": 2
+    },
+    {
+      "name": "Mix Aqua",
+      "qty": 2
+    },
+    {
+      "name": "Philosopher's Stone",
       "qty": 1
     },
     {
-      "name": "Silver Bullet",
+      "name": "Four Waters of Paradise",
       "qty": 1
     },
     {
-      "name": "Toolbox",
+      "name": "Wiccan Tools",
+      "qty": 4
+    },
+    {
+      "name": "Angel's Egg",
+      "qty": 2
+    },
+    {
+      "name": "De Vermis Mysteriis",
+      "qty": 1
+    },
+    {
+      "name": "Devil's Egg",
       "qty": 2
     },
     {
@@ -29,79 +49,55 @@
       "qty": 1
     },
     {
-      "name": "Coy Nixie",
+      "name": "Land Deed",
+      "qty": 2
+    },
+    {
+      "name": "Aethermoeba",
+      "qty": 2
+    },
+    {
+      "name": "Gibbous Nightgaunts",
       "qty": 3
     },
     {
-      "name": "Lugbog Cat",
+      "name": "Nommo Monitor",
+      "qty": 2
+    },
+    {
+      "name": "Failed Mutation",
       "qty": 3
-    },
-    {
-      "name": "Nelly Longarms",
-      "qty": 1
-    },
-    {
-      "name": "Order of the Sacred Oak",
-      "qty": 2
-    },
-    {
-      "name": "Salmon of Knowledge",
-      "qty": 2
-    },
-    {
-      "name": "Sir Pelleas",
-      "qty": 1
-    },
-    {
-      "name": "Abaddon Succubus",
-      "qty": 2
-    },
-    {
-      "name": "Hyperparasite",
-      "qty": 1
-    },
-    {
-      "name": "Ruler of Thul",
-      "qty": 1
-    },
-    {
-      "name": "Sacred Stag",
-      "qty": 2
-    },
-    {
-      "name": "Selfsame Simulacrum",
-      "qty": 2
-    },
-    {
-      "name": "Archangel Raphael",
-      "qty": 1
-    },
-    {
-      "name": "Daperyll Vampire",
-      "qty": 1
     },
     {
       "name": "Lacuna Entity",
       "qty": 2
     },
     {
-      "name": "Lilith",
+      "name": "Regurgitator",
       "qty": 1
     },
     {
-      "name": "Gnarled Wendigo",
-      "qty": 3
+      "name": "Mephistopheles",
+      "qty": 1
     },
     {
-      "name": "Lord of Lies",
-      "qty": 2
+      "name": "Ophanim",
+      "qty": 1
     },
     {
-      "name": "Mester Stoor Worm",
-      "qty": 2
+      "name": "The Ninth Legion",
+      "qty": 1
     },
     {
       "name": "Dormant Monstrosity",
+      "qty": 1
+    },
+    {
+      "name": "Yog-Sothoth",
+      "qty": 1
+    },
+    {
+      "name": "Diluvian Kraken",
       "qty": 2
     },
     {
@@ -109,47 +105,59 @@
       "qty": 1
     },
     {
-      "name": "Plague of Frogs",
+      "name": "The Doom of Dilmun",
+      "qty": 1
+    },
+    {
+      "name": "Ultimate Horror",
+      "qty": 1
+    },
+    {
+      "name": "Lord of the Void",
       "qty": 1
     },
     {
       "name": "Blink",
+      "qty": 2
+    },
+    {
+      "name": "Desecrate",
+      "qty": 2
+    },
+    {
+      "name": "Gift of the Raven",
+      "qty": 2
+    },
+    {
+      "name": "Monstermorphosis",
+      "qty": 2
+    },
+    {
+      "name": "Abyssal Assault",
       "qty": 1
     },
     {
-      "name": "Pollimorph",
-      "qty": 2
-    },
-    {
-      "name": "Riptide",
-      "qty": 2
-    },
-    {
-      "name": "Grapple Shot",
-      "qty": 2
-    },
-    {
-      "name": "Swap",
-      "qty": 3
+      "name": "Black Mass",
+      "qty": 1
     },
     {
       "name": "Shapeshift",
-      "qty": 1
-    },
-    {
-      "name": "Stormy Seas",
-      "qty": 1
-    },
-    {
-      "name": "Whirling Blades",
-      "qty": 3
-    },
-    {
-      "name": "Call of the Sea",
       "qty": 2
     },
     {
-      "name": "The Flood",
+      "name": "Howl from Beyond",
+      "qty": 1
+    },
+    {
+      "name": "Chaoswish",
+      "qty": 1
+    },
+    {
+      "name": "Astral Alcazar",
+      "qty": 1
+    },
+    {
+      "name": "Cloud City",
       "qty": 1
     },
     {
@@ -158,59 +166,59 @@
     },
     {
       "name": "Deep Sea",
+      "qty": 3
+    },
+    {
+      "name": "Den of Evil",
+      "qty": 4
+    },
+    {
+      "name": "Ersatz Platz",
       "qty": 1
     },
     {
       "name": "Floodplain",
-      "qty": 2
+      "qty": 1
+    },
+    {
+      "name": "Gilman House",
+      "qty": 1
     },
     {
       "name": "Gothic Tower",
       "qty": 1
     },
     {
-      "name": "Innsmouth Dock",
-      "qty": 1
+      "name": "Kelp Cavern",
+      "qty": 2
     },
     {
       "name": "Lighthouse",
-      "qty": 3
+      "qty": 2
     },
     {
       "name": "Lone Tower",
       "qty": 1
     },
     {
-      "name": "Maelström",
-      "qty": 1
-    },
-    {
-      "name": "Mirror Realm",
-      "qty": 1
-    },
-    {
-      "name": "Mismanaged Mortuary",
+      "name": "Mountain Peaks",
       "qty": 2
     },
     {
-      "name": "River Rapids",
+      "name": "Observatory",
       "qty": 2
     },
     {
-      "name": "Tadpole Pool",
+      "name": "Peculiar Port",
       "qty": 1
     },
     {
-      "name": "The Geistwood",
+      "name": "The Colour Out of Space",
       "qty": 1
     },
     {
-      "name": "Thin Ice",
-      "qty": 3
-    },
-    {
-      "name": "Treetop Hideout",
-      "qty": 4
+      "name": "The Void",
+      "qty": 1
     },
     {
       "name": "Troll Bridge",
@@ -218,7 +226,7 @@
     },
     {
       "name": "Wuthering Heights",
-      "qty": 2
+      "qty": 1
     }
   ]
 }
