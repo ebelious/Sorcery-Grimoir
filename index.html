@@ -3631,6 +3631,20 @@ function showDeckUrlImportPopup(){
   if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
   _startDeckUrlImport(url);
 }
+function _toggleComDeckElFilter(el){
+  G.comDecksElFilter=G.comDecksElFilter||[];
+  var idx=G.comDecksElFilter.indexOf(el);
+  if(idx>=0)G.comDecksElFilter.splice(idx,1);
+  else G.comDecksElFilter.push(el);
+  _renderKeepScroll();
+}
+function _toggleComDeckAvFilter(av){
+  G.comDecksAvFilter=G.comDecksAvFilter||[];
+  var idx=G.comDecksAvFilter.indexOf(av);
+  if(idx>=0)G.comDecksAvFilter.splice(idx,1);
+  else G.comDecksAvFilter.push(av);
+  _renderKeepScroll();
+}
 function previewCommunityDeck(idx){
   var d=(G.comDecksItems||[])[idx];
   if(!d||!d.url)return;
@@ -5860,12 +5874,67 @@ function pContent(){
     if(G.comDecksLoading){o('<div class="ld">'+spinIcon()+' Loading community decks&hellip;</div>');}
     else if(G.comDecksErr){o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.comDecksErr)+'</div>');}
     else if(G.comDecksItems&&G.comDecksItems.length){
-      o('<div class="slbl2">Community Decks ('+G.comDecksItems.length+')</div>');
-      o('<div style="display:flex;flex-direction:column;gap:6px">');
-      G.comDecksItems.forEach(function(d,i){
-        o('<div class="sddi" onclick="previewCommunityDeck('+i+')"><div class="sn">'+h(d.name||'Untitled Deck')+'</div><div class="sc" style="color:var(--fg2)">'+(d.author?'by @'+h(d.author):'')+'</div></div>');
+      // Search bar
+      o('<div class="si" style="position:relative;margin-bottom:8px">');
+      o('<input placeholder="Search decks or authors&hellip;" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" value="'+h(G.comDecksSearch||'')+'" oninput="G.comDecksSearch=this.value;_renderKeepScroll()">');
+      o('</div>');
+
+      // Sort options
+      o('<div style="display:flex;gap:6px;margin-bottom:8px">');
+      [['latest','Latest'],['name','Name'],['trending','Trending']].forEach(function(s){
+        var on=(G.comDecksSort||'latest')===s[0];
+        o('<button class="fb'+(on?' gold':'')+'" style="flex:1;font-size:11px;padding:7px 4px" onclick="G.comDecksSort=\''+s[0]+'\';_renderKeepScroll()">'+s[1]+'</button>');
       });
       o('</div>');
+
+      // Element filters
+      o('<div class="slbl2" style="margin-bottom:4px">Element</div>');
+      o('<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">');
+      [['earth','Earth'],['fire','Fire'],['water','Water'],['air','Air']].forEach(function(e){
+        var on=(G.comDecksElFilter||[]).indexOf(e[0])>=0;
+        o('<button class="fb'+(on?' gold':'')+'" style="font-size:11px;padding:6px 10px" onclick="_toggleComDeckElFilter(\''+e[0]+'\')">'+e[1]+'</button>');
+      });
+      o('</div>');
+
+      // Avatar filters -- one button per avatar actually seen in the
+      // loaded data, generated dynamically since the full set isn't known
+      // ahead of time. Hidden entirely if no avatar data was detected.
+      var uniqueAvatars=Array.from(new Set(G.comDecksItems.map(function(d){return d.avatar;}).filter(Boolean))).sort();
+      if(uniqueAvatars.length){
+        o('<div class="slbl2" style="margin-bottom:4px">Avatar</div>');
+        o('<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">');
+        uniqueAvatars.forEach(function(av){
+          var on=(G.comDecksAvFilter||[]).indexOf(av)>=0;
+          o('<button class="fb'+(on?' gold':'')+'" style="font-size:11px;padding:6px 10px" onclick="_toggleComDeckAvFilter(\''+h(av).replace(/'/g,"\\'")+'\')">'+h(av)+'</button>');
+        });
+        o('</div>');
+      }
+
+      // Apply search + filters + sort
+      var items=G.comDecksItems.slice();
+      var q=(G.comDecksSearch||'').toLowerCase().trim();
+      if(q){items=items.filter(function(d){return (d.name||'').toLowerCase().indexOf(q)>=0||(d.author||'').toLowerCase().indexOf(q)>=0;});}
+      if(G.comDecksElFilter&&G.comDecksElFilter.length){items=items.filter(function(d){return (d.elements||[]).some(function(e){return G.comDecksElFilter.indexOf(e)>=0;});});}
+      if(G.comDecksAvFilter&&G.comDecksAvFilter.length){items=items.filter(function(d){return G.comDecksAvFilter.indexOf(d.avatar)>=0;});}
+      var sortMode=G.comDecksSort||'latest';
+      items.sort(function(a,b){
+        if(sortMode==='name')return (a.name||'').localeCompare(b.name||'');
+        if(sortMode==='trending')return (b.views||0)-(a.views||0);
+        return (b.timestamp||0)-(a.timestamp||0); // latest
+      });
+
+      o('<div class="slbl2">Community Decks ('+items.length+')</div>');
+      if(!items.length){
+        o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">No decks match these filters.</div>');
+      } else {
+        o('<div style="display:flex;flex-direction:column;gap:6px">');
+        items.forEach(function(d){
+          var origIdx=G.comDecksItems.indexOf(d);
+          var elStr=(d.elements&&d.elements.length)?d.elements.map(function(e){return e.charAt(0).toUpperCase()+e.slice(1);}).join('/'):'';
+          o('<div class="sddi" onclick="previewCommunityDeck('+origIdx+')"><div class="sn">'+h(d.name||'Untitled Deck')+'</div><div class="sc" style="color:var(--fg2)">'+(d.author?'by @'+h(d.author):'')+(elStr?' &middot; '+elStr:'')+'</div></div>');
+        });
+        o('</div>');
+      }
     } else {
       o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">No community decks available yet.</div>');
     }
