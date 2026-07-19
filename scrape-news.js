@@ -56,15 +56,17 @@ const fs = require('fs');
     process.exit(1);
   }
 
-  // Load existing news.json to avoid re-fetching images we already have
+  // Load existing news.json to avoid re-fetching images we already have,
+  // and to know which URLs we've already seen (so we only push a
+  // notification for genuinely new articles, not every run).
   let existingImages = {};
-  let previousFirstUrl = null;
+  let existingUrls = new Set();
   try {
     const existing = JSON.parse(fs.readFileSync('news.json', 'utf8'));
     (existing.articles || []).forEach(a => {
       if (a.url && a.image) existingImages[a.url] = a.image;
+      if (a.url) existingUrls.add(a.url);
     });
-    if (existing.articles && existing.articles[0]) previousFirstUrl = existing.articles[0].url;
     console.log('Loaded ' + Object.keys(existingImages).length + ' cached images from existing news.json');
   } catch (e) {
     console.log('No existing news.json -- fetching all images fresh');
@@ -130,29 +132,30 @@ const fs = require('fs');
   fs.writeFileSync('news.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + articles.length + ' articles to news.json');
 
-  // Notify subscribers via Firebase Cloud Messaging if the newest article
-  // changed since the last run. `previousFirstUrl` is null on the very first
-  // run (no news.json yet) -- skip notifying in that case so setup doesn't
-  // blast everyone with every existing article at once.
-  if (previousFirstUrl && articles[0] && articles[0].url !== previousFirstUrl) {
+  // Notify subscribers about genuinely new articles only -- not on the very
+  // first run ever (when existingUrls is empty, everything would look
+  // "new" and blast a notification for the entire backlog at once).
+  const newArticles = articles.filter(a => a.url && !existingUrls.has(a.url));
+  if (newArticles.length && existingUrls.size && process.env.SEND_PUSH_URL && process.env.SEND_PUSH_KEY) {
+    const first = newArticles[0];
+    const title = newArticles.length === 1
+      ? first.title
+      : newArticles.length + ' new articles';
+    const body = newArticles.length === 1
+      ? 'New article on sorcerytcg.com/news'
+      : [first.title, '+' + (newArticles.length - 1) + ' more'].join(' — ');
     try {
-      const admin = require('firebase-admin');
-      if (!admin.apps.length) {
-        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-      }
-      await admin.messaging().send({
-        topic: 'news',
-        notification: {
-          title: 'New Sorcery News',
-          body: articles[0].title || 'A new article is available.'
-        },
-        android: { priority: 'high' },
-        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: articles[0].url } }
+      const res = await fetch(process.env.SEND_PUSH_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-send-key': process.env.SEND_PUSH_KEY },
+        body: JSON.stringify({ topic: 'news', title, body, url: first.url })
       });
-      console.log('Sent FCM notification for new article: ' + articles[0].url);
+      if (!res.ok) console.warn('send-push returned ' + res.status + ': ' + await res.text());
+      else console.log('Sent push notification for ' + newArticles.length + ' new article(s).');
     } catch (e) {
-      console.log('FCM notification failed (non-fatal): ' + e.message);
+      console.warn('send-push request failed:', e.message);
     }
+  } else if (newArticles.length) {
+    console.log(newArticles.length + ' new article(s) found, but not sending a push (first run, or SEND_PUSH_URL/SEND_PUSH_KEY not set).');
   }
 })();
