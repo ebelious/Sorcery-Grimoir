@@ -3631,7 +3631,7 @@ function _normalizeFastPathCardEntry(entry){
   var qty=entry.qty||entry.quantity||entry.count||1;
   return name?{name:String(name),qty:Number(qty)||1}:null;
 }
-function _startDeckUrlImport(url,previewMode){
+function _startDeckUrlImport(url,previewMode,authorHint){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
@@ -3644,14 +3644,14 @@ function _startDeckUrlImport(url,previewMode){
     body:JSON.stringify({url:url,requestId:requestId})
   })
     .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error((d.error||'Failed to start import')+(d.status?' (HTTP '+d.status+')':'')+(d.detail?'\\n\\n'+d.detail:''));return d;});})
-    .then(function(){ _pollDeckUrlImport(requestId,0,previewMode,url); })
+    .then(function(){ _pollDeckUrlImport(requestId,0,previewMode,url,authorHint); })
     .catch(function(e){
       delete G.comDeckImportingUrls[url];
       _renderKeepScroll();
       alert('Could not start the import: '+e.message);
     });
 }
-function _pollDeckUrlImport(requestId,attempt,previewMode,url){
+function _pollDeckUrlImport(requestId,attempt,previewMode,url,authorHint){
   if(requestId!==G._deckUrlImportReqId)return; // a newer import superseded this one
   if(attempt>72){ // ~6 minutes at 5s intervals
     if(url)delete G.comDeckImportingUrls[url];
@@ -3663,7 +3663,7 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
       if(!d||d.requestId!==requestId){
-        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url);},5000);
+        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url,authorHint);},5000);
         return;
       }
       if(d.error){
@@ -3672,10 +3672,11 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
         alert('Import failed: '+d.error);
         return;
       }
+      if(!d.author&&authorHint)d.author=authorHint;
       _finishDeckUrlImport(d);
     })
     .catch(function(){
-      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url);},5000);
+      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url,authorHint);},5000);
     });
 }
 function _finishDeckUrlImport(result){
@@ -3705,7 +3706,7 @@ function _finishDeckUrlImport(result){
   if(unmatched.length){
     console.log('Deck import: '+unmatched.length+' card(s) from the scrape could not be matched to a known card in the local database:',unmatched);
   }
-  G.decks[deckName]={name:deckName,cards:matched,collection:matchedColl,maybe:matchedMaybe};
+  G.decks[deckName]={name:deckName,cards:matched,collection:matchedColl,maybe:matchedMaybe,creator:(result.author||'').trim()};
   sv('sg-dk',G.decks);
   render();
   var extraParts=[];
@@ -4700,7 +4701,7 @@ function _comDeckSearchOrImportAction(){
 }
 // Imports a deck directly (no preview step) -- tries the fast path first,
 // falling back to the slow GitHub Actions pipeline automatically.
-function importCommunityDeckDirect(url){
+function importCommunityDeckDirect(url,authorHint){
   if(!url)return;
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
@@ -4714,14 +4715,14 @@ function importCommunityDeckDirect(url){
   })
     .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
     .then(function(res){
-      if(!res.ok||!res.data.ok){console.log('Fast import path unavailable -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
+      if(!res.ok||!res.data.ok){console.log('Fast import path unavailable -- falling back to slow pipeline.');_startDeckUrlImport(url,false,authorHint);return;}
       var cards=(res.data.cards||[]).map(_normalizeFastPathCardEntry).filter(Boolean);
-      if(!cards.length){console.log('Fast import path returned no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
-      _finishDeckUrlImport({deckName:res.data.deckName||'Community Deck',cards:cards,url:url});
+      if(!cards.length){console.log('Fast import path returned no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,false,authorHint);return;}
+      _finishDeckUrlImport({deckName:res.data.deckName||'Community Deck',cards:cards,url:url,author:res.data.author||authorHint||''});
     })
     .catch(function(e){
       console.log('Fast import path failed ('+e.message+') -- falling back to slow pipeline.');
-      _startDeckUrlImport(url,false);
+      _startDeckUrlImport(url,false,authorHint);
     });
 }
 function searchCommunityDecksLive(){
@@ -5363,7 +5364,7 @@ function pContent(){
           if(d.author)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:0">@'+h(d.author)+'</div>');
           if(_importing)o('<div style="font-size:11px;color:var(--fg2);margin-top:2px">'+spinIcon()+' Importing&hellip; this can take up to a couple of minutes.</div>');
           o('</div>');
-          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;font-size:11px;padding:7px 10px"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
+          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;font-size:11px;padding:7px 10px"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\',\''+h(d.author||'').replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
           o('</div>');
         });
         o('</div>');
@@ -5384,12 +5385,16 @@ function pContent(){
         ['a','e','f','w'].forEach(function(el){if(th.indexOf(el)>=0)dkEls[el]=true;});
       });
       var safeK=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var avatarEntry=dk.cards.find(function(x){var cx=cardByName(x.name);return cx&&cType(cx)==='avatar';});
+      var avatarCard=avatarEntry?cardByName(avatarEntry.name):null;
       o('<div class="dk-c" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px" onclick="G.selDeck=\''+safeK+'\';openPanel(\'deckview\')">');
+      o('<div style="width:40px;height:40px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(avatarCard?cImgTag(avatarCard,'width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block'):'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
       o('<div style="flex:1;min-width:0">');
       o('<div style="display:flex;align-items:center;gap:8px">');
       o('<div style="font-size:20px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(dk.name)+'</div>');
       o('<span style="display:inline-flex;align-items:center;gap:2px;flex-shrink:0">'+['a','e','f','w'].filter(function(el){return dkEls[el];}).map(function(el){return eSVG(elMap[el],14);}).join('')+'</span>');
       o('</div>');
+      if(dk.creator)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:0">@'+h(dk.creator)+'</div>');
       o('<div class="ss" style="margin-top:3px;font-size:15px"><span class="sw">Win '+ds.w+'</span><span class="sl_">Loss '+ds.l+'</span><span class="sp_">'+pct2+'</span></div>');
       o('</div>');
       o('<span style="color:var(--hi);font-size:16px">&rarr;</span>');
@@ -5406,6 +5411,7 @@ function pContent(){
     o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
     o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
+    if(dv.creator)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">@'+h(dv.creator)+'</div>');
     // Group cards by type
     var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
     var typeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
