@@ -4704,45 +4704,34 @@ function _comDeckApiNormalize(d){
 function searchCommunityDecksLive(){
   var query=(G.comDecksSearchDraft||'').trim();
   if(!query){clearCommunityDeckSearch();return;}
-  var filterObj={query:query,set:'*',filters:[],csort:'relevance',dsort:'relevance',fsort:'relevance',divider:'all',avatar:'*'};
-  var wrapped={'0':{json:filterObj}};
-  var apiUrl='https://curiosa.io/api/trpc/deck.search?batch=1&input='+encodeURIComponent(JSON.stringify(wrapped));
   G.comDecksSearching=true;G.comDecksSearchErr=null;_renderKeepScroll();
-
-  function handleResponse(res){
-    console.log('Community deck search API status:',res.status);
-    console.log('Community deck search API raw response:',res.text.slice(0,20000));
-    G.comDecksSearching=false;
-    if(!res.ok){G.comDecksSearchErr='Search failed (HTTP '+res.status+').';_renderKeepScroll();return;}
-    var parsed;
-    try{parsed=JSON.parse(res.text);}catch(e){G.comDecksSearchErr='Search response was not valid JSON.';_renderKeepScroll();return;}
-    var rawDecks=_comDeckApiExtract(parsed);
-    if(!rawDecks){G.comDecksSearchErr='Search succeeded but the response shape wasn\'t recognized. Check the console for the raw response.';_renderKeepScroll();return;}
-    G.comDecksSearchResults=rawDecks.map(_comDeckApiNormalize).filter(function(d){return d.url;});
-    G.comDecksSearchActive=true;
-    _renderKeepScroll();
-  }
-
-  // Try corsproxy.io first; if the fetch itself fails at the network level
-  // (not just a bad HTTP response -- an actual failure to connect), retry
-  // once through allorigins.win before giving up. Both are already
-  // whitelisted in this app's CSP.
-  var primary='https://corsproxy.io/?url='+encodeURIComponent(apiUrl);
-  var fallback='https://api.allorigins.win/raw?url='+encodeURIComponent(apiUrl);
-  console.log('Community deck search: trying corsproxy.io...');
-  fetch(primary)
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/search-community-decks',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({query:query})
+  })
     .then(function(r){return r.text().then(function(t){return {ok:r.ok,status:r.status,text:t};});})
-    .then(handleResponse)
+    .then(function(res){
+      console.log('Community deck search status:',res.status);
+      console.log('Community deck search raw response:',res.text.slice(0,20000));
+      G.comDecksSearching=false;
+      if(!res.ok){
+        var errMsg='Search failed (HTTP '+res.status+').';
+        try{var errBody=JSON.parse(res.text);if(errBody.error)errMsg=errBody.error;}catch(e){}
+        G.comDecksSearchErr=errMsg;_renderKeepScroll();return;
+      }
+      var parsed;
+      try{parsed=JSON.parse(res.text);}catch(e){G.comDecksSearchErr='Search response was not valid JSON.';_renderKeepScroll();return;}
+      var rawDecks=_comDeckApiExtract(parsed);
+      if(!rawDecks){G.comDecksSearchErr='Search succeeded but the response shape wasn\'t recognized. Check the console for the raw response.';_renderKeepScroll();return;}
+      G.comDecksSearchResults=rawDecks.map(_comDeckApiNormalize).filter(function(d){return d.url;});
+      G.comDecksSearchActive=true;
+      _renderKeepScroll();
+    })
     .catch(function(e){
-      console.log('corsproxy.io failed ('+e.message+'), retrying via allorigins.win...');
-      fetch(fallback)
-        .then(function(r){return r.text().then(function(t){return {ok:r.ok,status:r.status,text:t};});})
-        .then(handleResponse)
-        .catch(function(e2){
-          G.comDecksSearching=false;
-          G.comDecksSearchErr='Search failed on both proxies: '+e2.message;
-          _renderKeepScroll();
-        });
+      G.comDecksSearching=false;
+      G.comDecksSearchErr='Search failed: '+e.message;
+      _renderKeepScroll();
     });
 }
 function clearCommunityDeckSearch(){
