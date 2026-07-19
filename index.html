@@ -3689,19 +3689,30 @@ function _finishDeckUrlImport(result){
   var deckName=result.deckName||'Imported Deck';
   var baseName=deckName,n=1;
   while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
-  var matched=[],unmatched=[];
-  (result.cards||[]).forEach(function(entry){
-    var c=cardByName(entry.name);
-    if(c){matched.push({name:cName(c),qty:entry.qty});}
-    else{unmatched.push(entry.name+' x'+entry.qty);}
-  });
+  function _matchEntries(list,label,unmatchedAll){
+    var out=[];
+    (list||[]).forEach(function(entry){
+      var c=cardByName(entry.name);
+      if(c){out.push({name:cName(c),qty:entry.qty});}
+      else{unmatchedAll.push(entry.name+' x'+entry.qty+' ('+label+')');}
+    });
+    return out;
+  }
+  var unmatched=[];
+  var matched=_matchEntries(result.cards,'main',unmatched);
+  var matchedColl=_matchEntries(result.collection,'collection',unmatched);
+  var matchedMaybe=_matchEntries(result.maybeboard,'maybeboard',unmatched);
   if(unmatched.length){
     console.log('Deck import: '+unmatched.length+' card(s) from the scrape could not be matched to a known card in the local database:',unmatched);
   }
-  G.decks[deckName]={name:deckName,cards:matched};
+  G.decks[deckName]={name:deckName,cards:matched,collection:matchedColl,maybe:matchedMaybe};
   sv('sg-dk',G.decks);
   render();
-  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s)'+elapsedStr+'.','decks');
+  var extraParts=[];
+  if(matchedColl.length)extraParts.push(matchedColl.length+' collection');
+  if(matchedMaybe.length)extraParts.push(matchedMaybe.length+' maybeboard');
+  var extraStr=extraParts.length?(' ('+extraParts.join(', ')+')'):'';
+  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s)'+extraStr+elapsedStr+'.','decks');
 }
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
