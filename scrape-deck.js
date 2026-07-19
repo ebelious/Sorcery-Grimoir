@@ -49,7 +49,7 @@ if (!DECK_URL) {
 // Common deck-list line patterns:
 //   "3x Card Name" / "3 x Card Name" / "3 Card Name"  (quantity first)
 //   "Card Name x3" / "Card Name (3)"                   (quantity last)
-const QTY_FIRST_RE = /^(\d{1,3})\s*[xX]?\s+(.+)$/;
+const QTY_FIRST_RE = /^(\d{1,3})\s*[xX]?\s*([A-Z][^%\/]*)$/;
 const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
 
 (async () => {
@@ -80,7 +80,7 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
     const NON_CARD_LABELS = new Set([
       'avatar', 'aura', 'artifact', 'minion', 'magic', 'site', 'spell',
       'collection', 'maybeboard', 'spellbook', 'atlas', 'sideboard',
-      'deck', 'cards', 'total', 'unique'
+      'deck', 'cards', 'total', 'unique', 'views', 'comments', 'likes', 'shares'
     ]);
 
     const cards = [];
