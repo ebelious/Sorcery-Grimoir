@@ -3681,11 +3681,11 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url,authorHint){
 }
 function _finishDeckUrlImport(result){
   if(result.url&&G.comDeckImportingUrls)delete G.comDeckImportingUrls[result.url];
-  var elapsedStr='';
+  var timeStr='';
   if(result.url&&G.comDeckImportStartTimes&&G.comDeckImportStartTimes[result.url]){
     var elapsedSec=Math.round((Date.now()-G.comDeckImportStartTimes[result.url])/1000);
     delete G.comDeckImportStartTimes[result.url];
-    elapsedStr=elapsedSec<60?(' ('+elapsedSec+'s)'):(' ('+Math.floor(elapsedSec/60)+'m '+(elapsedSec%60)+'s)');
+    timeStr=elapsedSec<60?(elapsedSec+'s'):(Math.floor(elapsedSec/60)+'m '+(elapsedSec%60)+'s');
   }
   var deckName=result.deckName||'Imported Deck';
   var baseName=deckName,n=1;
@@ -3709,11 +3709,7 @@ function _finishDeckUrlImport(result){
   G.decks[deckName]={name:deckName,cards:matched,collection:matchedColl,maybe:matchedMaybe,creator:(result.author||'').trim()};
   sv('sg-dk',G.decks);
   render();
-  var extraParts=[];
-  if(matchedColl.length)extraParts.push(matchedColl.length+' collection');
-  if(matchedMaybe.length)extraParts.push(matchedMaybe.length+' maybeboard');
-  var extraStr=extraParts.length?(' ('+extraParts.join(', ')+')'):'';
-  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s)'+extraStr+elapsedStr+'.','decks');
+  _sendNotification('Deck Imported','"'+deckName+'" has successfully been imported'+(timeStr?'  |  took '+timeStr:'')+'.','decks');
 }
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
