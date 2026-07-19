@@ -3625,7 +3625,7 @@ function exportDeckCSV(k){
 }
 function createDeck(){var nm='New Deck '+(Object.keys(G.decks).length+1);G.decks[nm]={name:nm,cards:[]};sv('sg-dk',G.decks);render();}
 function showDeckUrlImportPopup(){
-  var url=prompt('Paste a Curiosa deck URL (e.g. https://curiosa.io/decks/...)');
+  var url=prompt('Paste a Curiosa deck URL (e.g. https://curiosa.io/decks/...)\n\nThis will take a few minutes.');
   if(!url)return;
   url=url.trim();
   if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
@@ -5175,7 +5175,7 @@ function pContent(){
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
   if(p==='decks'){
-    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button><button class="fb" onclick="showDeckUrlImportPopup()">Import from URL</button></div>');
+    o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button><button class="fb" onclick="showDeckUrlImportPopup()">Import Curiosa.io</button></div>');
     if(G.deckUrlImporting){
       o('<div class="ld" style="margin-top:6px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');
     }
