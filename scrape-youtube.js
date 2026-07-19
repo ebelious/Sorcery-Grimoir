@@ -110,7 +110,8 @@ function parseLatestEntry(xml, channelName) {
           title: 'New video: ' + newest.channel,
           body: newest.title
         },
-        webpush: { fcmOptions: { link: 'https://www.youtube.com/watch?v=' + newest.videoId } }
+        android: { priority: 'high' },
+        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: 'https://www.youtube.com/watch?v=' + newest.videoId } }
       });
       console.log('Sent FCM notification for new video: ' + newest.videoId);
     } catch (e) {
