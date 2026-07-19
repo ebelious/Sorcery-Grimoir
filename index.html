@@ -5493,7 +5493,7 @@ function pContent(){
     o('<div style="margin-bottom:12px">');
     o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--yel);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+collKey+'\')">');
     o('<span>Collection <span style="color:var(--fg2);font-weight:400">('+collTotal+'/10)</span></span>');
-    o('<span style="font-size:12px">'+(collExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span style="font-size:12px">'+(collExp?'&uarr;':'&darr;')+'</span>');
     o('</div>');
     if(collExp){
     if(!deckColl.length){
@@ -5524,7 +5524,7 @@ function pContent(){
     o('<div style="margin-bottom:12px">');
     o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--bbl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+maybeKey+'\')">');
     o('<span>Maybeboard <span style="color:var(--fg2);font-weight:400">('+maybeTotal+')</span></span>');
-    o('<span style="font-size:12px">'+(maybeExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span style="font-size:12px">'+(maybeExp?'&uarr;':'&darr;')+'</span>');
     o('</div>');
     if(maybeExp){
     if(!deckMaybe.length){
