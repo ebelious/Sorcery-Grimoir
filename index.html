@@ -6650,7 +6650,7 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
