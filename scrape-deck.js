@@ -60,7 +60,32 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
   try {
     console.log('Fetching ' + DECK_URL + '...');
     await page.goto(DECK_URL, { waitUntil: 'networkidle', timeout: 30000 });
-    await page.waitForTimeout(3000); // let the SPA finish rendering the card list
+    await page.waitForTimeout(3000); // let the SPA finish rendering the main card list
+
+    // Confirmed from an earlier diagnostic run of a related scraper:
+    // "Collection (10)" and "Maybeboard (23)" appear as bare section
+    // headers with NO card lines following them, unlike sections like
+    // "Minion (35)" which render their cards immediately. That strongly
+    // suggests these sections are collapsed/lazy-loaded and need a click
+    // to expand -- try clicking anything whose text matches, for both
+    // section names, before reading the final page text. Wrapped
+    // defensively since the exact DOM structure is unconfirmed; a failed
+    // click here shouldn't crash the whole scrape.
+    for (const label of ['Collection', 'Maybeboard']) {
+      try {
+        const el = page.getByText(label, { exact: false }).first();
+        if (await el.count() > 0) {
+          console.log('Found an element matching "' + label + '", attempting to click it to expand...');
+          await el.click({ timeout: 5000 });
+          await page.waitForTimeout(1500); // let any lazy-loaded cards render
+          console.log('Clicked "' + label + '".');
+        } else {
+          console.log('No element found matching "' + label + '" -- skipping.');
+        }
+      } catch (e) {
+        console.log('Could not click "' + label + '" (' + e.message + ') -- continuing without expanding it.');
+      }
+    }
 
     const { deckName, lines } = await page.evaluate(() => {
       const h1 = document.querySelector('h1,h2');
