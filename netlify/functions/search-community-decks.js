@@ -55,7 +55,7 @@ exports.handler = async function (event) {
   const filterObj = {
     query, set: '*', filters: [],
     csort: 'relevance', dsort: 'relevance', fsort: 'relevance',
-    divider: 'all', avatar: '*'
+    divider: 'all', avatar: '*', limit: 100
   };
   const wrapped = { '0': { json: filterObj } };
   const apiUrl = 'https://curiosa.io/api/trpc/deck.search?batch=1&input=' + encodeURIComponent(JSON.stringify(wrapped));
