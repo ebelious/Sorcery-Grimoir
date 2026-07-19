@@ -5243,7 +5243,7 @@ function pContent(){
   });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
   if(p==='codex'){
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
-    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a>');
+    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a>');
     if(G.codexChangelog&&G.codexChangelog.length){
       o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="showChangelogList()">Changelog</button>');
     }
@@ -5263,7 +5263,7 @@ function pContent(){
     return out.join('');
   }
   if(p==='faq'){
-    o('<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/faqs" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a></div>');
+    o('<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/faqs" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a></div>');
     var q=(S.faqQ||'').toLowerCase();var grouped={};
     var _lastFaqCard='';
     FAQ_DATA.forEach(function(f){
@@ -6016,11 +6016,14 @@ function pContent(){
     });
     o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;gap:8px;margin-bottom:9px;align-items:stretch">');
-    o('<select style="flex:1;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);padding:8px 10px;font-size:16px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none" onchange="G.ytCh=this.value;G.ytSelCh=(this.value===\'all\'?null:this.value);render()">');
+    o('<div style="position:relative;flex:1">');
+    o('<select style="width:100%;appearance:none;-webkit-appearance:none;-moz-appearance:none;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);padding:8px 28px 8px 10px;font-size:16px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none" onchange="G.ytCh=this.value;G.ytSelCh=(this.value===\'all\'?null:this.value);render()">');
     YT_CHS.forEach(function(x){
       o('<option value="'+x.id+'"'+(G.ytCh===x.id?' selected':'')+'>'+h(x.id==='all'?'':x.n)+'</option>');
     });
     o('</select>');
+    o('<span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--hi);pointer-events:none">&darr;</span>');
+    o('</div>');
     if(G.ytCh!=='all')o('<button class="fb" style="border-color:var(--red);color:var(--red);flex-shrink:0" onclick="G.ytCh=\'all\';G.ytSelCh=null;render()">Reset</button>');
     o('</div>');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
