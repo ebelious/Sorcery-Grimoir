@@ -43,14 +43,6 @@ const LIMIT = 10;
 
   const raw = await res.json();
 
-  let previousMessageId = null;
-  try {
-    const existing = JSON.parse(fs.readFileSync('discord.json', 'utf8'));
-    if (existing.messages && existing.messages[0]) previousMessageId = existing.messages[0].id;
-  } catch (e) {
-    console.log('No existing discord.json -- first run, will not notify');
-  }
-
   const messages = raw
     // Skip empty messages (e.g. embed-only or attachment-only with no text)
     .filter(m => (m.content && m.content.trim()) || (m.embeds && m.embeds.length) || (m.attachments && m.attachments.length))
@@ -68,6 +60,18 @@ const LIMIT = 10;
     process.exit(1);
   }
 
+  // Capture the previously-known message IDs before overwriting, to detect
+  // genuinely new messages since the last run.
+  let previousIds = null;
+  try {
+    const existing = JSON.parse(fs.readFileSync('discord.json', 'utf8'));
+    if (Array.isArray(existing.messages)) {
+      previousIds = new Set(existing.messages.map(m => m.id));
+    }
+  } catch (e) {
+    console.log('No existing discord.json -- first run, will not notify');
+  }
+
   const output = {
     updated: new Date().toISOString(),
     messages,
@@ -76,29 +80,36 @@ const LIMIT = 10;
   fs.writeFileSync('discord.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + messages.length + ' messages to discord.json');
 
-  // Notify subscribers via Firebase Cloud Messaging if the newest message
-  // changed since the last run. `previousMessageId` is null on the very
-  // first run (no discord.json yet) -- skip notifying in that case so setup
-  // doesn't blast everyone with every existing message at once.
-  if (previousMessageId && messages[0] && messages[0].id !== previousMessageId) {
-    try {
-      const admin = require('firebase-admin');
-      if (!admin.apps.length) {
-        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+  // Notify subscribers via Firebase Cloud Messaging if any message wasn't
+  // present last run. `previousIds` is null on the very first run (no
+  // discord.json yet) -- skip notifying in that case so setup doesn't blast
+  // everyone with the whole recent history at once. Same direct
+  // firebase-admin pattern as scrape-youtube.js / scrape-rewards.js.
+  if (previousIds) {
+    const newMessages = messages.filter(m => !previousIds.has(m.id));
+    if (newMessages.length) {
+      try {
+        const admin = require('firebase-admin');
+        if (!admin.apps.length) {
+          const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+          admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+        }
+        const first = newMessages[0];
+        await admin.messaging().send({
+          topic: 'discord',
+          notification: {
+            title: newMessages.length === 1 ? (first.author + ' in Discord') : (newMessages.length + ' new Discord messages'),
+            body: newMessages.length === 1 ? first.content.slice(0, 120) : first.content.slice(0, 80)
+          },
+          android: { priority: 'high' },
+          webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url } }
+        });
+        console.log('Sent FCM notification for ' + newMessages.length + ' new message(s)');
+      } catch (e) {
+        console.log('FCM notification failed (non-fatal): ' + e.message);
       }
-      await admin.messaging().send({
-        topic: 'discord',
-        notification: {
-          title: 'New Discord Message',
-          body: (messages[0].content || 'A new message is available.').slice(0, 150)
-        },
-        android: { priority: 'high' },
-        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: messages[0].url } }
-      });
-      console.log('Sent FCM notification for new message: ' + messages[0].id);
-    } catch (e) {
-      console.log('FCM notification failed (non-fatal): ' + e.message);
+    } else {
+      console.log('No new messages since last run.');
     }
   }
 })();
