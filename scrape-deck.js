@@ -95,7 +95,14 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
       };
     });
 
+    // The author's Curiosa handle renders as its own "@username" line right
+    // after the deck name/title area -- confirmed directly from real
+    // diagnostic output (e.g. "Scream!", "@ebelious", "Constructed", ...).
+    const authorLine = lines.find(l => /^@[A-Za-z0-9_-]+$/.test(l));
+    const author = authorLine ? authorLine.slice(1) : '';
+
     console.log('Deck name detected: ' + deckName);
+    console.log('Author detected: ' + (author || '(none found)'));
     console.log('Full page text (for debugging):', JSON.stringify(lines, null, 2));
 
     // Deck-builder pages commonly show a composition summary (e.g. "Minion
@@ -191,12 +198,13 @@ const QTY_LAST_RE = /^(.+?)\s*(?:[xX]\s*(\d{1,3})|\((\d{1,3})\))$/;
       writeResult({
         error: 'Could not find any card list on that page. It may have failed to load, or the page structure differs from what this scraper expects.',
         deckName,
+        author,
         rawTextSample: lines.slice(0, 60)
       });
       process.exit(0);
     }
 
-    writeResult({ deckName, cards: finalCards, collection: finalCollection, maybeboard: finalMaybeboard });
+    writeResult({ deckName, author, cards: finalCards, collection: finalCollection, maybeboard: finalMaybeboard });
     console.log('Done -- wrote ' + finalCards.length + ' main, ' + finalCollection.length + ' collection, ' + finalMaybeboard.length + ' maybeboard card(s) to ' + RESULT_FILE);
   } catch (err) {
     await browser.close().catch(() => {});
