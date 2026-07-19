@@ -63,6 +63,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           cp deck-import-result.json /tmp/deck-import-result.json
+          git checkout -- .
 
           if git fetch origin deck-results 2>/dev/null; then
             git checkout -B deck-results origin/deck-results
