@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19T13:29:04.935Z",
+  "updated": "2026-07-19T19:13:40.807Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -68,68 +68,16 @@
       "url": "https://play.sorcerytcg.com/events/e653610a-0abe-4d2a-b998-0876723ff1ee"
     },
     {
-      "name": "MegaGame Sorcery Sealed League: Week 1",
-      "date": "Sun. Jul 19, 2026",
-      "time": "9:30 AM UTC",
-      "type": "Sealed Tournament",
-      "location": "Centra rajons, Riga",
-      "city": "Centra rajons",
-      "state": "Riga",
-      "address": "29 Lāčplēša iela Centra rajons Riga 1011",
-      "description": "",
-      "storeName": "MegaGame",
-      "url": "https://play.sorcerytcg.com/events/1bbe80d4-4c0b-4ded-9940-7ccd056f7e74"
-    },
-    {
-      "name": "MAZE SUMMER STORM CORNERSTONE",
-      "date": "Sun. Jul 19, 2026",
-      "time": "9:30 AM UTC",
-      "type": "Constructed Tournament",
-      "location": "Prato, Toscana",
-      "city": "Prato",
-      "state": "Toscana",
-      "address": "45 Minutes",
-      "description": "",
-      "storeName": "Magic Maze",
-      "url": "https://play.sorcerytcg.com/events/26f69d54-929c-4122-a9e4-a2f2181e564a"
-    },
-    {
-      "name": "CornerStone @ Crach Card Club",
-      "date": "Sun. Jul 19, 2026",
-      "time": "11:00 AM UTC",
-      "type": "Sealed Tournament",
-      "location": "Kessel-Lo, Vlaams Gewest",
-      "city": "Kessel-Lo",
-      "state": "Vlaams Gewest",
-      "address": "9 Benedenplein Kessel-Lo Vlaams Gewest 3010",
-      "description": "",
-      "storeName": "Crach Card Club",
-      "url": "https://play.sorcerytcg.com/events/7f005c1e-8f19-43e2-8c0c-010603fd0d62"
-    },
-    {
-      "name": "HEBDO SORCERY - Troll2Jeux",
-      "date": "Sun. Jul 19, 2026",
-      "time": "12:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Paris, IDF",
-      "city": "Paris",
-      "state": "IDF",
-      "address": "45 Minutes",
-      "description": "",
-      "storeName": "Troll2jeux",
-      "url": "https://play.sorcerytcg.com/events/dcfbd955-c4a9-45ba-83f7-58e1e4bd5f30"
-    },
-    {
       "name": "Sunday Sorcery Social and Escalation League",
       "date": "Sun. Jul 19, 2026",
       "time": "2:00 PM UTC",
-      "type": "David's Good Game Cafe",
+      "type": "Casual Meetup",
       "location": "Hamden, CT",
       "city": "Hamden",
       "state": "CT",
       "address": "2285 Whitney Avenue Hamden CT 06518",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/fca9b1ab-f30a-4f8c-817d-889a1b09688d"
     },
     {
@@ -144,19 +92,6 @@
       "description": "",
       "storeName": "Cold Foil Heroes",
       "url": "https://play.sorcerytcg.com/events/36885ec5-8ce4-4b1b-be42-7f5abba0f18e"
-    },
-    {
-      "name": "Tabletop Cincy Mixed Sealed",
-      "date": "Sun. Jul 19, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Tabletop Cincy Mixed Sealed",
-      "location": "West Chester Township, OH",
-      "city": "West Chester Township",
-      "state": "OH",
-      "address": "4876 Union Centre Pavilion West Chester Township OH 45069",
-      "description": "",
-      "storeName": "Tabletop Cincy",
-      "url": "https://play.sorcerytcg.com/events/018737d1-13f3-40ca-81c3-7548885a9031"
     },
     {
       "name": "Weekly Sunday Sorcery",
@@ -235,19 +170,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f96f0bc6-e52d-4135-87d6-058512c73dcc"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Jul 19, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Thieves Guild Gaming",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "address": "1 Levee Wy 2112b Newport KY 41071",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/61808dca-b1cc-4b94-a565-b9270938b043"
     }
   ]
 }
