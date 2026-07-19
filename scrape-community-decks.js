@@ -69,9 +69,28 @@ const MAX_DECKS = 60;
       const lines = item.text.split('\n').map(l => l.trim()).filter(Boolean);
       if (!lines.length) return;
 
-      // Heuristic: first line is the deck name; look for an "@author" style
-      // line among the rest. Fall back gracefully if the shape differs.
-      const name = lines[0];
+      // The real diagnostic data shows each tile's text has several
+      // optional lines before/after the actual deck name: a badge ("New",
+      // "Primer"), a relative timestamp ("4 hours ago"), one or more bare
+      // view/like/comment counts, a format name, and finally "@author".
+      // Skip all of those and take the first genuinely-remaining line as
+      // the deck name.
+      const KNOWN_BADGES = new Set(['new', 'primer']);
+      const KNOWN_FORMATS = new Set(['constructed', 'multiplayer', 'draft', 'jumpstart', 'limited']);
+
+      let name = null;
+      for (const line of lines) {
+        const lw = line.toLowerCase();
+        if (KNOWN_BADGES.has(lw)) continue;
+        if (/\bago$/i.test(line)) continue;
+        if (/^\d+$/.test(line)) continue;
+        if (KNOWN_FORMATS.has(lw)) continue;
+        if (line.startsWith('@')) continue;
+        name = line;
+        break;
+      }
+      if (!name) name = lines[0]; // fallback if every line got filtered out somehow
+
       const authorLine = lines.find(l => l.startsWith('@')) || lines.find(l => /^by\s+/i.test(l));
       const author = authorLine ? authorLine.replace(/^by\s+/i, '').replace(/^@/, '') : '';
 
