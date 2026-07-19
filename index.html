@@ -5333,7 +5333,7 @@ function pContent(){
         o('<div style="font-size:10px;color:var(--fg2);padding:4px 0 10px">No decks found.</div>');
       } else {
         o('<div class="slbl2">Results ('+G.comDecksSearchResults.length+')</div>');
-        o('<div style="display:flex;flex-direction:column;margin-bottom:10px">');
+        o('<div style="display:flex;flex-direction:column;margin-bottom:10px;max-height:50vh;overflow-y:auto;overflow-x:hidden">');
         G.comDecksSearchResults.forEach(function(d,idx){
           var elIcons=(d.elements||[]).map(function(e){return eSVG(e,16);}).join('');
           var _importing=!!(G.comDeckImportingUrls&&G.comDeckImportingUrls[d.url]);
@@ -5345,7 +5345,6 @@ function pContent(){
           if(_importing)o('<div style="font-size:11px;color:var(--fg2);margin-top:2px">'+spinIcon()+' Importing&hellip; this can take up to a couple of minutes.</div>');
           o('</div>');
           o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;font-size:11px;padding:7px 10px"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
-          o('</div>');
           o('</div>');
         });
         o('</div>');
