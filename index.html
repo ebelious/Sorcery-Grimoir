@@ -3631,13 +3631,40 @@ function showDeckUrlImportPopup(){
   if(!/^https:\/\/curiosa\.io\/decks\//.test(url)){alert('That doesn\'t look like a curiosa.io deck link.');return;}
   _startDeckUrlImport(url);
 }
+// Tries several plausible field names for one card entry within the fast
+// path's deck data, since the actual shape is unconfirmed.
+function _normalizeFastPathCardEntry(entry){
+  var name=entry.name||entry.cardName||(entry.card&&(entry.card.name||entry.card.title))||'';
+  var qty=entry.qty||entry.quantity||entry.count||1;
+  return name?{name:String(name),qty:Number(qty)||1}:null;
+}
 function previewCommunityDeck(url){
   if(!url)return;
-  _startDeckUrlImport(url,true);
+  G.deckUrlImporting=true;G._deckUrlImportPreviewMode=true;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/get-deck-preview-fast',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({url:url})
+  })
+    .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
+    .then(function(res){
+      if(!res.ok){console.log('Fast deck preview path unavailable:',res.data&&res.data.error);_startDeckUrlImport(url,true);return;}
+      var dd=res.data.deckData||{};
+      var rawCards=dd.cards||dd.mainboard||dd.spellbook||[];
+      var cards=rawCards.map(_normalizeFastPathCardEntry).filter(Boolean);
+      console.log('Fast deck preview path succeeded via '+res.data.source+' with '+cards.length+' card(s).');
+      if(!cards.length){console.log('Fast path found deck data but no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,true);return;}
+      G.deckUrlImporting=false;
+      _showCommunityDeckPreview({deckName:dd.name||dd.title||'Community Deck',cards:cards,url:url},'fastpath-'+Date.now());
+    })
+    .catch(function(e){
+      console.log('Fast deck preview path failed ('+e.message+') -- falling back to slow pipeline.');
+      _startDeckUrlImport(url,true);
+    });
 }
 function _startDeckUrlImport(url,previewMode){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
-  G.deckUrlImporting=true;G._deckUrlImportReqId=requestId;_renderKeepScroll();
+  G.deckUrlImporting=true;G._deckUrlImportReqId=requestId;G._deckUrlImportPreviewMode=!!previewMode;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/trigger-deck-import',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
@@ -5300,7 +5327,7 @@ function pContent(){
   if(p==='decks'){
     o('<div class="fr"><button class="fb" onclick="createDeck()">+ New Deck</button><button class="fb" onclick="trigUpDecks()">Import</button><button class="fb" onclick="showDeckUrlImportPopup()">Import Curiosa.io</button></div>');
     if(G.deckUrlImporting){
-      o('<div class="ld" style="margin-top:6px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');
+      o('<div class="ld" style="margin-top:6px">'+spinIcon()+(G._deckUrlImportPreviewMode?' Loading deck preview&hellip; this can take up to a couple of minutes.':' Importing deck&hellip; this can take up to a couple of minutes.')+'</div>');
     }
     // Community deck search -- type a name, hit Search (or Enter), pick a
     // result to preview its full contents (with an Import button in that
