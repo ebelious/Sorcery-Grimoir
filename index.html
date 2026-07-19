@@ -3652,7 +3652,7 @@ function _startDeckUrlImport(url,previewMode){
 }
 function _pollDeckUrlImport(requestId,attempt,previewMode){
   if(requestId!==G._deckUrlImportReqId)return; // a newer import superseded this one
-  if(attempt>36){ // ~6 minutes at 10s intervals
+  if(attempt>72){ // ~6 minutes at 5s intervals
     G.deckUrlImporting=false;_renderKeepScroll();
     alert('The import is taking longer than expected. Check the GitHub Actions log, or try again.');
     return;
@@ -3661,7 +3661,7 @@ function _pollDeckUrlImport(requestId,attempt,previewMode){
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
       if(!d||d.requestId!==requestId){
-        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},10000);
+        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},5000);
         return;
       }
       G.deckUrlImporting=false;
@@ -3674,7 +3674,7 @@ function _pollDeckUrlImport(requestId,attempt,previewMode){
       else{ _finishDeckUrlImport(d); }
     })
     .catch(function(){
-      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},10000);
+      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode);},5000);
     });
 }
 // Shows a not-yet-saved community deck using the same deckview rendering
