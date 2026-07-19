@@ -1,7 +1,7 @@
 {
-  "requestId": "1784475586067-vr8p2gjo3gp",
+  "requestId": "1784478079840-tuivo1hh3x",
   "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
-  "timestamp": "2026-07-19T15:41:35.378Z",
+  "timestamp": "2026-07-19T16:23:11.479Z",
   "deckName": "Scream!",
   "cards": [
     {
@@ -86,7 +86,7 @@
     },
     {
       "name": "King of the Realm",
-      "qty": 2
+      "qty": 1
     },
     {
       "name": "Conqueror Worm",
@@ -94,7 +94,7 @@
     },
     {
       "name": "Dispel",
-      "qty": 2
+      "qty": 1
     },
     {
       "name": "Gift of the Wolf",
@@ -102,15 +102,15 @@
     },
     {
       "name": "Attack by Night",
-      "qty": 3
+      "qty": 2
     },
     {
       "name": "Bury",
-      "qty": 3
+      "qty": 2
     },
     {
       "name": "Landmass",
-      "qty": 4
+      "qty": 3
     },
     {
       "name": "Undead Ambush",
@@ -126,7 +126,7 @@
     },
     {
       "name": "Bedrock",
-      "qty": 6
+      "qty": 3
     },
     {
       "name": "Boulevard of Bones",
@@ -178,7 +178,7 @@
     },
     {
       "name": "Sinkhole",
-      "qty": 3
+      "qty": 2
     },
     {
       "name": "Temple of Moloch",
@@ -191,13 +191,19 @@
     {
       "name": "Wuthering Heights",
       "qty": 2
-    },
+    }
+  ],
+  "collection": [
     {
       "name": "Zap!",
       "qty": 1
     },
     {
       "name": "Blink",
+      "qty": 1
+    },
+    {
+      "name": "Dispel",
       "qty": 1
     },
     {
@@ -209,7 +215,15 @@
       "qty": 1
     },
     {
+      "name": "Bury",
+      "qty": 1
+    },
+    {
       "name": "Grapple Shot",
+      "qty": 1
+    },
+    {
+      "name": "Landmass",
       "qty": 1
     },
     {
@@ -219,9 +233,19 @@
     {
       "name": "Arc Lightning",
       "qty": 1
+    }
+  ],
+  "maybeboard": [
+    {
+      "name": "Bedrock",
+      "qty": 3
     },
     {
       "name": "Open Grave",
+      "qty": 1
+    },
+    {
+      "name": "Sinkhole",
       "qty": 1
     },
     {
@@ -242,6 +266,10 @@
     },
     {
       "name": "Arcade of Bones",
+      "qty": 1
+    },
+    {
+      "name": "Attack by Night",
       "qty": 1
     },
     {
@@ -274,6 +302,10 @@
     },
     {
       "name": "Draconian Bonekite",
+      "qty": 1
+    },
+    {
+      "name": "King of the Realm",
       "qty": 1
     },
     {
