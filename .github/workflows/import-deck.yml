@@ -25,12 +25,29 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'npm'
 
-      - name: Install dependencies
-        run: |
-          npm install
-          npm install playwright
-          npx playwright install chromium --with-deps
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Get installed Playwright version
+        id: pw-version
+        run: echo "version=$(node -e \"console.log(require('./node_modules/playwright/package.json').version)\")" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright browser binary
+        uses: actions/cache@v4
+        id: pw-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
+
+      - name: Install Chromium (cache miss only -- this is the slow part being cached)
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install OS dependencies only (cache hit -- browser binary already present)
+        if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: Run deck scraper
         env:
