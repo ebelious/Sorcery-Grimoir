@@ -17,7 +17,13 @@
       "type": "image/png"
     },
     {
-      "src": "icons/convertico-1000025874_96x96.png",
+      "src": "icons/icon-512-mask.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-96-monochrome.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "monochrome"
