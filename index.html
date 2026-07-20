@@ -5146,10 +5146,12 @@ function pContent(){
           // Scroll only the inner list itself -- scrollIntoView() would also
           // scroll the outer .panel (this section sits below the fold),
           // undoing the panel's scroll-to-top-on-open reset and causing a
-          // visible flicker.
-          var _top=_s.offsetTop,_bot=_top+_s.offsetHeight;
-          if(_top<_l.scrollTop)_l.scrollTop=_top;
-          else if(_bot>_l.scrollTop+_l.clientHeight)_l.scrollTop=_bot-_l.clientHeight;
+          // visible flicker. Use getBoundingClientRect deltas rather than
+          // offsetTop, since #dicebg-list has no position:relative and
+          // offsetTop would resolve against the wrong ancestor.
+          var _lr=_l.getBoundingClientRect(),_sr=_s.getBoundingClientRect();
+          if(_sr.top<_lr.top)_l.scrollTop-=(_lr.top-_sr.top);
+          else if(_sr.bottom>_lr.bottom)_l.scrollTop+=(_sr.bottom-_lr.bottom);
         }
       },0);
       o('</div>');
