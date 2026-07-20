@@ -21,10 +21,12 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install playwright
+          npm install playwright firebase-admin
           npx playwright install chromium --with-deps
 
       - name: Run scraper
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: node scrape-rewards.js
 
       - name: Commit rewards.json if changed
