@@ -987,6 +987,7 @@ function boot(){
   }
   _updateOfflineCacheCount();
   _syncAutoCacheSetting();
+  _requestPersistentStorage();
   var _openParam=new URLSearchParams(location.search).get('open');
   if(_openParam){
     _openNotificationSection(_openParam);
@@ -3288,6 +3289,16 @@ function _offlineImageUrls(scope,rewardsData){
   });
   return _dedupeUrls(urls);
 }
+// Asks the browser to treat this origin's cached data (images, card/codex
+// JSON, app shell) as persistent rather than "best-effort" storage. Without
+// this, Chrome/Android is allowed to silently clear the cache under low
+// disk space, which is why cached data could disappear across app closes
+// even though nothing was wrong with the caching logic itself.
+function _requestPersistentStorage(){
+  if(navigator.storage&&navigator.storage.persist){
+    navigator.storage.persist().catch(function(){});
+  }
+}
 // Queries the service worker's image cache directly (the Cache API is
 // Tells the service worker whether it should opportunistically cache
 // images/data as they're viewed (see the matching listener in sw.js -- a
@@ -3311,6 +3322,21 @@ function _updateOfflineCacheCount(){
   caches.open('sg-card-images-v1').then(function(c){return c.keys();}).then(function(keys){
     G.offlineCacheCount=keys.length;render();
   }).catch(function(){G.offlineCacheCount=0;render();});
+}
+// Wipes every Cache Storage bucket this app has written to (app shell,
+// card images, data JSON) -- a destructive action, so it requires two
+// separate confirmations before anything is actually deleted.
+function clearAllCache(){
+  if(!confirm('Are you sure you want to clear:\n\nApp Data Cache\nCard Data Cache'))return;
+  if(!confirm('Are you sure? This cannot be undone.'))return;
+  if(!('caches' in window)){alert('Cache storage is not available in this browser.');return;}
+  caches.keys().then(function(names){
+    return Promise.all(names.map(function(n){return caches.delete(n);}));
+  }).then(function(){
+    _updateOfflineCacheCount();_renderKeepScroll();
+  }).catch(function(){
+    _updateOfflineCacheCount();_renderKeepScroll();
+  });
 }
 // Same idea as _renderKeepScroll(), but also explicitly restores keyboard
 // focus to a given button by id afterward -- re-rendering destroys and
@@ -5164,6 +5190,7 @@ function pContent(){
       o('<button class="fb" style="width:100%" onclick="cacheAppData()">Cache App Data</button>');
     }
     o('</div>');
+    o('<button class="fb red" style="width:100%;margin-top:6px" onclick="clearAllCache()">Clear Cache</button>');
     o('<div class="slbl2">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
