@@ -6539,11 +6539,19 @@ function closeCardRefPopup(){
   }
 }
 
+// Matches text against a query where every whitespace-separated word in the
+// query must appear somewhere in the text, in any order -- e.g. "fire
+// ability" matches "Ability of Fire" just as well as "Fire Ability".
+function _gsMatch(text,q){
+  var words=q.split(/\s+/).filter(Boolean);
+  var t=(text||'').toLowerCase();
+  return words.every(function(w){return t.indexOf(w)>=0;});
+}
 function buildGsDrop(){
   var q=S.gs.toLowerCase();if(!q)return '';var items=[];
-  CARDS.filter(function(c){return cName(c).toLowerCase().indexOf(q)>=0;}).slice(0,5).forEach(function(c){items.push('<div class="sddi" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}"><div class="sn">'+h(cName(c))+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Card</span></div></div>');});
+  CARDS.filter(function(c){return _gsMatch(cName(c),q);}).slice(0,30).forEach(function(c){items.push('<div class="sddi" data-cn="'+h(cName(c))+'" onclick="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\');}"><div class="sn">'+h(cName(c))+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Card</span></div></div>');});
   var _seenFaqCards={};
-  FAQ_DATA.filter(function(f){return f.card&&f.card.toLowerCase().indexOf(q)>=0;}).forEach(function(f){
+  FAQ_DATA.filter(function(f){return f.card&&_gsMatch(f.card,q);}).forEach(function(f){
     if(_seenFaqCards[f.card])return;
     _seenFaqCards[f.card]=true;
     items.push('<div class="sddi" data-faq="'+h(f.card)+'" onclick="gsOpenFaq(this.dataset.faq)"><div class="sn">'+h(f.card)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">FAQ</span></div></div>');
@@ -6553,15 +6561,15 @@ function buildGsDrop(){
   CODEX_DATA.forEach(function(k){
     if(k.k)_curParentKey=k.k; // track which main entry this sub-entry belongs to
     var label=k.k||k.sub||'';
-    if(label&&label.toLowerCase().indexOf(q)>=0){
+    if(label&&_gsMatch(label,q)){
       var parentKey=k.k||_curParentKey;
       if(parentKey&&!_codexMatches.some(function(m){return m.parentKey===parentKey&&m.label===label;})){
         _codexMatches.push({label:label,parentKey:parentKey});
       }
     }
   });
-  _codexMatches.slice(0,2).forEach(function(m){items.push('<div class="sddi" data-codex="'+h(m.parentKey)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(m.label)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Codex</span></div></div>');});
-  return items.slice(0,8).join('');
+  _codexMatches.slice(0,15).forEach(function(m){items.push('<div class="sddi" data-codex="'+h(m.parentKey)+'" onclick="gsOpenCodex(this.dataset.codex)"><div class="sn">'+h(m.label)+'</div><div class="sc"><span class="cm-tag" style="color:var(--hi);border-color:var(--hi)">Codex</span></div></div>');});
+  return items.slice(0,60).join('');
 }
 // Patches just the search dropdown + clear button in place (no full app
 // re-render), so the on-screen keyboard isn't dismissed while typing.
