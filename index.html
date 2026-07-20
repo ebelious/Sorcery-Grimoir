@@ -5141,7 +5141,16 @@ function pContent(){
       setTimeout(function(){
         if(_lastDiceBgListScrollTarget===G.diceBgImage)return; // selection unchanged -- don't re-scroll on unrelated re-renders
         _lastDiceBgListScrollTarget=G.diceBgImage;
-        var _l=document.getElementById('dicebg-list');var _s=_l&&_l.querySelector('.on');if(_s)_s.scrollIntoView({block:'nearest'});
+        var _l=document.getElementById('dicebg-list');var _s=_l&&_l.querySelector('.on');
+        if(_l&&_s){
+          // Scroll only the inner list itself -- scrollIntoView() would also
+          // scroll the outer .panel (this section sits below the fold),
+          // undoing the panel's scroll-to-top-on-open reset and causing a
+          // visible flicker.
+          var _top=_s.offsetTop,_bot=_top+_s.offsetHeight;
+          if(_top<_l.scrollTop)_l.scrollTop=_top;
+          else if(_bot>_l.scrollTop+_l.clientHeight)_l.scrollTop=_bot-_l.clientHeight;
+        }
       },0);
       o('</div>');
       o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-top:4px">'+h(_label)+'</div>');
