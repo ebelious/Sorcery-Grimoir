@@ -3328,7 +3328,6 @@ function _updateOfflineCacheCount(){
 // separate confirmations before anything is actually deleted.
 function clearAllCache(){
   if(!confirm('Are you sure you want to clear:\n\nApp Data Cache\nCard Data Cache'))return;
-  if(!confirm('Are you sure? This cannot be undone.'))return;
   if(!('caches' in window)){alert('Cache storage is not available in this browser.');return;}
   caches.keys().then(function(names){
     return Promise.all(names.map(function(n){return caches.delete(n);}));
@@ -6618,7 +6617,7 @@ function updateGsDrop(){
     if(!gc){
       gc=document.createElement('button');
       gc.className='sx';gc.id='gs-clr';gc.innerHTML='&times;';
-      gc.style.color='var(--hi)';gc.style.fontSize='22px';
+      gc.style.color='var(--hi)';gc.style.fontSize='30px';
       gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
       si.insertBefore(gc,inp.nextSibling);
     }
@@ -6690,7 +6689,7 @@ function render(){
       var gsDrop=S.gsDrop&&S.gs?buildGsDrop():'';
       o('<div class="dbg" onclick="closeAll()"></div><div class="drawer">');
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'">');
-      if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:22px">&times;</button>');
+      if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:30px">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
       o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" style="font-size:15px" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
