@@ -484,7 +484,9 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .stbar{font-size:12px;color:var(--fg2);text-align:center;padding:4px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:6px}
 .fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
 .frow{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px;align-items:center}
-.flbl{font-size:12px;color:var(--hi);width:40px;flex-shrink:0;text-transform:uppercase}
+.frow-scroll{display:flex;gap:3px;flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.frow-scroll::-webkit-scrollbar{display:none}
+.flbl{font-size:12px;color:var(--hi);width:48px;flex-shrink:0;text-transform:uppercase;white-space:nowrap}
 .ftag{font-size:15px;padding:6px 10px;border:1px solid var(--bd);background:transparent;color:var(--fg2);cursor:pointer;border-radius:0}
 .ftag.on{border-color:var(--hi);color:var(--hi)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
@@ -813,6 +815,7 @@ var ARTISTS=[
   {n:'Elwira Pawlikowska',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/elwira-pawlikowska'},
   {n:'Emil Idzikowski',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/emil-idzikowski'},
   {n:'Francesca Baerald',k:'Alpha/Beta/Arthurian/Gothic',url:''},
+  {n:'Franck Pawlowski',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/franck-pawlowski'},
   {n:'Gadu Duaso',k:'Sorcery TCG artist',url:'https://www.collectorarthouse.com/sorcery-artists/gadu-duaso'},
   {n:'Gerald Brom',k:'Sorcery TCG artist',url:''},
   {n:'Jeff A. Menges',k:'Alpha/Beta/Arthurian/Gothic',url:'https://www.collectorarthouse.com/sorcery-artists/jeff-a-menges'},
@@ -1519,7 +1522,7 @@ function _diceBuildForSides(sides, col, isCustom){
     var stlGroup=_buildStlGroup(shape,col);
     if(stlGroup){ _diceClearMesh(); _diceGroup=stlGroup; _diceScene.add(_diceGroup); return; }
   }
-  if(isCustom) _diceBuildSphere(col);
+  if(isCustom) _diceBuildD20(col);
   else if(sides===4) _diceBuildD4(col);
   else if(sides===6) _diceBuildD6(col);
   else if(sides===8) _diceBuildD8(col);
@@ -3491,10 +3494,15 @@ function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[]};render();}
 function fBar(f,fn,mana,resetFn,hideReset){
   var sets=Object.keys(SETS);
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
-  function row(lbl,key,opts){return '<div class="frow"><span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>'+opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('')+'</div>';}
+  function row(lbl,key,opts,scroll){
+    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
+    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('');
+    if(scroll)return '<div class="frow">'+lblHtml+'<div class="frow-scroll">'+btnsHtml+'</div></div>';
+    return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
+  }
   var anyActive=Object.keys(f).some(function(k){return f[k]&&f[k].length>0;});
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'])+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
@@ -3631,7 +3639,7 @@ function _normalizeFastPathCardEntry(entry){
   var qty=entry.qty||entry.quantity||entry.count||1;
   return name?{name:String(name),qty:Number(qty)||1}:null;
 }
-function _startDeckUrlImport(url,previewMode){
+function _startDeckUrlImport(url,previewMode,authorHint){
   var requestId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
@@ -3644,14 +3652,14 @@ function _startDeckUrlImport(url,previewMode){
     body:JSON.stringify({url:url,requestId:requestId})
   })
     .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error((d.error||'Failed to start import')+(d.status?' (HTTP '+d.status+')':'')+(d.detail?'\\n\\n'+d.detail:''));return d;});})
-    .then(function(){ _pollDeckUrlImport(requestId,0,previewMode,url); })
+    .then(function(){ _pollDeckUrlImport(requestId,0,previewMode,url,authorHint); })
     .catch(function(e){
       delete G.comDeckImportingUrls[url];
       _renderKeepScroll();
       alert('Could not start the import: '+e.message);
     });
 }
-function _pollDeckUrlImport(requestId,attempt,previewMode,url){
+function _pollDeckUrlImport(requestId,attempt,previewMode,url,authorHint){
   if(requestId!==G._deckUrlImportReqId)return; // a newer import superseded this one
   if(attempt>72){ // ~6 minutes at 5s intervals
     if(url)delete G.comDeckImportingUrls[url];
@@ -3663,7 +3671,7 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
       if(!d||d.requestId!==requestId){
-        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url);},5000);
+        setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url,authorHint);},5000);
         return;
       }
       if(d.error){
@@ -3672,36 +3680,44 @@ function _pollDeckUrlImport(requestId,attempt,previewMode,url){
         alert('Import failed: '+d.error);
         return;
       }
+      if(!d.author&&authorHint)d.author=authorHint;
       _finishDeckUrlImport(d);
     })
     .catch(function(){
-      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url);},5000);
+      setTimeout(function(){_pollDeckUrlImport(requestId,attempt+1,previewMode,url,authorHint);},5000);
     });
 }
 function _finishDeckUrlImport(result){
   if(result.url&&G.comDeckImportingUrls)delete G.comDeckImportingUrls[result.url];
-  var elapsedStr='';
+  var timeStr='';
   if(result.url&&G.comDeckImportStartTimes&&G.comDeckImportStartTimes[result.url]){
     var elapsedSec=Math.round((Date.now()-G.comDeckImportStartTimes[result.url])/1000);
     delete G.comDeckImportStartTimes[result.url];
-    elapsedStr=elapsedSec<60?(' ('+elapsedSec+'s)'):(' ('+Math.floor(elapsedSec/60)+'m '+(elapsedSec%60)+'s)');
+    timeStr=elapsedSec<60?(elapsedSec+'s'):(Math.floor(elapsedSec/60)+'m '+(elapsedSec%60)+'s');
   }
   var deckName=result.deckName||'Imported Deck';
   var baseName=deckName,n=1;
   while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
-  var matched=[],unmatched=[];
-  (result.cards||[]).forEach(function(entry){
-    var c=cardByName(entry.name);
-    if(c){matched.push({name:cName(c),qty:entry.qty});}
-    else{unmatched.push(entry.name+' x'+entry.qty);}
-  });
+  function _matchEntries(list,label,unmatchedAll){
+    var out=[];
+    (list||[]).forEach(function(entry){
+      var c=cardByName(entry.name);
+      if(c){out.push({name:cName(c),qty:entry.qty});}
+      else{unmatchedAll.push(entry.name+' x'+entry.qty+' ('+label+')');}
+    });
+    return out;
+  }
+  var unmatched=[];
+  var matched=_matchEntries(result.cards,'main',unmatched);
+  var matchedColl=_matchEntries(result.collection,'collection',unmatched);
+  var matchedMaybe=_matchEntries(result.maybeboard,'maybeboard',unmatched);
   if(unmatched.length){
     console.log('Deck import: '+unmatched.length+' card(s) from the scrape could not be matched to a known card in the local database:',unmatched);
   }
-  G.decks[deckName]={name:deckName,cards:matched};
+  G.decks[deckName]={name:deckName,cards:matched,collection:matchedColl,maybe:matchedMaybe,creator:(result.author||'').trim()};
   sv('sg-dk',G.decks);
   render();
-  _sendNotification('Deck Imported','"'+deckName+'" was imported with '+matched.length+' card(s)'+elapsedStr+'.','decks');
+  _sendNotification('Deck Imported','"'+deckName+'" has successfully been imported'+(timeStr?'  |  took '+timeStr:'')+'.','decks');
 }
 function _maxCopies(c){var r=cRar(c);if(r==='unique')return 1;if(r==='elite')return 2;if(r==='exceptional')return 3;return 4;}
 function addCardToDeck(deckKey,cardName){
@@ -4689,7 +4705,7 @@ function _comDeckSearchOrImportAction(){
 }
 // Imports a deck directly (no preview step) -- tries the fast path first,
 // falling back to the slow GitHub Actions pipeline automatically.
-function importCommunityDeckDirect(url){
+function importCommunityDeckDirect(url,authorHint){
   if(!url)return;
   G.comDeckImportingUrls=G.comDeckImportingUrls||{};
   G.comDeckImportingUrls[url]=true;
@@ -4703,14 +4719,14 @@ function importCommunityDeckDirect(url){
   })
     .then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d};});})
     .then(function(res){
-      if(!res.ok||!res.data.ok){console.log('Fast import path unavailable -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
+      if(!res.ok||!res.data.ok){console.log('Fast import path unavailable -- falling back to slow pipeline.');_startDeckUrlImport(url,false,authorHint);return;}
       var cards=(res.data.cards||[]).map(_normalizeFastPathCardEntry).filter(Boolean);
-      if(!cards.length){console.log('Fast import path returned no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,false);return;}
-      _finishDeckUrlImport({deckName:res.data.deckName||'Community Deck',cards:cards,url:url});
+      if(!cards.length){console.log('Fast import path returned no usable cards -- falling back to slow pipeline.');_startDeckUrlImport(url,false,authorHint);return;}
+      _finishDeckUrlImport({deckName:res.data.deckName||'Community Deck',cards:cards,url:url,author:res.data.author||authorHint||''});
     })
     .catch(function(e){
       console.log('Fast import path failed ('+e.message+') -- falling back to slow pipeline.');
-      _startDeckUrlImport(url,false);
+      _startDeckUrlImport(url,false,authorHint);
     });
 }
 function searchCommunityDecksLive(){
@@ -5227,7 +5243,7 @@ function pContent(){
   });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
   if(p==='codex'){
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
-    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io &rarr;</a>');
+    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a>');
     if(G.codexChangelog&&G.codexChangelog.length){
       o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="showChangelogList()">Changelog</button>');
     }
@@ -5247,7 +5263,7 @@ function pContent(){
     return out.join('');
   }
   if(p==='faq'){
-    o('<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/faqs" target="_blank">curiosa.io &rarr;</a></div>');
+    o('<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/faqs" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a></div>');
     var q=(S.faqQ||'').toLowerCase();var grouped={};
     var _lastFaqCard='';
     FAQ_DATA.forEach(function(f){
@@ -5314,24 +5330,23 @@ function pContent(){
     // whether the input+button pair searches Curiosa by name or imports a
     // pasted deck URL directly. Replaces the separate "Import Curiosa.io"
     // button entirely.
-    o('<div class="slbl2" style="margin-top:10px">Search Curiosa Decks</div>');
+    o('<div class="slbl2" style="margin-top:10px">Search Curiosa</div>');
     var _mode=G.comDecksSearchMode||'name';
     var _typedUrl=(G.comDecksSearchDraft||'').trim();
     var _typedUrlImporting=(_mode==='url'&&G.comDeckImportingUrls&&G.comDeckImportingUrls[_typedUrl]);
     o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
-    o('<select id="comdeck-search-mode" class="fb" onchange="G.comDecksSearchMode=this.value;_renderKeepScroll()" style="flex-shrink:0;font-family:inherit">');
+    o('<div style="position:relative;flex-shrink:0;display:inline-flex;align-items:center">');
+    o('<select id="comdeck-search-mode" class="fb" onchange="G.comDecksSearchMode=this.value;_renderKeepScroll()" style="appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:26px;font-family:inherit;height:34px;box-sizing:border-box">');
     o('<option value="name"'+(_mode==='name'?' selected':'')+'>Name</option>');
     o('<option value="url"'+(_mode==='url'?' selected':'')+'>URL</option>');
     o('</select>');
+    o('<span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--hi);pointer-events:none;font-size:11px">&darr;</span>');
+    o('</div>');
     o('<div class="si" style="position:relative;flex:1">');
     o('<input id="comdeck-search-inp" placeholder="'+(_mode==='url'?'Deck URL&hellip;':'Deck name&hellip;')+'" autocomplete="off" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 10px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none;display:block;box-sizing:border-box" value="'+h(G.comDecksSearchDraft||'')+'" oninput="G.comDecksSearchDraft=this.value" onkeydown="if(event.key===\'Enter\'){event.preventDefault();_comDeckSearchOrImportAction();}">');
     o('</div>');
-    o('<button class="fb gold" style="flex-shrink:0"'+(_typedUrlImporting?' disabled':'')+' onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
-    o('<button class="fb red" style="flex-shrink:0" onclick="clearCommunityDeckSearch()">Clear</button>');
-    o('</div>');
-    o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
-    o('<button class="fb" style="flex-shrink:0" onclick="trigUpDecks()">Import CSV</button>');
-    o('<button class="fb" style="flex-shrink:0" onclick="createDeck()">+ New Deck</button>');
+    o('<button class="fb gold" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box"'+(_typedUrlImporting?' disabled':'')+' onclick="_comDeckSearchOrImportAction()">'+(_mode==='url'?'Import':'Search')+'</button>');
+    if(G.comDecksSearchActive&&G.comDecksSearchResults&&G.comDecksSearchResults.length)o('<button class="fb red" style="flex-shrink:0;min-width:100px;text-align:center" onclick="clearCommunityDeckSearch()">Clear</button>');
     o('</div>');
     if(_typedUrlImporting){o('<div class="ld" style="margin-bottom:8px">'+spinIcon()+' Importing deck&hellip; this can take up to a couple of minutes.</div>');}
     if(G.comDecksSearching){o('<div class="ld" style="margin-bottom:8px">'+spinIcon()+' Searching Curiosa&hellip;</div>');}
@@ -5346,19 +5361,23 @@ function pContent(){
           var elIcons=(d.elements||[]).map(function(e){return eSVG(e,16);}).join('');
           var _importing=!!(G.comDeckImportingUrls&&G.comDeckImportingUrls[d.url]);
           o('<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:'+(idx%2===0?'var(--bg2)':'var(--bg3)')+'">');
-          o('<div style="width:40px;height:40px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.6);display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
+          o('<div style="width:40px;height:40px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(d.avatarImg?'<img src="'+h(d.avatarImg)+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block" loading="lazy">':'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
           o('<div style="flex:1;min-width:0">');
           o('<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-width:0"><span class="sn" style="font-size:16px;overflow-wrap:break-word;min-width:0">'+h(d.name||'Untitled Deck')+'</span>'+(elIcons?'<span style="display:inline-flex;gap:2px;flex-shrink:0">'+elIcons+'</span>':'')+'</div>');
           if(d.author)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:0">@'+h(d.author)+'</div>');
           if(_importing)o('<div style="font-size:11px;color:var(--fg2);margin-top:2px">'+spinIcon()+' Importing&hellip; this can take up to a couple of minutes.</div>');
           o('</div>');
-          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;font-size:11px;padding:7px 10px"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
+          o('<button class="fb'+(_importing?'':' gold')+'" style="flex-shrink:0;min-width:100px;text-align:center"'+(_importing?' disabled':'')+' onclick="importCommunityDeckDirect(\''+h(d.url).replace(/'/g,"\\'")+'\',\''+h(d.author||'').replace(/'/g,"\\'")+'\')">'+(_importing?'Importing':'Import')+'</button>');
           o('</div>');
         });
         o('</div>');
       }
     }
     o('<div class="slbl2">My Decks</div>');
+    o('<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">');
+    o('<button class="fb" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box" onclick="trigUpDecks()">Import CSV</button>');
+    o('<button class="fb" style="flex-shrink:0;min-width:100px;text-align:center;height:34px;box-sizing:border-box" onclick="createDeck()">+ New Deck</button>');
+    o('</div>');
     var _realDeckKeys=Object.keys(G.decks).filter(function(k){return k!=='__preview__';});
     if(!_realDeckKeys.length){o('<div class="ld" style="color:var(--fg2)">No decks yet. Tap + New Deck to create one.</div>');}
     var elMap={f:'fire',w:'water',e:'earth',a:'air'};
@@ -5373,12 +5392,16 @@ function pContent(){
         ['a','e','f','w'].forEach(function(el){if(th.indexOf(el)>=0)dkEls[el]=true;});
       });
       var safeK=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var avatarEntry=dk.cards.find(function(x){var cx=cardByName(x.name);return cx&&cType(cx)==='avatar';});
+      var avatarCard=avatarEntry?cardByName(avatarEntry.name):null;
       o('<div class="dk-c" style="cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px" onclick="G.selDeck=\''+safeK+'\';openPanel(\'deckview\')">');
+      o('<div style="width:40px;height:40px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(avatarCard?cImgTag(avatarCard,'width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block'):'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
       o('<div style="flex:1;min-width:0">');
       o('<div style="display:flex;align-items:center;gap:8px">');
       o('<div style="font-size:20px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(dk.name)+'</div>');
       o('<span style="display:inline-flex;align-items:center;gap:2px;flex-shrink:0">'+['a','e','f','w'].filter(function(el){return dkEls[el];}).map(function(el){return eSVG(elMap[el],14);}).join('')+'</span>');
       o('</div>');
+      if(dk.creator)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:0">@'+h(dk.creator)+'</div>');
       o('<div class="ss" style="margin-top:3px;font-size:15px"><span class="sw">Win '+ds.w+'</span><span class="sl_">Loss '+ds.l+'</span><span class="sp_">'+pct2+'</span></div>');
       o('</div>');
       o('<span style="color:var(--hi);font-size:16px">&rarr;</span>');
@@ -5395,6 +5418,7 @@ function pContent(){
     o('<button class="fb" onclick="exportDeckCSV(\''+h(dvk)+'\')">Export</button>');
     o('<button class="fb red" onclick="delDeck(\''+h(dvk)+'\');goBack()">Delete</button>');
     o('</div>');
+    if(dv.creator)o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">@'+h(dv.creator)+'</div>');
     // Group cards by type
     var typeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
     var typeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
@@ -5480,7 +5504,7 @@ function pContent(){
     o('<div style="margin-bottom:12px">');
     o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--yel);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+collKey+'\')">');
     o('<span>Collection <span style="color:var(--fg2);font-weight:400">('+collTotal+'/10)</span></span>');
-    o('<span style="font-size:12px">'+(collExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span style="font-size:12px">'+(collExp?'&uarr;':'&darr;')+'</span>');
     o('</div>');
     if(collExp){
     if(!deckColl.length){
@@ -5489,15 +5513,16 @@ function pContent(){
     deckColl.forEach(function(entry){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;flex:1;display:flex;align-items:center;gap:6px;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
-      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
-      o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
-      if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
+      o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
-      o('<button class="eadj" onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="'+(collTotal>=10?'opacity:.3':'')+'" '+(collTotal>=10?'disabled':'')+' onclick="adjDeckColl(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      if(c&&cType(c)!=='site'&&cType(c)!=='avatar'){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'<span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#b8b8b8;font-size:9px;font-weight:700;color:#111;line-height:1">'+(cMana(c)!=null?cMana(c):'&mdash;')+'</span></span>');
+      } else if(c&&cType(c)==='site'&&cThr(c)){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'</span>');
+      }
       o('</div>');
     });
     }
@@ -5510,7 +5535,7 @@ function pContent(){
     o('<div style="margin-bottom:12px">');
     o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--bbl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+maybeKey+'\')">');
     o('<span>Maybeboard <span style="color:var(--fg2);font-weight:400">('+maybeTotal+')</span></span>');
-    o('<span style="font-size:12px">'+(maybeExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span style="font-size:12px">'+(maybeExp?'&uarr;':'&darr;')+'</span>');
     o('</div>');
     if(maybeExp){
     if(!deckMaybe.length){
@@ -5519,16 +5544,16 @@ function pContent(){
     deckMaybe.forEach(function(entry){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var rarC={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'}[(c?cRar(c):'ordinary')]||'#918175';
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;flex:1;display:flex;align-items:center;gap:6px;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
-      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'&times;</span>');
-      o('<span style="flex:1;font-size:14px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
-      if(c){o('<span style="font-size:10px;color:'+rarC+'">'+cRar(c)+'</span>');}
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
+      o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
-      var maxMaybe=c?_maxCopies(c):4;
-      o('<button class="eadj" onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="'+(entry.qty>=maxMaybe?'opacity:.3':'')+'" '+(entry.qty>=maxMaybe?'disabled':'')+' onclick="adjDeckMaybe(\''+h(dvk)+'\',\''+safeEntryNm+'\',1)">+</button>');
+      if(c&&cType(c)!=='site'&&cType(c)!=='avatar'){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'<span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#b8b8b8;font-size:9px;font-weight:700;color:#111;line-height:1">'+(cMana(c)!=null?cMana(c):'&mdash;')+'</span></span>');
+      } else if(c&&cType(c)==='site'&&cThr(c)){
+        o('<span style="font-size:9px;color:var(--fg2);display:inline-flex;align-items:center;gap:3px;flex-shrink:0">'+thrIcons(cThr(c))+'</span>');
+      }
       o('</div>');
     });
     }
@@ -5993,11 +6018,16 @@ function pContent(){
       return (v.channel||'').toLowerCase()===(selCh.n||'').toLowerCase();
     });
     o('<div style="flex-shrink:0;background:var(--bg2)">');
-    o('<div class="yt-pills">');
+    o('<div style="display:flex;gap:8px;margin-bottom:9px;align-items:stretch">');
+    o('<div style="position:relative;flex:1">');
+    o('<select style="width:100%;appearance:none;-webkit-appearance:none;-moz-appearance:none;background:var(--bg3);border:1px solid var(--bd);color:var(--fg);padding:8px 28px 8px 10px;font-size:16px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;outline:none" onchange="G.ytCh=this.value;G.ytSelCh=(this.value===\'all\'?null:this.value);render()">');
     YT_CHS.forEach(function(x){
-      var isOn=G.ytCh===x.id;
-      o('<button class="yt-pill'+(isOn?' on':'')+'" onclick="G.ytCh=\''+x.id+'\';G.ytSelCh='+(x.id==='all'?'null':'\''+x.id+'\'')+ ';render()">'+h(x.n)+'</button>');
+      o('<option value="'+x.id+'"'+(G.ytCh===x.id?' selected':'')+'>'+h(x.id==='all'?'':x.n)+'</option>');
     });
+    o('</select>');
+    o('<span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--hi);pointer-events:none">&darr;</span>');
+    o('</div>');
+    if(G.ytCh!=='all')o('<button class="fb" style="border-color:var(--red);color:var(--red);flex-shrink:0" onclick="G.ytCh=\'all\';G.ytSelCh=null;render()">Reset</button>');
     o('</div>');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
     o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.ytLoaded=false;G.ytVids=[];loadYTVideos()">Refresh</button>');
@@ -6110,7 +6140,7 @@ function cModal(){
   } else {
     o('<div class="cm-img" style="position:relative" onclick="_expandImg(this)">'+cImgTag(_dispCard)+_navArrows+'</div>');
   }
-  o('<div style="font-size:8px;color:var(--fg2);text-align:center;margin:-3px 0 5px">tap to fullscreen</div>');
+  
   if(cArt(c)){
     var _artObj=ARTISTS.find(function(a){return a.n===cArt(c);});
     var _artUrl=_artObj&&_artObj.url?_artObj.url:'https://www.collectorarthouse.com/sorcery-artists/'+cArt(c).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -6124,7 +6154,6 @@ function cModal(){
         +'</div>';
     })());
   }
-  var allSets=cSets(c);if(allSets.length>1)o('<div style="font-size:8px;color:var(--fg2);margin-bottom:4px">Also in: '+allSets.filter(function(s){return s!==cSet(c);}).map(h).join(', ')+'</div>');
   if(c.prints&&c.prints.length>1){
     var pKey='cm_prints_'+nm.replace(/[^a-z0-9]/gi,'_');
     var pExp=!!G.accExp[pKey];
@@ -6206,7 +6235,6 @@ function cModal(){
     var maxC=isAvatar?1:_maxCopies(c);
     var cardZone=isAvatar?'Avatar':cType(c)==='site'?'Atlas':'Spellbook';
     var maxColl=isAvatar?1:maxC;
-    o('<div style="font-size:11px;color:var(--fg2);margin-bottom:8px">'+h(cRar(c))+' &mdash; max '+maxC+' cop'+(maxC===1?'y':'ies')+' in '+cardZone+' &middot; collection max 10 cards</div>');
     var selDk=(G.cmDeckSel&&G.decks[G.cmDeckSel])?G.cmDeckSel:dkKeys[0];
     G.cmDeckSel=selDk;
     o('<select style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--wht);padding:8px;font-size:14px;margin-bottom:10px;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onchange="G.cmDeckSel=this.value;_renderKeepScroll()">');
@@ -6628,7 +6656,7 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':''))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl">'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
