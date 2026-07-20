@@ -159,7 +159,8 @@ messaging.onBackgroundMessage(function(payload) {
   var title = n.title || 'Sorcery Grimoire';
   var options = {
     body: n.body || '',
-    icon: 'icons/icon-192.png'
+    icon: 'icons/icon-192.png',
+    badge: 'icons/icon-badge-96.png'
   };
   self.registration.showNotification(title, options);
 });
