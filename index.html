@@ -5243,6 +5243,7 @@ function pContent(){
     o((function(){var _i=(G._rd=G._rd||[]).push({t:r.s,b:r.c})-1;return '<div class="acc rd-entry" style="margin-bottom:3px" onclick="rdPopIdx('+_i+')"><div style="padding:7px 9px"><div class="acc-nm">'+h(r.s)+'</div><div class="cod-def">'+h(r.c)+'</div></div></div>';})());
   });o('<button class="fb gold full" onclick="openRulebook()" style="margin-top:8px">📖 Read Rulebook PDF</button>');o('<a class="ext-lnk" style="margin-top:4px" href="https://sorcerytcg.com/how-to-play" target="_blank">Official Rulebook page &rarr;</a>');return out.join('');}
   if(p==='codex'){
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
     o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/codex" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a>');
     if(G.codexChangelog&&G.codexChangelog.length){
@@ -5251,6 +5252,8 @@ function pContent(){
     o('</div>');
     var q=(S.codexQ||'').toLowerCase();var codexMain=CODEX_DATA.filter(function(k){return k.k&&k.k.trim()!='';});var fil=q?codexMain.filter(function(k){return k.k.toLowerCase().indexOf(q)>=0||k.def.toLowerCase().indexOf(q)>=0||(k.sub&&k.sub.toLowerCase().indexOf(q)>=0);}):codexMain;
     o('<div id="codex-srch-wrap" class="si" style="margin:0 0 6px"><input id="codex-srch" placeholder="Search codex&hellip;" value="'+h(S.codexQ||'')+'">');if(S.codexQ)o('<button class="sx" onclick="S.codexQ=\'\';render()">&times;</button>');o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
     fil.forEach(function(k,i){
       o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
         return '<div class="acc rd-entry" onclick="rdPopIdx('+_i+')">'
@@ -5261,9 +5264,11 @@ function pContent(){
           +'</div>';
       })());
     });
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   if(p==='faq'){
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;gap:5px;text-align:center;text-decoration:none;box-sizing:border-box" href="https://curiosa.io/faqs" target="_blank">curiosa.io <span style="color:var(--hi)">&rarr;</span></a></div>');
     var q=(S.faqQ||'').toLowerCase();var grouped={};
     var _lastFaqCard='';
@@ -5276,6 +5281,8 @@ function pContent(){
     });
     var cardNames=Object.keys(grouped).sort();var total=Object.values(grouped).reduce(function(s,a){return s+a.length;},0);
     o('<div id="faq-srch-wrap" class="si" style="margin:0 0 6px"><input id="faq-srch" placeholder="Search FAQ&hellip;" value="'+h(S.faqQ||'')+'">');if(S.faqQ)o('<button class="sx" onclick="S.faqQ=\'\';render()">&times;</button>');o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
     cardNames.forEach(function(card,i){var faqs=grouped[card];
       var _items=faqs.map(function(f){return {q:f.q,a:f.a,segments:f.segments};});
       var _i=(G._faqRd=G._faqRd||[]).push({t:card,sections:[{items:_items}]})-1;
@@ -5286,6 +5293,7 @@ function pContent(){
         +'</div>'
         +'</div>');
     });
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   if(p==='links'){[{n:'SorceryTCG.com',u:'https://sorcerytcg.com/',d:'Official site'},{n:'Curiosa.io',u:'https://curiosa.io',d:'Deckbuilder, card DB, market'},{n:'Play Network',u:'https://play.sorcerytcg.com',d:'Events & Dust rewards'},{n:'Discord',u:'https://discord.gg/sorcerytcg',d:'Community server'},{n:'Reddit',u:'https://reddit.com/r/sorcerytcg',d:'Community discussions'},{n:'Collector Arthouse',u:'https://www.collectorarthouse.com/curio-cards',d:'Artwork and Curios'},{n:'Sorcerers Summit',u:'https://www.sorcererssummit.com/',d:'Community events & content'},{n:'Ruby Coreier',u:'https://www.patreon.com/therubycoreier',d:'Uniquely Retro Magazine'}].forEach(function(l){o('<a class="ext-lnk" style="font-size:17px;margin-bottom:10px;color:var(--fg)" href="'+l.u+'" target="_blank"><b style="color:var(--hi)">'+l.n+'</b> &mdash; '+l.d+'</a>');});return out.join('');}
@@ -5988,9 +5996,12 @@ function pContent(){
   }
   if(p==='rewards'){
     if(!G.rewardsLoaded&&!G.rewardsLoading){setTimeout(function(){loadRewards();},50);}
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
     o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://play.sorcerytcg.com/rewards" target="_blank">Play Network <span style="color:var(--hi)">&rarr;</span></a>');
     o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
     if(G.rewardsLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(G.rewardsErr){o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.rewardsErr)+'</div>');}
     else if(G.rewardsItems&&G.rewardsItems.length){
@@ -6009,6 +6020,7 @@ function pContent(){
     } else {
       o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">No rewards data available yet.</div>');
     }
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   if(p==='yt'){
@@ -6050,9 +6062,12 @@ function pContent(){
   }
   if(p==='news'){
     if(!G.newsLoaded&&!G.newsLoading)loadNews();
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
     o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.newsLoaded=false;G.newsItems=null;loadNews()">Refresh</button>');
     o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
 
     if(G.newsLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
     if(G.newsErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.newsErr)+'</div>');
@@ -6069,13 +6084,17 @@ function pContent(){
     } else if(!G.newsLoading){
       o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap Refresh to load the latest news.</div>');
     }
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   if(p==='discord'){
     if(!G.discordLoaded&&!G.discordLoading)loadDiscord();
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;justify-content:flex-end;margin-bottom:6px">');
     o('<button class="fb gold" style="font-size:14px;padding:8px 18px" onclick="G.discordLoaded=false;G.discordItems=null;loadDiscord()">Refresh</button>');
     o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
 
     if(G.discordLoading)o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');
     if(G.discordErr)o('<div style="font-size:9px;color:var(--fg2);padding:2px 0">'+h(G.discordErr)+'</div>');
@@ -6092,10 +6111,14 @@ function pContent(){
     } else if(!G.discordLoading){
       o('<div style="font-size:9px;color:var(--fg2);padding:8px 0">Tap Refresh to load the latest Discord updates.</div>');
     }
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   if(p==='art'){
+    o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div id="art-srch-wrap" class="si" style="margin:0 0 6px"><input id="art-srch" placeholder="Search artists&hellip;" value="'+h(S.artQ||'')+'">');if(S.artQ)o('<button class="sx" onclick="S.artQ=\'\';render()">&times;</button>');o('</div>');
+    o('</div>'); // close static header
+    o('<div style="flex:1;min-height:0;overflow-y:auto">');
     var artQ=(S.artQ||'').toLowerCase();
     var artFil=artQ?ARTISTS.filter(function(a){return a.n.toLowerCase().indexOf(artQ)>=0;}):ARTISTS;
     artFil.forEach(function(a,i){
@@ -6104,6 +6127,7 @@ function pContent(){
       o('<div class="art-c"><div class="art-h" onclick="window.open(\''+artUrl+'\',\'_blank\')" style="cursor:pointer"><div><div class="art-nm">'+h(a.n)+'</div><div class="art-kn">'+h(a.k)+'</div></div><span style="color:var(--bbl);font-size:9px">&rarr;</span></div></div>');
     });
     if(artQ&&!artFil.length)o('<div class="ld">No artists match.</div>');
+    o('</div>'); // close scrollable list
     return out.join('');
   }
   return '';
@@ -6657,7 +6681,8 @@ function render(){
       }
     }
     if(G.panel&&G.panel!=='card'){
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+(G.panel==='yt'?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='codex'||G.panel==='faq'?' style="height:92vh"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(G.panel==='yt'?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
+      var _fixHdrPanels=(G.panel==='yt'||G.panel==='news'||G.panel==='discord'||G.panel==='art'||G.panel==='rewards'||G.panel==='codex'||G.panel==='faq');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+((G.panel==='codex'||G.panel==='faq')?' style="height:92vh;display:flex;flex-direction:column;overflow-y:hidden"':(_fixHdrPanels?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(_fixHdrPanels?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
