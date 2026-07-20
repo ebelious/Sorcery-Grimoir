@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19T19:13:40.807Z",
+  "updated": "2026-07-20T03:35:32.684Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -29,32 +29,6 @@
       "url": "https://play.sorcerytcg.com/events/b8ddf9ad-6a2d-4857-9d24-0cac94d95f2a"
     },
     {
-      "name": "Spelgalaxen weekly",
-      "date": "Jul 18, 2026 - Jul 19, 2026",
-      "time": "10:00 PM UTC",
-      "type": "Spelgalaxen Constructed",
-      "location": "Rådmansvången, Skåne län",
-      "city": "Rådmansvången",
-      "state": "Skåne län",
-      "address": "41 Södra Förstadsgatan Rådmansvången Skåne län 211 43",
-      "description": "",
-      "storeName": "Spelgalaxen",
-      "url": "https://play.sorcerytcg.com/events/8c45323e-21c0-428b-a867-852f3b4adf72"
-    },
-    {
-      "name": "Cornerstone Beskar Top 8",
-      "date": "Sun. Jul 19, 2026",
-      "time": "8:09 AM UTC",
-      "type": "Constructed Tournament",
-      "location": "Victoria Park, WA",
-      "city": "Victoria Park",
-      "state": "WA",
-      "address": "55 Washington Street Victoria Park WA 6100",
-      "description": "",
-      "storeName": "Beskar Forge Gaming",
-      "url": "https://play.sorcerytcg.com/events/fb768200-8075-4f1e-9341-4cc9cb124c1f"
-    },
-    {
       "name": "🕯️ 7. Constructed CZECH LEAGUE 2026",
       "date": "Sun. Jul 19, 2026",
       "time": "9:15 AM UTC",
@@ -66,19 +40,6 @@
       "description": "",
       "storeName": "Tolarie.cz",
       "url": "https://play.sorcerytcg.com/events/e653610a-0abe-4d2a-b998-0876723ff1ee"
-    },
-    {
-      "name": "Sunday Sorcery Social and Escalation League",
-      "date": "Sun. Jul 19, 2026",
-      "time": "2:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Hamden, CT",
-      "city": "Hamden",
-      "state": "CT",
-      "address": "2285 Whitney Avenue Hamden CT 06518",
-      "description": "",
-      "storeName": "David's Good Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/fca9b1ab-f30a-4f8c-817d-889a1b09688d"
     },
     {
       "name": "Sorcery Sundays at Cold Foil Heroes",
@@ -120,19 +81,6 @@
       "url": "https://play.sorcerytcg.com/events/e9ac8917-3a2f-4e17-a85e-011a0be7ebd7"
     },
     {
-      "name": "Constructed Tournament",
-      "date": "Sun. Jul 19, 2026",
-      "time": "4:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "address": "12186 GA-92 ste 110 Woodstock GA 30188",
-      "description": "",
-      "storeName": "Cold Foil Heroes",
-      "url": "https://play.sorcerytcg.com/events/6b77ad47-7ce5-4bf2-8507-ce49fc6f1cbe"
-    },
-    {
       "name": "Enter the Battlefield - Weekly Constructed",
       "date": "Sun. Jul 19, 2026",
       "time": "4:30 PM UTC",
@@ -144,19 +92,6 @@
       "description": "",
       "storeName": "Enter The Battlefield Newmarket",
       "url": "https://play.sorcerytcg.com/events/3088d926-8f0a-4d5d-bb5e-81c30ee7e260"
-    },
-    {
-      "name": "Franklin GenCon Prep",
-      "date": "Sun. Jul 19, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Franklin, IN",
-      "city": "Franklin",
-      "state": "IN",
-      "address": "100 S Jackson St Franklin IN 46131",
-      "description": "",
-      "storeName": "Middle Davids Candles & Gifts",
-      "url": "https://play.sorcerytcg.com/events/3ae8dffe-e509-48b6-9157-7efcc454e8d8"
     },
     {
       "name": "Casual Play Meetup",
