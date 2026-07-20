@@ -5156,6 +5156,12 @@ function pContent(){
     o('<div class="slbl2">UI Backgrounds</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>UI Backgrounds</span><span style="color:var(--hi)">&#8594;</span></button>');
+    if(G.cfg.bgImage){
+      var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
+      var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
+      o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="width:70px" oninput="_bgSetOpacity(this.value)"><input type="number" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+      o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="width:70px" oninput="_bgSetDarkness(this.value)"><input type="number" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+    }
     o('<div class="slbl2">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
@@ -5197,12 +5203,6 @@ function pContent(){
     o('<div class="set-row"><span>Discord</span><button class="ftag'+(G.cfg.pushDiscord?' on':'')+'" onclick="togglePushTopic(\'discord\')">'+(G.cfg.pushDiscord?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>YouTube</span><button class="ftag'+(G.cfg.pushYoutube?' on':'')+'" onclick="togglePushTopic(\'youtube\')">'+(G.cfg.pushYoutube?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Rewards</span><button class="ftag'+(G.cfg.pushRewards?' on':'')+'" onclick="togglePushTopic(\'rewards\')">'+(G.cfg.pushRewards?'On':'Off')+'</button></div>');
-    if(G.cfg.bgImage){
-      var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
-      var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
-      o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="width:70px" oninput="_bgSetOpacity(this.value)"><input type="number" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
-      o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="width:70px" oninput="_bgSetDarkness(this.value)"><input type="number" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
-    }
     o('<div class="slbl2">UI Buttons</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
