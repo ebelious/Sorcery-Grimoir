@@ -5062,6 +5062,15 @@ function openPanel(id){
       if(el)el.scrollTop=0;
     });});
   }
+  if(id==='dice'){
+    // The dice preview's 3D canvas mounts asynchronously (_diceInitPreview,
+    // via its own setTimeout) and can shift layout after the reset above
+    // already ran, so re-assert scrollTop=0 once more after it settles.
+    setTimeout(function(){
+      var el=document.querySelector('.panel');
+      if(el)el.scrollTop=0;
+    },60);
+  }
 }
 function openCat(cat){vibrate(10);_evACSeq++;G.evAcResults=[];G.evInputFocused=false;G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){
