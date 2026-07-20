@@ -5057,6 +5057,8 @@ function openPanel(id){
   var _rb0=document.querySelector('.rd-body');
   G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu,readModal:G.readModal,rdScroll:_rb0?_rb0.scrollTop:0,selCard:G.selCard});G.panel=id;G.cat=null;G.readModal=null;render();
   if(id==='card'||id==='dice'){
+    var _elSync=document.querySelector(id==='card'?'.cm':'.panel');
+    if(_elSync)_elSync.scrollTop=0; // set before first paint to avoid a visible flicker/jump
     requestAnimationFrame(function(){requestAnimationFrame(function(){
       var el=document.querySelector(id==='card'?'.cm':'.panel');
       if(el)el.scrollTop=0;
