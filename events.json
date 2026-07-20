@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-20T14:17:46.030Z",
+  "updated": "2026-07-20T19:50:13.500Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -55,6 +55,19 @@
       "url": "https://play.sorcerytcg.com/events/b08a4dd3-ba2f-4296-b1d5-6196324eb6f6"
     },
     {
+      "name": "Monday Afternoon Sorcery",
+      "date": "Mon. Jul 20, 2026",
+      "time": "3:30 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Brno-střed, Jihomoravský kraj",
+      "city": "Brno-střed",
+      "state": "Jihomoravský kraj",
+      "address": "45 Minutes",
+      "description": "",
+      "storeName": "Hrana Stolu",
+      "url": "https://play.sorcerytcg.com/events/79d1230e-a09f-4704-9204-3d176204a6d3"
+    },
+    {
       "name": "Weekly Play",
       "date": "Mon. Jul 20, 2026",
       "time": "4:00 PM UTC",
@@ -66,32 +79,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c13c630a-2fad-4947-adc1-3f6b7d6f2009"
-    },
-    {
-      "name": "Constructed w Merfolku",
-      "date": "Mon. Jul 20, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Pruszków, mazowieckie",
-      "city": "Pruszków",
-      "state": "mazowieckie",
-      "address": "44 Tadeusza Kościuszki Pruszków mazowieckie 05-800",
-      "description": "",
-      "storeName": "Merfolk",
-      "url": "https://play.sorcerytcg.com/events/5c39cca1-4c3a-4924-b0c0-6fa52e61e0dd"
-    },
-    {
-      "name": "Casual Tournament @ TCG ARENA",
-      "date": "Mon. Jul 20, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "București, București",
-      "city": "București",
-      "state": "București",
-      "address": "4 Bulevardul Libertății 117 București București 040128",
-      "description": "",
-      "storeName": "TCG ARENA",
-      "url": "https://play.sorcerytcg.com/events/a675ad41-cdb6-4ce1-9a2e-97aac41cc578"
     },
     {
       "name": "Tolarian Weekly Play",
@@ -110,13 +97,13 @@
       "name": "Tournoi Sorcery Garajeux",
       "date": "Mon. Jul 20, 2026",
       "time": "5:00 PM UTC",
-      "type": "Garajeux / EN Quête de Jeux",
+      "type": "Constructed Tournament",
       "location": "Montélimar, Auvergne-Rhône-Alpes",
       "city": "Montélimar",
       "state": "Auvergne-Rhône-Alpes",
       "address": "9 Allée Hispano Suiza Montélimar Auvergne-Rhône-Alpes 26200",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Garajeux / EN Quête de Jeux",
       "url": "https://play.sorcerytcg.com/events/5b9e3cc6-5a6c-41ba-b78b-a04858d682e3"
     },
     {
@@ -222,32 +209,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/9a17330d-361a-4eb1-87f2-b8255753d495"
-    },
-    {
-      "name": "Sorcery Open Play - Weekly",
-      "date": "Mon. Jul 20, 2026",
-      "time": "11:00 PM UTC",
-      "type": "Undercity Games",
-      "location": "Eau Claire, WI",
-      "city": "Eau Claire",
-      "state": "WI",
-      "address": "930 Galloway St Suite 217 Mailbox 46 Eau Claire WI 54703",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/15f9dd52-f8a9-47a9-82c5-3354ab83457d"
-    },
-    {
-      "name": "Casual Meetup",
-      "date": "Mon. Jul 20, 2026",
-      "time": "11:06 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Roseville, MN",
-      "city": "Roseville",
-      "state": "MN",
-      "address": "1975 County Road B2 West Roseville MN 55113",
-      "description": "",
-      "storeName": "Gamezenter",
-      "url": "https://play.sorcerytcg.com/events/b8ddf9ad-6a2d-4857-9d24-0cac94d95f2a"
     }
   ]
 }
