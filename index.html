@@ -6587,7 +6587,7 @@ function pTap(p,pi){
   var _valFS=(_turnBarOn&&G.mode!==1)?'88px':'120px';
 
   // Life tile — invisible overlay: top half = +1, bottom half = -1
-  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:170px"':'')+'>');
+  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:230px"':'')+'>');
   if(p.dead){
     o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden"><img src="DD.jpg" alt="Death\'s Door" style="width:100%;height:100%;object-fit:cover;opacity:.92"></div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
@@ -6607,7 +6607,7 @@ function pTap(p,pi){
   }
   o('</div>');
 
-  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:170px"':'')+'>');
+  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:230px"':'')+'>');
   o('<div class="tap-val" style="color:var(--mana);font-size:'+_valFS+'">'+p.mana+'</div>');
   o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
   o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
@@ -6654,7 +6654,7 @@ function pTap(p,pi){
     // tree (a re-render would destroy/recreate the GL context otherwise),
     // so this is just an empty placeholder; _diceSyncInlineSlot() moves the
     // persistent overlay into it right after every render() call.
-    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:4px 0 0'+(G.diceCollapsed?';display:none':'')+'"></div>');
+    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:0'+(G.diceCollapsed?';display:none':'')+'"></div>');
     // Config button is anchored to the bottom corner of the whole board
     // (position:absolute against .p-tap, which has position:relative in
     // 1P) so it's always in the same spot regardless of which layout or
@@ -6664,7 +6664,8 @@ function pTap(p,pi){
     var _diceCollapseOffset=(_p1BtnShown?56:6)+'px';
     o('<button class="p1-settings-btn" onclick="G.diceCollapsed=!G.diceCollapsed;render()" style="position:fixed;'+(p1Left?'left:'+_diceCollapseOffset:'right:'+_diceCollapseOffset)+';bottom:calc(6px + env(safe-area-inset-bottom, 0px));width:44px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:41" title="'+(G.diceCollapsed?'Show Die':'Collapse Die')+'"><span style="position:relative;display:inline-flex">'+smallDieSVG(20,1,null,false)+'<span style="position:absolute;bottom:-6px;right:-6px;font-size:13px;font-weight:900;color:var(--hi);line-height:1;text-shadow:0 0 2px var(--bg2)">'+(G.diceCollapsed?'&uarr;':'&darr;')+'</span></span></button>');
     var _cornerPad=_p1BtnShown?(p1Left?'padding-left:100px':'padding-right:100px'):'padding-'+(p1Left?'left':'right')+':52px';
-    o('<div class="tap-bottom-row" id="p1-fixed-buttons" style="display:flex;flex-direction:column;gap:10px;padding:14px 6px calc(14px + env(safe-area-inset-bottom, 0px));flex-shrink:0;min-height:96px;box-sizing:border-box;position:fixed;left:0;right:0;bottom:0;background:var(--bg2);z-index:40;'+_cornerPad+'">');
+    var _p1BottomRowHasContent=_turnBarOn||!!diceBtnsHTML;
+    o('<div class="tap-bottom-row" id="p1-fixed-buttons" style="display:flex;flex-direction:column;gap:10px;padding:14px 6px calc(14px + env(safe-area-inset-bottom, 0px));flex-shrink:0;min-height:'+(_p1BottomRowHasContent?96:56)+'px;box-sizing:border-box;position:fixed;left:0;right:0;bottom:0;background:var(--bg2);z-index:40;'+_cornerPad+'">');
     if(_turnBarOn){
       // Same single-row pattern as 2P Competitive: dice buttons, turn
       // button, and timer side by side (order follows Dice Side setting).
