@@ -1265,8 +1265,15 @@ function saveNames(){
   sv('sg-cfg',G.cfg);
   goBack();
 }
-function showLog(li){G.logPopup={li:li,wi:li===0?1:0};render();}
-function showP2Log(){G.logPopup={li:'p2',wi:0};render();}
+function showLog(li){
+  var wi=li===0?1:0;
+  if(G.mpRoom){_mpProposeResult(wi,li);return;}
+  G.logPopup={li:li,wi:wi};render();
+}
+function showP2Log(){
+  if(G.mpRoom){_mpProposeResult(0,'p2');return;}
+  G.logPopup={li:'p2',wi:0};render();
+}
 function _logPlayer(idx){
   if(idx==='p2'){
     if(G.mpRoom){var _oppP2=_mpOpponentOrLast();return {name:G.cfg.p2||'Player 2',deck:(_oppP2&&_oppP2.deck&&_oppP2.deck.name)?_oppP2.deck.name:null};}
