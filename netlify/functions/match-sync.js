@@ -36,6 +36,22 @@ function isExpired(room) {
 }
 
 exports.handler = async function (event) {
+  // Requests from a different origin (e.g. GitHub Pages calling this
+  // Netlify function) trigger a CORS preflight OPTIONS request before the
+  // real POST. Without an explicit 200/204 response with the right headers
+  // here, that preflight fails and the browser blocks the actual request.
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      },
+      body: ''
+    };
+  }
+
   // getStore('sg-matches') alone relies on Netlify auto-injecting a Blobs
   // context into the function's environment, which isn't happening on this
   // site (throws MissingBlobsEnvironmentError). Falling back to explicit
