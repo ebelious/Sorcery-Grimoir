@@ -1167,7 +1167,7 @@ function _applyBgImage(){
 
 // ── PLAYERS ───────────────────────────────────────────────────────────────────
 function mkP(i){return{name:i===0?G.cfg.p1:G.cfg.p2,life:G.cfg.maxLife,mana:0,manaUsed:0,dead:false,thresh:{fire:0,water:0,earth:0,air:0},hist:[],deck:null,tlog:[],phase:'start'};}
-function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;}
+function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
 
 // ── TURN SYSTEM ───────────────────────────────────────────────────────────────
 function startTurn(pi){
@@ -1273,6 +1273,10 @@ function cancelLog(){G.logPopup=null;render();}
 // Full-canvas physics dice overlay (persistent, shown/hidden per roll)
 var _diceOverlay=null;   // DOM wrapper div
 var _diceCanvas=null;    // THREE canvas
+var _diceHandleResizeFn=null; // set inside _diceInitOverlay -- called on window resize and after dock layout changes
+var _diceDockMode=null;  // tracks which layout (1 or 2) the overlay is currently styled for
+var _diceResultHideTimer=null; // pending auto-hide timeout for the result popup (1P dock only)
+var _diceCamDist=12; // camera height above the table -- shared by rendering AND physics bounds so they never disagree
 var _diceRenderer=null;
 var _diceScene=null;
 var _diceCamera=null;
@@ -2372,6 +2376,7 @@ function _diceInitOverlay(){
 
   // Canvas fills the entire overlay
   var canvasWrap=document.createElement('div');
+  canvasWrap.id='dice-canvas-wrap';
   canvasWrap.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;';
 
   var cv=document.createElement('canvas');
@@ -2404,16 +2409,20 @@ function _diceInitOverlay(){
   popup2.style.cssText='position:absolute;top:80px;left:50%;transform:translateX(-50%) rotate(180deg) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
   popup2.innerHTML='<div id="dice-3d-label2" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num2" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk2" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
 
-  // Click canvas area to re-roll when result is showing
+  // Click canvas area to roll -- in the 1P view this always rolls (tap the
+  // dice like a physical die); in the fullscreen 2P modal, tapping only
+  // re-rolls once a result is already showing (original behavior).
   canvasWrap.style.cursor='pointer';
   canvasWrap.addEventListener('click',function(){
-    if(_dicePhase==='idle'&&_diceResult!==null) _diceRollAgain();
+    if(_dicePhase!=='idle')return;
+    if(_diceDockMode)_diceRollAgain();
+    else if(_diceResult!==null)_diceRollAgain();
   });
 
   wrap.appendChild(canvasWrap);
+  canvasWrap.appendChild(popup);
   wrap.appendChild(bar);
   wrap.appendChild(bar2);
-  wrap.appendChild(popup);
   wrap.appendChild(popup2);
   document.body.appendChild(wrap);
   _diceOverlay=wrap;
@@ -2423,9 +2432,9 @@ function _diceInitOverlay(){
   _diceScene=new THREE.Scene();
   _diceScene.background=new THREE.Color(_diceHexNum(_diceEffectiveColor(G.diceTexture||'felt')));
   _diceCamera=new THREE.PerspectiveCamera(50,W/H,0.1,100);
-  _diceCamera.position.set(0,12,0); _diceCamera.lookAt(0,0,0); _diceCamera.up.set(0,0,-1);
+  _diceCamera.position.set(0,_diceCamDist,0); _diceCamera.lookAt(0,0,0); _diceCamera.up.set(0,0,-1);
   _diceRenderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
-  _diceRenderer.setSize(W,H);
+  _diceRenderer.setSize(W,H,false);
   _diceRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
   _diceRenderer.shadowMap.enabled=true;
   _diceRenderer.shadowMap.type=THREE.PCFSoftShadowMap;
@@ -2451,7 +2460,7 @@ function _diceInitOverlay(){
   var _initNorm=_diceMakeNormalMap(G.diceTexture||'felt',512);
   _initTex.wrapS=_initTex.wrapT=THREE.ClampToEdgeWrapping; _initTex.repeat.set(1,1);
   // Use window dimensions — canvas offsetWidth may be 0 before layout
-  var _camDist=12; // camera Y=12, plane Y=0
+  var _camDist=_diceCamDist; // camera Y, plane Y=0
   var _fovRad=50*Math.PI/180;
   var _planeH=2*Math.tan(_fovRad/2)*_camDist;
   var _aspect=(W>0&&H>0)?(W/H):(window.innerWidth/Math.max(1,window.innerHeight));
@@ -2461,17 +2470,26 @@ function _diceInitOverlay(){
   _diceFeltB=null;
 
   // Resize handler
-  window.addEventListener('resize',function(){
+  function _diceHandleResize(){
     if(!_diceOverlay||_diceOverlay.style.display==='none') return;
     var W2=cv.offsetWidth||window.innerWidth, H2=cv.offsetHeight||window.innerHeight;
-    _diceRenderer.setSize(W2,H2); _diceCamera.aspect=W2/H2; _diceCamera.updateProjectionMatrix();
+    if(!W2||!H2){
+      // Container isn't properly laid out yet (e.g. right after being
+      // moved into a fresh slot, before the browser has settled) -- don't
+      // corrupt the camera/felt with a zero/invalid size, just retry shortly.
+      setTimeout(function(){ if(_diceHandleResizeFn)_diceHandleResizeFn(); },50);
+      return;
+    }
+    _diceRenderer.setSize(W2,H2,false); _diceCamera.aspect=W2/H2; _diceCamera.updateProjectionMatrix();
     if(_diceFelt){
-      var _cd=12, _fr=50*Math.PI/180;
+      var _cd=_diceCamDist, _fr=50*Math.PI/180;
       var _ph=2*Math.tan(_fr/2)*_cd, _pw=_ph*(W2/H2);
       _diceFelt.geometry.dispose();
       _diceFelt.geometry=new THREE.PlaneGeometry(_pw,_ph);
     }
-  });
+  }
+  window.addEventListener('resize',_diceHandleResize);
+  _diceHandleResizeFn=_diceHandleResize;
 
   // Start render loop
   function _diceLoop(t){
@@ -2480,9 +2498,10 @@ function _diceInitOverlay(){
     if(_diceGroup && _diceRolling){
       _diceTimer+=dt;
       var _dieR=0.7;
-      var _bndH=2*Math.tan(50*Math.PI/180/2)*12;
+      var _bndH=2*Math.tan(50*Math.PI/180/2)*_diceCamDist;
       var _bndAsp=(_diceRenderer.domElement.width||window.innerWidth)/Math.max(1,_diceRenderer.domElement.height||window.innerHeight);
-      var _bndX=_bndH*_bndAsp/2-_dieR, _bndZ=_bndH/2-_dieR;
+      var _bndSafety=_diceDockMode?0.85:1; // small margin so the die can't touch the very edge, without shrinking the play area down to almost nothing
+      var _bndX=_bndH*_bndAsp*_bndSafety/2-_dieR, _bndZ=_bndH*_bndSafety/2-_dieR;
       var _ground=0.65;
       var _gravity=28;
       if(G.diceFastRoll&&(performance.now()-_diceRollStartWall)>=500){
@@ -2546,6 +2565,10 @@ function _diceInitOverlay(){
         _diceGroup.position.y+=(_ground-_diceGroup.position.y)*0.3;
         _diceGroup.position.x+=_diceVPX*dt;
         _diceGroup.position.z+=_diceVPZ*dt;
+        if(_diceGroup.position.x> _bndX){_diceGroup.position.x= _bndX;_diceVPX*=-0.9;}
+        if(_diceGroup.position.x<-_bndX){_diceGroup.position.x=-_bndX;_diceVPX*=-0.9;}
+        if(_diceGroup.position.z> _bndZ){_diceGroup.position.z= _bndZ;_diceVPZ*=-0.9;}
+        if(_diceGroup.position.z<-_bndZ){_diceGroup.position.z=-_bndZ;_diceVPZ*=-0.9;}
         _diceVPX*=Math.pow(0.75,dt*60); _diceVPZ*=Math.pow(0.75,dt*60);
         _diceGroup.position.x+=(-_diceGroup.position.x)*0.04;
         _diceGroup.position.z+=(-_diceGroup.position.z)*0.04;
@@ -2557,6 +2580,10 @@ function _diceInitOverlay(){
           _diceGroup2.position.y+=(_ground-_diceGroup2.position.y)*0.3;
           _diceGroup2.position.x+=_diceVPX2*dt;
           _diceGroup2.position.z+=_diceVPZ2*dt;
+          if(_diceGroup2.position.x> _bndX){_diceGroup2.position.x= _bndX;_diceVPX2*=-0.9;}
+          if(_diceGroup2.position.x<-_bndX){_diceGroup2.position.x=-_bndX;_diceVPX2*=-0.9;}
+          if(_diceGroup2.position.z> _bndZ){_diceGroup2.position.z= _bndZ;_diceVPZ2*=-0.9;}
+          if(_diceGroup2.position.z<-_bndZ){_diceGroup2.position.z=-_bndZ;_diceVPZ2*=-0.9;}
           _diceVPX2*=Math.pow(0.75,dt*60); _diceVPZ2*=Math.pow(0.75,dt*60);
           _diceGroup2.position.x+=(-1.2-_diceGroup2.position.x)*0.04;
           _diceGroup2.position.z+=(-_diceGroup2.position.z)*0.04;
@@ -2575,6 +2602,126 @@ function _diceInitOverlay(){
     _diceRenderer.render(_diceScene,_diceCamera);
   }
   _diceLoop(0);
+  _diceApplyDockLayout();
+}
+
+// Switches the dice overlay between the original fullscreen modal (2P) and
+// a normal (non-fixed) block box meant to be moved into the inline slot
+// pTap() renders between the Threshold row and the buttons row (1P, both
+// Competitive and Minimal). Safe to call before the overlay exists yet --
+// it just no-ops until _diceInitOverlay() runs.
+function _diceApplyDockLayout(){
+  if(!_diceOverlay) return;
+  var dockMode=(G.mode===1);
+  if(_diceDockMode===dockMode){ _diceSyncInlineSlot(); return; } // already in the right layout, just make sure it's in the current slot
+  _diceDockMode=dockMode;
+  var canvasWrap=document.getElementById('dice-canvas-wrap');
+  var bar=document.getElementById('dice-3d-bar');
+  var bar2=document.getElementById('dice-3d-bar2');
+  var popup2=document.getElementById('dice-3d-popup2');
+  var popupEl=document.getElementById('dice-3d-popup');
+  var bg=_diceEffectiveColor(G.diceTexture||'felt');
+  if(dockMode){
+    // Normal in-flow block box (NOT position:fixed) -- it gets appended
+    // into whatever DOM node #dice-inline-slot currently is, so it renders
+    // exactly where pTap() put that slot: after Threshold, before the
+    // buttons row. _diceSyncInlineSlot() (called after every render())
+    // re-parents it there each time, since a render() rebuild destroys and
+    // recreates the placeholder.
+    var _isMinimal=!!(G.cfg&&G.cfg.hideTurnBar);
+    _diceIsMinimalMode=_isMinimal;
+    _diceOverlay.style.cssText='position:relative;width:100%;height:260px;display:block;background:'+bg+';border-radius:8px;overflow:hidden;';
+    if(canvasWrap)canvasWrap.style.cssText='position:relative;display:block;width:100%;height:100%;overflow:hidden;';
+    // Zoom the camera out so the table and die render visibly smaller
+    // within the shorter container, instead of looking like a tight crop
+    // of the fullscreen view. Physics bounds use this same distance (see
+    // the roll loop), so the die still can't roll outside what's visible.
+    _diceCamDist=11;
+    if(_diceCamera)_diceCamera.position.set(0,_diceCamDist,0);
+    // Apply the configured background (custom image or felt texture)
+    // immediately -- without this, the scene keeps showing the default
+    // felt texture it was created with until the first roll actually
+    // triggers this same update, even if an image is configured.
+    try{_diceUpdateSceneBg();}catch(e){}
+    // Center the result popup within this container.
+    if(popupEl){popupEl.style.bottom='auto';popupEl.style.top='50%';}
+    // P2-oriented controls and the fullscreen "Done" bars don't apply here
+    // -- it's never closed, and there's no P2.
+    if(bar)bar.style.display='none';
+    if(bar2)bar2.style.display='none';
+    if(popup2)popup2.style.display='none';
+    if(!_diceGroup&&typeof THREE!=='undefined'){
+      // Nothing's been rolled yet this session -- place a resting die on
+      // the table instead of leaving it showing an empty felt plane.
+      try{
+        _diceSides=20;_diceCount=1;_diceCI=G.dieCI;_dicePI=0;_diceIsCustom=false;
+        _diceBuildForSides(20,getDieCol(G.dieCI),false);
+        if(_diceGroup)_diceGroup.position.set(0,0.65,0);
+      }catch(e){}
+    }
+  } else {
+    _diceOverlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;display:none;background:'+bg+';';
+    if(canvasWrap)canvasWrap.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;';
+    _diceCamDist=12;
+    if(_diceCamera)_diceCamera.position.set(0,_diceCamDist,0);
+    if(popupEl){popupEl.style.top='auto';popupEl.style.bottom='80px';}
+    if(bar)bar.style.display='';
+    if(bar2)bar2.style.display='';
+    if(popup2)popup2.style.display='';
+    if(document.body&&_diceOverlay.parentNode!==document.body)document.body.appendChild(_diceOverlay);
+  }
+  if(_diceHandleResizeFn)_diceHandleResizeFn();
+  _diceSyncInlineSlot();
+}
+
+// Moves the persistent dice overlay into pTap()'s #dice-inline-slot
+// placeholder, if one currently exists in the DOM (1P mode). Every
+// render() call destroys and recreates that placeholder along with the
+// rest of #app's HTML, so the overlay has to be re-parented into the new
+// one each time -- appendChild() on an element already in the document
+// just moves it, which preserves the WebGL context/Three.js state instead
+// of destroying and recreating it.
+var _diceIsMinimalMode=null; // tracks Competitive/Minimal separately from _diceDockMode, since layout can change without G.mode changing
+function _diceSyncInlineSlot(){
+  if(G.mode!==1||!_diceOverlay) return;
+  var slot=document.getElementById('dice-inline-slot');
+  var _isMinimal=!!(G.cfg&&G.cfg.hideTurnBar);
+  if(_diceIsMinimalMode!==_isMinimal&&_diceDockMode){
+    // Competitive/Minimal switched while already in 1P (e.g. via Settings,
+    // which doesn't go through the G.mode-change path that normally sets
+    // this) -- reapply the animation height for the new layout.
+    _diceIsMinimalMode=_isMinimal;
+    _diceOverlay.style.height='260px';
+    if(_diceHandleResizeFn)_diceHandleResizeFn();
+  }
+  if(slot&&_diceOverlay.parentNode!==slot){
+    slot.appendChild(_diceOverlay);
+    if(_diceHandleResizeFn)_diceHandleResizeFn();
+    // The die's last position could be left over from a fullscreen 2P
+    // session (a much larger visible area) -- re-center it so it's always
+    // actually visible in this smaller container rather than potentially
+    // sitting outside what's currently in view.
+    if(_dicePhase==='idle'&&_diceGroup){
+      _diceGroup.position.set(0,0.65,0);
+      if(_diceGroup2)_diceGroup2.position.set(-1.2,0.65,0);
+    }
+  }
+}
+
+// The buttons row is position:fixed against the true viewport (not any
+// ancestor in the layout), so normal content needs matching reserved
+// space above it or it'd render underneath. Measures the row's ACTUAL
+// rendered height every render, rather than guessing a fixed padding
+// number that can drift out of sync with what's really there.
+function _syncP1ButtonPadding(){
+  var tap=document.getElementById('p1-tap');
+  var btns=document.getElementById('p1-fixed-buttons');
+  if(!tap) return;
+  if(btns){
+    tap.style.paddingBottom=btns.offsetHeight+'px';
+  } else if(tap.style.paddingBottom){
+    tap.style.paddingBottom='';
+  }
 }
 
 function _diceShowResult(){
@@ -2588,8 +2735,17 @@ function _diceShowResult(){
     document.getElementById('dice-3d-label').textContent=label;
     document.getElementById('dice-3d-num').textContent=total;
     document.getElementById('dice-3d-brk').textContent=brk;
-    popup.style.transform='translateX(-50%) scale(1)';
+    popup.style.transform=(_diceDockMode?'translate(-50%,-50%) scale(1)':'translateX(-50%) scale(1)');
     popup.style.pointerEvents='none';
+    if(_diceResultHideTimer){clearTimeout(_diceResultHideTimer);_diceResultHideTimer=null;}
+    if(_diceDockMode){
+      _diceResultHideTimer=setTimeout(function(){
+        // Hide only the result popup -- leave the die itself resting on
+        // the table exactly where it landed.
+        if(popup)popup.style.transform='translate(-50%,-50%) scale(0)';
+        _diceResultHideTimer=null;
+      },3000);
+    }
   }
   // P2 display (top, rotated so P2 reads it right-side-up)
   var popup2=document.getElementById('dice-3d-popup2');
@@ -2607,8 +2763,9 @@ function _diceShowResult(){
 
 function _diceHidePopup(){
   _diceResult=null;
+  if(_diceResultHideTimer){clearTimeout(_diceResultHideTimer);_diceResultHideTimer=null;}
   var popup=document.getElementById('dice-3d-popup');
-  if(popup){popup.style.transform='translateX(-50%) scale(0)';popup.style.pointerEvents='none';}
+  if(popup){popup.style.transform=(_diceDockMode?'translate(-50%,-50%) scale(0)':'translateX(-50%) scale(0)');popup.style.pointerEvents='none';}
   var popup2=document.getElementById('dice-3d-popup2');
   if(popup2){popup2.style.transform='translateX(-50%) rotate(180deg) scale(0)';popup2.style.pointerEvents='none';}
 }
@@ -2632,6 +2789,13 @@ function rollDice(sides,count,colIdx,pi,isCustom){
   for(var i=0;i<_diceCount;i++) _dicePendingRolls.push(Math.ceil(Math.random()*sides));
 
   _diceHidePopup();
+
+  // Image backgrounds are a cheap CSS swap (no texture generation), so
+  // apply immediately, before the overlay is shown -- otherwise the felt
+  // texture from the previous scene state flashes for a frame first.
+  if(G.diceBgImage){
+    try{_diceUpdateSceneBg();}catch(e){}
+  }
 
   // Show overlay immediately so the user sees the screen open right away,
   // then do heavy texture work on the next frame so the browser can paint first
@@ -2658,24 +2822,29 @@ function rollDice(sides,count,colIdx,pi,isCustom){
     _diceBuildForSides(_sides,_col,_isCustom);
     // Kick physics
     _diceRolling=true; _dicePhase='rolling'; _diceTimer=0;
+  // The smaller inline container needs a gentler throw -- less distance
+  // and velocity to contain, so the die can't reach the visible edge
+  // even for a single frame before the bounds clamp catches up.
+  var _velScale=_diceDockMode?0.45:1;
+  var _posScale=_diceDockMode?0.35:1;
   _diceVY_pos=(Math.random()*6+8); // throw upward
   _diceVY_pos2=(Math.random()*6+8);
-  _diceVX=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
-  _diceVY=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
-  _diceVZ=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
-  _diceVPX=(Math.random()-0.5)*60+(Math.random()>0.5?20:-20);
-  _diceVPZ=(Math.random()-0.5)*50+(Math.random()>0.5?18:-18);
+  _diceVX=((Math.random()-0.5)*80+(Math.random()>0.5?36:-36))*_velScale;
+  _diceVY=((Math.random()-0.5)*70+(Math.random()>0.5?28:-28))*_velScale;
+  _diceVZ=((Math.random()-0.5)*60+(Math.random()>0.5?22:-22))*_velScale;
+  _diceVPX=((Math.random()-0.5)*60+(Math.random()>0.5?20:-20))*_velScale;
+  _diceVPZ=((Math.random()-0.5)*50+(Math.random()>0.5?18:-18))*_velScale;
   if(_diceGroup) _diceGroup.position.set(
-    _prevX!==null?_prevX:(_diceCount>=2?-1.2:(Math.random()*6-3)),
+    _prevX!==null?_prevX:(_diceCount>=2?-1.2:(Math.random()*6-3)*_posScale),
     0.5,
-    _prevZ!==null?_prevZ:(Math.random()*4-2));
+    _prevZ!==null?_prevZ:(Math.random()*4-2)*_posScale);
   if(_diceGroup2){
-    _diceVX2=(Math.random()-0.5)*80+(Math.random()>0.5?36:-36);
-    _diceVY2=(Math.random()-0.5)*70+(Math.random()>0.5?28:-28);
-    _diceVZ2=(Math.random()-0.5)*60+(Math.random()>0.5?22:-22);
-    _diceVPX2=(Math.random()-0.5)*60+(Math.random()>0.5?20:-20);
-    _diceVPZ2=(Math.random()-0.5)*50+(Math.random()>0.5?18:-18);
-    _diceGroup2.position.set(_prevX2!==null?_prevX2:1.2,0.5,_prevZ2!==null?_prevZ2:(Math.random()*4-2));
+    _diceVX2=((Math.random()-0.5)*80+(Math.random()>0.5?36:-36))*_velScale;
+    _diceVY2=((Math.random()-0.5)*70+(Math.random()>0.5?28:-28))*_velScale;
+    _diceVZ2=((Math.random()-0.5)*60+(Math.random()>0.5?22:-22))*_velScale;
+    _diceVPX2=((Math.random()-0.5)*60+(Math.random()>0.5?20:-20))*_velScale;
+    _diceVPZ2=((Math.random()-0.5)*50+(Math.random()>0.5?18:-18))*_velScale;
+    _diceGroup2.position.set(_prevX2!==null?_prevX2:1.2*_posScale,0.5,_prevZ2!==null?_prevZ2:(Math.random()*4-2)*_posScale);
   }
 
   },0); // end setTimeout — deferred for fast overlay open
@@ -6388,15 +6557,15 @@ function pTap(p,pi){
 
   var _turnBarOn=!(G.cfg&&G.cfg.hideTurnBar);
 
-  o('<div class="p-tap">');
+  o('<div class="p-tap" id="p1-tap"'+(G.mode===1?' style="position:relative;box-sizing:border-box"':'')+'>');
 
   // Life + Mana side by side
-  o('<div class="tap-row"'+(_turnBarOn?'':' style="flex:1;min-height:0"')+'>');
+  o('<div class="tap-row"'+((G.mode===1||!_turnBarOn)?' style="flex:1;min-height:0"':'')+'>');
 
-  var _valFS=_turnBarOn?'88px':'120px';
+  var _valFS=(_turnBarOn&&G.mode!==1)?'88px':'120px';
 
   // Life tile — invisible overlay: top half = +1, bottom half = -1
-  o('<div class="tap-tile">');
+  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:170px"':'')+'>');
   if(p.dead){
     o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden"><img src="DD.jpg" alt="Death\'s Door" style="width:100%;height:100%;object-fit:cover;opacity:.92"></div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
@@ -6408,8 +6577,7 @@ function pTap(p,pi){
   }
   o('</div>');
 
-  // Mana tile — invisible overlay: top half = +1, bottom half = -1
-  o('<div class="tap-tile">');
+  o('<div class="tap-tile"'+(G.mode===1?' style="min-height:170px"':'')+'>');
   o('<div class="tap-val" style="color:var(--mana);font-size:'+_valFS+'">'+p.mana+'</div>');
   o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
   o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
@@ -6420,7 +6588,7 @@ function pTap(p,pi){
   // Threshold row — each element: top half = +1, bottom half = -1
   o('<div class="tap-el-row">');
   ELEM.slice(0,4).forEach(function(e){
-    o('<div class="tap-el">');
+    o('<div class="tap-el"'+(G.mode===1?' style="min-height:150px"':'')+'>');
     o('<div style="z-index:1;pointer-events:none">'+eSVG(e.k,36)+'</div>');
     o('<div class="tap-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
     o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)"></button>');
@@ -6449,7 +6617,39 @@ function pTap(p,pi){
     _p1RowPad=p1Left?';padding-left:52px':';padding-right:52px';
   }
 
-  if(!_turnBarOn){
+  if(G.mode===1){
+    // 1P: die animation renders inline, in normal page flow (between
+    // Threshold and these buttons) -- NOT pinned to the viewport. The
+    // actual WebGL canvas has to live outside the innerHTML-rebuilt DOM
+    // tree (a re-render would destroy/recreate the GL context otherwise),
+    // so this is just an empty placeholder; _diceSyncInlineSlot() moves the
+    // persistent overlay into it right after every render() call.
+    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:4px 0 0"></div>');
+    // Config button is anchored to the bottom corner of the whole board
+    // (position:absolute against .p-tap, which has position:relative in
+    // 1P) so it's always in the same spot regardless of which layout or
+    // what else is showing, instead of living inline with the other buttons.
+    var _p1BtnCorner=_p1BtnShown?('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:fixed;'+(p1Left?'left:6px':'right:6px')+';bottom:calc(6px + env(safe-area-inset-bottom, 0px));width:44px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:41" title="Configuration">&#9881;</button>'):'';
+    if(_p1BtnCorner)o(_p1BtnCorner);
+    var _cornerPad=_p1BtnShown?(p1Left?'padding-left:52px':'padding-right:52px'):'';
+    o('<div class="tap-bottom-row" id="p1-fixed-buttons" style="display:flex;flex-direction:column;gap:10px;padding:14px 6px calc(14px + env(safe-area-inset-bottom, 0px));flex-shrink:0;min-height:96px;box-sizing:border-box;position:fixed;left:0;right:0;bottom:0;background:var(--bg2);z-index:40;'+_cornerPad+'">');
+    if(_turnBarOn){
+      // Same single-row pattern as 2P Competitive: dice buttons, turn
+      // button, and timer side by side (order follows Dice Side setting).
+      var _diceLeft1P=!(G.cfg&&G.cfg.diceLeft===false);
+      var _diceBlock1P='<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-content:center;max-width:44%;flex-shrink:0">'+diceBtnsHTML+'</div>';
+      var _chessOn=(G.p1TimerRunning||G.p1TimerPending);
+      var _timesStack='<div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0"><div style="'+(_chessOn?'':'visibility:hidden')+'">'+chessTimeHTML(pi)+'</div>'+timerFaceHTML(pi)+'</div>';
+      var _turnBlock1P='<div style="flex:1;display:flex;min-width:0">'+turnBtn(pi)+'</div>';
+      o('<div style="display:flex;gap:6px;align-items:stretch">');
+      if(_diceLeft1P){o(_diceBlock1P);o(_turnBlock1P);o(_timesStack);}
+      else{o(_timesStack);o(_turnBlock1P);o(_diceBlock1P);}
+      o('</div>');
+    } else {
+      o('<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">'+diceBtnsHTML+'</div>');
+    }
+    o('</div>');
+  } else if(!_turnBarOn){
     if(!_diceInHeader)o('<div class="tap-dice-row">'+diceBtnsHTML+'</div>');
     o('<div class="tap-bottom-row" style="display:flex;gap:6px;align-items:stretch;padding:4px 6px;flex-shrink:0;position:relative'+(_p1BtnShown?';min-height:56px':'')+_p1RowPad+'">');
     o('<div style="flex:1">'+turnBtn(pi)+'</div>');
@@ -6661,15 +6861,12 @@ function render(){
     var _botP=G.cfg&&G.cfg.p2Side==='bottom'?p1:p0;
     var _topPI=G.cfg&&G.cfg.p2Side==='bottom'?0:1;
     var _botPI=G.cfg&&G.cfg.p2Side==='bottom'?1:0;
-    o('<div id="board" style="'+_boardBgStyle()+'">');
+    o('<div id="board" style="'+_boardBgStyle()+(G.mode===1?';margin-bottom:calc(-1 * env(safe-area-inset-bottom, 0px))':'')+'">');
     // P2 at TOP (flipped 180°)
     if(_topP)o('<div class="flip">'+_pFn(_topP,_topPI)+'</div>');
 
-    // Center spacer contains tbar so it floats between both players
-    var lr=G.dice&&!G.dice.rolling&&!G.dice.settling&&G.dice.final!=null?'<span class="last-roll">'+G.dice.final+'</span>':'';
     o('<div class="flip-spacer">');
     o(turnBar());
-    if(lr)o('<div id="topbar" style="justify-content:center;padding:2px 7px">'+lr+'</div>');
     o('</div>');
 
     // P1 at BOTTOM
@@ -6792,6 +6989,7 @@ function render(){
     if(G.panel==='cards'){
       requestAnimationFrame(function(){ _csAttachScrollBtn(); });
     }
+    if(G.mode===1){try{_diceSyncInlineSlot();_syncP1ButtonPadding();}catch(e){}}
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
