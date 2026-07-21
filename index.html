@@ -874,6 +874,8 @@ var G={
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpDeckDlPopup:false,mpMyDeckKey:null,mpLastOpp:null,
+  mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
+  mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
 var _mpPollTimer=null;
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
@@ -1266,8 +1268,11 @@ function showP2Log(){G.logPopup={li:'p2',wi:0};render();}
 function _logPlayer(idx){return idx==='p2'?{name:G.cfg.p2||'Player 2',deck:null}:G.players[idx];}
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
 function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
-function confirmLog(){
-  var wi=G.logPopup.wi,li=G.logPopup.li,w=_logPlayer(wi),lo=_logPlayer(li);
+// Writes a confirmed result to Local Stats / Deck Stats / Match Log. Shared
+// by the solo/local-match path (confirmLog below) and the connect-match
+// path (_mpApplyRemoteResult), which both compute the same winner/loser
+// player objects (w/lo, from _logPlayer) before calling this.
+function _mpFinalizeEntry(w,lo,turnsOverride,durationOverride,startTimeOverride){
   var now=new Date();
   var entry={
     ts:now.getTime(),
@@ -1276,11 +1281,12 @@ function confirmLog(){
     loser:lo.name,
     winnerDeck:w.deck?(G.decks[w.deck]?G.decks[w.deck].name:w.deck):'',
     loserDeck:lo.deck?(G.decks[lo.deck]?G.decks[lo.deck].name:lo.deck):'',
-    turns:G.turnNum,
-    startTime:G.matchStartTime||null,
+    turns:turnsOverride!=null?turnsOverride:G.turnNum,
+    startTime:startTimeOverride!==undefined?startTimeOverride:(G.matchStartTime||null),
     endTime:_fmtTime(now)
   };
-  if(G.matchStartTime){var dur=Math.round((now.getTime()-G.matchStartTime)/60000);entry.duration=dur+'m';}
+  var dur=durationOverride!==undefined?durationOverride:(G.matchStartTime?(Math.round((now.getTime()-G.matchStartTime)/60000)+'m'):null);
+  if(dur)entry.duration=dur;
   if(!G.matchLog)G.matchLog=[];
   G.matchLog.unshift(entry);if(G.matchLog.length>50)G.matchLog.length=50;
   sv('sg-ml',G.matchLog);
@@ -1291,11 +1297,19 @@ function confirmLog(){
   var _lDkN=lo.deck?(G.decks[lo.deck]?G.decks[lo.deck].name:lo.deck):'';
   if(w.deck){if(!G.dkstat[w.deck])G.dkstat[w.deck]={w:0,l:0,name:_wDkN};G.dkstat[w.deck].w++;G.dkstat[w.deck].name=_wDkN;}
   if(lo.deck){if(!G.dkstat[lo.deck])G.dkstat[lo.deck]={w:0,l:0,name:_lDkN};G.dkstat[lo.deck].l++;G.dkstat[lo.deck].name=_lDkN;}
-  sv('sg-rec',G.records);sv('sg-ds',G.dkstat);G.logPopup=null;G.matchStartTime=null;
+  sv('sg-rec',G.records);sv('sg-ds',G.dkstat);
+}
+function confirmLog(){
+  var wi=G.logPopup.wi,li=G.logPopup.li;
   if(G.mpRoom){
-    if(G.mpLastOpp&&G.mpLastOpp.deck)G.mpDeckDlPopup=true;
-    _mpEndMatch(); // confirming the result automatically closes out the connect match
+    // Connect match: don't finalize unilaterally -- send the proposed
+    // result to the opponent and wait for them to confirm it too.
+    _mpProposeResult(wi,li);
+    return;
   }
+  var w=_logPlayer(wi),lo=_logPlayer(li);
+  _mpFinalizeEntry(w,lo);
+  G.logPopup=null;G.matchStartTime=null;
   render();
 }
 function cancelLog(){G.logPopup=null;render();}
@@ -4427,10 +4441,11 @@ function mpAcceptMatch(){
   closeAll(); // exit the Connect panel/drawer so the board is what's shown
 }
 function mpCreate(){
-  var uname=((document.getElementById('mp-uname')||{}).value||G.cfg.p1||'').trim()||'Player 1';
-  var deckKey=(document.getElementById('mp-deck')||{}).value||'';
+  var uname=((G.mpFormUname!=null?G.mpFormUname:G.cfg.p1)||'').trim()||'Player 1';
+  var deckKey=G.mpFormDeckKey||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
+  _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4443,12 +4458,13 @@ function mpCreate(){
   }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
 }
 function mpJoin(){
-  var code=((document.getElementById('mp-code')||{}).value||'').trim().toUpperCase();
-  var uname=((document.getElementById('mp-uname2')||{}).value||G.cfg.p1||'').trim()||'Player 1';
-  var deckKey=(document.getElementById('mp-deck2')||{}).value||'';
+  var code=(G.mpFormCode||'').trim().toUpperCase();
+  var uname=((G.mpFormUname!=null?G.mpFormUname:G.cfg.p1)||'').trim()||'Player 1';
+  var deckKey=G.mpFormDeckKey||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
+  _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4457,6 +4473,7 @@ function mpJoin(){
   .then(function(d){
     G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
     _mpOnConnected();
+    _mpStartPoll(); // keep polling through the match so the confirm-result flow can sync
     render();
   }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
 }
@@ -4471,9 +4488,15 @@ function _mpPoll(){
       if(!hadOpp&&_mpOpponent()){
         _mpOnConnected();
         _sendNotification('Match Connected',(_mpOpponent().username||'Opponent')+' has joined the match.','connect');
-        _mpStopPoll();
+        // polling continues (not stopped here) so the result-confirmation flow below can still sync through the rest of the match
       }
-      if(G.panel==='connect'||G.panel==='mpdeck')render();
+      var res=d.room.result;
+      if(res&&!G.mpResultFinalized){
+        var myKey=G.mpRole==='p1'?'confirmedP1':'confirmedP2';
+        if(!res[myKey]&&!G.mpResultPopup){G.mpResultPopup=res;}
+        if(res.confirmedP1&&res.confirmedP2){_mpApplyRemoteResult(res);}
+      }
+      if(G.panel==='connect'||G.panel==='mpdeck'||G.mpResultPopup||G.mpWaitingResult)render();
     }).catch(function(){});
 }
 function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
@@ -4490,6 +4513,64 @@ function _mpEndMatch(){
 }
 function mpLeave(){
   _mpEndMatch();
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;
+  render();
+}
+// Sends the proposed result to the opponent instead of finalizing locally.
+// wi/li are indices local to THIS device, where 0 is always "me" (see
+// _mpApplyNames) -- proposerWon therefore means "the side that proposed
+// this result won", independent of room p1/p2 role, so the receiving
+// device can correctly invert it for its own perspective.
+function _mpProposeResult(wi,li){
+  var proposerWon=(wi===0);
+  var turns=G.turnNum;
+  var duration=G.matchStartTime?(Math.round((Date.now()-G.matchStartTime)/60000)+'m'):null;
+  G.mpPendingResult={proposerWon:proposerWon,turns:turns,duration:duration};
+  G.mpWaitingResult=true;
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'proposeResult',code:G.mpCode,role:G.mpRole,result:{proposerWon:proposerWon,turns:turns,duration:duration}})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room)G.mpRoom=d.room;
+    _mpStartPoll(); // make sure we're actively watching for the opponent's confirmation
+    render();
+  }).catch(function(e){G.mpWaitingResult=false;G.mpPendingResult=null;G.mpErr='Failed to send result: '+e.message;render();});
+}
+// Runs on the receiving device once they tap Confirm on the "Confirm Match
+// Result" popup.
+function mpConfirmResult(){
+  var code=G.mpCode;
+  G.mpResultPopup=null;render();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'confirmResult',code:code,role:G.mpRole})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room){
+      G.mpRoom=d.room;
+      var res=d.room.result;
+      if(res&&res.confirmedP1&&res.confirmedP2)_mpApplyRemoteResult(res);
+    }
+    render();
+  }).catch(function(){render();});
+}
+// Writes the agreed result to this device once BOTH sides have confirmed --
+// runs on the proposer's device (once the opponent confirms) and on the
+// confirming device (right after they confirm), using each device's own
+// G.players (already correctly set up as [me, opponent] per _mpApplyNames)
+// so decks/names resolve correctly on both sides independently.
+function _mpApplyRemoteResult(res){
+  if(G.mpResultFinalized)return;
+  G.mpResultFinalized=true;
+  var amProposer=!!G.mpPendingResult;
+  var iWon=amProposer?res.proposerWon:!res.proposerWon;
+  var wi=iWon?0:1,li=iWon?1:0;
+  var w=_logPlayer(wi),lo=_logPlayer(li);
+  _mpFinalizeEntry(w,lo,res.turns,res.duration,G.matchStartTime||null);
+  if(G.mpLastOpp&&G.mpLastOpp.deck)G.mpDeckDlPopup=true;
+  _mpEndMatch();
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.matchStartTime=null;
   render();
 }
 function mpViewOppDeck(){
@@ -6220,15 +6301,16 @@ function pContent(){
       o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
       o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
       o('</div>');
-      var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'">'+h(G.decks[k].name)+'</option>';}).join('');
+      var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpFormDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
+      var mpUnameVal=(G.mpFormUname!=null)?G.mpFormUname:(G.cfg.p1||'');
       if(mpMode==='join'){
-        o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
-        o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
+        o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
       } else {
-        o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
       }
     } else {
@@ -7210,7 +7292,7 @@ function render(){
       if(G.matchStartTime){var _elapsedMin=Math.round((Date.now()-G.matchStartTime)/60000);o('<span style="background:var(--bg);padding:5px 11px;border:1px solid var(--bd)">Time: '+_elapsedMin+'m</span>');}
       o('</div>');
       o('<div style="font-size:11px;color:var(--fg3);text-align:center;margin-top:10px;border-top:1px solid var(--bd);padding-top:8px">&#10003; Saves to Local Stats &amp; Deck Stats</div>');
-      if(G.mpRoom&&_mpOpponent()){o('<div style="font-size:11px;color:var(--hi);text-align:center;margin-top:6px">&#9876; Connected match with '+h(_mpOpponent().username||'opponent')+' &mdash; will close automatically on confirm</div>');}
+      if(G.mpRoom&&_mpOpponent()){o('<div style="font-size:11px;color:var(--hi);text-align:center;margin-top:6px">&#9876; Connected match with '+h(_mpOpponent().username||'opponent')+' &mdash; they must also confirm before this is logged</div>');}
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="cancelLog()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="confirmLog()">Confirm</button></div></div></div>');
     }}
 
@@ -7245,6 +7327,24 @@ function render(){
       o('<div style="font-size:14px;color:var(--fg2);margin-bottom:4px">Download</div>');
       o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:14px">'+h(_mpOppD.username)+'&#39;s deck?</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpDismissDeckDl()">No Thanks</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpDownloadOppDeckCSV()">Download</button></div></div></div>');
+    }
+
+    if(G.mpResultPopup&&!G.mpPendingResult){
+      var _rres=G.mpResultPopup;
+      var _rAmWinner=!_rres.proposerWon;
+      var _rWinP=_rAmWinner?G.players[0]:G.players[1];
+      var _rLosP=_rAmWinner?G.players[1]:G.players[0];
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Confirm Match Result</div><div class="lp-b">');
+      o('<div style="font-size:13px;color:var(--fg2);margin-bottom:10px">Your opponent reported:</div>');
+      o('<div style="font-size:20px;font-weight:700;color:var(--grn);margin-bottom:4px">'+h(_rWinP?_rWinP.name:'')+' won</div>');
+      o('<div style="font-size:14px;color:var(--fg2);margin-bottom:14px">vs '+h(_rLosP?_rLosP.name:'')+'</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpConfirmResult()">Confirm</button></div></div></div>');
+    }
+
+    if(G.mpWaitingResult&&!G.mpResultFinalized){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to confirm the match result&hellip;</div>');
+      o('</div></div></div>');
     }
 
     // ── Drawer ──
