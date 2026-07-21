@@ -36,7 +36,17 @@ function isExpired(room) {
 }
 
 exports.handler = async function (event) {
-  const store = getStore('sg-matches');
+  // getStore('sg-matches') alone relies on Netlify auto-injecting a Blobs
+  // context into the function's environment, which isn't happening on this
+  // site (throws MissingBlobsEnvironmentError). Falling back to explicit
+  // siteID + token fixes that -- these must be added as environment
+  // variables in the Netlify dashboard (Site settings -> Environment
+  // variables): NETLIFY_SITE_ID (Site settings -> General -> Site details ->
+  // Site ID) and NETLIFY_API_TOKEN (a Personal Access Token from User
+  // settings -> Applications -> New access token).
+  const store = (process.env.NETLIFY_SITE_ID && process.env.NETLIFY_API_TOKEN)
+    ? getStore({ name: 'sg-matches', siteID: process.env.NETLIFY_SITE_ID, token: process.env.NETLIFY_API_TOKEN })
+    : getStore('sg-matches');
 
   try {
     if (event.httpMethod === 'POST') {
