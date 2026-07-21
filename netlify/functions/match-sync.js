@@ -122,6 +122,15 @@ exports.handler = async function (event) {
         const room = await store.get(code, { type: 'json' });
         if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
 
+        // If a result is already pending confirmation (proposed by either
+        // side, not yet confirmed by both), don't let a second proposal
+        // silently overwrite it -- this happens when both players trigger
+        // Log Result at nearly the same time. Tell the caller so they can
+        // fall back to confirming the existing one instead.
+        if (room.result && !(room.result.confirmedP1 && room.result.confirmedP2)) {
+          return resp(409, { error: 'A result is already pending confirmation', code, room });
+        }
+
         room.result = {
           proposerWon: !!result.proposerWon,
           turns: result.turns || 0,
