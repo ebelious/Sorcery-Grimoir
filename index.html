@@ -6418,8 +6418,8 @@ function pContent(){
       if(G.mpErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpErr)+'</div>');
       var mpMode=G.mpMode||'create';
       o('<div style="display:flex;gap:8px;margin-bottom:16px">');
-      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
-      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
+      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1;padding:16px;font-size:16px" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
+      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1;padding:16px;font-size:16px" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
       o('</div>');
       var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpFormDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
       var mpUnameVal=(G.mpFormUname!=null)?G.mpFormUname:(G.cfg.p1||'');
@@ -6427,7 +6427,7 @@ function pContent(){
         o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
         o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
+        o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
@@ -7455,7 +7455,7 @@ function render(){
       if(_sm.myDeckKey&&G.decks[_sm.myDeckKey])o('<button class="fb" style="flex:1" onclick="G.selDeck=\''+h(_sm.myDeckKey).replace(/'/g,"\\'")+'\';openPanel(\'deckview\')">My Deck</button>');
       if(_sm.oppHasDeck)o('<button class="fb" style="flex:1" onclick="openPanel(\'mpdeck\')">Opponent Deck</button>');
       o('</div>');
-      if(_sm.oppHasDeck)o('<button class="fb full" style="margin-bottom:4px" onclick="mpDownloadOppDeckCSV()">&#x2B07; Download Opponent Deck</button>');
+      if(_sm.oppHasDeck)o('<button class="fb gold full" style="margin-bottom:4px" onclick="mpImportOppDeck()">&#x2B07; Import Opponent Deck</button>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCloseMatchSummary()">Close</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpPlayAgain()">Play Again</button></div></div></div>');
     }
 
