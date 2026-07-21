@@ -873,7 +873,7 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpDeckDlPopup:false,
 };
 var _mpPollTimer=null;
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
@@ -1278,7 +1278,9 @@ function confirmLog(){
   var _lDkN=lo.deck?(G.decks[lo.deck]?G.decks[lo.deck].name:lo.deck):'';
   if(w.deck){if(!G.dkstat[w.deck])G.dkstat[w.deck]={w:0,l:0,name:_wDkN};G.dkstat[w.deck].w++;G.dkstat[w.deck].name=_wDkN;}
   if(lo.deck){if(!G.dkstat[lo.deck])G.dkstat[lo.deck]={w:0,l:0,name:_lDkN};G.dkstat[lo.deck].l++;G.dkstat[lo.deck].name=_lDkN;}
-  sv('sg-rec',G.records);sv('sg-ds',G.dkstat);G.logPopup=null;G.matchStartTime=null;render();
+  sv('sg-rec',G.records);sv('sg-ds',G.dkstat);G.logPopup=null;G.matchStartTime=null;
+  if(G.mpRoom&&_mpOpponent()&&_mpOpponent().deck)G.mpDeckDlPopup=true;
+  render();
 }
 function cancelLog(){G.logPopup=null;render();}
 
@@ -4367,6 +4369,29 @@ function _mpAddOpponentToRecords(){
   var opp=_mpOpponent();
   if(opp&&opp.username&&!G.records[opp.username]){G.records[opp.username]={w:0,l:0};sv('sg-rec',G.records);}
 }
+function _deckAvatarCard(deck){
+  if(!deck||!deck.cards)return null;
+  var entry=deck.cards.find(function(x){var c=cardByName(x.name);return c&&cType(c)==='avatar';});
+  return entry?cardByName(entry.name):null;
+}
+// Once both sides of a Connect match are present, mirror the room's p1/p2
+// usernames into the same Player 1/Player 2 fields the normal match-logging
+// flow (confirmLog) already reads from, so the match gets logged correctly
+// without the user re-typing names.
+function _mpApplyNames(){
+  if(!G.mpRoom)return;
+  var p1u=G.mpRoom.p1&&G.mpRoom.p1.username;
+  var p2u=G.mpRoom.p2&&G.mpRoom.p2.username;
+  if(p1u){G.cfg.p1=p1u;if(G.players[0])G.players[0].name=p1u;}
+  if(p2u){G.cfg.p2=p2u;if(G.players[1])G.players[1].name=p2u;}
+  sv('sg-cfg',G.cfg);
+}
+function _mpOnConnected(){
+  _mpAddOpponentToRecords();
+  _mpApplyNames();
+  G.mpConnectedPopup=true;
+}
+function mpDismissConnected(){G.mpConnectedPopup=false;render();}
 function mpCreate(){
   var uname=((document.getElementById('mp-uname')||{}).value||G.cfg.p1||'').trim()||'Player 1';
   var deckKey=(document.getElementById('mp-deck')||{}).value||'';
@@ -4395,7 +4420,7 @@ function mpJoin(){
   }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to join match');return d;});})
   .then(function(d){
     G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
-    _mpAddOpponentToRecords();
+    _mpOnConnected();
     render();
   }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
 }
@@ -4408,7 +4433,7 @@ function _mpPoll(){
       var hadOpp=!!_mpOpponent();
       G.mpRoom=d.room;
       if(!hadOpp&&_mpOpponent()){
-        _mpAddOpponentToRecords();
+        _mpOnConnected();
         _sendNotification('Match Connected',(_mpOpponent().username||'Opponent')+' has joined the match.','connect');
         _mpStopPoll();
       }
@@ -4450,6 +4475,32 @@ function mpImportOppDeck(){
   sv('sg-dk',G.decks);
   render();
   _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'opponent')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
+}
+function mpDismissDeckDl(){G.mpDeckDlPopup=false;render();}
+function mpDownloadOppDeckCSV(){
+  var opp=_mpOpponent();
+  G.mpDeckDlPopup=false;
+  if(!opp||!opp.deck){render();return;}
+  var dv=opp.deck;
+  var rows=[['qty','name','type','rarity','cost','threshold','element']];
+  (dv.cards||[]).forEach(function(entry){
+    var c=cardByName(entry.name);
+    var t=c?cType(c):'';
+    var r=c?cRar(c):'';
+    var cost=c?(c[3]!==undefined?c[3]:''):'';
+    var thr=c?cThr(c):'';
+    var el='';
+    if(thr){var els=[];['a','e','f','w'].forEach(function(e){if(thr.indexOf(e)>=0)els.push({a:'Air',e:'Earth',f:'Fire',w:'Water'}[e]);});el=els.join('/');}
+    rows.push([entry.qty,entry.name,t,r,cost,thr||'',el]);
+  });
+  var csv=rows.map(function(r){return r.map(function(v){var s=String(v);if(s.indexOf(',')>=0||s.indexOf('"')>=0)s='"'+s.replace(/"/g,'""')+'"';return s;}).join(',');}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=(dv.name||'opponent-deck').replace(/[^a-z0-9_\-]/gi,'_')+'.csv';
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+  render();
 }
 function logMatch(){
   var w=document.getElementById('lw').value,lo=document.getElementById('ll').value;
@@ -6138,7 +6189,7 @@ function pContent(){
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
+        o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
       }
     } else {
       var mpMe=_mpMe(),mpOpp=_mpOpponent();
@@ -6157,7 +6208,6 @@ function pContent(){
         o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(mpOpp.username)+'</div>');
         if(mpOpp.deck){
           o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(mpOpp.deck.name)+'</div>');
-          o('<div style="display:flex;gap:8px;margin-top:10px"><button class="fb" style="flex:1" onclick="mpViewOppDeck()">View Deck</button><button class="fb gold" style="flex:1" onclick="mpImportOppDeck()">Import Deck</button></div>');
         } else {
           o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">No deck shared</div>');
         }
@@ -7128,6 +7178,25 @@ function render(){
       o('<div class="ov" onclick="if(event.target===this)closeTimeOutPopup()"><div class="log-pop" style="text-align:center"><div class="lp-t" style="font-size:22px">&#9203; Time&#39;s Up</div><div class="lp-b">');
       o('<div style="font-size:22px;font-weight:700;color:var(--red);margin:6px 0 14px">'+h(_outP?_outP.name:'Player')+' Ran out of Time</div>');
       o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:18px;font-size:20px" onclick="closeTimeOutPopup()">OK</button></div></div></div>');
+    }
+
+    if(G.mpConnectedPopup&&_mpOpponent()){
+      var _mpOppP=_mpOpponent();
+      var _mpAv=_deckAvatarCard(_mpOppP.deck);
+      o('<div class="ov" onclick="if(event.target===this)mpDismissConnected()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">&#9876; Match Connected</div><div class="lp-b">');
+      o('<div style="width:64px;height:64px;border-radius:8px;overflow:hidden;margin:0 auto 10px;background:var(--bg);display:flex;align-items:center;justify-content:center">'+(_mpAv?cImgTag(_mpAv,'width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block'):'<span style="font-size:9px;color:var(--fg3)">?</span>')+'</div>');
+      o('<div style="font-size:20px;font-weight:700;color:var(--wht);margin-bottom:4px">'+h(_mpOppP.username)+'</div>');
+      if(_mpOppP.deck)o('<div style="font-size:14px;color:var(--cyn)">'+h(_mpOppP.deck.name)+'</div>');
+      else o('<div style="font-size:13px;color:var(--fg2)">No deck shared</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpDismissConnected()">OK</button></div></div></div>');
+    }
+
+    if(G.mpDeckDlPopup&&_mpOpponent()){
+      var _mpOppD=_mpOpponent();
+      o('<div class="ov" onclick="if(event.target===this)mpDismissDeckDl()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Complete</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2);margin-bottom:4px">Download</div>');
+      o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:14px">'+h(_mpOppD.username)+'&#39;s deck?</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpDismissDeckDl()">No Thanks</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpDownloadOppDeckCSV()">Download</button></div></div></div>');
     }
 
     // ── Drawer ──
