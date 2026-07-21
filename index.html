@@ -1267,11 +1267,19 @@ function saveNames(){
 }
 function showLog(li){
   var wi=li===0?1:0;
-  if(G.mpRoom){_mpProposeResult(wi,li);return;}
+  if(G.mpRoom){
+    if(G.mpResultPopup)return; // opponent already proposed a result that's waiting on our confirmation -- don't start a competing one
+    _mpProposeResult(wi,li);
+    return;
+  }
   G.logPopup={li:li,wi:wi};render();
 }
 function showP2Log(){
-  if(G.mpRoom){_mpProposeResult(0,'p2');return;}
+  if(G.mpRoom){
+    if(G.mpResultPopup)return;
+    _mpProposeResult(0,'p2');
+    return;
+  }
   G.logPopup={li:'p2',wi:0};render();
 }
 function _logPlayer(idx){
@@ -4455,11 +4463,17 @@ function _mpOnConnected(){
 // mpLastOpp so it's still available for the end-of-match download even
 // after the match room itself is closed out.
 function mpAcceptMatch(){
-  switchMode(1); // Connect matches only use 1 Player mode -- each device tracks its own life, opponent's is synced
+  // initP (not switchMode) gives a truly fresh start -- switchMode carries
+  // over life/mana/manaUsed/threshold from whatever was played before,
+  // which is wrong when a brand-new connect match is starting. This is the
+  // same reset combo the app's own "Reset" button uses.
+  initP(1);
+  p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
   _mpApplyNames();
   G.mpLastOpp=_mpOpponent();
   G.mpConnectedPopup=false;
   closeAll(); // exit the Connect panel/drawer so the board is what's shown
+  _mpPushLife(G.players[0].life); // let the opponent's device know our life is freshly reset, not whatever it was at the end of a previous match
 }
 function mpCreate(){
   var uname=((G.mpFormUname!=null?G.mpFormUname:G.cfg.p1)||'').trim()||'Player 1';
@@ -4565,8 +4579,22 @@ function _mpProposeResult(wi,li){
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({action:'proposeResult',code:G.mpCode,role:G.mpRole,result:{proposerWon:proposerWon,turns:turns,duration:duration}})
-  }).then(function(r){return r.json();})
-  .then(function(d){
+  }).then(function(r){return r.json().then(function(d){return {status:r.status,d:d};});})
+  .then(function(res){
+    var d=res.d;
+    if(res.status===409&&d&&d.room){
+      // Opponent's proposal reached the server first -- fall back to
+      // confirming theirs instead of leaving us stuck on our own
+      // now-orphaned "waiting" state.
+      G.mpPendingResult=null;G.mpWaitingResult=false;
+      G.mpRoom=d.room;
+      var existing=d.room.result;
+      var myKey=G.mpRole==='p1'?'confirmedP1':'confirmedP2';
+      if(existing&&!existing[myKey])G.mpResultPopup=existing;
+      _mpStartPoll();
+      render();
+      return;
+    }
     if(d&&d.room)G.mpRoom=d.room;
     _mpStartPoll(); // make sure we're actively watching for the opponent's confirmation
     render();
@@ -4696,13 +4724,15 @@ function mpSubmitRematch(){
   }).then(function(r){return r.json();})
   .then(function(d){
     if(d&&d.room)G.mpRoom=d.room;
-    switchMode(1); // fresh life/turn tracking for the new game -- Connect matches only use 1 Player mode
+    initP(1); // fresh life/mana/threshold/turn tracking for the new game -- Connect matches only use 1 Player mode
+    p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
     _mpApplyNames();
     G.mpLastOpp=_mpOpponent();
-    G.mpResultFinalized=false;
+    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;
     G.mpRematchPicking=false;
     _mpStartPoll();
     closeAll();
+    _mpPushLife(G.players[0].life); // let the opponent's device know our life is freshly reset for the new game
     render();
   }).catch(function(e){G.mpErr='Failed to start rematch: '+e.message;G.mpRematchPicking=false;render();});
 }
@@ -7409,15 +7439,15 @@ function render(){
       o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAcceptMatch()">Accept</button></div></div></div>');
     }
 
-    if(G.mpMatchSummaryPopup){
+    if(G.mpMatchSummaryPopup&&!G.panel){
       var _sm=G.mpMatchSummaryPopup;
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:320px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Summary</div><div class="lp-b">');
       o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="color:var(--grn);font-weight:700;font-size:18px">'+h(_sm.winner)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">WINNER</span></div>');
       o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span style="color:var(--red);font-weight:700;font-size:18px">'+h(_sm.loser)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">LOSER</span></div>');
       o('<div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;font-size:12px;color:var(--fg2)"><span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Turn: '+_sm.turns+'</span>'+(_sm.duration?'<span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Time: '+h(_sm.duration)+'</span>':'')+'</div>');
       o('<div style="display:flex;gap:8px;margin-bottom:8px">');
-      if(_sm.myDeckKey&&G.decks[_sm.myDeckKey])o('<button class="fb" style="flex:1" onclick="G.selDeck=\''+h(_sm.myDeckKey).replace(/'/g,"\\'")+'\';G.mpMatchSummaryPopup=null;openPanel(\'deckview\')">My Deck</button>');
-      if(_sm.oppHasDeck)o('<button class="fb" style="flex:1" onclick="G.mpMatchSummaryPopup=null;openPanel(\'mpdeck\')">Opponent Deck</button>');
+      if(_sm.myDeckKey&&G.decks[_sm.myDeckKey])o('<button class="fb" style="flex:1" onclick="G.selDeck=\''+h(_sm.myDeckKey).replace(/'/g,"\\'")+'\';openPanel(\'deckview\')">My Deck</button>');
+      if(_sm.oppHasDeck)o('<button class="fb" style="flex:1" onclick="openPanel(\'mpdeck\')">Opponent Deck</button>');
       o('</div>');
       if(_sm.oppHasDeck)o('<button class="fb full" style="margin-bottom:4px" onclick="mpDownloadOppDeckCSV()">&#x2B07; Download Opponent Deck</button>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCloseMatchSummary()">Close</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpPlayAgain()">Play Again</button></div></div></div>');
@@ -7443,7 +7473,7 @@ function render(){
       o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpConfirmResult()">Confirm</button></div></div></div>');
     }
 
-    if(G.mpWaitingResult&&!G.mpResultFinalized){
+    if(G.mpWaitingResult&&!G.mpResultFinalized&&!G.mpResultPopup){
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to confirm the match result&hellip;</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpCancelWaitingResult()">Cancel</button></div></div></div>');
