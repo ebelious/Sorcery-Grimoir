@@ -1311,6 +1311,33 @@ function _mlDeckCell(deckName){
   var img=avCard?cImgTag(avCard,'width:20px;height:20px;border-radius:4px;object-fit:cover;object-position:center top;transform:scale(1.6);flex-shrink:0'):'';
   return '<span style="display:flex;align-items:center;gap:5px">'+(img?'<span style="width:20px;height:20px;border-radius:4px;overflow:hidden;flex-shrink:0;display:inline-flex">'+img+'</span>':'')+'<span>'+h(deckName)+'</span></span>';
 }
+// Filters G.matchLog by player name (winner or loser, case-insensitive substring)
+// and returns the <tr> markup for the Match History table body.
+function _mlFilteredRows(){
+  var q=(G.mlFilter||'').toLowerCase().trim();
+  var list=q?G.matchLog.filter(function(e){return (e.winner||'').toLowerCase().includes(q)||(e.loser||'').toLowerCase().includes(q);}):G.matchLog;
+  if(!list.length)return '<tr><td colspan="6" style="color:var(--fg2);font-size:12px;padding:6px">No matches'+(q?' for \u201c'+h(q)+'\u201d':'')+'.</td></tr>';
+  var rows=[];
+  list.forEach(function(e){
+    var edate=_fmtLogDate(e.ts);
+    rows.push('<tr>');
+    rows.push('<td class="ml-w">'+h(e.winner||'')+'</td>');
+    rows.push('<td>'+_mlDeckCell(e.winnerDeck)+'</td>');
+    rows.push('<td class="ml-l">'+h(e.loser||'')+'</td>');
+    rows.push('<td>'+_mlDeckCell(e.loserDeck)+'</td>');
+    rows.push('<td>'+(e.turns!=null?h(''+e.turns):'--')+'</td>');
+    rows.push('<td>'+(edate?h(edate):'--')+'</td>');
+    rows.push('</tr>');
+  });
+  return rows.join('');
+}
+// Live-updates just the Match History table body on filter input, so the
+// text field doesn't lose keyboard focus the way a full render() would.
+function _filterMatchLog(){
+  var body=document.getElementById('ml-tbl-body');
+  if(!body||!G.matchLog)return;
+  body.innerHTML=_mlFilteredRows();
+}
 // Writes a confirmed result to Local Stats / Deck Stats / Match Log. Shared
 // by the solo/local-match path (confirmLog below) and the connect-match
 // path (_mpApplyRemoteResult), which both compute the same winner/loser
@@ -1331,7 +1358,7 @@ function _mpFinalizeEntry(w,lo,turnsOverride,durationOverride,startTimeOverride)
   var dur=durationOverride!==undefined?durationOverride:(G.matchStartTime?(Math.round((now.getTime()-G.matchStartTime)/60000)+'m'):null);
   if(dur)entry.duration=dur;
   if(!G.matchLog)G.matchLog=[];
-  G.matchLog.unshift(entry);if(G.matchLog.length>50)G.matchLog.length=50;
+  G.matchLog.unshift(entry);
   sv('sg-ml',G.matchLog);
   G.timerLog=G.timerLog||[];G.timerLog.unshift({winnerConfirmed:true,winner:w.name,loser:lo.name,time:_fmtTime12(now)});if(G.timerLog.length>200)G.timerLog.length=200;
   if(!G.records[w.name])G.records[w.name]={w:0,l:0};if(!G.records[lo.name])G.records[lo.name]={w:0,l:0};
@@ -4769,6 +4796,13 @@ function logMatch(){
   G.records[w].w++;G.records[lo].l++;
   if(wd){if(!G.dkstat[wd])G.dkstat[wd]={w:0,l:0};G.dkstat[wd].w++;}
   if(ld_){if(!G.dkstat[ld_])G.dkstat[ld_]={w:0,l:0};G.dkstat[ld_].l++;}
+  var now=new Date();
+  var wdName=wd&&G.decks[wd]?G.decks[wd].name:'';
+  var ldName=ld_&&G.decks[ld_]?G.decks[ld_].name:'';
+  var mlEntry={ts:now.getTime(),time:_fmtTime(now),winner:w,loser:lo,winnerDeck:wdName,loserDeck:ldName,turns:null};
+  if(!G.matchLog)G.matchLog=[];
+  G.matchLog.unshift(mlEntry);
+  sv('sg-ml',G.matchLog);
   sv('sg-rec',G.records);sv('sg-ds',G.dkstat);render();
 }
 function clearMatchHistory(){
@@ -6531,18 +6565,9 @@ function pContent(){
     o('</tbody></table><div class="slbl2">Log Match</div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Winner</span><select class="fi" id="lw" style="flex:1" onchange="document.getElementById(\'lwd\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'ll\').value){document.getElementById(\'ll\').value=G.cfg.p1;document.getElementById(\'lld\').style.display=\'\';}"><option value="">Winner&hellip;</option>'+pO+'</select><select class="fi" id="lwd" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Defeated</span><select class="fi" id="ll" style="flex:1" onchange="document.getElementById(\'lld\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'lw\').value){document.getElementById(\'lw\').value=G.cfg.p1;document.getElementById(\'lwd\').style.display=\'\';}"><option value="">Loser&hellip;</option>'+pO+'</select><select class="fi" id="lld" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr" style="align-items:stretch;margin-top:4px"><button class="fb gold" style="flex:1" onclick="logMatch()">Log Match</button><button class="fb red" onclick="clearMatchHistory()">Clear</button></div>');
     if(G.matchLog&&G.matchLog.length){
       o('<div class="slbl2" style="margin-top:10px">Match History</div>');
-      o('<div class="ml-tbl-wrap"><table class="rt ml-tbl"><thead><tr><th>Winner</th><th>Winner Deck</th><th>Loser</th><th>Loser Deck</th><th>Turns</th><th>Date</th></tr></thead><tbody>');
-      G.matchLog.slice(0,20).forEach(function(e){
-        var edate=_fmtLogDate(e.ts);
-        o('<tr>');
-        o('<td class="ml-w">'+h(e.winner||'')+'</td>');
-        o('<td>'+_mlDeckCell(e.winnerDeck)+'</td>');
-        o('<td class="ml-l">'+h(e.loser||'')+'</td>');
-        o('<td>'+_mlDeckCell(e.loserDeck)+'</td>');
-        o('<td>'+(e.turns!=null?h(''+e.turns):'--')+'</td>');
-        o('<td>'+(edate?h(edate):'--')+'</td>');
-        o('</tr>');
-      });
+      o('<input class="fi" id="ml-filter-inp" placeholder="Filter by player name&hellip;" style="margin-bottom:6px" value="'+h(G.mlFilter||'')+'" oninput="G.mlFilter=this.value;_filterMatchLog()">');
+      o('<div class="ml-tbl-wrap"><table class="rt ml-tbl"><thead><tr><th>Winner</th><th>Winner Deck</th><th>Loser</th><th>Loser Deck</th><th>Turns</th><th>Date</th></tr></thead><tbody id="ml-tbl-body">');
+      o(_mlFilteredRows());
       o('</tbody></table></div>');
     }
     o('</div>');
