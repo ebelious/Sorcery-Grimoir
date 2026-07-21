@@ -1316,6 +1316,7 @@ function confirmLog(){
   if(G.mpRoom){
     // Connect match: don't finalize unilaterally -- send the proposed
     // result to the opponent and wait for them to confirm it too.
+    G.logPopup=null;
     _mpProposeResult(wi,li);
     return;
   }
@@ -4459,6 +4460,7 @@ function mpCreate(){
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4478,6 +4480,7 @@ function mpJoin(){
   G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4551,6 +4554,7 @@ function _mpProposeResult(wi,li){
   var duration=G.matchStartTime?(Math.round((Date.now()-G.matchStartTime)/60000)+'m'):null;
   G.mpPendingResult={proposerWon:proposerWon,turns:turns,duration:duration};
   G.mpWaitingResult=true;
+  render();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({action:'proposeResult',code:G.mpCode,role:G.mpRole,result:{proposerWon:proposerWon,turns:turns,duration:duration}})
