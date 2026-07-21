@@ -6599,8 +6599,8 @@ function pTap(p,pi){
   }
   if(G.mode===1){
     var _p2h=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
-    o('<div class="p2hp-badge" style="position:absolute;bottom:6px;right:6px;width:74px;height:92px;z-index:5;border:2px solid var(--red);background:var(--bg2);box-sizing:border-box;overflow:hidden">');
-    o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
+    o('<div class="p2hp-badge" style="position:absolute;bottom:6px;right:6px;width:82px;height:124px;z-index:5;border:2px solid var(--red);background:var(--bg2);box-sizing:border-box;overflow:hidden">');
+    o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
     o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
     o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
     o('</div>');
@@ -6618,7 +6618,7 @@ function pTap(p,pi){
   // Threshold row — each element: top half = +1, bottom half = -1
   o('<div class="tap-el-row">');
   ELEM.slice(0,4).forEach(function(e){
-    o('<div class="tap-el"'+(G.mode===1?' style="min-height:150px"':'')+'>');
+    o('<div class="tap-el"'+(G.mode===1?' style="min-height:135px"':'')+'>');
     o('<div style="z-index:1;pointer-events:none">'+eSVG(e.k,36)+'</div>');
     o('<div class="tap-el-val" style="color:'+e.c+'">'+p.thresh[e.k]+'</div>');
     o('<button class="tap-btn-top" onclick="adjEl('+pi+',\''+e.k+'\',1)"></button>');
