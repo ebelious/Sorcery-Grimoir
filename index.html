@@ -599,6 +599,10 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .ml-meta{color:var(--fg3);font-size:11px;margin-left:auto}
 .rt th{font-weight:700;color:var(--fg2);text-align:left;padding:4px;border-bottom:1px solid var(--bd);font-size:11px;text-transform:uppercase}
 .rt td{padding:4px 5px;border-bottom:1px solid var(--bg3)}
+.ml-tbl-wrap{overflow-x:auto;overflow-y:auto;max-height:240px;border:1px solid var(--bg3);border-radius:6px}
+.ml-tbl{font-size:11px;table-layout:auto}
+.ml-tbl th,.ml-tbl td{white-space:nowrap;padding:4px 6px}
+.ml-tbl thead th{position:sticky;top:0;background:var(--bg);z-index:1}
 .wc{color:var(--grn);font-weight:700}.lc{color:var(--red);font-weight:700}
 @keyframes sp{to{transform:rotate(360deg)}}
 .spin{animation:sp .8s linear infinite;display:inline-flex;align-items:center;justify-content:center;transform-origin:center center;vertical-align:middle}.spin img,.spin svg{display:block;transform-origin:center center}
@@ -1296,6 +1300,17 @@ function _logPlayer(idx){
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
 function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
 function _fmtLogDate(ts){if(!ts)return '';var d=new Date(ts);if(isNaN(d.getTime()))return '';var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return months[d.getMonth()]+' '+d.getDate();}
+// Renders a deck-name cell for the Match History table: avatar icon (looked up
+// from G.decks by matching name) + deck name. Falls back to just the name (or
+// a dash) if the deck can't be resolved to an avatar card.
+function _mlDeckCell(deckName){
+  if(!deckName)return '<span style="color:var(--fg3)">--</span>';
+  var dk=Object.values(G.decks||{}).find(function(d){return d&&d.name===deckName;});
+  var avEntry=dk&&dk.cards?dk.cards.find(function(x){var cx=cardByName(x.name);return cx&&cType(cx)==='avatar';}):null;
+  var avCard=avEntry?cardByName(avEntry.name):null;
+  var img=avCard?cImgTag(avCard,'width:20px;height:20px;border-radius:4px;object-fit:cover;object-position:center top;transform:scale(1.6);flex-shrink:0'):'';
+  return '<span style="display:flex;align-items:center;gap:5px">'+(img?'<span style="width:20px;height:20px;border-radius:4px;overflow:hidden;flex-shrink:0;display:inline-flex">'+img+'</span>':'')+'<span>'+h(deckName)+'</span></span>';
+}
 // Writes a confirmed result to Local Stats / Deck Stats / Match Log. Shared
 // by the solo/local-match path (confirmLog below) and the connect-match
 // path (_mpApplyRemoteResult), which both compute the same winner/loser
@@ -6511,26 +6526,19 @@ function pContent(){
     o('</tbody></table><div class="slbl2">Log Match</div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Winner</span><select class="fi" id="lw" style="flex:1" onchange="document.getElementById(\'lwd\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'ll\').value){document.getElementById(\'ll\').value=G.cfg.p1;document.getElementById(\'lld\').style.display=\'\';}"><option value="">Winner&hellip;</option>'+pO+'</select><select class="fi" id="lwd" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Defeated</span><select class="fi" id="ll" style="flex:1" onchange="document.getElementById(\'lld\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'lw\').value){document.getElementById(\'lw\').value=G.cfg.p1;document.getElementById(\'lwd\').style.display=\'\';}"><option value="">Loser&hellip;</option>'+pO+'</select><select class="fi" id="lld" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><button class="fb gold full" onclick="logMatch()">Log Match</button>');
     if(G.matchLog&&G.matchLog.length){
       o('<div class="slbl2" style="margin-top:10px">Match History</div>');
+      o('<div class="ml-tbl-wrap"><table class="rt ml-tbl"><thead><tr><th>Winner</th><th>Winner Deck</th><th>Loser</th><th>Loser Deck</th><th>Turns</th><th>Date</th></tr></thead><tbody>');
       G.matchLog.slice(0,20).forEach(function(e){
-        var dur=e.duration?' · '+e.duration:'';
-        var turns=e.turns?' · T'+e.turns:'';
         var edate=_fmtLogDate(e.ts);
-        o('<div class="ml-row" style="flex-direction:column;align-items:flex-start;gap:2px">');
-        o('<div style="display:flex;align-items:center;gap:4px;width:100%;flex-wrap:nowrap">');
-        o('<span class="ml-w">'+h(e.winner||'')+'</span>');
-        o('<span class="ml-sep">def.</span>');
-        o('<span class="ml-l">'+h(e.loser||'')+'</span>');
-        o('<span class="ml-meta" style="margin-left:auto;white-space:nowrap">'+(edate?h(edate)+' &middot; ':'')+h(e.time||'')+dur+turns+'</span>');
-        o('</div>');
-        if(e.winnerDeck||e.loserDeck){
-          o('<div style="display:flex;gap:6px;font-size:11px;color:var(--fg2);padding-left:2px">');
-          if(e.winnerDeck)o('<span style="color:var(--grn)">'+h(e.winnerDeck)+'</span>');
-          if(e.winnerDeck&&e.loserDeck)o('<span style="color:var(--fg3)">vs</span>');
-          if(e.loserDeck)o('<span style="color:var(--red)">'+h(e.loserDeck)+'</span>');
-          o('</div>');
-        }
-        o('</div>');
+        o('<tr>');
+        o('<td class="ml-w">'+h(e.winner||'')+'</td>');
+        o('<td>'+_mlDeckCell(e.winnerDeck)+'</td>');
+        o('<td class="ml-l">'+h(e.loser||'')+'</td>');
+        o('<td>'+_mlDeckCell(e.loserDeck)+'</td>');
+        o('<td>'+(e.turns!=null?h(''+e.turns):'--')+'</td>');
+        o('<td>'+(edate?h(edate):'--')+'</td>');
+        o('</tr>');
       });
+      o('</tbody></table></div>');
     }
     o('</div>');
     return out.join('');
