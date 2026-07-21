@@ -4344,11 +4344,12 @@ function trigUpDecks(){
   };r.readAsText(f);document.body.removeChild(inp);};document.body.appendChild(inp);inp.click();
 }
 function addRec(n){n=(n||'').trim();if(!n)return;if(!G.records[n])G.records[n]={w:0,l:0};sv('sg-rec',G.records);render();}
-function delRec(n){delete G.records[n];sv('sg-rec',G.records);render();}
+function delRec(n){if(!confirm('Delete player "'+n+'"? This will remove their W/L record.'))return;delete G.records[n];sv('sg-rec',G.records);render();}
 function logMatch(){
   var w=document.getElementById('lw').value,lo=document.getElementById('ll').value;
   var wd=document.getElementById('lwd').value,ld_=document.getElementById('lld').value;
   if(!w||!lo||w===lo)return;
+  if(!confirm('Log match: '+w+' defeated '+lo+'?'))return;
   if(!G.records[w])G.records[w]={w:0,l:0};if(!G.records[lo])G.records[lo]={w:0,l:0};
   G.records[w].w++;G.records[lo].l++;
   if(wd){if(!G.dkstat[wd])G.dkstat[wd]={w:0,l:0};G.dkstat[wd].w++;}
