@@ -881,6 +881,19 @@ var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
 // ── STORAGE ──────────────────────────────────────────────────────────────────
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function ld(k,d){try{var r=localStorage.getItem(k);return r!==null?JSON.parse(r):d;}catch(e){return d;}}
+// Static per-device code -- generated once and persisted, used alongside the
+// username to tell users apart in Connect matches (e.g. two people both
+// named "Alex"). The player never has to know or type it; it's just shown
+// read-only in the Player Name panel for reference.
+function _mpUserCode(){
+  var c=ld('sg-usercode',null);
+  if(!c){
+    var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    c='';for(var i=0;i<6;i++)c+=chars[Math.floor(Math.random()*chars.length)];
+    sv('sg-usercode',c);
+  }
+  return c;
+}
 function vibrate(pattern){try{if(G.cfg&&G.cfg.vibrate===false)return;if(navigator.vibrate)navigator.vibrate(pattern);}catch(e){}}
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
@@ -4383,15 +4396,17 @@ function _deckAvatarCard(deck){
 // a deck value that isn't a G.decks key by using it as the display name.
 function _mpApplyNames(){
   if(!G.mpRoom)return;
-  var p1u=G.mpRoom.p1&&G.mpRoom.p1.username;
-  var p2u=G.mpRoom.p2&&G.mpRoom.p2.username;
-  if(p1u){G.cfg.p1=p1u;if(G.players[0])G.players[0].name=p1u;}
-  if(p2u){G.cfg.p2=p2u;if(G.players[1])G.players[1].name=p2u;}
+  var me=_mpMe(),opp=_mpOpponent();
+  var myU=me&&me.username;
+  var oppU=opp&&opp.username;
+  // The user on this device is always shown/logged as Player 1 locally,
+  // regardless of whether they created (room p1) or joined (room p2) the
+  // match -- matches how each device's own board is laid out.
+  if(myU){G.cfg.p1=myU;if(G.players[0])G.players[0].name=myU;}
+  if(oppU){G.cfg.p2=oppU;if(G.players[1])G.players[1].name=oppU;}
   sv('sg-cfg',G.cfg);
-  var myIdx=G.mpRole==='p1'?0:1,oppIdx=myIdx===0?1:0;
-  var opp=_mpOpponent();
-  if(G.players[myIdx])G.players[myIdx].deck=G.mpMyDeckKey||null;
-  if(G.players[oppIdx])G.players[oppIdx].deck=(opp&&opp.deck&&opp.deck.name)?opp.deck.name:null;
+  if(G.players[0])G.players[0].deck=G.mpMyDeckKey||null;
+  if(G.players[1])G.players[1].deck=(opp&&opp.deck&&opp.deck.name)?opp.deck.name:null;
 }
 function _mpOnConnected(){
   _mpAddOpponentToRecords();
@@ -4408,7 +4423,7 @@ function mpCreate(){
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'create',username:uname,deck:deck})
+    body:JSON.stringify({action:'create',username:uname,usercode:_mpUserCode(),deck:deck})
   }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to create match');return d;});})
   .then(function(d){
     G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p1';G.mpBusy=false;
@@ -4426,7 +4441,7 @@ function mpJoin(){
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'join',code:code,username:uname,deck:deck})
+    body:JSON.stringify({action:'join',code:code,username:uname,usercode:_mpUserCode(),deck:deck})
   }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to join match');return d;});})
   .then(function(d){
     G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
@@ -5515,6 +5530,7 @@ function pContent(){
   if(p==='names'){
     o('<div class="fr"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:18px;padding:14px 12px"></div>');
     o('<button class="fb gold full" style="font-size:16px;padding:14px" onclick="saveNames()">Save</button>');
+    o('<div style="text-align:center;margin-top:14px;font-size:11px;color:var(--fg3)">Device Code: <span style="letter-spacing:.1em;color:var(--fg2)">'+h(_mpUserCode())+'</span></div>');
     return out.join('');}
   if(p==='themes'){
     o('<div class="set-pop">');
