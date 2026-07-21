@@ -873,7 +873,7 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpDeckDlPopup:false,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpDeckDlPopup:false,mpMyDeckKey:null,
 };
 var _mpPollTimer=null;
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
@@ -4375,9 +4375,12 @@ function _deckAvatarCard(deck){
   return entry?cardByName(entry.name):null;
 }
 // Once both sides of a Connect match are present, mirror the room's p1/p2
-// usernames into the same Player 1/Player 2 fields the normal match-logging
-// flow (confirmLog) already reads from, so the match gets logged correctly
-// without the user re-typing names.
+// usernames (and each side's own selected deck) into the same Player 1/
+// Player 2 fields the normal match-logging flow (confirmLog) already reads
+// from, so the match gets logged correctly without the user re-typing
+// anything. The opponent's deck isn't a key in this device's G.decks, so it
+// falls back to the deck's plain name string -- confirmLog already handles
+// a deck value that isn't a G.decks key by using it as the display name.
 function _mpApplyNames(){
   if(!G.mpRoom)return;
   var p1u=G.mpRoom.p1&&G.mpRoom.p1.username;
@@ -4385,10 +4388,15 @@ function _mpApplyNames(){
   if(p1u){G.cfg.p1=p1u;if(G.players[0])G.players[0].name=p1u;}
   if(p2u){G.cfg.p2=p2u;if(G.players[1])G.players[1].name=p2u;}
   sv('sg-cfg',G.cfg);
+  var myIdx=G.mpRole==='p1'?0:1,oppIdx=myIdx===0?1:0;
+  var opp=_mpOpponent();
+  if(G.players[myIdx])G.players[myIdx].deck=G.mpMyDeckKey||null;
+  if(G.players[oppIdx])G.players[oppIdx].deck=(opp&&opp.deck&&opp.deck.name)?opp.deck.name:null;
 }
 function _mpOnConnected(){
   _mpAddOpponentToRecords();
   _mpApplyNames();
+  closeAll(); // exit the Connect panel/drawer so the board is what's shown once the popup is dismissed
   G.mpConnectedPopup=true;
 }
 function mpDismissConnected(){G.mpConnectedPopup=false;render();}
@@ -4396,6 +4404,7 @@ function mpCreate(){
   var uname=((document.getElementById('mp-uname')||{}).value||G.cfg.p1||'').trim()||'Player 1';
   var deckKey=(document.getElementById('mp-deck')||{}).value||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  G.mpMyDeckKey=deckKey||null;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4412,6 +4421,7 @@ function mpJoin(){
   var uname=((document.getElementById('mp-uname2')||{}).value||G.cfg.p1||'').trim()||'Player 1';
   var deckKey=(document.getElementById('mp-deck2')||{}).value||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
@@ -6184,11 +6194,11 @@ function pContent(){
       if(mpMode==='join'){
         o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
         o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck2" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
       }
     } else {
