@@ -1225,7 +1225,15 @@ function adjStat(pi,stat,d){
   G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
   if(stat==='life')p.dead=p.life<=0;render();
 }
-function adjP2Life(d){G.p2Life=Math.max(0,Math.min(G.cfg.maxLife,(G.p2Life!=null?G.p2Life:G.cfg.maxLife)+d));render();}
+function adjP2Life(d){
+  var pv=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
+  G.p2Life=Math.max(0,Math.min(G.cfg.maxLife,pv+d));
+  if(G.p2Life===pv)return;
+  var df=G.p2Life-pv;
+  var ev=(G.cfg.p2||'Player 2')+': life '+(df>0?'+':'')+df;
+  G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
+  render();
+}
 function adjMU(pi,d){G.players[pi].manaUsed=Math.max(0,Math.min(999,G.players[pi].manaUsed+d));render();}
 function adjEl(pi,k,d){G.players[pi].thresh[k]=Math.max(0,Math.min(20,G.players[pi].thresh[k]+d));render();}
 function setDeck(pi,k){G.players[pi].deck=k||null;render();}
@@ -1239,10 +1247,12 @@ function saveNames(){
   goBack();
 }
 function showLog(li){G.logPopup={li:li,wi:li===0?1:0};render();}
+function showP2Log(){G.logPopup={li:'p2',wi:0};render();}
+function _logPlayer(idx){return idx==='p2'?{name:G.cfg.p2||'Player 2',deck:null}:G.players[idx];}
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
 function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
 function confirmLog(){
-  var wi=G.logPopup.wi,li=G.logPopup.li,w=G.players[wi],lo=G.players[li];
+  var wi=G.logPopup.wi,li=G.logPopup.li,w=_logPlayer(wi),lo=_logPlayer(li);
   var now=new Date();
   var entry={
     ts:now.getTime(),
@@ -6593,22 +6603,29 @@ function pTap(p,pi){
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="showLog('+pi+')"></button>');
   } else {
-    o('<div class="tap-val" style="color:'+lifeColor+';font-size:'+_valFS+'">'+p.life+'</div>');
+    o('<div class="tap-val" style="color:'+lifeColor+';font-size:'+_valFS+(G.mode===1?';margin-top:-14px':'')+'">'+p.life+'</div>');
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
   if(G.mode===1){
     var _p2h=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
+    var _p2dead=_p2h<=0;
     o('<div class="p2hp-badge" style="position:absolute;bottom:6px;right:6px;width:82px;height:124px;z-index:5;border:2px solid var(--red);background:var(--bg2);box-sizing:border-box;overflow:hidden">');
-    o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
-    o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
-    o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
+    if(_p2dead){
+      o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden"><img src="DD.jpg" alt="Death\'s Door" style="width:100%;height:100%;object-fit:cover;opacity:.92"></div>');
+      o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
+      o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();showP2Log()"></button>');
+    } else {
+      o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
+      o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
+      o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
+    }
     o('</div>');
   }
   o('</div>');
 
   o('<div class="tap-tile"'+(G.mode===1?' style="min-height:230px"':'')+'>');
-  o('<div class="tap-val" style="color:var(--mana);font-size:'+_valFS+'">'+p.mana+'</div>');
+  o('<div class="tap-val" style="color:var(--mana);font-size:'+_valFS+(G.mode===1?';margin-top:-14px':'')+'">'+p.mana+'</div>');
   o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'mana\',1)"></button>');
   o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'mana\',-1)"></button>');
   o('</div>');
@@ -6907,7 +6924,7 @@ function render(){
     o('</div>'); // #board
 
     // ── Overlays ── (dice overlay is now a persistent fullscreen DOM element, not rendered here)
-    if(G.logPopup){var w=G.players[G.logPopup.wi],lo=G.players[G.logPopup.li];if(w&&lo){
+    if(G.logPopup){var w=_logPlayer(G.logPopup.wi),lo=_logPlayer(G.logPopup.li);if(w&&lo){
       var _wDk=w.deck&&G.decks[w.deck]?G.decks[w.deck].name:(w.deck||'');
       var _loDk=lo.deck&&G.decks[lo.deck]?G.decks[lo.deck].name:(lo.deck||'');
       o('<div class="ov" onclick="if(event.target===this)cancelLog()"><div class="log-pop" style="max-width:340px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Log Result</div><div class="lp-b" style="font-size:14px">');
