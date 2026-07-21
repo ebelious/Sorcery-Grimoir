@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-20T09:23:51.431Z",
+  "updated": "2026-07-21T08:36:27.818Z",
   "codex": [
     {
       "k": "Abilities that Reference the Card's Own Name",
@@ -4373,10 +4373,10 @@
         },
         {
           "t": "p",
-          "text": "• Current and max life",
+          "text": "• Max life",
           "runs": [
             {
-              "text": "• Current and max life",
+              "text": "• Max life",
               "bold": false,
               "italic": false,
               "link": false
@@ -29333,7 +29333,19 @@
           "text": "You always put your cards into the cemetery you own (the one nearby your deck).",
           "runs": [
             {
-              "text": "You always put your cards into the cemetery you own (the one nearby your deck).",
+              "text": "You always put your cards into the cemetery you own (the one ",
+              "bold": false,
+              "italic": false,
+              "link": false
+            },
+            {
+              "text": "nearby",
+              "bold": false,
+              "italic": false,
+              "link": true
+            },
+            {
+              "text": " your deck).",
               "bold": false,
               "italic": false,
               "link": false
