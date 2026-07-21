@@ -1197,7 +1197,7 @@ function endTurn(pi){
   if(G.pTimeEnd[pi]!=null){G.pTimeRemain[pi]=Math.max(0,G.pTimeEnd[pi]-Date.now());G.pTimeEnd[pi]=null;}
   G.timerLog=G.timerLog||[];G.timerLog.unshift({turn:G.turnNum,name:p.name,time:_timerLogTimeStr(),full:_timerFullTimeStr(),used:_chessUsedTimeStr(pi),pFull:_chessFullTimeStr(),lives:G.players.map(function(pl,i){return{name:pl.name,life:pl.life,expired:(G.pTimeRemain[i]!=null&&G.pTimeRemain[i]<=0)};})});if(G.timerLog.length>200)G.timerLog.length=200;
   p.manaUsed=0;p.hist=[];p.phase='disabled';G.activePI=-1;
-  if(G.mode<2){G.turnNum++;p.phase='start';render();return;}
+  if(G.mode<2){G.turnNum+=2;p.phase='start';render();return;}
   var opp=G.players[pi===0?1:0];opp.phase='start';G.turnNum++;
   startTurn(pi===0?1:0);
 }
@@ -2977,7 +2977,7 @@ function showP1Settings(anchorEl){
   var p1Col=getDieCol(G.dieCI);
   html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:14px">D20</span></button>';
   html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,true)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
-  html+='<input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:56px;height:44px;text-align:center;font-size:14px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:6px" onchange="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);this.value=G.customDieSides;_refreshP1Settings()" title="Custom die sides">';
+  html+='<input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:56px;height:44px;text-align:center;font-size:14px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:6px" oninput="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);if(typeof _diceIsCustom!==\'undefined\'&&_diceIsCustom)_diceSides=G.customDieSides;" onchange="this.value=G.customDieSides;_refreshP1Settings()" title="Custom die sides">';
   html+='</div>';
 
   // ── Section: Timer ──
