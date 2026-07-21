@@ -1168,6 +1168,7 @@ function _applyBgImage(){
 // ── PLAYERS ───────────────────────────────────────────────────────────────────
 function mkP(i){return{name:i===0?G.cfg.p1:G.cfg.p2,life:G.cfg.maxLife,mana:0,manaUsed:0,dead:false,thresh:{fire:0,water:0,earth:0,air:0},hist:[],deck:null,tlog:[],phase:'start'};}
 function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
+function switchMode(n){var _prev=G.players||[];G.players=[];for(var i=0;i<n;i++){var p=mkP(i);if(_prev[i]){p.life=_prev[i].life;p.mana=_prev[i].mana;p.manaUsed=_prev[i].manaUsed;p.thresh=_prev[i].thresh;}G.players.push(p);}G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
 
 // ── TURN SYSTEM ───────────────────────────────────────────────────────────────
 function startTurn(pi){
@@ -1526,7 +1527,7 @@ function _diceBuildForSides(sides, col, isCustom){
   if(isCustom&&STL_MODELS[shape]){
     _stlEnsureLoaded(shape,function(){ if((G.diceShape||'normal')===shape)_diceBuildForSides(sides,col,isCustom); });
     var stlGroup=_buildStlGroup(shape,col);
-    if(stlGroup){ _diceClearMesh(); _diceGroup=stlGroup; _diceScene.add(_diceGroup); return; }
+    if(stlGroup){ _diceClearMesh(); _diceGroup=stlGroup; _diceScene.add(_diceGroup); if(!_diceDockMode)_diceGroup.scale.multiplyScalar(0.88); return; }
   }
   if(isCustom) _diceBuildD20(col);
   else if(sides===4) _diceBuildD4(col);
@@ -1535,6 +1536,10 @@ function _diceBuildForSides(sides, col, isCustom){
   else if(sides===10) _diceBuildD10(col);
   else if(sides===12) _diceBuildD12(col);
   else _diceBuildD20(col); // 20 or fallback
+  if(!_diceDockMode){
+    if(_diceGroup)_diceGroup.scale.multiplyScalar(0.88);
+    if(_diceGroup2)_diceGroup2.scale.multiplyScalar(0.88);
+  }
 }
 
 
@@ -6225,7 +6230,7 @@ function pContent(){
     if(!G.rewardsLoaded&&!G.rewardsLoading){setTimeout(function(){loadRewards();},50);}
     o('<div style="flex-shrink:0;background:var(--bg2)">');
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
-    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://play.sorcerytcg.com/rewards" target="_blank">Play Network <span style="color:var(--hi)">&rarr;</span></a>');
+    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="https://play.sorcerytcg.com/rewards" target="_blank">Play Network <span style="color:var(--hi);margin-left:4px">&rarr;</span></a>');
     o('</div>');
     o('</div>'); // close static header
     o('<div style="flex:1;min-height:0;overflow-y:auto">');
@@ -6634,14 +6639,16 @@ function pTap(p,pi){
     // tree (a re-render would destroy/recreate the GL context otherwise),
     // so this is just an empty placeholder; _diceSyncInlineSlot() moves the
     // persistent overlay into it right after every render() call.
-    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:4px 0 0"></div>');
+    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:4px 0 0'+(G.diceCollapsed?';display:none':'')+'"></div>');
     // Config button is anchored to the bottom corner of the whole board
     // (position:absolute against .p-tap, which has position:relative in
     // 1P) so it's always in the same spot regardless of which layout or
     // what else is showing, instead of living inline with the other buttons.
     var _p1BtnCorner=_p1BtnShown?('<button onclick="showP1Settings(this)" class="p1-settings-btn" style="position:fixed;'+(p1Left?'left:6px':'right:6px')+';bottom:calc(6px + env(safe-area-inset-bottom, 0px));width:44px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:41" title="Configuration">&#9881;</button>'):'';
     if(_p1BtnCorner)o(_p1BtnCorner);
-    var _cornerPad=_p1BtnShown?(p1Left?'padding-left:52px':'padding-right:52px'):'';
+    var _diceCollapseOffset=(_p1BtnShown?56:6)+'px';
+    o('<button class="p1-settings-btn" onclick="G.diceCollapsed=!G.diceCollapsed;render()" style="position:fixed;'+(p1Left?'left:'+_diceCollapseOffset:'right:'+_diceCollapseOffset)+';bottom:calc(6px + env(safe-area-inset-bottom, 0px));width:44px;height:44px;border:2px solid var(--bd);color:var(--fg2);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:41" title="'+(G.diceCollapsed?'Show Die':'Collapse Die')+'"><span style="position:relative;display:inline-flex">'+smallDieSVG(20,1,null,false)+'<span style="position:absolute;bottom:-6px;right:-6px;font-size:13px;font-weight:900;color:var(--hi);line-height:1;text-shadow:0 0 2px var(--bg2)">'+(G.diceCollapsed?'&uarr;':'&darr;')+'</span></span></button>');
+    var _cornerPad=_p1BtnShown?(p1Left?'padding-left:100px':'padding-right:100px'):'padding-'+(p1Left?'left':'right')+':52px';
     o('<div class="tap-bottom-row" id="p1-fixed-buttons" style="display:flex;flex-direction:column;gap:10px;padding:14px 6px calc(14px + env(safe-area-inset-bottom, 0px));flex-shrink:0;min-height:96px;box-sizing:border-box;position:fixed;left:0;right:0;bottom:0;background:var(--bg2);z-index:40;'+_cornerPad+'">');
     if(_turnBarOn){
       // Same single-row pattern as 2P Competitive: dice buttons, turn
@@ -6705,7 +6712,7 @@ function turnBar(){
   var _ml=G.cfg&&G.cfg.menuLeft;
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
-  if(_diceHdr){
+  if(_diceHdr&&G.mode!==1){
     var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
     return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_diceRow+(_ml?'':_mbtn)+'</div>';
   }
@@ -6920,7 +6927,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:30px">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;initP(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" style="font-size:15px" onclick="G.mode=2;initP(2);render()">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;switchMode(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" style="font-size:15px" onclick="G.mode=2;switchMode(2);render()">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
