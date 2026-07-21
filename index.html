@@ -873,7 +873,7 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
@@ -4549,18 +4549,21 @@ function _mpPushLife(life){
 }
 function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
 function _mpStopPoll(){if(_mpPollTimer){clearInterval(_mpPollTimer);_mpPollTimer=null;}}
-function _mpEndMatch(){
-  if(G.mpCode){
+function _mpEndMatch(deleteRoom){
+  if(G.mpCode&&deleteRoom){
     fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({action:'leave',code:G.mpCode})
     }).catch(function(){});
   }
+  if(G.mpCode)G.mpLastCode=G.mpCode; // kept so "Play Again" can reconnect to the same room -- it was previously being wiped out here, which silently broke the rematch's sync entirely
   _mpStopPoll();
-  G.mpCode=null;G.mpRoom=null;G.mpRole=null;G.mpErr=null;
+  G.mpCode=null;G.mpRoom=null;G.mpErr=null;
+  // G.mpRole is intentionally NOT cleared here -- it's needed to resume the same room if the player taps "Play Again"; an explicit Leave Match clears it separately below
 }
 function mpLeave(){
-  _mpEndMatch();
+  _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
+  G.mpRole=null;G.mpLastCode=null;
   G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;
   render();
 }
@@ -4718,11 +4721,14 @@ function mpSubmitRematch(){
   var deckKey=G.mpRematchDeckKey||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
+  var code=G.mpCode||G.mpLastCode; // G.mpCode is null once the previous match ended -- reconnect using the preserved code
+  if(!code){G.mpErr='Could not find the match to rejoin.';G.mpRematchPicking=false;render();return;}
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'rematch',code:G.mpCode,role:G.mpRole,deck:deck})
+    body:JSON.stringify({action:'rematch',code:code,role:G.mpRole,deck:deck})
   }).then(function(r){return r.json();})
   .then(function(d){
+    G.mpCode=code; // restore the active code so polling/life-push work again
     if(d&&d.room)G.mpRoom=d.room;
     initP(1); // fresh life/mana/threshold/turn tracking for the new game -- Connect matches only use 1 Player mode
     p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
