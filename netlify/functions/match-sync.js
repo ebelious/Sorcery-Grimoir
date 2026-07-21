@@ -8,9 +8,12 @@
 //   POST { action:'create', username, deck } -> { code, room }
 //   POST { action:'join',   code, username, deck } -> { code, room }
 //   POST { action:'leave',  code } -> { ok:true }
+//   POST { action:'proposeResult', code, role, result:{proposerWon,turns,duration} } -> { code, room }
+//   POST { action:'confirmResult', code, role } -> { code, room }
 //   GET  ?action=get&code=XXXXX -> { code, room }
 //
-// room shape: { created, p1:{username,deck,ts}, p2:{username,deck,ts}|null }
+// room shape: { created, p1:{username,deck,ts}, p2:{username,deck,ts}|null,
+//               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|undefined }
 
 const { getStore } = require('@netlify/blobs');
 
@@ -105,6 +108,41 @@ exports.handler = async function (event) {
         const code = (body.code || '').trim().toUpperCase();
         if (code) await store.delete(code);
         return resp(200, { ok: true });
+      }
+
+      if (action === 'proposeResult') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        const result = body.result || {};
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        room.result = {
+          proposerWon: !!result.proposerWon,
+          turns: result.turns || 0,
+          duration: result.duration || null,
+          confirmedP1: role === 'p1',
+          confirmedP2: role === 'p2'
+        };
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
+      if (action === 'confirmResult') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+        if (!room.result) return resp(400, { error: 'No pending result to confirm' });
+
+        if (role === 'p1') room.result.confirmedP1 = true;
+        else room.result.confirmedP2 = true;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
       }
 
       return resp(400, { error: 'Unknown action' });
