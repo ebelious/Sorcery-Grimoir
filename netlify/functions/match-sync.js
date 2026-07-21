@@ -71,6 +71,7 @@ exports.handler = async function (event) {
 
       if (action === 'create') {
         const username = (body.username || '').trim().slice(0, 40);
+        const usercode = (body.usercode || '').trim().slice(0, 20);
         const deck = body.deck || null;
         if (!username) return resp(400, { error: 'Username required' });
 
@@ -80,7 +81,7 @@ exports.handler = async function (event) {
           const existing = await store.get(code, { type: 'json' });
           if (isExpired(existing)) break;
         }
-        const room = { created: Date.now(), p1: { username, deck, ts: Date.now() }, p2: null };
+        const room = { created: Date.now(), p1: { username, usercode, deck, ts: Date.now() }, p2: null };
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
@@ -88,13 +89,14 @@ exports.handler = async function (event) {
       if (action === 'join') {
         const code = (body.code || '').trim().toUpperCase();
         const username = (body.username || '').trim().slice(0, 40);
+        const usercode = (body.usercode || '').trim().slice(0, 20);
         const deck = body.deck || null;
         if (!code || !username) return resp(400, { error: 'Code and username required' });
 
         const room = await store.get(code, { type: 'json' });
         if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
 
-        room.p2 = { username, deck, ts: Date.now() };
+        room.p2 = { username, usercode, deck, ts: Date.now() };
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
