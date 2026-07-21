@@ -4654,7 +4654,8 @@ function _mpApplyRemoteResult(res){
     winner:w.name,loser:lo.name,
     turns:res.turns||G.turnNum,duration:res.duration||null,
     myDeckKey:G.mpMyDeckKey||null,
-    oppHasDeck:!!(oppSnap&&oppSnap.deck)
+    oppHasDeck:!!(oppSnap&&oppSnap.deck),
+    iWon:iWon
   };
   _mpEndMatch();
   G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.matchStartTime=null;
@@ -7451,9 +7452,15 @@ function render(){
 
     if(G.mpMatchSummaryPopup&&!G.panel){
       var _sm=G.mpMatchSummaryPopup;
+      var _smMyDeck=(_sm.myDeckKey&&G.decks[_sm.myDeckKey])?G.decks[_sm.myDeckKey]:null;
+      var _smOppDeck=(G.mpLastOpp&&G.mpLastOpp.deck)?G.mpLastOpp.deck:null;
+      var _smWinDeck=_sm.iWon?_smMyDeck:_smOppDeck;
+      var _smLosDeck=_sm.iWon?_smOppDeck:_smMyDeck;
+      var _smWinAv=_deckAvatarCard(_smWinDeck);
+      var _smLosAv=_deckAvatarCard(_smLosDeck);
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:320px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Summary</div><div class="lp-b">');
-      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="color:var(--grn);font-weight:700;font-size:18px">'+h(_sm.winner)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">WINNER</span></div>');
-      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span style="color:var(--red);font-weight:700;font-size:18px">'+h(_sm.loser)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">LOSER</span></div>');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><div style="display:flex;align-items:center;gap:8px;min-width:0">'+(_smWinAv?'<div style="width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg)">'+cImgTag(_smWinAv,'width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block')+'</div>':'')+'<span style="color:var(--grn);font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(_sm.winner)+'</span></div><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd);flex-shrink:0">WINNER</span></div>');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:8px;min-width:0">'+(_smLosAv?'<div style="width:32px;height:32px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg)">'+cImgTag(_smLosAv,'width:100%;height:100%;object-fit:cover;object-position:center top;transform:scale(1.6);display:block')+'</div>':'')+'<span style="color:var(--red);font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(_sm.loser)+'</span></div><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd);flex-shrink:0">LOSER</span></div>');
       o('<div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;font-size:12px;color:var(--fg2)"><span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Turn: '+_sm.turns+'</span>'+(_sm.duration?'<span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Time: '+h(_sm.duration)+'</span>':'')+'</div>');
       o('<div style="display:flex;gap:8px;margin-bottom:8px">');
       if(_sm.myDeckKey&&G.decks[_sm.myDeckKey])o('<button class="fb" style="flex:1" onclick="G.selDeck=\''+h(_sm.myDeckKey).replace(/'/g,"\\'")+'\';openPanel(\'deckview\')">My Deck</button>');
