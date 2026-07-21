@@ -873,7 +873,8 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpDeckDlPopup:false,mpMyDeckKey:null,mpLastOpp:null,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,
+  mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -1240,7 +1241,8 @@ function adjStat(pi,stat,d){
   var ev=p.name+': '+stat+' '+(df>0?'+':'')+df;
   p.hist.unshift(ev);if(p.hist.length>3)p.hist.length=3;
   G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
-  if(stat==='life')p.dead=p.life<=0;render();
+  if(stat==='life'){p.dead=p.life<=0;if(pi===0&&G.mpRoom)_mpPushLife(p.life);}
+  render();
 }
 function adjP2Life(d){
   var pv=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
@@ -1265,7 +1267,17 @@ function saveNames(){
 }
 function showLog(li){G.logPopup={li:li,wi:li===0?1:0};render();}
 function showP2Log(){G.logPopup={li:'p2',wi:0};render();}
-function _logPlayer(idx){return idx==='p2'?{name:G.cfg.p2||'Player 2',deck:null}:G.players[idx];}
+function _logPlayer(idx){
+  if(idx==='p2'){
+    if(G.mpRoom){var _oppP2=_mpOpponentOrLast();return {name:G.cfg.p2||'Player 2',deck:(_oppP2&&_oppP2.deck&&_oppP2.deck.name)?_oppP2.deck.name:null};}
+    return {name:G.cfg.p2||'Player 2',deck:null};
+  }
+  if(idx===1&&!G.players[1]&&G.mpRoom){
+    var _opp1=_mpOpponentOrLast();
+    return {name:G.cfg.p2||(_opp1&&_opp1.username)||'Player 2',deck:(_opp1&&_opp1.deck&&_opp1.deck.name)?_opp1.deck.name:null};
+  }
+  return G.players[idx];
+}
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
 function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
 // Writes a confirmed result to Local Stats / Deck Stats / Match Log. Shared
@@ -4435,6 +4447,7 @@ function _mpOnConnected(){
 // mpLastOpp so it's still available for the end-of-match download even
 // after the match room itself is closed out.
 function mpAcceptMatch(){
+  switchMode(1); // Connect matches only use 1 Player mode -- each device tracks its own life, opponent's is synced
   _mpApplyNames();
   G.mpLastOpp=_mpOpponent();
   G.mpConnectedPopup=false;
@@ -4496,8 +4509,19 @@ function _mpPoll(){
         if(!res[myKey]&&!G.mpResultPopup){G.mpResultPopup=res;}
         if(res.confirmedP1&&res.confirmedP2){_mpApplyRemoteResult(res);}
       }
-      if(G.panel==='connect'||G.panel==='mpdeck'||G.mpResultPopup||G.mpWaitingResult)render();
+      render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
+}
+var _mpLifePushTimer=null;
+function _mpPushLife(life){
+  if(!G.mpRoom||!G.mpCode)return;
+  if(_mpLifePushTimer)clearTimeout(_mpLifePushTimer);
+  _mpLifePushTimer=setTimeout(function(){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'setLife',code:G.mpCode,role:G.mpRole,life:life})
+    }).catch(function(){});
+  },400);
 }
 function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
 function _mpStopPoll(){if(_mpPollTimer){clearInterval(_mpPollTimer);_mpPollTimer=null;}}
@@ -4537,6 +4561,19 @@ function _mpProposeResult(wi,li){
     render();
   }).catch(function(e){G.mpWaitingResult=false;G.mpPendingResult=null;G.mpErr='Failed to send result: '+e.message;render();});
 }
+// Lets the proposer back out if the opponent never confirms (they left,
+// lost connection, etc.) instead of being stuck on the waiting popup.
+function mpCancelWaitingResult(){
+  G.mpWaitingResult=false;
+  G.mpPendingResult=null;
+  if(G.mpCode){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'cancelResult',code:G.mpCode})
+    }).catch(function(){});
+  }
+  render();
+}
 // Runs on the receiving device once they tap Confirm on the "Confirm Match
 // Result" popup.
 function mpConfirmResult(){
@@ -4568,18 +4605,29 @@ function _mpApplyRemoteResult(res){
   var wi=iWon?0:1,li=iWon?1:0;
   var w=_logPlayer(wi),lo=_logPlayer(li);
   _mpFinalizeEntry(w,lo,res.turns,res.duration,G.matchStartTime||null);
-  if(G.mpLastOpp&&G.mpLastOpp.deck)G.mpDeckDlPopup=true;
+  var oppSnap=_mpOpponent()||G.mpLastOpp;
+  G.mpLastOpp=oppSnap; // refresh the snapshot before the room closes, in case this was a rematch with an updated deck
+  G.mpMatchSummaryPopup={
+    winner:w.name,loser:lo.name,
+    turns:res.turns||G.turnNum,duration:res.duration||null,
+    myDeckKey:G.mpMyDeckKey||null,
+    oppHasDeck:!!(oppSnap&&oppSnap.deck)
+  };
   _mpEndMatch();
   G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.matchStartTime=null;
   render();
 }
+// Returns the opponent's room-side data even after the room itself has been
+// closed out (post-match), by falling back to the mpLastOpp snapshot taken
+// at Accept time.
+function _mpOpponentOrLast(){return _mpOpponent()||G.mpLastOpp;}
 function mpViewOppDeck(){
-  var opp=_mpOpponent();
+  var opp=_mpOpponentOrLast();
   if(!opp||!opp.deck){alert('Opponent has not selected a deck.');return;}
   openPanel('mpdeck');
 }
 function mpImportOppDeck(){
-  var opp=_mpOpponent();
+  var opp=_mpOpponentOrLast();
   if(!opp||!opp.deck){alert('Opponent has not selected a deck.');return;}
   var srcCards=opp.deck.cards||[];
   var deckName=opp.deck.name||'Opponent Deck';
@@ -4596,10 +4644,8 @@ function mpImportOppDeck(){
   render();
   _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'opponent')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
 }
-function mpDismissDeckDl(){G.mpDeckDlPopup=false;render();}
 function mpDownloadOppDeckCSV(){
-  var opp=G.mpLastOpp;
-  G.mpDeckDlPopup=false;
+  var opp=_mpOpponentOrLast();
   if(!opp||!opp.deck){render();return;}
   var dv=opp.deck;
   var rows=[['qty','name','type','rarity','cost','threshold','element']];
@@ -4620,7 +4666,34 @@ function mpDownloadOppDeckCSV(){
   a.href=url;a.download=(dv.name||'opponent-deck').replace(/[^a-z0-9_\-]/gi,'_')+'.csv';
   document.body.appendChild(a);a.click();
   setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+}
+function mpCloseMatchSummary(){G.mpMatchSummaryPopup=null;render();}
+function mpPlayAgain(){
+  G.mpMatchSummaryPopup=null;
+  G.mpRematchDeckKey=G.mpMyDeckKey||'';
+  G.mpRematchPicking=true;
   render();
+}
+function mpCancelRematch(){G.mpRematchPicking=false;render();}
+function mpSubmitRematch(){
+  var deckKey=G.mpRematchDeckKey||'';
+  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  G.mpMyDeckKey=deckKey||null;
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'rematch',code:G.mpCode,role:G.mpRole,deck:deck})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room)G.mpRoom=d.room;
+    switchMode(1); // fresh life/turn tracking for the new game -- Connect matches only use 1 Player mode
+    _mpApplyNames();
+    G.mpLastOpp=_mpOpponent();
+    G.mpResultFinalized=false;
+    G.mpRematchPicking=false;
+    _mpStartPoll();
+    closeAll();
+    render();
+  }).catch(function(e){G.mpErr='Failed to start rematch: '+e.message;G.mpRematchPicking=false;render();});
 }
 function logMatch(){
   var w=document.getElementById('lw').value,lo=document.getElementById('ll').value;
@@ -6343,7 +6416,7 @@ function pContent(){
     return out.join('');
   }
   if(p==='mpdeck'){
-    var mpOppD=_mpOpponent();
+    var mpOppD=_mpOpponentOrLast();
     if(!mpOppD||!mpOppD.deck){o('<div class="ld">No opponent deck.</div>');return out.join('');}
     var mpDv=mpOppD.deck;
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
@@ -6957,17 +7030,21 @@ function pTap(p,pi){
     o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
   if(G.mode===1){
-    var _p2h=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
+    var _mpOppLife=G.mpRoom?(_mpOpponent()&&_mpOpponent().life!=null?_mpOpponent().life:G.cfg.maxLife):null;
+    var _p2h=(_mpOppLife!=null)?_mpOppLife:(G.p2Life!=null?G.p2Life:G.cfg.maxLife);
     var _p2dead=_p2h<=0;
+    var _p2ReadOnly=!!G.mpRoom; // during a connect match this badge mirrors the opponent's own device instead of being tapped locally
     o('<div class="p2hp-badge" style="position:absolute;bottom:6px;right:6px;width:82px;height:124px;z-index:5;border:2px solid var(--red);background:var(--bg2);box-sizing:border-box;overflow:hidden">');
     if(_p2dead){
       o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden"><img src="DD.jpg" alt="Death\'s Door" style="width:100%;height:100%;object-fit:cover;opacity:.92"></div>');
-      o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
+      if(!_p2ReadOnly)o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
       o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();showP2Log()"></button>');
     } else {
       o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
-      o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
-      o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
+      if(!_p2ReadOnly){
+        o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
+        o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
+      }
     }
     o('</div>');
   }
@@ -7321,19 +7398,33 @@ function render(){
       o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAcceptMatch()">Accept</button></div></div></div>');
     }
 
-    if(G.mpDeckDlPopup&&G.mpLastOpp){
-      var _mpOppD=G.mpLastOpp;
-      o('<div class="ov" onclick="if(event.target===this)mpDismissDeckDl()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Complete</div><div class="lp-b">');
-      o('<div style="font-size:14px;color:var(--fg2);margin-bottom:4px">Download</div>');
-      o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:14px">'+h(_mpOppD.username)+'&#39;s deck?</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpDismissDeckDl()">No Thanks</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpDownloadOppDeckCSV()">Download</button></div></div></div>');
+    if(G.mpMatchSummaryPopup){
+      var _sm=G.mpMatchSummaryPopup;
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:320px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Summary</div><div class="lp-b">');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="color:var(--grn);font-weight:700;font-size:18px">'+h(_sm.winner)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">WINNER</span></div>');
+      o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span style="color:var(--red);font-weight:700;font-size:18px">'+h(_sm.loser)+'</span><span style="font-size:10px;color:var(--fg3);background:var(--bg);padding:3px 7px;border:1px solid var(--bd)">LOSER</span></div>');
+      o('<div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;font-size:12px;color:var(--fg2)"><span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Turn: '+_sm.turns+'</span>'+(_sm.duration?'<span style="background:var(--bg);padding:4px 9px;border:1px solid var(--bd)">Time: '+h(_sm.duration)+'</span>':'')+'</div>');
+      o('<div style="display:flex;gap:8px;margin-bottom:8px">');
+      if(_sm.myDeckKey&&G.decks[_sm.myDeckKey])o('<button class="fb" style="flex:1" onclick="G.selDeck=\''+h(_sm.myDeckKey).replace(/'/g,"\\'")+'\';G.mpMatchSummaryPopup=null;openPanel(\'deckview\')">My Deck</button>');
+      if(_sm.oppHasDeck)o('<button class="fb" style="flex:1" onclick="G.mpMatchSummaryPopup=null;openPanel(\'mpdeck\')">Opponent Deck</button>');
+      o('</div>');
+      if(_sm.oppHasDeck)o('<button class="fb full" style="margin-bottom:4px" onclick="mpDownloadOppDeckCSV()">&#x2B07; Download Opponent Deck</button>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCloseMatchSummary()">Close</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpPlayAgain()">Play Again</button></div></div></div>');
+    }
+
+    if(G.mpRematchPicking){
+      var _rmOpts='<option value="">No deck</option>'+Object.keys(G.decks).filter(function(k){return k!=='__preview__';}).map(function(k){return '<option value="'+h(k)+'"'+((G.mpRematchDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Play Again</div><div class="lp-b">');
+      o('<div style="font-size:13px;color:var(--fg2);margin-bottom:10px;text-align:left">Choose your deck for the next match:</div>');
+      o('<select onclick="event.stopPropagation()" onchange="G.mpRematchDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box;margin-bottom:4px">'+_rmOpts+'</select>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCancelRematch()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpSubmitRematch()">Start</button></div></div></div>');
     }
 
     if(G.mpResultPopup&&!G.mpPendingResult){
       var _rres=G.mpResultPopup;
       var _rAmWinner=!_rres.proposerWon;
-      var _rWinP=_rAmWinner?G.players[0]:G.players[1];
-      var _rLosP=_rAmWinner?G.players[1]:G.players[0];
+      var _rWinP=_rAmWinner?_logPlayer(0):_logPlayer(1);
+      var _rLosP=_rAmWinner?_logPlayer(1):_logPlayer(0);
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Confirm Match Result</div><div class="lp-b">');
       o('<div style="font-size:13px;color:var(--fg2);margin-bottom:10px">Your opponent reported:</div>');
       o('<div style="font-size:20px;font-weight:700;color:var(--grn);margin-bottom:4px">'+h(_rWinP?_rWinP.name:'')+' won</div>');
@@ -7344,7 +7435,7 @@ function render(){
     if(G.mpWaitingResult&&!G.mpResultFinalized){
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to confirm the match result&hellip;</div>');
-      o('</div></div></div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpCancelWaitingResult()">Cancel</button></div></div></div>');
     }
 
     // ── Drawer ──
@@ -7354,7 +7445,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:30px">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;switchMode(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'" style="font-size:15px" onclick="G.mode=2;switchMode(2);render()">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;switchMode(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'"'+(G.mpRoom?' disabled title="Connect matches use 1 Player mode" style="font-size:15px;opacity:.4"':' style="font-size:15px"')+' onclick="'+(G.mpRoom?'':'G.mode=2;switchMode(2);render()')+'">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
