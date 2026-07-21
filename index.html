@@ -2388,13 +2388,13 @@ function _diceInitOverlay(){
   // P1 Done button — bottom of screen, normal orientation
   var bar=document.createElement('div');
   bar.id='dice-3d-bar';
-  bar.style.cssText='position:absolute;bottom:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;';
+  bar.style.cssText='position:absolute;bottom:0;left:50%;transform:translateX(-50%);padding:12px 0;z-index:20;';
   bar.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:14px 34px;font-size:18px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // P2 Done button — top of screen, rotated 180° so P2 reads it correctly
   var bar2=document.createElement('div');
   bar2.id='dice-3d-bar2';
-  bar2.style.cssText='position:absolute;top:0;left:0;width:100%;display:flex;justify-content:center;align-items:center;padding:12px 0;z-index:20;transform:rotate(180deg);';
+  bar2.style.cssText='position:absolute;top:0;left:50%;transform:translateX(-50%) rotate(180deg);padding:12px 0;z-index:20;';
   bar2.innerHTML='<button style="background:var(--bg3);border:1px solid var(--bd);color:var(--fg2);padding:14px 34px;font-size:18px;cursor:pointer;font-family:inherit" onclick="closeDice()">Done</button>';
 
   // Result displays — one per player in their readable orientation
