@@ -1295,6 +1295,7 @@ function _logPlayer(idx){
 }
 function _fmtTime(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
 function _fmtTime12(d){var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();var ap=h>=12?'PM':'AM';var h12=h%12;if(h12===0)h12=12;return h12+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' '+ap;}
+function _fmtLogDate(ts){if(!ts)return '';var d=new Date(ts);if(isNaN(d.getTime()))return '';var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return months[d.getMonth()]+' '+d.getDate();}
 // Writes a confirmed result to Local Stats / Deck Stats / Match Log. Shared
 // by the solo/local-match path (confirmLog below) and the connect-match
 // path (_mpApplyRemoteResult), which both compute the same winner/loser
@@ -6512,12 +6513,13 @@ function pContent(){
       G.matchLog.slice(0,20).forEach(function(e){
         var dur=e.duration?' · '+e.duration:'';
         var turns=e.turns?' · T'+e.turns:'';
+        var edate=_fmtLogDate(e.ts);
         o('<div class="ml-row" style="flex-direction:column;align-items:flex-start;gap:2px">');
         o('<div style="display:flex;align-items:center;gap:4px;width:100%;flex-wrap:nowrap">');
         o('<span class="ml-w">'+h(e.winner||'')+'</span>');
         o('<span class="ml-sep">def.</span>');
         o('<span class="ml-l">'+h(e.loser||'')+'</span>');
-        o('<span class="ml-meta" style="margin-left:auto;white-space:nowrap">'+h(e.time||'')+dur+turns+'</span>');
+        o('<span class="ml-meta" style="margin-left:auto;white-space:nowrap">'+(edate?h(edate)+' &middot; ':'')+h(e.time||'')+dur+turns+'</span>');
         o('</div>');
         if(e.winnerDeck||e.loserDeck){
           o('<div style="display:flex;gap:6px;font-size:11px;color:var(--fg2);padding-left:2px">');
