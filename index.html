@@ -2504,7 +2504,7 @@ function _diceInitOverlay(){
       var _bndX=_bndH*_bndAsp*_bndSafety/2-_dieR, _bndZ=_bndH*_bndSafety/2-_dieR;
       var _ground=0.65;
       var _gravity=28;
-      var _diceRollCapMs=G.diceFastRoll?500:1700;
+      var _diceRollCapMs=G.diceFastRoll?500:1250;
       if((performance.now()-_diceRollStartWall)>=_diceRollCapMs){
         _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=_ground;
         if(_diceGroup2) _diceGroup2.position.y=_ground;
@@ -2571,8 +2571,10 @@ function _diceInitOverlay(){
         if(_diceGroup.position.z> _bndZ){_diceGroup.position.z= _bndZ;_diceVPZ*=-0.9;}
         if(_diceGroup.position.z<-_bndZ){_diceGroup.position.z=-_bndZ;_diceVPZ*=-0.9;}
         _diceVPX*=Math.pow(0.75,dt*60); _diceVPZ*=Math.pow(0.75,dt*60);
-        _diceGroup.position.x+=(-_diceGroup.position.x)*0.04;
-        _diceGroup.position.z+=(-_diceGroup.position.z)*0.04;
+        if(!_diceDockMode){
+          _diceGroup.position.x+=(-_diceGroup.position.x)*0.04;
+          _diceGroup.position.z+=(-_diceGroup.position.z)*0.04;
+        }
         if(_diceGroup2){
           _diceGroup2.rotation.x+=_diceVX2*dt;
           _diceGroup2.rotation.y+=_diceVY2*dt;
@@ -2586,8 +2588,10 @@ function _diceInitOverlay(){
           if(_diceGroup2.position.z> _bndZ){_diceGroup2.position.z= _bndZ;_diceVPZ2*=-0.9;}
           if(_diceGroup2.position.z<-_bndZ){_diceGroup2.position.z=-_bndZ;_diceVPZ2*=-0.9;}
           _diceVPX2*=Math.pow(0.75,dt*60); _diceVPZ2*=Math.pow(0.75,dt*60);
-          _diceGroup2.position.x+=(-1.2-_diceGroup2.position.x)*0.04;
-          _diceGroup2.position.z+=(-_diceGroup2.position.z)*0.04;
+          if(!_diceDockMode){
+            _diceGroup2.position.x+=(-1.2-_diceGroup2.position.x)*0.04;
+            _diceGroup2.position.z+=(-_diceGroup2.position.z)*0.04;
+          }
         }
         if(Math.abs(_diceVX)<0.06&&Math.abs(_diceVY)<0.06){
           _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=_ground;
@@ -2703,8 +2707,12 @@ function _diceSyncInlineSlot(){
     // actually visible in this smaller container rather than potentially
     // sitting outside what's currently in view.
     if(_dicePhase==='idle'&&_diceGroup){
-      _diceGroup.position.set(0,0.65,0);
-      if(_diceGroup2)_diceGroup2.position.set(-1.2,0.65,0);
+      var _dieR=0.7;
+      var _bndH=2*Math.tan(50*Math.PI/180/2)*_diceCamDist;
+      var _bndAsp=(_diceRenderer&&_diceRenderer.domElement)?((_diceRenderer.domElement.width||window.innerWidth)/Math.max(1,_diceRenderer.domElement.height||window.innerHeight)):(window.innerWidth/Math.max(1,window.innerHeight));
+      var _bndX=_bndH*_bndAsp*0.85/2-_dieR, _bndZ=_bndH*0.85/2-_dieR;
+      if(Math.abs(_diceGroup.position.x)>_bndX||Math.abs(_diceGroup.position.z)>_bndZ) _diceGroup.position.set(0,0.65,0);
+      if(_diceGroup2&&(Math.abs(_diceGroup2.position.x)>_bndX||Math.abs(_diceGroup2.position.z)>_bndZ)) _diceGroup2.position.set(-1.2,0.65,0);
     }
   }
 }
