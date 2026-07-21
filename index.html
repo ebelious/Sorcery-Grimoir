@@ -266,7 +266,7 @@ body.rounded .cm-tag,body.rounded .cm-rt,body.rounded .price-box,body.rounded .q
 body.rounded .p-tap,body.rounded .sbox,body.rounded .adj,body.rounded .sm-btn,body.rounded .eadj,body.rounded .dks,body.rounded .hp{border-radius:6px}
 body.rounded .dice-pop,body.rounded .log-pop,body.rounded .dbtn,body.rounded .lp-btn,body.rounded .sdd{border-radius:8px}
 body.rounded .dk-c,body.rounded .dk-tag,body.rounded .art-c,body.rounded .sc,body.rounded .own-b{border-radius:6px}
-body.rounded .p1-settings-btn,body.rounded .p2-dice-theme-btn{border-radius:8px}
+body.rounded .p1-settings-btn,body.rounded .p2-dice-theme-btn,body.rounded .p2hp-badge{border-radius:8px}
 body.rounded .coll-th,body.rounded .p-cl,body.rounded .yt-sel{border-radius:6px}
 body.rounded .rd-modal{border-radius:10px}
 body.rounded .rd-close{border-radius:6px}
@@ -1167,7 +1167,7 @@ function _applyBgImage(){
 
 // ── PLAYERS ───────────────────────────────────────────────────────────────────
 function mkP(i){return{name:i===0?G.cfg.p1:G.cfg.p2,life:G.cfg.maxLife,mana:0,manaUsed:0,dead:false,thresh:{fire:0,water:0,earth:0,air:0},hist:[],deck:null,tlog:[],phase:'start'};}
-function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
+function initP(n){G.players=[];for(var i=0;i<n;i++)G.players.push(mkP(i));G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;G.p2Life=G.cfg.maxLife;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
 function switchMode(n){var _prev=G.players||[];G.players=[];for(var i=0;i<n;i++){var p=mkP(i);if(_prev[i]){p.life=_prev[i].life;p.mana=_prev[i].mana;p.manaUsed=_prev[i].manaUsed;p.thresh=_prev[i].thresh;}G.players.push(p);}G.mode=n;G.turnNum=1;G.turnLog=[];G.activePI=-1;if(n===1){try{_diceInitOverlay();}catch(e){}}try{_diceApplyDockLayout();}catch(e){}}
 
 // ── TURN SYSTEM ───────────────────────────────────────────────────────────────
@@ -1225,6 +1225,7 @@ function adjStat(pi,stat,d){
   G.turnLog.unshift(ev);if(G.turnLog.length>30)G.turnLog.length=30;
   if(stat==='life')p.dead=p.life<=0;render();
 }
+function adjP2Life(d){G.p2Life=Math.max(0,Math.min(G.cfg.maxLife,(G.p2Life!=null?G.p2Life:G.cfg.maxLife)+d));render();}
 function adjMU(pi,d){G.players[pi].manaUsed=Math.max(0,Math.min(999,G.players[pi].manaUsed+d));render();}
 function adjEl(pi,k,d){G.players[pi].thresh[k]=Math.max(0,Math.min(20,G.players[pi].thresh[k]+d));render();}
 function setDeck(pi,k){G.players[pi].deck=k||null;render();}
@@ -6596,6 +6597,14 @@ function pTap(p,pi){
     o('<button class="tap-btn-top" onclick="adjStat('+pi+',\'life\',1)"></button>');
     o('<button class="tap-btn-bot" onclick="adjStat('+pi+',\'life\',-1)"></button>');
   }
+  if(G.mode===1){
+    var _p2h=G.p2Life!=null?G.p2Life:G.cfg.maxLife;
+    o('<div class="p2hp-badge" style="position:absolute;bottom:6px;right:6px;width:74px;height:92px;z-index:5;border:2px solid var(--red);background:var(--bg2);box-sizing:border-box;overflow:hidden">');
+    o('<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;line-height:1;color:var(--fg);pointer-events:none">'+_p2h+'</div>');
+    o('<button class="tap-btn-top" style="z-index:6" onclick="event.stopPropagation();adjP2Life(1)"></button>');
+    o('<button class="tap-btn-bot" style="z-index:6" onclick="event.stopPropagation();adjP2Life(-1)"></button>');
+    o('</div>');
+  }
   o('</div>');
 
   o('<div class="tap-tile"'+(G.mode===1?' style="min-height:170px"':'')+'>');
@@ -6723,13 +6732,13 @@ function turnBar(){
     return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_diceRow+(_ml?'':_mbtn)+'</div>';
   }
   if(G.cfg&&G.cfg.hideTurnBar){
-    var _p0sH='<div class="tb-s"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0?h(p0.name):'')+'</span></div>';
+    var _p0sH='<div class="tb-s"'+(G.mode===1?' style="border-right:none"':'')+'><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0&&G.mode!==1?h(p0.name):'')+'</span></div>';
     var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
     return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_mbtn)+'</div>';
   }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
-  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
+  var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':(G.mode===1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(G.cfg.p2||'Player 2')+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>');
   return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_mbtn)+'</div>';
 }
 
