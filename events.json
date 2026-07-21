@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-20T19:50:13.500Z",
+  "updated": "2026-07-21T03:16:52.568Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -107,6 +107,19 @@
       "url": "https://play.sorcerytcg.com/events/5b9e3cc6-5a6c-41ba-b78b-a04858d682e3"
     },
     {
+      "name": "Monday Night Arthurian Legends Draft",
+      "date": "Jul 20, 2026 - Jul 21, 2026",
+      "time": "8:30 PM UTC",
+      "type": "Sealed Tournament",
+      "location": "Greensburg, KY",
+      "city": "Greensburg",
+      "state": "KY",
+      "address": "409 B Columbia Highway Greensburg KY 42743",
+      "description": "",
+      "storeName": "Moon Mountain Games",
+      "url": "https://play.sorcerytcg.com/events/a9a3824d-3e0b-4069-9dd5-446d5c15b62b"
+    },
+    {
       "name": "Monday Night Sorcery",
       "date": "Mon. Jul 20, 2026",
       "time": "9:33 PM UTC",
@@ -134,6 +147,19 @@
     },
     {
       "name": "KG Locals",
+      "date": "Jul 20, 2026 - Jul 21, 2026",
+      "time": "10:00 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Morgantown, WV",
+      "city": "Morgantown",
+      "state": "WV",
+      "address": "60 Minutes",
+      "description": "",
+      "storeName": "Kassar's Games",
+      "url": "https://play.sorcerytcg.com/events/63607f3a-dfca-4410-bbfa-f77101fad251"
+    },
+    {
+      "name": "KG Locals",
       "date": "Mon. Jul 20, 2026",
       "time": "10:00 PM UTC",
       "type": "Kassar's Games",
@@ -143,19 +169,19 @@
       "address": "60 Minutes",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1a26d2fb-55fc-4e9f-bc2a-39a033b18a2f"
+      "url": "https://play.sorcerytcg.com/events/63607f3a-dfca-4410-bbfa-f77101fad251"
     },
     {
       "name": "Weekly Constructed",
       "date": "Mon. Jul 20, 2026",
       "time": "10:00 PM UTC",
-      "type": "Cosmic Cardboard",
+      "type": "Constructed Tournament",
       "location": "Cannon, KY",
       "city": "Cannon",
       "state": "KY",
       "address": "539 S Ky 3438 Cannon KY 40923",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Cosmic Cardboard",
       "url": "https://play.sorcerytcg.com/events/0e49d6fb-c427-459e-b721-869e1ba04b0b"
     },
     {
@@ -175,40 +201,14 @@
       "name": "GSC LOCALS",
       "date": "Jul 20, 2026 - Jul 21, 2026",
       "time": "10:30 PM UTC",
-      "type": "Greentree Sports Cards",
+      "type": "Constructed Tournament",
       "location": "Pittsburgh, PA",
       "city": "Pittsburgh",
       "state": "PA",
       "address": "1962 Greentree Road Pittsburgh PA 15220",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Greentree Sports Cards",
       "url": "https://play.sorcerytcg.com/events/aba8c09a-f212-4caa-bce9-13732c8925cf"
-    },
-    {
-      "name": "Sorcery at Oinkers",
-      "date": "Mon. Jul 20, 2026",
-      "time": "11:00 PM UTC",
-      "type": "Oinkers Island",
-      "location": "Broken Arrow, OK",
-      "city": "Broken Arrow",
-      "state": "OK",
-      "address": "745 North Aspen Avenue Broken Arrow OK 74012",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6f951be4-da52-4047-b735-b626b46e3a60"
-    },
-    {
-      "name": "Monday Sorcery",
-      "date": "Mon. Jul 20, 2026",
-      "time": "11:00 PM UTC",
-      "type": "Middle Tennessee Gaming",
-      "location": "Nashville, TN",
-      "city": "Nashville",
-      "state": "TN",
-      "address": "1851 Roswell Rd - Marietta, GA",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9a17330d-361a-4eb1-87f2-b8255753d495"
     }
   ]
 }
