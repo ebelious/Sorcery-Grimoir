@@ -7544,7 +7544,7 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:30px">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn'+(G.mode===1?' on':'')+'" style="font-size:15px" onclick="G.mode=1;switchMode(1);render()">1P</button><button class="qbtn'+(G.mode===2?' on':'')+'"'+(G.mpRoom?' disabled title="Connect matches use 1 Player mode" style="font-size:15px;opacity:.4"':' style="font-size:15px"')+' onclick="'+(G.mpRoom?'':'G.mode=2;switchMode(2);render()')+'">2P</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn on" style="font-size:15px'+(G.mpRoom?';opacity:.4':'')+'"'+(G.mpRoom?' disabled title="Connect matches use 1 Player mode"':' onclick="switchMode(G.mode===1?2:1);render()"')+'>'+(G.mode===2?'2P':'1P')+'</button><button class="qbtn" style="font-size:15px" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()">Reset</button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px" onclick="showTimerPopup(this)">&#9201;</button><button class="qbtn" style="font-size:20px" onclick="openPanel(\'connect\')" title="Connect">&#9876;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
@@ -7552,7 +7552,6 @@ function render(){
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
-      o('<div class="cro" onclick="openPanel(\'connect\')"><div class="crn">&#9876; Connect</div><div style="color:var(--hi)">&#8594;</div></div>');
       if(!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){
         if(_pwaPrompt){
           o('<div style="margin-top:auto;text-align:center"><button class="fb" style="margin:12px 0 0" onclick="installPWA()">&#x2B07; Install as App</button></div>');
