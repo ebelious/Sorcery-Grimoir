@@ -2801,6 +2801,7 @@ function rollDice(sides,count,colIdx,pi,isCustom){
   // Show overlay immediately so the user sees the screen open right away,
   // then do heavy texture work on the next frame so the browser can paint first
   _diceOverlay.style.display='flex';
+  if(_diceHandleResizeFn)_diceHandleResizeFn();
   G.dice={sides:sides,count:count,rolling:true,rolls:_dicePendingRolls,final:null,settling:false,ci:_diceCI,pi:_dicePI};
   render();
 
