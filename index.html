@@ -771,7 +771,7 @@ var MENU_S={
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'aotr', n:'Archives of the Realm', url:'https://www.youtube.com/channel/UCjN3qLn5iH2UenbQMNquejQ/videos', cid:'UCjN3qLn5iH2UenbQMNquejQ'},
@@ -873,7 +873,9 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,
 };
+var _mpPollTimer=null;
 var S={gs:'',cS:'',coS:'',faqQ:'',codexQ:'',gsDrop:false};
 
 // ── STORAGE ──────────────────────────────────────────────────────────────────
@@ -2996,6 +2998,7 @@ function showP1Settings(anchorEl){
   html+='<div style="display:flex;align-items:center;gap:8px">';
   html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;justify-content:center;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Set match timer"><span style="font-size:14px">Timer</span></button>';
   html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;padding:8px 12px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px">Timer Log</span></button>';
+  html+='<button onclick="var _pp=document.getElementById(\'p1-settings-pop\');if(_pp)_pp.remove();openPanel(\'connect\')" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:18px;color:var(--hi,#22d3ee)" title="Connect with another device">&#9876;</button>';
   html+='</div>';
 
   // ── Section: Player 2 ──
@@ -4356,6 +4359,98 @@ function trigUpDecks(){
 }
 function addRec(n){n=(n||'').trim();if(!n)return;if(!G.records[n])G.records[n]={w:0,l:0};sv('sg-rec',G.records);render();}
 function delRec(n){if(!confirm('Delete player "'+n+'"? This will remove their W/L record.'))return;delete G.records[n];sv('sg-rec',G.records);render();}
+
+// CONNECT (2-device match code, via Netlify Blobs -- see match-sync.js)
+function _mpMe(){if(!G.mpRoom)return null;return G.mpRole==='p1'?G.mpRoom.p1:G.mpRoom.p2;}
+function _mpOpponent(){if(!G.mpRoom)return null;return G.mpRole==='p1'?G.mpRoom.p2:G.mpRoom.p1;}
+function _mpAddOpponentToRecords(){
+  var opp=_mpOpponent();
+  if(opp&&opp.username&&!G.records[opp.username]){G.records[opp.username]={w:0,l:0};sv('sg-rec',G.records);}
+}
+function mpCreate(){
+  var uname=((document.getElementById('mp-uname')||{}).value||G.cfg.p1||'').trim()||'Player 1';
+  var deckKey=(document.getElementById('mp-deck')||{}).value||'';
+  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'create',username:uname,deck:deck})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to create match');return d;});})
+  .then(function(d){
+    G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p1';G.mpBusy=false;
+    _mpStartPoll();
+    render();
+  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+}
+function mpJoin(){
+  var code=((document.getElementById('mp-code')||{}).value||'').trim().toUpperCase();
+  var uname=((document.getElementById('mp-uname2')||{}).value||G.cfg.p1||'').trim()||'Player 1';
+  var deckKey=(document.getElementById('mp-deck2')||{}).value||'';
+  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  if(!code){G.mpErr='Enter a match code.';render();return;}
+  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'join',code:code,username:uname,deck:deck})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to join match');return d;});})
+  .then(function(d){
+    G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
+    _mpAddOpponentToRecords();
+    render();
+  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+}
+function _mpPoll(){
+  if(!G.mpCode)return;
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync?action=get&code='+encodeURIComponent(G.mpCode))
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d||!d.room)return;
+      var hadOpp=!!_mpOpponent();
+      G.mpRoom=d.room;
+      if(!hadOpp&&_mpOpponent()){
+        _mpAddOpponentToRecords();
+        _sendNotification('Match Connected',(_mpOpponent().username||'Opponent')+' has joined the match.','connect');
+        _mpStopPoll();
+      }
+      if(G.panel==='connect'||G.panel==='mpdeck')render();
+    }).catch(function(){});
+}
+function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
+function _mpStopPoll(){if(_mpPollTimer){clearInterval(_mpPollTimer);_mpPollTimer=null;}}
+function mpLeave(){
+  if(G.mpCode){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'leave',code:G.mpCode})
+    }).catch(function(){});
+  }
+  _mpStopPoll();
+  G.mpCode=null;G.mpRoom=null;G.mpRole=null;G.mpErr=null;
+  render();
+}
+function mpViewOppDeck(){
+  var opp=_mpOpponent();
+  if(!opp||!opp.deck){alert('Opponent has not selected a deck.');return;}
+  openPanel('mpdeck');
+}
+function mpImportOppDeck(){
+  var opp=_mpOpponent();
+  if(!opp||!opp.deck){alert('Opponent has not selected a deck.');return;}
+  var srcCards=opp.deck.cards||[];
+  var deckName=opp.deck.name||'Opponent Deck';
+  var baseName=deckName,n=1;
+  while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
+  var unmatched=[],matched=[];
+  srcCards.forEach(function(entry){
+    var c=cardByName(entry.name);
+    if(c){matched.push({name:cName(c),qty:entry.qty});}
+    else{unmatched.push(entry.name+' x'+entry.qty);}
+  });
+  G.decks[deckName]={name:deckName,cards:matched,creator:opp.username||''};
+  sv('sg-dk',G.decks);
+  render();
+  _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'opponent')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
+}
 function logMatch(){
   var w=document.getElementById('lw').value,lo=document.getElementById('ll').value;
   var wd=document.getElementById('lwd').value,ld_=document.getElementById('lld').value;
@@ -6024,6 +6119,88 @@ function pContent(){
     o('<a class="ext-lnk" style="margin-top:6px" href="https://curiosa.io/decks" target="_blank">All community decks on curiosa.io &rarr;</a>');
     return out.join('');
   }
+  if(p==='connect'){
+    o('<div class="set-pop">');
+    if(!G.mpRoom){
+      o('<div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px;text-align:center">&#9876; Connect</div>');
+      if(G.mpErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpErr)+'</div>');
+      var mpMode=G.mpMode||'create';
+      o('<div style="display:flex;gap:8px;margin-bottom:16px">');
+      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
+      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
+      o('</div>');
+      var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'">'+h(G.decks[k].name)+'</option>';}).join('');
+      if(mpMode==='join'){
+        o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
+        o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck2" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
+      } else {
+        o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(G.cfg.p1||'')+'" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+        o('<div style="margin-bottom:14px"><select id="mp-deck" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+        o('<button class="fb gold full" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
+      }
+    } else {
+      var mpMe=_mpMe(),mpOpp=_mpOpponent();
+      o('<div style="text-align:center;margin-bottom:16px">');
+      o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Match Code</div>');
+      o('<div style="font-size:32px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpCode)+'</div>');
+      o('</div>');
+      o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:10px">');
+      o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">You</div>');
+      o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(mpMe?mpMe.username:'')+'</div>');
+      if(mpMe&&mpMe.deck)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(mpMe.deck.name)+'</div>');
+      o('</div>');
+      o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">');
+      o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Opponent</div>');
+      if(mpOpp){
+        o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(mpOpp.username)+'</div>');
+        if(mpOpp.deck){
+          o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(mpOpp.deck.name)+'</div>');
+          o('<div style="display:flex;gap:8px;margin-top:10px"><button class="fb" style="flex:1" onclick="mpViewOppDeck()">View Deck</button><button class="fb gold" style="flex:1" onclick="mpImportOppDeck()">Import Deck</button></div>');
+        } else {
+          o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">No deck shared</div>');
+        }
+      } else {
+        o('<div style="font-size:14px;color:var(--fg2)">Waiting for opponent to join&hellip;</div>');
+      }
+      o('</div>');
+      o('<button class="fb red full" onclick="mpLeave()">Leave Match</button>');
+    }
+    o('</div>');
+    return out.join('');
+  }
+  if(p==='mpdeck'){
+    var mpOppD=_mpOpponent();
+    if(!mpOppD||!mpOppD.deck){o('<div class="ld">No opponent deck.</div>');return out.join('');}
+    var mpDv=mpOppD.deck;
+    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+    o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(mpDv.name||'Deck')+'</div>');
+    o('<button class="fb gold" onclick="mpImportOppDeck()">Import</button>');
+    o('</div>');
+    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">@'+h(mpOppD.username)+'</div>');
+    var mpTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+    var mpTypeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
+    var mpTypeOrder=['avatar','aura','artifact','minion','magic','site'];
+    (mpDv.cards||[]).forEach(function(entry){
+      var c=cardByName(entry.name);
+      var t=c?cType(c):'minion';
+      if(!mpTypeGroups[t])t='minion';
+      mpTypeGroups[t].push({entry:entry,card:c});
+    });
+    mpTypeOrder.forEach(function(t){
+      var grp=mpTypeGroups[t];
+      if(!grp.length)return;
+      o('<div class="slbl2" style="margin-top:10px">'+mpTypeLabels[t]+' ('+grp.length+')</div>');
+      grp.forEach(function(g){
+        o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
+        o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
+        o('<span style="font-size:14px;color:var(--fg)'+(g.card?'':';font-style:italic;color:var(--fg2)')+'">'+h(g.entry.name)+'</span>');
+        o('</div>');
+      });
+    });
+    return out.join('');
+  }
   if(p==='sl'){
     o('<div class="sl-pop">');
     if(G.cfg.p1&&!G.records[G.cfg.p1]){G.records[G.cfg.p1]={w:0,l:0};sv('sg-rec',G.records);}
@@ -6968,6 +7145,7 @@ function render(){
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
+      o('<div class="cro" onclick="openPanel(\'connect\')"><div class="crn">&#9876; Connect</div><div style="color:var(--hi)">&#8594;</div></div>');
       if(!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){
         if(_pwaPrompt){
           o('<div style="margin-top:auto;text-align:center"><button class="fb" style="margin:12px 0 0" onclick="installPWA()">&#x2B07; Install as App</button></div>');
@@ -6985,7 +7163,7 @@ function render(){
     }
     if(G.panel&&G.panel!=='card'){
       var _fixHdrPanels=(G.panel==='yt'||G.panel==='news'||G.panel==='discord'||G.panel==='art'||G.panel==='rewards'||G.panel==='codex'||G.panel==='faq');
-      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+((G.panel==='codex'||G.panel==='faq')?' style="height:92vh;display:flex;flex-direction:column;overflow-y:hidden"':(_fixHdrPanels?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(_fixHdrPanels?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
+      o('<div class="pbg'+(G.panel==='life'||G.panel==='names'||G.panel==='sd'||G.panel==='links'||G.panel==='connect'?' pbg-center':'')+'" onclick="if(event.target===this)closeAll()"><div class="panel"'+((G.panel==='codex'||G.panel==='faq')?' style="height:92vh;display:flex;flex-direction:column;overflow-y:hidden"':(_fixHdrPanels?' style="display:flex;flex-direction:column;overflow-y:hidden"':(G.panel==='decks'?' style="min-height:50vh"':'')))+'><div class="phdr"'+(_fixHdrPanels?' style="flex-shrink:0"':'')+'><button class="p-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button><div class="p-ttl"'+(G.panel==='life'?' style="text-align:left;padding-left:78px"':'')+'>'+(PT[G.panel]||'')+'</div></div>'+pContent()+'</div></div>');
     }
     if(G.panel==='card')o(cModal());
     if(G.expImg)o('<div class="fs-img" onclick="G.expImg=null;G.expImgSite=false;render()"><img src="'+G.expImg+'" alt="card" style="'+(G.expImgSite?'height:90vw;width:90vh;transform:rotate(90deg);object-fit:contain':'max-height:90vh;max-width:90vw;object-fit:contain')+'"></div>');
