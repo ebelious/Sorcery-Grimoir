@@ -2504,7 +2504,8 @@ function _diceInitOverlay(){
       var _bndX=_bndH*_bndAsp*_bndSafety/2-_dieR, _bndZ=_bndH*_bndSafety/2-_dieR;
       var _ground=0.65;
       var _gravity=28;
-      if(G.diceFastRoll&&(performance.now()-_diceRollStartWall)>=500){
+      var _diceRollCapMs=G.diceFastRoll?500:1700;
+      if((performance.now()-_diceRollStartWall)>=_diceRollCapMs){
         _diceRolling=false; _dicePhase='idle'; _diceGroup.position.y=_ground;
         if(_diceGroup2) _diceGroup2.position.y=_ground;
         _diceShowResult();
@@ -2523,7 +2524,7 @@ function _diceInitOverlay(){
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        var _rdamp=_airborne?Math.pow(0.99,dt*60):Math.pow(0.82,dt*60);
+        var _rdamp=_airborne?Math.pow(0.99,dt*60):Math.pow(0.98,dt*60);
         _diceVX*=_rdamp; _diceVY*=_rdamp; _diceVZ*=_rdamp;
         _diceGroup.position.x+=_diceVPX*dt;
         _diceGroup.position.z+=_diceVPZ*dt;
@@ -2544,7 +2545,7 @@ function _diceInitOverlay(){
           _diceGroup2.rotation.x+=_diceVX2*dt;
           _diceGroup2.rotation.y+=_diceVY2*dt;
           _diceGroup2.rotation.z+=_diceVZ2*dt;
-          var _rdamp2=_airborne2?Math.pow(0.99,dt*60):Math.pow(0.82,dt*60);
+          var _rdamp2=_airborne2?Math.pow(0.99,dt*60):Math.pow(0.98,dt*60);
           _diceVX2*=_rdamp2; _diceVY2*=_rdamp2; _diceVZ2*=_rdamp2;
           _diceGroup2.position.x+=_diceVPX2*dt;
           _diceGroup2.position.z+=_diceVPZ2*dt;
@@ -2555,13 +2556,13 @@ function _diceInitOverlay(){
           _diceVPX2*=Math.pow(0.98,dt*60); _diceVPZ2*=Math.pow(0.98,dt*60);
         }
         var _rollThresh=G.diceFastRoll?0.1:0.8;
-        if(_diceTimer>_rollThresh&&_diceGroup.position.y<=_ground+0.05&&Math.abs(_diceVX)<1.5&&Math.abs(_diceVY)<1.5) _dicePhase='settling';
+        if(_diceTimer>_rollThresh&&_diceGroup.position.y<=_ground+0.05&&Math.abs(_diceVX)<1.5&&Math.abs(_diceVY)<1.5&&Math.abs(_diceVPX)<1.5&&Math.abs(_diceVPZ)<1.5) _dicePhase='settling';
       }
       if(_dicePhase==='settling'){
         _diceGroup.rotation.x+=_diceVX*dt;
         _diceGroup.rotation.y+=_diceVY*dt;
         _diceGroup.rotation.z+=_diceVZ*dt;
-        _diceVX*=Math.pow(0.72,dt*60); _diceVY*=Math.pow(0.72,dt*60); _diceVZ*=Math.pow(0.72,dt*60);
+        _diceVX*=Math.pow(0.75,dt*60); _diceVY*=Math.pow(0.75,dt*60); _diceVZ*=Math.pow(0.75,dt*60);
         _diceGroup.position.y+=(_ground-_diceGroup.position.y)*0.3;
         _diceGroup.position.x+=_diceVPX*dt;
         _diceGroup.position.z+=_diceVPZ*dt;
@@ -2576,7 +2577,7 @@ function _diceInitOverlay(){
           _diceGroup2.rotation.x+=_diceVX2*dt;
           _diceGroup2.rotation.y+=_diceVY2*dt;
           _diceGroup2.rotation.z+=_diceVZ2*dt;
-          _diceVX2*=Math.pow(0.72,dt*60); _diceVY2*=Math.pow(0.72,dt*60); _diceVZ2*=Math.pow(0.72,dt*60);
+          _diceVX2*=Math.pow(0.75,dt*60); _diceVY2*=Math.pow(0.75,dt*60); _diceVZ2*=Math.pow(0.75,dt*60);
           _diceGroup2.position.y+=(_ground-_diceGroup2.position.y)*0.3;
           _diceGroup2.position.x+=_diceVPX2*dt;
           _diceGroup2.position.z+=_diceVPZ2*dt;
@@ -2829,9 +2830,9 @@ function rollDice(sides,count,colIdx,pi,isCustom){
   var _posScale=_diceDockMode?0.35:1;
   _diceVY_pos=(Math.random()*6+8); // throw upward
   _diceVY_pos2=(Math.random()*6+8);
-  _diceVX=((Math.random()-0.5)*80+(Math.random()>0.5?36:-36))*_velScale;
-  _diceVY=((Math.random()-0.5)*70+(Math.random()>0.5?28:-28))*_velScale;
-  _diceVZ=((Math.random()-0.5)*60+(Math.random()>0.5?22:-22))*_velScale;
+  _diceVX=(Math.random()>0.5?1:-1)*(36+Math.random()*40)*_velScale;
+  _diceVY=(Math.random()>0.5?1:-1)*(28+Math.random()*35)*_velScale;
+  _diceVZ=(Math.random()>0.5?1:-1)*(22+Math.random()*30)*_velScale;
   _diceVPX=((Math.random()-0.5)*60+(Math.random()>0.5?20:-20))*_velScale;
   _diceVPZ=((Math.random()-0.5)*50+(Math.random()>0.5?18:-18))*_velScale;
   if(_diceGroup) _diceGroup.position.set(
@@ -2839,9 +2840,9 @@ function rollDice(sides,count,colIdx,pi,isCustom){
     0.5,
     _prevZ!==null?_prevZ:(Math.random()*4-2)*_posScale);
   if(_diceGroup2){
-    _diceVX2=((Math.random()-0.5)*80+(Math.random()>0.5?36:-36))*_velScale;
-    _diceVY2=((Math.random()-0.5)*70+(Math.random()>0.5?28:-28))*_velScale;
-    _diceVZ2=((Math.random()-0.5)*60+(Math.random()>0.5?22:-22))*_velScale;
+    _diceVX2=(Math.random()>0.5?1:-1)*(36+Math.random()*40)*_velScale;
+    _diceVY2=(Math.random()>0.5?1:-1)*(28+Math.random()*35)*_velScale;
+    _diceVZ2=(Math.random()>0.5?1:-1)*(22+Math.random()*30)*_velScale;
     _diceVPX2=((Math.random()-0.5)*60+(Math.random()>0.5?20:-20))*_velScale;
     _diceVPZ2=((Math.random()-0.5)*50+(Math.random()>0.5?18:-18))*_velScale;
     _diceGroup2.position.set(_prevX2!==null?_prevX2:1.2*_posScale,0.5,_prevZ2!==null?_prevZ2:(Math.random()*4-2)*_posScale);
