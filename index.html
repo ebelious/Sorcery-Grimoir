@@ -409,7 +409,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .si{position:relative;margin-bottom:5px}
 .si input{width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--fg);padding:9px 34px 9px 10px;outline:none;font-size:14px;font-family:'Courier New',monospace;display:block}
 #gs-inp{padding-top:16px;padding-bottom:16px;font-size:16px}
-.si input:focus,#gs-inp:focus,#dv-srch:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
+.si input:focus,#gs-inp:focus,#dv-srch:focus,#npp:focus{border:2px solid var(--hi)!important;box-shadow:0 0 6px rgba(0,0,0,0.25)}
 .si input::placeholder{color:var(--fg3)}
 .si .sx{position:absolute;right:0;top:0;height:100%;width:36px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--fg2)}
 .sdd{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--bd);z-index:20;max-height:175px;overflow-y:auto;margin-top:1px}
@@ -453,8 +453,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .sl-pop .slbl2{font-size:17px}
 .sl-pop .fi{font-size:16px;padding:11px 12px}
 .sl-pop .fb{font-size:14px;padding:11px 16px}
-.sl-pop .rt{font-size:16px}
-.sl-pop .rt th{font-size:13px;padding:7px}
+.sl-pop .rt{font-size:19px}
+.sl-pop .rt th{font-size:15px;padding:7px}
 .sl-pop .rt td{padding:9px 8px}
 .sl-pop .ml-row{font-size:15px}
 .sl-pop .ml-sep,.sl-pop .ml-meta{font-size:13px}
@@ -2988,7 +2988,7 @@ function showP1Settings(anchorEl){
   html+='</div>';
 
   // ── Section: Player 2 ──
-  var knownPlayers=Object.keys(G.records||{}).sort();
+  var knownPlayers=Object.keys(G.records||{}).filter(function(n){return n!==G.cfg.p1;}).sort();
   var curP2=G.players[1]?G.players[1].name:(G.cfg.p2||'Player 2');
   if(knownPlayers.length){
     html+='<div style="margin-top:14px;font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Player 2</div>';
@@ -6014,11 +6014,12 @@ function pContent(){
   }
   if(p==='sl'){
     o('<div class="sl-pop">');
-    var ns=Object.keys(G.records),pO=G.players.map(function(pp){return '<option value="'+h(pp.name)+'">'+h(pp.name)+'</option>';}).join(''),dO='<option value="">No deck</option>'+Object.entries(G.decks).map(function(kv){return '<option value="'+h(kv[0])+'">'+h(kv[1].name)+'</option>';}).join('');
+    if(G.cfg.p1&&!G.records[G.cfg.p1]){G.records[G.cfg.p1]={w:0,l:0};sv('sg-rec',G.records);}
+    var ns=Object.keys(G.records),pNames=ns.concat(G.players.map(function(pp){return pp.name;}).filter(function(n){return ns.indexOf(n)===-1;})),pO=pNames.map(function(n){return '<option value="'+h(n)+'">'+h(n)+'</option>';}).join(''),dO='<option value="">No deck</option>'+Object.entries(G.decks).map(function(kv){return '<option value="'+h(kv[0])+'">'+h(kv[1].name)+'</option>';}).join('');
     o('<div class="fr"><input class="fi" id="npp" placeholder="Add player&hellip;" style="flex:1"><button class="fb gold" onclick="addRec(document.getElementById(\'npp\').value);document.getElementById(\'npp\').value=\'\'">Add</button></div>');
     o('<table class="rt"><thead><tr><th>Player</th><th>W</th><th>L</th><th>%</th><th></th></tr></thead><tbody>');
-    if(ns.length){ns.forEach(function(n){var r=G.records[n];var pct=r.w+r.l>0?Math.round(r.w/(r.w+r.l)*100)+'%':'--';o('<tr><td>'+h(n)+'</td><td class="wc">'+r.w+'</td><td class="lc">'+r.l+'</td><td>'+pct+'</td><td><button class="fb red" style="font-size:11px;padding:4px 8px" onclick="delRec(\''+h(n)+'\')">&times;</button></td></tr>');});}else{o('<tr><td colspan="5" style="color:var(--fg2);font-size:12px;padding:6px">No players yet.</td></tr>');}
-    o('</tbody></table><div class="slbl2">Log Match</div><div class="fr"><select class="fi" id="lw" style="flex:1"><option value="">Winner&hellip;</option>'+pO+'</select><select class="fi" id="lwd" style="flex:1"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr"><select class="fi" id="ll" style="flex:1"><option value="">Loser&hellip;</option>'+pO+'</select><select class="fi" id="lld" style="flex:1"><option value="">Deck&hellip;</option>'+dO+'</select></div><button class="fb gold full" onclick="logMatch()">Log Match</button>');
+    if(ns.length){ns.forEach(function(n){var r=G.records[n];var pct=r.w+r.l>0?Math.round(r.w/(r.w+r.l)*100)+'%':'--';var _me=n===G.cfg.p1;o('<tr'+(_me?' style="background:rgba(104,168,228,0.12)"':'')+'><td'+(_me?' style="color:var(--hi);font-weight:700"':'')+'>'+h(n)+'</td><td class="wc">'+r.w+'</td><td class="lc">'+r.l+'</td><td>'+pct+'</td><td><button class="fb red" style="font-size:11px;padding:4px 8px" onclick="delRec(\''+h(n)+'\')">&times;</button></td></tr>');});}else{o('<tr><td colspan="5" style="color:var(--fg2);font-size:12px;padding:6px">No players yet.</td></tr>');}
+    o('</tbody></table><div class="slbl2">Log Match</div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Winner</span><select class="fi" id="lw" style="flex:1" onchange="document.getElementById(\'lwd\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'ll\').value){document.getElementById(\'ll\').value=G.cfg.p1;document.getElementById(\'lld\').style.display=\'\';}"><option value="">Winner&hellip;</option>'+pO+'</select><select class="fi" id="lwd" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><div class="fr" style="align-items:center"><span style="font-size:15px;font-weight:700;color:var(--hi);flex-shrink:0">Defeated</span><select class="fi" id="ll" style="flex:1" onchange="document.getElementById(\'lld\').style.display=(this.value===G.cfg.p1)?\'\':\'none\';if(this.value&&this.value!==G.cfg.p1&&!document.getElementById(\'lw\').value){document.getElementById(\'lw\').value=G.cfg.p1;document.getElementById(\'lwd\').style.display=\'\';}"><option value="">Loser&hellip;</option>'+pO+'</select><select class="fi" id="lld" style="flex:1;display:none"><option value="">Deck&hellip;</option>'+dO+'</select></div><button class="fb gold full" onclick="logMatch()">Log Match</button>');
     if(G.matchLog&&G.matchLog.length){
       o('<div class="slbl2" style="margin-top:10px">Match History</div>');
       G.matchLog.slice(0,20).forEach(function(e){
