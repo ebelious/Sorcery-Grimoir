@@ -103,6 +103,12 @@ exports.handler = async function (event) {
         const room = await store.get(code, { type: 'json' });
         if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
 
+        // Same device created this code -- reject before writing p2, so a
+        // person can't end up occupying both player slots in their own match.
+        if (usercode && room.p1 && room.p1.usercode && room.p1.usercode === usercode) {
+          return resp(403, { error: "You can't join your own match. Share the code with someone else instead." });
+        }
+
         room.p2 = { username, usercode, deck, ts: Date.now() };
         await store.setJSON(code, room);
         return resp(200, { code, room });
