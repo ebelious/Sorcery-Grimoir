@@ -877,7 +877,7 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
@@ -2530,6 +2530,12 @@ function _diceInitOverlay(){
   popup2.style.cssText='position:absolute;top:80px;left:50%;transform:translateX(-50%) rotate(180deg) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
   popup2.innerHTML='<div id="dice-3d-label2" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num2" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk2" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
 
+  // Connect matches: small corner popup showing the opponent's last dice
+  // roll, synced via match-sync polling (see _mpPushDice/_diceShowOpponentRoll).
+  var oppBadge=document.createElement('div');
+  oppBadge.id='dice-opp-badge';
+  oppBadge.style.cssText='position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .3s;z-index:15;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit;border:2px solid var(--red)';
+
   // Click canvas area to roll -- in the 1P view this always rolls (tap the
   // dice like a physical die); in the fullscreen 2P modal, tapping only
   // re-rolls once a result is already showing (original behavior).
@@ -2542,6 +2548,7 @@ function _diceInitOverlay(){
 
   wrap.appendChild(canvasWrap);
   canvasWrap.appendChild(popup);
+  canvasWrap.appendChild(oppBadge);
   wrap.appendChild(bar);
   wrap.appendChild(bar2);
   wrap.appendChild(popup2);
@@ -2888,7 +2895,20 @@ function _diceShowResult(){
   }
   // Store final result in G for last-roll display
   G.dice={sides:_diceSides,count:_diceCount,rolling:false,rolls:_dicePendingRolls,final:total,settling:false,ci:_diceCI,pi:_dicePI};
+  if(G.mpRoom&&G.mpCode)_mpPushDice(total,label,brk);
   render(); // update last-roll display in the main UI
+}
+
+var _diceOppBadgeHideTimer=null;
+function _diceShowOpponentRoll(dice){
+  if(!_diceOverlay||!dice)return;
+  var badge=document.getElementById('dice-opp-badge');
+  if(!badge)return;
+  var oppName=(_mpOpponent()&&_mpOpponent().username)||'Opponent';
+  badge.textContent=oppName+': '+dice.total+(dice.brk?' ('+dice.brk+')':'');
+  badge.style.opacity='1';
+  if(_diceOppBadgeHideTimer){clearTimeout(_diceOppBadgeHideTimer);_diceOppBadgeHideTimer=null;}
+  _diceOppBadgeHideTimer=setTimeout(function(){badge.style.opacity='0';_diceOppBadgeHideTimer=null;},3000);
 }
 
 function _diceHidePopup(){
@@ -4498,6 +4518,7 @@ function _mpApplyNames(){
 }
 function _mpOnConnected(){
   _mpAddOpponentToRecords();
+  G.mpLastOppDiceTs=null;
   G.mpConnectedPopup=true; // shows opponent's name/deck/avatar -- player must tap Accept to proceed
 }
 // Runs only when the player explicitly accepts the match from the "Match
@@ -4576,6 +4597,11 @@ function _mpPoll(){
         if(!res[myKey]&&!G.mpResultPopup){G.mpResultPopup=res;}
         if(res.confirmedP1&&res.confirmedP2){_mpApplyRemoteResult(res);}
       }
+      var _oppD=_mpOpponent();
+      if(_oppD&&_oppD.dice&&_oppD.dice.ts&&_oppD.dice.ts!==G.mpLastOppDiceTs){
+        G.mpLastOppDiceTs=_oppD.dice.ts;
+        try{_diceShowOpponentRoll(_oppD.dice);}catch(e){}
+      }
       render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
 }
@@ -4589,6 +4615,13 @@ function _mpPushLife(life){
       body:JSON.stringify({action:'setLife',code:G.mpCode,role:G.mpRole,life:life})
     }).catch(function(){});
   },400);
+}
+function _mpPushDice(total,label,brk){
+  if(!G.mpRoom||!G.mpCode)return;
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'setDice',code:G.mpCode,role:G.mpRole,dice:{total:total,label:label,brk:brk,ts:Date.now()}})
+  }).catch(function(){});
 }
 function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
 function _mpStopPoll(){if(_mpPollTimer){clearInterval(_mpPollTimer);_mpPollTimer=null;}}
