@@ -719,7 +719,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.0.3/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 <body>
@@ -4647,10 +4647,26 @@ function _mpPushDice(total,label,brk){
 }
 function _mpDrawQR(){
   var cv=document.getElementById('mp-qr-canvas');
-  if(!cv||typeof QRCode==='undefined'||!G.mpCode)return;
+  if(!cv||typeof qrcode==='undefined'||!G.mpCode)return;
   var joinUrl=location.origin+location.pathname+'?join='+encodeURIComponent(G.mpCode);
-  var sz=G.mpCreateViewMode==='qr'?200:180;
-  QRCode.toCanvas(cv,joinUrl,{width:sz,margin:1,color:{dark:'#000000',light:'#ffffff'}},function(err){if(err)console.error(err);});
+  try{
+    var qr=qrcode(0,'M'); // typeNumber 0 = auto-pick smallest size that fits the data
+    qr.addData(joinUrl);
+    qr.make();
+    var count=qr.getModuleCount();
+    var targetSz=G.mpCreateViewMode==='qr'?200:180;
+    var cell=Math.max(1,Math.floor(targetSz/count));
+    var sz=cell*count;
+    cv.width=sz;cv.height=sz;
+    var ctx=cv.getContext('2d');
+    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,sz,sz);
+    ctx.fillStyle='#000000';
+    for(var r=0;r<count;r++){
+      for(var c=0;c<count;c++){
+        if(qr.isDark(r,c))ctx.fillRect(c*cell,r*cell,cell,cell);
+      }
+    }
+  }catch(e){console.error('QR draw failed:',e);}
 }
 
 // Camera-based QR scanning for the Join Match flow (the counterpart to
@@ -6603,7 +6619,7 @@ function pContent(){
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<div style="display:flex;gap:8px"><button class="fb gold" style="flex:1;padding:16px;font-size:15px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'code\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button><button class="fb gold" style="flex:1;padding:16px;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'qr\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create<br>QR Code</span>')+'</button></div>');
+        o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'qr\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
       }
     } else {
       var mpMe=_mpMe(),mpOpp=_mpOpponent();
@@ -7758,7 +7774,7 @@ function render(){
       requestAnimationFrame(function(){ _csAttachScrollBtn(); });
     }
     if(G.mode===1){try{_diceSyncInlineSlot();_syncP1ButtonPadding();}catch(e){}}
-    if(G.panel==='connect'&&G.mpRoom&&G.mpRole==='p1'&&G.mpCode){try{_mpDrawQR();}catch(e){}}
+    if(G.panel==='connect'&&G.mpRoom&&G.mpRole==='p1'&&G.mpCode){try{_mpDrawQR();}catch(e){console.error('QR render hook failed:',e);}}
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
