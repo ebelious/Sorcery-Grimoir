@@ -4591,6 +4591,19 @@ function mpJoin(){
     body:JSON.stringify({action:'join',code:code,username:uname,usercode:_mpUserCode(),deck:deck})
   }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to join match');return d;});})
   .then(function(d){
+    if(d.room&&d.room.p1&&d.room.p1.usercode&&d.room.p1.usercode===_mpUserCode()){
+      // Same device created this code -- undo the join (delete the room,
+      // since it's our own test room anyway) instead of letting someone
+      // occupy both player slots in their own match.
+      fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'leave',code:code})
+      }).catch(function(){});
+      G.mpBusy=false;G.mpCode=null;G.mpRoom=null;G.mpRole=null;
+      G.mpErr="You can't join your own match. Share the code with someone else instead.";
+      render();
+      return;
+    }
     G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
     _mpOnConnected();
     _mpStartPoll(); // keep polling through the match so the confirm-result flow can sync
@@ -7674,7 +7687,7 @@ function render(){
       o('<div id="mp-scan-mount" style="position:relative;width:100%;aspect-ratio:1;background:#000;border-radius:8px;overflow:hidden"></div>');
       if(G.mpScanErr)o('<div style="color:var(--red);font-size:12px;margin-top:8px">'+h(G.mpScanErr)+'</div>');
       else o('<div style="font-size:12px;color:var(--fg2);margin-top:8px">Point your camera at the match QR code</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="_mpCloseScan()">Cancel</button></div></div></div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border:2px solid var(--red)" onclick="_mpCloseScan()">Cancel</button></div></div></div>');
     }
 
     if(G.mpResultPopup&&!G.mpPendingResult){
