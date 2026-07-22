@@ -2904,7 +2904,7 @@ function _diceShowOpponentRoll(dice){
   if(!_diceOverlay||!dice)return;
   var badge=document.getElementById('dice-opp-badge');
   if(!badge)return;
-  badge.innerHTML='<span style="font-size:20px;font-weight:900">'+dice.total+'</span>'+(dice.brk?'<span style="font-size:11px;margin-left:4px">('+dice.brk+')</span>':'');
+  badge.innerHTML='<span style="font-size:120px;font-weight:900">'+dice.total+'</span>'+(dice.brk?'<span style="font-size:11px;margin-left:4px">('+dice.brk+')</span>':'');
   badge.style.opacity='1';
   if(_diceOppBadgeHideTimer){clearTimeout(_diceOppBadgeHideTimer);_diceOppBadgeHideTimer=null;}
   _diceOppBadgeHideTimer=setTimeout(function(){badge.style.opacity='0';_diceOppBadgeHideTimer=null;},3000);
