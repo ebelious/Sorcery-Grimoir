@@ -12,10 +12,11 @@
 //   POST { action:'confirmResult', code, role } -> { code, room }
 //   POST { action:'cancelResult',  code } -> { code, room }  (withdraws a proposed-but-unconfirmed result)
 //   POST { action:'setLife', code, role, life } -> { code, room }
+//   POST { action:'setDice', code, role, dice:{total,label,brk,ts} } -> { code, room }
 //   POST { action:'rematch', code, role, deck } -> { code, room }  (clears result + life, keeps the room/code)
 //   GET  ?action=get&code=XXXXX -> { code, room }
 //
-// room shape: { created, p1:{username,deck,life,ts}, p2:{username,deck,life,ts}|null,
+// room shape: { created, p1:{username,deck,life,dice,ts}, p2:{username,deck,life,dice,ts}|null,
 //               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null }
 
 const { getStore } = require('@netlify/blobs');
@@ -184,6 +185,21 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
+      if (action === 'setDice') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        const dice = body.dice || null;
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+        if (!room[role]) return resp(400, { error: 'Player slot not found' });
+
+        room[role].dice = dice;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
       if (action === 'rematch') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -196,6 +212,7 @@ exports.handler = async function (event) {
 
         room[role].deck = deck;
         room[role].life = null;
+        room[role].dice = null;
         room[role].ts = Date.now();
         room.result = null;
         await store.setJSON(code, room);
