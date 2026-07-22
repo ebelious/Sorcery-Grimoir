@@ -4612,7 +4612,10 @@ function _mpPoll(){
         G.mpLastOppDiceTs=_oppD.dice.ts;
         try{_diceShowOpponentRoll(_oppD.dice);}catch(e){}
       }
-      render(); // keeps the synced opponent-life badge (and connect popups) live during the match
+      // Skip re-rendering while the rematch deck picker is open -- a full
+      // render() tears down and rebuilds the whole page (including the open
+      // <select>), which interrupts/cancels the deck choice mid-selection.
+      if(!G.mpRematchPicking)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
 }
 var _mpLifePushTimer=null;
