@@ -719,6 +719,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 </head>
 <body>
 <div id="app"><div class="ld"><span class="spin" style="font-size:22px">&#9650;</span></div></div>
@@ -877,7 +879,7 @@ var G={
   p1TimerWarnMin:5,p1TimerCritMin:1,
   pTimeRemain:[null,null],pTimeEnd:[null,null],pTimeOutAck:[false,false],pTimeOutPI:null,
   timerLog:[],
-  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,
+  mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
@@ -1013,6 +1015,13 @@ function boot(){
   var _openParam=new URLSearchParams(location.search).get('open');
   if(_openParam){
     _openNotificationSection(_openParam);
+    history.replaceState(null,'',location.pathname);
+  }
+  var _joinParam=new URLSearchParams(location.search).get('join');
+  if(_joinParam){
+    G.mpMode='join';
+    G.mpFormCode=_joinParam.toUpperCase().slice(0,8);
+    openPanel('connect');
     history.replaceState(null,'',location.pathname);
   }
   loadPubDecks();
@@ -4636,6 +4645,66 @@ function _mpPushDice(total,label,brk){
     body:JSON.stringify({action:'setDice',code:G.mpCode,role:G.mpRole,dice:{total:total,label:label,brk:brk,ts:Date.now()}})
   }).catch(function(){});
 }
+function _mpDrawQR(){
+  var cv=document.getElementById('mp-qr-canvas');
+  if(!cv||typeof QRCode==='undefined'||!G.mpCode)return;
+  var joinUrl=location.origin+location.pathname+'?join='+encodeURIComponent(G.mpCode);
+  var sz=G.mpCreateViewMode==='qr'?200:180;
+  QRCode.toCanvas(cv,joinUrl,{width:sz,margin:1,color:{dark:'#000000',light:'#ffffff'}},function(err){if(err)console.error(err);});
+}
+
+// Camera-based QR scanning for the Join Match flow (the counterpart to
+// _mpDrawQR above). The video element is created directly via the DOM
+// (not through the normal render() string-building) so an unrelated
+// re-render elsewhere can't tear down an active camera stream mid-scan.
+var _mpScanStream=null,_mpScanRAF=null,_mpScanCanvas=null,_mpScanCtx=null;
+function _mpOpenScan(){
+  if(typeof jsQR==='undefined'){G.mpErr='QR scanning isn\'t available.';render();return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){G.mpErr='Camera access isn\'t available on this device/browser.';render();return;}
+  G.mpScanOpen=true;G.mpScanErr=null;render();
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(function(stream){
+    if(!G.mpScanOpen){stream.getTracks().forEach(function(t){t.stop();});return;} // cancelled before permission resolved
+    _mpScanStream=stream;
+    var video=document.createElement('video');
+    video.setAttribute('playsinline','');video.setAttribute('autoplay','');
+    video.muted=true;
+    video.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
+    video.srcObject=stream;
+    video.play().catch(function(){});
+    var mount=document.getElementById('mp-scan-mount');
+    if(mount){mount.innerHTML='';mount.appendChild(video);}
+    _mpScanCanvas=document.createElement('canvas');
+    _mpScanCtx=_mpScanCanvas.getContext('2d',{willReadFrequently:true});
+    (function tick(){
+      if(!G.mpScanOpen)return;
+      if(video.readyState===video.HAVE_ENOUGH_DATA&&video.videoWidth){
+        _mpScanCanvas.width=video.videoWidth;_mpScanCanvas.height=video.videoHeight;
+        _mpScanCtx.drawImage(video,0,0,_mpScanCanvas.width,_mpScanCanvas.height);
+        var imgData=_mpScanCtx.getImageData(0,0,_mpScanCanvas.width,_mpScanCanvas.height);
+        var found=jsQR(imgData.data,imgData.width,imgData.height);
+        if(found&&found.data){_mpHandleScanResult(found.data);return;}
+      }
+      _mpScanRAF=requestAnimationFrame(tick);
+    })();
+  }).catch(function(){
+    G.mpScanErr='Camera access denied or unavailable.';render();
+  });
+}
+function _mpHandleScanResult(text){
+  var codeVal=null;
+  try{var u=new URL(text);codeVal=u.searchParams.get('join');}catch(e){}
+  if(!codeVal)codeVal=text; // fallback: QR just encoded the raw code, not a URL
+  codeVal=(codeVal||'').trim().toUpperCase().slice(0,8);
+  _mpCloseScan();
+  if(codeVal){vibrate(15);G.mpFormCode=codeVal;render();}
+}
+function _mpCloseScan(){
+  G.mpScanOpen=false;
+  if(_mpScanRAF){cancelAnimationFrame(_mpScanRAF);_mpScanRAF=null;}
+  if(_mpScanStream){_mpScanStream.getTracks().forEach(function(t){t.stop();});_mpScanStream=null;}
+  render();
+}
+
 function _mpStartPoll(){if(_mpPollTimer)clearInterval(_mpPollTimer);_mpPollTimer=setInterval(_mpPoll,3000);}
 function _mpStopPoll(){if(_mpPollTimer){clearInterval(_mpPollTimer);_mpPollTimer=null;}}
 function _mpEndMatch(deleteRoom){
@@ -6527,20 +6596,31 @@ function pContent(){
       var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpFormDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
       var mpUnameVal=(G.mpFormUname!=null)?G.mpFormUname:(G.cfg.p1||'');
       if(mpMode==='join'){
-        o('<div style="margin-bottom:10px"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="width:100%;padding:10px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"></div>');
+        o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan()" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
         o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button>');
+        o('<div style="display:flex;gap:8px"><button class="fb gold" style="flex:1;padding:16px;font-size:15px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'code\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'Create Code')+'</button><button class="fb gold" style="flex:1;padding:16px;font-size:15px;display:flex;align-items:center;justify-content:center;gap:6px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'qr\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create<br>QR Code</span>')+'</button></div>');
       }
     } else {
       var mpMe=_mpMe(),mpOpp=_mpOpponent();
       o('<div style="text-align:center;margin-bottom:16px">');
-      o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Match Code</div>');
-      o('<div style="font-size:32px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpCode)+'</div>');
+      if(G.mpRole==='p1'&&G.mpCreateViewMode==='qr'){
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Scan to Join</div>');
+        o('<div style="display:flex;justify-content:center;margin-bottom:10px"><canvas id="mp-qr-canvas" width="200" height="200" style="background:#fff;border-radius:8px;padding:10px;box-sizing:content-box"></canvas></div>');
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Or Match Code</div>');
+        o('<div style="font-size:24px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpCode)+'</div>');
+      } else {
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Match Code</div>');
+        o('<div style="font-size:32px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpCode)+'</div>');
+        if(G.mpRole==='p1'){
+          o('<div style="font-size:11px;color:var(--fg2);margin-top:10px;margin-bottom:8px">Or scan to join</div>');
+          o('<div style="display:flex;justify-content:center"><canvas id="mp-qr-canvas" width="180" height="180" style="background:#fff;border-radius:8px;padding:8px;box-sizing:content-box"></canvas></div>');
+        }
+      }
       o('</div>');
       o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:10px">');
       o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">You</div>');
@@ -7565,6 +7645,14 @@ function render(){
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCancelRematch()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpSubmitRematch()">Start</button></div></div></div>');
     }
 
+    if(G.mpScanOpen){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:340px;padding:16px"><div class="lp-t" style="font-size:16px;margin-bottom:10px">Scan Match QR Code</div><div class="lp-b">');
+      o('<div id="mp-scan-mount" style="position:relative;width:100%;aspect-ratio:1;background:#000;border-radius:8px;overflow:hidden"></div>');
+      if(G.mpScanErr)o('<div style="color:var(--red);font-size:12px;margin-top:8px">'+h(G.mpScanErr)+'</div>');
+      else o('<div style="font-size:12px;color:var(--fg2);margin-top:8px">Point your camera at the match QR code</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="_mpCloseScan()">Cancel</button></div></div></div>');
+    }
+
     if(G.mpResultPopup&&!G.mpPendingResult){
       var _rres=G.mpResultPopup;
       var _rAmWinner=!_rres.proposerWon;
@@ -7670,6 +7758,7 @@ function render(){
       requestAnimationFrame(function(){ _csAttachScrollBtn(); });
     }
     if(G.mode===1){try{_diceSyncInlineSlot();_syncP1ButtonPadding();}catch(e){}}
+    if(G.panel==='connect'&&G.mpRoom&&G.mpRole==='p1'&&G.mpCode){try{_mpDrawQR();}catch(e){}}
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
