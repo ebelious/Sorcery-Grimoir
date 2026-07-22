@@ -2534,7 +2534,7 @@ function _diceInitOverlay(){
   // roll, synced via match-sync polling (see _mpPushDice/_diceShowOpponentRoll).
   var oppBadge=document.createElement('div');
   oppBadge.id='dice-opp-badge';
-  oppBadge.style.cssText='position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .3s;z-index:15;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit;border:2px solid var(--red)';
+  oppBadge.style.cssText='position:absolute;top:10px;right:10px;background:var(--bg2);border:2px solid var(--red);border-radius:12px;padding:8px 16px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);pointer-events:none;opacity:0;transition:opacity .3s;z-index:15;';
 
   // Click canvas area to roll -- in the 1P view this always rolls (tap the
   // dice like a physical die); in the fullscreen 2P modal, tapping only
@@ -2904,7 +2904,7 @@ function _diceShowOpponentRoll(dice){
   if(!_diceOverlay||!dice)return;
   var badge=document.getElementById('dice-opp-badge');
   if(!badge)return;
-  badge.innerHTML='<span style="font-size:120px;font-weight:900">'+dice.total+'</span>'+(dice.brk?'<span style="font-size:11px;margin-left:4px">('+dice.brk+')</span>':'');
+  badge.innerHTML='<div style="font-size:10px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2px;font-family:inherit">'+(dice.label?h(dice.label):'')+'</div><div style="font-size:46px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif">'+dice.total+'</div>'+(dice.brk?'<div style="font-size:12px;color:var(--fg3);margin-top:2px;font-family:inherit">'+h(dice.brk)+'</div>':'');
   badge.style.opacity='1';
   if(_diceOppBadgeHideTimer){clearTimeout(_diceOppBadgeHideTimer);_diceOppBadgeHideTimer=null;}
   _diceOppBadgeHideTimer=setTimeout(function(){badge.style.opacity='0';_diceOppBadgeHideTimer=null;},3000);
