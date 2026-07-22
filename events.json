@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-21T19:38:55.492Z",
+  "updated": "2026-07-22T03:14:31.581Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -45,13 +45,13 @@
       "name": "Weekly play",
       "date": "Tue. Jul 21, 2026",
       "time": "5:30 AM UTC",
-      "type": "Park Enigma",
+      "type": "Casual Meetup",
       "location": "Kranj, Kranj",
       "city": "Kranj",
       "state": "Kranj",
       "address": "5 Glavni trg Kranj Kranj 4000",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Park Enigma",
       "url": "https://play.sorcerytcg.com/events/01b56c2e-0e16-4d8e-a03b-9f8bee0d7b55"
     },
     {
@@ -66,19 +66,6 @@
       "description": "",
       "storeName": "Dragon's Lair Comics and Fantasy (Austin)",
       "url": "https://play.sorcerytcg.com/events/34e9d552-9853-4e64-be0f-ce74fe33085a"
-    },
-    {
-      "name": "Weekly Play",
-      "date": "Tue. Jul 21, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Essen, NRW",
-      "city": "Essen",
-      "state": "NRW",
-      "address": "79 Segerothstraße Essen NRW 45141",
-      "description": "",
-      "storeName": "White Rabbit - Community Game Store (Essen)",
-      "url": "https://play.sorcerytcg.com/events/80c1ecd0-1986-4636-a2b0-b2dec82d8a85"
     },
     {
       "name": "Weekly Casual",
@@ -105,45 +92,6 @@
       "description": "",
       "storeName": "Jupiter Badajoz",
       "url": "https://play.sorcerytcg.com/events/b6a97e8c-b8d8-42b6-a835-2ca9a1e7143a"
-    },
-    {
-      "name": "⭐ Sorcery : Construit",
-      "date": "Tue. Jul 21, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Paris, IDF",
-      "city": "Paris",
-      "state": "IDF",
-      "address": "59 Rue de Rivoli Paris IDF 75001",
-      "description": "",
-      "storeName": "Playin Paris Rivoli",
-      "url": "https://play.sorcerytcg.com/events/25877c86-b5a0-4e3d-ae04-559021affb12"
-    },
-    {
-      "name": "On Demand Constructed Event 210726",
-      "date": "Tue. Jul 21, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Sheffield City Centre, England",
-      "city": "Sheffield City Centre",
-      "state": "England",
-      "address": "97 Mary Street Sheffield City Centre England S1 4RT",
-      "description": "",
-      "storeName": "Patriot Games Ltd",
-      "url": "https://play.sorcerytcg.com/events/c6a87115-8d8e-42e1-ad0b-e94f2d219311"
-    },
-    {
-      "name": "sorcery tuesday constructed",
-      "date": "Tue. Jul 21, 2026",
-      "time": "5:40 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Bexhill, England",
-      "city": "Bexhill",
-      "state": "England",
-      "address": "49 Saint Leonards Road Bexhill England TN40 1JA",
-      "description": "",
-      "storeName": "Magic mayhem hobbies",
-      "url": "https://play.sorcerytcg.com/events/088a8c0d-9c5b-41e8-a99f-a9685bd5b8e0"
     },
     {
       "name": "GIOCA E CONQUISTA LA STREGONERIA casual",
