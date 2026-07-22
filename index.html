@@ -4649,24 +4649,32 @@ function _mpDrawQR(){
   var cv=document.getElementById('mp-qr-canvas');
   if(!cv||typeof qrcode==='undefined'||!G.mpCode)return;
   var joinUrl=location.origin+location.pathname+'?join='+encodeURIComponent(G.mpCode);
-  try{
-    var qr=qrcode(0,'M'); // typeNumber 0 = auto-pick smallest size that fits the data
-    qr.addData(joinUrl);
-    qr.make();
-    var count=qr.getModuleCount();
-    var targetSz=G.mpCreateViewMode==='qr'?200:180;
-    var cell=Math.max(1,Math.floor(targetSz/count));
-    var sz=cell*count;
-    cv.width=sz;cv.height=sz;
-    var ctx=cv.getContext('2d');
-    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,sz,sz);
-    ctx.fillStyle='#000000';
-    for(var r=0;r<count;r++){
-      for(var c=0;c<count;c++){
-        if(qr.isDark(r,c))ctx.fillRect(c*cell,r*cell,cell,cell);
-      }
+  var qr=null;
+  // typeNumber 0 ("auto") is documented but has known inconsistent behavior
+  // across qrcode-generator builds/versions, so pick the smallest working
+  // type ourselves by trying 1..40 until one is big enough for the data.
+  for(var t=1;t<=40&&!qr;t++){
+    try{
+      var candidate=qrcode(t,'M');
+      candidate.addData(joinUrl);
+      candidate.make();
+      qr=candidate;
+    }catch(e){ /* too small for this type -- try the next one up */ }
+  }
+  if(!qr){console.error('QR generation failed: no type number fit the join URL');return;}
+  var count=qr.getModuleCount();
+  var targetSz=G.mpCreateViewMode==='qr'?200:180;
+  var cell=Math.max(1,Math.floor(targetSz/count));
+  var sz=cell*count;
+  cv.width=sz;cv.height=sz;
+  var ctx=cv.getContext('2d');
+  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,sz,sz);
+  ctx.fillStyle='#000000';
+  for(var r=0;r<count;r++){
+    for(var c=0;c<count;c++){
+      if(qr.isDark(r,c))ctx.fillRect(c*cell,r*cell,cell,cell);
     }
-  }catch(e){console.error('QR draw failed:',e);}
+  }
 }
 
 // Camera-based QR scanning for the Join Match flow (the counterpart to
