@@ -13,14 +13,15 @@
 //                          this scraper was set up to pull updates from
 //   DISCORD_GUILD_ID    - (optional) defaults to 278704728999854080, the official Sorcery
 //                          TCG server, used to build a "jump to message" link
-//   DISCORD_CHANNEL_NAME- (optional) display label, e.g. "announcements"
+//   DISCORD_CHANNEL_NAME- (optional) display label override, e.g. "announcements" -- if
+//                          unset, the real channel name is looked up from Discord instead
 
 const fs = require('fs');
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '1215448061850034226';
 const GUILD_ID = process.env.DISCORD_GUILD_ID || '278704728999854080';
-const CHANNEL_NAME = process.env.DISCORD_CHANNEL_NAME || '';
+const CHANNEL_NAME_OVERRIDE = process.env.DISCORD_CHANNEL_NAME || '';
 const LIMIT = 10;
 
 // Resolves Discord's raw mention syntax (<#channelId>, <@userId>, <@&roleId>)
@@ -77,10 +78,12 @@ function findAttachmentImages(attachments) {
 
   const raw = await res.json();
 
-  // Build id -> name lookup tables for resolving mentions. Best-effort: if
-  // either fetch fails (e.g. bot lacks "View Channels"/permission on the
-  // guild-wide endpoint), fall back to empty maps rather than aborting --
-  // mentions just stay as raw IDs in that case, same as before this change.
+  // Build id -> name lookup tables for resolving mentions, and for the
+  // scraped channel's own display name. Best-effort: if either fetch fails
+  // (e.g. bot lacks "View Channels" permission on the guild-wide endpoint),
+  // fall back to empty maps rather than aborting -- mentions just stay as
+  // raw IDs, and the channel badge falls back to DISCORD_CHANNEL_NAME (or
+  // blank) in that case, same as before this change.
   let channelMap = {}, roleMap = {};
   try {
     const chRes = await fetch('https://discord.com/api/v10/guilds/' + GUILD_ID + '/channels', { headers: { Authorization: 'Bot ' + TOKEN } });
@@ -101,6 +104,11 @@ function findAttachmentImages(attachments) {
     }
   } catch (e) { console.warn('Role lookup failed: ' + e.message); }
 
+  // Prefer the real channel name from the guild's channel list (already
+  // fetched above for mention resolution) over the DISCORD_CHANNEL_NAME env
+  // var, which is easy to forget to set and was left blank in production.
+  const channelDisplayName = channelMap[CHANNEL_ID] || CHANNEL_NAME_OVERRIDE;
+
   const messages = raw
     // Skip empty messages (e.g. embed-only or attachment-only with no text)
     .filter(m => (m.content && m.content.trim()) || (m.embeds && m.embeds.length) || (m.attachments && m.attachments.length))
@@ -116,7 +124,7 @@ function findAttachmentImages(attachments) {
         content: resolveMentions(rawContent, channelMap, roleMap, userMap),
         images: findEmbedImages(m.embeds).concat(findAttachmentImages(m.attachments)),
         timestamp: m.timestamp ? new Date(m.timestamp).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '',
-        channel: CHANNEL_NAME,
+        channel: channelDisplayName,
         url: 'https://discord.com/channels/' + GUILD_ID + '/' + CHANNEL_ID + '/' + m.id,
       };
     });
