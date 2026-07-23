@@ -13,11 +13,18 @@
 //   POST { action:'cancelResult',  code } -> { code, room }  (withdraws a proposed-but-unconfirmed result)
 //   POST { action:'setLife', code, role, life } -> { code, room }
 //   POST { action:'setDice', code, role, dice:{total,label,brk,ts} } -> { code, room }
-//   POST { action:'rematch', code, role, deck } -> { code, room }  (clears result + life, keeps the room/code)
+//   POST { action:'proposeRematch', code, role } -> { code, room }  (starts the two-phase rematch handshake)
+//   POST { action:'confirmRematch', code, role } -> { code, room }  (accepts a pending rematch)
+//   POST { action:'cancelRematch',  code } -> { code, room }  (withdraws/declines a pending rematch)
+//   POST { action:'rematch', code, role, deck } -> { code, room }  (clears result + life, keeps the room/code --
+//                                                                   called by each device once BOTH sides have
+//                                                                   accepted via proposeRematch/confirmRematch,
+//                                                                   to actually apply that device's deck choice)
 //   GET  ?action=get&code=XXXXX -> { code, room }
 //
 // room shape: { created, p1:{username,deck,life,dice,ts}, p2:{username,deck,life,dice,ts}|null,
-//               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null }
+//               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null,
+//               rematch:{confirmedP1,confirmedP2}|null }
 
 const { getStore } = require('@netlify/blobs');
 
@@ -206,6 +213,62 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
+      // ── Rematch, phase 1: propose ──────────────────────────────────────
+      // Mirrors proposeResult exactly: the first player to hit "Play Again"
+      // marks themselves as accepted and leaves the other slot pending. If
+      // both players happen to hit "Play Again" around the same time, the
+      // second proposal gets a 409 with the existing (already-pending)
+      // rematch so that caller can fall back to confirming it instead of
+      // silently clobbering it.
+      if (action === 'proposeRematch') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        if (room.rematch && !(room.rematch.confirmedP1 && room.rematch.confirmedP2)) {
+          return resp(409, { error: 'A rematch is already pending confirmation', code, room });
+        }
+
+        room.rematch = { confirmedP1: role === 'p1', confirmedP2: role === 'p2' };
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
+      // ── Rematch, phase 2: confirm ──────────────────────────────────────
+      // The other player accepts. Once both confirmedP1 and confirmedP2 are
+      // true, each device independently calls the 'rematch' action below
+      // (same as _mpApplyRemoteResult does for match results) to apply its
+      // own deck choice and reset its own life/dice.
+      if (action === 'confirmRematch') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+        if (!room.rematch) return resp(400, { error: 'No pending rematch to confirm' });
+
+        if (role === 'p1') room.rematch.confirmedP1 = true;
+        else room.rematch.confirmedP2 = true;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
+      if (action === 'cancelRematch') {
+        const code = (body.code || '').trim().toUpperCase();
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        room.rematch = null;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
       if (action === 'rematch') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -221,6 +284,7 @@ exports.handler = async function (event) {
         room[role].dice = null;
         room[role].ts = Date.now();
         room.result = null;
+        room.rematch = null; // two-phase handshake is done -- clear it so a future rematch request starts clean
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
