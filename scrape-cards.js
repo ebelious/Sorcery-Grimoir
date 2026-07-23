@@ -129,25 +129,47 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return [];
   }
 
-  // Subtypes (e.g. Angel, Demon, Beast, Mortal) aren't a separate structured
-  // field -- confirmed from a live diagnostic dump that they only appear
-  // woven into item.variants[].typeText, a flavor sentence combining the
-  // card's rarity and subtype(s), e.g. "An Elite Demon of alluring demise"
-  // or "Elite Spirits where Beasts once dwelled" (multiple subtypes, no
-  // fixed separator). The rule (confirmed by the person): every capitalized
-  // word is a subtype (always a noun) EXCEPT the rarity word, a leading
-  // article, an element name (the typeText sometimes echoes the card's own
-  // element), and a card-type name (Aura/Magic/Site/etc. typeText often
-  // just echoes the card's own type instead of naming a real subtype --
-  // e.g. Aura cards read "An Elite Aura of milk and honey"). Rarity is
-  // always present except on tokens (which have no typeText at all, so
-  // this naturally yields no subtypes for those). Possessive forms
-  // ("Demon's") are normalized to their base noun so they dedupe with the
-  // plain form ("Demon") instead of appearing as a separate subtype.
-  const RARITY_WORDS = new Set(['Ordinary', 'Exceptional', 'Elite', 'Unique']);
-  const ARTICLES = new Set(['A', 'An', 'The']);
-  const ELEMENT_WORDS = new Set(['Air', 'Water', 'Earth', 'Fire']);
-  const TYPE_WORDS = new Set(['Minion', 'Magic', 'Artifact', 'Aura', 'Site', 'Avatar', 'Spell']);
+  // Subtypes (e.g. Angel, Demon, Beast) aren't a separate structured field
+  // -- confirmed from a live diagnostic dump that they only appear woven
+  // into item.variants[].typeText, a flavor sentence combining the card's
+  // rarity and subtype(s), e.g. "An Elite Demon of alluring demise" or
+  // "Elite Spirits where Beasts once dwelled" (multiple subtypes, no fixed
+  // separator). Rather than trying to exclude every possible non-subtype
+  // word (rarity, articles, element names, type names, flavor text), this
+  // matches against the fixed, known list of subtypes the person supplied
+  // -- this is the same list used by the Subtype filter dropdown in
+  // index.html (SUBTYPES), so the two must be kept in sync if the game
+  // adds new subtypes later.
+  const KNOWN_SUBTYPES = ['Angel', 'Beast', 'Demon', 'Dragon', 'Dwarf', 'Faerie', 'Giant', 'Gnome', 'Goblin', 'Merfolk', 'Monster', 'Mortal', 'Ogre', 'Spirit', 'Sphinx', 'Troll', 'Undead', 'Automaton', 'Device', 'Document', 'Instrument', 'Monument', 'Potion', 'Relic', 'Weapon', 'Desert', 'River', 'Tower', 'Village'];
+  const SUBTYPE_LOOKUP = {};
+  KNOWN_SUBTYPES.forEach(s => { SUBTYPE_LOOKUP[s.toLowerCase()] = s; });
+  // Tries the word as typed, then common English plural endings, so
+  // "Dwarves" matches "Dwarf", "Sphinxes" matches "Sphinx", "Demons"
+  // matches "Demon", etc. -- any plural form should resolve to its
+  // singular entry in KNOWN_SUBTYPES.
+  function singularCandidates(w) {
+    const out = [w];
+    if (w.endsWith('ves')) out.push(w.slice(0, -3) + 'f');   // dwarves -> dwarf
+    if (w.endsWith('ies')) out.push(w.slice(0, -3) + 'y');   // (e.g. -y nouns)
+    if (w.endsWith('es'))  out.push(w.slice(0, -2));         // sphinxes -> sphinx
+    if (w.endsWith('s'))   out.push(w.slice(0, -1));         // demons -> demon
+    return out;
+  }
+  // Desert/River/Tower/Village don't appear in typeText like the other
+  // subtypes -- confirmed by the person that for Site cards, the subtype
+  // instead shows up as a capitalized word right in the card's own Name
+  // (e.g. "Accursed Desert", "Accursed Tower"). Case-sensitive on purpose:
+  // only a genuinely capitalized occurrence counts as the subtype, not an
+  // incidental lowercase word.
+  const SITE_SUBTYPES = new Set(['Desert', 'River', 'Tower', 'Village']);
+  function findSiteSubtypesFromName(item) {
+    const name = item.name || '';
+    const found = [];
+    name.split(/[^A-Za-z]+/).forEach(word => {
+      if (SITE_SUBTYPES.has(word) && found.indexOf(word) < 0) found.push(word);
+    });
+    return found;
+  }
   function findSubtypes(item) {
     let typeText = '';
     if (Array.isArray(item.variants)) {
@@ -155,16 +177,21 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
         if (v && v.typeText) { typeText = v.typeText; break; }
       }
     }
-    if (!typeText) return [];
     const seen = new Set();
     const subs = [];
-    typeText.split(/\s+/).forEach(raw => {
-      let word = raw.replace(/^[^A-Za-z]+|[^A-Za-z']+$/g, '');
-      word = word.replace(/['\u2019]s$/, ''); // Demon's -> Demon
-      if (!word || !/^[A-Z]/.test(word)) return;
-      if (RARITY_WORDS.has(word) || ARTICLES.has(word)) return;
-      if (ELEMENT_WORDS.has(word) || TYPE_WORDS.has(word)) return;
-      if (!seen.has(word)) { seen.add(word); subs.push(word); }
+    if (typeText) {
+      typeText.split(/[^A-Za-z]+/).forEach(raw => {
+        if (!raw) return;
+        const w = raw.toLowerCase();
+        let canon;
+        for (const cand of singularCandidates(w)) {
+          if (SUBTYPE_LOOKUP[cand]) { canon = SUBTYPE_LOOKUP[cand]; break; }
+        }
+        if (canon && !seen.has(canon)) { seen.add(canon); subs.push(canon); }
+      });
+    }
+    findSiteSubtypesFromName(item).forEach(s => {
+      if (!seen.has(s)) { seen.add(s); subs.push(s); }
     });
     return subs;
   }
