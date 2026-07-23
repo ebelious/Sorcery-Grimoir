@@ -120,12 +120,43 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
         const rarity = sc.rarity || '';
         const direct = v.src || v.image || v.imageUrl || v.art;
         const img = direct ? unwrapNextImage(direct) : '';
+        const flavor = v.flavorText || '';
         if (!setName && !finishRaw && !rarity) return null;
-        return { set: setName, finish: finishRaw, rarity, img };
+        return { set: setName, finish: finishRaw, rarity, img, flavor };
       }).filter(Boolean);
       if (out.length) return out;
     }
     return [];
+  }
+
+  // Subtypes (e.g. Angel, Demon, Beast, Mortal) aren't a separate structured
+  // field -- confirmed from a live diagnostic dump that they only appear
+  // woven into item.variants[].typeText, a flavor sentence combining the
+  // card's rarity and subtype(s), e.g. "An Elite Demon of alluring demise"
+  // or "Elite Spirits where Beasts once dwelled" (multiple subtypes, no
+  // fixed separator). The rule (confirmed by the person): every capitalized
+  // word is a subtype EXCEPT the rarity word and a leading article, and
+  // rarity is always present except on tokens (which have no typeText at
+  // all, so this naturally yields no subtypes for those).
+  const RARITY_WORDS = new Set(['Ordinary', 'Exceptional', 'Elite', 'Unique']);
+  const ARTICLES = new Set(['A', 'An', 'The']);
+  function findSubtypes(item) {
+    let typeText = '';
+    if (Array.isArray(item.variants)) {
+      for (const v of item.variants) {
+        if (v && v.typeText) { typeText = v.typeText; break; }
+      }
+    }
+    if (!typeText) return [];
+    const seen = new Set();
+    const subs = [];
+    typeText.split(/\s+/).forEach(raw => {
+      const word = raw.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, '');
+      if (!word || !/^[A-Z]/.test(word)) return;
+      if (RARITY_WORDS.has(word) || ARTICLES.has(word)) return;
+      if (!seen.has(word)) { seen.add(word); subs.push(word); }
+    });
+    return subs;
   }
 
   // Prefer whatever curiosa marks as the card's current/errata'd text over
@@ -196,36 +227,6 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return '';
   }
 
-  // Artist credit isn't documented anywhere in Curiosa's card.search
-  // response the way threshold/power/sets are, so check every location and
-  // field name those other printing-specific fields turned out to live
-  // under (item.setCard directly, and each variant's own .setCard), plus
-  // the common naming variants other TCG APIs use for this field.
-  function pickArtistField(obj) {
-    if (!obj || typeof obj !== 'object') return '';
-    const raw = obj.artist || obj.illustrator || obj.artistName || obj.illustratorName
-      || obj.credit || obj.creditLine || obj.artCredit || obj.painter;
-    if (!raw) return '';
-    if (typeof raw === 'string') return raw.trim();
-    if (typeof raw === 'object' && typeof raw.name === 'string') return raw.name.trim();
-    return '';
-  }
-  function findArtist(item) {
-    const sc = item.setCard || item;
-    let v = pickArtistField(item) || pickArtistField(sc);
-    if (v) return v;
-    const buckets = [item.variants, item.printings, item.editions, item.prints];
-    for (const arr of buckets) {
-      if (!Array.isArray(arr) || !arr.length) continue;
-      for (const p of arr) {
-        if (!p) continue;
-        v = pickArtistField(p) || pickArtistField(p.setCard);
-        if (v) return v;
-      }
-    }
-    return '';
-  }
-
   function findPower(item) {
     const sc = item.setCard || item;
     // Built-in CARDS data stores a split-power card's "attack" value as its
@@ -266,7 +267,6 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     return names;
   }
 
-  let _missingArtistLogged = 0;
   function norm(item) {
     if (!item?.name || !item?.slug) return null;
 
@@ -311,12 +311,7 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     const cost = item.cost ?? item.manaCost ?? item.mana_cost;
 
     const printings = findPrintings(item);
-    const artist = findArtist(item);
-    if (!artist && _missingArtistLogged < 3) {
-      _missingArtistLogged++;
-      console.warn('No artist found for "' + (item.name || '?') + '". Raw item:');
-      console.warn(JSON.stringify(item, null, 2));
-    }
+    const subtypes = findSubtypes(item);
 
     return {
       n:  item.name,
@@ -328,10 +323,11 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       s:  setName || (allSets[0] || ''),
       ss: allSets.length ? allSets : (setName ? [setName] : []),
       txt: findText(item),
-      ar: artist,
+      ar: item.artist || item.illustrator || item.artistName || '',
       th,
       sl: fullSlug,
       img: img || undefined,
+      sub: subtypes.length ? subtypes : undefined,
       prints: printings.length ? printings : undefined,
     };
   }
