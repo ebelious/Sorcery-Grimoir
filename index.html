@@ -3778,6 +3778,16 @@ function cacheAppData(){
   }
   next();
 }
+// While "Cache by Default" is enabled, keep the offline app-data cache
+// (cards/codex/news/etc.) fresh automatically instead of only updating it
+// when the user manually presses "Cache App Data". Skips the run if a
+// cache pass is already in progress, or if the setting has since been
+// turned off. Also re-runs the image cache using the full 'all' scope
+// (every card in the game), the same as the manual "Cache Card Data" button.
+setInterval(function(){
+  if(G.cfg.autoCache!==false&&!G.appDataCaching&&'serviceWorker' in navigator)cacheAppData();
+  if(G.cfg.autoCache!==false&&!G.offlineDownloading&&'serviceWorker' in navigator&&_offlineImageUrls('all').length)downloadForOffline('all');
+},60000);
 function imgURL(c){
   if(c&&c.img) return c.img;
   var s=cSlug(c);
