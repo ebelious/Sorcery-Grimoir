@@ -3923,7 +3923,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
   function row(lbl,key,opts,scroll){
     var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
-    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1)));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('');
+    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='el'?eSVG(o,16):(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1))));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('');
     if(scroll)return '<div class="frow">'+lblHtml+'<div class="frow-scroll">'+btnsHtml+'</div></div>';
     return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
   }
@@ -3950,7 +3950,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
       +'</div>';
   }
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Element','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
@@ -6357,7 +6357,7 @@ function pContent(){
   if(p==='cards'){
     var q=S.cS||'';var fil=cSortArr(cFilter(CARDS,G.cF,q));
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
-    o('<div id="csrch-wrap" class="si" style="margin:0 0 5px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
+    o('<div id="csrch-wrap" class="si" style="margin:0 0 5px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" style="color:var(--hi);font-size:26px" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
     o(fBar(G.cF,'setCF',true,'resetCF',true));
     var _cfActive=Object.keys(G.cF).some(function(k){return G.cF[k]&&G.cF[k].length>0;});
     o('<div class="frow"><span class="flbl">Sort</span>');
@@ -6386,7 +6386,7 @@ function pContent(){
     var fil=cFilter(allColl,G.coF,q);var total=Object.values(G.coll).reduce(function(s,d){return s+d.qty;},0);
     o('<div class="fr"><button class="fb" onclick="trigUpColl()">Import</button><button class="fb" onclick="exportColl()">Export</button><button class="fb red" onclick="clearColl()">Clear</button></div>');
     o('<div class="stbar">'+Object.keys(G.coll).length+' unique &middot; '+total+' total</div>');
-    o('<div id="csrch2-wrap" class="si" style="margin:0 0 5px"><input id="coll-srch" placeholder="Search collection&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" onclick="S.coS=\'\';render()">&times;</button>');o('</div>');
+    o('<div id="csrch2-wrap" class="si" style="margin:0 0 5px"><input id="coll-srch" placeholder="Search collection&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" style="color:var(--hi);font-size:26px" onclick="S.coS=\'\';render()">&times;</button>');o('</div>');
     o(fBar(G.coF,'setCoF',false,'resetCoF'));
     if(fil.length){fil.forEach(function(c){var nm=c._nm||cName(c);var d=G.coll[nm];if(!d)return;var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];var safenm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");o('<div class="coll-it"><div class="coll-th" style="cursor:pointer" onclick="var _c=cardByName(\''+safenm+'\');if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c)+'</div><div style="flex:1;min-width:0;cursor:pointer" onclick="var _c=cardByName(\''+safenm+'\');if(_c){G.selCard=_c;openPanel(\'card\');}"><div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(nm)+'</div><div style="font-size:11px;color:'+el.c+'">'+cEl(c)+'</div></div><div style="display:flex;align-items:center;gap:3px;flex-shrink:0"><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span style="font-size:11px;font-weight:700;color:var(--bgrn);min-width:16px;text-align:center">'+d.qty+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div></div>');});}
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
