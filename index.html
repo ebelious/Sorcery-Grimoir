@@ -4006,6 +4006,12 @@ function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv
 // restore everything generically without hand-maintaining a key list.
 function exportAllData(){
   var payload=_buildBackupPayload();
+  if('showSaveFilePicker' in window){
+    window.showSaveFilePicker({suggestedName:'sorcery_grimoire_backup.json',types:[{description:'JSON backup',accept:{'application/json':['.json']}}]})
+      .then(function(handle){return handle.createWritable().then(function(w){return w.write(JSON.stringify(payload)).then(function(){return w.close();});});})
+      .catch(function(e){if(e&&e.name!=='AbortError')alert('Could not save backup: '+e.message);});
+    return;
+  }
   var a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([JSON.stringify(payload)],{type:'application/json'}));
   a.download='sorcery_grimoire_backup_'+new Date().toISOString().slice(0,10)+'.json';
@@ -6177,8 +6183,6 @@ function pContent(){
     o('<div class="slbl2">Backup &amp; Restore</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 8px">Your decks, settings, collection, and stats live in this browser only. Clearing your browser\'s site data/cache can erase them &mdash; export a backup first, or restore one here.</div>');
     o('<div class="fr"><button class="fb" style="flex:1" onclick="exportAllData()">Export Backup</button><button class="fb" style="flex:1" onclick="trigUpAllData()">Restore Backup</button></div>');
-    o('<div class="set-row" style="margin-top:8px"><span>Auto-Backup</span><button class="ftag'+(G.cfg.autoBackupEnabled?' on':'')+'" onclick="'+(G.cfg.autoBackupEnabled?'disableAutoBackup()':'enableAutoBackup()')+'">'+(G.cfg.autoBackupEnabled?'On':'Off')+'</button></div>');
-    o('<div style="color:var(--fg2);font-size:11px;margin:2px 0 8px">Picks one file and keeps overwriting it automatically while the app is open. Needs Chrome, Edge, or this app on Android &mdash; not supported on Safari/iOS or Firefox.</div>');
     o('<div class="slbl2">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
