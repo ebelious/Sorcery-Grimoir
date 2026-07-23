@@ -8,6 +8,7 @@
 //   POST { action:'create', username, deck } -> { code, room }
 //   POST { action:'join',   code, username, deck } -> { code, room }
 //   POST { action:'leave',  code } -> { ok:true }
+//   POST { action:'acceptMatch', code, role } -> { code, room }  (both players must accept before the match starts)
 //   POST { action:'proposeResult', code, role, result:{proposerWon,turns,duration} } -> { code, room }
 //   POST { action:'confirmResult', code, role } -> { code, room }
 //   POST { action:'cancelResult',  code } -> { code, room }  (withdraws a proposed-but-unconfirmed result)
@@ -23,6 +24,7 @@
 //   GET  ?action=get&code=XXXXX -> { code, room }
 //
 // room shape: { created, p1:{username,deck,life,dice,ts}, p2:{username,deck,life,dice,ts}|null,
+//               accepted:{confirmedP1,confirmedP2}|undefined,
 //               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null,
 //               rematch:{confirmedP1,confirmedP2}|null }
 
@@ -95,7 +97,7 @@ exports.handler = async function (event) {
           const existing = await store.get(code, { type: 'json' });
           if (isExpired(existing)) break;
         }
-        const room = { created: Date.now(), p1: { username, usercode, deck, ts: Date.now() }, p2: null };
+        const room = { created: Date.now(), p1: { username, usercode, deck, ts: Date.now() }, p2: null, accepted: { confirmedP1: false, confirmedP2: false } };
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
@@ -125,6 +127,26 @@ exports.handler = async function (event) {
         const code = (body.code || '').trim().toUpperCase();
         if (code) await store.delete(code);
         return resp(200, { ok: true });
+      }
+
+      // Both players must accept once connected before the match actually
+      // starts (the "Match Connected" popup). Symmetric, unlike the
+      // propose/confirm result & rematch flows -- there's no "proposer"
+      // here, both sides just independently flip their own flag, and each
+      // device locally starts the match once it sees both are true.
+      if (action === 'acceptMatch') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        if (!room.accepted) room.accepted = { confirmedP1: false, confirmedP2: false };
+        if (role === 'p1') room.accepted.confirmedP1 = true;
+        else room.accepted.confirmedP2 = true;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
       }
 
       if (action === 'proposeResult') {
