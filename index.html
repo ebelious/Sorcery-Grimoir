@@ -3950,7 +3950,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
       +'</div>';
   }
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Element','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Element','el',['fire','water','earth','air','neutral'],true)+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'],true)+row('Set','set',sets,true)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+'],true):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
