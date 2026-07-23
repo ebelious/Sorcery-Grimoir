@@ -3154,7 +3154,7 @@ function showP1Settings(anchorEl){
   html+='<div style="margin-top:14px;font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Timer</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
   html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;color:var(--hi,#22d3ee)" title="Set match timer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button>';
-  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px">Timer Log</span></button>';
+  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px;pointer-events:none">Timer Log</span></button>';
   html+='<button onclick="var _pp=document.getElementById(\'p1-settings-pop\');if(_pp)_pp.remove();openPanel(\'connect\')" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:18px;color:var(--hi,#22d3ee)" title="Connect with another device">&#9876;</button>';
   html+='</div>';
 
@@ -3192,7 +3192,7 @@ function showP1Settings(anchorEl){
   pop.style.top=top+'px';
 
   setTimeout(function(){
-    function onOut(e){var _dp=document.getElementById('p1-dice-cpop');var _tp=document.getElementById('timer-pop');var _tlp=document.getElementById('timer-log-pop');if(!pop.contains(e.target)&&(!_dp||!_dp.contains(e.target))&&(!_tp||!_tp.contains(e.target))&&(!_tlp||!_tlp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}}
+    function onOut(e){var _dp=document.getElementById('p1-dice-cpop');var _tp=document.getElementById('timer-pop');var _tlp=document.getElementById('timer-log-pop');if(!pop.contains(e.target)&&e.target!==anchorEl&&!anchorEl.contains(e.target)&&(!_dp||!_dp.contains(e.target))&&(!_tp||!_tp.contains(e.target))&&(!_tlp||!_tlp.contains(e.target))){pop.remove();document.removeEventListener('click',onOut,true);}}
     document.addEventListener('click',onOut,true);
   },0);
 }
@@ -3719,6 +3719,19 @@ function _renderKeepScrollFocus(anchorId,force){
     }
   });
 }
+// Patches an in-progress cache bar's label + width directly, without a full
+// app re-render. The old code called _renderKeepScrollFocus() on every single
+// file/image completion, which tears down and rebuilds the whole settings
+// panel each time -- visible as a jitter/flicker in the menu while caching
+// runs. Only the start and finish of a cache pass actually change the DOM
+// structure (button <-> progress bar), so only those still go through the
+// full render; every tick in between just updates these two elements.
+function _updateCacheProgressUI(textId,barId,done,total,label){
+  var t=document.getElementById(textId);
+  if(t)t.textContent=label+'\u2026 ('+done+'/'+total+')';
+  var b=document.getElementById(barId);
+  if(b)b.style.width=(total?Math.round(100*done/total):0)+'%';
+}
 function downloadForOffline(scope){
   if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
   function start(rewardsData){
@@ -3733,7 +3746,7 @@ function downloadForOffline(scope){
       fetch(url,{mode:'no-cors'}).catch(function(){}).then(function(){
         G.offlineDownloadDone++;
         if(G.offlineDownloadDone>=G.offlineDownloadTotal){G.offlineDownloading=false;_updateOfflineCacheCount();_renderKeepScrollFocus('offline-cache-anchor',true);}
-        else{ if(G.offlineDownloadDone%5===0)_renderKeepScrollFocus('offline-cache-anchor'); next(); }
+        else{ _updateCacheProgressUI('offline-cache-text','offline-cache-bar',G.offlineDownloadDone,G.offlineDownloadTotal,'Caching images'); next(); }
       });
     }
     for(var i=0;i<CONCURRENCY;i++)next();
@@ -3769,12 +3782,12 @@ function cacheAppData(){
       var withBuster=url+(url.indexOf('?')>=0?'&':'?')+'t='+Date.now();
       fetch(withBuster,{cache:'no-store'})
         .catch(function(){})
-        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-anchor'); next(); });
+        .then(function(){ G.appDataCacheDone++;_updateCacheProgressUI('appdata-cache-text','appdata-cache-bar',G.appDataCacheDone,G.appDataCacheTotal,'Caching app data'); next(); });
     } else {
       var bgUrl=bgFiles[idx++ -dataFiles.length];
       fetch(bgUrl,{mode:'no-cors'})
         .catch(function(){})
-        .then(function(){ G.appDataCacheDone++;_renderKeepScrollFocus('appdata-cache-anchor'); next(); });
+        .then(function(){ G.appDataCacheDone++;_updateCacheProgressUI('appdata-cache-text','appdata-cache-bar',G.appDataCacheDone,G.appDataCacheTotal,'Caching app data'); next(); });
     }
   }
   next();
@@ -6145,8 +6158,8 @@ function pContent(){
     o('<div id="offline-cache-anchor" tabindex="-1" style="outline:none">');
     if(G.offlineDownloading){
       var _pct1=G.offlineDownloadTotal?Math.round(100*G.offlineDownloadDone/G.offlineDownloadTotal):0;
-      o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching images&hellip; ('+G.offlineDownloadDone+'/'+G.offlineDownloadTotal+')</div>');
-      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct1+'%;transition:width .2s"></div></div>');
+      o('<div id="offline-cache-text" style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching images&hellip; ('+G.offlineDownloadDone+'/'+G.offlineDownloadTotal+')</div>');
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div id="offline-cache-bar" style="background:var(--hi);height:100%;width:'+_pct1+'%;transition:width .2s"></div></div>');
     } else {
       o('<button class="fb" style="width:100%;margin-bottom:6px" onclick="if(confirm(\'This downloads every card image in the game (1000+ images, likely several hundred MB or more). It may take a while and use significant mobile data if not on Wi-Fi. Continue?\'))downloadForOffline(\'all\')">Cache Card Data</button>');
     }
@@ -6154,8 +6167,8 @@ function pContent(){
     o('<div id="appdata-cache-anchor" tabindex="-1" style="outline:none">');
     if(G.appDataCaching){
       var _pct2=G.appDataCacheTotal?Math.round(100*G.appDataCacheDone/G.appDataCacheTotal):0;
-      o('<div style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching app data&hellip; ('+G.appDataCacheDone+'/'+G.appDataCacheTotal+')</div>');
-      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div style="background:var(--hi);height:100%;width:'+_pct2+'%;transition:width .2s"></div></div>');
+      o('<div id="appdata-cache-text" style="font-size:11px;color:var(--fg2);margin-bottom:3px">Caching app data&hellip; ('+G.appDataCacheDone+'/'+G.appDataCacheTotal+')</div>');
+      o('<div style="background:var(--bg3);border:1px solid var(--bd);height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px"><div id="appdata-cache-bar" style="background:var(--hi);height:100%;width:'+_pct2+'%;transition:width .2s"></div></div>');
     } else {
       o('<button class="fb" style="width:100%" onclick="cacheAppData()">Cache App Data</button>');
     }
