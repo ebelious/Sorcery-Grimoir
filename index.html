@@ -3943,7 +3943,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
       +'<div class="acc" id="subdd_'+fn+'" style="margin-bottom:0;width:220px;flex-shrink:0;position:relative;overflow:visible">'
       +'<div class="acc-h" data-k="'+ddKey+'" onclick="toggleAcc(this.dataset.k)">'
       +'<div class="acc-nm" style="font-size:13px">'+summary+'</div>'
-      +'<span class="acc-arr">'+(open?'&#9650;':'&#9660;')+'</span>'
+      +'<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(open?'90deg':'-90deg')+')">&larr;</span>'
       +'</div>'
       +(open?'<div class="acc-body" style="position:absolute;top:100%;left:0;right:0;z-index:20;max-height:240px;overflow-y:auto;background:var(--bg2);border:1px solid var(--bd);box-shadow:0 4px 12px rgba(0,0,0,0.4)">'+opts+'</div>':'')
       +'</div>'
