@@ -883,7 +883,7 @@ var G={
   timerLog:[],
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
-  mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,
+  mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
 var _mpPollTimer=null;
@@ -4849,7 +4849,7 @@ function mpCreate(){
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4869,7 +4869,7 @@ function mpJoin(){
   G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4911,7 +4911,7 @@ function _mpPoll(){
       var res=d.room.result;
       if(res&&!G.mpResultFinalized){
         var myKey=G.mpRole==='p1'?'confirmedP1':'confirmedP2';
-        if(!res[myKey]&&!G.mpResultPopup){G.mpResultPopup=res;}
+        if(!res[myKey]&&!G.mpResultPopup&&!G.mpResultDeclined){G.mpResultPopup=res;}
         if(res.confirmedP1&&res.confirmedP2){_mpApplyRemoteResult(res);}
       }
       var _oppD=_mpOpponent();
@@ -5047,7 +5047,7 @@ function _mpEndMatch(deleteRoom){
 function mpLeave(){
   _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
   render();
 }
 // Sends the proposed result to the opponent instead of finalizing locally.
@@ -5099,6 +5099,17 @@ function mpCancelWaitingResult(){
   }
   render();
 }
+// Lets the receiving player dismiss the "Confirm Match Result" popup and
+// go back to the match instead of confirming -- doesn't tell the server
+// anything (the proposer's own Cancel button on their "Waiting for
+// Opponent" popup is what actually clears the pending proposal). Sets
+// mpResultDeclined so the poll loop doesn't immediately re-show the same
+// popup again on its next cycle.
+function mpDeclineResult(){
+  G.mpResultPopup=null;
+  G.mpResultDeclined=true;
+  render();
+}
 // Runs on the receiving device once they tap Confirm on the "Confirm Match
 // Result" popup.
 function mpConfirmResult(){
@@ -5140,7 +5151,7 @@ function _mpApplyRemoteResult(res){
     iWon:iWon
   };
   _mpEndMatch();
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.matchStartTime=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultDeclined=false;G.matchStartTime=null;
   render();
 }
 // Returns the opponent's room-side data even after the room itself has been
@@ -5219,7 +5230,7 @@ function mpSubmitRematch(){
     p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
     _mpApplyNames();
     G.mpLastOpp=_mpOpponent();
-    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpDeckImportedName=null;
+    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
     G.mpRematchPicking=false;
     _mpStartPoll();
     closeAll();
@@ -8018,7 +8029,7 @@ function render(){
       o('<div style="font-size:13px;color:var(--fg2);margin-bottom:10px">Your opponent reported:</div>');
       o('<div style="font-size:20px;font-weight:700;color:var(--grn);margin-bottom:4px">'+h(_rWinP?_rWinP.name:'')+' won</div>');
       o('<div style="font-size:14px;color:var(--fg2);margin-bottom:14px">vs '+h(_rLosP?_rLosP.name:'')+'</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpConfirmResult()">Confirm</button></div></div></div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpDeclineResult()">Not Yet</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpConfirmResult()">Confirm</button></div></div></div>');
     }
 
     if(G.mpWaitingResult&&!G.mpResultFinalized&&!G.mpResultPopup){
