@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T13:38:42.569Z",
+  "updated": "2026-07-23T13:50:35.017Z",
   "total": 1100,
   "cards": [
     {
@@ -52,9 +52,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-a_midsummer_nights_dream-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -159,9 +156,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-abundance-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -208,9 +202,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-abyssal_assault-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -294,9 +285,6 @@
       "th": "1f",
       "sl": "006-accursed_desert-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-accursed_desert-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -330,9 +318,6 @@
       "th": "1a",
       "sl": "006-accursed_tower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-accursed_tower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -365,9 +350,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-accusation-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -400,9 +382,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-acid_rain-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -436,9 +415,6 @@
       "th": "2f",
       "sl": "006-active_volcano-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-active_volcano-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -779,9 +755,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-all_mortals_gone-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -865,9 +838,6 @@
       "th": "",
       "sl": "006-altar_of_malachai-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-altar_of_malachai-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -1144,7 +1114,7 @@
       "th": "1e",
       "sl": "006-angel_ascendant-b-s",
       "sub": [
-        "Mortal's"
+        "Mortal"
       ],
       "prints": [
         {
@@ -1264,8 +1234,7 @@
       "th": "",
       "sl": "006-animist-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -1300,9 +1269,6 @@
       "th": "",
       "sl": "004-annual_fair-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-annual_fair-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -1420,9 +1386,6 @@
       "ar": "",
       "th": "1a 1e 1f 1w",
       "sl": "006-apply_alkahest-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -1572,11 +1535,6 @@
       "th": "1e 1w",
       "sl": "002-aqueduct-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-aqueduct-b-s.png",
-      "sub": [
-        "Site",
-        "Earth",
-        "Water"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -1673,9 +1631,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-arc_lightning-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -1743,9 +1698,6 @@
       "ar": "",
       "th": "3a",
       "sl": "004-arcane_barrage-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -1920,8 +1872,7 @@
       "th": "",
       "sl": "004-archimago-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -1964,9 +1915,6 @@
       "th": "1f",
       "sl": "002-arid_desert-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-arid_desert-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -2048,9 +1996,6 @@
       "ar": "",
       "th": "2a 2e 2f 2w",
       "sl": "006-armageddon-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -2239,9 +2184,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-assorted_animals-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -2290,9 +2232,6 @@
       "th": "",
       "sl": "002-astral_alcazar-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-astral_alcazar-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -2340,9 +2279,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-atlantean_fate-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -2439,9 +2375,6 @@
       "ar": "",
       "th": "1a",
       "sl": "004-attack_by_night-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -2475,9 +2408,6 @@
       "th": "1e",
       "sl": "006-autumn_bloom-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-autumn_bloom-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -2512,9 +2442,6 @@
       "th": "1w",
       "sl": "002-autumn_river-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-autumn_river-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -2612,9 +2539,6 @@
       "th": "1a 1e 1f 1w",
       "sl": "004-avalon-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-avalon-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -2649,8 +2573,7 @@
       "th": "",
       "sl": "001-avatar_of_air-pd-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -2693,8 +2616,7 @@
       "th": "",
       "sl": "001-avatar_of_earth-pd-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -2737,8 +2659,7 @@
       "th": "",
       "sl": "001-avatar_of_fire-pd-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -2781,8 +2702,7 @@
       "th": "",
       "sl": "001-avatar_of_water-pd-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -2956,9 +2876,6 @@
       "th": "",
       "sl": "006-baba_yagas_hut-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-baba_yagas_hut-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -2993,8 +2910,7 @@
       "sl": "004-babbling_brook-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-babbling_brook-b-s.png",
       "sub": [
-        "Be",
-        "Site"
+        "Be"
       ],
       "prints": [
         {
@@ -3029,9 +2945,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-backstab-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -3113,9 +3026,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-ball_lightning-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -3150,7 +3060,7 @@
       "sl": "006-balor_of_the_evil_eye-b-s",
       "sub": [
         "Giant",
-        "Demon's"
+        "Demon"
       ],
       "prints": [
         {
@@ -3304,9 +3214,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-baptize-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -3461,9 +3368,6 @@
       "th": "",
       "sl": "002-battlefield-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-battlefield-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -3513,8 +3417,7 @@
       "th": "",
       "sl": "002-battlemage-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -3570,9 +3473,6 @@
       "th": "1a",
       "sl": "004-beacon-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-beacon-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -3657,9 +3557,6 @@
       "th": "1e",
       "sl": "002-bedrock-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-bedrock-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -3706,9 +3603,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-begone-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -3841,9 +3735,6 @@
       "ar": "",
       "th": "3f",
       "sl": "006-betrayal-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -3876,9 +3767,6 @@
       "ar": "",
       "th": "1e",
       "sl": "006-bind_evil-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4051,9 +3939,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-black_mass-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4242,8 +4127,7 @@
       "th": "",
       "sl": "006-bladedancer-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -4277,9 +4161,6 @@
       "ar": "",
       "th": "1a 1f 1w",
       "sl": "006-blasphemy-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4363,9 +4244,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-blaze-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -4412,9 +4290,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-blaze_of_glory-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4482,9 +4357,6 @@
       "ar": "",
       "th": "1e",
       "sl": "006-bless-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4518,9 +4390,6 @@
       "th": "1e",
       "sl": "006-blessed_village-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-blessed_village-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4554,9 +4423,6 @@
       "th": "1w",
       "sl": "006-blessed_well-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-blessed_well-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4625,9 +4491,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-blink-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -4675,9 +4538,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-blizzard-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -4724,9 +4584,6 @@
       "ar": "",
       "th": "3f",
       "sl": "006-blood_mana-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -4950,9 +4807,6 @@
       "th": "1w",
       "sl": "004-bog-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-bog-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -4986,9 +4840,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-boil-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -5135,9 +4986,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-bone_spear-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -5172,9 +5020,6 @@
       "th": "",
       "sl": "002-boneyard-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-boneyard-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -5222,9 +5067,6 @@
       "th": "1f",
       "sl": "004-bonfire-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-bonfire-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -5363,9 +5205,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-border_militia-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -5464,9 +5303,6 @@
       "th": "",
       "sl": "002-bottomless_pit-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-bottomless_pit-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -5549,9 +5385,6 @@
       "th": "1e",
       "sl": "006-boulevard_of_bones-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-boulevard_of_bones-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -5620,9 +5453,6 @@
       "th": "",
       "sl": "004-bower_of_bliss-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-bower_of_bliss-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -5657,9 +5487,6 @@
       "th": "1e",
       "sl": "004-briar_patch-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-briar_patch-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -5800,9 +5627,6 @@
       "th": "",
       "sl": "004-broceliande-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-broceliande-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -5941,9 +5765,6 @@
       "ar": "",
       "th": "3a",
       "sl": "002-browse-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -6112,9 +5933,6 @@
       "th": "",
       "sl": "006-bureau_of_occult_control-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-bureau_of_occult_control-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -6147,9 +5965,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-buried_alive-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -6233,9 +6048,6 @@
       "ar": "",
       "th": "1f",
       "sl": "004-burning_hands-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -6269,9 +6081,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-bury-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -6319,7 +6128,7 @@
       "th": "1a 1e 1f 1w",
       "sl": "005-caelestis-b-s",
       "sub": [
-        "Dragon's",
+        "Dragon",
         "Spirit"
       ],
       "prints": [
@@ -6355,9 +6164,6 @@
       "th": "1e 1f 1w",
       "sl": "004-caerleon_upon_usk-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-caerleon_upon_usk-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -6425,9 +6231,6 @@
       "ar": "",
       "th": "3w",
       "sl": "006-call_of_the_sea-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -6461,9 +6264,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-call_to_war-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -6512,9 +6312,6 @@
       "th": "",
       "sl": "004-camelot-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-camelot-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -6689,9 +6486,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-carrionette-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -6724,9 +6518,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-cast_into_exile-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -6829,9 +6620,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-castles_ablaze-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -6965,9 +6753,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-cave_in-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -7100,9 +6885,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-chain_lightning-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -7200,9 +6982,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-chaos_twister-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -7249,9 +7028,6 @@
       "ar": "",
       "th": "2a 2w",
       "sl": "006-chaoswish-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7319,9 +7095,6 @@
       "ar": "",
       "th": "1f",
       "sl": "004-charge-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -7389,9 +7162,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-chorus_of_condemnation-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7426,9 +7196,6 @@
       "th": "",
       "sl": "006-city_of_glass-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-city_of_glass-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7469,9 +7236,6 @@
       "th": "",
       "sl": "006-city_of_plenty-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-city_of_plenty-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7505,9 +7269,6 @@
       "th": "",
       "sl": "006-city_of_souls-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-city_of_souls-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7541,9 +7302,6 @@
       "th": "",
       "sl": "006-city_of_traitors-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-city_of_traitors-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -7699,9 +7457,6 @@
       "th": "1a",
       "sl": "002-cloud_city-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-cloud_city-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -7926,9 +7681,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-common_sense-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -7976,9 +7728,6 @@
       "th": "1e",
       "sl": "004-common_village-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-common_village-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -8012,9 +7761,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-cone_of_flame-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -8111,9 +7857,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-consecrate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -8148,8 +7891,7 @@
       "sl": "006-consecrated_ground-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-consecrated_ground-b-s.png",
       "sub": [
-        "Site",
-        "God's"
+        "God"
       ],
       "prints": [
         {
@@ -8235,9 +7977,6 @@
       "th": "",
       "sl": "002-cornerstone-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-cornerstone-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -8319,9 +8058,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-corpse_explosion-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -8355,8 +8091,7 @@
       "th": "",
       "sl": "006-corruptor-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -8476,9 +8211,6 @@
       "th": "1e",
       "sl": "999-court_of_equity-d-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/999-court_of_equity-d-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Promotional",
@@ -8667,9 +8399,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-craterize-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -8837,9 +8566,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-critical_strike-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -8894,9 +8620,6 @@
       "th": "1w",
       "sl": "006-croaking_swamp-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-croaking_swamp-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -8966,9 +8689,6 @@
       "th": "",
       "sl": "002-crossroads-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-crossroads-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -9151,9 +8871,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-crusade-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -9200,9 +8917,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-cursed_iron-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9236,9 +8950,6 @@
       "th": "1f",
       "sl": "004-cursed_land-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-cursed_land-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -9442,9 +9153,6 @@
       "th": "1a",
       "sl": "006-dark_alley-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-dark_alley-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9480,9 +9188,6 @@
       "th": "1a",
       "sl": "002-dark_tower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-dark_tower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -9537,9 +9242,6 @@
       "th": "",
       "sl": "006-darkest_dungeon-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-darkest_dungeon-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9573,9 +9275,6 @@
       "ar": "",
       "th": "3f",
       "sl": "006-day_of_judgment-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9788,8 +9487,7 @@
       "th": "",
       "sl": "002-deathspeaker-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -9844,9 +9542,6 @@
       "ar": "",
       "th": "2a 2f",
       "sl": "006-deathwish-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9880,9 +9575,6 @@
       "th": "2w",
       "sl": "006-deep_sea-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-deep_sea-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -9966,9 +9658,6 @@
       "th": "1a",
       "sl": "006-defiler_spire-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-defiler_spire-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10001,9 +9690,6 @@
       "ar": "",
       "th": "1w",
       "sl": "004-degradation-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -10036,9 +9722,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-deliverance-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10106,9 +9789,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-demonic_contract-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10142,9 +9822,6 @@
       "th": "1a",
       "sl": "006-den_of_evil-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-den_of_evil-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10177,9 +9854,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-desecrate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10214,8 +9888,7 @@
       "sl": "006-desecrated_ground-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-desecrated_ground-b-s.png",
       "sub": [
-        "Site",
-        "God's"
+        "God"
       ],
       "prints": [
         {
@@ -10285,9 +9958,6 @@
       "th": "1f",
       "sl": "006-desert_bloom-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-desert_bloom-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10320,9 +9990,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-detonate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10405,9 +10072,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-dhol_chants-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10526,9 +10190,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-disenchant-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10576,9 +10237,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-disintegrate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10627,9 +10285,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-dispel-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10690,9 +10345,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-displace-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10726,9 +10378,6 @@
       "ar": "",
       "th": "3e",
       "sl": "002-divine_healing-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10775,9 +10424,6 @@
       "ar": "",
       "th": "1a 1e 1f 1w",
       "sl": "006-divine_intervention-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -10811,7 +10457,6 @@
       "th": "2e",
       "sl": "006-divine_lance-b-s",
       "sub": [
-        "Magic",
         "As"
       ],
       "prints": [
@@ -10882,9 +10527,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-dodge_roll-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10933,9 +10575,6 @@
       "th": "",
       "sl": "002-dome_of_osiros-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-dome_of_osiros-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -10984,9 +10623,6 @@
       "th": "",
       "sl": "002-donnybrook_inn-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-donnybrook_inn-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -11204,9 +10840,6 @@
       "th": "1w",
       "sl": "004-dozmary_pool-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-dozmary_pool-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -11312,8 +10945,7 @@
       "th": "",
       "sl": "005-dragonlord-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -11355,9 +10987,6 @@
       "th": "",
       "sl": "005-dragonlords_lair-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/005-dragonlords_lair-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Dragonlord",
@@ -11391,9 +11020,6 @@
       "th": "1a",
       "sl": "006-dread_thicket-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-dread_thicket-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -11462,9 +11088,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-dream_quest-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -11511,9 +11134,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-dredge-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -11582,9 +11202,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-drought-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -11632,9 +11249,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-drown-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -11718,8 +11332,7 @@
       "th": "",
       "sl": "004-druid-bt-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -11810,9 +11423,6 @@
       "ar": "",
       "th": "1e",
       "sl": "004-duel-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -11846,8 +11456,7 @@
       "th": "",
       "sl": "006-duplicator-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -11933,9 +11542,6 @@
       "th": "1f",
       "sl": "002-dwarven_forge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-dwarven_forge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -12018,9 +11624,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-earthquake-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -12117,9 +11720,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-eclipse-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12154,9 +11754,6 @@
       "th": "",
       "sl": "002-edge_of_the_world-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-edge_of_the_world-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -12239,9 +11836,6 @@
       "th": "1w",
       "sl": "006-elder_ruins-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-elder_ruins-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12277,8 +11871,7 @@
       "th": "",
       "sl": "002-elementalist-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -12371,8 +11964,7 @@
       "th": "",
       "sl": "002-enchantress-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -12428,9 +12020,6 @@
       "th": "1e",
       "sl": "006-endless_fence-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-endless_fence-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12463,9 +12052,6 @@
       "ar": "",
       "th": "1e",
       "sl": "006-enduring_faith-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12534,9 +12120,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-entangle_terrain-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -12654,9 +12237,6 @@
       "th": "",
       "sl": "006-ersatz_platz-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-ersatz_platz-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12810,9 +12390,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-evil_presence-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -12926,9 +12503,6 @@
       "ar": "",
       "th": "1e",
       "sl": "006-exhume-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -12962,9 +12536,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-exorcism-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -13012,9 +12583,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-extinguish-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -13062,9 +12630,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-fade-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -13112,9 +12677,6 @@
       "th": "1a",
       "sl": "004-fae_city-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-fae_city-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -13287,9 +12849,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-falling_star-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -13408,8 +12967,7 @@
       "th": "1a 1f",
       "sl": "006-fatality-b-s",
       "sub": [
-        "Finish",
-        "Magic"
+        "Finish"
       ],
       "prints": [
         {
@@ -13443,9 +13001,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-feast_for_crows-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -13478,9 +13033,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-feign_death-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -13649,9 +13201,6 @@
       "th": "2e",
       "sl": "006-fertile_earth-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-fertile_earth-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -13770,9 +13319,6 @@
       "th": "1f",
       "sl": "004-fields_of_camlann-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-fields_of_camlann-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -13807,9 +13353,6 @@
       "th": "1a",
       "sl": "006-fields_of_phyxis-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-fields_of_phyxis-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -13927,9 +13470,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-fire_harpoons-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -13977,9 +13517,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-fireball-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14027,9 +13564,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-firebolts-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14076,9 +13610,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-firebreathing-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -14216,9 +13747,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-flame_strike-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -14252,9 +13780,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-flame_wave-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14303,8 +13828,7 @@
       "th": "",
       "sl": "002-flamecaller-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -14431,9 +13955,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-flanking_maneuver-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14516,9 +14037,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-flood-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14567,9 +14085,6 @@
       "th": "1w",
       "sl": "002-floodplain-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-floodplain-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14617,9 +14132,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-font_of_life-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -14775,9 +14287,6 @@
       "th": "1f",
       "sl": "004-forge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-forge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -14811,9 +14320,6 @@
       "th": "1e",
       "sl": "006-forgotten_tomb-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-forgotten_tomb-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -14847,9 +14353,6 @@
       "th": "1e",
       "sl": "006-forlorn_keep-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-forlorn_keep-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -14918,9 +14421,6 @@
       "th": "1a",
       "sl": "006-forsaken_crypt-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-forsaken_crypt-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -14953,9 +14453,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-four_fat_frogs-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15095,9 +14592,6 @@
       "th": "",
       "sl": "002-free_city-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-free_city-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -15144,9 +14638,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-freeze-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15337,9 +14828,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-frost_nova-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -15422,9 +14910,6 @@
       "th": "1f",
       "sl": "004-funeral_pyre-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-funeral_pyre-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -15458,9 +14943,6 @@
       "th": "1e 1w",
       "sl": "006-garden_of_eden-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-garden_of_eden-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15530,8 +15012,7 @@
       "th": "",
       "sl": "002-geomancer-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -15573,9 +15054,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-geyser-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -15674,8 +15152,7 @@
       "sl": "006-ghost_town-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-ghost_town-b-s.png",
       "sub": [
-        "Once",
-        "Site"
+        "Once"
       ],
       "prints": [
         {
@@ -15709,9 +15186,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-ghostfire-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15899,9 +15373,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-gift_of_the_frog-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15934,9 +15405,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-gift_of_the_raven-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -15969,9 +15437,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-gift_of_the_serpent-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -16004,9 +15469,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-gift_of_the_wolf-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -16040,9 +15502,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-gigantism-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -16140,9 +15599,6 @@
       "th": "1w",
       "sl": "006-gilman_house-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-gilman_house-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -16176,9 +15632,6 @@
       "th": "1a 1e 1f",
       "sl": "004-glastonbury_tor-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-glastonbury_tor-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -16333,9 +15786,6 @@
       "th": "1e",
       "sl": "002-gnome_hollows-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-gnome_hollows-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -16417,9 +15867,6 @@
       "ar": "",
       "th": "4e",
       "sl": "006-golden_dawn-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -16595,9 +16042,6 @@
       "th": "1a",
       "sl": "002-gothic_tower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-gothic_tower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -16822,9 +16266,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-grapple_shot-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -16871,9 +16312,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-grasping_ground-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -16994,9 +16432,6 @@
       "th": "",
       "sl": "002-great_wall-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-great_wall-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -17163,9 +16598,6 @@
       "ar": "",
       "th": "1w",
       "sl": "004-grievous_insult-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -17403,9 +16835,6 @@
       "ar": "",
       "th": "2e",
       "sl": "004-guards-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -17597,9 +17026,6 @@
       "th": "",
       "sl": "004-hamlet-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-hamlet-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -17632,9 +17058,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-hamlets_ablaze-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -17739,8 +17162,7 @@
       "th": "",
       "sl": "006-harbinger-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -17788,9 +17210,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-harpyon_urge-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -17823,9 +17242,6 @@
       "ar": "",
       "th": "1e 1w",
       "sl": "006-harvest_festival-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -17896,8 +17312,7 @@
       "sl": "006-haystack-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-haystack-b-s.png",
       "sub": [
-        "Good",
-        "Site"
+        "Good"
       ],
       "prints": [
         {
@@ -18039,9 +17454,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-heat_ray-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -18089,9 +17501,6 @@
       "th": "",
       "sl": "006-heirloom_lost-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-heirloom_lost-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18124,9 +17533,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-hellfire-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18195,9 +17601,6 @@
       "th": "1f",
       "sl": "006-hellmouth-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-hellmouth-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18641,9 +18044,6 @@
       "th": "1e",
       "sl": "006-hillside_chapel-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-hillside_chapel-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18713,9 +18113,6 @@
       "th": "1e",
       "sl": "002-holy_ground-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-holy_ground-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -18762,9 +18159,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-holy_nova-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18867,9 +18261,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-homecoming-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -18938,9 +18329,6 @@
       "th": "1f",
       "sl": "006-horns_of_behemoth-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-horns_of_behemoth-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -19144,9 +18532,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-howl_from_beyond-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -19181,9 +18566,6 @@
       "th": "1e",
       "sl": "002-humble_village-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-humble_village-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19231,9 +18613,6 @@
       "th": "1e",
       "sl": "004-hunters_lodge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-hunters_lodge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -19407,9 +18786,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-ice_lance-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19456,9 +18832,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-ice_shards-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -19493,9 +18866,6 @@
       "th": "1w",
       "sl": "002-iceberg-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-iceberg-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19613,9 +18983,6 @@
       "ar": "",
       "th": "3f",
       "sl": "002-immolation-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19663,9 +19030,6 @@
       "th": "1e",
       "sl": "004-impenetrable_copse-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-impenetrable_copse-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -19700,9 +19064,6 @@
       "th": "",
       "sl": "002-imperial_road-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-imperial_road-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19750,8 +19111,7 @@
       "th": "",
       "sl": "006-imposter-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -19786,9 +19146,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-incinerate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -19887,8 +19244,7 @@
       "th": "1f",
       "sl": "002-infiltrate-b-s",
       "sub": [
-        "Sophisticated",
-        "Magic"
+        "Sophisticated"
       ],
       "prints": [
         {
@@ -19937,9 +19293,6 @@
       "th": "",
       "sl": "006-infusion_factory-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-infusion_factory-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -19973,9 +19326,6 @@
       "th": "1w",
       "sl": "006-innsmouth_dock-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-innsmouth_dock-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -20044,8 +19394,7 @@
       "th": "",
       "sl": "006-interrogator-b-s",
       "sub": [
-        "To",
-        "Avatar"
+        "To"
       ],
       "prints": [
         {
@@ -20079,9 +19428,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-into_the_abyss-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -20149,9 +19495,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-invasion-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -20184,9 +19527,6 @@
       "ar": "",
       "th": "1e 1w",
       "sl": "006-invigorate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -20341,8 +19681,7 @@
       "th": "",
       "sl": "006-ironclad-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -20378,9 +19717,6 @@
       "th": "1w",
       "sl": "002-island_leviathan-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-island_leviathan-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -20464,9 +19800,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-jihad-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -20513,9 +19846,6 @@
       "ar": "",
       "th": "1f",
       "sl": "004-joust-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -20549,9 +19879,6 @@
       "th": "1a 1f 1w",
       "sl": "004-joyous_garde-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-joyous_garde-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -20741,9 +20068,6 @@
       "th": "1w",
       "sl": "004-kelp_cavern-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-kelp_cavern-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -20974,9 +20298,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-kings_council-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -21011,9 +20332,6 @@
       "th": "1e",
       "sl": "002-kingdom_of_agartha-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-kingdom_of_agartha-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -21095,9 +20413,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-kiss_of_death-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -21131,8 +20446,7 @@
       "th": "3w",
       "sl": "006-kiss_of_judas-b-s",
       "sub": [
-        "Marked",
-        "Magic"
+        "Marked"
       ],
       "prints": [
         {
@@ -21251,9 +20565,6 @@
       "ar": "",
       "th": "1e",
       "sl": "004-knighthood-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -21287,9 +20598,6 @@
       "th": "1f",
       "sl": "006-kor_crematory-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-kor_crematory-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -21640,9 +20948,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-landmass-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -21675,9 +20980,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-lash-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -21710,9 +21012,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-lava_flow-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -21796,9 +21095,6 @@
       "th": "1f",
       "sl": "006-leadworks-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-leadworks-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -21832,9 +21128,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-leap_attack-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -21881,9 +21174,6 @@
       "ar": "",
       "th": "1w",
       "sl": "004-led_astray-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -21987,9 +21277,6 @@
       "th": "",
       "sl": "004-leyline_henge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-leyline_henge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -22022,9 +21309,6 @@
       "ar": "",
       "th": "2e 2w",
       "sl": "006-lifewish-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -22059,11 +21343,6 @@
       "th": "1a 1w",
       "sl": "002-lighthouse-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-lighthouse-b-s.png",
-      "sub": [
-        "Site",
-        "Water",
-        "Air"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -22112,9 +21391,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-lightning_bolt-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -22241,9 +21517,6 @@
       "th": "1a",
       "sl": "002-lone_tower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-lone_tower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -22298,9 +21571,6 @@
       "th": "1a",
       "sl": "004-lookout-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-lookout-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -22763,9 +22033,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-lure-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -22799,9 +22066,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-mad_dash-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -22900,9 +22164,6 @@
       "th": "1w",
       "sl": "002-maelstrom-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-maelstrom-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -23049,9 +22310,6 @@
       "ar": "",
       "th": "1a",
       "sl": "004-magic_missiles-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -23085,8 +22343,7 @@
       "th": "",
       "sl": "006-magician-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -23203,9 +22460,6 @@
       "th": "",
       "sl": "004-major_city-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-major_city-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -23239,9 +22493,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-major_explosion-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -23394,9 +22645,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-marine_voyage-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -23444,9 +22692,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-mariners_curse-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24059,9 +23304,6 @@
       "th": "1a",
       "sl": "004-merlins_tower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-merlins_tower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -24129,9 +23371,6 @@
       "ar": "",
       "th": "4w",
       "sl": "004-mesmerism-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -24200,9 +23439,6 @@
       "ar": "",
       "th": "3f",
       "sl": "002-meteor_shower-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24385,9 +23621,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-minecart_madness-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24435,9 +23668,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-minor_explosion-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24536,9 +23766,6 @@
       "th": "1f",
       "sl": "002-mirage-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-mirage-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24587,9 +23814,6 @@
       "th": "",
       "sl": "002-mirror_realm-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-mirror_realm-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -24637,9 +23861,6 @@
       "th": "",
       "sl": "006-mismanaged_mortuary-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-mismanaged_mortuary-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -24873,9 +24094,6 @@
       "th": "1f",
       "sl": "999-mobbed_court-d-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/999-mobbed_court-d-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Promotional",
@@ -24909,9 +24127,6 @@
       "th": "1a",
       "sl": "999-mock_court-d-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/999-mock_court-d-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Promotional",
@@ -24945,9 +24160,6 @@
       "th": "1f",
       "sl": "006-molten_maar-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-molten_maar-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25115,9 +24327,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-monstermorphosis-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25355,9 +24564,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-mortal_soil-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25391,9 +24597,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-mortality-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -25526,9 +24729,6 @@
       "th": "1e",
       "sl": "006-mount_ussar_sanctuary-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-mount_ussar_sanctuary-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25613,9 +24813,6 @@
       "th": "1a",
       "sl": "002-mountain_pass-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-mountain_pass-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -25663,9 +24860,6 @@
       "th": "2a",
       "sl": "006-mountain_peaks-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-mountain_peaks-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25820,9 +25014,6 @@
       "th": "",
       "sl": "002-mudflow-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-mudflow-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -25870,9 +25061,6 @@
       "th": "1w",
       "sl": "006-mudslide-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-mudslide-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25940,9 +25128,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-murder_of_crows-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -25976,9 +25161,6 @@
       "th": "",
       "sl": "006-myrrhs_trophy_room-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-myrrhs_trophy_room-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26047,9 +25229,6 @@
       "ar": "",
       "th": "",
       "sl": "006-necromancer-b-s",
-      "sub": [
-        "Avatar"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26096,9 +25275,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-necronomiconcert-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26131,9 +25307,6 @@
       "ar": "",
       "th": "1e",
       "sl": "006-necropotence-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26337,9 +25510,6 @@
       "th": "1e",
       "sl": "006-no_mans_land-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-no_mans_land-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26549,11 +25719,6 @@
       "th": "1f 1w",
       "sl": "002-oasis-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-oasis-b-s.png",
-      "sub": [
-        "Site",
-        "Fire",
-        "Water"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -26602,9 +25767,6 @@
       "th": "1a",
       "sl": "002-observatory-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-observatory-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -26653,9 +25815,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-occult_ritual-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -26760,9 +25919,6 @@
       "th": "",
       "sl": "006-old_mortimers_den-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-old_mortimers_den-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -26915,9 +26071,6 @@
       "ar": "",
       "th": "1e 1f",
       "sl": "006-onslaught-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -27001,9 +26154,6 @@
       "th": "1e",
       "sl": "006-open_grave-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-open_grave-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -27037,9 +26187,6 @@
       "th": "1a",
       "sl": "006-open_mausoleum-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-open_mausoleum-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -27349,7 +26496,6 @@
       "sl": "006-orpheus_crossing-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-orpheus_crossing-b-s.png",
       "sub": [
-        "Site",
         "Don't"
       ],
       "prints": [
@@ -27469,9 +26615,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-overflow-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -27505,9 +26648,6 @@
       "th": "1w",
       "sl": "999-overflowing_court-d-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/999-overflowing_court-d-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Promotional",
@@ -27541,9 +26681,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-overpower-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -27591,9 +26728,6 @@
       "ar": "",
       "th": "2f",
       "sl": "002-pact_with_the_devil-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -27814,8 +26948,7 @@
       "th": "",
       "sl": "002-pathfinder-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -27990,9 +27123,6 @@
       "ar": "",
       "th": "3f",
       "sl": "004-peasant_revolt-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -28026,9 +27156,6 @@
       "th": "1e",
       "sl": "004-pebbled_paths-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-pebbled_paths-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -28062,9 +27189,6 @@
       "th": "1w",
       "sl": "006-peculiar_port-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-peculiar_port-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -28132,9 +27256,6 @@
       "ar": "",
       "th": "2e",
       "sl": "004-pendragon_legacy-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -28303,9 +27424,6 @@
       "th": "1a",
       "sl": "004-perilous_bridge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-perilous_bridge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -28340,8 +27458,7 @@
       "th": "",
       "sl": "006-persecutor-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -28745,9 +27862,6 @@
       "th": "1e",
       "sl": "006-pilgrims_shrine-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-pilgrims_shrine-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -28782,9 +27896,6 @@
       "th": "1e",
       "sl": "002-pillar_of_zeiros-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-pillar_of_zeiros-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -28967,9 +28078,6 @@
       "ar": "",
       "th": "3w",
       "sl": "002-plague_of_frogs-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29017,9 +28125,6 @@
       "th": "1f",
       "sl": "006-plague_pits-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-plague_pits-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -29089,9 +28194,6 @@
       "th": "",
       "sl": "002-planar_gate-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-planar_gate-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29274,9 +28376,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-poison_nova-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29325,8 +28424,7 @@
       "sl": "004-poisoned_well-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-poisoned_well-b-s.png",
       "sub": [
-        "Don't",
-        "Site"
+        "Don't"
       ],
       "prints": [
         {
@@ -29511,9 +28609,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-pollimorph-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29561,9 +28656,6 @@
       "th": "1w",
       "sl": "004-pond-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-pond-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -29682,9 +28774,6 @@
       "th": "",
       "sl": "004-postern_gate-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-postern_gate-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -29717,9 +28806,6 @@
       "ar": "",
       "th": "1a",
       "sl": "004-power_of_flight-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -29752,9 +28838,6 @@
       "ar": "",
       "th": "2e 2f",
       "sl": "006-powerwish-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -29789,9 +28872,6 @@
       "th": "",
       "sl": "002-primordial_spring-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-primordial_spring-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29840,9 +28920,6 @@
       "th": "1a 1e 1f 1w",
       "sl": "002-pristine_paradise-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-pristine_paradise-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -29925,9 +29002,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-psionic_blast-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -30083,9 +29157,6 @@
       "th": "1f",
       "sl": "006-purgatory-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-purgatory-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -30240,9 +29311,6 @@
       "th": "1e",
       "sl": "002-quagmire-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-quagmire-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -30510,9 +29578,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-rain_of_arrows-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -30560,9 +29625,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-raise_dead-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -30609,9 +29671,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-raise_militia-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -30716,9 +29775,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-raze-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -30752,8 +29808,7 @@
       "th": "",
       "sl": "006-realm_eater-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -30823,9 +29878,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-recall-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -30960,9 +30012,6 @@
       "th": "1f",
       "sl": "002-red_desert-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-red_desert-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31184,9 +30233,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-release_the_hounds-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -31250,9 +30296,6 @@
       "th": "1f",
       "sl": "002-remote_desert-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-remote_desert-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31335,9 +30378,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-replication-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31384,9 +30424,6 @@
       "ar": "",
       "th": "2e",
       "sl": "004-rescue-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -31420,9 +30457,6 @@
       "ar": "",
       "th": "2e",
       "sl": "002-rest_in_peace-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31469,9 +30503,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-return_to_nature-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -31732,9 +30763,6 @@
       "th": "1e",
       "sl": "002-rift_valley-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-rift_valley-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31867,9 +30895,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-riptide-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -31918,9 +30943,6 @@
       "th": "1f",
       "sl": "006-river_of_blood-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-river_of_blood-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -31969,9 +30991,6 @@
       "th": "1f",
       "sl": "002-river_of_flame-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-river_of_flame-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -32019,9 +31038,6 @@
       "th": "1w",
       "sl": "006-river_rapids-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-river_rapids-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -32055,9 +31071,6 @@
       "th": "1f",
       "sl": "006-road_to_perdition-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-road_to_perdition-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -32242,9 +31255,6 @@
       "th": "",
       "sl": "002-roots_of_yggdrasil-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-roots_of_yggdrasil-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -32381,9 +31391,6 @@
       "th": "",
       "sl": "006-rubble-bt-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-rubble-bt-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -32489,11 +31496,6 @@
       "th": "1a 1f",
       "sl": "002-ruins-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-ruins-b-s.png",
-      "sub": [
-        "Site",
-        "Fire",
-        "Air"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -32592,9 +31594,6 @@
       "th": "1e",
       "sl": "002-rustic_village-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-rustic_village-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -32763,9 +31762,6 @@
       "th": "",
       "sl": "006-saintweald-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-saintweald-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -32833,9 +31829,6 @@
       "ar": "",
       "th": "3f",
       "sl": "006-salt_the_earth-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -32919,9 +31912,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-sandstorm-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -33038,9 +32028,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-satanic_panic-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -33075,8 +32062,7 @@
       "th": "",
       "sl": "006-savior-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -33209,9 +32195,6 @@
       "ar": "",
       "th": "1a 1w",
       "sl": "006-scatter-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -33345,9 +32328,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-scorched_earth-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -33530,9 +32510,6 @@
       "th": "",
       "sl": "006-sea_of_ash-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-sea_of_ash-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -33735,9 +32712,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-searing_truth-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -33820,9 +32794,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-second_wind-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -33857,9 +32828,6 @@
       "th": "1e",
       "sl": "002-secret_tunnel-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-secret_tunnel-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -33994,8 +32962,7 @@
       "th": "",
       "sl": "002-seer-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -34411,9 +33378,6 @@
       "th": "1e",
       "sl": "006-shallow_grave-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-shallow_grave-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -34481,9 +33445,6 @@
       "ar": "",
       "th": "2w",
       "sl": "004-shapeshift-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -34516,9 +33477,6 @@
       "ar": "",
       "th": "1f",
       "sl": "004-shatter_strike-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -34672,9 +33630,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-shield_wall-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -34723,9 +33678,6 @@
       "th": "1f",
       "sl": "002-shifting_sands-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-shifting_sands-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -34808,9 +33760,6 @@
       "th": "1a",
       "sl": "006-shrike_orchard-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-shrike_orchard-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -34879,9 +33828,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-shrink-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -35014,9 +33960,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-silence-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -35065,8 +34008,7 @@
       "sl": "006-silent_hills-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-silent_hills-b-s.png",
       "sub": [
-        "Not",
-        "Site"
+        "Not"
       ],
       "prints": [
         {
@@ -35187,9 +34129,6 @@
       "th": "1e",
       "sl": "002-simple_village-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-simple_village-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -35237,9 +34176,6 @@
       "th": "1w",
       "sl": "006-sinister_pond-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-sinister_pond-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -35274,9 +34210,6 @@
       "th": "",
       "sl": "002-sinkhole-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-sinkhole-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -35710,7 +34643,7 @@
       "sl": "004-sir_lamorak-b-s",
       "sub": [
         "This",
-        "Mortal's"
+        "Mortal"
       ],
       "prints": [
         {
@@ -36331,9 +35264,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-sjaelstrom-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -36545,9 +35475,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-sleep-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -36799,9 +35726,6 @@
       "ar": "",
       "th": "2e",
       "sl": "006-smite-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -36836,9 +35760,6 @@
       "th": "1f",
       "sl": "002-smokestacks_of_gnaak-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-smokestacks_of_gnaak-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -37020,9 +35941,6 @@
       "ar": "",
       "th": "2w",
       "sl": "004-snowball-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -37057,8 +35975,7 @@
       "sl": "006-sold_out_cemetery-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-sold_out_cemetery-b-s.png",
       "sub": [
-        "This",
-        "Site"
+        "This"
       ],
       "prints": [
         {
@@ -37095,8 +36012,7 @@
       "th": "",
       "sl": "002-sorcerer-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -37186,9 +36102,6 @@
       "ar": "",
       "th": "3e",
       "sl": "006-sow_the_earth-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -37223,8 +36136,7 @@
       "th": "",
       "sl": "002-sparkmage-b-s",
       "sub": [
-        "Your",
-        "Avatar's"
+        "Your"
       ],
       "prints": [
         {
@@ -37401,8 +36313,7 @@
       "th": "",
       "sl": "999-spellslinger-dk-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -37443,9 +36354,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-sphere_of_animosity-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -37479,9 +36387,6 @@
       "th": "",
       "sl": "006-sphinx_sarcophagus-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-sphinx_sarcophagus-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -37515,9 +36420,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-spin_attack-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -37566,9 +36468,6 @@
       "th": "1a",
       "sl": "006-spire-pd-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-spire-pd-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -37659,9 +36558,6 @@
       "th": "1a",
       "sl": "006-spore_spouts-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-spore_spouts-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -37696,9 +36592,6 @@
       "th": "1w",
       "sl": "002-spring_river-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-spring_river-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -37867,9 +36760,6 @@
       "th": "",
       "sl": "002-standing_stones-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-standing_stones-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -37917,9 +36807,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-star_seeds_of_uhr-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -38038,11 +36925,6 @@
       "th": "1e 1f",
       "sl": "002-steppe-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-steppe-b-s.png",
-      "sub": [
-        "Site",
-        "Earth",
-        "Fire"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -38090,9 +36972,6 @@
       "th": "1w",
       "sl": "006-stinging_kelp-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-stinging_kelp-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -38160,9 +37039,6 @@
       "ar": "",
       "th": "2e",
       "sl": "004-stone_rain-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -38246,9 +37122,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-stormy_seas-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -38297,9 +37170,6 @@
       "th": "1w",
       "sl": "006-stream-pd-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-stream-pd-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -38447,9 +37317,6 @@
       "th": "1w",
       "sl": "002-summer_river-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-summer_river-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -38497,9 +37364,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-summoning_sphere-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -38732,9 +37596,6 @@
       "ar": "",
       "th": "2w",
       "sl": "006-swap-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -38895,9 +37756,6 @@
       "ar": "",
       "th": "2w",
       "sl": "004-sylvan_splendor-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -38930,9 +37788,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-symmetric_suffering-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -39000,9 +37855,6 @@
       "ar": "",
       "th": "1a",
       "sl": "004-tactical_move-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -39037,9 +37889,6 @@
       "th": "1w",
       "sl": "002-tadpole_pool-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-tadpole_pool-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -39193,9 +38042,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-telekinesis-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -39243,9 +38089,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-teleport-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -39294,8 +38137,7 @@
       "th": "",
       "sl": "004-templar-bt-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -39337,9 +38179,6 @@
       "th": "1f",
       "sl": "006-temple_of_moloch-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-temple_of_moloch-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -39515,9 +38354,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-the_black_plague-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -39553,9 +38389,6 @@
       "th": "1a 1e 1f 1w",
       "sl": "002-the_colour_out_of_space-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-the_colour_out_of_space-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -39645,9 +38478,6 @@
       "th": "",
       "sl": "006-the_empyrean-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-the_empyrean-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -39715,9 +38545,6 @@
       "ar": "",
       "th": "4w",
       "sl": "006-the_flood-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -39752,9 +38579,6 @@
       "th": "",
       "sl": "002-the_geistwood-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-the_geistwood-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -39801,9 +38625,6 @@
       "ar": "",
       "th": "4w",
       "sl": "004-the_great_drowning_of_men-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -39836,9 +38657,6 @@
       "ar": "",
       "th": "2f",
       "sl": "004-the_great_famine-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -40099,8 +38917,7 @@
       "sl": "006-the_manor_at_daperyll_hill-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-the_manor_at_daperyll_hill-b-s.png",
       "sub": [
-        "Claret",
-        "Site"
+        "Claret"
       ],
       "prints": [
         {
@@ -40276,9 +39093,6 @@
       "th": "",
       "sl": "006-the_void-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-the_void-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -40384,8 +39198,7 @@
       "sl": "006-thin_ice-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-thin_ice-b-s.png",
       "sub": [
-        "Tread",
-        "Site"
+        "Tread"
       ],
       "prints": [
         {
@@ -40560,9 +39373,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-thunderstorm-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -40660,9 +39470,6 @@
       "th": "1a 1e 1w",
       "sl": "004-tintagel-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-tintagel-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -40695,9 +39502,6 @@
       "ar": "",
       "th": "3e",
       "sl": "004-tithe-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -40957,9 +39761,6 @@
       "th": "",
       "sl": "004-tournament_grounds-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-tournament_grounds-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -40993,9 +39794,6 @@
       "th": "",
       "sl": "004-town-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-town-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -41064,9 +39862,6 @@
       "th": "",
       "sl": "006-trade_encampment-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-trade_encampment-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41150,9 +39945,6 @@
       "th": "1a",
       "sl": "004-treetop_hideout-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-treetop_hideout-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -41185,9 +39977,6 @@
       "ar": "",
       "th": "1f",
       "sl": "006-trial_by_fire-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41220,9 +40009,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-trial_by_water-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41306,9 +40092,6 @@
       "th": "1w",
       "sl": "004-troll_bridge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-troll_bridge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -41342,9 +40125,6 @@
       "th": "",
       "sl": "006-troubled_town-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-troubled_town-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41528,9 +40308,6 @@
       "th": "1a",
       "sl": "006-twilight_bloom-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-twilight_bloom-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41564,9 +40341,6 @@
       "ar": "",
       "th": "3w",
       "sl": "002-twist_of_fate-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -41663,9 +40437,6 @@
       "ar": "",
       "th": "1a",
       "sl": "006-undead_ambush-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -41750,9 +40521,6 @@
       "th": "1w",
       "sl": "002-undertow-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-undertow-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -41935,9 +40703,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-unlikely_alliance-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -41985,9 +40750,6 @@
       "ar": "",
       "th": "1e",
       "sl": "002-unravel-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42071,9 +40833,6 @@
       "th": "1a",
       "sl": "002-updraft_ridge-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-updraft_ridge-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42121,9 +40880,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-upwelling-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42172,9 +40928,6 @@
       "th": "1e",
       "sl": "006-valley-pd-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-valley-pd-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -42215,9 +40968,6 @@
       "th": "",
       "sl": "004-valley_of_delight-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-valley_of_delight-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -42250,9 +41000,6 @@
       "ar": "",
       "th": "2e",
       "sl": "004-valor-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -42405,9 +41152,6 @@
       "ar": "",
       "th": "2a",
       "sl": "004-vanishment-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -42442,9 +41186,6 @@
       "th": "1e",
       "sl": "002-vantage_hills-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-vantage_hills-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42527,9 +41268,6 @@
       "th": "1e",
       "sl": "004-varmint_warrens-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-varmint_warrens-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -42563,9 +41301,6 @@
       "th": "1f",
       "sl": "006-vast_desert-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-vast_desert-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -42635,9 +41370,6 @@
       "th": "",
       "sl": "002-vaults_of_zul-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-vaults_of_zul-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42791,9 +41523,6 @@
       "th": "1f",
       "sl": "002-vesuvius-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-vesuvius-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -42926,9 +41655,6 @@
       "th": "1f",
       "sl": "006-vindictive_nation-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-vindictive_nation-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -43082,9 +41808,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-wall_of_air-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43131,9 +41854,6 @@
       "ar": "",
       "th": "1e",
       "sl": "004-wall_of_brambles-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -43167,9 +41887,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-wall_of_fire-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43217,9 +41934,6 @@
       "ar": "",
       "th": "1w",
       "sl": "002-wall_of_ice-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43310,9 +42024,6 @@
       "ar": "",
       "th": "3f",
       "sl": "002-warp_spasm-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43361,9 +42072,6 @@
       "th": "1f",
       "sl": "006-wasteland-pd-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-wasteland-pd-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -43405,9 +42113,6 @@
       "th": "1a",
       "sl": "002-watchtower-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-watchtower-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43455,9 +42160,6 @@
       "th": "1w",
       "sl": "006-watery_grave-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-watery_grave-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -43490,9 +42192,6 @@
       "ar": "",
       "th": "1w",
       "sl": "006-wave_of_eviction-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -43527,8 +42226,7 @@
       "th": "",
       "sl": "002-waveshaper-b-s",
       "sub": [
-        "Your",
-        "Avatar"
+        "Your"
       ],
       "prints": [
         {
@@ -43621,9 +42319,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-waypoint_portal-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43713,9 +42408,6 @@
       "th": "1a 1e 1f 1w",
       "sl": "004-wedding_hall-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-wedding_hall-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -43785,9 +42477,6 @@
       "ar": "",
       "th": "2a",
       "sl": "002-whirling_blades-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -43834,9 +42523,6 @@
       "ar": "",
       "th": "1a",
       "sl": "004-whirlwind-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -44160,9 +42846,6 @@
       "ar": "",
       "th": "1f",
       "sl": "002-wildfire-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -44346,9 +43029,6 @@
       "ar": "",
       "th": "1a",
       "sl": "002-windblast-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -44397,11 +43077,6 @@
       "th": "1a 1e",
       "sl": "002-windmill-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/002-windmill-b-s.png",
-      "sub": [
-        "Site",
-        "Earth",
-        "Air"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -44534,9 +43209,6 @@
       "th": "1w",
       "sl": "001-winter_river-bt-f",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/001-winter_river-bt-f.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Alpha",
@@ -44564,8 +43236,7 @@
       "th": "",
       "sl": "004-witch-b-s",
       "sub": [
-        "Your",
-        "Avatar's"
+        "Your"
       ],
       "prints": [
         {
@@ -44613,9 +43284,6 @@
       "ar": "",
       "th": "2a",
       "sl": "006-witching_hour-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -44707,9 +43375,6 @@
       "th": "",
       "sl": "004-wizards_den-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-wizards_den-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -44778,9 +43443,6 @@
       "th": "1e",
       "sl": "004-wormelow_tump-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/004-wormelow_tump-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -44864,9 +43526,6 @@
       "ar": "",
       "th": "2w",
       "sl": "002-wrath_of_the_sea-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Beta",
@@ -44913,9 +43572,6 @@
       "ar": "",
       "th": "2f",
       "sl": "006-wreathed_in_righteousness-b-s",
-      "sub": [
-        "Magic"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -44949,9 +43605,6 @@
       "th": "1a",
       "sl": "006-wuthering_heights-b-s",
       "img": "https://d27a44hjr9gen3.cloudfront.net/rotated/006-wuthering_heights-b-s.png",
-      "sub": [
-        "Site"
-      ],
       "prints": [
         {
           "set": "Gothic",
@@ -45056,9 +43709,6 @@
       "ar": "",
       "th": "4f",
       "sl": "004-year_of_the_blaze-b-s",
-      "sub": [
-        "Aura"
-      ],
       "prints": [
         {
           "set": "Arthurian Legends",
@@ -45297,8 +43947,7 @@
       "th": "1a",
       "sl": "006-zap-b-s",
       "sub": [
-        "Shockingly",
-        "Magic"
+        "Shockingly"
       ],
       "prints": [
         {
