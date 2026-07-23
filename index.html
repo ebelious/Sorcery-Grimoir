@@ -4523,7 +4523,7 @@ function _dvSearch(q){
   drop.innerHTML=matches.map(function(c){
     var inDeck=dv&&dv.cards.find(function(e){return e.name===cName(c);});
     var badge=inDeck?'<span style="font-size:9px;color:var(--bgrn);margin-left:4px">×'+inDeck.qty+'</span>':'';
-    return '<div data-cn="'+h(cName(c))+'" style="padding:9px 10px;cursor:pointer;border-bottom:1px solid var(--bg3);font-size:13px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onmousedown="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;openPanel(\'card\')}"><span style="color:var(--wht)">'+h(cName(c))+'</span>'+badge+'<span style="font-size:10px;color:var(--fg3);margin-left:6px">'+cEl(c)+' '+cType(c)+'</span></div>';
+    return '<div data-cn="'+h(cName(c))+'" style="padding:9px 10px;cursor:pointer;border-bottom:1px solid var(--bg3);font-size:13px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onmousedown="var _c=cardByName(this.dataset.cn);if(_c){G.selCard=_c;if(G.selDeck&&G.decks[G.selDeck])G.cmDeckSel=G.selDeck;openPanel(\'card\')}"><span style="color:var(--wht)">'+h(cName(c))+'</span>'+badge+'<span style="font-size:10px;color:var(--fg3);margin-left:6px">'+cEl(c)+' '+cType(c)+'</span></div>';
   }).join('');
   drop.style.display='block';
 }
