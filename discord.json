@@ -1,12 +1,15 @@
 {
-  "updated": "2026-07-23T18:50:00.141Z",
+  "updated": "2026-07-23T18:54:57.511Z",
   "messages": [
     {
       "id": "1529910866642993377",
       "author": "Sorcery: Contested Realm #announcements",
       "content": "@everyone We're just one week away from <#1104864674354303007> - it's time to gather your pack! \n\nThis year's Convention Promo, Grey Wolves, celebrates the friendships that make Sorcery so special.\n\nReimagined by fantasy artist Jeff Menges, the 2026 Sorcery Convention Promo will be available at Gen Con, the Auckland Card Show, Avatar of the Realm, and select Old School events throughout the year, while supplies last. \n\nTake a look at Jeff's early sketches and find out how to claim your own Grey Wolves at Gen Con: https://sorcerytcg.com/news/gather-your-pack-sorcery-s-2026-convention-promo \n\nWe can't wait to see you on the floor of Gen Con next week! 🐺",
       "images": [
-        "https://cdn.sanity.io/images/vg9ve3gy/production/d8448e76ea4d9f05beda8f492de824abd6d43c6a-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        {
+          "url": "https://sorcerytcg.com/news/gather-your-pack-sorcery-s-2026-convention-promo",
+          "image": "https://cdn.sanity.io/images/vg9ve3gy/production/d8448e76ea4d9f05beda8f492de824abd6d43c6a-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        }
       ],
       "timestamp": "Jul 23, 5:59 PM",
       "channel": "scrtcg-announcements",
@@ -17,7 +20,10 @@
       "author": "Sorcery: Contested Realm #announcements",
       "content": "@everyone Heading to Gen Con? Here's what you need to know before you arrive!\n\nWhether you’re testing your mastery of the realm, meeting legendary fantasy artists, or discovering Sorcery for the very first time, we can’t wait to see you in Indianapolis.\n\nRead the full Gen Con guide here: https://sorcerytcg.com/news/everything-you-need-to-know-for-sorcery-at-gen-con-2026",
       "images": [
-        "https://cdn.sanity.io/images/vg9ve3gy/production/d5283fe4a0a33df286cab748324e7ca1cd3f192e-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        {
+          "url": "https://sorcerytcg.com/news/everything-you-need-to-know-for-sorcery-at-gen-con-2026",
+          "image": "https://cdn.sanity.io/images/vg9ve3gy/production/d5283fe4a0a33df286cab748324e7ca1cd3f192e-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        }
       ],
       "timestamp": "Jul 17, 7:56 PM",
       "channel": "scrtcg-announcements",
@@ -28,7 +34,10 @@
       "author": "Sorcery: Contested Realm #announcements",
       "content": "@everyoneThe Codex has grown wiser, yet again!\n\nThis latest changelog brings new FAQ entries for the Courts and other cards, along with updates to **Mirage** and **Lord of Lies**.\n\n*Don’t trust his words - it’s in the name! *\n\nSee everything that’s changed: https://curiosa.io/codex/changelog  \n\nAdditionally, the Courts can now be found on Curiosa.io for those looking to brew some decks!",
       "images": [
-        "https://curiosa.io/_next/static/media/Empyrean.0b9f45b6.jpg"
+        {
+          "url": "https://curiosa.io/codex/changelog",
+          "image": "https://curiosa.io/_next/static/media/Empyrean.0b9f45b6.jpg"
+        }
       ],
       "timestamp": "Jul 15, 6:38 PM",
       "channel": "scrtcg-announcements",
@@ -39,8 +48,14 @@
       "author": "Sorcery: Contested Realm #announcements",
       "content": "@everyone  \n# All Rise! ⚖️\n\nThe court is **now** in session.\n\nFour new Dust Reward promo cards are now LIVE in the Rewards Store and ready to be claimed with your Dust!\n\nRead more about the new rewards here:\nhttps://www.sorcerytcg.com/news/all-rise-new-dust-rewards-are-here\n\nAnd while we’re celebrating the Courts, please join us in welcoming Franck Pawlowski to the Realm! \n\nMock Court is Franck’s first Sorcery illustration and we’re thrilled to have him as part of the growing family of Sorcery artists.\n\nMeet Franck here: https://www.sorcerytcg.com/news/welcome-to-sorcery-franck-pawlowski",
       "images": [
-        "https://cdn.sanity.io/images/vg9ve3gy/production/c5bce77d22e2c4e6c7ea202eafb53905a6eba999-2000x900.png?rect=0,50,2000,800&w=2000&h=800",
-        "https://cdn.sanity.io/images/vg9ve3gy/production/31c463e87c6ff0c7db08de3be34cf7d781cf7ec2-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        {
+          "url": "https://www.sorcerytcg.com/news/all-rise-new-dust-rewards-are-here",
+          "image": "https://cdn.sanity.io/images/vg9ve3gy/production/c5bce77d22e2c4e6c7ea202eafb53905a6eba999-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        },
+        {
+          "url": "https://www.sorcerytcg.com/news/welcome-to-sorcery-franck-pawlowski",
+          "image": "https://cdn.sanity.io/images/vg9ve3gy/production/31c463e87c6ff0c7db08de3be34cf7d781cf7ec2-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
+        }
       ],
       "timestamp": "Jul 14, 6:10 PM",
       "channel": "scrtcg-announcements",
