@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-22T14:07:41.734Z",
+  "updated": "2026-07-23T03:21:12.475Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -81,97 +81,6 @@
       "url": "https://play.sorcerytcg.com/events/3ea0b810-2499-4579-9027-1230e51f3252"
     },
     {
-      "name": "Sorcery Casual Play",
-      "date": "Wed. Jul 22, 2026",
-      "time": "3:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Wrexham, Wales",
-      "city": "Wrexham",
-      "state": "Wales",
-      "address": "",
-      "description": "",
-      "storeName": "Red Dragon's Vault",
-      "url": "https://play.sorcerytcg.com/events/3c8e5017-f178-4877-bbbb-7287a01a6e23"
-    },
-    {
-      "name": "Sorcery - weekly play",
-      "date": "Wed. Jul 22, 2026",
-      "time": "3:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Lublin, Województwo lubelskie",
-      "city": "Lublin",
-      "state": "Województwo lubelskie",
-      "address": "25 Stanisława Leszczyńskiego u6 Lublin Województwo lubelskie 20-068",
-      "description": "",
-      "storeName": "Mocku",
-      "url": "https://play.sorcerytcg.com/events/27e4c666-dcd2-4369-af00-3da44a20f22d"
-    },
-    {
-      "name": "Mystery Shack Weekly",
-      "date": "Wed. Jul 22, 2026",
-      "time": "3:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Göteborg, Västra Götalands län",
-      "city": "Göteborg",
-      "state": "Västra Götalands län",
-      "address": "26 Odinsgatan Göteborg Västra Götalands län 411 03",
-      "description": "",
-      "storeName": "Mystery Shack",
-      "url": "https://play.sorcerytcg.com/events/83d3c724-cea9-46ae-a956-753cbed50dd8"
-    },
-    {
-      "name": "Wednesday Sorcery MeetUP",
-      "date": "Wed. Jul 22, 2026",
-      "time": "3:52 PM UTC",
-      "type": "BB-Spiele",
-      "location": "Rosenheim, BY",
-      "city": "Rosenheim",
-      "state": "BY",
-      "address": "20 Kolbermoorer Straße Rosenheim BY 83026",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a0858f48-02ab-466b-b67a-dd9e4f218566"
-    },
-    {
-      "name": "Weekly constructed",
-      "date": "Wed. Jul 22, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "address": "14 Hauptplatz Schwechat Niederösterreich 2320",
-      "description": "",
-      "storeName": "Rarehuntershop",
-      "url": "https://play.sorcerytcg.com/events/0a430e22-6344-4235-909a-df82773e4b73"
-    },
-    {
-      "name": "Wednesday Constructed Tournament",
-      "date": "Wed. Jul 22, 2026",
-      "time": "4:00 PM UTC",
-      "type": "SideQuest",
-      "location": "Gdańsk, Województwo pomorskie",
-      "city": "Gdańsk",
-      "state": "Województwo pomorskie",
-      "address": "60 Minutes",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e6491e98-74ae-4144-b5e7-9f0f03c12299"
-    },
-    {
-      "name": "Yodasdata Sorcery Constructed",
-      "date": "Wed. Jul 22, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Idstein, HE",
-      "city": "Idstein",
-      "state": "HE",
-      "address": "60 Minutes",
-      "description": "",
-      "storeName": "YODASDATA",
-      "url": "https://play.sorcerytcg.com/events/bc00fd5a-b655-4a9a-9f7e-d6caf2f00594"
-    },
-    {
       "name": "Weekly Cornerstone",
       "date": "Wed. Jul 22, 2026",
       "time": "4:00 PM UTC",
@@ -198,32 +107,6 @@
       "url": "https://play.sorcerytcg.com/events/f2903e07-ac73-47ca-9769-f5c52733b6f8"
     },
     {
-      "name": "Casual Play Night",
-      "date": "Wed. Jul 22, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Bay Games",
-      "location": "Whitley Bay, England",
-      "city": "Whitley Bay",
-      "state": "England",
-      "address": "214 Whitley Road Whitley Bay England NE26 2TA",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f5895e90-be58-4547-95bd-0ce4453553e4"
-    },
-    {
-      "name": "EMPIRE GAMES: Wednesday Open Play!",
-      "date": "Wed. Jul 22, 2026",
-      "time": "6:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "address": "118 North McDuffie Street Anderson SC 29621",
-      "description": "",
-      "storeName": "Empire Games",
-      "url": "https://play.sorcerytcg.com/events/2c754a18-6502-4a16-8263-97d59d440098"
-    },
-    {
       "name": "Joker local night",
       "date": "Wed. Jul 22, 2026",
       "time": "7:30 PM UTC",
@@ -235,32 +118,6 @@
       "description": "",
       "storeName": "Joker-comics&games",
       "url": "https://play.sorcerytcg.com/events/deb8cfe1-06a5-4db5-a74f-986597f57b76"
-    },
-    {
-      "name": "Wednesday Locals",
-      "date": "Wed. Jul 22, 2026",
-      "time": "9:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Lacey Township, NJ",
-      "city": "Lacey Township",
-      "state": "NJ",
-      "address": "118 North Main Street Lacey Township NJ 08731",
-      "description": "",
-      "storeName": "Shipwreck Games",
-      "url": "https://play.sorcerytcg.com/events/565ac6a0-d50f-48a4-9bc1-0dbab83a5eee"
-    },
-    {
-      "name": "Casual Meetup",
-      "date": "Jul 22, 2026 - Jul 23, 2026",
-      "time": "9:30 PM UTC",
-      "type": "Game Kastle Greenville",
-      "location": "Taylors, SC",
-      "city": "Taylors",
-      "state": "SC",
-      "address": "1975 County Road B2 West Roseville MN 55113",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b8ddf9ad-6a2d-4857-9d24-0cac94d95f2a"
     }
   ]
 }
