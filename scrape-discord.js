@@ -44,18 +44,18 @@ function resolveMentions(content, channelMap, roleMap, userMap) {
 // just a bare link.
 function findEmbedImages(embeds) {
   if (!Array.isArray(embeds)) return [];
-  const urls = [];
+  const out = [];
   embeds.forEach(e => {
-    const url = (e.image && e.image.url) || (e.thumbnail && e.thumbnail.url);
-    if (url) urls.push(url);
+    const imgUrl = (e.image && e.image.url) || (e.thumbnail && e.thumbnail.url);
+    if (imgUrl) out.push({ url: e.url || null, image: imgUrl });
   });
-  return urls;
+  return out;
 }
 function findAttachmentImages(attachments) {
   if (!Array.isArray(attachments)) return [];
   return attachments
     .filter(a => a.content_type && a.content_type.indexOf('image/') === 0)
-    .map(a => a.url);
+    .map(a => ({ url: null, image: a.url }));
 }
 
 (async () => {
