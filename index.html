@@ -4913,6 +4913,15 @@ function _mpPoll(){
         var myKey=G.mpRole==='p1'?'confirmedP1':'confirmedP2';
         if(!res[myKey]&&!G.mpResultPopup&&!G.mpResultDeclined){G.mpResultPopup=res;}
         if(res.confirmedP1&&res.confirmedP2){_mpApplyRemoteResult(res);}
+      } else if(!res){
+        G.mpResultDeclined=false; // no proposal pending -- any future one is new, don't suppress it
+        if(G.mpWaitingResult){
+          // Our proposal is no longer on the server -- the other player
+          // declined it (or otherwise cancelled it). Drop our own "Waiting
+          // for Opponent" popup and return to the match instead of leaving
+          // it stuck open.
+          G.mpWaitingResult=false;G.mpPendingResult=null;
+        }
       }
       var _oppD=_mpOpponent();
       if(_oppD&&_oppD.dice&&_oppD.dice.ts&&_oppD.dice.ts!==G.mpLastOppDiceTs){
@@ -5100,14 +5109,21 @@ function mpCancelWaitingResult(){
   render();
 }
 // Lets the receiving player dismiss the "Confirm Match Result" popup and
-// go back to the match instead of confirming -- doesn't tell the server
-// anything (the proposer's own Cancel button on their "Waiting for
-// Opponent" popup is what actually clears the pending proposal). Sets
-// mpResultDeclined so the poll loop doesn't immediately re-show the same
-// popup again on its next cycle.
+// go back to the match instead of confirming. Also cancels the proposal
+// server-side (same action the proposer's own Cancel button uses) so their
+// "Waiting for Opponent" popup clears too, instead of leaving them stuck
+// waiting on a proposal that was just declined. Sets mpResultDeclined so
+// the poll loop doesn't immediately re-show the same popup again on its
+// next cycle.
 function mpDeclineResult(){
   G.mpResultPopup=null;
   G.mpResultDeclined=true;
+  if(G.mpCode){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'cancelResult',code:G.mpCode})
+    }).catch(function(){});
+  }
   render();
 }
 // Runs on the receiving device once they tap Confirm on the "Confirm Match
