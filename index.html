@@ -1660,6 +1660,18 @@ function _diceBuildSphere(col){
   _diceGroup.position.y=0; _diceScene.add(_diceGroup);
 }
 
+// Recolors the die currently resting on the felt right away, instead of
+// waiting for the next roll to pick up a newly-selected color. Only applies
+// in 1P mode (the persistent inline die) and only while idle -- a roll in
+// progress will pick up the new color on its own next build.
+function _diceApplyColorLive(){
+  if(G.mode!==1||!_diceGroup||_diceRolling||typeof THREE==='undefined')return;
+  var pos=_diceGroup.position.clone();
+  var rot=_diceGroup.rotation.clone();
+  _diceCI=G.dieCI;
+  _diceBuildForSides(_diceSides,getDieCol(G.dieCI),_diceIsCustom);
+  if(_diceGroup){_diceGroup.position.copy(pos);_diceGroup.rotation.copy(rot);}
+}
 function _diceBuildForSides(sides, col, isCustom){
   var shape=G.diceShape||'normal';
   if(isCustom&&STL_MODELS[shape]){
@@ -3045,7 +3057,7 @@ function showDiceColorPop1(anchorEl){
   DIE_COLS.forEach(function(col,i){
     var on=(G.dieCI%DIE_COLS.length)===i;
     var swatchCol=getDieCol(i);
-    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_refreshP1Popup()"></div>';
+    html+='<div style="width:28px;height:28px;border-radius:50%;cursor:pointer;background:'+swatchCol+';border:2px solid '+(on?'var(--hi,#fff)':'transparent')+';box-sizing:border-box" onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_diceApplyColorLive();_refreshP1Popup()"></div>';
   });
   html+='</div>';
 
@@ -4762,7 +4774,10 @@ function _mpPoll(){
       // Skip re-rendering while the rematch deck picker is open -- a full
       // render() tears down and rebuilds the whole page (including the open
       // <select>), which interrupts/cancels the deck choice mid-selection.
-      if(!G.mpRematchPicking)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
+      // Same reasoning applies to the Deck popup's card-search box: rebuilding
+      // it out from under an active mobile text input closes the keyboard.
+      var _typingInDvSearch=document.activeElement&&document.activeElement.id==='dv-srch';
+      if(!G.mpRematchPicking&&!_typingInDvSearch)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
 }
 var _mpLifePushTimer=null;
@@ -6025,7 +6040,7 @@ function pContent(){
       o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
     });
     o('</div>');
-    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_renderKeepScroll()"></div>');});o('</div>');
+    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_diceApplyColorLive();_renderKeepScroll()"></div>');});o('</div>');
     var _texDisabled=!!G.diceBgImage;
     o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
     DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
