@@ -483,11 +483,11 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .acc-a{font-size:15px;color:var(--fg);line-height:1.7;white-space:normal;word-break:break-word;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding-left:18px}
 .cod-def{font-size:14px;color:var(--fg);line-height:1.7;padding-top:6px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 .stbar{font-size:12px;color:var(--fg2);text-align:center;padding:4px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:6px}
-.fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
+.fbar{background:var(--bg3);border:1px solid var(--bd);padding:7px 7px 7px 3px;margin-bottom:6px}
 .frow{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px;align-items:center}
 .frow-scroll{display:flex;gap:3px;flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
 .frow-scroll::-webkit-scrollbar{display:none}
-.flbl{font-size:12px;color:var(--hi);width:64px;flex-shrink:0;text-transform:uppercase;white-space:nowrap}
+.flbl{font-size:12px;color:var(--hi);width:28px;flex-shrink:0;text-transform:uppercase;white-space:nowrap}
 .ftag{font-size:15px;padding:6px 10px;border:1px solid var(--bd);background:transparent;color:var(--fg2);cursor:pointer;border-radius:0}
 .mtag-drag{touch-action:none;user-select:none}
 .ftag.on{border-color:var(--hi);color:var(--hi)}
@@ -3543,13 +3543,18 @@ function showTimerLogPopup(anchorEl){
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];_renderKeepScroll();}
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
-// Closes any open subtype filter dropdown when the click lands outside it.
+// Closes any open subtype filter dropdown, or the Sort dropdown, when the
+// click lands outside it.
 document.addEventListener('click',function(e){
   var changed=false;
   Object.keys(G.accExp).forEach(function(k){
     if(k.indexOf('flt_sub_')===0&&G.accExp[k]){
       var el=document.getElementById(k.replace('flt_sub_','subdd_'));
       if(!el||!el.contains(e.target)){G.accExp[k]=false;changed=true;}
+    }
+    if(k==='flt_sort'&&G.accExp[k]){
+      var el2=document.getElementById('sortdd');
+      if(!el2||!el2.contains(e.target)){G.accExp[k]=false;changed=true;}
     }
   });
   if(changed)render();
@@ -3957,15 +3962,22 @@ function cSortArr(arr){
   });
   return out;
 }
-function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};render();}
+function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};G.cSort=null;G.cSortDir='asc';render();}
 function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};render();}
 var SUBTYPES=['Angel','Beast','Demon','Dragon','Dwarf','Faerie','Giant','Gnome','Goblin','Merfolk','Monster','Mortal','Ogre','Spirit','Sphinx','Troll','Undead','Automaton','Device','Document','Instrument','Monument','Potion','Relic','Weapon','Desert','River','Tower','Village'];
+var FILTER_ICONS={
+  type:'<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linejoin="round" stroke-width="32" d="M336 320H32L184 48l152 272zm-70.68-125.49A144 144 0 11192 320"></path></svg>',
+  el:'<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M14.265 1.627c0 3.545 1.869 5.327 3.479 7.021 1.54 1.62 3.006 3.163 3.006 6.102 0 4.812-3.753 8.25-8.565 8.25-4.813 0-8.935-3.421-8.935-8.25 0-2.039.962-4.011 2.509-4.899.305-.175.672.007.803.334C7.563 12.684 8.797 12.64 9.437 12c.388-.387.47-1.116-.004-2.062-2.405-4.812 1.863-8.279 4.2-8.854.336-.082.615.198.632.543ZM12.185 21.5c4.059 0 7.065-2.84 7.065-6.75 0-2.337-1.093-3.489-2.678-5.158l-.021-.023c-1.44-1.517-3.139-3.351-3.649-6.557a6.148 6.148 0 0 0-1.911 1.76c-.787 1.144-1.147 2.633-.216 4.495.603 1.205.777 2.74-.277 3.794-.657.657-1.762 1.1-2.956.586-.752-.324-1.353-.955-1.838-1.79-.567.706-.954 1.74-.954 2.893 0 3.847 3.288 6.75 7.435 6.75Z"></path></svg>',
+  rarity:'<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 256 256" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M216,152H168V104h48a8,8,0,0,0,0-16H168V40a8,8,0,0,0-16,0V88H104V40a8,8,0,0,0-16,0V88H40a8,8,0,0,0,0,16H88v48H40a8,8,0,0,0,0,16H88v48a8,8,0,0,0,16,0V168h48v48a8,8,0,0,0,16,0V168h48a8,8,0,0,0,0-16Zm-112,0V104h48v48Z"></path></svg>',
+  mana:'<svg stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9.5 5.5 5 11.077 5 15a7 7 0 0 0 14 0c0-3.923-4.5-9.5-7-13Z"></path></svg>'
+};
 function fBar(f,fn,mana,resetFn,hideReset){
   var sets=Object.keys(SETS);
   var subtypes=SUBTYPES;
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
   function row(lbl,key,opts,scroll){
-    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
+    var lblContent=FILTER_ICONS[key]||lbl;
+    var lblHtml='<span class="flbl" style="cursor:pointer;display:flex;align-items:center;justify-content:flex-start" onclick="'+fn+'(\''+key+'\',\'all\')">'+lblContent+'</span>';
     var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='el'?eSVG(o,16):(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1))));var dragAttrs=key==='mana'?' class="ftag mtag-drag'+(on?' on':'')+'" data-fn="'+fn+'" data-mana="'+h(o)+'"':' class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')"';return '<button'+dragAttrs+(scroll?' style="flex-shrink:0"':'')+'>'+label+'</button>';}).join('');
     if(scroll)return '<div class="frow">'+lblHtml+'<div class="frow-scroll">'+btnsHtml+'</div></div>';
     return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
@@ -3977,7 +3989,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
     var open=!!G.accExp[ddKey];
     var selCount=(f.sub&&f.sub.length)||0;
     var summary=selCount?(selCount+' selected'):'';
-    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\'sub\',\'all\')">Subtype</span>';
+    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\'sub\',\'all\')">Sub</span>';
     var opts=subtypes.map(function(o){
       var on=f.sub&&f.sub.indexOf(o)>=0;
       return '<div class="acc-row" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center'+(on?';color:var(--hi);font-weight:700':'')+'" onclick="'+fn+'(\'sub\',\''+h(o)+'\')"><span>'+h(o)+'</span>'+(on?'<span>&#10003;</span>':'')+'</div>';
@@ -6400,17 +6412,31 @@ function pContent(){
   if(p==='cards'){
     var q=S.cS||'';var fil=cSortArr(cFilter(CARDS,G.cF,q));
     o('<div class="stbar">'+fil.length+' / '+CARDS.length+' cards</div>');
-    o('<div id="csrch-wrap" class="si" style="margin:0 0 5px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" style="color:var(--hi);font-size:26px" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
-    o(fBar(G.cF,'setCF',true,'resetCF',true));
-    var _cfActive=Object.keys(G.cF).some(function(k){return G.cF[k]&&G.cF[k].length>0;});
-    o('<div class="frow"><span class="flbl">Sort</span>');
-    [['mana','Mana'],['thr','Threshold'],['name','A-Z']].forEach(function(s){
-      var on=G.cSort===s[0];
-      var arrow=on?(G.cSortDir==='asc'?' &#8593;':' &#8595;'):'';
-      o('<button class="ftag'+(on?' on':'')+'" onclick="setCSort(\''+s[0]+'\')">'+s[1]+arrow+'</button>');
-    });
-    if(_cfActive)o('<button class="fb red" style="font-size:13px;padding:6px 14px" onclick="resetCF()">&#x2715; Reset Filters</button>');
+    o('<div class="frow" style="align-items:center;flex-wrap:wrap">');
+    o('<div id="csrch-wrap" class="si" style="margin:0;flex:1;min-width:120px"><input id="card-srch" placeholder="Search '+CARDS.length+' cards&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" style="color:var(--hi);font-size:26px" onclick="S.cS=\'\';render()">&times;</button>');o('</div>');
+    (function(){
+      var ddKey='flt_sort';
+      var open=!!G.accExp[ddKey];
+      var opts=[['mana','Mana'],['thr','Threshold'],['name','A-Z']];
+      var cur=null;for(var i=0;i<opts.length;i++){if(opts[i][0]===G.cSort){cur=opts[i];break;}}
+      var summary=cur?(cur[1]+' '+(G.cSortDir==='asc'?'&#8593;':'&#8595;')):'Default';
+      var rows=opts.map(function(s){
+        var on=G.cSort===s[0];
+        var arrow=on?(G.cSortDir==='asc'?' &#8593;':' &#8595;'):'';
+        return '<div class="acc-row" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center'+(on?';color:var(--hi);font-weight:700':'')+'" onclick="setCSort(\''+s[0]+'\')">'+s[1]+arrow+'</div>';
+      }).join('');
+      o('<div class="acc" id="sortdd" style="margin-bottom:0;width:150px;flex-shrink:0;position:relative;overflow:visible;background:var(--bg2);border:1px solid var(--hi)">'
+        +'<div class="acc-h" data-k="'+ddKey+'" onclick="toggleAcc(this.dataset.k)">'
+        +'<div class="acc-nm" style="font-size:11px;color:var(--fg);text-transform:uppercase;font-weight:400">'+summary+'</div>'
+        +'<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(open?'90deg':'-90deg')+')">&larr;</span>'
+        +'</div>'
+        +(open?'<div class="acc-body" style="position:absolute;top:100%;left:0;right:0;z-index:20;background:var(--bg2);border:1px solid var(--bd);box-shadow:0 4px 12px rgba(0,0,0,0.4)">'+rows+'</div>':'')
+        +'</div>');
+    })();
     o('</div>');
+    o(fBar(G.cF,'setCF',true,'resetCF',true));
+    var _cfActive=Object.keys(G.cF).some(function(k){return G.cF[k]&&G.cF[k].length>0;})||!!G.cSort;
+    if(_cfActive)o('<div class="frow" style="justify-content:flex-end"><button class="fb red" style="font-size:13px;padding:6px 14px" onclick="resetCF()">&#x2715; Reset Filters</button></div>');
     o('<div class="cgrid" id="cs-grid">');
     fil.forEach(function(c){
       var _imgStyle=(c.t==='site'&&c.img)?'position:absolute;top:50%;left:50%;width:133.13%;height:75.12%;transform:translate(-50%,-50%) rotate(-90deg);object-fit:cover;display:block':undefined;
