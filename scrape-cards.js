@@ -135,11 +135,19 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
   // card's rarity and subtype(s), e.g. "An Elite Demon of alluring demise"
   // or "Elite Spirits where Beasts once dwelled" (multiple subtypes, no
   // fixed separator). The rule (confirmed by the person): every capitalized
-  // word is a subtype EXCEPT the rarity word and a leading article, and
-  // rarity is always present except on tokens (which have no typeText at
-  // all, so this naturally yields no subtypes for those).
+  // word is a subtype (always a noun) EXCEPT the rarity word, a leading
+  // article, an element name (the typeText sometimes echoes the card's own
+  // element), and a card-type name (Aura/Magic/Site/etc. typeText often
+  // just echoes the card's own type instead of naming a real subtype --
+  // e.g. Aura cards read "An Elite Aura of milk and honey"). Rarity is
+  // always present except on tokens (which have no typeText at all, so
+  // this naturally yields no subtypes for those). Possessive forms
+  // ("Demon's") are normalized to their base noun so they dedupe with the
+  // plain form ("Demon") instead of appearing as a separate subtype.
   const RARITY_WORDS = new Set(['Ordinary', 'Exceptional', 'Elite', 'Unique']);
   const ARTICLES = new Set(['A', 'An', 'The']);
+  const ELEMENT_WORDS = new Set(['Air', 'Water', 'Earth', 'Fire']);
+  const TYPE_WORDS = new Set(['Minion', 'Magic', 'Artifact', 'Aura', 'Site', 'Avatar', 'Spell']);
   function findSubtypes(item) {
     let typeText = '';
     if (Array.isArray(item.variants)) {
@@ -151,9 +159,11 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     const seen = new Set();
     const subs = [];
     typeText.split(/\s+/).forEach(raw => {
-      const word = raw.replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, '');
+      let word = raw.replace(/^[^A-Za-z]+|[^A-Za-z']+$/g, '');
+      word = word.replace(/['\u2019]s$/, ''); // Demon's -> Demon
       if (!word || !/^[A-Z]/.test(word)) return;
       if (RARITY_WORDS.has(word) || ARTICLES.has(word)) return;
+      if (ELEMENT_WORDS.has(word) || TYPE_WORDS.has(word)) return;
       if (!seen.has(word)) { seen.add(word); subs.push(word); }
     });
     return subs;
