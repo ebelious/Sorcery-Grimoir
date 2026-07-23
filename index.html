@@ -1285,11 +1285,7 @@ function saveNames(){
 function showLog(li){
   var wi=li===0?1:0;
   if(G.mode<2&&wi===1)wi='p2'; // 1P mode has no G.players[1] -- opponent is only tracked via the lightweight 'p2' stub (see _logPlayer)
-  if(G.mpRoom){
-    if(G.mpResultPopup)return; // opponent already proposed a result that's waiting on our confirmation -- don't start a competing one
-    _mpProposeResult(wi,li);
-    return;
-  }
+  if(G.mpRoom&&G.mpResultPopup)return; // opponent already proposed a result that's waiting on our confirmation -- don't start a competing one
   G.logPopup={li:li,wi:wi};render();
 }
 function showP2Log(){
