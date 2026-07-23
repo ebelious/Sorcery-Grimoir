@@ -24,6 +24,18 @@ const GUILD_ID = process.env.DISCORD_GUILD_ID || '278704728999854080';
 const CHANNEL_NAME_OVERRIDE = process.env.DISCORD_CHANNEL_NAME || '';
 const LIMIT = 10;
 
+// Some messages mention a channel that lives in a *different* Discord server
+// than the one this scraper pulls from (e.g. a "#gen-con" channel in a
+// separate convention/community server) -- no amount of querying this
+// guild's own channels/threads will ever resolve those, since they
+// genuinely don't belong to it. Add confirmed id -> name pairs here as
+// they come up; the id is the number inside <#...> in the raw message, and
+// the name can be read off the discord.com/channels/<guild>/<channel> URL
+// (right-click the mention in Discord -> Copy Link, or just click it).
+const CROSS_SERVER_CHANNEL_NAMES = {
+  '1104864674354303007': 'gen-con',
+};
+
 // Resolves Discord's raw mention syntax (<#channelId>, <@userId>, <@&roleId>)
 // into readable text. Without this, messages show the literal numeric ID
 // (e.g. "<#1104864674354303007>") since that's all Discord's API gives you
@@ -32,7 +44,10 @@ const LIMIT = 10;
 function resolveMentions(content, channelMap, roleMap, userMap) {
   if (!content) return content;
   let s = content;
-  s = s.replace(/<#(\d+)>/g, (full, id) => channelMap[id] ? '#' + channelMap[id] : full);
+  s = s.replace(/<#(\d+)>/g, (full, id) => {
+    const name = channelMap[id] || CROSS_SERVER_CHANNEL_NAMES[id];
+    return name ? '#' + name : full;
+  });
   s = s.replace(/<@&(\d+)>/g, (full, id) => roleMap[id] ? '@' + roleMap[id] : full);
   s = s.replace(/<@!?(\d+)>/g, (full, id) => userMap[id] ? '@' + userMap[id] : full);
   return s;
