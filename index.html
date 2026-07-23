@@ -4053,8 +4053,10 @@ function _discordEmoji(escapedHtml){
     return '<img src="https://cdn.discordapp.com/emojis/'+id+'.'+ext+'" alt=":'+name+':" title=":'+name+':" style="height:1.2em;width:auto;vertical-align:-0.25em">';
   });
 }
-function _discordFormat(escapedHtml){
+function _discordFormat(escapedHtml,images){
   var s=escapedHtml||'';
+  images=images||[];
+  var used={};
   // Fallback for raw mention syntax that slipped through unresolved (older
   // cached messages scraped before channel/role name lookup was added, or
   // if that lookup fails server-side) -- shows a generic readable label
@@ -4065,13 +4067,29 @@ function _discordFormat(escapedHtml){
   s=s.replace(/(https?:\/\/[^\s<]+)/g,function(url){
     var clean=url.replace(/[),.!?;:]+$/,'');
     var trail=url.slice(clean.length);
-    return '<a href="'+clean+'" target="_blank" rel="noopener noreferrer" style="color:var(--bbl);word-break:break-all">'+clean+'</a>'+trail;
+    var decoded=clean.replace(/&amp;/g,'&');
+    var imgHtml='';
+    for(var i=0;i<images.length;i++){
+      if(used[i]||!images[i].url)continue;
+      if(images[i].url===decoded||decoded.indexOf(images[i].url)===0||images[i].url.indexOf(decoded)===0){
+        used[i]=true;
+        imgHtml='<br><img src="'+h(images[i].image)+'" loading="lazy" style="max-width:100%;max-height:280px;border-radius:6px;border:1px solid var(--bd);margin:4px 0;display:block;object-fit:contain">';
+        break;
+      }
+    }
+    return '<a href="'+clean+'" target="_blank" rel="noopener noreferrer" style="color:var(--bbl);word-break:break-all">'+clean+'</a>'+trail+imgHtml;
   });
   s=s.replace(/\*\*([^\*]+)\*\*/g,'<b>$1</b>');
   s=s.replace(/\*([^\*]+)\*/g,'<i>$1</i>');
   s=s.replace(/(^|\s)_([^_]+)_(?=\s|$)/g,'$1<i>$2</i>');
   s=s.replace(/~~([^~]+)~~/g,'<s>$1</s>');
   s=s.replace(/`([^`]+)`/g,'<code style="background:var(--bg3);padding:1px 4px;border-radius:3px;font-size:0.9em">$1</code>');
+  // Images not tied to a specific link (direct attachments, or an embed
+  // whose url didn't match any link found in the text) still get shown,
+  // just appended at the end instead of inlined next to a link.
+  for(var i=0;i<images.length;i++){
+    if(!used[i])s+='<img src="'+h(images[i].image)+'" loading="lazy" style="max-width:100%;max-height:280px;border-radius:6px;border:1px solid var(--bd);margin:4px 0;display:block;object-fit:contain">';
+  }
   return s;
 }
 function localDate(s){if(!s||/check|every/i.test(s))return s||'TBD';try{var d=new Date(s);return isNaN(d)?s:d.toLocaleDateString(undefined,{weekday:'short',year:'numeric',month:'short',day:'numeric'});}catch(e){return s;}}
@@ -7323,8 +7341,8 @@ function pContent(){
         o('<div class="ev-c">');
         if(m.channel)o('<div class="yt-ch2">#'+h(m.channel)+'</div>');
         o('<div class="ev-nm">'+h(m.author||'')+'</div>');
-        if(m.content)o('<div style="font-size:16px;color:var(--fg);white-space:pre-wrap;margin:2px 0;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+_discordFormat(_discordEmoji(h(m.content)))+'</div>');
-        if(m.images&&m.images.length)m.images.forEach(function(u){o('<img src="'+h(u)+'" loading="lazy" style="max-width:100%;max-height:280px;border-radius:6px;border:1px solid var(--bd);margin:4px 0;display:block;object-fit:contain">');});
+        if(m.content)o('<div style="font-size:16px;color:var(--fg);white-space:pre-wrap;margin:2px 0;font-family:-apple-system,BlinkMacSystemFont,sans-serif">'+_discordFormat(_discordEmoji(h(m.content)),m.images)+'</div>');
+        else if(m.images&&m.images.length)o('<div style="margin:2px 0">'+_discordFormat('',m.images)+'</div>');
         if(m.timestamp)o('<div class="ev-mt">'+h(m.timestamp)+'</div>');
         o('</div>');
       });
