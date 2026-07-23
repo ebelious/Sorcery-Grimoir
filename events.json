@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T14:14:58.749Z",
+  "updated": "2026-07-23T19:25:56.405Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -81,43 +81,30 @@
       "url": "https://play.sorcerytcg.com/events/c73c8358-7725-456c-9496-a94a3b7e96f7"
     },
     {
-      "name": "Arturiańskie klimaty",
-      "date": "Thu. Jul 23, 2026",
-      "time": "3:45 PM UTC",
-      "type": "Sealed Tournament",
-      "location": "Kraków, Województwo małopolskie",
-      "city": "Kraków",
-      "state": "Województwo małopolskie",
-      "address": "10 Długa Kraków Województwo małopolskie 31-146",
-      "description": "",
-      "storeName": "Guildmage",
-      "url": "https://play.sorcerytcg.com/events/329596bf-70c8-4317-a06e-1c389c03142a"
-    },
-    {
       "name": "Sorcery Weekly Play @ JustFreak",
       "date": "Thu. Jul 23, 2026",
       "time": "4:00 PM UTC",
-      "type": "JustFreak.es",
+      "type": "Learn To Play",
       "location": "Churriana de la Vega, AN",
       "city": "Churriana de la Vega",
       "state": "AN",
       "address": "14 Calle María Pita Local 14 Tienda JustFreak.es Churriana de la Vega AN 18194",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "JustFreak.es",
       "url": "https://play.sorcerytcg.com/events/ee54c07f-d310-457e-b47c-de300daf4725"
     },
     {
-      "name": "Sorcery Constructed @ Alphaspel",
+      "name": "Sorcery Casual Learn to play",
       "date": "Thu. Jul 23, 2026",
-      "time": "4:44 PM UTC",
-      "type": "Sorcery Constructed @ Alphaspel",
-      "location": "Hägersten, Stockholms län",
-      "city": "Hägersten",
-      "state": "Stockholms län",
-      "address": "2 Instrumentvägen Hägersten Stockholms län 126 53",
+      "time": "5:16 PM UTC",
+      "type": "Casual Meetup",
+      "location": "Blackburn with Darwen, England",
+      "city": "Blackburn with Darwen",
+      "state": "England",
+      "address": "50 Church Street 50-54 Church Street Blackburn with Darwen England BB1 5AL",
       "description": "",
-      "storeName": "Alphaspel",
-      "url": "https://play.sorcerytcg.com/events/9a569e9f-d691-4d27-bc4a-6d531faaa17e"
+      "storeName": "Geek Retreat Blackburn",
+      "url": "https://play.sorcerytcg.com/events/ce15c59c-e2e6-40e1-8438-61140a55d2de"
     },
     {
       "name": "Thistle Tavern Edinburgh",
@@ -149,13 +136,13 @@
       "name": "Sorcery: The Contested Realm Standard",
       "date": "Thu. Jul 23, 2026",
       "time": "6:00 PM UTC",
-      "type": "Underworld Games",
+      "type": "Constructed Tournament",
       "location": "Nottingham, Nottinghamshire",
       "city": "Nottingham",
       "state": "Nottinghamshire",
       "address": "45 Minutes",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Underworld Games",
       "url": "https://play.sorcerytcg.com/events/f19c59cf-a9f4-4499-af45-8b6cf6eb2594"
     },
     {
@@ -198,6 +185,19 @@
       "url": "https://play.sorcerytcg.com/events/bdf7029b-3841-43fb-951c-24e9aa7add66"
     },
     {
+      "name": "Try Hard 2: Try Harder",
+      "date": "Jul 23, 2026 - Jul 24, 2026",
+      "time": "9:30 PM UTC",
+      "type": "Constructed Tournament",
+      "location": "Madison Heights, MI",
+      "city": "Madison Heights",
+      "state": "MI",
+      "address": "26324 John R Road Madison Heights MI 48071",
+      "description": "",
+      "storeName": "Mythic Forge Gaming",
+      "url": "https://play.sorcerytcg.com/events/925a1046-6187-4997-9e51-32ba43e5c5aa"
+    },
+    {
       "name": "Thursday Night Constructed",
       "date": "Thu. Jul 23, 2026",
       "time": "10:00 PM UTC",
@@ -222,32 +222,6 @@
       "description": "",
       "storeName": "BrickHammer Hobbies",
       "url": "https://play.sorcerytcg.com/events/c4ccd5a4-062f-4397-9242-1460ad02d448"
-    },
-    {
-      "name": "Casual Meetup",
-      "date": "Thu. Jul 23, 2026",
-      "time": "10:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Mechanicsville, VA",
-      "city": "Mechanicsville",
-      "state": "VA",
-      "address": "8075 Mechanicsville Turnpike Mechanicsville VA 23111",
-      "description": "",
-      "storeName": "Waterloo Games",
-      "url": "https://play.sorcerytcg.com/events/ac0c9c05-7734-4ae6-a8ed-8ce8e68df2f1"
-    },
-    {
-      "name": "Constructed Tournament & Open Play",
-      "date": "Jul 23, 2026 - Jul 24, 2026",
-      "time": "10:00 PM UTC",
-      "type": "The Guildhouse",
-      "location": "Franklin, TN",
-      "city": "Franklin",
-      "state": "TN",
-      "address": "507 Fair St 210 Franklin TN 37064",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/bc128d5f-e3aa-45c2-87a7-3ea6058a6b58"
     }
   ]
 }
