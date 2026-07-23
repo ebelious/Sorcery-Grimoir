@@ -94,6 +94,18 @@ function findAttachmentImages(attachments) {
       console.warn('Could not fetch guild channels for mention resolution: HTTP ' + chRes.status);
     }
   } catch (e) { console.warn('Channel lookup failed: ' + e.message); }
+  // Threads (e.g. event/announcement threads people get <#mentioned> into)
+  // don't show up in the plain /channels list above -- they need this
+  // separate endpoint.
+  try {
+    const thRes = await fetch('https://discord.com/api/v10/guilds/' + GUILD_ID + '/threads/active', { headers: { Authorization: 'Bot ' + TOKEN } });
+    if (thRes.ok) {
+      const thData = await thRes.json();
+      (thData.threads || []).forEach(t => { if (t.id && t.name) channelMap[t.id] = t.name; });
+    } else {
+      console.warn('Could not fetch active threads for mention resolution: HTTP ' + thRes.status);
+    }
+  } catch (e) { console.warn('Thread lookup failed: ' + e.message); }
   try {
     const roleRes = await fetch('https://discord.com/api/v10/guilds/' + GUILD_ID + '/roles', { headers: { Authorization: 'Bot ' + TOKEN } });
     if (roleRes.ok) {
