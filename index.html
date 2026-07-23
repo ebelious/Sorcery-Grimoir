@@ -1025,6 +1025,8 @@ function boot(){
     history.replaceState(null,'',location.pathname);
   }
   loadPubDecks();
+  if(G.cfg&&G.cfg.autoBackupEnabled)_startAutoBackupTimer();
+  document.addEventListener('visibilitychange',function(){if(document.hidden&&G.cfg&&G.cfg.autoBackupEnabled)_writeAutoBackup();});
   // Cards now come entirely from the scraper (no built-in CARDS data), so
   // fetch them immediately rather than waiting for idle time — fetch() is
   // async and non-blocking, so this doesn't delay first render.
@@ -3962,6 +3964,129 @@ function exportColl(){
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='sorcery_collection.csv';a.click();URL.revokeObjectURL(a.href);
 }
 function clearColl(){if(!confirm('Clear entire collection?'))return;G.coll={};sv('sg-co',G.coll);render();}
+// Full app backup: every localStorage key this app writes uses the 'sg-'
+// prefix (decks, config, player records, deck stats, match history,
+// collection, theme/background settings, etc.), so we can back up and
+// restore everything generically without hand-maintaining a key list.
+function exportAllData(){
+  var payload=_buildBackupPayload();
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(payload)],{type:'application/json'}));
+  a.download='sorcery_grimoire_backup_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();URL.revokeObjectURL(a.href);
+}
+function trigUpAllData(){
+  var inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.style.display='none';
+  inp.onchange=function(e){
+    var f=e.target.files[0];
+    if(!f){document.body.removeChild(inp);return;}
+    var r=new FileReader();
+    r.onload=function(ev){
+      try{
+        var payload=JSON.parse(ev.target.result);
+        var data=payload&&payload.data;
+        if(!data||typeof data!=='object'){alert('This doesn\'t look like a valid backup file.');return;}
+        if(!confirm('This will overwrite your current decks, settings, collection, and stats with the contents of this backup. Continue?'))return;
+        Object.keys(data).forEach(function(k){if(k.indexOf('sg-')===0)localStorage.setItem(k,data[k]);});
+        alert('Backup restored. The app will now reload.');
+        location.reload();
+      }catch(err){alert('Could not read that backup file: '+err.message);}
+    };
+    r.readAsText(f);
+    document.body.removeChild(inp);
+  };
+  document.body.appendChild(inp);inp.click();
+}
+
+// Auto-backup: repeatedly overwrites one file on disk with the latest data,
+// using the File System Access API (Chrome/Edge/Android Chrome only --
+// there's no cross-browser way to write to disk without a picker dialog
+// each time). The file handle itself can't go in localStorage (it's not
+// JSON-serializable), so it's kept in a small IndexedDB store instead.
+function _idbOpen(){
+  return new Promise(function(resolve,reject){
+    var req=indexedDB.open('sg-backup-db',1);
+    req.onupgradeneeded=function(){req.result.createObjectStore('handles');};
+    req.onsuccess=function(){resolve(req.result);};
+    req.onerror=function(){reject(req.error);};
+  });
+}
+function _idbSet(key,val){
+  return _idbOpen().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction('handles','readwrite');
+      tx.objectStore('handles').put(val,key);
+      tx.oncomplete=function(){resolve();};
+      tx.onerror=function(){reject(tx.error);};
+    });
+  });
+}
+function _idbGet(key){
+  return _idbOpen().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction('handles','readonly');
+      var req=tx.objectStore('handles').get(key);
+      req.onsuccess=function(){resolve(req.result);};
+      req.onerror=function(){reject(req.error);};
+    });
+  });
+}
+function _idbDel(key){
+  return _idbOpen().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx=db.transaction('handles','readwrite');
+      tx.objectStore('handles').delete(key);
+      tx.oncomplete=function(){resolve();};
+      tx.onerror=function(){reject(tx.error);};
+    });
+  });
+}
+function _buildBackupPayload(){
+  var data={};
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    if(k&&k.indexOf('sg-')===0)data[k]=localStorage.getItem(k);
+  }
+  return {type:'sorcery-grimoire-backup',version:1,exported:new Date().toISOString(),data:data};
+}
+var _autoBackupTimer=null;
+function _startAutoBackupTimer(){
+  if(_autoBackupTimer)clearInterval(_autoBackupTimer);
+  _autoBackupTimer=setInterval(_writeAutoBackup,10*60*1000); // every 10 min while the app is open
+  _writeAutoBackup(); // also write immediately so it's current right away
+}
+function _writeAutoBackup(){
+  return _idbGet('autoBackupHandle').then(function(handle){
+    if(!handle)return;
+    return handle.queryPermission({mode:'readwrite'}).then(function(perm){
+      if(perm==='granted')return perm;
+      return handle.requestPermission({mode:'readwrite'}); // may silently fail outside a user gesture -- that's a browser limitation, not something JS can force
+    }).then(function(perm){
+      if(perm!=='granted')return;
+      return handle.createWritable().then(function(w){return w.write(JSON.stringify(_buildBackupPayload())).then(function(){return w.close();});});
+    });
+  }).catch(function(e){console.error('Auto-backup write failed:',e);});
+}
+function enableAutoBackup(){
+  if(!('showSaveFilePicker' in window)){
+    alert("Auto-backup needs a Chromium-based browser (Chrome, Edge, or this app on Android) with file access support. Your current browser doesn't support it -- use Export Backup manually instead.");
+    return;
+  }
+  window.showSaveFilePicker({suggestedName:'sorcery_grimoire_backup.json',types:[{description:'JSON backup',accept:{'application/json':['.json']}}]})
+    .then(function(handle){return _idbSet('autoBackupHandle',handle);})
+    .then(function(){
+      G.cfg.autoBackupEnabled=true;sv('sg-cfg',G.cfg);
+      _startAutoBackupTimer();
+      render();
+    })
+    .catch(function(e){if(e&&e.name!=='AbortError')alert('Could not set up auto-backup: '+e.message);});
+}
+function disableAutoBackup(){
+  G.cfg.autoBackupEnabled=false;sv('sg-cfg',G.cfg);
+  if(_autoBackupTimer){clearInterval(_autoBackupTimer);_autoBackupTimer=null;}
+  _idbDel('autoBackupHandle').catch(function(){});
+  render();
+}
 function renameDeck(oldKey,newName){
   newName=(newName||'').trim();
   if(!newName||newName===oldKey)return;
@@ -6010,6 +6135,11 @@ function pContent(){
     }
     o('</div>');
     o('<button class="fb red" style="width:100%;margin-top:6px" onclick="clearAllCache()">Clear Cache</button>');
+    o('<div class="slbl2">Backup &amp; Restore</div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 8px">Your decks, settings, collection, and stats live in this browser only. Clearing your browser\'s site data/cache can erase them &mdash; export a backup first, or restore one here.</div>');
+    o('<div class="fr"><button class="fb" style="flex:1" onclick="exportAllData()">Export Backup</button><button class="fb" style="flex:1" onclick="trigUpAllData()">Restore Backup</button></div>');
+    o('<div class="set-row" style="margin-top:8px"><span>Auto-Backup</span><button class="ftag'+(G.cfg.autoBackupEnabled?' on':'')+'" onclick="'+(G.cfg.autoBackupEnabled?'disableAutoBackup()':'enableAutoBackup()')+'">'+(G.cfg.autoBackupEnabled?'On':'Off')+'</button></div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:2px 0 8px">Picks one file and keeps overwriting it automatically while the app is open. Needs Chrome, Edge, or this app on Android &mdash; not supported on Safari/iOS or Firefox.</div>');
     o('<div class="slbl2">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
