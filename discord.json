@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T18:44:19.396Z",
+  "updated": "2026-07-23T18:50:00.141Z",
   "messages": [
     {
       "id": "1529910866642993377",
@@ -9,7 +9,7 @@
         "https://cdn.sanity.io/images/vg9ve3gy/production/d8448e76ea4d9f05beda8f492de824abd6d43c6a-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
       ],
       "timestamp": "Jul 23, 5:59 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1529910866642993377"
     },
     {
@@ -20,7 +20,7 @@
         "https://cdn.sanity.io/images/vg9ve3gy/production/d5283fe4a0a33df286cab748324e7ca1cd3f192e-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
       ],
       "timestamp": "Jul 17, 7:56 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1527765919932219535"
     },
     {
@@ -31,7 +31,7 @@
         "https://curiosa.io/_next/static/media/Empyrean.0b9f45b6.jpg"
       ],
       "timestamp": "Jul 15, 6:38 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1527021669888299149"
     },
     {
@@ -43,7 +43,7 @@
         "https://cdn.sanity.io/images/vg9ve3gy/production/31c463e87c6ff0c7db08de3be34cf7d781cf7ec2-2000x900.png?rect=0,50,2000,800&w=2000&h=800"
       ],
       "timestamp": "Jul 14, 6:10 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1526652161075712082"
     },
     {
@@ -52,7 +52,7 @@
       "content": "test",
       "images": [],
       "timestamp": "Jul 13, 11:48 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1526374827525672970"
     },
     {
@@ -61,7 +61,7 @@
       "content": "Sorcery: Contested Realm #announcements",
       "images": [],
       "timestamp": "Jul 13, 10:44 PM",
-      "channel": "",
+      "channel": "scrtcg-announcements",
       "url": "https://discord.com/channels/278704728999854080/1215448061850034226/1526358581736247437"
     }
   ]
