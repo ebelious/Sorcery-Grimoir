@@ -436,7 +436,8 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .pbg{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);display:flex;align-items:flex-end}
 .pbg.pbg-center{align-items:center;justify-content:center}
 .panel{background:var(--bg2);border-top:1px solid var(--bd);padding:10px;width:100%;max-height:92vh;overflow-x:hidden;overflow-y:auto;overflow-anchor:none;scrollbar-gutter:stable}
-.pbg-center .panel{border-top:1px solid var(--bd);border-radius:10px!important;width:auto;min-width:260px;max-width:320px}
+.pbg-center .panel{border-top:1px solid var(--bd);width:auto;min-width:260px;max-width:320px}
+body.rounded .pbg-center .panel{border-radius:10px!important}
 .phdr{position:relative;display:flex;align-items:center;gap:6px;margin-bottom:9px;min-height:38px}
 .p-bk{position:absolute;left:0;top:50%;transform:translateY(-50%);font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase}
 .p-ttl{width:100%;text-align:center;font-size:19px;font-weight:700;text-transform:uppercase;color:var(--hi)}
@@ -2556,19 +2557,19 @@ function _diceInitOverlay(){
   // P1: bottom of screen, normal
   var popup=document.createElement('div');
   popup.id='dice-3d-popup';
-  popup.style.cssText='position:absolute;bottom:80px;left:50%;transform:translateX(-50%) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
+  popup.style.cssText='position:absolute;bottom:80px;left:50%;transform:translateX(-50%) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:'+(G.cfg.roundedCorners?'12px':'0')+';padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
   popup.innerHTML='<div id="dice-3d-label" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
   // P2: top of screen, rotated 180 so P2 can read it right-side-up
   var popup2=document.createElement('div');
   popup2.id='dice-3d-popup2';
-  popup2.style.cssText='position:absolute;top:80px;left:50%;transform:translateX(-50%) rotate(180deg) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
+  popup2.style.cssText='position:absolute;top:80px;left:50%;transform:translateX(-50%) rotate(180deg) scale(0);background:var(--bg2);border:1px solid var(--bd);border-radius:'+(G.cfg.roundedCorners?'12px':'0')+';padding:16px 40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;z-index:10;min-width:160px;';
   popup2.innerHTML='<div id="dice-3d-label2" style="font-size:11px;color:var(--fg2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;font-family:inherit"></div><div id="dice-3d-num2" style="font-size:72px;font-weight:900;color:var(--fg);line-height:1;font-family:Georgia,serif"></div><div id="dice-3d-brk2" style="font-size:18px;color:var(--fg3);margin-top:4px;font-family:inherit"></div>';
 
   // Connect matches: small corner popup showing the opponent's last dice
   // roll, synced via match-sync polling (see _mpPushDice/_diceShowOpponentRoll).
   var oppBadge=document.createElement('div');
   oppBadge.id='dice-opp-badge';
-  oppBadge.style.cssText='position:absolute;top:10px;right:10px;background:var(--bg2);border:2px solid var(--red);border-radius:12px;padding:8px 16px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);pointer-events:none;opacity:0;transition:opacity .3s;z-index:15;';
+  oppBadge.style.cssText='position:absolute;top:10px;right:10px;background:var(--bg2);border:2px solid var(--red);border-radius:'+(G.cfg.roundedCorners?'12px':'0')+';padding:8px 16px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.7);pointer-events:none;opacity:0;transition:opacity .3s;z-index:15;';
 
   // Click canvas area to roll -- in the 1P view this always rolls (tap the
   // dice like a physical die); in the fullscreen 2P modal, tapping only
@@ -3048,7 +3049,7 @@ function showDiceColorPop1(anchorEl){
   if(old){old.remove();return;}
   var pop=document.createElement('div');
   pop.id='p1-dice-cpop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:10px;box-shadow:0 4px 24px rgba(0,0,0,0.5);min-width:230px;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);padding:10px;box-shadow:0 4px 24px rgba(0,0,0,0.5);min-width:230px;';
 
   // ── Color section ──
   var _p1TexObj=DICE_TEXTURES.find(function(x){return x.id===(G.diceTexture||'felt');})||{};
@@ -3066,7 +3067,7 @@ function showDiceColorPop1(anchorEl){
   html+='<div style="display:flex;flex-wrap:wrap;gap:4px">';
   DICE_TEXTURES.forEach(function(t){
     var on=(G.diceTexture||'felt')===t.id;
-    html+='<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:50px;padding:4px 2px;border:2px solid '+(on?'var(--hi,#fff)':'var(--bd,#374151)')+';border-radius:6px;background:'+(on?'var(--bg3,#374151)':'var(--bg2,#1f2937)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--hi,#fff)':'var(--fg2,#9ca3af)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_refreshP1Popup()"><span style="font-size:15px;line-height:1">'+t.icon+'</span>'+t.label+'</button>';
+    html+='<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:50px;padding:4px 2px;border:2px solid '+(on?'var(--hi,#fff)':'var(--bd,#374151)')+';background:'+(on?'var(--bg3,#374151)':'var(--bg2,#1f2937)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--hi,#fff)':'var(--fg2,#9ca3af)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_refreshP1Popup()"><span style="font-size:15px;line-height:1">'+t.icon+'</span>'+t.label+'</button>';
   });
   html+='</div>';
 
@@ -3115,7 +3116,7 @@ function showP1Settings(anchorEl){
 
   var pop=document.createElement('div');
   pop.id='p1-settings-pop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:250px;max-width:92vw;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:250px;max-width:92vw;';
 
   var dkKeys=Object.keys(G.decks);
   var p0=G.players[0];
@@ -3124,8 +3125,8 @@ function showP1Settings(anchorEl){
   // ── Section: Layout Presets ──
   var html='<div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Layout</div>';
   html+='<div style="display:flex;gap:8px;margin-bottom:14px">';
-  html+='<button onclick="p1LayoutCompetitive()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:6px;cursor:pointer;font-size:13px;font-weight:700" title="Enable Turn Button">Competitive</button>';
-  html+='<button onclick="p1LayoutMinimal()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:6px;cursor:pointer;font-size:13px;font-weight:700" title="Hide Start Button, no dice">Minimal</button>';
+  html+='<button onclick="p1LayoutCompetitive()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:13px;font-weight:700" title="Enable Turn Button">Competitive</button>';
+  html+='<button onclick="p1LayoutMinimal()" style="flex:1;padding:8px 10px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:13px;font-weight:700" title="Hide Start Button, no dice">Minimal</button>';
   html+='</div>';
 
   // ── Section: Deck ──
@@ -3144,17 +3145,17 @@ function showP1Settings(anchorEl){
   // ── Section: Dice Theme ──
   html+='<div style="display:flex;align-items:center;gap:8px">';
   var p1Col=getDieCol(G.dieCI);
-  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:14px">D20</span></button>';
-  html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,true)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
+  html+='<button onclick="rollDice(20,1,G.dieCI,0,false)" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll a D20"><span style="font-size:14px">D20</span></button>';
+  html+='<button onclick="rollDice(G.customDieSides,1,G.dieCI,0,true)" style="display:flex;align-items:center;justify-content:center;flex:1;height:44px;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Roll the custom die"><span style="font-size:14px;text-align:center;line-height:1.1">Custom Die</span></button>';
   html+='<input type="number" min="2" max="1000" value="'+G.customDieSides+'" class="timer-inp" style="width:56px;height:44px;text-align:center;font-size:14px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:6px" oninput="G.customDieSides=Math.max(2,Math.min(1000,parseInt(this.value)||2));sv(\'sg-cds\',G.customDieSides);if(typeof _diceIsCustom!==\'undefined\'&&_diceIsCustom)_diceSides=G.customDieSides;" onchange="this.value=G.customDieSides;_refreshP1Settings()" title="Custom die sides">';
   html+='</div>';
 
   // ── Section: Timer ──
   html+='<div style="margin-top:14px;font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Timer</div>';
   html+='<div style="display:flex;align-items:center;gap:8px">';
-  html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Set match timer"><span style="font-size:14px">Timer</span></button>';
-  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px">Timer Log</span></button>';
-  html+='<button onclick="var _pp=document.getElementById(\'p1-settings-pop\');if(_pp)_pp.remove();openPanel(\'connect\')" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:6px;cursor:pointer;font-size:18px;color:var(--hi,#22d3ee)" title="Connect with another device">&#9876;</button>';
+  html+='<button onclick="showTimerPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="Set match timer"><span style="font-size:14px">Timer</span></button>';
+  html+='<button onclick="showTimerLogPopup(this)" style="display:flex;align-items:center;justify-content:center;height:44px;padding:0 12px;box-sizing:border-box;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:15px;color:var(--hi,#22d3ee)" title="View timer log"><span style="font-size:14px">Timer Log</span></button>';
+  html+='<button onclick="var _pp=document.getElementById(\'p1-settings-pop\');if(_pp)_pp.remove();openPanel(\'connect\')" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:2px solid var(--hi,#22d3ee);background:var(--bg3,#374151);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';cursor:pointer;font-size:18px;color:var(--hi,#22d3ee)" title="Connect with another device">&#9876;</button>';
   html+='</div>';
 
   // ── Section: Player 2 ──
@@ -3426,33 +3427,33 @@ function showTimerPopup(anchorEl){
   if(old){old.remove();return;}
   var pop=document.createElement('div');
   pop.id='timer-pop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);min-width:220px;';
 
   var html='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Duration (min)</div>';
   html+='<div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px">';
-  html+='<button onclick="p1TimerAdjustMinutes(-1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<button onclick="p1TimerAdjustMinutes(-1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">&minus;</button>';
   html+='<input id="timer-min-input" class="timer-inp" type="number" min="1" max="180" value="'+G.p1TimerMinutes+'" onchange="p1TimerSetMinutes(this.value)" style="width:64px;height:48px;text-align:center;font-size:18px;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px">';
-  html+='<button onclick="p1TimerAdjustMinutes(1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:8px;cursor:pointer">+</button>';
+  html+='<button onclick="p1TimerAdjustMinutes(1)" style="width:48px;height:48px;font-size:22px;font-weight:700;border:1px solid var(--bd,#374151);background:var(--bg3,#374151);color:var(--fg,#e2e8f0);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">+</button>';
   html+='</div>';
 
   html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Warning Threshold (min)</div>';
   html+='<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px">';
-  html+='<button onclick="p1TimerAdjustWarnMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<button onclick="p1TimerAdjustWarnMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">&minus;</button>';
   html+='<input id="timer-warn-input" class="timer-inp" type="number" min="1" max="179" value="'+G.p1TimerWarnMin+'" onchange="p1TimerSetWarnMin(this.value)" style="width:56px;height:36px;text-align:center;font-size:15px;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px">';
-  html+='<button onclick="p1TimerAdjustWarnMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer">+</button>';
+  html+='<button onclick="p1TimerAdjustWarnMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">+</button>';
   html+='</div>';
 
   html+='<div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Critical Threshold (min)</div>';
   html+='<div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px">';
-  html+='<button onclick="p1TimerAdjustCritMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px;cursor:pointer">&minus;</button>';
+  html+='<button onclick="p1TimerAdjustCritMin(-1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">&minus;</button>';
   html+='<input id="timer-crit-input" class="timer-inp" type="number" min="0" max="179" value="'+G.p1TimerCritMin+'" onchange="p1TimerSetCritMin(this.value)" style="width:56px;height:36px;text-align:center;font-size:15px;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px">';
-  html+='<button onclick="p1TimerAdjustCritMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:8px;cursor:pointer">+</button>';
+  html+='<button onclick="p1TimerAdjustCritMin(1)" style="width:36px;height:36px;font-size:18px;font-weight:700;border:1px solid var(--red,#ef4444);background:var(--bg3,#374151);color:var(--red,#ef4444);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer">+</button>';
   html+='</div>';
 
-  html+='<button onclick="p1TimerStart();document.getElementById(\'timer-pop\').remove();var _cfgp=document.getElementById(\'p1-settings-pop\');if(_cfgp)_cfgp.remove();" style="width:100%;padding:14px;border:1px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:8px;cursor:pointer;font-size:15px;font-weight:700;margin-bottom:8px">Start Timer</button>';
+  html+='<button onclick="p1TimerStart();document.getElementById(\'timer-pop\').remove();var _cfgp=document.getElementById(\'p1-settings-pop\');if(_cfgp)_cfgp.remove();" style="width:100%;padding:14px;border:1px solid var(--hi,#22d3ee);background:var(--bg3,#374151);color:var(--hi,#22d3ee);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer;font-size:15px;font-weight:700;margin-bottom:8px">Start Timer</button>';
   html+='<div style="display:flex;gap:8px">';
-  html+='<button onclick="p1TimerStop()" style="flex:1;padding:14px;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Pause</button>';
-  html+='<button onclick="p1TimerReset();document.getElementById(\'timer-pop\').remove();var _cfgp=document.getElementById(\'p1-settings-pop\');if(_cfgp)_cfgp.remove();" style="flex:1;padding:14px;border:1px solid var(--bd,#374151);background:transparent;color:var(--fg2,#9ca3af);border-radius:8px;cursor:pointer;font-size:14px;font-weight:700">Reset</button>';
+  html+='<button onclick="p1TimerStop()" style="flex:1;padding:14px;border:1px solid #f97316;background:var(--bg3,#374151);color:#f97316;border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer;font-size:14px;font-weight:700">Pause</button>';
+  html+='<button onclick="p1TimerReset();document.getElementById(\'timer-pop\').remove();var _cfgp=document.getElementById(\'p1-settings-pop\');if(_cfgp)_cfgp.remove();" style="flex:1;padding:14px;border:1px solid var(--bd,#374151);background:transparent;color:var(--fg2,#9ca3af);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';cursor:pointer;font-size:14px;font-weight:700">Reset</button>';
   html+='</div>';
 
   pop.innerHTML=html;
@@ -3480,7 +3481,7 @@ function showTimerLogPopup(anchorEl){
   if(old){old.remove();return;}
   var pop=document.createElement('div');
   pop.id='timer-log-pop';
-  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:8px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);width:360px;min-width:320px;max-width:92vw;max-height:88vh;overflow-y:auto;';
+  pop.style.cssText='position:fixed;z-index:5000;background:var(--bg2,#1f2937);border:1px solid var(--bd,#374151);border-radius:'+(G.cfg.roundedCorners?'8px':'0')+';padding:14px;box-shadow:0 4px 24px rgba(0,0,0,0.55);width:360px;min-width:320px;max-width:92vw;max-height:88vh;overflow-y:auto;';
 
   var html='<div style="font-size:14px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Timer Log</div>';
   if(!G.timerLog||!G.timerLog.length){
@@ -6047,13 +6048,13 @@ function pContent(){
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     [['normal','Normal'],['toad','Frog'],['coin','Coin'],['skull','Skull'],['bullet','Bullet'],['potion','Potion']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
-      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
+      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
     });
     o('</div>');
     o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_diceApplyColorLive();_renderKeepScroll()"></div>');});o('</div>');
     var _texDisabled=!!G.diceBgImage;
     o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
-    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:6px;background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
+    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
     if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
     ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
@@ -7049,7 +7050,7 @@ function pContent(){
         var _ekey=_ep.name+(_eloc||'');
         var _esaved=!!(G.evSaved||[]).find(function(x){return (x.name+(x.location||x.loc||''))===_ekey;});
         o('<div class="pbg" onclick="if(event.target===this)closeEvPopup()">');
-        o('<div class="panel" style="border-radius:8px 8px 0 0;max-height:85vh">');
+        o('<div class="panel" style="border-radius:'+(G.cfg.roundedCorners?'8px 8px 0 0':'0')+';max-height:85vh">');
         o('<div class="phdr">');
         o('<button class="p-bk" onclick="closeEvPopup()">&#x2715;</button>');
         o('<div class="p-ttl" style="font-size:16px">Event Details</div>');
@@ -7367,22 +7368,22 @@ function cModal(){
       o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
       o('<span style="font-size:13px;color:var(--fg2);width:72px;flex-shrink:0">'+cardZone+'</span>');
       o('<span style="font-size:13px;font-weight:700;color:'+(atMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inDeck+'/'+maxC+'</span>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inDeck===0?';opacity:.3':'')+'" '+(inDeck===0?'disabled':'')+' onclick="removeCardFromDeck(\''+safeKey+'\',\''+safeNm+'\')">&#8722;</button>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(atMax?';opacity:.3':'')+'" '+(atMax?'disabled':'')+' onclick="addCardToDeck(\''+safeKey+'\',\''+safeNm+'\')">+</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(inDeck===0?';opacity:.3':'')+'" '+(inDeck===0?'disabled':'')+' onclick="removeCardFromDeck(\''+safeKey+'\',\''+safeNm+'\')">&#8722;</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(atMax?';opacity:.3':'')+'" '+(atMax?'disabled':'')+' onclick="addCardToDeck(\''+safeKey+'\',\''+safeNm+'\')">+</button>');
       o('</div>');
       // Collection row
       o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">');
       o('<span style="font-size:13px;color:var(--yel);width:72px;flex-shrink:0">Collection</span>');
       o('<span style="font-size:13px;font-weight:700;color:'+(collAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inColl+'/'+maxColl+'<br><span style="font-size:10px;font-weight:400;color:var(--fg3)">'+collTotal+'/10</span></span>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inColl===0?';opacity:.3':'')+'" '+(inColl===0?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(collAtMax?';opacity:.3':'')+'" '+(collAtMax?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(inColl===0?';opacity:.3':'')+'" '+(inColl===0?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(collAtMax?';opacity:.3':'')+'" '+(collAtMax?'disabled':'')+' onclick="adjDeckColl(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
       o('</div>');
       // Maybeboard row
       o('<div style="display:flex;align-items:center;gap:8px">');
       o('<span style="font-size:13px;color:var(--bbl);width:72px;flex-shrink:0">Maybeboard</span>');
       o('<span style="font-size:13px;font-weight:700;color:'+(maybeAtMax?'var(--red)':'var(--fg2)')+';min-width:36px;text-align:center">'+inMaybe+'/'+maxC+'</span>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(inMaybe===0?';opacity:.3':'')+'" '+(inMaybe===0?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
-      o('<button class="eadj" style="width:44px;height:44px;font-size:22px;border-radius:8px'+(maybeAtMax?';opacity:.3':'')+'" '+(maybeAtMax?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(inMaybe===0?';opacity:.3':'')+'" '+(inMaybe===0?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',-1)">&#8722;</button>');
+      o('<button class="eadj" style="width:44px;height:44px;font-size:22px'+(maybeAtMax?';opacity:.3':'')+'" '+(maybeAtMax?'disabled':'')+' onclick="adjDeckMaybe(\''+safeKey+'\',\''+safeNm+'\',1)">+</button>');
       o('</div>');
       o('</div>');
     })();
@@ -7505,7 +7506,7 @@ function pTap(p,pi){
     // tree (a re-render would destroy/recreate the GL context otherwise),
     // so this is just an empty placeholder; _diceSyncInlineSlot() moves the
     // persistent overlay into it right after every render() call.
-    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:0'+(_turnBarOn?';margin-top:8px':'')+(G.diceCollapsed?';display:none':'')+'"></div>');
+    o('<div id="dice-inline-slot" style="width:100%;padding:0 12px;box-sizing:border-box;margin:0;margin-top:8px'+(G.diceCollapsed?';display:none':'')+'"></div>');
     // Config button is anchored to the bottom corner of the whole board
     // (position:absolute against .p-tap, which has position:relative in
     // 1P) so it's always in the same spot regardless of which layout or
