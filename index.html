@@ -869,9 +869,9 @@ var G={
   pubDecksItems:null,pubDecksLoading:false,pubDecksLoaded:false,pubDecksErr:null,pubDecksSearch:'',
   pubStats:null,pubStatsLoading:false,pubStatsLoaded:false,pubStatsErr:null,
   metaFmt:'constructed',metaCache:{},metaLoading:false,metaErr:null,
-  cF:{el:[],type:[],rarity:[],set:[],mana:[]},
+  cF:{el:[],type:[],rarity:[],set:[],sub:[],mana:[]},
   cSort:null,cSortDir:'asc',
-  coF:{el:[],type:[],rarity:[],set:[]},
+  coF:{el:[],type:[],rarity:[],set:[],sub:[]},
   accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
@@ -3539,6 +3539,19 @@ function showTimerLogPopup(anchorEl){
 }
 
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];_renderKeepScroll();}
+// Registered once at load (not re-created per popup), so this can't leak or
+// duplicate the way the ad-hoc popup listeners elsewhere in the app can.
+// Closes any open subtype filter dropdown when the click lands outside it.
+document.addEventListener('click',function(e){
+  var changed=false;
+  Object.keys(G.accExp).forEach(function(k){
+    if(k.indexOf('flt_sub_')===0&&G.accExp[k]){
+      var el=document.getElementById(k.replace('flt_sub_','subdd_'));
+      if(!el||!el.contains(e.target)){G.accExp[k]=false;changed=true;}
+    }
+  });
+  if(changed)render();
+},true);
 
 // ── CARD HELPERS ─────────────────────────────────────────────────────────────
 var _cm={};(function(){CARDS.forEach(function(c){_cm[c.n]=c;});})();
@@ -3547,6 +3560,7 @@ function cName(c){return c.n||'';}function cEl(c){return c.el||'neutral';}
 function cType(c){return(c.t||'').toLowerCase();}function cMana(c){return c.c!=null?c.c:null;}
 function cPow(c){return c.pw!=null?c.pw:null;}function cRar(c){return(c.r||'ordinary').toLowerCase();}
 function cSet(c){return c.s||'Alpha';}function cSets(c){return c.ss||[c.s||'Alpha'];}
+function cSub(c){return c.sub||[];}
 function cTxt(c){return c.txt||'';}function cArt(c){return c.ar||'';}
 function cThr(c){return c.th||'';}
 function thrIcons(th){
@@ -3864,6 +3878,7 @@ function cFilter(arr,f,q){
     if(f.type&&f.type.length&&f.type.indexOf(cType(c))<0)return false;
     if(f.rarity&&f.rarity.length&&f.rarity.indexOf(cRar(c))<0)return false;
     if(f.set&&f.set.length&&cSets(c).filter(function(s){return f.set.indexOf(s)>=0;}).length===0)return false;
+    if(f.sub&&f.sub.length&&cSub(c).filter(function(s){return f.sub.indexOf(s)>=0;}).length===0)return false;
     if(f.mana&&f.mana.length){var mc=cMana(c);var manaMatch=f.mana.some(function(mv){if(mv==='6+')return mc!=null&&mc>=6;return mc===parseInt(mv);});if(!manaMatch)return false;}
     return true;
   });
@@ -3898,10 +3913,12 @@ function cSortArr(arr){
   });
   return out;
 }
-function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],mana:[]};render();}
-function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[]};render();}
+function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};render();}
+function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[],sub:[]};render();}
+var SUBTYPES=['Angel','Beast','Demon','Dragon','Dwarf','Faerie','Giant','Gnome','Goblin','Merfolk','Monster','Mortal','Ogre','Spirit','Sphinx','Troll','Undead','Automaton','Device','Document','Instrument','Monument','Potion','Relic','Weapon','Desert','River','Tower','Village'];
 function fBar(f,fn,mana,resetFn,hideReset){
   var sets=Object.keys(SETS);
+  var subtypes=SUBTYPES;
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
   function row(lbl,key,opts,scroll){
     var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
@@ -3910,8 +3927,29 @@ function fBar(f,fn,mana,resetFn,hideReset){
     return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
   }
   var anyActive=Object.keys(f).some(function(k){return f[k]&&f[k].length>0;});
+  function subtypeDropdown(){
+    if(!subtypes.length)return '';
+    var ddKey='flt_sub_'+fn;
+    var open=!!G.accExp[ddKey];
+    var selCount=(f.sub&&f.sub.length)||0;
+    var summary=selCount?(selCount+' selected'):'';
+    var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\'sub\',\'all\')">Subtype</span>';
+    var opts=subtypes.map(function(o){
+      var on=f.sub&&f.sub.indexOf(o)>=0;
+      return '<div class="acc-row" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center'+(on?';color:var(--hi);font-weight:700':'')+'" onclick="'+fn+'(\'sub\',\''+h(o)+'\')"><span>'+h(o)+'</span>'+(on?'<span>&#10003;</span>':'')+'</div>';
+    }).join('');
+    return '<div class="frow">'+lblHtml
+      +'<div class="acc" id="subdd_'+fn+'" style="margin-bottom:0;width:220px;flex-shrink:0;position:relative;overflow:visible">'
+      +'<div class="acc-h" data-k="'+ddKey+'" onclick="toggleAcc(this.dataset.k)">'
+      +'<div class="acc-nm" style="font-size:13px">'+summary+'</div>'
+      +'<span class="acc-arr">'+(open?'&#9650;':'&#9660;')+'</span>'
+      +'</div>'
+      +(open?'<div class="acc-body" style="position:absolute;top:100%;left:0;right:0;z-index:20;max-height:240px;overflow-y:auto;background:var(--bg2);border:1px solid var(--bd);box-shadow:0 4px 12px rgba(0,0,0,0.4)">'+opts+'</div>':'')
+      +'</div>'
+      +'</div>';
+  }
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Elem','el',['fire','water','earth','air','neutral'])+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'])+row('Set','set',sets)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+']):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
@@ -7281,6 +7319,19 @@ function cModal(){
         +'</div>';
     })());
   }
+  if(_curPrint&&_curPrint.flavor){
+    var flavKey='cm_flavor_'+nm.replace(/[^a-z0-9]/gi,'_');
+    var flavExp=!!G.accExp[flavKey];
+    o('<div class="acc" style="margin-bottom:4px">');
+    o('<div class="acc-h" data-k="'+flavKey+'" onclick="toggleAcc(this.dataset.k)">');
+    o('<div class="acc-nm" style="font-size:13px">Flavor Text</div>');
+    o('<span class="acc-arr">'+(flavExp?'&#9650;':'&#9660;')+'</span>');
+    o('</div>');
+    if(flavExp){
+      o('<div class="acc-body"><div class="acc-row" style="font-style:italic;color:var(--fg2)">'+h(_curPrint.flavor)+'</div></div>');
+    }
+    o('</div>');
+  }
   if(c.prints&&c.prints.length>1){
     var pKey='cm_prints_'+nm.replace(/[^a-z0-9]/gi,'_');
     var pExp=!!G.accExp[pKey];
@@ -7949,20 +8000,11 @@ function render(){
       _rmHtml+='</div></div>';
       out.push(_rmHtml);
     }
-    var _fi=(document.activeElement&&document.activeElement.tagName==='INPUT'&&document.activeElement.id)||null;
-    var _fp=_fi?document.activeElement.selectionStart:0;
     var _scEl=document.querySelector('.cm')||document.querySelector('.panel');
     var _scTop=_scEl?_scEl.scrollTop:null;
     document.getElementById('app').innerHTML=out.join('');
 
     bindSearchInputs();
-    if(_fi){
-      var _fel=document.getElementById(_fi);
-      if(_fel&&_fel.tagName==='INPUT'){
-        _fel.focus();
-        try{_fel.setSelectionRange(_fp,_fp);}catch(e){}
-      }
-    }
     if(_scTop!==null){
       requestAnimationFrame(function(){
         var _scEl2=document.querySelector('.cm')||document.querySelector('.panel');
