@@ -884,6 +884,7 @@ var G={
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
+  mpMatchAcceptWaiting:false,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -4826,12 +4827,33 @@ function _mpOnConnected(){
   G.mpLastOppDiceTs=null;
   G.mpConnectedPopup=true; // shows opponent's name/deck/avatar -- player must tap Accept to proceed
 }
-// Runs only when the player explicitly accepts the match from the "Match
-// Connected" popup -- this is what actually populates the names/decks used
-// for logging, and is also when we snapshot the opponent's info into
-// mpLastOpp so it's still available for the end-of-match download even
-// after the match room itself is closed out.
+// Runs when the player taps Accept on the "Match Connected" popup. Posts
+// our own acceptance and waits for the opponent's -- the match only
+// actually starts (via _mpFinalizeMatchStart) once both sides have
+// accepted, same two-phase pattern as match results and rematches.
 function mpAcceptMatch(){
+  G.mpConnectedPopup=false;
+  var code=G.mpCode;
+  if(!code){G.mpErr='Could not find the match.';render();return;}
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'acceptMatch',code:code,role:G.mpRole})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room){
+      G.mpRoom=d.room;
+      var acc=d.room.accepted;
+      if(acc&&acc.confirmedP1&&acc.confirmedP2){_mpFinalizeMatchStart();return;}
+    }
+    G.mpMatchAcceptWaiting=true;
+    render();
+  }).catch(function(e){G.mpErr='Failed to accept match: '+e.message;render();});
+}
+// Runs once BOTH players have accepted -- this is what actually populates
+// the names/decks used for logging, and is also when we snapshot the
+// opponent's info into mpLastOpp so it's still available for the
+// end-of-match download even after the match room itself is closed out.
+function _mpFinalizeMatchStart(){
   // initP (not switchMode) gives a truly fresh start -- switchMode carries
   // over life/mana/manaUsed/threshold from whatever was played before,
   // which is wrong when a brand-new connect match is starting. This is the
@@ -4841,6 +4863,7 @@ function mpAcceptMatch(){
   _mpApplyNames();
   G.mpLastOpp=_mpOpponent();
   G.mpConnectedPopup=false;
+  G.mpMatchAcceptWaiting=false;
   closeAll(); // exit the Connect panel/drawer so the board is what's shown
   _mpPushLife(G.players[0].life); // let the opponent's device know our life is freshly reset, not whatever it was at the end of a previous match
 }
@@ -4850,7 +4873,7 @@ function mpCreate(){
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4870,7 +4893,7 @@ function mpJoin(){
   G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4908,6 +4931,10 @@ function _mpPoll(){
         _mpOnConnected();
         _sendNotification('Match Connected',(_mpOpponent().username||'Opponent')+' has joined the match.','connect');
         // polling continues (not stopped here) so the result-confirmation flow below can still sync through the rest of the match
+      }
+      var acc=d.room.accepted;
+      if(acc&&acc.confirmedP1&&acc.confirmedP2&&G.mpMatchAcceptWaiting){
+        _mpFinalizeMatchStart();
       }
       var res=d.room.result;
       if(res&&!G.mpResultFinalized){
@@ -5074,7 +5101,7 @@ function _mpEndMatch(deleteRoom){
 function mpLeave(){
   _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;
   render();
 }
 // Sends the proposed result to the opponent instead of finalizing locally.
@@ -5185,7 +5212,7 @@ function _mpApplyRemoteResult(res){
     iWon:iWon
   };
   _mpEndMatch();
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultDeclined=false;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.matchStartTime=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultDeclined=false;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.matchStartTime=null;
   render();
 }
 // Returns the opponent's room-side data even after the room itself has been
@@ -5350,7 +5377,7 @@ function _mpFinalizeRematch(){
     p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
     _mpApplyNames();
     G.mpLastOpp=_mpOpponent();
-    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
+    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;
     _mpStartPoll();
     closeAll();
     _mpPushLife(G.players[0].life); // let the opponent's device know our life is freshly reset for the new game
@@ -8098,6 +8125,12 @@ function render(){
       });
       o('<div style="font-size:11px;color:var(--fg3);margin-top:2px">Accept to start the match</div>');
       o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAcceptMatch()">Accept</button></div></div></div>');
+    }
+
+    if(G.mpMatchAcceptWaiting&&!G.mpConnectedPopup){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to accept the match&hellip;</div>');
+      o('</div></div></div>');
     }
 
     if(G.mpMatchSummaryPopup&&!G.panel){
