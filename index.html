@@ -883,6 +883,7 @@ var G={
   timerLog:[],
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
+  mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -4849,7 +4850,7 @@ function mpCreate(){
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4869,7 +4870,7 @@ function mpJoin(){
   G.mpMyDeckKey=deckKey||null;
   if(!code){G.mpErr='Enter a match code.';render();return;}
   _mpStopPoll(); // clear any stray timer from a previous attempt before starting fresh
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
   G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
@@ -4921,6 +4922,23 @@ function _mpPoll(){
           // for Opponent" popup and return to the match instead of leaving
           // it stuck open.
           G.mpWaitingResult=false;G.mpPendingResult=null;
+        }
+      }
+      var rm=d.room.rematch;
+      if(rm){
+        if(rm.confirmedP1&&rm.confirmedP2){
+          if(G.mpRematchWaiting){G.mpRematchWaiting=false;_mpFinalizeRematch();}
+        } else {
+          var myRmKey=G.mpRole==='p1'?'confirmedP1':'confirmedP2';
+          if(!rm[myRmKey]&&!G.mpRematchConfirmPopup&&!G.mpRematchWaiting&&!G.mpRematchDeclined){G.mpRematchConfirmPopup=true;}
+        }
+      } else {
+        G.mpRematchDeclined=false; // no rematch pending -- any future one is new, don't suppress it
+        if(G.mpRematchWaiting){
+          // Our rematch proposal is no longer on the server -- the other
+          // player declined it. Return to the match summary instead of
+          // leaving us stuck waiting.
+          G.mpRematchWaiting=false;G.mpRematchPendingDeck=null;
         }
       }
       var _oppD=_mpOpponent();
@@ -5056,7 +5074,7 @@ function _mpEndMatch(deleteRoom){
 function mpLeave(){
   _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
   render();
 }
 // Sends the proposed result to the opponent instead of finalizing locally.
@@ -5167,7 +5185,7 @@ function _mpApplyRemoteResult(res){
     iWon:iWon
   };
   _mpEndMatch();
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultDeclined=false;G.matchStartTime=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultDeclined=false;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.matchStartTime=null;
   render();
 }
 // Returns the opponent's room-side data even after the room itself has been
@@ -5228,13 +5246,99 @@ function mpPlayAgain(){
   G.mpRematchPicking=true;
   render();
 }
-function mpCancelRematch(){G.mpRematchPicking=false;render();}
+function mpCancelRematch(){G.mpRematchPicking=false;G.mpRematchAccepting=false;render();}
+// Picking a deck and hitting "Start" either proposes a new rematch (first
+// player to act) or, if we're accepting one the opponent already proposed
+// (G.mpRematchAccepting), confirms it instead -- same request either way
+// from the player's perspective, just a different server action underneath.
 function mpSubmitRematch(){
   var deckKey=G.mpRematchDeckKey||'';
   var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
   G.mpMyDeckKey=deckKey||null;
+  G.mpRematchPendingDeck=deck; // stashed for the finalize step once both sides have accepted
   var code=G.mpCode||G.mpLastCode; // G.mpCode is null once the previous match ended -- reconnect using the preserved code
   if(!code){G.mpErr='Could not find the match to rejoin.';G.mpRematchPicking=false;render();return;}
+  G.mpRematchPicking=false;
+  if(G.mpRematchAccepting){
+    G.mpRematchAccepting=false;
+    _mpConfirmRematch(code);
+    return;
+  }
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'proposeRematch',code:code,role:G.mpRole})
+  }).then(function(r){return r.json().then(function(d){return {status:r.status,d:d};});})
+  .then(function(res){
+    var d=res.d;
+    G.mpCode=code;
+    if(res.status===409&&d&&d.room){
+      // Opponent proposed a rematch at nearly the same time -- confirm
+      // theirs instead of leaving our own proposal orphaned.
+      G.mpRoom=d.room;
+      _mpConfirmRematch(code);
+      return;
+    }
+    if(d&&d.room)G.mpRoom=d.room;
+    G.mpRematchWaiting=true;
+    _mpStartPoll();
+    render();
+  }).catch(function(e){G.mpErr='Failed to start rematch: '+e.message;render();});
+}
+// Lets the proposer back out if the opponent never responds, mirroring
+// mpCancelWaitingResult for match results.
+function mpCancelRematchWaiting(){
+  G.mpRematchWaiting=false;
+  G.mpRematchPendingDeck=null;
+  if(G.mpCode){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'cancelRematch',code:G.mpCode})
+    }).catch(function(){});
+  }
+  render();
+}
+// Opens the same deck-picker used to propose a rematch, but routes the
+// submission to confirmRematch instead (see mpSubmitRematch above).
+function mpAcceptRematch(){
+  G.mpRematchConfirmPopup=false;
+  G.mpRematchAccepting=true;
+  G.mpRematchDeckKey=G.mpMyDeckKey||'';
+  G.mpRematchPicking=true;
+  render();
+}
+function mpDeclineRematch(){
+  G.mpRematchConfirmPopup=false;
+  G.mpRematchDeclined=true;
+  if(G.mpCode){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'cancelRematch',code:G.mpCode})
+    }).catch(function(){});
+  }
+  render();
+}
+function _mpConfirmRematch(code){
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'confirmRematch',code:code,role:G.mpRole})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room){
+      G.mpRoom=d.room;
+      var rm=d.room.rematch;
+      if(rm&&rm.confirmedP1&&rm.confirmedP2){_mpFinalizeRematch();return;}
+    }
+    render();
+  }).catch(function(e){G.mpErr='Failed to confirm rematch: '+e.message;render();});
+}
+// Runs once BOTH players have accepted (confirmedP1 && confirmedP2) --
+// independently on each device, same pattern as _mpApplyRemoteResult for
+// match results. Applies this device's own deck choice via the existing
+// 'rematch' action, then actually starts the new game locally.
+function _mpFinalizeRematch(){
+  var code=G.mpCode||G.mpLastCode;
+  if(!code){G.mpErr='Could not find the match to rejoin.';render();return;}
+  var deck=G.mpRematchPendingDeck||null;
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({action:'rematch',code:code,role:G.mpRole,deck:deck})
@@ -5246,13 +5350,12 @@ function mpSubmitRematch(){
     p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
     _mpApplyNames();
     G.mpLastOpp=_mpOpponent();
-    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;
-    G.mpRematchPicking=false;
+    G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;
     _mpStartPoll();
     closeAll();
     _mpPushLife(G.players[0].life); // let the opponent's device know our life is freshly reset for the new game
     render();
-  }).catch(function(e){G.mpErr='Failed to start rematch: '+e.message;G.mpRematchPicking=false;render();});
+  }).catch(function(e){G.mpErr='Failed to start rematch: '+e.message;render();});
 }
 function logMatch(){
   var w=document.getElementById('lw').value,lo=document.getElementById('ll').value;
@@ -8022,7 +8125,7 @@ function render(){
 
     if(G.mpRematchPicking){
       var _rmOpts='<option value="">No deck</option>'+Object.keys(G.decks).filter(function(k){return k!=='__preview__';}).map(function(k){return '<option value="'+h(k)+'"'+((G.mpRematchDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
-      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Play Again</div><div class="lp-b">');
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">'+(G.mpRematchAccepting?'Accept Rematch':'Play Again')+'</div><div class="lp-b">');
       o('<div style="font-size:13px;color:var(--fg2);margin-bottom:10px;text-align:left">Choose your deck for the next match:</div>');
       o('<select onclick="event.stopPropagation()" onchange="G.mpRematchDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box;margin-bottom:4px">'+_rmOpts+'</select>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpCancelRematch()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpSubmitRematch()">Start</button></div></div></div>');
@@ -8052,6 +8155,18 @@ function render(){
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to confirm the match result&hellip;</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpCancelWaitingResult()">Cancel</button></div></div></div>');
+    }
+
+    if(G.mpRematchConfirmPopup&&!G.mpRematchPicking){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Rematch?</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">Your opponent wants to play again.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpDeclineRematch()">Decline</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpAcceptRematch()">Accept</button></div></div></div>');
+    }
+
+    if(G.mpRematchWaiting&&!G.mpRematchConfirmPopup){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to accept the rematch&hellip;</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpCancelRematchWaiting()">Cancel</button></div></div></div>');
     }
 
     // ── Drawer ──
