@@ -489,6 +489,7 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .frow-scroll::-webkit-scrollbar{display:none}
 .flbl{font-size:12px;color:var(--hi);width:64px;flex-shrink:0;text-transform:uppercase;white-space:nowrap}
 .ftag{font-size:15px;padding:6px 10px;border:1px solid var(--bd);background:transparent;color:var(--fg2);cursor:pointer;border-radius:0}
+.mtag-drag{touch-action:none;user-select:none}
 .ftag.on{border-color:var(--hi);color:var(--hi)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
 .ct{border:1px solid var(--bd);background:var(--bg3);overflow:hidden;cursor:pointer}
@@ -871,7 +872,7 @@ var G={
   metaFmt:'constructed',metaCache:{},metaLoading:false,metaErr:null,
   cF:{el:[],type:[],rarity:[],set:[],sub:[],mana:[]},
   cSort:null,cSortDir:'asc',
-  coF:{el:[],type:[],rarity:[],set:[],sub:[]},
+  coF:{el:[],type:[],rarity:[],set:[],sub:[],mana:[]},
   accExp:{},matchLog:[],matchStartTime:null,
   turnNum:1,turnLog:[],
   activePI:-1,
@@ -3554,6 +3555,48 @@ document.addEventListener('click',function(e){
   if(changed)render();
 },true);
 
+// Click-and-drag paint-select for the Mana filter buttons: pressing on a
+// button toggles it, and dragging over other mana buttons applies that same
+// on/off state to each one as the pointer passes over it. Updates G.cF/G.coF
+// directly and toggles classes live during the drag (no re-render per move,
+// for smoothness); a single render() syncs everything on release.
+var _manaDrag=null;
+function _manaDragTarget(t){return t&&t.closest?t.closest('.mtag-drag'):null;}
+function _manaDragApply(btn,mode){
+  var fn=btn.dataset.fn,val=btn.dataset.mana;
+  var f=fn==='setCF'?G.cF:G.coF;
+  if(!f.mana)f.mana=[];
+  var idx=f.mana.indexOf(val);
+  if(mode==='add'&&idx<0)f.mana.push(val);
+  if(mode==='remove'&&idx>=0)f.mana.splice(idx,1);
+  btn.classList.toggle('on',mode==='add');
+}
+document.addEventListener('pointerdown',function(e){
+  var btn=_manaDragTarget(e.target);
+  if(!btn)return;
+  var fn=btn.dataset.fn;
+  var f=fn==='setCF'?G.cF:G.coF;
+  var mode=(f.mana&&f.mana.indexOf(btn.dataset.mana)>=0)?'remove':'add';
+  _manaDrag={mode:mode,touched:{}};
+  _manaDrag.touched[btn.dataset.mana]=true;
+  _manaDragApply(btn,mode);
+  e.preventDefault();
+});
+document.addEventListener('pointermove',function(e){
+  if(!_manaDrag)return;
+  var el=document.elementFromPoint(e.clientX,e.clientY);
+  var btn=_manaDragTarget(el);
+  if(!btn||_manaDrag.touched[btn.dataset.mana])return;
+  _manaDrag.touched[btn.dataset.mana]=true;
+  _manaDragApply(btn,_manaDrag.mode);
+});
+document.addEventListener('pointerup',function(){
+  if(_manaDrag){_manaDrag=null;render();}
+});
+document.addEventListener('pointercancel',function(){
+  if(_manaDrag){_manaDrag=null;render();}
+});
+
 // ── CARD HELPERS ─────────────────────────────────────────────────────────────
 var _cm={};(function(){CARDS.forEach(function(c){_cm[c.n]=c;});})();
 function cardByName(n){return _cm[n]||null;}
@@ -3880,7 +3923,7 @@ function cFilter(arr,f,q){
     if(f.rarity&&f.rarity.length&&f.rarity.indexOf(cRar(c))<0)return false;
     if(f.set&&f.set.length&&cSets(c).filter(function(s){return f.set.indexOf(s)>=0;}).length===0)return false;
     if(f.sub&&f.sub.length&&cSub(c).filter(function(s){return f.sub.indexOf(s)>=0;}).length===0)return false;
-    if(f.mana&&f.mana.length){var mc=cMana(c);var manaMatch=f.mana.some(function(mv){if(mv==='6+')return mc!=null&&mc>=6;return mc===parseInt(mv);});if(!manaMatch)return false;}
+    if(f.mana&&f.mana.length){var mc=cMana(c);var manaMatch=f.mana.some(function(mv){if(mv==='10+')return mc!=null&&mc>=10;return mc===parseInt(mv);});if(!manaMatch)return false;}
     return true;
   });
 }
@@ -3915,7 +3958,7 @@ function cSortArr(arr){
   return out;
 }
 function resetCF(){G.cF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};render();}
-function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[],sub:[]};render();}
+function resetCoF(){G.coF={el:[],type:[],rarity:[],set:[],sub:[],mana:[]};render();}
 var SUBTYPES=['Angel','Beast','Demon','Dragon','Dwarf','Faerie','Giant','Gnome','Goblin','Merfolk','Monster','Mortal','Ogre','Spirit','Sphinx','Troll','Undead','Automaton','Device','Document','Instrument','Monument','Potion','Relic','Weapon','Desert','River','Tower','Village'];
 function fBar(f,fn,mana,resetFn,hideReset){
   var sets=Object.keys(SETS);
@@ -3923,7 +3966,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
   function isOn(key,o){if(o==='all')return !f[key]||!f[key].length;return f[key]&&f[key].indexOf(o)>=0;}
   function row(lbl,key,opts,scroll){
     var lblHtml='<span class="flbl" style="cursor:pointer" onclick="'+fn+'(\''+key+'\',\'all\')">'+lbl+'</span>';
-    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='el'?eSVG(o,16):(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1))));return '<button class="ftag'+(on?' on':'')+'"'+(scroll?' style="flex-shrink:0"':'')+' onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')">'+label+'</button>';}).join('');
+    var btnsHtml=opts.map(function(o){var on=isOn(key,o);var label=o==='all'?'All':(key==='el'?eSVG(o,16):(key==='set'?((SETS[o]&&SETS[o].abbr)||o):(o.charAt(0).toUpperCase()+o.slice(1))));var dragAttrs=key==='mana'?' class="ftag mtag-drag'+(on?' on':'')+'" data-fn="'+fn+'" data-mana="'+h(o)+'"':' class="ftag'+(on?' on':'')+'" onclick="'+fn+'(\''+key+'\',\''+h(o)+'\')"';return '<button'+dragAttrs+(scroll?' style="flex-shrink:0"':'')+'>'+label+'</button>';}).join('');
     if(scroll)return '<div class="frow">'+lblHtml+'<div class="frow-scroll">'+btnsHtml+'</div></div>';
     return '<div class="frow">'+lblHtml+btnsHtml+'</div>';
   }
@@ -3950,7 +3993,7 @@ function fBar(f,fn,mana,resetFn,hideReset){
       +'</div>';
   }
   var resetBtn=(!hideReset&&anyActive&&resetFn)?'<button class="fb" style="font-size:9px;padding:2px 8px;margin-bottom:4px" onclick="'+resetFn+'()">&#x2715; Reset Filters</button>':'';
-  return '<div class="fbar">'+resetBtn+row('Element','el',['fire','water','earth','air','neutral'],true)+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'],true)+row('Set','set',sets,true)+(mana?row('Mana','mana',['0','1','2','3','4','5','6+'],true):'')+'</div>';
+  return '<div class="fbar">'+resetBtn+row('Element','el',['fire','water','earth','air','neutral'],true)+row('Type','type',['avatar','minion','magic','aura','site','artifact'],true)+subtypeDropdown()+row('Rarity','rarity',['ordinary','exceptional','elite','unique'],true)+row('Set','set',sets,true)+(mana?row('Mana','mana',['0','1','2','3','4','5','6','7','8','9','10+'],true):'')+'</div>';
 }
 function h(s){if(s==null)s='';else if(typeof s!=='string')s=String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function _faqTableHtml(grid){
@@ -6387,7 +6430,7 @@ function pContent(){
     o('<div class="fr"><button class="fb" onclick="trigUpColl()">Import</button><button class="fb" onclick="exportColl()">Export</button><button class="fb red" onclick="clearColl()">Clear</button></div>');
     o('<div class="stbar">'+Object.keys(G.coll).length+' unique &middot; '+total+' total</div>');
     o('<div id="csrch2-wrap" class="si" style="margin:0 0 5px"><input id="coll-srch" placeholder="Search collection&hellip;" value="'+h(q)+'">');if(q)o('<button class="sx" style="color:var(--hi);font-size:26px" onclick="S.coS=\'\';render()">&times;</button>');o('</div>');
-    o(fBar(G.coF,'setCoF',false,'resetCoF'));
+    o(fBar(G.coF,'setCoF',true,'resetCoF'));
     if(fil.length){fil.forEach(function(c){var nm=c._nm||cName(c);var d=G.coll[nm];if(!d)return;var el=ELEM.find(function(e){return e.k===cEl(c);})||ELEM[4];var safenm=nm.replace(/\\/g,'\\\\').replace(/'/g,"\\'");o('<div class="coll-it"><div class="coll-th" style="cursor:pointer" onclick="var _c=cardByName(\''+safenm+'\');if(_c){G.selCard=_c;openPanel(\'card\');}">'+cImgTag(c)+'</div><div style="flex:1;min-width:0;cursor:pointer" onclick="var _c=cardByName(\''+safenm+'\');if(_c){G.selCard=_c;openPanel(\'card\');}"><div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(nm)+'</div><div style="font-size:11px;color:'+el.c+'">'+cEl(c)+'</div></div><div style="display:flex;align-items:center;gap:3px;flex-shrink:0"><button class="eadj" onclick="adjColl(\''+h(nm)+'\',-1)">-</button><span style="font-size:11px;font-weight:700;color:var(--bgrn);min-width:16px;text-align:center">'+d.qty+'</span><button class="eadj" onclick="adjColl(\''+h(nm)+'\',1)">+</button></div></div>');});}
     else{o('<div class="ld">Empty. Import a CSV or add from Cards.</div>');}return out.join('');
   }
@@ -7326,7 +7369,7 @@ function cModal(){
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" data-k="'+flavKey+'" onclick="toggleAcc(this.dataset.k)">');
     o('<div class="acc-nm" style="font-size:13px">Flavor Text</div>');
-    o('<span class="acc-arr">'+(flavExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(flavExp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(flavExp){
       o('<div class="acc-body"><div class="acc-row" style="font-style:italic;color:var(--fg2)">'+h(_curPrint.flavor)+'</div></div>');
@@ -7340,7 +7383,7 @@ function cModal(){
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" data-k="'+pKey+'" onclick="toggleAcc(this.dataset.k)">');
     o('<div class="acc-nm" style="font-size:13px">Printings ('+c.prints.length+')</div>');
-    o('<span class="acc-arr">'+(pExp?'&#9650;':'&#9660;')+'</span>');
+    o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(pExp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(pExp){
       o('<div class="acc-body">');
@@ -7369,7 +7412,7 @@ function cModal(){
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" style="display:flex;align-items:center" data-k="'+faqKey+'" onclick="toggleAcc(this.dataset.k)">');
     o('<div class="acc-nm" style="font-size:13px;flex:1">FAQ & Codex</div>');
-     o('<span class="acc-arr">'+(exp?'&#9650;':'&#9660;')+'</span>');
+     o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(exp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(exp){
       o('<div class="acc-body">');
