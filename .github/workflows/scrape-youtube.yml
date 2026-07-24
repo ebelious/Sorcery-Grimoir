@@ -2,8 +2,12 @@ name: Scrape YouTube & Notify
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 minutes
+    - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
   workflow_dispatch:          # allows manual run from GitHub Actions tab
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false  # queue instead of overlapping -- a run already in progress finishes before the next trigger starts
 
 jobs:
   scrape:
@@ -21,10 +25,13 @@ jobs:
       - name: Install firebase-admin
         run: npm install firebase-admin
 
-      - name: Run scraper
+      - name: Run scraper (twice, 30s apart)
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: node scrape-youtube.js
+        run: |
+          node scrape-youtube.js
+          sleep 30
+          node scrape-youtube.js
 
       - name: Commit youtube-state.json if changed
         run: |
