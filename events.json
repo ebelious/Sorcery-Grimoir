@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T20:12:50.250Z",
+  "updated": "2026-07-24T20:52:43.303Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -71,23 +71,6 @@
       "url": "https://play.sorcerytcg.com/events/d704dbee-d42a-46bf-a680-a82f8d305c04"
     },
     {
-      "name": "Geek Haven - Casual Meetup",
-      "date": "Fri. Jul 24, 2026",
-      "time": "3:30 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bonn, NRW",
-      "city": "Bonn",
-      "state": "NRW",
-      "lat": 50.7352621,
-      "lng": 7.1024635,
-      "address": "2 Rathausstraße Bonn NRW 53225",
-      "description": "",
-      "storeName": "Geek Haven",
-      "url": "https://play.sorcerytcg.com/events/09f0dc8e-8f14-4d96-a2ce-869e6edd0b36"
-    },
-    {
       "name": "Weekly du Soir",
       "date": "Fri. Jul 24, 2026",
       "time": "5:30 PM UTC",
@@ -105,21 +88,21 @@
       "url": "https://play.sorcerytcg.com/events/2a3b954a-f79f-4314-b7ed-b3de37dfc97b"
     },
     {
-      "name": "Weekly Play 24/07",
+      "name": "Casual Sorcery",
       "date": "Fri. Jul 24, 2026",
-      "time": "7:00 PM UTC",
+      "time": "9:00 PM UTC",
       "type": "Casual Meetup",
       "price": "FREE",
       "duration": "",
-      "location": "Firenze, Toscana",
-      "city": "Firenze",
-      "state": "Toscana",
-      "lat": 43.7697955,
-      "lng": 11.2556404,
-      "address": "168 Via Francesco Baracca Firenze Toscana 50127",
+      "location": "Ashland, OH",
+      "city": "Ashland",
+      "state": "OH",
+      "lat": 40.7887367,
+      "lng": -82.2360391,
+      "address": "16 Hedstrom Drive Ashland OH 44805",
       "description": "",
-      "storeName": "Game",
-      "url": "https://play.sorcerytcg.com/events/98678b31-4b05-49d0-8273-2aaf7dfe1f94"
+      "storeName": "The Eldritch Bastion",
+      "url": "https://play.sorcerytcg.com/events/57f4e7b0-48ff-45a5-9a44-bfc783763d9b"
     },
     {
       "name": "Friday Afternnon Meet Up",
@@ -205,6 +188,23 @@
       "description": "",
       "storeName": "Variant",
       "url": "https://play.sorcerytcg.com/events/2531765a-0dc4-4596-a3e9-baafeec06e9c"
+    },
+    {
+      "name": "Casual Liberal Sem Palworld",
+      "date": "Jul 24, 2026 - Jul 25, 2026",
+      "time": "10:59 PM UTC",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Setor Bueno, GO",
+      "city": "Setor Bueno",
+      "state": "GO",
+      "lat": -16.697876,
+      "lng": -49.277922,
+      "address": "",
+      "description": "",
+      "storeName": "Paladins Games Store",
+      "url": "https://play.sorcerytcg.com/events/c7693903-8bd5-4862-8566-c9f1526e5428"
     },
     {
       "name": "Friday Evening Sorcery",
@@ -477,40 +477,6 @@
       "description": "",
       "storeName": "The Portland Game Store",
       "url": "https://play.sorcerytcg.com/events/dc61365b-7e0c-4f1f-ac4e-526b308e8786"
-    },
-    {
-      "name": "Game Keeper Verdun",
-      "date": "Sat. Jul 25, 2026",
-      "time": "2:18 AM UTC",
-      "type": "Game Keeper Verdun",
-      "price": "Constructed Tournament",
-      "duration": "60 Minutes",
-      "location": "Montréal, QC",
-      "city": "Montréal",
-      "state": "QC",
-      "lat": 45.5031824,
-      "lng": -73.5698065,
-      "address": "4430 Rue Wellington Montréal QC H4G 1W5",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/98b5deba-57c6-4fd2-8484-b94e229a35f4"
-    },
-    {
-      "name": "Beskar Forge's Sorcery Saturdays",
-      "date": "Sat. Jul 25, 2026",
-      "time": "6:00 AM UTC",
-      "type": "Beskar Forge Gaming",
-      "price": "Constructed Tournament",
-      "duration": "45 Minutes",
-      "location": "Victoria Park, WA",
-      "city": "Victoria Park",
-      "state": "WA",
-      "lat": -31.9723554,
-      "lng": 115.8954511,
-      "address": "55 Washington Street Victoria Park WA 6100",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/13703385-6d37-4108-be72-351ce6fe8a0e"
     }
   ]
 }
