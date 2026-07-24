@@ -169,13 +169,23 @@ function isUpcoming(e, todayStart) {
 // real nearby events exist -- they just never made it into events.json.
 //
 // The button isn't present in the DOM until scrolled near the bottom (a
-// live diagnostic run showed 0 clicks without this -- the button simply
-// didn't exist yet), so each iteration scrolls to the bottom first.
+// live diagnostic run showed 0 clicks even after programmatic scrollTo --
+// the button simply never mounted), so each iteration does a real
+// mouse-wheel scroll (many infinite-scroll/virtualization libraries only
+// react to genuine scroll gestures, not scrollTo) and also scrolls any
+// nested scrollable container on the page, in case the list scrolls inside
+// its own div rather than the window.
 async function loadMoreEvents(page, maxClicks) {
   let clicks = 0;
   for (let i = 0; i < maxClicks; i++) {
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(500); // give the lazy-mounted button a moment to appear
+    await page.mouse.wheel(0, 4000);
+    await page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+      document.querySelectorAll('*').forEach(el => {
+        if (el.scrollHeight > el.clientHeight + 50) el.scrollTop = el.scrollHeight;
+      });
+    });
+    await page.waitForTimeout(700); // give the lazy-mounted button a moment to appear
     const clicked = await page.evaluate(() => {
       const els = Array.from(document.querySelectorAll('button, a, div, span'));
       const btn = els.find(el =>
@@ -185,7 +195,21 @@ async function loadMoreEvents(page, maxClicks) {
       if (btn) { btn.click(); return true; }
       return false;
     });
-    if (!clicked) break;
+    if (!clicked) {
+      if (i === 0) {
+        // Diagnostic fallback: if it fails on the very first attempt, dump
+        // anything on the page that mentions "load" so the next round has
+        // real data instead of another blind guess at the button's shape.
+        const hints = await page.evaluate(() => {
+          const els = Array.from(document.querySelectorAll('button, a, [role="button"]'));
+          return els
+            .filter(el => el.textContent && /load/i.test(el.textContent))
+            .map(el => ({ tag: el.tagName, text: el.textContent.trim().slice(0, 60), visible: el.offsetParent !== null }));
+        });
+        console.log('No "Load Newer" found after scrolling. Load-related elements on page:', JSON.stringify(hints, null, 2));
+      }
+      break;
+    }
     clicks++;
     await page.waitForTimeout(1200); // let the newly appended events render before the next click
   }
