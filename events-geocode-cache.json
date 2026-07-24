@@ -1,0 +1,66 @@
+{
+  "dunedin|otago": {
+    "lat": -45.8740984,
+    "lng": 170.5035755
+  },
+  "lismore|nsw": {
+    "lat": -28.8077608,
+    "lng": 153.2791883
+  },
+  "linköping|östergötlands län": {
+    "lat": 58.4098135,
+    "lng": 15.6245252
+  },
+  "granada|an": {
+    "lat": 37.1734995,
+    "lng": -3.5995337
+  },
+  "madrid|md": {
+    "lat": 40.416782,
+    "lng": -3.703507
+  },
+  "bratislava|bratislavský kraj": {
+    "lat": 48.1516988,
+    "lng": 17.1093063
+  },
+  "bonn|nrw": {
+    "lat": 50.7352621,
+    "lng": 7.1024635
+  },
+  "vienna|wien": {
+    "lat": 48.2032864,
+    "lng": 16.3691936
+  },
+  "chichester|england": {
+    "lat": 50.8364862,
+    "lng": -0.7791721
+  },
+  "greater london|england": {
+    "lat": 51.5074456,
+    "lng": -0.1277653
+  },
+  "lyon|auvergne-rhône-alpes": {
+    "lat": 45.7578137,
+    "lng": 4.8320114
+  },
+  "firenze|toscana": {
+    "lat": 43.7697955,
+    "lng": 11.2556404
+  },
+  "milano|lombardia": {
+    "lat": 45.4641943,
+    "lng": 9.1896346
+  },
+  "norfolk|ne": {
+    "lat": 42.0283379,
+    "lng": -97.4169964
+  },
+  "newnan|ga": {
+    "lat": 33.3806716,
+    "lng": -84.7996573
+  },
+  "livermore|ca": {
+    "lat": 37.6820583,
+    "lng": -121.768053
+  }
+}
