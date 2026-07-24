@@ -62,5 +62,73 @@
   "livermore|ca": {
     "lat": 37.6820583,
     "lng": -121.768053
+  },
+  "st albans city|vt": {
+    "lat": 44.8107911,
+    "lng": -73.0833607
+  },
+  "orange park|fl": {
+    "lat": 30.1654707,
+    "lng": -81.7016346
+  },
+  "bloomfield|nj": {
+    "lat": 40.7934789,
+    "lng": -74.1979277
+  },
+  "clinton|in": {
+    "lat": 40.2992769,
+    "lng": -86.4692735
+  },
+  "bentonville|ar": {
+    "lat": 36.3728608,
+    "lng": -94.208787
+  },
+  "port richey|fl": {
+    "lat": 28.2716755,
+    "lng": -82.7195451
+  },
+  "pikesville|md": {
+    "lat": 39.385227,
+    "lng": -76.7080456
+  },
+  "pottstown|pa": {
+    "lat": 40.2452976,
+    "lng": -75.6496424
+  },
+  "round rock|tx": {
+    "lat": 30.5085915,
+    "lng": -97.6788056
+  },
+  "port orchard|wa": {
+    "lat": 47.5315625,
+    "lng": -122.6384056
+  },
+  "melbourne|vic": {
+    "lat": -37.8142454,
+    "lng": 144.9631732
+  },
+  "portland|or": {
+    "lat": 45.5202471,
+    "lng": -122.674194
+  },
+  "chandler|az": {
+    "lat": 33.3062031,
+    "lng": -111.841185
+  },
+  "sacramento|ca": {
+    "lat": 38.5810606,
+    "lng": -121.493895
+  },
+  "simi valley|ca": {
+    "lat": 34.2677404,
+    "lng": -118.7538071
+  },
+  "montréal|qc": {
+    "lat": 45.5031824,
+    "lng": -73.5698065
+  },
+  "victoria park|wa": {
+    "lat": -31.9723554,
+    "lng": 115.8954511
   }
 }
