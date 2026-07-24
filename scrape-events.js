@@ -159,6 +159,33 @@ function isUpcoming(e, todayStart) {
   return e.endDate.getTime() >= todayStart.getTime();
 }
 
+// The listing page only renders a small initial batch of events -- the rest
+// requires clicking "Load Newer" repeatedly, which appends more events to
+// the same page (confirmed live: the button text is exactly "Load Newer").
+// Without this, the scraped set is really just whatever handful of events
+// Play Network happened to list first (observed: essentially random
+// worldwide locations, not anchored to any particular region), so
+// location-based filtering downstream could easily come up empty even when
+// real nearby events exist -- they just never made it into events.json.
+async function loadMoreEvents(page, maxClicks) {
+  let clicks = 0;
+  for (let i = 0; i < maxClicks; i++) {
+    const clicked = await page.evaluate(() => {
+      const els = Array.from(document.querySelectorAll('button, a, div, span'));
+      const btn = els.find(el =>
+        el.textContent && el.textContent.trim() === 'Load Newer' &&
+        el.offsetParent !== null && el.children.length === 0
+      );
+      if (btn) { btn.click(); return true; }
+      return false;
+    });
+    if (!clicked) break;
+    clicks++;
+    await page.waitForTimeout(1200); // let the newly appended events render before the next click
+  }
+  console.log('Clicked "Load Newer" ' + clicks + ' time(s) to expand the event pool.');
+}
+
 (async () => {
   console.log('Launching browser...');
   const browser = await chromium.launch();
@@ -168,6 +195,7 @@ function isUpcoming(e, todayStart) {
   await page.goto(EVENTS_URL, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForTimeout(3000);
   await page.waitForSelector('a[href*="/events/"]', { timeout: 15000 }).catch(() => {});
+  await loadMoreEvents(page, 40);
 
   const { parsed, urlsByName, listDiagnostics } = await page.evaluate(({ rangePattern, singlePattern }) => {
     const dateRangeRe = new RegExp(rangePattern, 'i');
