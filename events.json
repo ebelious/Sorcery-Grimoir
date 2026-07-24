@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T20:52:43.303Z",
+  "updated": "2026-07-24T20:59:29.186Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -184,7 +184,7 @@
       "state": "FL",
       "lat": 30.1654707,
       "lng": -81.7016346,
-      "address": "45 Minutes",
+      "address": "",
       "description": "",
       "storeName": "Variant",
       "url": "https://play.sorcerytcg.com/events/2531765a-0dc4-4596-a3e9-baafeec06e9c"
