@@ -1,223 +1,309 @@
 {
-  "requestId": "1784759885099-0g7td73ask0a",
-  "url": "https://curiosa.io/decks/cmmknxomt00he04joiz942kdj",
-  "timestamp": "2026-07-22T22:39:01.612Z",
-  "deckName": "wet witch",
-  "author": "Jobacca",
+  "requestId": "1784937453512-jv91zwenmq",
+  "url": "https://curiosa.io/decks/cmq48ba9i01g604jvw3uh4uym",
+  "timestamp": "2026-07-24T23:57:08.341Z",
+  "deckName": "Crusades",
+  "author": "Duncan27",
   "cards": [
     {
-      "name": "Witch",
+      "name": "Savior",
       "qty": 1
     },
     {
-      "name": "Mariner's Curse",
-      "qty": 2
-    },
-    {
-      "name": "Flood",
-      "qty": 3
-    },
-    {
-      "name": "Abundance",
-      "qty": 2
-    },
-    {
-      "name": "The Great Drowning of Men",
-      "qty": 1
-    },
-    {
-      "name": "Aquamarine Core",
-      "qty": 1
-    },
-    {
-      "name": "Ferryman's Coin",
+      "name": "Mix Aer",
       "qty": 1
     },
     {
       "name": "Mix Aqua",
-      "qty": 2
-    },
-    {
-      "name": "Meat Hook",
       "qty": 1
     },
     {
-      "name": "Tide Naiads",
+      "name": "Mix Ignis",
+      "qty": 1
+    },
+    {
+      "name": "Mix Terra",
+      "qty": 1
+    },
+    {
+      "name": "Philosopher's Stone",
+      "qty": 1
+    },
+    {
+      "name": "Excalibur",
+      "qty": 1
+    },
+    {
+      "name": "Four Waters of Paradise",
+      "qty": 1
+    },
+    {
+      "name": "Pnakotic Manuscript",
+      "qty": 1
+    },
+    {
+      "name": "Toolbox",
       "qty": 2
     },
     {
-      "name": "Coy Nixie",
+      "name": "Wiccan Tools",
       "qty": 2
     },
     {
-      "name": "Fey Changeling",
+      "name": "Revered Revenant",
       "qty": 3
     },
     {
-      "name": "Guile Sirens",
-      "qty": 2
-    },
-    {
-      "name": "Nelly Longarms",
+      "name": "Highland Princess",
       "qty": 1
     },
     {
-      "name": "Orm Infestor",
-      "qty": 1
-    },
-    {
-      "name": "Lord of Unland",
-      "qty": 1
-    },
-    {
-      "name": "Selfsame Simulacrum",
-      "qty": 2
-    },
-    {
-      "name": "Anui Undine",
+      "name": "Land Surveyor",
       "qty": 3
     },
     {
-      "name": "Lacuna Entity",
-      "qty": 2
+      "name": "Pied Piper of Hameln",
+      "qty": 1
     },
     {
-      "name": "Unland Angler",
-      "qty": 2
+      "name": "Aino",
+      "qty": 1
     },
     {
-      "name": "Hearkening Kraken",
+      "name": "Apprentice Wizard",
+      "qty": 1
+    },
+    {
+      "name": "Merlin",
+      "qty": 1
+    },
+    {
+      "name": "Morgana le Fay",
+      "qty": 1
+    },
+    {
+      "name": "Sir Agravaine",
+      "qty": 1
+    },
+    {
+      "name": "Sir Pelleas",
+      "qty": 1
+    },
+    {
+      "name": "The Lady of the Lake",
+      "qty": 1
+    },
+    {
+      "name": "Vengeful Heir",
+      "qty": 1
+    },
+    {
+      "name": "Doctor Demetrius",
+      "qty": 1
+    },
+    {
+      "name": "Queen Guinevere",
+      "qty": 1
+    },
+    {
+      "name": "Sir Balin",
+      "qty": 1
+    },
+    {
+      "name": "Sir Bedivere",
+      "qty": 1
+    },
+    {
+      "name": "Sir Gaheris",
+      "qty": 1
+    },
+    {
+      "name": "Sir Gawain",
+      "qty": 1
+    },
+    {
+      "name": "Sir Ironside",
+      "qty": 1
+    },
+    {
+      "name": "Sir Lamorak",
+      "qty": 1
+    },
+    {
+      "name": "Sir Morien",
+      "qty": 1
+    },
+    {
+      "name": "Sir Priamus",
+      "qty": 1
+    },
+    {
+      "name": "Dame Britomart",
+      "qty": 1
+    },
+    {
+      "name": "Faith Incarnate",
+      "qty": 1
+    },
+    {
+      "name": "Sir Galahad",
+      "qty": 1
+    },
+    {
+      "name": "Sir Tristan",
+      "qty": 1
+    },
+    {
+      "name": "Sir Lancelot",
+      "qty": 1
+    },
+    {
+      "name": "Sir Mordred",
+      "qty": 1
+    },
+    {
+      "name": "King of the Realm",
+      "qty": 1
+    },
+    {
+      "name": "Dodge Roll",
+      "qty": 1
+    },
+    {
+      "name": "Browse",
+      "qty": 1
+    },
+    {
+      "name": "Pendragon Legacy",
+      "qty": 1
+    },
+    {
+      "name": "Backstab",
+      "qty": 1
+    },
+    {
+      "name": "Blink",
       "qty": 3
-    },
-    {
-      "name": "Shoggoth",
-      "qty": 1
-    },
-    {
-      "name": "Great Old One",
-      "qty": 1
-    },
-    {
-      "name": "Gift of the Frog",
-      "qty": 4
-    },
-    {
-      "name": "Pollimorph",
-      "qty": 2
-    },
-    {
-      "name": "Replication",
-      "qty": 2
     },
     {
       "name": "Return to Nature",
       "qty": 3
     },
     {
-      "name": "Wave of Eviction",
-      "qty": 2
-    },
-    {
-      "name": "Drown",
-      "qty": 2
-    },
-    {
-      "name": "Font of Life",
+      "name": "Riptide",
       "qty": 1
     },
     {
-      "name": "Overflow",
-      "qty": 3
+      "name": "Blaze of Glory",
+      "qty": 1
     },
     {
-      "name": "Abyssal Assault",
-      "qty": 3
+      "name": "King's Council",
+      "qty": 2
     },
     {
       "name": "Mesmerism",
       "qty": 1
     },
     {
-      "name": "Stormy Seas",
+      "name": "Aqueduct",
+      "qty": 3
+    },
+    {
+      "name": "Caerleon-Upon-Usk",
       "qty": 1
     },
     {
-      "name": "The Flood",
+      "name": "Camelot",
       "qty": 1
     },
     {
-      "name": "Wrath of the Sea",
+      "name": "Ersatz Platz",
       "qty": 2
     },
     {
-      "name": "Babbling Brook",
-      "qty": 3
+      "name": "Fields of Camlann",
+      "qty": 1
     },
     {
-      "name": "Blessed Well",
-      "qty": 4
-    },
-    {
-      "name": "Bog",
+      "name": "Lighthouse",
       "qty": 2
     },
     {
-      "name": "Bower of Bliss",
+      "name": "Oasis",
+      "qty": 3
+    },
+    {
+      "name": "Observatory",
       "qty": 1
     },
     {
-      "name": "Croaking Swamp",
-      "qty": 4
+      "name": "Primordial Spring",
+      "qty": 1
     },
     {
-      "name": "Deep Sea",
+      "name": "Pristine Paradise",
+      "qty": 1
+    },
+    {
+      "name": "Ruins",
       "qty": 3
     },
     {
-      "name": "Floodplain",
+      "name": "Steppe",
       "qty": 3
     },
     {
-      "name": "Island Leviathan",
+      "name": "The Empyrean",
+      "qty": 1
+    },
+    {
+      "name": "Tintagel",
+      "qty": 1
+    },
+    {
+      "name": "Tournament Grounds",
       "qty": 2
     },
     {
-      "name": "Kelp Cavern",
+      "name": "Valley of Delight",
       "qty": 2
     },
     {
-      "name": "Maelström",
-      "qty": 1
-    },
-    {
-      "name": "Pond",
-      "qty": 3
-    },
-    {
-      "name": "Sinister Pond",
-      "qty": 1
-    },
-    {
-      "name": "Stinging Kelp",
-      "qty": 4
-    },
-    {
-      "name": "Tadpole Pool",
-      "qty": 1
-    },
-    {
-      "name": "Thin Ice",
-      "qty": 1
-    },
-    {
-      "name": "Troll Bridge",
-      "qty": 3
-    },
-    {
-      "name": "Undertow",
-      "qty": 3
+      "name": "Windmill",
+      "qty": 2
     }
   ],
-  "collection": [],
-  "maybeboard": []
+  "collection": [
+    {
+      "name": "Tournament Grounds",
+      "qty": 1
+    },
+    {
+      "name": "Zap!",
+      "qty": 1
+    },
+    {
+      "name": "Disenchant",
+      "qty": 1
+    },
+    {
+      "name": "Gift of the Serpent",
+      "qty": 1
+    },
+    {
+      "name": "Boil",
+      "qty": 1
+    }
+  ],
+  "maybeboard": [
+    {
+      "name": "Pied Piper of Hameln",
+      "qty": 1
+    },
+    {
+      "name": "Sow the Earth",
+      "qty": 1
+    }
+  ]
 }
