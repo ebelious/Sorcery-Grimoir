@@ -93,7 +93,7 @@ const SINGLE_DATE_RE = new RegExp('^([A-Za-z]{2,4}\\.?\\s+)?(' + MONTH + ')\\w*\
 const TIME_RE = /^\d{1,2}:\d{2}\s*(AM|PM)\b/i;
 const PLAYERS_RE = /^\d+\s+Players?$/i;
 const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
-const ADDRESS_RE = /^\d{1,6}\s+\S+\s+\S+/; // street number followed by a multi-word street name -- excludes single-word false positives like "45 Minutes" (duration) or "32 Capacity" that also start with a number
+const ADDRESS_RE = /\d{1,6}\s+\S+\s+\S+/; // a street number followed by a multi-word street name, anywhere in the line (not anchored to the start, since some venues prefix the line with "Suite X, ") -- still excludes single-word false positives like "45 Minutes" (duration) or "32 Capacity" since those only have one word after the number
 const NOT_ADDRESS_RE = /\b(minutes?|mins?|hours?|hrs?|capacity|players?)\b/i; // extra safety net against the same class of false positive
 
 // Some venue detail pages show a short address subtitle followed by the
@@ -335,7 +335,7 @@ async function loadMoreEvents(page, maxClicks) {
         const detailLines = await page.evaluate(() =>
           document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
         );
-        const addrLine = detailLines.find(l => ADDRESS_RE.test(l) && !NOT_ADDRESS_RE.test(l));
+        const addrLine = detailLines.find(l => ADDRESS_RE.test(l) && !NOT_ADDRESS_RE.test(l) && !TIME_RE.test(l));
         if (addrLine) address = cleanupAddress(addrLine);
         const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
         if (durLine) duration = durLine;
