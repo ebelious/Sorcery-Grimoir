@@ -167,9 +167,15 @@ function isUpcoming(e, todayStart) {
 // worldwide locations, not anchored to any particular region), so
 // location-based filtering downstream could easily come up empty even when
 // real nearby events exist -- they just never made it into events.json.
+//
+// The button isn't present in the DOM until scrolled near the bottom (a
+// live diagnostic run showed 0 clicks without this -- the button simply
+// didn't exist yet), so each iteration scrolls to the bottom first.
 async function loadMoreEvents(page, maxClicks) {
   let clicks = 0;
   for (let i = 0; i < maxClicks; i++) {
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(500); // give the lazy-mounted button a moment to appear
     const clicked = await page.evaluate(() => {
       const els = Array.from(document.querySelectorAll('button, a, div, span'));
       const btn = els.find(el =>
