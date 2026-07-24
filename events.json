@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T20:59:29.186Z",
+  "updated": "2026-07-24T21:13:42.522Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -65,7 +65,7 @@
       "state": "MD",
       "lat": 40.416782,
       "lng": -3.703507,
-      "address": "36 Calle de Blasco de Garay Calle Blasco de Garay, 36, Local Padis Madrid MD 28015",
+      "address": "36, Local Padis Madrid MD 28015",
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d704dbee-d42a-46bf-a680-a82f8d305c04"
@@ -154,6 +154,23 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2a912c0f-2bc6-45ba-b086-181327fdab9c"
+    },
+    {
+      "name": "Casual Meetup",
+      "date": "Jul 24, 2026 - Jul 25, 2026",
+      "time": "10:30 PM UTC",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "45 Minutes",
+      "location": "Charlotte, NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "lat": 35.2272086,
+      "lng": -80.8430827,
+      "address": "227 Southside Drive Charlotte NC 28217",
+      "description": "",
+      "storeName": "Cosmic Hearth Games",
+      "url": "https://play.sorcerytcg.com/events/14623513-ba19-4574-9078-42e0a9f677de"
     },
     {
       "name": "Friday Night Constructed @ Guardian Cards & Comics",
@@ -320,7 +337,7 @@
       "state": "PA",
       "lat": 40.2452976,
       "lng": -75.6496424,
-      "address": "214 East High Street 214 E High St Pottstown PA 19464",
+      "address": "214 E High St Pottstown PA 19464",
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0aeb2442-1680-4204-8048-ed8fb830cee7"
@@ -460,23 +477,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2a7c2f29-d5b1-4d07-987b-9055edb9a724"
-    },
-    {
-      "name": "(7/24) PGS Weekly Constructed 6:45PM",
-      "date": "Sat. Jul 25, 2026",
-      "time": "1:45 AM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "922 North Killingsworth Street Suite 1A Portland OR 97217",
-      "description": "",
-      "storeName": "The Portland Game Store",
-      "url": "https://play.sorcerytcg.com/events/dc61365b-7e0c-4f1f-ac4e-526b308e8786"
     }
   ]
 }
