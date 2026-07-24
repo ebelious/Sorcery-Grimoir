@@ -95,6 +95,25 @@ const PLAYERS_RE = /^\d+\s+Players?$/i;
 const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
 const ADDRESS_RE = /^\d{1,6}\s+\S+\s+\S+/; // street number followed by a multi-word street name -- excludes single-word false positives like "45 Minutes" (duration) or "32 Capacity" that also start with a number
 const NOT_ADDRESS_RE = /\b(minutes?|mins?|hours?|hrs?|capacity|players?)\b/i; // extra safety net against the same class of false positive
+
+// Some venue detail pages show a short address subtitle followed by the
+// full address right after it, and since our line detection just grabs
+// whichever line matches ADDRESS_RE first, the two can end up concatenated
+// into one garbled string with everything repeated (confirmed live:
+// "suite 7, 2177, Kingsley Ave 2177 Kingsley Ave #7, suite 7 Orange Park FL
+// 32073"). If the street number shows up a second time later in the
+// string, treat everything from that second occurrence onward as the real,
+// more complete address and drop the duplicated prefix.
+function cleanupAddress(addr) {
+  if (!addr) return addr;
+  const numMatch = addr.match(/\b(\d{2,6})\b/);
+  if (!numMatch) return addr;
+  const num = numMatch[1];
+  const firstIdx = addr.indexOf(num);
+  const secondIdx = addr.indexOf(num, firstIdx + num.length);
+  if (secondIdx > 0) return addr.slice(secondIdx).trim();
+  return addr;
+}
 const STATUS_RE = /^(Complete|Completed|Upcoming|Cancelled|Canceled|In Progress|Live)$/i;
 // Anything that isn't strictly in the future -- already finished, cancelled,
 // or actively happening right now -- gets excluded from "upcoming".
@@ -317,7 +336,7 @@ async function loadMoreEvents(page, maxClicks) {
           document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
         );
         const addrLine = detailLines.find(l => ADDRESS_RE.test(l) && !NOT_ADDRESS_RE.test(l));
-        if (addrLine) address = addrLine;
+        if (addrLine) address = cleanupAddress(addrLine);
         const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
         if (durLine) duration = durLine;
 
