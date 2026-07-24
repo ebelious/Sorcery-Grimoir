@@ -2,8 +2,12 @@ name: Scrape Sorcery News
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # runs every 6 hours
+    - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
   workflow_dispatch:          # allows manual run from GitHub Actions tab
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false  # queue instead of overlapping -- a run already in progress finishes before the next trigger starts
 
 jobs:
   scrape:
@@ -24,10 +28,13 @@ jobs:
           npm install playwright
           npx playwright install chromium --with-deps
 
-      - name: Run scraper
+      - name: Run scraper (twice, 30s apart)
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: node scrape-news.js
+        run: |
+          node scrape-news.js
+          sleep 30
+          node scrape-news.js
 
       - name: Commit news.json if changed
         run: |
