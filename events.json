@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T19:44:33.487Z",
+  "updated": "2026-07-24T19:56:48.138Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -16,21 +16,6 @@
       "description": "",
       "storeName": "Card Merchant Dunedin",
       "url": "https://play.sorcerytcg.com/events/b4f4122b-6b0f-411b-bda3-f0e29c067ef6"
-    },
-    {
-      "name": "Friday Night Sorcery",
-      "date": "Fri. Jul 24, 2026",
-      "time": "8:00 AM UTC",
-      "type": "Constructed Tournament",
-      "location": "Lismore, NSW",
-      "city": "Lismore",
-      "state": "NSW",
-      "lat": -28.8077608,
-      "lng": 153.2791883,
-      "address": "60 Minutes",
-      "description": "",
-      "storeName": "Unplugged Games",
-      "url": "https://play.sorcerytcg.com/events/97bb537a-06fa-45e2-a5a8-6da44ba4e15c"
     },
     {
       "name": "Lyktan's Laid back Lounge at Närcon",
@@ -78,21 +63,6 @@
       "url": "https://play.sorcerytcg.com/events/d704dbee-d42a-46bf-a680-a82f8d305c04"
     },
     {
-      "name": "Pikazard Constructed",
-      "date": "Fri. Jul 24, 2026",
-      "time": "3:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Bratislava, Bratislavský kraj",
-      "city": "Bratislava",
-      "state": "Bratislavský kraj",
-      "lat": 48.1516988,
-      "lng": 17.1093063,
-      "address": "14 Gessayova Bratislava Bratislavský kraj 85103",
-      "description": "",
-      "storeName": "Pikazard.eu",
-      "url": "https://play.sorcerytcg.com/events/4c8e2c4e-19a1-4733-9af8-5985a6aaf92a"
-    },
-    {
       "name": "Geek Haven - Casual Meetup",
       "date": "Fri. Jul 24, 2026",
       "time": "3:30 PM UTC",
@@ -106,51 +76,6 @@
       "description": "",
       "storeName": "Geek Haven",
       "url": "https://play.sorcerytcg.com/events/09f0dc8e-8f14-4d96-a2ce-869e6edd0b36"
-    },
-    {
-      "name": "Spielraum Weekly",
-      "date": "Fri. Jul 24, 2026",
-      "time": "3:30 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Vienna, Wien",
-      "city": "Vienna",
-      "state": "Wien",
-      "lat": 48.2032864,
-      "lng": 16.3691936,
-      "address": "17 Otto-Bauer-Gasse 17 Vienna Wien 1060",
-      "description": "",
-      "storeName": "SpielRaum GmbH",
-      "url": "https://play.sorcerytcg.com/events/6fc7d232-1d3f-44ee-921a-851af52e348b"
-    },
-    {
-      "name": "TGR Casual Meetup",
-      "date": "Fri. Jul 24, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Chichester, England",
-      "city": "Chichester",
-      "state": "England",
-      "lat": 50.8364862,
-      "lng": -0.7791721,
-      "address": "",
-      "description": "",
-      "storeName": "The Game Room",
-      "url": "https://play.sorcerytcg.com/events/57ba1ff5-e5ef-4bf1-8409-8fdc383817d3"
-    },
-    {
-      "name": "Sorcery Weekly",
-      "date": "Fri. Jul 24, 2026",
-      "time": "5:29 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Greater London, England",
-      "city": "Greater London",
-      "state": "England",
-      "lat": 51.5074456,
-      "lng": -0.1277653,
-      "address": "45 Minutes",
-      "description": "",
-      "storeName": "Spellbound Games",
-      "url": "https://play.sorcerytcg.com/events/a2a8421c-6d92-4795-b051-0c479229d03d"
     },
     {
       "name": "Weekly du Soir",
