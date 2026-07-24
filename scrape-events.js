@@ -95,7 +95,9 @@ const PLAYERS_RE = /^\d+\s+Players?$/i;
 const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
 const ADDRESS_RE = /^\d{1,6}\s+\S+/; // starts with a street number
 const STATUS_RE = /^(Complete|Completed|Upcoming|Cancelled|Canceled|In Progress|Live)$/i;
-const COMPLETED_STATUS_RE = /^(Complete|Completed|Cancelled|Canceled)$/i;
+// Anything that isn't strictly in the future -- already finished, cancelled,
+// or actively happening right now -- gets excluded from "upcoming".
+const NOT_UPCOMING_STATUS_RE = /^(Complete|Completed|Cancelled|Canceled|In Progress|Live)$/i;
 
 function parseDate(str) {
   const d = new Date(str.trim());
@@ -153,7 +155,7 @@ function extractFromListing(lines, i) {
 // occurrence rather than the series -- use the range's end date instead.
 function isUpcoming(e, todayStart) {
   if (!e.isRange && e.status && STATUS_RE.test(e.status)) {
-    return !COMPLETED_STATUS_RE.test(e.status);
+    return !NOT_UPCOMING_STATUS_RE.test(e.status);
   }
   if (!e.endDate) return true; // can't determine -- fail open
   return e.endDate.getTime() >= todayStart.getTime();
