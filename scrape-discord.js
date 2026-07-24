@@ -23,6 +23,7 @@ const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '1215448061850034226';
 const GUILD_ID = process.env.DISCORD_GUILD_ID || '278704728999854080';
 const CHANNEL_NAME_OVERRIDE = process.env.DISCORD_CHANNEL_NAME || '';
 const LIMIT = 10;
+const STATE_FILE = 'discord-state.json'; // tracks the last-seen message id, so we only notify on genuinely new messages
 
 // Some messages mention a channel that lives in a *different* Discord server
 // than the one this scraper pulls from (e.g. a "#gen-con" channel in a
@@ -168,4 +169,46 @@ function findAttachmentImages(attachments) {
 
   fs.writeFileSync('discord.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + messages.length + ' messages to discord.json');
+
+  // Notify subscribers when the newest message changes since the last run.
+  // Same direct firebase-admin pattern as scrape-youtube.js / scrape-news.js.
+  // Skip notifying on the very first run (no prior state to compare
+  // against), same reasoning as those scrapers.
+  const newest = messages[0];
+  let previousId = null;
+  try {
+    previousId = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')).lastMessageId || null;
+  } catch (e) {
+    console.log('No existing ' + STATE_FILE + ' -- first run, will not notify');
+  }
+
+  fs.writeFileSync(STATE_FILE, JSON.stringify({
+    lastMessageId: newest.id,
+    updated: new Date().toISOString()
+  }, null, 2));
+
+  if (previousId && newest.id !== previousId) {
+    try {
+      const admin = require('firebase-admin');
+      if (!admin.apps.length) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+      }
+      const body = newest.content ? newest.content.slice(0, 140) : 'New Discord update';
+      await admin.messaging().send({
+        topic: 'discord',
+        notification: {
+          title: 'Discord: ' + (newest.author || 'New message'),
+          body
+        },
+        android: { priority: 'high' },
+        webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: newest.url } }
+      });
+      console.log('Sent FCM notification for new Discord message: ' + newest.id);
+    } catch (e) {
+      console.log('FCM notification failed (non-fatal): ' + e.message);
+    }
+  } else {
+    console.log('No new message since last run.');
+  }
 })();
