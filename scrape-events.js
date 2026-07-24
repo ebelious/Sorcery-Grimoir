@@ -93,7 +93,8 @@ const SINGLE_DATE_RE = new RegExp('^([A-Za-z]{2,4}\\.?\\s+)?(' + MONTH + ')\\w*\
 const TIME_RE = /^\d{1,2}:\d{2}\s*(AM|PM)\b/i;
 const PLAYERS_RE = /^\d+\s+Players?$/i;
 const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
-const ADDRESS_RE = /^\d{1,6}\s+\S+/; // starts with a street number
+const ADDRESS_RE = /^\d{1,6}\s+\S+\s+\S+/; // street number followed by a multi-word street name -- excludes single-word false positives like "45 Minutes" (duration) or "32 Capacity" that also start with a number
+const NOT_ADDRESS_RE = /\b(minutes?|mins?|hours?|hrs?|capacity|players?)\b/i; // extra safety net against the same class of false positive
 const STATUS_RE = /^(Complete|Completed|Upcoming|Cancelled|Canceled|In Progress|Live)$/i;
 // Anything that isn't strictly in the future -- already finished, cancelled,
 // or actively happening right now -- gets excluded from "upcoming".
@@ -315,7 +316,7 @@ async function loadMoreEvents(page, maxClicks) {
         const detailLines = await page.evaluate(() =>
           document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
         );
-        const addrLine = detailLines.find(l => ADDRESS_RE.test(l));
+        const addrLine = detailLines.find(l => ADDRESS_RE.test(l) && !NOT_ADDRESS_RE.test(l));
         if (addrLine) address = addrLine;
         const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
         if (durLine) duration = durLine;
