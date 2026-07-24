@@ -6,7 +6,14 @@
 // https://ebelious.github.io/Sorcery-Grimoir/events.json -- see
 // loadLocalEvents() in index.html. This scraper's job is just to keep that
 // file populated with events shaped to match what that UI reads:
-//   { name, date, time, type, location, city, state, address, description, url }
+//   { name, date, time, type, location, city, state, lat, lng, address, description, url }
+//
+// lat/lng are geocoded from city+state via Nominatim (OpenStreetMap, free,
+// no API key) and cached across runs in events-geocode-cache.json so the
+// same city isn't re-geocoded every scrape -- this is what lets the app do
+// real straight-line-distance ("N miles from me") filtering client-side
+// instead of the plain substring city/state text matching it fell back to
+// before this existed.
 //
 // APPROACH (v4): live diagnostics revealed each event card on the /events
 // LISTING page follows this exact 9-line repeating pattern:
@@ -51,6 +58,34 @@ const fs = require('fs');
 
 const EVENTS_URL = 'https://play.sorcerytcg.com/events?locationType=in-person&radius=25';
 const MAX_DETAIL_VISITS = 75; // cap detail-page visits (address lookup only) to keep runtime reasonable
+const GEOCODE_STATE_FILE = 'events-geocode-cache.json'; // persists city/state -> lat/lng across runs so we don't re-geocode the same places every 90 seconds
+
+// Nominatim (OpenStreetMap's free geocoder, no API key) enforces a hard
+// 1-request/second limit and requires an identifying User-Agent -- both
+// matter here since dozens of events can share a handful of cities, so we
+// geocode each unique city/state pair only once per run (and persist the
+// result across runs in GEOCODE_STATE_FILE, so a city already looked up
+// last week never needs a fresh request at all).
+const NOMINATIM_USER_AGENT = 'Sorcery-Grimoir-EventScraper/1.0 (https://github.com/ebelious/Sorcery-Grimoir)';
+async function geocode(city, state, cache) {
+  const key = (city + '|' + state).toLowerCase().trim();
+  if (cache[key] !== undefined) return cache[key]; // includes cached nulls (a previous failed lookup), so we don't retry those every run either
+  const q = [city, state].filter(Boolean).join(', ');
+  if (!q) { cache[key] = null; return null; }
+  try {
+    const res = await fetch(
+      'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(q) + '&format=json&limit=1',
+      { headers: { 'User-Agent': NOMINATIM_USER_AGENT } }
+    );
+    const results = res.ok ? await res.json() : [];
+    const hit = results && results[0];
+    cache[key] = hit ? { lat: parseFloat(hit.lat), lng: parseFloat(hit.lon) } : null;
+  } catch (e) {
+    cache[key] = null;
+  }
+  await new Promise(r => setTimeout(r, 1100)); // stay under Nominatim's 1 req/sec limit
+  return cache[key];
+}
 
 const MONTH = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
 const DATE_RANGE_RE = new RegExp('^(' + MONTH + ')\\w*\\.?\\s+\\d{1,2},\\s+\\d{4}\\s*-\\s*(' + MONTH + ')\\w*\\.?\\s+\\d{1,2},\\s+\\d{4}$', 'i');
@@ -196,6 +231,14 @@ function isUpcoming(e, todayStart) {
 
   console.log('Visiting up to ' + MAX_DETAIL_VISITS + ' detail pages for street addresses...');
 
+  let geocodeCache = {};
+  try {
+    geocodeCache = JSON.parse(fs.readFileSync(GEOCODE_STATE_FILE, 'utf8'));
+    console.log('Loaded ' + Object.keys(geocodeCache).length + ' cached city/state geocodes from ' + GEOCODE_STATE_FILE);
+  } catch (e) {
+    console.log('No existing ' + GEOCODE_STATE_FILE + ' -- geocoding all cities fresh');
+  }
+
   const events = [];
   let sampleLogged = false;
 
@@ -222,6 +265,8 @@ function isUpcoming(e, todayStart) {
       }
     }
 
+    const geo = await geocode(e.city, e.state, geocodeCache);
+
     events.push({
       name: e.name,
       date: e.dateDisplay,
@@ -230,12 +275,16 @@ function isUpcoming(e, todayStart) {
       location: e.location,
       city: e.city,
       state: e.state,
+      lat: geo ? geo.lat : null,
+      lng: geo ? geo.lng : null,
       address,
       description: '',
       storeName: e.storeName,
       url: e.url
     });
   }
+
+  fs.writeFileSync(GEOCODE_STATE_FILE, JSON.stringify(geocodeCache, null, 2));
 
   await browser.close();
 
