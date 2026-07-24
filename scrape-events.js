@@ -6,7 +6,7 @@
 // https://ebelious.github.io/Sorcery-Grimoir/events.json -- see
 // loadLocalEvents() in index.html. This scraper's job is just to keep that
 // file populated with events shaped to match what that UI reads:
-//   { name, date, time, type, location, city, state, lat, lng, address, description, url }
+//   { name, date, time, type, price, duration, location, city, state, lat, lng, address, description, url }
 //
 // lat/lng are geocoded from city+state via Nominatim (OpenStreetMap, free,
 // no API key) and cached across runs in events-geocode-cache.json so the
@@ -57,7 +57,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 const EVENTS_URL = 'https://play.sorcerytcg.com/events?locationType=in-person&radius=25';
-const MAX_DETAIL_VISITS = 75; // cap detail-page visits (address lookup only) to keep runtime reasonable
+const MAX_DETAIL_VISITS = 250; // cap detail-page visits (address/price/duration lookup) to keep runtime reasonable
 const GEOCODE_STATE_FILE = 'events-geocode-cache.json'; // persists city/state -> lat/lng across runs so we don't re-geocode the same places every 90 seconds
 
 // Nominatim (OpenStreetMap's free geocoder, no API key) enforces a hard
@@ -132,7 +132,7 @@ function extractFromListing(lines, i) {
   if (PLAYERS_RE.test(lines[j] || '')) j++; // skip player count if present
   const storeName = lines[j] || '';
   const type = lines[j + 1] || '';
-  // (lines[j+2] would be the price -- not needed for our schema)
+  const price = lines[j + 2] || '';
 
   return {
     name,
@@ -146,6 +146,7 @@ function extractFromListing(lines, i) {
     endDate,
     time,
     storeName,
+    price,
     type
   };
 }
@@ -305,6 +306,7 @@ async function loadMoreEvents(page, maxClicks) {
   for (let i = 0; i < upcoming.length; i++) {
     const e = upcoming[i];
     let address = '';
+    let duration = '';
 
     if (e.url && i < MAX_DETAIL_VISITS) {
       try {
@@ -315,6 +317,8 @@ async function loadMoreEvents(page, maxClicks) {
         );
         const addrLine = detailLines.find(l => ADDRESS_RE.test(l));
         if (addrLine) address = addrLine;
+        const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
+        if (durLine) duration = durLine;
 
         if (!sampleLogged) {
           console.log('Sample detail page lines (first event, for debugging):', JSON.stringify(detailLines.slice(0, 20), null, 2));
@@ -332,6 +336,8 @@ async function loadMoreEvents(page, maxClicks) {
       date: e.dateDisplay,
       time: e.time,
       type: e.type,
+      price: e.price,
+      duration,
       location: e.location,
       city: e.city,
       state: e.state,
