@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T19:25:56.405Z",
+  "updated": "2026-07-24T03:15:21.197Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -94,32 +94,6 @@
       "url": "https://play.sorcerytcg.com/events/ee54c07f-d310-457e-b47c-de300daf4725"
     },
     {
-      "name": "Sorcery Casual Learn to play",
-      "date": "Thu. Jul 23, 2026",
-      "time": "5:16 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Blackburn with Darwen, England",
-      "city": "Blackburn with Darwen",
-      "state": "England",
-      "address": "50 Church Street 50-54 Church Street Blackburn with Darwen England BB1 5AL",
-      "description": "",
-      "storeName": "Geek Retreat Blackburn",
-      "url": "https://play.sorcerytcg.com/events/ce15c59c-e2e6-40e1-8438-61140a55d2de"
-    },
-    {
-      "name": "Thistle Tavern Edinburgh",
-      "date": "Thu. Jul 23, 2026",
-      "time": "5:30 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Edinburgh, Scotland",
-      "city": "Edinburgh",
-      "state": "Scotland",
-      "address": "79 Shandwick Pl Edinburgh Scotland EH2 4SD",
-      "description": "",
-      "storeName": "Thistle Tavern",
-      "url": "https://play.sorcerytcg.com/events/ef79ce42-9ed1-4f58-bc0d-33da8d0009e9"
-    },
-    {
       "name": "Weekly Sorcering Tournament",
       "date": "Thu. Jul 23, 2026",
       "time": "5:30 PM UTC",
@@ -133,19 +107,6 @@
       "url": "https://play.sorcerytcg.com/events/ecc72fbe-cc8f-4798-8544-df8de7b2ab59"
     },
     {
-      "name": "Sorcery: The Contested Realm Standard",
-      "date": "Thu. Jul 23, 2026",
-      "time": "6:00 PM UTC",
-      "type": "Constructed Tournament",
-      "location": "Nottingham, Nottinghamshire",
-      "city": "Nottingham",
-      "state": "Nottinghamshire",
-      "address": "45 Minutes",
-      "description": "",
-      "storeName": "Underworld Games",
-      "url": "https://play.sorcerytcg.com/events/f19c59cf-a9f4-4499-af45-8b6cf6eb2594"
-    },
-    {
       "name": "Sorcery Constructed Vila Geek Serra",
       "date": "Thu. Jul 23, 2026",
       "time": "7:00 PM UTC",
@@ -157,19 +118,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/5fc9e904-f2fb-4c75-a4eb-0796cc0a1bfd"
-    },
-    {
-      "name": "Casual 230726",
-      "date": "Thu. Jul 23, 2026",
-      "time": "7:15 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Roma, RM - Roma",
-      "city": "Roma",
-      "state": "RM - Roma",
-      "address": "",
-      "description": "",
-      "storeName": "Il Covo del Nerd - Roma",
-      "url": "https://play.sorcerytcg.com/events/9386a1ef-a328-42d0-8ebc-75a3a2242b10"
     },
     {
       "name": "Sorcery Night at the Forge",
