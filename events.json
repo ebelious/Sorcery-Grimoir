@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T18:57:51.681Z",
+  "updated": "2026-07-24T19:31:42.709Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -181,21 +181,6 @@
       "description": "",
       "storeName": "Game",
       "url": "https://play.sorcerytcg.com/events/98678b31-4b05-49d0-8273-2aaf7dfe1f94"
-    },
-    {
-      "name": "Open Night Joker",
-      "date": "Fri. Jul 24, 2026",
-      "time": "7:15 PM UTC",
-      "type": "Casual Meetup",
-      "location": "Milano, Lombardia",
-      "city": "Milano",
-      "state": "Lombardia",
-      "lat": 45.4641943,
-      "lng": 9.1896346,
-      "address": "21 Via Giuseppe Gianella Milano Lombardia 20152",
-      "description": "",
-      "storeName": "Joker-comics&games",
-      "url": "https://play.sorcerytcg.com/events/ebc07077-c180-40f0-a46a-55275249bdc1"
     },
     {
       "name": "Friday Afternnon Meet Up",
