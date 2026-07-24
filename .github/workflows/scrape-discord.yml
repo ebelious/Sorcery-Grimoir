@@ -1,23 +1,30 @@
 name: Scrape Discord Updates
- 
+
 on:
   schedule:
     - cron: '*/1 * * * *'  # runs every 1 minute (scraper itself runs twice per tick, 30s apart)
   workflow_dispatch:          # allows manual run from GitHub Actions tab
- 
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false  # queue instead of overlapping -- a run already in progress finishes before the next trigger starts
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
- 
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
- 
+
+      - name: Install firebase-admin
+        run: npm install firebase-admin
+
       - name: Run scraper (twice, 30s apart)
         run: |
           node scrape-discord.js
@@ -25,12 +32,13 @@ jobs:
           node scrape-discord.js
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
- 
-      - name: Commit discord.json if changed
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Commit discord.json / discord-state.json if changed
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add discord.json
+          git add discord.json discord-state.json
           git diff --staged --quiet || git commit -m "chore: update discord.json [skip ci]"
           for i in 1 2 3 4 5; do
             git push && break
@@ -38,4 +46,3 @@ jobs:
             git pull --rebase origin main
             sleep 3
           done
- 
