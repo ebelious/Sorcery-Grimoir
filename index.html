@@ -775,11 +775,28 @@ var MENU_S={
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
   Media:['YouTube','News','Discord'],
-  'Play Network':['Rewards'],
+  'Play Network':['Events','Rewards'],
   Artists:['All Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
 var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
+// ── Events location fields (persistent Country/State/City search) ─────────
+var EV_COUNTRIES=[
+  ['us','United States'],['ca','Canada'],['au','Australia'],['nz','New Zealand'],['gb','United Kingdom'],
+  ['ie','Ireland'],['de','Germany'],['fr','France'],['nl','Netherlands'],['be','Belgium'],['es','Spain'],
+  ['it','Italy'],['pt','Portugal'],['ch','Switzerland'],['at','Austria'],['se','Sweden'],['no','Norway'],
+  ['dk','Denmark'],['fi','Finland'],['pl','Poland'],['cz','Czechia'],['sk','Slovakia'],['hu','Hungary'],
+  ['ro','Romania'],['gr','Greece'],['is','Iceland'],['lu','Luxembourg'],['sg','Singapore'],['jp','Japan'],
+  ['kr','South Korea'],['cn','China'],['hk','Hong Kong'],['tw','Taiwan'],['ph','Philippines'],['my','Malaysia'],
+  ['th','Thailand'],['in','India'],['id','Indonesia'],['vn','Vietnam'],['za','South Africa'],['br','Brazil'],
+  ['mx','Mexico'],['ar','Argentina'],['cl','Chile'],['co','Colombia'],['il','Israel'],['ae','United Arab Emirates'],
+  ['other','Other'],
+];
+var EV_STATES_US=['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+var EV_STATES_CA=['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'];
+var EV_STATES_AU=['Australian Capital Territory','New South Wales','Northern Territory','Queensland','South Australia','Tasmania','Victoria','Western Australia'];
+var EV_STATES_BY_COUNTRY={us:EV_STATES_US,ca:EV_STATES_CA,au:EV_STATES_AU};
+
 var YT_CHS=[
   {id:'all',  n:'All Channels',         url:'', cid:''},
   {id:'aotr', n:'Archives of the Realm', url:'https://www.youtube.com/channel/UCjN3qLn5iH2UenbQMNquejQ/videos', cid:'UCjN3qLn5iH2UenbQMNquejQ'},
@@ -981,7 +998,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -999,7 +1016,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evSaved=ld('sg-evsaved',[])||[];G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -5521,48 +5538,68 @@ function loadYTVideos(){
 // ── NEWS ──────────────────────────────────────────────────────────────────────
 var _evACTimer=null;
 var _evACSeq=0;
-function evCityAutocomplete(val){
-  clearTimeout(_evACTimer);
-  if(!val||val.length<2){G.evAcResults=[];render();return;}
-  var _mySeq=++_evACSeq;
-  _evACTimer=setTimeout(function(){
-    fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(val)+'&format=json&limit=6&addressdetails=1&accept-language=en')
-      .then(function(r){return r.json();})
-      .then(function(results){
-        if(_mySeq!==_evACSeq)return; // a newer search or a selection happened -- ignore this stale response
-        if(!results||!results.length){G.evAcResults=[];render();return;}
-        G.evAcResults=results.map(function(r){
-          var addr=r.address||{};
-          var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||r.display_name.split(',')[0];
-          var state=addr.state||addr.state_district||'';
-          var country=addr.country_code||'';
-          var label=city+(state?', '+state:'')+(country&&country!=='us'?' ('+country.toUpperCase()+')':'');
-          return {label:label,city:city,state:state};
-        });
-        render();
-      })
-      .catch(function(){if(_mySeq===_evACSeq){G.evAcResults=[];}});
-  },250);
+// Persists the Country/State/City fields, geocodes them (structured
+// Nominatim query -- more reliable than a single free-text string) and
+// caches the resulting lat/lng in cfg too, so future app loads don't need
+// to re-geocode at all unless the location is changed again.
+function evOpenLocPopup(){
+  // Edit a draft copy, not G.cfg directly -- so opening the popup and
+  // backing out (Cancel) never mutates the saved location.
+  G.evLocDraftCountry=G.cfg.evCountry||'';
+  G.evLocDraftState=G.cfg.evState||'';
+  G.evLocDraftCity=G.cfg.evCityCfg||'';
+  G.evLocPopup=true;render();
 }
-
-function evSelectCity(el){
-  var label=typeof el==='string'?el:(el.dataset?el.dataset.label:el);
-  if(!label)return;
-  _evACSeq++; // invalidate any in-flight autocomplete fetch so it can't reopen the dropdown
-  G.evInputFocused=false;
-  G.evCityInput=label;G.evCity=label;G.evAcResults=[];
-  var inp=document.getElementById('ev-city-inp');
-  if(inp)inp.value=label;
-  var box=document.getElementById('ev-ac-box');
-  if(box)box.innerHTML='';
-  // Save to recent locations
-  try{
-    var recent=JSON.parse(localStorage.getItem('sg-ev-recent')||'[]');
-    recent=recent.filter(function(r){return r!==label;});
-    recent.unshift(label);
-    localStorage.setItem('sg-ev-recent',JSON.stringify(recent.slice(0,8)));
-  }catch(e){}
-  loadLocalEvents(label);
+function evCloseLocPopup(){G.evLocPopup=false;render();}
+function evSaveLocationPopup(){
+  G.cfg.evCountry=G.evLocDraftCountry||'';
+  G.cfg.evState=G.evLocDraftState||'';
+  G.cfg.evCityCfg=G.evLocDraftCity||'';
+  G.evLocPopup=false;
+  sv('sg-cfg',G.cfg);
+  var city=(G.cfg.evCityCfg||'').trim();
+  var state=(G.cfg.evState||'').trim();
+  var country=(G.cfg.evCountry||'').trim();
+  if(!city&&!state&&!country){
+    G.cfg.evLat=null;G.cfg.evLng=null;sv('sg-cfg',G.cfg);
+    loadLocalEvents();
+    return;
+  }
+  G.evLoading=true;G.evLoaded=false;G.evErr=null;render();
+  var qs='format=json&limit=1';
+  if(city)qs+='&city='+encodeURIComponent(city);
+  if(state)qs+='&state='+encodeURIComponent(state);
+  if(country&&country!=='other')qs+='&country='+encodeURIComponent(country);
+  fetch('https://nominatim.openstreetmap.org/search?'+qs)
+    .then(function(r){return r.json();})
+    .then(function(results){
+      var hit=results&&results[0];
+      G.cfg.evLat=hit?parseFloat(hit.lat):null;
+      G.cfg.evLng=hit?parseFloat(hit.lon):null;
+      sv('sg-cfg',G.cfg);
+      loadLocalEvents();
+    })
+    .catch(function(){loadLocalEvents();});
+}
+// Clears the saved location entirely (the "X" next to the saved-location chip).
+function evClearSavedLocation(){
+  G.cfg.evCountry='';G.cfg.evState='';G.cfg.evCityCfg='';G.cfg.evLat=null;G.cfg.evLng=null;
+  sv('sg-cfg',G.cfg);
+  loadLocalEvents();
+}
+// Builds the "City, State (Country)" display label from the persisted fields.
+function _evLocationLabel(){
+  var city=G.cfg.evCityCfg||'';
+  var state=G.cfg.evState||'';
+  var country=G.cfg.evCountry||'';
+  var countryName='';
+  for(var i=0;i<EV_COUNTRIES.length;i++){if(EV_COUNTRIES[i][0]===country){countryName=EV_COUNTRIES[i][1];break;}}
+  var parts=[];
+  if(city)parts.push(city);
+  if(state)parts.push(state);
+  var label=parts.join(', ');
+  if(country&&country!=='us'&&country!=='other'&&countryName)label+=(label?' ':'')+'('+countryName+')';
+  return label;
 }
 
 function showEvPopup(ei){
@@ -5642,58 +5679,70 @@ function _evIsUpcoming(e){
   if(isNaN(d.getTime()))return true;
   return d.getTime()>=todayStart.getTime();
 }
-function loadLocalEvents(city){
+// Distance in miles between two lat/lng points (haversine formula).
+function _milesBetween(lat1,lng1,lat2,lng2){
+  var R=3958.8; // Earth radius in miles
+  var dLat=(lat2-lat1)*Math.PI/180;
+  var dLng=(lng2-lng1)*Math.PI/180;
+  var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+var EV_SEARCH_RADIUS_MI=25;
+
+function loadLocalEvents(){
   if(G.evLoading)return;
   G.evLoading=true;G.evLoaded=false;G.evErr=null;G.evItems=null;render();
-  var loc=(city||G.evCity||'').trim();
-
-  if(loc){
-    // A real search (city typed, autocomplete pick, or "Use My Location") --
-    // try a live fetch genuinely anchored to that city/state first, since
-    // the static events.json is just one fixed shared snapshot and can't
-    // be centered on an arbitrary searched location.
-    var parts=loc.split(',');
-    var qCity=parts[0]?parts[0].trim():'';
-    var qState=parts[1]?parts[1].trim():'';
-    var qs='city='+encodeURIComponent(qCity)+(qState?'&state='+encodeURIComponent(qState):'');
-    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/fetch-events?'+qs)
-      .then(function(r){if(!r.ok)throw new Error('live fetch failed');return r.json();})
-      .then(function(d){
-        var evs=(d.events||[]).filter(_evIsUpcoming);
-        if(!evs.length)throw new Error('no live results');
-        G.evLoading=false;G.evLoaded=true;G.evItems=evs;render();
-      })
-      .catch(function(e){
-        console.warn('Live event search failed, falling back to cached data:',e);
-        _loadEventsFromStaticFile(loc);
-      });
-  } else {
-    _loadEventsFromStaticFile('');
-  }
+  G.evLat=G.cfg.evLat;G.evLng=G.cfg.evLng;
+  var mySeq=++G._evLoadSeq;
+  // Safety net: fetch() has no built-in timeout, so if a request ever
+  // genuinely hangs (flaky network, CDN hiccup, etc.) the promise just
+  // never settles -- without this, G.evLoading gets stuck true forever,
+  // and since this function bails out early while it's true, every
+  // subsequent Search tap silently does nothing until the page is reloaded.
+  setTimeout(function(){
+    if(mySeq===G._evLoadSeq&&G.evLoading){
+      G.evLoading=false;G.evLoaded=true;
+      G.evErr='Search timed out. Please try again.';
+      render();
+    }
+  },20000);
+  _loadEventsFromStaticFile(_evLocationLabel());
 }
 
-// Falls back to the shared, periodically-scraped events.json (and from
-// there to the AI search) when the live per-city fetch isn't available or
-// didn't find anything.
+// Loads the shared, periodically-scraped events.json and filters it to
+// events within EV_SEARCH_RADIUS_MI of the searched location. Uses real
+// straight-line distance (each event is geocoded at scrape time) when we
+// have coordinates for both the search location and the event; falls back
+// to substring city/state text matching for events that failed to geocode,
+// and to the AI search if the static file itself is unavailable.
 function _loadEventsFromStaticFile(loc){
   var lowerLoc=loc.toLowerCase();
+  var haveSearchCoords=G.evLat!=null&&G.evLng!=null;
   fetch('https://ebelious.github.io/Sorcery-Grimoir/events.json?t='+Date.now())
     .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
     .then(function(d){
       var all=(d.events||[]).filter(_evIsUpcoming);
       if(!all.length)throw new Error('empty');
-      // Filter by city/state if provided
-      var filtered=lowerLoc?all.filter(function(e){
-        var l=(e.location||e.address||'').toLowerCase();
-        var n=(e.name||'').toLowerCase();
-        return lowerLoc.split(',').some(function(part){
-          var p=part.trim();
-          return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
+      var filtered;
+      if(lowerLoc){
+        filtered=all.filter(function(e){
+          if(haveSearchCoords&&e.lat!=null&&e.lng!=null){
+            return _milesBetween(G.evLat,G.evLng,e.lat,e.lng)<=EV_SEARCH_RADIUS_MI;
+          }
+          // No coordinates for this event (geocoding failed at scrape time) -- fall back to text matching just for this one
+          var l=(e.location||e.address||'').toLowerCase();
+          var n=(e.name||'').toLowerCase();
+          return lowerLoc.split(',').some(function(part){
+            var p=part.trim();
+            return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
+          });
         });
-      }):all;
+      } else {
+        filtered=all;
+      }
       G.evLoading=false;G.evLoaded=true;
       G.evItems=filtered.length?filtered:all.slice(0,20);
-      if(!filtered.length&&lowerLoc)G.evErr='No events found near '+loc+'. Showing all upcoming events.';
+      if(!filtered.length&&lowerLoc)G.evErr='No events found within '+EV_SEARCH_RADIUS_MI+' miles of '+loc+'. Showing all upcoming events.';
       render();
     })
     .catch(function(){
@@ -5724,30 +5773,50 @@ function _loadEventsViaAPI(city){
 
 
 function getLocationAndLoadEvents(){
-  if(!navigator.geolocation){G.evCity='your area';loadLocalEvents();return;}
-  G.evLoading=true;render();
+  if(!navigator.geolocation){G.evErr='Location services are not available in this browser.';render();return;}
+  G.evLoading=true;G.evErr=null;render();
   navigator.geolocation.getCurrentPosition(
     function(pos){
       var lat=pos.coords.latitude,lng=pos.coords.longitude;
       // Reverse geocode using nominatim (free, no key)
       fetch('https://nominatim.openstreetmap.org/reverse?lat='+lat+'&lon='+lng+'&format=json&accept-language=en')
-        .then(function(r){return r.json();})
+        .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
         .then(function(d){
           var addr=d.address||{};
           var city=addr.city||addr.town||addr.village||addr.suburb||addr.county||'';
           var state=addr.state||addr.state_district||'';
-          var country=addr.country_code||'';
-          // Build readable location: "Jacksonville, FL" style
-          var stateAbbr=state;
-          G.evCity=city+(stateAbbr?', '+stateAbbr:'')+(country&&country!=='us'?' ('+country.toUpperCase()+')':'');
-          if(!G.evCity.trim())G.evCity=d.display_name?d.display_name.split(',')[0]:'your area';
-          G.evLat=lat;G.evLng=lng;
+          var country=(addr.country_code||'').toLowerCase();
+          country=EV_COUNTRIES.some(function(c){return c[0]===country;})?country:'other';
+          // Populate and save immediately -- we already have precise GPS
+          // coordinates, so there's no need to re-geocode via
+          // evSaveLocationPopup or wait for a manual Save tap. Keep the
+          // popup's draft fields in sync too, so if it's opened afterward
+          // (e.g. to tweak something) it shows the same values.
+          G.cfg.evCityCfg=city;
+          G.cfg.evState=state;
+          G.cfg.evCountry=country;
+          G.cfg.evLat=lat;
+          G.cfg.evLng=lng;
+          sv('sg-cfg',G.cfg);
+          G.evLocDraftCity=city;
+          G.evLocDraftState=state;
+          G.evLocDraftCountry=country;
           G.evLoading=false;
-          loadLocalEvents(G.evCity);
+          loadLocalEvents();
         })
-        .catch(function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();});
+        .catch(function(e){
+          G.evLoading=false;
+          G.evErr='Found your location, but could not look up the city/state name ('+e.message+'). Please try again or set it manually.';
+          render();
+        });
     },
-    function(){G.evCity='your area';G.evLoading=false;loadLocalEvents();}
+    function(err){
+      G.evLoading=false;
+      var msgs={1:'Location access was denied. Please allow location access and try again, or set your location manually.',2:'Could not determine your location. Please try again or set it manually.',3:'Location request timed out. Please try again or set it manually.'};
+      G.evErr=msgs[err.code]||'Could not get your location.';
+      render();
+    },
+    {timeout:10000}
   );
 }
 
@@ -7263,42 +7332,34 @@ function pContent(){
   }
   if(p==='ev'){G._evReg=[];
     if(!G.evLoaded&&!G.evLoading){setTimeout(function(){loadLocalEvents();},50);}
-    var _evCity=G.evCity||'';
-    var _pnParts=_evCity.split(',');
-    var _pnCity=_pnParts[0]?_pnParts[0].trim():'';
-    var _pnState=_pnParts[1]?_pnParts[1].trim():'';
+    var _evLbl=_evLocationLabel();
+    var _pnCity=G.cfg.evCityCfg||'';
+    var _pnState=G.cfg.evState||'';
     var _pnURL='https://play.sorcerytcg.com/events'
       +(_pnCity?'?city='+encodeURIComponent(_pnCity):'')
       +(_pnState?(_pnCity?'&':'?')+'state='+encodeURIComponent(_pnState):'');
 
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
-    o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="G.evCityInput=\'\';getLocationAndLoadEvents()">Use My Location</button>');
-    o('<a class="fb" style="font-size:11px;padding:8px 10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="'+_pnURL+'" target="_blank">Play Network &rarr;</a>');
+    o('<a class="fb" style="font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase;background:transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="'+_pnURL+'" target="_blank">Play Network &rarr;</a>');
     o('</div>');
 
-    // Search row
-    o('<div style="display:flex;gap:4px;margin-bottom:4px;align-items:flex-start">');
-    o('<div class="ev-ac-wrap" style="flex:1">');
-    o('<input id="ev-city-inp" class="fi" placeholder="City, State&hellip;" value="'+h(G.evCityInput||'')+'" style="width:100%;box-sizing:border-box" oninput="G.evCityInput=this.value;evCityAutocomplete(this.value)" onkeydown="if(event.key===\'Enter\'){var v=this.value.trim();if(v)evSelectCity(v);}" onfocus="G.evInputFocused=true;var _b=document.getElementById(\'ev-ac-box\');if(_b)_b.style.display=\'block\';" onblur="setTimeout(function(){G.evInputFocused=false;var _b=document.getElementById(\'ev-ac-box\');if(_b)_b.style.display=\'none\';},200);">');
-    o('<div id="ev-ac-box" class="ev-ac-box" style="display:'+(G.evInputFocused?'block':'none')+'">');
-    if(G.evAcResults&&G.evAcResults.length){
-      G.evAcResults.forEach(function(r){
-        o('<div class="ev-ac-item" data-label="'+h(r.label)+'" onclick="evSelectCity(this)"><b>'+h(r.city)+'</b>'+(r.state?'<span style="color:var(--fg2)">, '+h(r.state)+'</span>':'')+'</div>');
-      });
+    // Saved location chip (with an X to clear it) or a button to set one
+    if(_evLbl){
+      o('<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:8px">');
+      o('<span style="flex:1;font-size:13px;cursor:pointer" onclick="evOpenLocPopup()">&#128205; '+h(_evLbl)+'</span>');
+      o('<button class="fb" style="font-size:11px;padding:6px 9px" onclick="evOpenLocPopup()">Edit</button>');
+      o('<button class="fb red" style="font-size:11px;padding:6px 9px" onclick="evClearSavedLocation()">&#x2715;</button>');
+      o('</div>');
     } else {
-      var _recentLocs=[];try{_recentLocs=JSON.parse(localStorage.getItem('sg-ev-recent')||'[]');}catch(e){}
-      if(_recentLocs.length&&!G.evCityInput){
-        _recentLocs.slice(0,5).forEach(function(loc){
-          o('<div class="ev-ac-item" data-label="'+h(loc)+'" onclick="evSelectCity(this)" style="color:var(--fg2)">&#128337; '+h(loc)+'</div>');
-        });
-      }
+      o('<div style="text-align:center;margin-bottom:8px"><button class="fb gold" style="font-size:13px;padding:9px 14px" onclick="evOpenLocPopup()">Set Location</button></div>');
     }
-    o('</div>');
-    o('</div>');
-    o('<button class="fb gold" onclick="var inp=document.getElementById(\'ev-city-inp\');var v=inp?inp.value.trim():\'\';if(v){evSelectCity(v);}else{getLocationAndLoadEvents();}">Search</button>');
+
+    o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:center">');
+    o('<button class="fb" style="font-size:12px;padding:9px 14px" onclick="getLocationAndLoadEvents()">Use My Location</button>');
+    o('<button class="fb gold" style="font-size:12px;padding:9px 14px" onclick="loadLocalEvents()">Search</button>');
     o('</div>');
 
-    if(_evCity&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching near: <b>'+h(_evCity)+'</b></div>');
+    if(_evLbl&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching within '+EV_SEARCH_RADIUS_MI+' miles of: <b>'+h(_evLbl)+'</b></div>');
 
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(G.evItems&&G.evItems.length){
@@ -7366,12 +7427,16 @@ function pContent(){
         o('</div>');
         o('<div style="padding:14px;overflow-y:auto">');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
-        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">&#128197; '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' &#128336; <b>'+h(_ep.time)+'</b>':'')+( _ep.type?' &middot; '+h(_ep.type):'')+'</div>');
+        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">&#128197; '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' &#128336; <b>'+h(_ep.time)+'</b>':'')+'</div>');
+        if(_ep.type||_ep.price||_ep.duration){
+          var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
+          o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
+        }
         if(_ep.storeName)o('<div style="font-size:14px;font-weight:700;margin-bottom:4px">&#127978; '+h(_ep.storeName)+'</div>');
         var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
         if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">&#128205; '+h(_epicitystate)+'</div>');
-        if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:3px">&#127978; '+h(_eloc)+'</div>');
-        if(_eaddr&&_eaddr!==_eloc)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
+        if(_eaddr)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
+        else if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:10px">'+h(_eloc)+'</div>');
         if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
         o('<div style="display:flex;gap:8px;flex-direction:column">');
         if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">&#x1F5FA; Open in Google Maps</a>');
@@ -8133,6 +8198,25 @@ function render(){
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to accept the match&hellip;</div>');
       o('</div></div></div>');
+    }
+
+    if(G.evLocPopup){
+      o('<div class="ov" onclick="if(event.target===this)evCloseLocPopup()"><div class="log-pop" style="text-align:left;max-width:320px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Set Location</div><div class="lp-b">');
+      o('<select class="fi" style="width:100%;box-sizing:border-box;margin-bottom:8px" onclick="event.stopPropagation()" onchange="G.evLocDraftCountry=this.value;G.evLocDraftState=\'\';render()">');
+      o('<option value="">Country&hellip;</option>');
+      EV_COUNTRIES.forEach(function(c){o('<option value="'+h(c[0])+'"'+(G.evLocDraftCountry===c[0]?' selected':'')+'>'+h(c[1])+'</option>');});
+      o('</select>');
+      var _stStates=EV_STATES_BY_COUNTRY[G.evLocDraftCountry];
+      if(_stStates){
+        o('<select class="fi" style="width:100%;box-sizing:border-box;margin-bottom:8px" onclick="event.stopPropagation()" onchange="G.evLocDraftState=this.value">');
+        o('<option value="">State/Province&hellip;</option>');
+        _stStates.forEach(function(s){o('<option value="'+h(s)+'"'+(G.evLocDraftState===s?' selected':'')+'>'+h(s)+'</option>');});
+        o('</select>');
+      } else {
+        o('<input class="fi" style="width:100%;box-sizing:border-box;margin-bottom:8px" placeholder="State/Region (optional)" value="'+h(G.evLocDraftState||'')+'" onclick="event.stopPropagation()" oninput="G.evLocDraftState=this.value">');
+      }
+      o('<input class="fi" style="width:100%;box-sizing:border-box" placeholder="City" value="'+h(G.evLocDraftCity||'')+'" onclick="event.stopPropagation()" oninput="G.evLocDraftCity=this.value">');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="evCloseLocPopup()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="evSaveLocationPopup()">Save</button></div></div></div>');
     }
 
     if(G.mpMatchSummaryPopup&&!G.panel){
