@@ -58,6 +58,17 @@ const fs = require('fs');
 
 const EVENTS_URL = 'https://play.sorcerytcg.com/events?locationType=in-person&radius=25';
 const MAX_DETAIL_VISITS = 250; // cap detail-page visits (address/price/duration lookup) to keep runtime reasonable
+const SEEN_STATE_FILE = 'events-seen-state.json'; // tracks event URLs seen in prior runs, so we only notify about genuinely new events
+
+// Mirrors the app's own favorite-store topic naming (see index.html) --
+// FCM topic names only allow [a-zA-Z0-9-_.~%], so store names get
+// lowercased, non-matching characters collapsed to a single "-", and
+// prefixed so they can't collide with the fixed global topics (news/
+// discord/youtube/rewards).
+function storeTopicName(storeName) {
+  const slug = (storeName || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return slug ? 'store-' + slug : null;
+}
 const GEOCODE_STATE_FILE = 'events-geocode-cache.json'; // persists city/state -> lat/lng across runs so we don't re-geocode the same places every 90 seconds
 
 // Nominatim (OpenStreetMap's free geocoder, no API key) enforces a hard
@@ -382,4 +393,60 @@ async function loadMoreEvents(page, maxClicks) {
 
   fs.writeFileSync('events.json', JSON.stringify(output, null, 2));
   console.log('Done -- scraped ' + events.length + ' upcoming events to events.json');
+
+  // Notify about genuinely new events, grouped by store (one notification
+  // per store with new events, not one per event, to avoid spamming
+  // someone's device if a store adds several events in one scrape cycle).
+  // Skipped on the very first run ever (no prior state to compare against,
+  // same reasoning as the other scrapers' notification logic).
+  let seenUrls = [];
+  let isFirstRun = true;
+  try {
+    seenUrls = JSON.parse(fs.readFileSync(SEEN_STATE_FILE, 'utf8')).urls || [];
+    isFirstRun = false;
+  } catch (e) {
+    console.log('No existing ' + SEEN_STATE_FILE + ' -- first run, will not notify');
+  }
+  const seenSet = new Set(seenUrls);
+  const newEvents = events.filter(e => e.url && !seenSet.has(e.url));
+
+  fs.writeFileSync(SEEN_STATE_FILE, JSON.stringify({ urls: events.map(e => e.url).filter(Boolean) }, null, 2));
+
+  if (isFirstRun || !newEvents.length) {
+    console.log(isFirstRun ? 'First run -- not sending store notifications.' : 'No new events since last run.');
+  } else {
+    const byStore = {};
+    newEvents.forEach(e => {
+      const key = e.storeName || 'Unknown Store';
+      (byStore[key] = byStore[key] || []).push(e);
+    });
+    try {
+      const admin = require('firebase-admin');
+      if (!admin.apps.length) {
+        const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+      }
+      for (const storeName of Object.keys(byStore)) {
+        const topic = storeTopicName(storeName);
+        if (!topic) continue;
+        const evs = byStore[storeName];
+        const first = evs[0];
+        const title = 'New event at ' + storeName;
+        const body = evs.length === 1 ? first.name : evs.length + ' new events, including ' + first.name;
+        try {
+          await admin.messaging().send({
+            topic,
+            notification: { title, body },
+            android: { priority: 'high' },
+            webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url } }
+          });
+          console.log('Sent FCM notification to store topic "' + topic + '" (' + evs.length + ' new event(s)).');
+        } catch (e) {
+          console.log('FCM notification failed for store "' + storeName + '" (non-fatal): ' + e.message);
+        }
+      }
+    } catch (e) {
+      console.log('FCM setup failed (non-fatal): ' + e.message);
+    }
+  }
 })();
