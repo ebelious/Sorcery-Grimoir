@@ -14,12 +14,22 @@
 //   npm install firebase-admin
 //   (package.json + package-lock.json committed so Netlify installs it)
 //
-// Request body: { "token": "<fcm-token>", "topics": ["news","discord","youtube"] }
-// Any of the three topics not present in `topics` will be unsubscribed.
+// Request body:
+//   { "token": "<fcm-token>", "topics": ["news","discord","youtube"] }
+//     -- syncs the device to exactly this set of the fixed global topics;
+//        any of ALL_TOPICS not present gets unsubscribed.
+//   { "token": "<fcm-token>", "subscribeTopics": ["store-variant"], "unsubscribeTopics": ["store-old-shop"] }
+//     -- for arbitrary per-store topics (favorite-store notifications),
+//        which aren't a small fixed set the server can enumerate. The
+//        client is responsible for knowing which store topics it wants
+//        added/removed (e.g. on favorite/unfavorite), since there's no way
+//        to ask FCM which topics a token is currently subscribed to.
+// Both forms can be combined in a single request.
 
 const admin = require('firebase-admin');
 
-const ALL_TOPICS = ['news', 'discord', 'youtube'];
+const ALL_TOPICS = ['news', 'discord', 'youtube', 'rewards'];
+const TOPIC_NAME_RE = /^[a-zA-Z0-9\-_.~%]+$/; // FCM's own topic name character restrictions
 
 if (!admin.apps.length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
@@ -41,23 +51,46 @@ exports.handler = async function (event) {
   }
 
   const token = payload.token;
-  const wantTopics = Array.isArray(payload.topics) ? payload.topics.filter(t => ALL_TOPICS.includes(t)) : [];
-
   if (!token) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Missing token' }) };
   }
 
   const results = { subscribed: [], unsubscribed: [], errors: [] };
 
-  for (const topic of ALL_TOPICS) {
-    try {
-      if (wantTopics.includes(topic)) {
-        await admin.messaging().subscribeToTopic(token, topic);
-        results.subscribed.push(topic);
-      } else {
-        await admin.messaging().unsubscribeFromTopic(token, topic);
-        results.unsubscribed.push(topic);
+  // Fixed global topics -- full sync (subscribe to what's listed, unsubscribe from the rest of ALL_TOPICS)
+  if (Array.isArray(payload.topics)) {
+    const wantTopics = payload.topics.filter(t => ALL_TOPICS.includes(t));
+    for (const topic of ALL_TOPICS) {
+      try {
+        if (wantTopics.includes(topic)) {
+          await admin.messaging().subscribeToTopic(token, topic);
+          results.subscribed.push(topic);
+        } else {
+          await admin.messaging().unsubscribeFromTopic(token, topic);
+          results.unsubscribed.push(topic);
+        }
+      } catch (e) {
+        results.errors.push({ topic, message: e.message });
       }
+    }
+  }
+
+  // Arbitrary per-store topics -- direct add/remove, no fixed whitelist
+  const subscribeTopics = Array.isArray(payload.subscribeTopics) ? payload.subscribeTopics.filter(t => TOPIC_NAME_RE.test(t)) : [];
+  const unsubscribeTopics = Array.isArray(payload.unsubscribeTopics) ? payload.unsubscribeTopics.filter(t => TOPIC_NAME_RE.test(t)) : [];
+
+  for (const topic of subscribeTopics) {
+    try {
+      await admin.messaging().subscribeToTopic(token, topic);
+      results.subscribed.push(topic);
+    } catch (e) {
+      results.errors.push({ topic, message: e.message });
+    }
+  }
+  for (const topic of unsubscribeTopics) {
+    try {
+      await admin.messaging().unsubscribeFromTopic(token, topic);
+      results.unsubscribed.push(topic);
     } catch (e) {
       results.errors.push({ topic, message: e.message });
     }
