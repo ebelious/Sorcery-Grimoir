@@ -962,7 +962,7 @@ var G={
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
-  mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,
+  mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -1077,7 +1077,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -3635,6 +3635,16 @@ function confirmResetFromHeader(){
   p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
   G.menu=false;
   render();
+}
+// Confirmation gate for "Reset to Default" in Interface Settings -- wipes
+// out all UI/theme customization, so it gets the same explicit confirm
+// step (and matching popup style) as the match Reset buttons.
+function showThemeResetConfirm(){G.themeResetConfirmPopup=true;render();}
+function cancelThemeResetConfirm(){G.themeResetConfirmPopup=false;render();}
+function confirmThemeReset(){
+  G.themeResetConfirmPopup=false;
+  resetAllTheme();
+  _renderKeepScroll();
 }
 // Tracks the most recent keystroke OR focus per input id. Used by render()
 // to decide whether to preserve focus across an unrelated background
@@ -6673,7 +6683,7 @@ function pContent(){
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
-    o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="resetAllTheme();_renderKeepScroll()">Reset to Default</button>');
+    o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="showThemeResetConfirm()">Reset to Default</button>');
     o('</div>');
     return out.join('');}
   if(p==='color'){
@@ -8281,6 +8291,27 @@ function updateGsDrop(){
 // (id="hdr-gs-inp") -- kept as a separate function/element id rather than
 // reusing "gs-inp" since the header search and the menu drawer's search
 // could theoretically both exist in the DOM at once.
+// The header sits inside .flip-spacer, which has overflow:hidden (to keep
+// the board layout clean) -- that clips a plain position:absolute dropdown
+// even though it has a high z-index. position:fixed escapes that ancestor
+// entirely, so its coordinates are computed here instead of via CSS top/
+// left percentages. Called both right after typing (updateHdrGsDrop) and
+// after every full render() -- a full render rebuilds the header from a
+// plain HTML string with no inline positioning, so without reapplying this
+// on every render too, the dropdown would revert to being clipped (and
+// invisible) the instant any unrelated background render fired, not just
+// while actively typing.
+function _positionHdrGsDrop(){
+  var inp=document.getElementById('hdr-gs-inp');
+  var sdd=inp&&inp.parentElement&&inp.parentElement.querySelector('.sdd');
+  if(!inp||!sdd)return;
+  var r=inp.getBoundingClientRect();
+  sdd.style.position='fixed';
+  sdd.style.top=r.bottom+'px';
+  sdd.style.left=r.left+'px';
+  sdd.style.width=r.width+'px';
+  sdd.style.zIndex='2000';
+}
 function updateHdrGsDrop(){
   var inp=document.getElementById('hdr-gs-inp');
   if(!inp)return;
@@ -8291,6 +8322,7 @@ function updateHdrGsDrop(){
   if(dropHtml){
     if(!sdd){sdd=document.createElement('div');sdd.className='sdd';si.appendChild(sdd);}
     sdd.innerHTML=dropHtml;
+    _positionHdrGsDrop();
   } else if(sdd){
     sdd.remove();
   }
@@ -8398,6 +8430,12 @@ function render(){
       o('<div class="ov" onclick="if(event.target===this)cancelResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset Match?</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">This will reset life, mana, and turn tracking for both players.</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="cancelResetConfirm()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--hi);color:var(--fg)" onclick="confirmResetFromHeader()">Reset</button></div></div></div>');
+    }
+
+    if(G.themeResetConfirmPopup){
+      o('<div class="ov" onclick="if(event.target===this)cancelThemeResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset to Default?</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">This will reset all UI layout, theme, and appearance settings to their defaults.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="cancelThemeResetConfirm()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--hi);color:var(--fg)" onclick="confirmThemeReset()">Reset</button></div></div></div>');
     }
 
     if(G.evLocPopup){
@@ -8563,6 +8601,7 @@ function render(){
     document.getElementById('app').innerHTML=out.join('');
 
     bindSearchInputs();
+    if(G.headerSearchOpen)_positionHdrGsDrop();
     if(_refocusId){
       var _refocusEl=document.getElementById(_refocusId);
       if(_refocusEl&&(_refocusEl.tagName==='INPUT'||_refocusEl.tagName==='TEXTAREA')){
