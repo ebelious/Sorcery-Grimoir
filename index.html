@@ -7031,7 +7031,7 @@ function pContent(){
           nmColor=(dvCollEntry&&dvCollEntry.qty>0)?'var(--bbl)':'var(--red)';
         }
         o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-        o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+        o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;G.cmDeckSel=\''+h(dvk)+'\';openPanel(\'card\')}">');
         o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
         o('<span style="flex:1;font-size:16px;color:'+nmColor+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
         o('</div>');
@@ -7062,7 +7062,7 @@ function pContent(){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;G.cmDeckSel=\''+h(dvk)+'\';openPanel(\'card\')}">');
       o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
       o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
@@ -7093,7 +7093,7 @@ function pContent(){
       var c=cardByName(entry.name);
       var safeEntryNm=entry.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       o('<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bg3)">');
-      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;openPanel(\'card\')}">');
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:6px;flex:1;min-width:0" onclick="var _c=cardByName(\''+safeEntryNm+'\');if(_c){G.selCard=_c;G.cmDeckSel=\''+h(dvk)+'\';openPanel(\'card\')}">');
       o('<span style="font-size:13px;font-weight:700;color:var(--fg2);min-width:22px">'+entry.qty+'</span>');
       o('<span style="flex:1;font-size:16px;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(entry.name)+'</span>');
       o('</div>');
