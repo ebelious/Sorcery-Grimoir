@@ -154,5 +154,107 @@
   "niterói|rs": {
     "lat": -29.9512384,
     "lng": -51.1648792
+  },
+  "sofia|sf": {
+    "lat": -32.9237935,
+    "lng": -60.7548291
+  },
+  "warszawa|województwo mazowieckie": {
+    "lat": 52.2319581,
+    "lng": 21.0067249
+  },
+  "nashville|tn": {
+    "lat": 36.1622767,
+    "lng": -86.7742984
+  },
+  "dublin|dublin": {
+    "lat": 53.3437061,
+    "lng": -6.2544278
+  },
+  "vigo di cadore|veneto": {
+    "lat": 46.4945985,
+    "lng": 12.5452957
+  },
+  "oulu|pohjois-pohjanmaa": {
+    "lat": 65.0117914,
+    "lng": 25.4701973
+  },
+  "hägersten|stockholms län": {
+    "lat": 59.3039831,
+    "lng": 17.9671408
+  },
+  "mechanicsville|va": {
+    "lat": 37.627722,
+    "lng": -77.3538176
+  },
+  "new york|ny": {
+    "lat": 40.7127281,
+    "lng": -74.0060152
+  },
+  "conway|ar": {
+    "lat": 35.0891932,
+    "lng": -92.4398402
+  },
+  "boise|id": {
+    "lat": 43.6166163,
+    "lng": -116.200886
+  },
+  "new tecumseth|on": {
+    "lat": 44.1542367,
+    "lng": -79.8689888
+  },
+  "concord|nc": {
+    "lat": 35.4094178,
+    "lng": -80.5800049
+  },
+  "hendersonville|nc": {
+    "lat": 35.3187279,
+    "lng": -82.4609528
+  },
+  "buenos aires|cdad. autónoma de buenos aires": null,
+  "turnhout|vlaams gewest": null,
+  "vinton|ia": {
+    "lat": 42.1679131,
+    "lng": -92.0239504
+  },
+  "bloomington|in": {
+    "lat": 39.1670396,
+    "lng": -86.5342881
+  },
+  "woodlawn|md": {
+    "lat": 39.305436,
+    "lng": -76.7539156
+  },
+  "wyoming|mi": {
+    "lat": 42.9132581,
+    "lng": -85.7057035
+  },
+  "mooca|sp": {
+    "lat": -23.5606808,
+    "lng": -46.5971924
+  },
+  "warwick|ri": {
+    "lat": 41.6992717,
+    "lng": -71.4586114
+  },
+  "rochester|mn": {
+    "lat": 44.0234387,
+    "lng": -92.4630182
+  },
+  "olive branch|ms": {
+    "lat": 34.9617605,
+    "lng": -89.8295315
+  },
+  "los angeles|ca": {
+    "lat": 34.0536909,
+    "lng": -118.242766
+  },
+  "cincinnati|oh": {
+    "lat": 39.1012809,
+    "lng": -84.5127405
+  },
+  "toledo|oh": {
+    "lat": 41.6529143,
+    "lng": -83.5378173
   }
 }
