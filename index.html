@@ -128,6 +128,67 @@ function togglePushTopic(topic){
     _renderKeepScroll();
   }
 }
+// Mirrors the scraper's own storeTopicName() in scrape-events.js exactly --
+// FCM topic names only allow [a-zA-Z0-9-_.~%], so store names get
+// lowercased, non-matching characters collapsed to a single "-", and
+// prefixed so they can't collide with the fixed global topics.
+function _storeTopicName(storeName){
+  var slug=(storeName||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  return slug?'store-'+slug:null;
+}
+function isFavStore(storeName){
+  return (G.favStores||[]).indexOf(storeName)>=0;
+}
+// Favorite stores get their own dedicated FCM topic (unlike News/Discord/
+// YouTube, which are one shared global topic each) -- subscribed/
+// unsubscribed directly per store, rather than through the fixed-topic
+// full-list sync those use, since the set of possible stores is unbounded
+// and the server has no way to enumerate "all topics this token was ever
+// subscribed to".
+function toggleFavStore(storeName){
+  if(!storeName)return;
+  var topic=_storeTopicName(storeName);
+  if(!topic)return;
+  var idx=(G.favStores||[]).indexOf(storeName);
+  if(idx<0){
+    if(typeof Notification==='undefined'){alert('Push notifications are not supported in this browser.');return;}
+    Notification.requestPermission().then(function(perm){
+      if(perm!=='granted')return;
+      G.favStores=G.favStores||[];
+      G.favStores.push(storeName);
+      sv('sg-favstores',G.favStores);
+      _initFirebaseMessaging();
+      _fcmSubscribeSingle(topic,true);
+      _renderKeepScroll();
+    });
+  } else {
+    G.favStores.splice(idx,1);
+    sv('sg-favstores',G.favStores);
+    _fcmSubscribeSingle(topic,false);
+    _renderKeepScroll();
+  }
+}
+// Directly subscribes/unsubscribes this device's FCM token to/from one
+// arbitrary topic (used for per-store favorites), as opposed to
+// _fcmSyncTopics() which re-syncs the whole fixed News/Discord/YouTube/
+// Rewards set.
+function _fcmSubscribeSingle(topic,subscribe){
+  if(!_fcmReady||!_fcmMessaging||!('serviceWorker' in navigator))return;
+  navigator.serviceWorker.ready.then(function(reg){
+    _fcmMessaging.getToken({vapidKey:FIREBASE_VAPID_KEY,serviceWorkerRegistration:reg}).then(function(token){
+      if(!token)return;
+      _fcmToken=token;sv('sg-fcm-token',token);
+      var body=subscribe?{token:token,subscribeTopics:[topic]}:{token:token,unsubscribeTopics:[topic]};
+      fetch(_NETLIFY_ORIGIN+'/.netlify/functions/subscribe-topic',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(body)
+      }).then(function(r){
+        if(!r.ok)console.warn('subscribe-topic returned',r.status);
+      }).catch(function(e){console.warn('subscribe-topic request failed:',e);});
+    }).catch(function(e){console.warn('FCM getToken failed:',e);});
+  });
+}
 </script>
 <script>
 // Register external service worker
@@ -901,7 +962,7 @@ var G={
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
-  mpMatchAcceptWaiting:false,
+  mpMatchAcceptWaiting:false,mpDeclinedByName:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -998,7 +1059,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null,showResetInHeader:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null,showResetInHeader:false,showConnectInHeader:false,showTimerInHeader:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -1016,7 +1077,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.resetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -4903,6 +4964,26 @@ function mpAcceptMatch(){
     render();
   }).catch(function(e){G.mpErr='Failed to accept match: '+e.message;render();});
 }
+// Runs when the player taps Decline on the "Match Connected" popup. Tells
+// the server so the opponent's device can show a "declined" popup (see the
+// poll loop), then leaves the room and returns to Connect setup locally.
+function mpDeclineMatch(){
+  G.mpConnectedPopup=false;
+  var code=G.mpCode;
+  if(code){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/match-sync',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'declineMatch',code:code,role:G.mpRole})
+    }).catch(function(){});
+  }
+  mpLeave();
+}
+// Acknowledges the "X has declined the match" popup and returns to
+// Connect setup.
+function mpAckDecline(){
+  G.mpDeclinedByName=null;
+  mpLeave();
+}
 // Runs once BOTH players have accepted -- this is what actually populates
 // the names/decks used for logging, and is also when we snapshot the
 // opponent's info into mpLastOpp so it's still available for the
@@ -4989,6 +5070,11 @@ function _mpPoll(){
       var acc=d.room.accepted;
       if(acc&&acc.confirmedP1&&acc.confirmedP2&&G.mpMatchAcceptWaiting){
         _mpFinalizeMatchStart();
+      }
+      if(d.room.declined&&d.room.declined!==G.mpRole&&!G.mpDeclinedByName){
+        G.mpDeclinedByName=(d.room[d.room.declined]&&d.room[d.room.declined].username)||'Opponent';
+        G.mpConnectedPopup=false;G.mpMatchAcceptWaiting=false;
+        render();
       }
       var res=d.room.result;
       if(res&&!G.mpResultFinalized){
@@ -5155,7 +5241,7 @@ function _mpEndMatch(deleteRoom){
 function mpLeave(){
   _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;
   render();
 }
 // Sends the proposed result to the opponent instead of finalizing locally.
@@ -6580,6 +6666,8 @@ function pContent(){
     o('<div class="slbl2">UI Buttons</div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Connect Button in Header</span><button class="ftag'+(G.cfg.showConnectInHeader?' on':'')+'" onclick="G.cfg.showConnectInHeader=!G.cfg.showConnectInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showConnectInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Timer Button in Header</span><button class="ftag'+(G.cfg.showTimerInHeader?' on':'')+'" onclick="G.cfg.showTimerInHeader=!G.cfg.showTimerInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showTimerInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
@@ -7404,6 +7492,13 @@ function pContent(){
 
     if(_evLbl&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching within '+EV_SEARCH_RADIUS_MI+' miles of: <b>'+h(_evLbl)+'</b></div>');
 
+    if(G.favStores&&G.favStores.length){
+      o('<div class="slbl2" style="margin-top:8px">Favorite Stores</div>');
+      G.favStores.forEach(function(s){
+        o('<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:4px"><span style="font-size:13px">&#9733; '+h(s)+'</span><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(s)+'" onclick="toggleFavStore(this.dataset.store)">Remove</button></div>');
+      });
+    }
+
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else if(G.evItems&&G.evItems.length){
       o('<div class="slbl2" style="margin-top:8px">Results</div>');
@@ -7475,7 +7570,10 @@ function pContent(){
           var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
           o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
         }
-        if(_ep.storeName)o('<div style="font-size:14px;font-weight:700;margin-bottom:4px">&#127978; '+h(_ep.storeName)+'</div>');
+        if(_ep.storeName){
+          var _isFav=isFavStore(_ep.storeName);
+          o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div style="font-size:14px;font-weight:700">&#127978; '+h(_ep.storeName)+'</div><button class="fb" style="padding:4px 8px;font-size:14px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+(_isFav?'&#9733; Favorited':'&#9734; Favorite Store')+'</button></div>');
+        }
         var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
         if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">&#128205; '+h(_epicitystate)+'</div>');
         if(_eaddr)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
@@ -8011,19 +8109,22 @@ function turnBar(){
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
   var _rbtn=(G.cfg&&G.cfg.showResetInHeader)?'<button class="menu-btn tb-menu" onclick="showResetConfirm()" title="Reset" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>':'';
+  var _cbtn=(G.cfg&&G.cfg.showConnectInHeader)?'<button class="menu-btn tb-menu" onclick="openPanel(\'connect\')" title="Connect" style="display:flex;align-items:center;justify-content:center;font-size:15px">&#9876;</button>':'';
+  var _tbtn=(G.cfg&&G.cfg.showTimerInHeader)?'<button class="menu-btn tb-menu" onclick="showTimerPopup(this)" title="Timer" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button>':'';
+  var _hdrBtns=_rbtn+_cbtn+_tbtn;
   if(_diceHdr&&G.mode!==1){
     var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_diceRow+(_ml?'':_rbtn+_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_diceRow+(_ml?'':_hdrBtns+_mbtn)+'</div>';
   }
   if(G.cfg&&G.cfg.hideTurnBar){
     var _p0sH='<div class="tb-s"'+(G.mode===1?' style="border-right:none"':'')+'><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0&&G.mode!==1?h(p0.name):'')+'</span></div>';
     var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_rbtn+_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_hdrBtns+_mbtn)+'</div>';
   }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
   var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':(G.mode===1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(G.cfg.p2||'Player 2')+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>');
-  return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_rbtn+_mbtn)+'</div>';
+  return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_hdrBtns+_mbtn)+'</div>';
 }
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
@@ -8235,13 +8336,19 @@ function render(){
         o('</div></div>');
       });
       o('<div style="font-size:11px;color:var(--fg3);margin-top:2px">Accept to start the match</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn ok" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAcceptMatch()">Accept</button></div></div></div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpDeclineMatch()">Decline</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpAcceptMatch()">Accept</button></div></div></div>');
     }
 
     if(G.mpMatchAcceptWaiting&&!G.mpConnectedPopup){
       o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to accept the match&hellip;</div>');
       o('</div></div></div>');
+    }
+
+    if(G.mpDeclinedByName){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Match Declined</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">'+h(G.mpDeclinedByName)+' has declined the match.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAckDecline()">OK</button></div></div></div>');
     }
 
     if(G.resetConfirmPopup){
