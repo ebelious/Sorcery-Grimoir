@@ -5860,31 +5860,43 @@ function loadLocalEvents(){
 function _loadEventsFromStaticFile(loc){
   var lowerLoc=loc.toLowerCase();
   var haveSearchCoords=G.evLat!=null&&G.evLng!=null;
+  function withinRadius(e,mi){
+    if(haveSearchCoords&&e.lat!=null&&e.lng!=null){
+      return _milesBetween(G.evLat,G.evLng,e.lat,e.lng)<=mi;
+    }
+    // No coordinates for this event (geocoding failed at scrape time) -- fall back to text matching just for this one
+    var l=(e.location||e.address||'').toLowerCase();
+    var n=(e.name||'').toLowerCase();
+    return lowerLoc.split(',').some(function(part){
+      var p=part.trim();
+      return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
+    });
+  }
   fetch('https://ebelious.github.io/Sorcery-Grimoir/events.json?t='+Date.now())
     .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
     .then(function(d){
       var all=(d.events||[]).filter(_evIsUpcoming);
       if(!all.length)throw new Error('empty');
-      var filtered;
-      if(lowerLoc){
-        filtered=all.filter(function(e){
-          if(haveSearchCoords&&e.lat!=null&&e.lng!=null){
-            return _milesBetween(G.evLat,G.evLng,e.lat,e.lng)<=EV_SEARCH_RADIUS_MI;
-          }
-          // No coordinates for this event (geocoding failed at scrape time) -- fall back to text matching just for this one
-          var l=(e.location||e.address||'').toLowerCase();
-          var n=(e.name||'').toLowerCase();
-          return lowerLoc.split(',').some(function(part){
-            var p=part.trim();
-            return p.length>1&&(l.indexOf(p)>=0||n.indexOf(p)>=0);
-          });
-        });
-      } else {
-        filtered=all;
-      }
       G.evLoading=false;G.evLoaded=true;
-      G.evItems=filtered.length?filtered:all.slice(0,20);
-      if(!filtered.length&&lowerLoc)G.evErr='No events found within '+EV_SEARCH_RADIUS_MI+' miles of '+loc+'. Showing all upcoming events.';
+      if(!lowerLoc){
+        G.evItems=all;G.evErr=null;render();return;
+      }
+      var filtered=all.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI);});
+      if(filtered.length){
+        G.evItems=filtered;G.evErr=null;
+      } else if(haveSearchCoords){
+        // Nothing within 25mi -- widen to 50mi instead of falling back to
+        // the unfiltered "all events" list. The message shows either way;
+        // the wider results (if any) populate below it.
+        G.evItems=all.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI*2);});
+        G.evErr='No Events found in 25 mile radius';
+      } else {
+        // Text-matching fallback (no coordinates for the search location)
+        // -- widening the "radius" wouldn't change anything here, since
+        // it's the same substring match regardless of distance.
+        G.evItems=[];
+        G.evErr='No Events found in 25 mile radius';
+      }
       render();
     })
     .catch(function(){
@@ -7523,7 +7535,9 @@ function pContent(){
     }
 
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
-    else if(G.evItems&&G.evItems.length){
+    else {
+      if(G.evErr)o('<div style="font-size:11px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
+      if(G.evItems&&G.evItems.length){
       o('<div class="slbl2" style="margin-top:8px">Results</div>');
       G._evReg=[];
       o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
@@ -7545,10 +7559,9 @@ function pContent(){
         o('</div>');
       });
       o('</div>');
-    } else if(G.evErr){
-      o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
-    } else if(!G.evLoaded){
-      o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">Enter a city or use your location to find events.</div>');
+      } else if(!G.evLoaded&&!G.evErr){
+        o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">Enter a city or use your location to find events.</div>');
+      }
     }
 
     // Saved events
@@ -8136,6 +8149,13 @@ function turnBar(){
   var _tbtn=(G.cfg&&G.cfg.showTimerInHeader)?'<button class="menu-btn tb-menu" onclick="showTimerPopup(this)" title="Timer" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button>':'';
   var _sbtn=(G.cfg&&G.cfg.showSearchInHeader)?'<button class="menu-btn tb-menu" onclick="G.headerSearchOpen=true;render()" title="Search" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>':'';
   var _hdrBtns=_rbtn+_cbtn+_tbtn+_sbtn;
+  // One invisible placeholder per currently-enabled optional button, so the
+  // ghost side always matches the real side's total width -- otherwise the
+  // ghost spacer only ever accounted for the menu button alone, and the
+  // dice row / T# label would drift off-center by however many extra
+  // buttons (Reset/Connect/Timer/Search) happened to be toggled on.
+  var _ghostBtn='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
+  var _hdrBtnsGhost=(_rbtn?_ghostBtn:'')+(_cbtn?_ghostBtn:'')+(_tbtn?_ghostBtn:'')+(_sbtn?_ghostBtn:'');
   if(G.headerSearchOpen){
     var _hgsDrop=S.gsDrop&&S.gs?buildGsDrop():'';
     return '<div id="tbar" style="padding:4px 6px;gap:4px">'
@@ -8149,17 +8169,17 @@ function turnBar(){
   }
   if(_diceHdr&&G.mode!==1){
     var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_diceRow+(_ml?'':_hdrBtns+_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns:_ghost+_hdrBtnsGhost)+_diceRow+(_ml?_ghost+_hdrBtnsGhost:_hdrBtns+_mbtn)+'</div>';
   }
   if(G.cfg&&G.cfg.hideTurnBar){
     var _p0sH='<div class="tb-s"'+(G.mode===1?' style="border-right:none"':'')+'><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0&&G.mode!==1?h(p0.name):'')+'</span></div>';
     var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_hdrBtns+_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns:_ghost+_hdrBtnsGhost)+_p0sH+_p1sH+(_ml?_ghost+_hdrBtnsGhost:_hdrBtns+_mbtn)+'</div>';
   }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
   var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':(G.mode===1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(G.cfg.p2||'Player 2')+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>');
-  return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_hdrBtns+_mbtn)+'</div>';
+  return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns:_ghost+_hdrBtnsGhost)+_p0s+_tn+_p1s+(_ml?_ghost+_hdrBtnsGhost:_hdrBtns+_mbtn)+'</div>';
 }
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
