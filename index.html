@@ -4986,7 +4986,16 @@ function mpDeclineMatch(){
       body:JSON.stringify({action:'declineMatch',code:code,role:G.mpRole})
     }).catch(function(){});
   }
-  mpLeave();
+  // Don't delete the room here (mpLeave() would) -- the other player's
+  // poll loop needs to see room.declined first, or a race between this
+  // request and their next poll could delete the room before they ever
+  // learn the match was declined, leaving them stuck with no notification.
+  // They're the ones who actually clean up the room, once they acknowledge
+  // the "declined" popup (see mpAckDecline below).
+  _mpEndMatch(false);
+  G.mpRole=null;G.mpLastCode=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;
+  render();
 }
 // Acknowledges the "X has declined the match" popup and returns to
 // Connect setup.
