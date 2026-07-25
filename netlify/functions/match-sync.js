@@ -9,6 +9,7 @@
 //   POST { action:'join',   code, username, deck } -> { code, room }
 //   POST { action:'leave',  code } -> { ok:true }
 //   POST { action:'acceptMatch', code, role } -> { code, room }  (both players must accept before the match starts)
+//   POST { action:'declineMatch', code, role } -> { code, room }  (the other player gets shown a "declined" popup)
 //   POST { action:'proposeResult', code, role, result:{proposerWon,turns,duration} } -> { code, room }
 //   POST { action:'confirmResult', code, role } -> { code, room }
 //   POST { action:'cancelResult',  code } -> { code, room }  (withdraws a proposed-but-unconfirmed result)
@@ -25,6 +26,7 @@
 //
 // room shape: { created, p1:{username,deck,life,dice,ts}, p2:{username,deck,life,dice,ts}|null,
 //               accepted:{confirmedP1,confirmedP2}|undefined,
+//               declined:'p1'|'p2'|null,
 //               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null,
 //               rematch:{confirmedP1,confirmedP2}|null }
 
@@ -52,10 +54,6 @@ function isExpired(room) {
 }
 
 exports.handler = async function (event) {
-  // Requests from a different origin (e.g. GitHub Pages calling this
-  // Netlify function) trigger a CORS preflight OPTIONS request before the
-  // real POST. Without an explicit 200/204 response with the right headers
-  // here, that preflight fails and the browser blocks the actual request.
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 204,
@@ -68,14 +66,6 @@ exports.handler = async function (event) {
     };
   }
 
-  // getStore('sg-matches') alone relies on Netlify auto-injecting a Blobs
-  // context into the function's environment, which isn't happening on this
-  // site (throws MissingBlobsEnvironmentError). Falling back to explicit
-  // siteID + token fixes that -- these must be added as environment
-  // variables in the Netlify dashboard (Site settings -> Environment
-  // variables): NETLIFY_SITE_ID (Site settings -> General -> Site details ->
-  // Site ID) and NETLIFY_API_TOKEN (a Personal Access Token from User
-  // settings -> Applications -> New access token).
   const store = (process.env.NETLIFY_SITE_ID && process.env.NETLIFY_API_TOKEN)
     ? getStore({ name: 'sg-matches', siteID: process.env.NETLIFY_SITE_ID, token: process.env.NETLIFY_API_TOKEN })
     : getStore('sg-matches');
@@ -112,8 +102,6 @@ exports.handler = async function (event) {
         const room = await store.get(code, { type: 'json' });
         if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
 
-        // Same device created this code -- reject before writing p2, so a
-        // person can't end up occupying both player slots in their own match.
         if (usercode && room.p1 && room.p1.usercode && room.p1.usercode === usercode) {
           return resp(403, { error: "You can't join your own match. Share the code with someone else instead." });
         }
@@ -149,6 +137,22 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
+      // The other player gets shown "<username> has declined the match" via
+      // the poll loop, which reads room.declined and looks up that role's
+      // own username from room.p1/p2 -- no need to pass the name separately.
+      if (action === 'declineMatch') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        room.declined = role;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
       if (action === 'proposeResult') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -158,11 +162,6 @@ exports.handler = async function (event) {
         const room = await store.get(code, { type: 'json' });
         if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
 
-        // If a result is already pending confirmation (proposed by either
-        // side, not yet confirmed by both), don't let a second proposal
-        // silently overwrite it -- this happens when both players trigger
-        // Log Result at nearly the same time. Tell the caller so they can
-        // fall back to confirming the existing one instead.
         if (room.result && !(room.result.confirmedP1 && room.result.confirmedP2)) {
           return resp(409, { error: 'A result is already pending confirmation', code, room });
         }
@@ -235,13 +234,6 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
-      // ── Rematch, phase 1: propose ──────────────────────────────────────
-      // Mirrors proposeResult exactly: the first player to hit "Play Again"
-      // marks themselves as accepted and leaves the other slot pending. If
-      // both players happen to hit "Play Again" around the same time, the
-      // second proposal gets a 409 with the existing (already-pending)
-      // rematch so that caller can fall back to confirming it instead of
-      // silently clobbering it.
       if (action === 'proposeRematch') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -259,11 +251,6 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
-      // ── Rematch, phase 2: confirm ──────────────────────────────────────
-      // The other player accepts. Once both confirmedP1 and confirmedP2 are
-      // true, each device independently calls the 'rematch' action below
-      // (same as _mpApplyRemoteResult does for match results) to apply its
-      // own deck choice and reset its own life/dice.
       if (action === 'confirmRematch') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -306,7 +293,7 @@ exports.handler = async function (event) {
         room[role].dice = null;
         room[role].ts = Date.now();
         room.result = null;
-        room.rematch = null; // two-phase handshake is done -- clear it so a future rematch request starts clean
+        room.rematch = null;
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
