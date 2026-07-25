@@ -1,12 +1,20 @@
 {
-  "requestId": "1784937453512-jv91zwenmq",
-  "url": "https://curiosa.io/decks/cmq48ba9i01g604jvw3uh4uym",
-  "timestamp": "2026-07-24T23:57:08.341Z",
-  "deckName": "Crusades",
-  "author": "Duncan27",
+  "requestId": "1784955323781-zfz3zcxjlxb",
+  "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
+  "timestamp": "2026-07-25T04:56:30.246Z",
+  "deckName": "Scream!",
+  "author": "ebelious",
   "cards": [
     {
-      "name": "Savior",
+      "name": "Necromancer",
+      "qty": 1
+    },
+    {
+      "name": "Crusade",
+      "qty": 1
+    },
+    {
+      "name": "Eclipse",
       "qty": 1
     },
     {
@@ -14,151 +22,67 @@
       "qty": 1
     },
     {
-      "name": "Mix Aqua",
-      "qty": 1
-    },
-    {
-      "name": "Mix Ignis",
-      "qty": 1
-    },
-    {
       "name": "Mix Terra",
       "qty": 1
     },
     {
-      "name": "Philosopher's Stone",
-      "qty": 1
-    },
-    {
-      "name": "Excalibur",
-      "qty": 1
-    },
-    {
-      "name": "Four Waters of Paradise",
-      "qty": 1
-    },
-    {
-      "name": "Pnakotic Manuscript",
-      "qty": 1
-    },
-    {
       "name": "Toolbox",
-      "qty": 2
-    },
-    {
-      "name": "Wiccan Tools",
-      "qty": 2
-    },
-    {
-      "name": "Revered Revenant",
       "qty": 3
     },
     {
-      "name": "Highland Princess",
-      "qty": 1
-    },
-    {
-      "name": "Land Surveyor",
+      "name": "Kettletop Leprechaun",
       "qty": 3
     },
     {
-      "name": "Pied Piper of Hameln",
+      "name": "Skeleton Mage",
+      "qty": 2
+    },
+    {
+      "name": "Field Laborers",
+      "qty": 2
+    },
+    {
+      "name": "Root Spider",
+      "qty": 3
+    },
+    {
+      "name": "Screamer",
+      "qty": 3
+    },
+    {
+      "name": "Stygian Archers",
+      "qty": 3
+    },
+    {
+      "name": "Death Knight",
+      "qty": 3
+    },
+    {
+      "name": "Gargantula",
+      "qty": 2
+    },
+    {
+      "name": "Pudge Butcher",
+      "qty": 3
+    },
+    {
+      "name": "Archangel Michael",
       "qty": 1
     },
     {
-      "name": "Aino",
+      "name": "Crawling Congregation",
+      "qty": 2
+    },
+    {
+      "name": "Daperyll Vampire",
+      "qty": 3
+    },
+    {
+      "name": "Returned King",
       "qty": 1
     },
     {
-      "name": "Apprentice Wizard",
-      "qty": 1
-    },
-    {
-      "name": "Merlin",
-      "qty": 1
-    },
-    {
-      "name": "Morgana le Fay",
-      "qty": 1
-    },
-    {
-      "name": "Sir Agravaine",
-      "qty": 1
-    },
-    {
-      "name": "Sir Pelleas",
-      "qty": 1
-    },
-    {
-      "name": "The Lady of the Lake",
-      "qty": 1
-    },
-    {
-      "name": "Vengeful Heir",
-      "qty": 1
-    },
-    {
-      "name": "Doctor Demetrius",
-      "qty": 1
-    },
-    {
-      "name": "Queen Guinevere",
-      "qty": 1
-    },
-    {
-      "name": "Sir Balin",
-      "qty": 1
-    },
-    {
-      "name": "Sir Bedivere",
-      "qty": 1
-    },
-    {
-      "name": "Sir Gaheris",
-      "qty": 1
-    },
-    {
-      "name": "Sir Gawain",
-      "qty": 1
-    },
-    {
-      "name": "Sir Ironside",
-      "qty": 1
-    },
-    {
-      "name": "Sir Lamorak",
-      "qty": 1
-    },
-    {
-      "name": "Sir Morien",
-      "qty": 1
-    },
-    {
-      "name": "Sir Priamus",
-      "qty": 1
-    },
-    {
-      "name": "Dame Britomart",
-      "qty": 1
-    },
-    {
-      "name": "Faith Incarnate",
-      "qty": 1
-    },
-    {
-      "name": "Sir Galahad",
-      "qty": 1
-    },
-    {
-      "name": "Sir Tristan",
-      "qty": 1
-    },
-    {
-      "name": "Sir Lancelot",
-      "qty": 1
-    },
-    {
-      "name": "Sir Mordred",
+      "name": "Army of the Dead",
       "qty": 1
     },
     {
@@ -166,143 +90,231 @@
       "qty": 1
     },
     {
-      "name": "Dodge Roll",
-      "qty": 1
-    },
-    {
-      "name": "Browse",
-      "qty": 1
-    },
-    {
-      "name": "Pendragon Legacy",
-      "qty": 1
-    },
-    {
-      "name": "Backstab",
-      "qty": 1
-    },
-    {
-      "name": "Blink",
-      "qty": 3
-    },
-    {
-      "name": "Return to Nature",
-      "qty": 3
-    },
-    {
-      "name": "Riptide",
-      "qty": 1
-    },
-    {
-      "name": "Blaze of Glory",
-      "qty": 1
-    },
-    {
-      "name": "King's Council",
+      "name": "Conqueror Worm",
       "qty": 2
     },
     {
-      "name": "Mesmerism",
+      "name": "Dispel",
       "qty": 1
     },
     {
-      "name": "Aqueduct",
+      "name": "Gift of the Wolf",
       "qty": 3
     },
     {
-      "name": "Caerleon-Upon-Usk",
-      "qty": 1
-    },
-    {
-      "name": "Camelot",
-      "qty": 1
-    },
-    {
-      "name": "Ersatz Platz",
+      "name": "Attack by Night",
       "qty": 2
     },
     {
-      "name": "Fields of Camlann",
-      "qty": 1
-    },
-    {
-      "name": "Lighthouse",
+      "name": "Bury",
       "qty": 2
     },
     {
-      "name": "Oasis",
+      "name": "Landmass",
       "qty": 3
     },
     {
-      "name": "Observatory",
-      "qty": 1
-    },
-    {
-      "name": "Primordial Spring",
-      "qty": 1
-    },
-    {
-      "name": "Pristine Paradise",
-      "qty": 1
-    },
-    {
-      "name": "Ruins",
+      "name": "Undead Ambush",
       "qty": 3
     },
     {
-      "name": "Steppe",
+      "name": "Earthquake",
+      "qty": 2
+    },
+    {
+      "name": "Whirling Blades",
+      "qty": 2
+    },
+    {
+      "name": "Bedrock",
       "qty": 3
     },
     {
-      "name": "The Empyrean",
-      "qty": 1
-    },
-    {
-      "name": "Tintagel",
-      "qty": 1
-    },
-    {
-      "name": "Tournament Grounds",
+      "name": "Boulevard of Bones",
       "qty": 2
     },
     {
-      "name": "Valley of Delight",
+      "name": "Briar Patch",
+      "qty": 1
+    },
+    {
+      "name": "Dark Tower",
+      "qty": 1
+    },
+    {
+      "name": "Den of Evil",
+      "qty": 1
+    },
+    {
+      "name": "Fertile Earth",
+      "qty": 3
+    },
+    {
+      "name": "Fields of Phyxis",
       "qty": 2
+    },
+    {
+      "name": "Gothic Tower",
+      "qty": 1
+    },
+    {
+      "name": "Lone Tower",
+      "qty": 1
+    },
+    {
+      "name": "Mirror Realm",
+      "qty": 1
+    },
+    {
+      "name": "Mount Ussar Sanctuary",
+      "qty": 1
+    },
+    {
+      "name": "Mountain Peaks",
+      "qty": 3
+    },
+    {
+      "name": "Rift Valley",
+      "qty": 2
+    },
+    {
+      "name": "Sinkhole",
+      "qty": 2
+    },
+    {
+      "name": "Temple of Moloch",
+      "qty": 1
     },
     {
       "name": "Windmill",
+      "qty": 3
+    },
+    {
+      "name": "Wuthering Heights",
       "qty": 2
     }
   ],
   "collection": [
     {
-      "name": "Tournament Grounds",
-      "qty": 1
-    },
-    {
       "name": "Zap!",
       "qty": 1
     },
     {
-      "name": "Disenchant",
+      "name": "Blink",
       "qty": 1
     },
     {
-      "name": "Gift of the Serpent",
+      "name": "Dispel",
       "qty": 1
     },
     {
-      "name": "Boil",
+      "name": "Displace",
+      "qty": 1
+    },
+    {
+      "name": "Teleport",
+      "qty": 1
+    },
+    {
+      "name": "Bury",
+      "qty": 1
+    },
+    {
+      "name": "Grapple Shot",
+      "qty": 1
+    },
+    {
+      "name": "Landmass",
+      "qty": 1
+    },
+    {
+      "name": "Murder of Crows",
+      "qty": 1
+    },
+    {
+      "name": "Arc Lightning",
       "qty": 1
     }
   ],
   "maybeboard": [
     {
-      "name": "Pied Piper of Hameln",
+      "name": "Bedrock",
+      "qty": 3
+    },
+    {
+      "name": "Open Grave",
       "qty": 1
     },
     {
-      "name": "Sow the Earth",
+      "name": "Sinkhole",
+      "qty": 1
+    },
+    {
+      "name": "Dwarven Digging Team",
+      "qty": 1
+    },
+    {
+      "name": "Grim Reaper",
+      "qty": 1
+    },
+    {
+      "name": "Lady Iseult",
+      "qty": 1
+    },
+    {
+      "name": "Mover of Mountains",
+      "qty": 1
+    },
+    {
+      "name": "Arcade of Bones",
+      "qty": 1
+    },
+    {
+      "name": "Attack by Night",
+      "qty": 1
+    },
+    {
+      "name": "Goswhit Helmet",
+      "qty": 1
+    },
+    {
+      "name": "Kiss of Death",
+      "qty": 2
+    },
+    {
+      "name": "Raise Militia",
+      "qty": 1
+    },
+    {
+      "name": "Vanishment",
+      "qty": 1
+    },
+    {
+      "name": "Bane of Aventis",
+      "qty": 1
+    },
+    {
+      "name": "Book of the Dead",
+      "qty": 1
+    },
+    {
+      "name": "Orb of Ba'al Berith",
+      "qty": 1
+    },
+    {
+      "name": "Draconian Bonekite",
+      "qty": 1
+    },
+    {
+      "name": "King of the Realm",
+      "qty": 1
+    },
+    {
+      "name": "Craterize",
+      "qty": 1
+    },
+    {
+      "name": "The Doom of Dilmun",
       "qty": 1
     }
   ]
