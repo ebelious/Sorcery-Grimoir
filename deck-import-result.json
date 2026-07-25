@@ -1,320 +1,227 @@
 {
-  "requestId": "1784955323781-zfz3zcxjlxb",
-  "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
-  "timestamp": "2026-07-25T04:56:30.246Z",
-  "deckName": "Scream!",
+  "requestId": "1784955739037-rpql9xr7s6k",
+  "url": "https://curiosa.io/decks/cmqjztmmn016z04jp4c2sq34v",
+  "timestamp": "2026-07-25T05:03:15.361Z",
+  "deckName": "Dreched Hag",
   "author": "ebelious",
   "cards": [
     {
-      "name": "Necromancer",
+      "name": "Witch",
       "qty": 1
     },
     {
-      "name": "Crusade",
+      "name": "Aquamarine Core",
       "qty": 1
     },
     {
-      "name": "Eclipse",
+      "name": "Mix Aqua",
       "qty": 1
     },
     {
-      "name": "Mix Aer",
-      "qty": 1
-    },
-    {
-      "name": "Mix Terra",
-      "qty": 1
-    },
-    {
-      "name": "Toolbox",
-      "qty": 3
-    },
-    {
-      "name": "Kettletop Leprechaun",
-      "qty": 3
-    },
-    {
-      "name": "Skeleton Mage",
+      "name": "Torshammar Trinket",
       "qty": 2
     },
     {
-      "name": "Field Laborers",
+      "name": "The Rack",
+      "qty": 1
+    },
+    {
+      "name": "Dank Omphalos",
+      "qty": 1
+    },
+    {
+      "name": "Meat Hook",
       "qty": 2
     },
     {
-      "name": "Root Spider",
-      "qty": 3
-    },
-    {
-      "name": "Screamer",
-      "qty": 3
-    },
-    {
-      "name": "Stygian Archers",
-      "qty": 3
-    },
-    {
-      "name": "Death Knight",
-      "qty": 3
-    },
-    {
-      "name": "Gargantula",
+      "name": "Lucid Dreamers",
       "qty": 2
     },
     {
-      "name": "Pudge Butcher",
+      "name": "Polar Bears",
       "qty": 3
     },
     {
-      "name": "Archangel Michael",
-      "qty": 1
-    },
-    {
-      "name": "Crawling Congregation",
+      "name": "Polar Explorers",
       "qty": 2
     },
     {
-      "name": "Daperyll Vampire",
+      "name": "Accursed Albatross",
+      "qty": 2
+    },
+    {
+      "name": "Aino",
+      "qty": 1
+    },
+    {
+      "name": "Coy Nixie",
       "qty": 3
     },
     {
-      "name": "Returned King",
-      "qty": 1
-    },
-    {
-      "name": "Army of the Dead",
-      "qty": 1
-    },
-    {
-      "name": "King of the Realm",
-      "qty": 1
-    },
-    {
-      "name": "Conqueror Worm",
+      "name": "Fey Changeling",
       "qty": 2
     },
     {
-      "name": "Dispel",
-      "qty": 1
-    },
-    {
-      "name": "Gift of the Wolf",
+      "name": "Lugbog Cat",
       "qty": 3
     },
     {
-      "name": "Attack by Night",
+      "name": "Nelly Longarms",
+      "qty": 1
+    },
+    {
+      "name": "Abaddon Succubus",
       "qty": 2
     },
     {
-      "name": "Bury",
+      "name": "Mimic",
       "qty": 2
     },
     {
-      "name": "Landmass",
+      "name": "Ruler of Thul",
+      "qty": 1
+    },
+    {
+      "name": "Sacred Stag",
+      "qty": 2
+    },
+    {
+      "name": "Lacuna Entity",
+      "qty": 2
+    },
+    {
+      "name": "Lilith",
+      "qty": 1
+    },
+    {
+      "name": "Questing Beast",
+      "qty": 1
+    },
+    {
+      "name": "Lord of Lies",
+      "qty": 2
+    },
+    {
+      "name": "Great Old One",
+      "qty": 1
+    },
+    {
+      "name": "Pollimorph",
+      "qty": 2
+    },
+    {
+      "name": "Return to Nature",
       "qty": 3
     },
     {
-      "name": "Undead Ambush",
+      "name": "Riptide",
+      "qty": 4
+    },
+    {
+      "name": "Overflow",
+      "qty": 4
+    },
+    {
+      "name": "Swap",
       "qty": 3
     },
     {
-      "name": "Earthquake",
+      "name": "Mesmerism",
+      "qty": 1
+    },
+    {
+      "name": "Call of the Sea",
       "qty": 2
     },
     {
-      "name": "Whirling Blades",
-      "qty": 2
-    },
-    {
-      "name": "Bedrock",
+      "name": "Babbling Brook",
       "qty": 3
     },
     {
-      "name": "Boulevard of Bones",
+      "name": "Cornerstone",
       "qty": 2
     },
     {
-      "name": "Briar Patch",
-      "qty": 1
-    },
-    {
-      "name": "Dark Tower",
-      "qty": 1
-    },
-    {
-      "name": "Den of Evil",
-      "qty": 1
-    },
-    {
-      "name": "Fertile Earth",
+      "name": "Croaking Swamp",
       "qty": 3
     },
     {
-      "name": "Fields of Phyxis",
-      "qty": 2
-    },
-    {
-      "name": "Gothic Tower",
-      "qty": 1
-    },
-    {
-      "name": "Lone Tower",
-      "qty": 1
-    },
-    {
-      "name": "Mirror Realm",
-      "qty": 1
-    },
-    {
-      "name": "Mount Ussar Sanctuary",
-      "qty": 1
-    },
-    {
-      "name": "Mountain Peaks",
+      "name": "Deep Sea",
       "qty": 3
     },
     {
-      "name": "Rift Valley",
+      "name": "Floodplain",
       "qty": 2
     },
     {
-      "name": "Sinkhole",
+      "name": "Heirloom Lost",
       "qty": 2
     },
     {
-      "name": "Temple of Moloch",
+      "name": "Island Leviathan",
       "qty": 1
     },
     {
-      "name": "Windmill",
+      "name": "Kelp Cavern",
+      "qty": 2
+    },
+    {
+      "name": "Maelström",
+      "qty": 1
+    },
+    {
+      "name": "River Rapids",
+      "qty": 2
+    },
+    {
+      "name": "Summer River",
       "qty": 3
     },
     {
-      "name": "Wuthering Heights",
+      "name": "Thin Ice",
+      "qty": 2
+    },
+    {
+      "name": "Troll Bridge",
+      "qty": 2
+    },
+    {
+      "name": "Undertow",
       "qty": 2
     }
   ],
-  "collection": [
-    {
-      "name": "Zap!",
-      "qty": 1
-    },
-    {
-      "name": "Blink",
-      "qty": 1
-    },
-    {
-      "name": "Dispel",
-      "qty": 1
-    },
-    {
-      "name": "Displace",
-      "qty": 1
-    },
-    {
-      "name": "Teleport",
-      "qty": 1
-    },
-    {
-      "name": "Bury",
-      "qty": 1
-    },
-    {
-      "name": "Grapple Shot",
-      "qty": 1
-    },
-    {
-      "name": "Landmass",
-      "qty": 1
-    },
-    {
-      "name": "Murder of Crows",
-      "qty": 1
-    },
-    {
-      "name": "Arc Lightning",
-      "qty": 1
-    }
-  ],
+  "collection": [],
   "maybeboard": [
     {
-      "name": "Bedrock",
-      "qty": 3
-    },
-    {
-      "name": "Open Grave",
+      "name": "Dodge Roll",
       "qty": 1
     },
     {
-      "name": "Sinkhole",
+      "name": "Plague of Frogs",
       "qty": 1
     },
     {
-      "name": "Dwarven Digging Team",
+      "name": "Sewer Rats",
       "qty": 1
     },
     {
-      "name": "Grim Reaper",
+      "name": "Gift of the Frog",
       "qty": 1
     },
     {
-      "name": "Lady Iseult",
-      "qty": 1
-    },
-    {
-      "name": "Mover of Mountains",
-      "qty": 1
-    },
-    {
-      "name": "Arcade of Bones",
-      "qty": 1
-    },
-    {
-      "name": "Attack by Night",
-      "qty": 1
-    },
-    {
-      "name": "Goswhit Helmet",
-      "qty": 1
-    },
-    {
-      "name": "Kiss of Death",
+      "name": "Magellan Globe",
       "qty": 2
     },
     {
-      "name": "Raise Militia",
+      "name": "Blade of Thorns",
       "qty": 1
     },
     {
-      "name": "Vanishment",
+      "name": "Lake Afanc",
       "qty": 1
     },
     {
-      "name": "Bane of Aventis",
-      "qty": 1
-    },
-    {
-      "name": "Book of the Dead",
-      "qty": 1
-    },
-    {
-      "name": "Orb of Ba'al Berith",
-      "qty": 1
-    },
-    {
-      "name": "Draconian Bonekite",
-      "qty": 1
-    },
-    {
-      "name": "King of the Realm",
-      "qty": 1
-    },
-    {
-      "name": "Craterize",
-      "qty": 1
-    },
-    {
-      "name": "The Doom of Dilmun",
+      "name": "Meat Hook",
       "qty": 1
     }
   ]
