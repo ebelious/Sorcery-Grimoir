@@ -998,7 +998,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null,showResetInHeader:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -1016,7 +1016,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.resetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -3552,6 +3552,30 @@ function showTimerLogPopup(anchorEl){
 }
 
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];_renderKeepScroll();}
+// Confirmation gate for the optional header Reset button -- resetting mid-
+// match is destructive (clears life/mana/turn tracking for both players),
+// so unlike the existing main-menu Reset (a deliberate multi-tap-away
+// action), this one needs an explicit confirm step since it's always
+// visible and one tap away during active play.
+function showResetConfirm(){G.resetConfirmPopup=true;render();}
+function cancelResetConfirm(){G.resetConfirmPopup=false;render();}
+function confirmResetFromHeader(){
+  G.resetConfirmPopup=false;
+  initP(G.mode);
+  p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
+  render();
+}
+// Tracks the most recent keystroke per input id. Used by render() to decide
+// whether to preserve focus across an unrelated background render (a timer
+// tick, poll, etc. firing while the user is actively typing elsewhere) --
+// only inputs typed in very recently get refocused, so this doesn't
+// resurrect the earlier bug where a keyboard the user had already
+// dismissed (but which mobile browsers still report as "focused") kept
+// reopening on every unrelated render.
+var _lastInputTs={};
+document.addEventListener('input',function(e){
+  if(e.target&&e.target.id)_lastInputTs[e.target.id]=Date.now();
+},true);
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
 // Closes any open subtype filter dropdown, or the Sort dropdown, when the
@@ -6504,6 +6528,7 @@ function pContent(){
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
     o('<div class="slbl2">Offline Access</div>');
     o('<div class="set-row"><span>Cache by Default</span><button class="ftag'+(G.cfg.autoCache!==false?' on':'')+'" onclick="toggleAutoCache()">'+(G.cfg.autoCache!==false?'On':'Off')+'</button></div>');
     o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
@@ -7967,19 +7992,20 @@ function turnBar(){
   var _ml=G.cfg&&G.cfg.menuLeft;
   var _mbtn='<button class="menu-btn tb-menu" onclick="G.menu=true;G.navStack=[];render()">&#9776;</button>';
   var _ghost='<button class="menu-btn tb-menu" style="visibility:hidden;pointer-events:none">&#9776;</button>';
+  var _rbtn=(G.cfg&&G.cfg.showResetInHeader)?'<button class="menu-btn tb-menu" onclick="showResetConfirm()" title="Reset" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>':'';
   if(_diceHdr&&G.mode!==1){
     var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_diceRow+(_ml?'':_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_diceRow+(_ml?'':_rbtn+_mbtn)+'</div>';
   }
   if(G.cfg&&G.cfg.hideTurnBar){
     var _p0sH='<div class="tb-s"'+(G.mode===1?' style="border-right:none"':'')+'><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+(p0&&G.mode!==1?h(p0.name):'')+'</span></div>';
     var _p1sH=p1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(p1.name)+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>';
-    return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_mbtn)+'</div>';
+    return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_p0sH+_p1sH+(_ml?'':_rbtn+_mbtn)+'</div>';
   }
     var _p0s='<div class="tb-s'+(p0&&p0.phase==='active'?' act':'')+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p0)+(p0?h(p0.name):'')+' </span></div>';
   var _tn='<div class="tb-n">T '+G.turnNum+'</div>';
   var _p1s=p1?'<div class="tb-s'+(p1.phase==='active'?' act':'')+'"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+ph(p1)+h(p1.name)+'</span></div>':(G.mode===1?'<div class="tb-s"><span style="display:inline-block;transform:rotate(180deg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%">'+h(G.cfg.p2||'Player 2')+'</span></div>':'<div class="tb-s" style="pointer-events:none"></div>');
-  return '<div id="tbar">'+(_ml?_mbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_mbtn)+'</div>';
+  return '<div id="tbar">'+(_ml?_mbtn+_rbtn+_ghost:_ghost)+_p0s+_tn+_p1s+(_ml?'':_rbtn+_mbtn)+'</div>';
 }
 
 // ── SMALL DIE SVG ─────────────────────────────────────────────────────────────
@@ -8200,6 +8226,12 @@ function render(){
       o('</div></div></div>');
     }
 
+    if(G.resetConfirmPopup){
+      o('<div class="ov" onclick="if(event.target===this)cancelResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset Match?</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">This will reset life, mana, and turn tracking for both players.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="cancelResetConfirm()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="confirmResetFromHeader()">Reset</button></div></div></div>');
+    }
+
     if(G.evLocPopup){
       o('<div class="ov" onclick="if(event.target===this)evCloseLocPopup()"><div class="log-pop" style="text-align:left;max-width:320px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Set Location</div><div class="lp-b">');
       o('<select class="fi" style="width:100%;box-sizing:border-box;margin-bottom:8px" onclick="event.stopPropagation()" onchange="G.evLocDraftCountry=this.value;G.evLocDraftState=\'\';render()">');
@@ -8353,9 +8385,22 @@ function render(){
     }
     var _scEl=document.querySelector('.cm')||document.querySelector('.panel');
     var _scTop=_scEl?_scEl.scrollTop:null;
+    var _ae=document.activeElement;
+    var _refocusId=null,_refocusPos=0;
+    if(_ae&&_ae.id&&(_ae.tagName==='INPUT'||_ae.tagName==='TEXTAREA')&&_lastInputTs[_ae.id]&&(Date.now()-_lastInputTs[_ae.id])<2500){
+      _refocusId=_ae.id;
+      try{_refocusPos=_ae.selectionStart;}catch(e){}
+    }
     document.getElementById('app').innerHTML=out.join('');
 
     bindSearchInputs();
+    if(_refocusId){
+      var _refocusEl=document.getElementById(_refocusId);
+      if(_refocusEl&&(_refocusEl.tagName==='INPUT'||_refocusEl.tagName==='TEXTAREA')){
+        _refocusEl.focus();
+        try{_refocusEl.setSelectionRange(_refocusPos,_refocusPos);}catch(e){}
+      }
+    }
     if(_scTop!==null){
       requestAnimationFrame(function(){
         var _scEl2=document.querySelector('.cm')||document.querySelector('.panel');
