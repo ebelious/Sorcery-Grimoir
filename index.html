@@ -6123,7 +6123,10 @@ function _comDeckApiExtract(data){
   try{candidates.push(data[0].result.data);}catch(e){}
   try{candidates.push(data.result.data.json.decks);}catch(e){}
   try{candidates.push(data.decks);}catch(e){}
-  for(var i=0;i<candidates.length;i++){if(Array.isArray(candidates[i])&&candidates[i].length)return candidates[i];}
+  // An empty array is still a recognized, valid shape -- it just means the
+  // search genuinely found zero decks. Only candidates that aren't arrays
+  // at all count as "shape not recognized".
+  for(var i=0;i<candidates.length;i++){if(Array.isArray(candidates[i]))return candidates[i];}
   return null;
 }
 function _comDeckApiNormalize(d){
