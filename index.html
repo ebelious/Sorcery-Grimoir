@@ -770,7 +770,7 @@ function _ensureDieColorsDiffer(){
   }
 }
 var MENU_S={
-  Settings:['Starting Life','Player name','Interface'],
+  Settings:['Interface'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
@@ -1300,6 +1300,16 @@ function saveNames(){
   if(v1!==undefined){v1=v1.trim()||'Player 2';G.cfg.p2=v1;if(G.players[1])G.players[1].name=v1;}
   sv('sg-cfg',G.cfg);
   goBack();
+}
+// Same save logic as saveNames(), but for the Player Name field now embedded
+// inline in Interface Settings -- stays on the panel afterward instead of
+// navigating away, since goBack() would kick the user out of Interface
+// Settings entirely rather than just confirming the save.
+function saveNamesInline(){
+  var v0=(document.getElementById('ni0')||{}).value;
+  if(v0!==undefined){v0=v0.trim()||'Player 1';G.cfg.p1=v0;if(G.players[0])G.players[0].name=v0;}
+  sv('sg-cfg',G.cfg);
+  _renderKeepScroll();
 }
 function showLog(li){
   var wi=li===0?1:0;
@@ -3552,29 +3562,32 @@ function showTimerLogPopup(anchorEl){
 }
 
 function toggleAcc(key){G.accExp[key]=!G.accExp[key];_renderKeepScroll();}
-// Confirmation gate for the optional header Reset button -- resetting mid-
-// match is destructive (clears life/mana/turn tracking for both players),
-// so unlike the existing main-menu Reset (a deliberate multi-tap-away
-// action), this one needs an explicit confirm step since it's always
-// visible and one tap away during active play.
+// Confirmation gate shared by both Reset buttons (the optional header one
+// and the main-menu one) -- resetting mid-match is destructive (clears
+// life/mana/turn tracking for both players), so both get an explicit
+// confirm step instead of resetting immediately on tap.
 function showResetConfirm(){G.resetConfirmPopup=true;render();}
 function cancelResetConfirm(){G.resetConfirmPopup=false;render();}
 function confirmResetFromHeader(){
   G.resetConfirmPopup=false;
   initP(G.mode);
   p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));
+  G.menu=false;
   render();
 }
-// Tracks the most recent keystroke per input id. Used by render() to decide
-// whether to preserve focus across an unrelated background render (a timer
-// tick, poll, etc. firing while the user is actively typing elsewhere) --
-// only inputs typed in very recently get refocused, so this doesn't
-// resurrect the earlier bug where a keyboard the user had already
-// dismissed (but which mobile browsers still report as "focused") kept
-// reopening on every unrelated render.
+// Tracks the most recent keystroke OR focus per input id. Used by render()
+// to decide whether to preserve focus across an unrelated background
+// render (a timer tick, poll, etc. firing right after the user taps into
+// an input, or while actively typing) -- only inputs interacted with very
+// recently get refocused, so this doesn't resurrect the earlier bug where
+// a keyboard the user had already dismissed (but which mobile browsers
+// still report as "focused") kept reopening on every unrelated render.
 var _lastInputTs={};
 document.addEventListener('input',function(e){
   if(e.target&&e.target.id)_lastInputTs[e.target.id]=Date.now();
+},true);
+document.addEventListener('focus',function(e){
+  if(e.target&&e.target.id&&(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'))_lastInputTs[e.target.id]=Date.now();
 },true);
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
@@ -6498,6 +6511,11 @@ function pContent(){
     return out.join('');}
   if(p==='themes'){
     o('<div class="set-pop">');
+    o('<div class="slbl2">Starting Life</div>');
+    o('<div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:6px"><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">-</button><span style="font-size:32px;font-weight:700;color:var(--fg);min-width:50px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">+</button></div>');
+    o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-bottom:14px">Applied on next Reset</div>');
+    o('<div class="slbl2">Player Name</div>');
+    o('<div class="fr" style="margin-bottom:14px"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:16px;padding:10px 12px"><button class="fb gold" style="font-size:13px;padding:0 14px" onclick="saveNamesInline()">Save</button></div>');
     o('<div class="slbl2">UI Layouts</div>');
     o('<div style="display:flex;gap:8px;margin-bottom:14px">');
     o('<button class="fb full" style="flex:1" onclick="p1LayoutCompetitive()">Competitive</button>');
@@ -6527,8 +6545,6 @@ function pContent(){
       o('</div>');
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
     o('<div class="slbl2">Offline Access</div>');
     o('<div class="set-row"><span>Cache by Default</span><button class="ftag'+(G.cfg.autoCache!==false?' on':'')+'" onclick="toggleAutoCache()">'+(G.cfg.autoCache!==false?'On':'Off')+'</button></div>');
     o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
@@ -6562,6 +6578,8 @@ function pContent(){
     o('<div class="set-row"><span>YouTube</span><button class="ftag'+(G.cfg.pushYoutube?' on':'')+'" onclick="togglePushTopic(\'youtube\')">'+(G.cfg.pushYoutube?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Rewards</span><button class="ftag'+(G.cfg.pushRewards?' on':'')+'" onclick="togglePushTopic(\'rewards\')">'+(G.cfg.pushRewards?'On':'Off')+'</button></div>');
     o('<div class="slbl2">UI Buttons</div>');
+    o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
@@ -8229,7 +8247,7 @@ function render(){
     if(G.resetConfirmPopup){
       o('<div class="ov" onclick="if(event.target===this)cancelResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset Match?</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">This will reset life, mana, and turn tracking for both players.</div>');
-      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="cancelResetConfirm()">Cancel</button><button class="lp-btn ok" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="confirmResetFromHeader()">Reset</button></div></div></div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="cancelResetConfirm()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--hi);color:var(--fg)" onclick="confirmResetFromHeader()">Reset</button></div></div></div>');
     }
 
     if(G.evLocPopup){
@@ -8327,12 +8345,13 @@ function render(){
       o('<div class="dhead"><div class="si"><input id="gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'">');
       if(S.gs)o('<button class="sx" id="gs-clr" style="color:var(--hi);font-size:30px">&times;</button>');
       if(gsDrop)o('<div class="sdd">'+gsDrop+'</div>');
-      o('</div><div class="qrow"><button class="qbtn on" style="font-size:15px;display:flex;align-items:center;justify-content:center'+(G.mpRoom?';opacity:.4':'')+'"'+(G.mpRoom?' disabled title="Connect matches use 1 Player mode"':' onclick="switchMode(G.mode===1?2:1);render()"')+' title="'+(G.mode===2?'2 Player':'1 Player')+'">'+(G.mode===2?'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>')+'</button><button class="qbtn" style="font-size:15px;display:flex;align-items:center;justify-content:center" onclick="initP(G.mode);p1TimerReset(!!(G.cfg&&G.cfg.hideTurnBar));G.menu=false;render()" title="Reset"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px;display:flex;align-items:center;justify-content:center" onclick="showTimerPopup(this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button><button class="qbtn" style="font-size:20px" onclick="openPanel(\'connect\')" title="Connect">&#9876;</button></div></div>');
+      o('</div><div class="qrow"><button class="qbtn on" style="font-size:15px;display:flex;align-items:center;justify-content:center'+(G.mpRoom?';opacity:.4':'')+'"'+(G.mpRoom?' disabled title="Connect matches use 1 Player mode"':' onclick="switchMode(G.mode===1?2:1);render()"')+' title="'+(G.mode===2?'2 Player':'1 Player')+'">'+(G.mode===2?'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>')+'</button><button class="qbtn" style="font-size:15px;display:flex;align-items:center;justify-content:center" onclick="showResetConfirm()" title="Reset"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button><button class="qbtn'+(G.cfg.keepAwake?' on':'')+'" style="font-size:20px" onclick="G.cfg.keepAwake=!G.cfg.keepAwake;sv(\'sg-cfg\',G.cfg);if(G.cfg.keepAwake)_requestWakeLock();else _releaseWakeLock();render()">&#x2600;</button><button class="qbtn" style="font-size:20px;display:flex;align-items:center;justify-content:center" onclick="showTimerPopup(this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button><button class="qbtn" style="font-size:20px" onclick="openPanel(\'connect\')" title="Connect">&#9876;</button></div></div>');
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
         var _catDot=((cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))||(cat==='Play Network'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
         if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
+        else if(cat==='Settings'){o('<div class="cro" onclick="openPanel(\'themes\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
       if(!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){
