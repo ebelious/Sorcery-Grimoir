@@ -2,7 +2,7 @@ name: Scrape Sorcery Events
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # every 6 hours, matching scrape-news.yml
+    - cron: '0 */4 * * *'   # every 4 hours
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 jobs:
@@ -21,17 +21,19 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install playwright
+          npm install playwright firebase-admin
           npx playwright install chromium --with-deps
 
       - name: Run scraper
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: node scrape-events.js
 
-      - name: Commit events.json / events-geocode-cache.json if changed
+      - name: Commit events.json / state files if changed
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add events.json events-geocode-cache.json
+          git add events.json events-geocode-cache.json events-seen-state.json
           git diff --staged --quiet || git commit -m "chore: update events.json [skip ci]"
           for i in 1 2 3 4 5; do
             git push && break
