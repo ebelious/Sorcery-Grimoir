@@ -962,7 +962,7 @@ var G={
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
-  mpMatchAcceptWaiting:false,mpDeclinedByName:null,
+  mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -1059,7 +1059,7 @@ function closeReadModal(){
 function boot(){
   G.theme=ld('sg-th','');G.records=ld('sg-rec',{});G.coll=ld('sg-co',{});
   G.decks=ld('sg-dk',{});G.dkstat=ld('sg-ds',{});
-  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null,showResetInHeader:false,showConnectInHeader:false,showTimerInHeader:false});
+  G.cfg=ld('sg-cfg',{maxLife:20,p1:'Player 1',p2:'Player 2',roundedCorners:true,menuLeft:false,layout:'tap',keepAwake:false,p1Flip:false,plainFont:false,vibrate:true,diceLeft:true,p1BtnLeft:false,bgImage:null,hi:'#68A8E4',hiOverride:true,hideTurnBar:true,diceInHeader:true,notifications:true,pushNews:true,pushDiscord:true,pushYoutube:true,pushRewards:true,autoCache:true,evCountry:'',evState:'',evCityCfg:'',evLat:null,evLng:null,showResetInHeader:false,showConnectInHeader:false,showTimerInHeader:false,showSearchInHeader:false});
   G.matchLog=ld('sg-ml',[]);
   G.vdice=ld('sg-vd',{4:false,6:false,8:false,10:false,12:false,20:true,'2d6':false,'custom':false});
   if(G.vdice.custom===undefined)G.vdice.custom=false;
@@ -1077,7 +1077,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -6478,7 +6478,7 @@ function loadPubStats(){
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 function openPanel(id){
   vibrate(10);
-  _evACSeq++;G.evAcResults=[];G.evInputFocused=false;
+  _evACSeq++;G.evAcResults=[];G.evInputFocused=false;G.headerSearchOpen=false;
   if(id==='news'){G.newsHasNew=false;if(G.newsItems&&G.newsItems.length){var l=G.newsItems[0].url||G.newsItems[0].title;if(l)sv('sg-news-seen',l);}}
   if(id==='yt'){G.ytHasNew=false;if(G.ytVids&&G.ytVids.length&&(G.ytCh||'all')==='all'){var lv=G.ytVids[0].videoId||G.ytVids[0].id;if(lv)sv('sg-yt-seen',lv);}}
   if(id==='discord'){G.discordHasNew=false;if(G.discordItems&&G.discordItems.length){var ld2=G.discordItems[0].id;if(ld2)sv('sg-discord-seen',ld2);}}
@@ -6598,10 +6598,10 @@ function pContent(){
   if(p==='themes'){
     o('<div class="set-pop">');
     o('<div class="slbl2">Starting Life</div>');
-    o('<div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:6px"><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.max(1,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">-</button><span style="font-size:32px;font-weight:700;color:var(--fg);min-width:50px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife+=5;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">+</button></div>');
+    o('<div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:6px"><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.max(10,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">-</button><span style="font-size:32px;font-weight:700;color:var(--fg);min-width:50px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.min(60,G.cfg.maxLife+5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">+</button></div>');
     o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-bottom:14px">Applied on next Reset</div>');
     o('<div class="slbl2">Player Name</div>');
-    o('<div class="fr" style="margin-bottom:14px"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:16px;padding:10px 12px"><button class="fb gold" style="font-size:13px;padding:0 14px" onclick="saveNamesInline()">Save</button></div>');
+    o('<div class="fr" style="margin-bottom:14px"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:16px;padding:10px 12px"><button class="fb" style="font-size:11px;padding:8px 14px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase;background:transparent" onclick="saveNamesInline()">Save</button></div>');
     o('<div class="slbl2">UI Layouts</div>');
     o('<div style="display:flex;gap:8px;margin-bottom:14px">');
     o('<button class="fb full" style="flex:1" onclick="p1LayoutCompetitive()">Competitive</button>');
@@ -6668,6 +6668,7 @@ function pContent(){
     o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Connect Button in Header</span><button class="ftag'+(G.cfg.showConnectInHeader?' on':'')+'" onclick="G.cfg.showConnectInHeader=!G.cfg.showConnectInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showConnectInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Timer Button in Header</span><button class="ftag'+(G.cfg.showTimerInHeader?' on':'')+'" onclick="G.cfg.showTimerInHeader=!G.cfg.showTimerInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showTimerInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Global Search Button in Header</span><button class="ftag'+(G.cfg.showSearchInHeader?' on':'')+'" onclick="G.cfg.showSearchInHeader=!G.cfg.showSearchInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showSearchInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
@@ -8111,7 +8112,19 @@ function turnBar(){
   var _rbtn=(G.cfg&&G.cfg.showResetInHeader)?'<button class="menu-btn tb-menu" onclick="showResetConfirm()" title="Reset" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>':'';
   var _cbtn=(G.cfg&&G.cfg.showConnectInHeader)?'<button class="menu-btn tb-menu" onclick="openPanel(\'connect\')" title="Connect" style="display:flex;align-items:center;justify-content:center;font-size:15px">&#9876;</button>':'';
   var _tbtn=(G.cfg&&G.cfg.showTimerInHeader)?'<button class="menu-btn tb-menu" onclick="showTimerPopup(this)" title="Timer" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button>':'';
-  var _hdrBtns=_rbtn+_cbtn+_tbtn;
+  var _sbtn=(G.cfg&&G.cfg.showSearchInHeader)?'<button class="menu-btn tb-menu" onclick="G.headerSearchOpen=true;render()" title="Search" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>':'';
+  var _hdrBtns=_rbtn+_cbtn+_tbtn+_sbtn;
+  if(G.headerSearchOpen){
+    var _hgsDrop=S.gsDrop&&S.gs?buildGsDrop():'';
+    return '<div id="tbar" style="padding:4px 6px;gap:4px">'
+      +'<div class="si" style="flex:1;position:relative;min-width:0">'
+      +'<input id="hdr-gs-inp" placeholder="Cards, FAQ, Codex&hellip;" value="'+h(S.gs)+'" style="width:100%;box-sizing:border-box">'
+      +(S.gs?'<button class="sx" id="hdr-gs-clr" style="color:var(--hi);font-size:24px">&times;</button>':'')
+      +(_hgsDrop?'<div class="sdd">'+_hgsDrop+'</div>':'')
+      +'</div>'
+      +'<button class="menu-btn tb-menu" onclick="G.headerSearchOpen=false;S.gs=\'\';S.gsDrop=false;render()" title="Close Search">&times;</button>'
+      +'</div>';
+  }
   if(_diceHdr&&G.mode!==1){
     var _diceRow='<div style="flex:1;display:flex;gap:4px;align-items:center;justify-content:center;overflow-x:auto">'+diceHdrHTML()+'</div>';
     return '<div id="tbar">'+(_ml?_mbtn+_hdrBtns+_ghost:_ghost)+_diceRow+(_ml?'':_hdrBtns+_mbtn)+'</div>';
@@ -8257,6 +8270,36 @@ function updateGsDrop(){
       gc=document.createElement('button');
       gc.className='sx';gc.id='gs-clr';gc.innerHTML='&times;';
       gc.style.color='var(--hi)';gc.style.fontSize='30px';
+      gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
+      si.insertBefore(gc,inp.nextSibling);
+    }
+  } else if(gc){
+    gc.remove();
+  }
+}
+// Mirrors updateGsDrop() exactly, but for the expanded header search bar
+// (id="hdr-gs-inp") -- kept as a separate function/element id rather than
+// reusing "gs-inp" since the header search and the menu drawer's search
+// could theoretically both exist in the DOM at once.
+function updateHdrGsDrop(){
+  var inp=document.getElementById('hdr-gs-inp');
+  if(!inp)return;
+  var si=inp.parentElement;
+  if(!si)return;
+  var sdd=si.querySelector('.sdd');
+  var dropHtml=S.gsDrop&&S.gs?buildGsDrop():'';
+  if(dropHtml){
+    if(!sdd){sdd=document.createElement('div');sdd.className='sdd';si.appendChild(sdd);}
+    sdd.innerHTML=dropHtml;
+  } else if(sdd){
+    sdd.remove();
+  }
+  var gc=document.getElementById('hdr-gs-clr');
+  if(S.gs){
+    if(!gc){
+      gc=document.createElement('button');
+      gc.className='sx';gc.id='hdr-gs-clr';gc.innerHTML='&times;';
+      gc.style.color='var(--hi)';gc.style.fontSize='24px';
       gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
       si.insertBefore(gc,inp.nextSibling);
     }
@@ -8564,12 +8607,20 @@ function bindSearchInputs(){
     el._b=function(){S.gs=el.value;S.gsDrop=true;updateGsDrop();};
     el.addEventListener('input',el._b);
   })();
+  (function(){
+    var el=document.getElementById('hdr-gs-inp');
+    if(!el)return;
+    if(el._b)el.removeEventListener('input',el._b);
+    el._b=function(){S.gs=el.value;S.gsDrop=true;updateHdrGsDrop();};
+    el.addEventListener('input',el._b);
+  })();
   bind('card-srch',function(v){S.cS=v;});
   bind('coll-srch',function(v){S.coS=v;});
   bind('faq-srch',function(v){S.faqQ=v;});
   bind('codex-srch',function(v){S.codexQ=v;});
   bind('art-srch',function(v){S.artQ=v;});
   var gc=document.getElementById('gs-clr');if(gc)gc.onclick=function(){S.gs='';S.gsDrop=false;render();};
+  var hgc=document.getElementById('hdr-gs-clr');if(hgc)hgc.onclick=function(){S.gs='';S.gsDrop=false;render();};
 }
 
 function _randElem(){
