@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-24T21:25:45.286Z",
+  "updated": "2026-07-25T03:15:54.764Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -88,23 +88,6 @@
       "url": "https://play.sorcerytcg.com/events/2a3b954a-f79f-4314-b7ed-b3de37dfc97b"
     },
     {
-      "name": "Casual Sorcery",
-      "date": "Fri. Jul 24, 2026",
-      "time": "9:00 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Ashland, OH",
-      "city": "Ashland",
-      "state": "OH",
-      "lat": 40.7887367,
-      "lng": -82.2360391,
-      "address": "16 Hedstrom Drive Ashland OH 44805",
-      "description": "",
-      "storeName": "The Eldritch Bastion",
-      "url": "https://play.sorcerytcg.com/events/57f4e7b0-48ff-45a5-9a44-bfc783763d9b"
-    },
-    {
       "name": "Friday Afternnon Meet Up",
       "date": "Jul 24, 2026 - Jul 25, 2026",
       "time": "9:00 PM UTC",
@@ -156,21 +139,21 @@
       "url": "https://play.sorcerytcg.com/events/2a912c0f-2bc6-45ba-b086-181327fdab9c"
     },
     {
-      "name": "Casual Meetup",
+      "name": "Impromptu Casual Sorcery",
       "date": "Jul 24, 2026 - Jul 25, 2026",
-      "time": "10:30 PM UTC",
+      "time": "10:09 PM UTC",
       "type": "Casual Meetup",
       "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Charlotte, NC",
-      "city": "Charlotte",
-      "state": "NC",
-      "lat": 35.2272086,
-      "lng": -80.8430827,
-      "address": "227 Southside Drive Charlotte NC 28217",
+      "duration": "",
+      "location": "Powder Springs, GA",
+      "city": "Powder Springs",
+      "state": "GA",
+      "lat": 33.8595492,
+      "lng": -84.683824,
+      "address": "5780 C.H. James Parkway 230 Powder Springs GA 30127",
       "description": "",
-      "storeName": "Cosmic Hearth Games",
-      "url": "https://play.sorcerytcg.com/events/14623513-ba19-4574-9078-42e0a9f677de"
+      "storeName": "SilverShield Gaming",
+      "url": "https://play.sorcerytcg.com/events/2587d14b-9e9e-49e3-b2cf-d07585b038ba"
     },
     {
       "name": "Friday Night Constructed @ Guardian Cards & Comics",
@@ -241,6 +224,23 @@
       "url": "https://play.sorcerytcg.com/events/636477fd-38b7-4973-8ee6-124808b916b5"
     },
     {
+      "name": "Casual Meetup",
+      "date": "Jul 24, 2026 - Jul 25, 2026",
+      "time": "11:00 PM UTC",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Charlotte, NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "lat": 35.2272086,
+      "lng": -80.8430827,
+      "address": "227 Southside Drive Charlotte NC 28217",
+      "description": "",
+      "storeName": "Cosmic Hearth Games",
+      "url": "https://play.sorcerytcg.com/events/14623513-ba19-4574-9078-42e0a9f677de"
+    },
+    {
       "name": "Gothic Sealed Store Tournament",
       "date": "Jul 24, 2026 - Jul 25, 2026",
       "time": "11:00 PM UTC",
@@ -292,6 +292,23 @@
       "url": "https://play.sorcerytcg.com/events/cdeb5fb4-d7fc-4e94-bf08-45e85a88db78"
     },
     {
+      "name": "Friday Night Gothic Draft",
+      "date": "Jul 24, 2026 - Jul 25, 2026",
+      "time": "11:30 PM UTC",
+      "type": "Draft Tournament",
+      "price": "FREE",
+      "duration": "60 Minutes",
+      "location": "St. Louis, MO",
+      "city": "St. Louis",
+      "state": "MO",
+      "lat": 38.6254063,
+      "lng": -90.190009,
+      "address": "8380 Watson Road St. Louis MO 63119",
+      "description": "",
+      "storeName": "Game Nite",
+      "url": "https://play.sorcerytcg.com/events/35530b81-a4dc-4b41-9071-2220fece64be"
+    },
+    {
       "name": "Stevenson Games Sorcery",
       "date": "Fri. Jul 24, 2026",
       "time": "11:35 PM UTC",
@@ -324,6 +341,23 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/8b21b2c1-07d0-44ee-aa75-16a17318cfb6"
+    },
+    {
+      "name": "Sorcery no Happy",
+      "date": "Jul 24, 2026 - Jul 25, 2026",
+      "time": "11:36 PM UTC",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "45 Minutes",
+      "location": "Niterói, RS",
+      "city": "Niterói",
+      "state": "RS",
+      "lat": -29.9512384,
+      "lng": -51.1648792,
+      "address": "1163 R. Venâncio Aires Niterói RS 92110-000",
+      "description": "",
+      "storeName": "Filhos de Rívia",
+      "url": "https://play.sorcerytcg.com/events/be890fca-cfef-4a48-bb93-ed7f8a85040e"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -341,40 +375,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0aeb2442-1680-4204-8048-ed8fb830cee7"
-    },
-    {
-      "name": "$10 Constructed event",
-      "date": "Sat. Jul 25, 2026",
-      "time": "12:00 AM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "60 Minutes",
-      "location": "Round Rock, TX",
-      "city": "Round Rock",
-      "state": "TX",
-      "lat": 30.5085915,
-      "lng": -97.6788056,
-      "address": "$10 Constructed event",
-      "description": "",
-      "storeName": "Bell's Gaming Center",
-      "url": "https://play.sorcerytcg.com/events/7696f083-d705-4d96-9996-3cc4faac24e1"
-    },
-    {
-      "name": "Social Play",
-      "date": "Sat. Jul 25, 2026",
-      "time": "12:00 AM UTC",
-      "type": "Ironheade Video Games",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "Port Orchard, WA",
-      "city": "Port Orchard",
-      "state": "WA",
-      "lat": 47.5315625,
-      "lng": -122.6384056,
-      "address": "1700 SE Mile Hill Dr Suite 136 Port Orchard WA 98366",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ecf31504-f48e-4b4a-89d8-6238e678ca66"
     },
     {
       "name": "Melbourne GRAND CONTEST 25-26 July 2026",
@@ -426,57 +426,6 @@
       "description": "",
       "storeName": "Puddletown Games & Puzzles",
       "url": "https://play.sorcerytcg.com/events/66ae947f-766e-4517-bb9f-dc837978708d"
-    },
-    {
-      "name": "Sorcery Open Play Casual Meetup",
-      "date": "Sat. Jul 25, 2026",
-      "time": "1:00 AM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Chandler, AZ",
-      "city": "Chandler",
-      "state": "AZ",
-      "lat": 33.3062031,
-      "lng": -111.841185,
-      "address": "1371 North Alma School Road Chandler AZ 85224",
-      "description": "",
-      "storeName": "Mox Boarding House Chandler",
-      "url": "https://play.sorcerytcg.com/events/78c400a2-60de-478f-9c12-ce8c187f3059"
-    },
-    {
-      "name": "60/30/10 (aka Benchmark)",
-      "date": "Sat. Jul 25, 2026",
-      "time": "1:30 AM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "60/30/10 (aka Benchmark)",
-      "description": "",
-      "storeName": "Hammerhead Games",
-      "url": "https://play.sorcerytcg.com/events/d535527b-57c9-4de1-943f-7055a49a1b76"
-    },
-    {
-      "name": "Sorcery Constructed",
-      "date": "Sat. Jul 25, 2026",
-      "time": "1:30 AM UTC",
-      "type": "A Hidden Fortress",
-      "price": "Constructed Tournament",
-      "duration": "60 Minutes",
-      "location": "Simi Valley, CA",
-      "city": "Simi Valley",
-      "state": "CA",
-      "lat": 34.2677404,
-      "lng": -118.7538071,
-      "address": "1960 Sequoia Avenue #10 Simi Valley CA 93063",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2a7c2f29-d5b1-4d07-987b-9055edb9a724"
     }
   ]
 }
