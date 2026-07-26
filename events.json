@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-26T17:05:13.084Z",
+  "updated": "2026-07-26T21:01:06.879Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -105,23 +105,6 @@
       "url": "https://play.sorcerytcg.com/events/18e114db-8ab4-4c7e-8fe9-d905dfb8ea08"
     },
     {
-      "name": "sunday sorecery at cardboard castle",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Augusta, GA",
-      "city": "Augusta",
-      "state": "GA",
-      "lat": 33.4709714,
-      "lng": -81.9748429,
-      "address": "3836 Washington Road #9 Augusta GA 30907",
-      "description": "",
-      "storeName": "Cardboard Castle Games",
-      "url": "https://play.sorcerytcg.com/events/12369896-0241-439d-9f36-095406b144a4"
-    },
-    {
       "name": "Sunday Afternoon - Learn to Play 12PM-3PM",
       "date": "Sun. Jul 26, 2026",
       "time": "5:00 PM UTC",
@@ -142,8 +125,8 @@
       "name": "Sunday Casual Play",
       "date": "Sun. Jul 26, 2026",
       "time": "5:00 PM UTC",
-      "type": "Lifelink Games",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Charlottesville, VA",
       "city": "Charlottesville",
@@ -152,25 +135,8 @@
       "lng": -78.4766781,
       "address": "257 Connor Drive B Charlottesville VA 22911",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Lifelink Games",
       "url": "https://play.sorcerytcg.com/events/cf4ad664-8063-46f4-88ac-53a2da622b6e"
-    },
-    {
-      "name": "Dragons Lair - Gothic Kit 8 Player Casual Constructed",
-      "date": "Sun. Jul 26, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Austin, TX",
-      "city": "Austin",
-      "state": "TX",
-      "lat": 30.2711286,
-      "lng": -97.7436995,
-      "address": "2438 West Anderson Lane b1 Austin TX 78757",
-      "description": "",
-      "storeName": "Dragon's Lair Comics and Fantasy (Austin)",
-      "url": "https://play.sorcerytcg.com/events/66201e43-e018-44e2-a425-fa63fef9108d"
     },
     {
       "name": "Sorcery Sunday KC!!",
@@ -207,23 +173,6 @@
       "url": "https://play.sorcerytcg.com/events/c5951b8f-2c0d-422c-8d68-d81ad3c0cfe3"
     },
     {
-      "name": "Sunday Afternoon Sorcery Constructed",
-      "date": "Sun. Jul 26, 2026",
-      "time": "6:00 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Rochester, MN",
-      "city": "Rochester",
-      "state": "MN",
-      "lat": 44.0234387,
-      "lng": -92.4630182,
-      "address": "511 Northern Hills Dr NE Suite 7 Rochester MN 55906",
-      "description": "",
-      "storeName": "Gamez & More",
-      "url": "https://play.sorcerytcg.com/events/b1ce4c36-7ca4-4113-bd39-0ac1e7ec7cad"
-    },
-    {
       "name": "Sorcery: Contested Realm play",
       "date": "Sun. Jul 26, 2026",
       "time": "6:00 PM UTC",
@@ -239,23 +188,6 @@
       "description": "",
       "storeName": "Gamers' Haunt",
       "url": "https://play.sorcerytcg.com/events/6eca65b9-11e1-4393-bed9-79af8d42e9a6"
-    },
-    {
-      "name": "Weekly Play",
-      "date": "Sun. Jul 26, 2026",
-      "time": "6:52 PM UTC",
-      "type": "SilverShield Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Powder Springs, GA",
-      "city": "Powder Springs",
-      "state": "GA",
-      "lat": 33.8595492,
-      "lng": -84.683824,
-      "address": "5780 C.H. James Parkway 230 Powder Springs GA 30127",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a54489e3-9c9c-44e0-ae97-f0a722e274e8"
     },
     {
       "name": "Sorcery Constructed Tournament",
@@ -278,8 +210,8 @@
       "name": "Sunday Constructed Sorcery",
       "date": "Sun. Jul 26, 2026",
       "time": "7:00 PM UTC",
-      "type": "Local Legends",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "45 Minutes",
       "location": "Fremont, IN",
       "city": "Fremont",
@@ -288,25 +220,8 @@
       "lng": -84.9327395,
       "address": "655 Indiana 120 suite a2 Fremont IN 46737",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Local Legends",
       "url": "https://play.sorcerytcg.com/events/2d311aa3-b817-4962-ad75-d96cfc6ca6a1"
-    },
-    {
-      "name": "Chaos Sealed",
-      "date": "Sun. Jul 26, 2026",
-      "time": "7:00 PM UTC",
-      "type": "Sealed Tournament",
-      "price": "FREE",
-      "duration": "60 Minutes",
-      "location": "San Antonio, TX",
-      "city": "San Antonio",
-      "state": "TX",
-      "lat": 29.4246002,
-      "lng": -98.4951405,
-      "address": "5251 Timberhill Drive Ste 104 San Antonio TX 78238",
-      "description": "",
-      "storeName": "Shenanigans Gaming LLC",
-      "url": "https://play.sorcerytcg.com/events/af9355db-86db-4276-8719-14312b1367c5"
     },
     {
       "name": "Sorcery Sunday",
@@ -343,23 +258,6 @@
       "url": "https://play.sorcerytcg.com/events/6f6eb148-e1b8-4caa-9661-ceb5764fc72b"
     },
     {
-      "name": "Cornerstone 2026",
-      "date": "Sun. Jul 26, 2026",
-      "time": "7:29 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Mérida, Yuc.",
-      "city": "Mérida",
-      "state": "Yuc.",
-      "lat": 20.9670759,
-      "lng": -89.6237402,
-      "address": "6 Calle 50 Mérida Yuc. 97220",
-      "description": "",
-      "storeName": "Alternative Reality",
-      "url": "https://play.sorcerytcg.com/events/aea48f8e-795f-4ec1-afae-fb00fe85b3d2"
-    },
-    {
       "name": "Utopia Games Sorcery day",
       "date": "Sun. Jul 26, 2026",
       "time": "7:30 PM UTC",
@@ -394,21 +292,21 @@
       "url": "https://play.sorcerytcg.com/events/8da948cc-106a-416b-9ce2-81b0369abd06"
     },
     {
-      "name": "Dane's Games Weekly Play",
-      "date": "Sun. Jul 26, 2026",
-      "time": "8:00 PM UTC",
-      "type": "Constructed Tournament",
+      "name": "Alpha Draft",
+      "date": "Jul 26, 2026 - Jul 27, 2026",
+      "time": "8:15 PM UTC",
+      "type": "Draft Tournament",
       "price": "FREE",
       "duration": "60 Minutes",
-      "location": "West Chicago, IL",
-      "city": "West Chicago",
-      "state": "IL",
-      "lat": 41.8847507,
-      "lng": -88.2039607,
-      "address": "1895 North Neltnor Boulevard West Chicago IL 60185",
+      "location": "Bentonville, AR",
+      "city": "Bentonville",
+      "state": "AR",
+      "lat": 36.3728608,
+      "lng": -94.208787,
+      "address": "1400 Southeast Walton Boulevard Bentonville AR 72712",
       "description": "",
-      "storeName": "Dane's Games",
-      "url": "https://play.sorcerytcg.com/events/c211a518-44e6-4221-8e4a-76c1815ab9e4"
+      "storeName": "Gear Gaming Store",
+      "url": "https://play.sorcerytcg.com/events/a45f1796-6a7d-45b6-a3d4-06a9581aa8f5"
     },
     {
       "name": "Weekly Sorcery Night",
@@ -477,23 +375,6 @@
       "description": "",
       "storeName": "Big Brother Comics",
       "url": "https://play.sorcerytcg.com/events/79f75158-657b-43c9-a48d-aba4a173816b"
-    },
-    {
-      "name": "SUNDAY SORCERY",
-      "date": "Jul 26, 2026 - Jul 27, 2026",
-      "time": "9:00 PM UTC",
-      "type": "JC Hobby",
-      "price": "Tournament",
-      "duration": "60 Minutes",
-      "location": "Omaha, NE",
-      "city": "Omaha",
-      "state": "NE",
-      "lat": 41.2587459,
-      "lng": -95.9383758,
-      "address": "20275 Honeysuckle Dr Omaha NE 680223962",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/49220b19-dab8-4027-b6ba-70ec190c72f1"
     }
   ]
 }
