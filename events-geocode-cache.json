@@ -260,5 +260,125 @@
   "trindade|sc": {
     "lat": -27.5893834,
     "lng": -48.5224004
+  },
+  "pruszków|województwo mazowieckie": {
+    "lat": 52.1626141,
+    "lng": 20.8080199
+  },
+  "dublin|d": {
+    "lat": 53.3493795,
+    "lng": -6.2605593
+  },
+  "hamden|ct": {
+    "lat": 41.3836233,
+    "lng": -72.9020069
+  },
+  "woodstock|ga": {
+    "lat": 34.1014112,
+    "lng": -84.5192192
+  },
+  "beckett ridge|oh": {
+    "lat": 39.3439305,
+    "lng": -84.4388476
+  },
+  "rochester|ny": {
+    "lat": 43.157285,
+    "lng": -77.615214
+  },
+  "fruitport township|mi": {
+    "lat": 43.1553362,
+    "lng": -86.2029504
+  },
+  "augusta|ga": {
+    "lat": 33.4709714,
+    "lng": -81.9748429
+  },
+  "québec|qc": {
+    "lat": 46.8137431,
+    "lng": -71.2084061
+  },
+  "newmarket|on": {
+    "lat": 44.056258,
+    "lng": -79.461708
+  },
+  "newport|ky": {
+    "lat": 39.0889469,
+    "lng": -84.4919524
+  },
+  "charlottesville|va": {
+    "lat": 38.029306,
+    "lng": -78.4766781
+  },
+  "austin|tx": {
+    "lat": 30.2711286,
+    "lng": -97.7436995
+  },
+  "lenexa|ks": {
+    "lat": 38.9697458,
+    "lng": -94.7845837
+  },
+  "chesterton|in": {
+    "lat": 41.6107243,
+    "lng": -87.0522661
+  },
+  "asheville|nc": {
+    "lat": 35.595363,
+    "lng": -82.5508407
+  },
+  "tempe|az": {
+    "lat": 33.4255117,
+    "lng": -111.940016
+  },
+  "fremont|in": {
+    "lat": 41.7308834,
+    "lng": -84.9327395
+  },
+  "san antonio|tx": {
+    "lat": 29.4246002,
+    "lng": -98.4951405
+  },
+  "cary|nc": {
+    "lat": 35.7882893,
+    "lng": -78.7812081
+  },
+  "mérida|yuc.": {
+    "lat": 20.9670759,
+    "lng": -89.6237402
+  },
+  "brasília|df": {
+    "lat": -15.7939869,
+    "lng": -47.8828
+  },
+  "fernley|nevada": {
+    "lat": 39.6078829,
+    "lng": -119.2506489
+  },
+  "west chicago|il": {
+    "lat": 41.8847507,
+    "lng": -88.2039607
+  },
+  "mcfarland|wi": {
+    "lat": 43.0123487,
+    "lng": -89.2897646
+  },
+  "springfield|or": {
+    "lat": 44.0462362,
+    "lng": -123.0220289
+  },
+  "flemington|nj": {
+    "lat": 40.5130953,
+    "lng": -74.8591333
+  },
+  "omaha|ne": {
+    "lat": 41.2587459,
+    "lng": -95.9383758
+  },
+  "kingman|az": {
+    "lat": 35.1895921,
+    "lng": -114.0532996
+  },
+  "anderson|sc": {
+    "lat": 34.5258335,
+    "lng": -82.652962
   }
 }
