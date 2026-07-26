@@ -8338,14 +8338,13 @@ function _positionHdrGsDrop(){
   if(G.mode===2){
     // 2-player mode: show results above the input instead of below -- the
     // on-screen keyboard covers the lower portion of the screen there and
-    // would otherwise hide them. visualViewport.height (when available) is
-    // used instead of window.innerHeight, which can shift unstably while
-    // the keyboard is still animating open -- without this, recalculating
-    // position on every keystroke/render against a moving target made the
-    // dropdown visibly climb upward as the keyboard settled.
-    var vh=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;
+    // would otherwise hide them. position:fixed is positioned relative to
+    // window.innerHeight (the layout viewport), not visualViewport.height
+    // (the visual viewport, which excludes the keyboard) -- using the
+    // latter here previously caused an offset equal to the keyboard's own
+    // height, placing the dropdown in the wrong spot.
     sdd.style.top='auto';
-    sdd.style.bottom=(vh-r.top)+'px';
+    sdd.style.bottom=(window.innerHeight-r.top)+'px';
   } else {
     sdd.style.bottom='auto';
     sdd.style.top=r.bottom+'px';
