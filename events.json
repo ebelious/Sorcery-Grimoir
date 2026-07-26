@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-26T10:05:43.209Z",
+  "updated": "2026-07-26T13:27:19.981Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -23,8 +23,8 @@
       "name": "Guślarstwo w Merfolku - Sorcery Open Play",
       "date": "Sun. Jul 26, 2026",
       "time": "10:00 AM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
+      "type": "Merfolk",
+      "price": "Casual Meetup",
       "duration": "",
       "location": "Pruszków, Województwo mazowieckie",
       "city": "Pruszków",
@@ -33,25 +33,8 @@
       "lng": 20.8080199,
       "address": "44 Tadeusza Kościuszki Pruszków Województwo mazowieckie 05-800",
       "description": "",
-      "storeName": "Merfolk",
+      "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/abe7dc00-6af7-49c8-acf9-3df9fb140ac5"
-    },
-    {
-      "name": "Sunday Sorcery Sealed",
-      "date": "Sun. Jul 26, 2026",
-      "time": "10:06 AM UTC",
-      "type": "Sealed Tournament",
-      "price": "FREE",
-      "duration": "60 Minutes",
-      "location": "Dublin, D",
-      "city": "Dublin",
-      "state": "D",
-      "lat": 53.3493795,
-      "lng": -6.2605593,
-      "address": "© 2026 Erik's Curiosa Limited",
-      "description": "",
-      "storeName": "Underworld Gaming",
-      "url": "https://play.sorcerytcg.com/events/e3c9b057-99f0-4a35-ac86-c1d448f9cece"
     },
     {
       "name": "Sunday Sorcery Social and Escalation League",
@@ -613,40 +596,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3d9f5cf5-53e1-4004-9b6c-721ec9129e3c"
-    },
-    {
-      "name": "Sunday Meet Up",
-      "date": "Sun. Jul 26, 2026",
-      "time": "9:30 PM UTC",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Kingman, AZ",
-      "city": "Kingman",
-      "state": "AZ",
-      "lat": 35.1895921,
-      "lng": -114.0532996,
-      "address": "© 2026 Erik's Curiosa Limited",
-      "description": "",
-      "storeName": "Kingdom Cards",
-      "url": "https://play.sorcerytcg.com/events/b37b0c6a-b1fb-4061-b2b2-f8433ee020a4"
-    },
-    {
-      "name": "Empire Games: Sunday Open Play",
-      "date": "Sun. Jul 26, 2026",
-      "time": "10:00 PM UTC",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "118 North McDuffie Street Anderson SC 29621",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ae7950d3-6119-4515-8489-87cb9078619d"
     }
   ]
 }
