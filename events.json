@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-26T13:27:19.981Z",
+  "updated": "2026-07-26T17:05:13.084Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -23,8 +23,8 @@
       "name": "Guślarstwo w Merfolku - Sorcery Open Play",
       "date": "Sun. Jul 26, 2026",
       "time": "10:00 AM UTC",
-      "type": "Merfolk",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Pruszków, Województwo mazowieckie",
       "city": "Pruszków",
@@ -33,15 +33,15 @@
       "lng": 20.8080199,
       "address": "44 Tadeusza Kościuszki Pruszków Województwo mazowieckie 05-800",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Merfolk",
       "url": "https://play.sorcerytcg.com/events/abe7dc00-6af7-49c8-acf9-3df9fb140ac5"
     },
     {
       "name": "Sunday Sorcery Social and Escalation League",
       "date": "Sun. Jul 26, 2026",
       "time": "2:00 PM UTC",
-      "type": "David's Good Game Cafe",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Hamden, CT",
       "city": "Hamden",
@@ -50,15 +50,15 @@
       "lng": -72.9020069,
       "address": "2285 Whitney Avenue Hamden CT 06518",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/92a6de46-7ebb-4ee7-96df-e482ec5cd807"
     },
     {
       "name": "Sorcery Sundays at Cold Foil Heroes",
       "date": "Jul 26, 2026 - Jul 27, 2026",
       "time": "4:00 PM UTC",
-      "type": "Cold Foil Heroes",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Woodstock, GA",
       "city": "Woodstock",
@@ -67,7 +67,7 @@
       "lng": -84.5192192,
       "address": "suite 110, 12186, GA-92 Woodstock GA 30188",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Cold Foil Heroes",
       "url": "https://play.sorcerytcg.com/events/276cc9b8-16db-4237-b37b-b9b35fd38b96"
     },
     {
@@ -86,23 +86,6 @@
       "description": "",
       "storeName": "Tabletop Cincy",
       "url": "https://play.sorcerytcg.com/events/5763cf4e-479d-42da-8b1b-cd76af6ad1e6"
-    },
-    {
-      "name": "Draft Tournament Monthly",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Draft Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Rochester, NY",
-      "city": "Rochester",
-      "state": "NY",
-      "lat": 43.157285,
-      "lng": -77.615214,
-      "address": "1225 Jefferson Road Ste. A-17 Rochester NY 14623",
-      "description": "",
-      "storeName": "Millennium Games",
-      "url": "https://play.sorcerytcg.com/events/5d24abf9-b1bf-40ce-a665-5a372a8b7867"
     },
     {
       "name": "Weekly Sunday Sorcery",
@@ -139,74 +122,6 @@
       "url": "https://play.sorcerytcg.com/events/12369896-0241-439d-9f36-095406b144a4"
     },
     {
-      "name": "Cornerstone Geek and co",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Montréal, QC",
-      "city": "Montréal",
-      "state": "QC",
-      "lat": 45.5031824,
-      "lng": -73.5698065,
-      "address": "7155 Chemin de la Côte Saint Luc Montréal QC H4V 1J2",
-      "description": "",
-      "storeName": "Geek and Co.",
-      "url": "https://play.sorcerytcg.com/events/a4c7cb8a-e4a6-418c-b200-8431b144ed25"
-    },
-    {
-      "name": "Casusal meetup",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Québec, QC",
-      "city": "Québec",
-      "state": "QC",
-      "lat": 46.8137431,
-      "lng": -71.2084061,
-      "address": "2300 Boulevard Père-Lelièvre Québec QC G1P 2X5",
-      "description": "",
-      "storeName": "Game Keeper Verdun",
-      "url": "https://play.sorcerytcg.com/events/6c80dbe0-e852-4853-8f34-0cd161ce09b9"
-    },
-    {
-      "name": "Sealed Sunday",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:30 PM UTC",
-      "type": "Cold Foil Heroes",
-      "price": "Sealed Tournament",
-      "duration": "45 Minutes",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "lat": 34.1014112,
-      "lng": -84.5192192,
-      "address": "12186 GA-92 ste 110 Woodstock GA 30188",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6c541aa5-b632-4d03-8275-aebd75208ce4"
-    },
-    {
-      "name": "Enter the Battlefield - Weekly Constructed",
-      "date": "Sun. Jul 26, 2026",
-      "time": "4:30 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Newmarket, ON",
-      "city": "Newmarket",
-      "state": "ON",
-      "lat": 44.056258,
-      "lng": -79.461708,
-      "address": "81 Davis Drive Newmarket ON L3Y 2M9",
-      "description": "",
-      "storeName": "Enter The Battlefield Newmarket",
-      "url": "https://play.sorcerytcg.com/events/33048ef2-5c4a-44c3-9646-fa7a1c9b8fe9"
-    },
-    {
       "name": "Sunday Afternoon - Learn to Play 12PM-3PM",
       "date": "Sun. Jul 26, 2026",
       "time": "5:00 PM UTC",
@@ -222,23 +137,6 @@
       "description": "",
       "storeName": "Gear Gaming Store",
       "url": "https://play.sorcerytcg.com/events/8801a671-0e5b-407d-a8d0-9ada97acb2e9"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Jul 26, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
-      "duration": "45 Minutes",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "lat": 39.0889469,
-      "lng": -84.4919524,
-      "address": "1 Levee Wy 2112b Newport KY 41071",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/582056d2-6c59-45e4-8db0-41ba65866ea6"
     },
     {
       "name": "Sunday Casual Play",
@@ -329,8 +227,8 @@
       "name": "Sorcery: Contested Realm play",
       "date": "Sun. Jul 26, 2026",
       "time": "6:00 PM UTC",
-      "type": "Gamers' Haunt",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Asheville, NC",
       "city": "Asheville",
@@ -339,7 +237,7 @@
       "lng": -82.5508407,
       "address": "167 Patton Ave Asheville NC 28801",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers' Haunt",
       "url": "https://play.sorcerytcg.com/events/6eca65b9-11e1-4393-bed9-79af8d42e9a6"
     },
     {
@@ -411,11 +309,28 @@
       "url": "https://play.sorcerytcg.com/events/af9355db-86db-4276-8719-14312b1367c5"
     },
     {
+      "name": "Sorcery Sunday",
+      "date": "Sun. Jul 26, 2026",
+      "time": "7:00 PM UTC",
+      "type": "Hobby Habit",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "La Grande, OR",
+      "city": "La Grande",
+      "state": "OR",
+      "lat": 45.3246068,
+      "lng": -118.0878695,
+      "address": "411 Fir Street La Grande OR 97850",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/46c8e5bc-01b3-4de9-ad4e-735c02b13d65"
+    },
+    {
       "name": "Sunday Skirmish",
       "date": "Sun. Jul 26, 2026",
       "time": "7:15 PM UTC",
-      "type": "East Coast Gaming",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Cary, NC",
       "city": "Cary",
@@ -424,7 +339,7 @@
       "lng": -78.7812081,
       "address": "107 Edinburgh South Drive suite 209 Cary NC 27511",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "East Coast Gaming",
       "url": "https://play.sorcerytcg.com/events/6f6eb148-e1b8-4caa-9661-ceb5764fc72b"
     },
     {
@@ -579,23 +494,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/49220b19-dab8-4027-b6ba-70ec190c72f1"
-    },
-    {
-      "name": "Casual Sunday Event",
-      "date": "Sun. Jul 26, 2026",
-      "time": "9:11 PM UTC",
-      "type": "Untapped Market",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Springfield, OR",
-      "city": "Springfield",
-      "state": "OR",
-      "lat": 44.0462362,
-      "lng": -123.0220289,
-      "address": "© 2026 Erik's Curiosa Limited",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3d9f5cf5-53e1-4004-9b6c-721ec9129e3c"
     }
   ]
 }
