@@ -8332,10 +8332,19 @@ function _positionHdrGsDrop(){
   if(!inp||!sdd)return;
   var r=inp.getBoundingClientRect();
   sdd.style.position='fixed';
-  sdd.style.top=r.bottom+'px';
   sdd.style.left=r.left+'px';
   sdd.style.width=r.width+'px';
   sdd.style.zIndex='2000';
+  if(G.mode===2){
+    // 2-player mode: show results above the input instead of below -- the
+    // on-screen keyboard covers the lower portion of the screen there and
+    // would otherwise hide them.
+    sdd.style.top='auto';
+    sdd.style.bottom=(window.innerHeight-r.top)+'px';
+  } else {
+    sdd.style.bottom='auto';
+    sdd.style.top=r.bottom+'px';
+  }
 }
 function updateHdrGsDrop(){
   var inp=document.getElementById('hdr-gs-inp');
