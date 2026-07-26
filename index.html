@@ -8147,7 +8147,7 @@ function turnBar(){
   var _rbtn=(G.cfg&&G.cfg.showResetInHeader)?'<button class="menu-btn tb-menu" onclick="showResetConfirm()" title="Reset" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>':'';
   var _cbtn=(G.cfg&&G.cfg.showConnectInHeader)?'<button class="menu-btn tb-menu" onclick="openPanel(\'connect\')" title="Connect" style="display:flex;align-items:center;justify-content:center;font-size:15px">&#9876;</button>':'';
   var _tbtn=(G.cfg&&G.cfg.showTimerInHeader)?'<button class="menu-btn tb-menu" onclick="showTimerPopup(this)" title="Timer" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 2h12"/><path d="M6 22h12"/><path d="M6 2c0 5 4 6 6 8 2-2 6-3 6-8"/><path d="M6 22c0-5 4-6 6-8 2 2 6 3 6 8"/></svg></button>':'';
-  var _sbtn=(G.cfg&&G.cfg.showSearchInHeader)?'<button class="menu-btn tb-menu" onclick="G.headerSearchOpen=true;render()" title="Search" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>':'';
+  var _sbtn=(G.cfg&&G.cfg.showSearchInHeader)?'<button class="menu-btn tb-menu" onclick="_hdrGsDropPos=null;G.headerSearchOpen=true;render()" title="Search" style="display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></button>':'';
   var _hdrBtns=_rbtn+_cbtn+_tbtn+_sbtn;
   if(G.headerSearchOpen){
     var _hgsDrop=S.gsDrop&&S.gs?buildGsDrop():'';
@@ -8330,26 +8330,44 @@ function _positionHdrGsDrop(){
   var inp=document.getElementById('hdr-gs-inp');
   var sdd=inp&&inp.parentElement&&inp.parentElement.querySelector('.sdd');
   if(!inp||!sdd)return;
-  var r=inp.getBoundingClientRect();
+  // The full position is computed once per open session and cached --
+  // this function reruns on every keystroke and every background render
+  // (needed so the dropdown survives unrelated re-renders), and even
+  // partially recalculating (e.g. just window.innerHeight) still let the
+  // input's own on-screen position drift slightly between calls, which was
+  // enough to make the whole dropdown visibly jump/scroll while the user
+  // was mid-scroll through the results themselves. Freezing everything
+  // after the first calculation eliminates that entirely.
+  if(!_hdrGsDropPos){
+    var r=inp.getBoundingClientRect();
+    _hdrGsDropPos={left:r.left,width:r.width};
+    if(G.mode===2){
+      // 2-player mode: show results above the input instead of below --
+      // the on-screen keyboard covers the lower portion of the screen
+      // there and would otherwise hide them. position:fixed is positioned
+      // relative to window.innerHeight (the layout viewport), not
+      // visualViewport.height (the visual viewport, which excludes the
+      // keyboard) -- using the latter here previously caused an offset
+      // equal to the keyboard's own height, placing the dropdown in the
+      // wrong spot.
+      _hdrGsDropPos.bottom=window.innerHeight-r.top;
+    } else {
+      _hdrGsDropPos.top=r.bottom;
+    }
+  }
   sdd.style.position='fixed';
-  sdd.style.left=r.left+'px';
-  sdd.style.width=r.width+'px';
+  sdd.style.left=_hdrGsDropPos.left+'px';
+  sdd.style.width=_hdrGsDropPos.width+'px';
   sdd.style.zIndex='2000';
-  if(G.mode===2){
-    // 2-player mode: show results above the input instead of below -- the
-    // on-screen keyboard covers the lower portion of the screen there and
-    // would otherwise hide them. position:fixed is positioned relative to
-    // window.innerHeight (the layout viewport), not visualViewport.height
-    // (the visual viewport, which excludes the keyboard) -- using the
-    // latter here previously caused an offset equal to the keyboard's own
-    // height, placing the dropdown in the wrong spot.
+  if(_hdrGsDropPos.bottom!=null){
     sdd.style.top='auto';
-    sdd.style.bottom=(window.innerHeight-r.top)+'px';
+    sdd.style.bottom=_hdrGsDropPos.bottom+'px';
   } else {
     sdd.style.bottom='auto';
-    sdd.style.top=r.bottom+'px';
+    sdd.style.top=_hdrGsDropPos.top+'px';
   }
 }
+var _hdrGsDropPos=null; // reset to null when the search icon is tapped (see _sbtn below), so a fresh position is captured each time the dropdown opens
 function updateHdrGsDrop(){
   var inp=document.getElementById('hdr-gs-inp');
   if(!inp)return;
