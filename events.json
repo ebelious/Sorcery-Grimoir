@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T11:27:11.755Z",
+  "updated": "2026-07-27T14:39:42.034Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -35,6 +35,23 @@
       "description": "",
       "storeName": "Gongaii Games, Inc",
       "url": "https://play.sorcerytcg.com/events/9891b1ee-b330-493b-bf54-b5c010b8ca93"
+    },
+    {
+      "name": "OMG Biweekly",
+      "date": "Mon. Jul 27, 2026",
+      "time": "2:21 PM UTC",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Vantaa, Uusimaa",
+      "city": "Vantaa",
+      "state": "Uusimaa",
+      "lat": 60.2929883,
+      "lng": 25.0436744,
+      "address": "© 2026 Erik's Curiosa Limited",
+      "description": "",
+      "storeName": "Oh My Game",
+      "url": "https://play.sorcerytcg.com/events/69f4bf3d-f36f-49a3-87f8-98b0a1023943"
     },
     {
       "name": "Weekly Play",
@@ -188,6 +205,23 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d1e57fc1-6fce-46bf-ac8c-5206b1752d0b"
+    },
+    {
+      "name": "Sorcery de Cozinha",
+      "date": "Jul 27, 2026 - Jul 28, 2026",
+      "time": "10:30 PM UTC",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bauru, SP",
+      "city": "Bauru",
+      "state": "SP",
+      "lat": -22.3173803,
+      "lng": -49.0689778,
+      "address": "10 Rua Hugo Sajovic Bauru SP 17047-623",
+      "description": "",
+      "storeName": "Covil do Mago Hobby Store",
+      "url": "https://play.sorcerytcg.com/events/f73effb5-698d-4785-92ae-0bfe20d5fc88"
     },
     {
       "name": "Casual Monday night",
@@ -647,40 +681,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/77e336ed-0a30-4884-a269-9f3f0b2b2a63"
-    },
-    {
-      "name": "Tuesday Evening Casual Sorcery",
-      "date": "Tue. Jul 28, 2026",
-      "time": "9:00 PM UTC",
-      "type": "Main Line Chess & Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Paoli, PA",
-      "city": "Paoli",
-      "state": "PA",
-      "lat": 40.0405675,
-      "lng": -75.4927891,
-      "address": "7 S Valley Rd Paoli PA 19301",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b23dcba2-4f2d-4bbf-ad91-0aa68421f103"
-    },
-    {
-      "name": "Weekly Play",
-      "date": "Tue. Jul 28, 2026",
-      "time": "9:00 PM UTC",
-      "type": "Great Escape Games Rocklin",
-      "price": "Casual Meetup",
-      "duration": "45 Minutes",
-      "location": "Rocklin, CA",
-      "city": "Rocklin",
-      "state": "CA",
-      "lat": 38.7907339,
-      "lng": -121.2357828,
-      "address": "39 Wirichsbongardstraße Aachen NRW 52062",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2bddc967-8f4c-4e24-95d3-aac48b632a78"
     }
   ]
 }
