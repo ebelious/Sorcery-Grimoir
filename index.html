@@ -450,7 +450,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .dice-btns{display:flex;gap:8px;justify-content:center;margin-top:12px}
 .timer-inp::-webkit-outer-spin-button,.timer-inp::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .timer-inp{-moz-appearance:textfield}
-.bg-range{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--bg3);outline:none;cursor:pointer}
+.bg-range{-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:var(--bg3);outline:none;cursor:pointer;touch-action:none}
 .bg-range::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--bg3);border:1px solid var(--bd)}
 .bg-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--hi);border:2px solid var(--bg2);margin-top:-6px;cursor:pointer}
 .bg-range::-moz-range-track{height:6px;border-radius:3px;background:var(--bg3);border:1px solid var(--bd)}
@@ -831,7 +831,7 @@ function _ensureDieColorsDiffer(){
   }
 }
 var MENU_S={
-  Settings:['Interface'],
+  Settings:['Settings'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
   Cards:['Card Search','Collection','My Decks'],
   Stats:['Local Stats','Deck Stats'],
@@ -839,8 +839,8 @@ var MENU_S={
   'Play Network':['Events','Rewards'],
   Artists:['All Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Interface':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Interface',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Settings':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Settings',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
 // ── Events location fields (persistent Country/State/City search) ─────────
 var EV_COUNTRIES=[
   ['us','United States'],['ca','Canada'],['au','Australia'],['nz','New Zealand'],['gb','United Kingdom'],
@@ -4994,7 +4994,7 @@ function mpDeclineMatch(){
   // the "declined" popup (see mpAckDecline below).
   _mpEndMatch(false);
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;G.mpFormCode='';
   render();
 }
 // Acknowledges the "X has declined the match" popup and returns to
@@ -5064,14 +5064,15 @@ function mpJoin(){
       }).catch(function(){});
       G.mpBusy=false;G.mpCode=null;G.mpRoom=null;G.mpRole=null;
       G.mpErr="You can't join your own match. Share the code with someone else instead.";
+      G.mpFormCode='';
       render();
       return;
     }
-    G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;
+    G.mpCode=d.code;G.mpRoom=d.room;G.mpRole='p2';G.mpBusy=false;G.mpFormCode='';
     _mpOnConnected();
     _mpStartPoll(); // keep polling through the match so the confirm-result flow can sync
     render();
-  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;G.mpFormCode='';render();});
 }
 function _mpPoll(){
   if(!G.mpCode)return;
@@ -5260,7 +5261,7 @@ function _mpEndMatch(deleteRoom){
 function mpLeave(){
   _mpEndMatch(true); // explicit leave -- delete the room, unlike a match ending naturally (which keeps it around for Play Again)
   G.mpRole=null;G.mpLastCode=null;
-  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;
+  G.mpPendingResult=null;G.mpResultPopup=null;G.mpWaitingResult=false;G.mpResultFinalized=false;G.mpResultDeclined=false;G.mpDeckImportedName=null;G.mpRematchPicking=false;G.mpRematchWaiting=false;G.mpRematchConfirmPopup=false;G.mpRematchDeclined=false;G.mpRematchAccepting=false;G.mpRematchPendingDeck=null;G.mpMatchAcceptWaiting=false;G.mpDeclinedByName=null;G.mpFormCode='';
   render();
 }
 // Sends the proposed result to the opponent instead of finalizing locally.
