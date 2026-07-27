@@ -384,5 +384,142 @@
   "la grande|or": {
     "lat": 45.3246068,
     "lng": -118.0878695
+  },
+  "beaverton|or": {
+    "lat": 45.4871723,
+    "lng": -122.80378
+  },
+  "aachen|nrw": {
+    "lat": 50.776351,
+    "lng": 6.083862
+  },
+  "bucurești|bucurești": {
+    "lat": 44.4356445,
+    "lng": 26.1009263
+  },
+  "pardubice|pardubický kraj": {
+    "lat": 50.0385812,
+    "lng": 15.7791356
+  },
+  "cambridge|on": {
+    "lat": 43.3600536,
+    "lng": -80.3123023
+  },
+  "greensburg|ky": {
+    "lat": 37.2608936,
+    "lng": -85.4988548
+  },
+  "morgantown|wv": {
+    "lat": 39.6296809,
+    "lng": -79.9559437
+  },
+  "cannon|ky": {
+    "lat": 36.9145327,
+    "lng": -83.858257
+  },
+  "marietta|ga": {
+    "lat": 33.9528472,
+    "lng": -84.5496148
+  },
+  "london|on": {
+    "lat": 42.9836747,
+    "lng": -81.2496068
+  },
+  "raleigh|nc": {
+    "lat": 35.7803977,
+    "lng": -78.6390989
+  },
+  "muskegon|mi": {
+    "lat": 43.2341813,
+    "lng": -86.2483921
+  },
+  "broken arrow|ok": {
+    "lat": 36.0525993,
+    "lng": -95.7908195
+  },
+  "eau claire|wi": {
+    "lat": 44.811349,
+    "lng": -91.4984941
+  },
+  "roseville|mn": {
+    "lat": 45.0060767,
+    "lng": -93.1566107
+  },
+  "wentzville|mo": {
+    "lat": 38.8244136,
+    "lng": -90.8683119
+  },
+  "miami|fl": {
+    "lat": 25.7741566,
+    "lng": -80.1935973
+  },
+  "seattle|wa": {
+    "lat": 47.6038321,
+    "lng": -122.330062
+  },
+  "las vegas|nv": {
+    "lat": 36.1674263,
+    "lng": -115.1484131
+  },
+  "spokane valley|wa": {
+    "lat": 47.6571104,
+    "lng": -117.2613936
+  },
+  "wasilla|ak": {
+    "lat": 61.5824216,
+    "lng": -149.442563
+  },
+  "blenheim central|marlborough region": null,
+  "sydney|nsw": {
+    "lat": -33.8698439,
+    "lng": 151.2082848
+  },
+  "nambour|qld": {
+    "lat": -26.6257326,
+    "lng": 152.959953
+  },
+  "paris|idf": {
+    "lat": 48.8534951,
+    "lng": 2.3483915
+  },
+  "wrocław|województwo dolnośląskie": {
+    "lat": 51.1089776,
+    "lng": 17.0326689
+  },
+  "essen|nrw": {
+    "lat": 51.4582235,
+    "lng": 7.0158171
+  },
+  "osijek|osječko-baranjska županija": {
+    "lat": 45.5548793,
+    "lng": 18.6953685
+  },
+  "barkarby|stockholms län": {
+    "lat": 59.4051955,
+    "lng": 17.8643513
+  },
+  "badajoz|ex": {
+    "lat": 38.878187,
+    "lng": -6.9701115
+  },
+  "cork|co": {
+    "lat": 51.8985136,
+    "lng": -8.4726423
+  },
+  "springfield|mo": {
+    "lat": 37.2081729,
+    "lng": -93.2922715
+  },
+  "harrison|oh": {
+    "lat": 40.2694328,
+    "lng": -81.1289112
+  },
+  "paoli|pa": {
+    "lat": 40.0405675,
+    "lng": -75.4927891
+  },
+  "rocklin|ca": {
+    "lat": 38.7907339,
+    "lng": -121.2357828
   }
 }
