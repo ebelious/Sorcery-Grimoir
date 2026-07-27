@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T03:19:11.549Z",
+  "updated": "2026-07-27T07:35:01.404Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -120,23 +120,6 @@
       "description": "",
       "storeName": "Collector's Cache",
       "url": "https://play.sorcerytcg.com/events/b93f9c79-71d3-4e70-ad67-53b2a2cdb01e"
-    },
-    {
-      "name": "Gothic Escalation",
-      "date": "Sun. Jul 26, 2026",
-      "time": "6:00 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Chesterton, IN",
-      "city": "Chesterton",
-      "state": "IN",
-      "lat": 41.6107243,
-      "lng": -87.0522661,
-      "address": "1585 South Calumet Road Chesterton IN 46304",
-      "description": "",
-      "storeName": "Reliquary Gaming",
-      "url": "https://play.sorcerytcg.com/events/c5951b8f-2c0d-422c-8d68-d81ad3c0cfe3"
     },
     {
       "name": "Sorcery: Contested Realm play",
