@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-27T14:39:42.034Z",
+  "updated": "2026-07-27T17:45:56.461Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -37,23 +37,6 @@
       "url": "https://play.sorcerytcg.com/events/9891b1ee-b330-493b-bf54-b5c010b8ca93"
     },
     {
-      "name": "OMG Biweekly",
-      "date": "Mon. Jul 27, 2026",
-      "time": "2:21 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Vantaa, Uusimaa",
-      "city": "Vantaa",
-      "state": "Uusimaa",
-      "lat": 60.2929883,
-      "lng": 25.0436744,
-      "address": "© 2026 Erik's Curiosa Limited",
-      "description": "",
-      "storeName": "Oh My Game",
-      "url": "https://play.sorcerytcg.com/events/69f4bf3d-f36f-49a3-87f8-98b0a1023943"
-    },
-    {
       "name": "Weekly Play",
       "date": "Mon. Jul 27, 2026",
       "time": "4:00 PM UTC",
@@ -69,40 +52,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2bddc967-8f4c-4e24-95d3-aac48b632a78"
-    },
-    {
-      "name": "Constructed w Merfolku",
-      "date": "Mon. Jul 27, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Merfolk",
-      "price": "Constructed Tournament",
-      "duration": "45 Minutes",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "44 Tadeusza Kościuszki Pruszków Województwo mazowieckie 05-800",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4f201d5c-ba3c-4982-93d5-69ababd5e85f"
-    },
-    {
-      "name": "Casual Tournament @ TCG ARENA",
-      "date": "Mon. Jul 27, 2026",
-      "time": "4:00 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "București, București",
-      "city": "București",
-      "state": "București",
-      "lat": 44.4356445,
-      "lng": 26.1009263,
-      "address": "4 Bulevardul Libertății 117 București București 040128",
-      "description": "",
-      "storeName": "TCG ARENA",
-      "url": "https://play.sorcerytcg.com/events/dfe6ffbe-000e-42d5-be5b-913a0e355359"
     },
     {
       "name": "Tolarian Weekly Play",
@@ -127,16 +76,16 @@
       "time": "8:00 PM UTC",
       "type": "MK Kards",
       "price": "Constructed Tournament",
-      "duration": "60 Minutes",
+      "duration": "45 Minutes",
       "location": "Cambridge, ON",
       "city": "Cambridge",
       "state": "ON",
       "lat": 43.3600536,
       "lng": -80.3123023,
-      "address": "48 Queen St E - Cambridge, ON",
+      "address": "© 2026 Erik's Curiosa Limited",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b54c9846-97a2-419a-94fe-4bce6ae701b4"
+      "url": "https://play.sorcerytcg.com/events/87d95744-4d58-424b-bb01-bb36bd033d3c"
     },
     {
       "name": "Monday Night Sorcery",
@@ -244,8 +193,8 @@
       "name": "Casual constructed @ B&B",
       "date": "Mon. Jul 27, 2026",
       "time": "10:30 PM UTC",
-      "type": "Battle & Board",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Raleigh, NC",
       "city": "Raleigh",
@@ -254,7 +203,7 @@
       "lng": -78.6390989,
       "address": "6504 Falls of Neuse Rd Ste 130 Raleigh NC 27615",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Battle & Board",
       "url": "https://play.sorcerytcg.com/events/0e2588f9-7541-44c7-8a1b-cf33228fa6cf"
     },
     {
@@ -647,40 +596,6 @@
       "description": "",
       "storeName": "Sandbox",
       "url": "https://play.sorcerytcg.com/events/0d0935d0-1519-4bea-9194-10206a047a5b"
-    },
-    {
-      "name": "Tuesday night spell slinging",
-      "date": "Tue. Jul 28, 2026",
-      "time": "5:51 PM UTC",
-      "type": "The Dragon Loft",
-      "price": "Constructed Tournament",
-      "duration": "60 Minutes",
-      "location": "Springfield, MO",
-      "city": "Springfield",
-      "state": "MO",
-      "lat": 37.2081729,
-      "lng": -93.2922715,
-      "address": "3857 S Campbell Ave Suite A Springfield MO 65807-5301",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a199bee8-63fb-44fa-a628-13211f181bef"
-    },
-    {
-      "name": "TCA Sorcery Tuesdays",
-      "date": "Tue. Jul 28, 2026",
-      "time": "9:00 PM UTC",
-      "type": "Trading Card Academy",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Harrison, OH",
-      "city": "Harrison",
-      "state": "OH",
-      "lat": 40.2694328,
-      "lng": -81.1289112,
-      "address": "221 Harrison Avenue Harrison OH 45030",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/77e336ed-0a30-4884-a269-9f3f0b2b2a63"
     }
   ]
 }
