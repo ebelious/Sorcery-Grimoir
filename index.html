@@ -1254,6 +1254,26 @@ function _boardBgStyle(){
   });
   return parts.join(';');
 }
+// Fire on every 'input' tick while actively dragging the slider (many
+// times per second) -- must NOT call render()/_renderKeepScroll(), since
+// that rebuilds the settings panel's DOM including the slider itself,
+// which destroys the browser's native drag-tracking on that element and
+// makes it impossible to drag smoothly (only single clicks would register).
+// Persisting to storage and any full re-render is deferred to onchange,
+// which fires once when the drag actually ends.
+function _bgLiveOpacity(v){
+  v=Math.max(0,Math.min(100,parseInt(v)||0));
+  G.cfg.bgOpacity=v;
+  var nb=document.getElementById('bg-op-num');if(nb)nb.value=v;
+  var board=document.getElementById('board');
+  if(board)board.setAttribute('style',_boardBgStyle()+(G.mode===1?';margin-bottom:calc(-1 * env(safe-area-inset-bottom, 0px))':''));
+}
+function _bgLiveDarkness(v){
+  v=Math.max(0,Math.min(100,parseInt(v)||0));
+  G.cfg.bgDarkness=v;
+  var nb=document.getElementById('bg-dk-num');if(nb)nb.value=v;
+  _applyBgImage();
+}
 function _bgSetOpacity(v){
   v=Math.max(0,Math.min(100,parseInt(v)||0));
   G.cfg.bgOpacity=v;sv('sg-cfg',G.cfg);_renderKeepScroll();
@@ -6652,8 +6672,8 @@ function pContent(){
     if(G.cfg.bgImage){
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
       var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
-      o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="flex:1;min-width:0" oninput="_bgSetOpacity(this.value)"><input type="number" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
-      o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="flex:1;min-width:0" oninput="_bgSetDarkness(this.value)"><input type="number" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+      o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="flex:1;min-width:0" oninput="_bgLiveOpacity(this.value)" onchange="_bgSetOpacity(this.value)"><input type="number" id="bg-op-num" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
+      o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="flex:1;min-width:0" oninput="_bgLiveDarkness(this.value)" onchange="_bgSetDarkness(this.value)"><input type="number" id="bg-dk-num" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
     }
     o('<div class="slbl2">UI Options</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
