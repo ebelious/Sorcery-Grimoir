@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-26T21:01:06.879Z",
+  "updated": "2026-07-27T03:19:11.549Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -35,23 +35,6 @@
       "description": "",
       "storeName": "Merfolk",
       "url": "https://play.sorcerytcg.com/events/abe7dc00-6af7-49c8-acf9-3df9fb140ac5"
-    },
-    {
-      "name": "Sunday Sorcery Social and Escalation League",
-      "date": "Sun. Jul 26, 2026",
-      "time": "2:00 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hamden, CT",
-      "city": "Hamden",
-      "state": "CT",
-      "lat": 41.3836233,
-      "lng": -72.9020069,
-      "address": "2285 Whitney Avenue Hamden CT 06518",
-      "description": "",
-      "storeName": "David's Good Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/92a6de46-7ebb-4ee7-96df-e482ec5cd807"
     },
     {
       "name": "Sorcery Sundays at Cold Foil Heroes",
@@ -103,23 +86,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/18e114db-8ab4-4c7e-8fe9-d905dfb8ea08"
-    },
-    {
-      "name": "Sunday Afternoon - Learn to Play 12PM-3PM",
-      "date": "Sun. Jul 26, 2026",
-      "time": "5:00 PM UTC",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bentonville, AR",
-      "city": "Bentonville",
-      "state": "AR",
-      "lat": 36.3728608,
-      "lng": -94.208787,
-      "address": "1400 Southeast Walton Boulevard Bentonville AR 72712",
-      "description": "",
-      "storeName": "Gear Gaming Store",
-      "url": "https://play.sorcerytcg.com/events/8801a671-0e5b-407d-a8d0-9ada97acb2e9"
     },
     {
       "name": "Sunday Casual Play",
@@ -207,23 +173,6 @@
       "url": "https://play.sorcerytcg.com/events/563e0d3d-8046-4acf-a183-0b2d9fc116b6"
     },
     {
-      "name": "Sunday Constructed Sorcery",
-      "date": "Sun. Jul 26, 2026",
-      "time": "7:00 PM UTC",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "45 Minutes",
-      "location": "Fremont, IN",
-      "city": "Fremont",
-      "state": "IN",
-      "lat": 41.7308834,
-      "lng": -84.9327395,
-      "address": "655 Indiana 120 suite a2 Fremont IN 46737",
-      "description": "",
-      "storeName": "Local Legends",
-      "url": "https://play.sorcerytcg.com/events/2d311aa3-b817-4962-ad75-d96cfc6ca6a1"
-    },
-    {
       "name": "Sorcery Sunday",
       "date": "Sun. Jul 26, 2026",
       "time": "7:00 PM UTC",
@@ -239,23 +188,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/46c8e5bc-01b3-4de9-ad4e-735c02b13d65"
-    },
-    {
-      "name": "Sunday Skirmish",
-      "date": "Sun. Jul 26, 2026",
-      "time": "7:15 PM UTC",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "107 Edinburgh South Drive suite 209 Cary NC 27511",
-      "description": "",
-      "storeName": "East Coast Gaming",
-      "url": "https://play.sorcerytcg.com/events/6f6eb148-e1b8-4caa-9661-ceb5764fc72b"
     },
     {
       "name": "Utopia Games Sorcery day",
