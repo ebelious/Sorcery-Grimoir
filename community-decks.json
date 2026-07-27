@@ -1,23 +1,253 @@
 {
-  "updated": "2026-07-27T09:25:15.959Z",
+  "updated": "2026-07-27T14:08:00.093Z",
   "source": "https://curiosa.io/decks",
   "decks": [
     {
-      "name": "Fog Tempo Battlemage",
+      "name": "Eerie Winds",
       "author": "",
-      "url": "https://curiosa.io/decks/cmnc4imy800t404kwtvr987ej",
+      "url": "https://curiosa.io/decks/cmk9t8j47008l04jyj6ynxg2p",
       "format": "Constructed",
-      "timestamp": 1785143140033,
+      "timestamp": 1785161189679,
       "views": null,
       "elements": [],
       "avatar": ""
     },
     {
-      "name": "Iron (Fe) Imposter",
+      "name": "Budget Pillow Fort",
       "author": "",
-      "url": "https://curiosa.io/decks/cmppe6keo009704lb0vy6zxvj",
+      "url": "https://curiosa.io/decks/cmqqt7ano00af04lglkxrl2ew",
       "format": "Constructed",
-      "timestamp": 1785141825319,
+      "timestamp": 1785161183762,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "The Last Judgement",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqsjarhy00l704l1swjw3bsd",
+      "format": "Constructed",
+      "timestamp": 1785161155164,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "The Feast",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmojn5lm3007i04l1orlf6l69",
+      "format": "Constructed",
+      "timestamp": 1785160911323,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Burning Faith",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmp2gwbsv002904ley4eqch77",
+      "format": "Constructed",
+      "timestamp": 1785160421791,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Ele",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrsg2tu2000t0aja2hufd7wf",
+      "format": "Constructed",
+      "timestamp": 1785160217696,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Magician combo shenanigans",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr4xbard008504le5ey8kiqg",
+      "format": "Constructed",
+      "timestamp": 1785159927223,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Archimago",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms39p98m000n0akjqew85tsm",
+      "format": "Constructed",
+      "timestamp": 1785159208952,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "🧙🏾‍♂️Kung Fu Kenny ⚔️",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmoe63xv400cz04jj91xsf4vh",
+      "format": "Constructed",
+      "timestamp": 1785158785165,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Unleash the Dead",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms12xl3o00050ahzlnewpu7v",
+      "format": "Constructed",
+      "timestamp": 1785158665434,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steam Savior",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmq5uruws00bu04jrnvpb08u5",
+      "format": "Constructed",
+      "timestamp": 1785158516212,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Flagged as Evil",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2wossd001504l1p6l0s770",
+      "format": "Constructed",
+      "timestamp": 1785158192384,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Evil is in the Air (Running List)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmjqbyy4w3od12bf3up1hyse5",
+      "format": "Constructed",
+      "timestamp": 1785158020127,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Tormenter",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2cocpa00290al2jgpwebez",
+      "format": "Constructed",
+      "timestamp": 1785157969588,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "VVITCH II",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr98v6qq00n804jl0c452una",
+      "format": "Constructed",
+      "timestamp": 1785157855235,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Sorcerer's Castle",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmoqbbe2v00f004ldghv5wpva",
+      "format": "Constructed",
+      "timestamp": 1785156992554,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Tap ➔ Say Uncle [TTS]",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2g5n4g000m0ajl1vo6huwl",
+      "format": "Constructed",
+      "timestamp": 1785156096068,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fire PF",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmpo6lt9a00av04ld8z1pcr3h",
+      "format": "Constructed",
+      "timestamp": 1785154959999,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Enchantress | Ash Midrange",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmkgf6v7500bx04l8jqnil2by",
+      "format": "Constructed",
+      "timestamp": 1785154935506,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Enchantress | Muck Court",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrvclo1r000c09hs0560iyuk",
+      "format": "Constructed",
+      "timestamp": 1785154923150,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Castle",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms06tn6z000o0aki0ex56907",
+      "format": "Constructed",
+      "timestamp": 1785154531554,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "3rd place 2026 Cornerstone Tokyo",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2ei4x600090akpeodx6c78",
+      "format": "Constructed",
+      "timestamp": 1785154179544,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "My Geomancer",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms35rz2e000h0akngh26u0n5",
+      "format": "Constructed",
+      "timestamp": 1785152989456,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steam Train",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrr0r6t900040aj99gz4xqu3",
+      "format": "Constructed",
+      "timestamp": 1785152318313,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fire Persecutor Aggro",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr1bgnbw000d04l7n0dtdxt2",
+      "format": "Constructed",
+      "timestamp": 1785152083475,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -27,7 +257,47 @@
       "author": "",
       "url": "https://curiosa.io/decks/cms2d6irc000604joy3gmd63r",
       "format": "Constructed",
-      "timestamp": 1785141288044,
+      "timestamp": 1785150749769,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Holy diver",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmlr34uop00gl04ibzgyo5xqo",
+      "format": "Constructed",
+      "timestamp": 1785146399497,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "...And Justice for All",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2veeop00240akypl3wrfid",
+      "format": "Constructed",
+      "timestamp": 1785145655416,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Iron (Fe) Imposter",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmppe6keo009704lb0vy6zxvj",
+      "format": "Constructed",
+      "timestamp": 1785145354311,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fog Tempo Battlemage",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmnc4imy800t404kwtvr987ej",
+      "format": "Constructed",
+      "timestamp": 1785143140033,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -43,16 +313,6 @@
       "avatar": ""
     },
     {
-      "name": "Steam Train",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrr0r6t900040aj99gz4xqu3",
-      "format": "Constructed",
-      "timestamp": 1785139519727,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "Wolf Lord",
       "author": "",
       "url": "https://curiosa.io/decks/cms2x2xse000f0akklx5z3wsk",
@@ -63,31 +323,11 @@
       "avatar": ""
     },
     {
-      "name": "Flagged as Evil",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2wossd001504l1p6l0s770",
-      "format": "Constructed",
-      "timestamp": 1785138328653,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "Zombie",
       "author": "",
       "url": "https://curiosa.io/decks/cmqj4z59x002o04jxe6zarp8g",
       "format": "Constructed",
       "timestamp": 1785136821529,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "...And Justice for All",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2veeop00240akypl3wrfid",
-      "format": "Constructed",
-      "timestamp": 1785136472380,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -358,246 +598,6 @@
       "url": "https://curiosa.io/decks/cms2qot93000a0agbkdpp31vv",
       "format": "Constructed",
       "timestamp": 1785127303239,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - 4th Place - Death Frogs",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qnnct00090ajf3q90wte0",
-      "format": "Constructed",
-      "timestamp": 1785127221225,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - Spirits of the Spells",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qmv0200060bkvekzejcvd",
-      "format": "Constructed",
-      "timestamp": 1785127184463,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - Occult R Us",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qkzlp00080ajhyox5emd7",
-      "format": "Constructed",
-      "timestamp": 1785127128301,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "War Mage Tweaked",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmp0kakc300nw04juqo3qgyk6",
-      "format": "Constructed",
-      "timestamp": 1785127103438,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - Aquafinder",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qjthz000f0ake2cvd6bkc",
-      "format": "Constructed",
-      "timestamp": 1785127058822,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - 3rd Place - Exhumed Onslaught",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qib97000a0ahwig8hexh4",
-      "format": "Constructed",
-      "timestamp": 1785126994330,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - 2nd Place - Cornerstone Dunedin",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qfzkt00220akmq09l7r2z",
-      "format": "Constructed",
-      "timestamp": 1785126907990,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - Interrogatorrrr",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2qe77r00080ajfxgc3dfw0",
-      "format": "Constructed",
-      "timestamp": 1785126806786,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dunedin NZ Cornerstone 2026 - Harbinger",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2q90ey00000akvi95kgdo6",
-      "format": "Constructed",
-      "timestamp": 1785126629243,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Budget Harbinger Brew v1",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2pzdu6000009kjhszn4549",
-      "format": "Constructed",
-      "timestamp": 1785126089146,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Rank 1 NA Magoo (EU Conceded to Geoffrey)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmkbqifg6025404kykcqnarx1",
-      "format": "Constructed",
-      "timestamp": 1785125754749,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dirty Thirty Wolfgang Druid",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms0rce5l007104jmuy1stk4c",
-      "format": "Constructed",
-      "timestamp": 1785125577604,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Ranchantress",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrwdny4l001n04l2i8nu8b9m",
-      "format": "Constructed",
-      "timestamp": 1785124600150,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Battlemage Wair",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2m242400070ahwo5rytwvp",
-      "format": "Constructed",
-      "timestamp": 1785124460369,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "U r bad",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrkbfa24000609jcyq4gtm1x",
-      "format": "Constructed",
-      "timestamp": 1785123940893,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Blurid",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmq4iw4sd008c04l3kstt9h3d",
-      "format": "Constructed",
-      "timestamp": 1785123769444,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Geonecromancy",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqn9nrj500ki04l480fbhvga",
-      "format": "Constructed",
-      "timestamp": 1785123741488,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Prosecutor Midrange 1.1",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrf9djwz009l04gtly8dd8sd",
-      "format": "Constructed",
-      "timestamp": 1785123551822,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Burn it down",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrwp7yve00050ajemo5n7vj4",
-      "format": "Constructed",
-      "timestamp": 1785123267190,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "20260727-東京Cornerstone",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2no5uy000e0ahvm1svx7oe",
-      "format": "Constructed",
-      "timestamp": 1785123192354,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Tap ➔ Say Uncle [TTS]",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2g5n4g000m0ajl1vo6huwl",
-      "format": "Constructed",
-      "timestamp": 1785123067863,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Ele",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrsg2tu2000t0aja2hufd7wf",
-      "format": "Constructed",
-      "timestamp": 1785122582090,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "L'Appel du Vide",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2kkxub00000ahzffbgme29",
-      "format": "Constructed",
-      "timestamp": 1785122128128,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Dead Depths",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmre5u5kd005j04kyzwfz52go",
-      "format": "Constructed",
-      "timestamp": 1785121875940,
       "views": null,
       "elements": [],
       "avatar": ""
