@@ -63,41 +63,35 @@ function extractEventDetails(html, eventId, eventName) {
   out.address = [line, cityM ? cityM[1] : '', stateM ? stateM[1] : '', zipM ? zipM[1] : '']
     .filter(Boolean).join(' ').trim();
 
-  // Start/end/date: a real event detail page turned out to contain MANY
-  // objects with their own "id"/"startsAt" fields, not just the one event
-  // requested -- confirmed live, taking just the first "id" match on the
-  // page grabbed a completely unrelated timestamp shared across every
-  // event tested (all four showed the exact same wrong start date).
-  // Disambiguate by requiring the event's own name to also appear near a
-  // candidate id match -- the real event object has both together.
+  // Start/end/date: earlier versions searched a wide text window for
+  // "startsAt" and "endsAt" independently, which could pair a start from
+  // one nearby object with an end from a completely different one --
+  // confirmed live twice: once as literally reversed times, once as a
+  // multi-week date range (matching a recurring series' first and last
+  // occurrences, not the one specific date this URL is actually for).
+  // Requiring startsAt/endsAt/name to all come from the exact same flat
+  // object as this event's id (stopping at the first { or } after id, so
+  // the match can't cross into an unrelated adjacent object) fixes both.
   function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-  const idPattern = new RegExp('"id":"' + escapeRe(eventId) + '"', 'g');
-  const candidates = [];
+  const objRe = new RegExp('"id":"' + escapeRe(eventId) + '"([^{}]*)', 'g');
+  let best = null;
   let m;
-  while ((m = idPattern.exec(unescaped)) !== null) candidates.push(m.index);
-
-  let windowText = '';
-  if (candidates.length) {
-    if (eventName) {
-      const namePattern = new RegExp('"name":"' + escapeRe(eventName) + '"');
-      const nameMatchIdx = candidates.find(idx => namePattern.test(unescaped.slice(Math.max(0, idx - 800), idx + 800)));
-      if (nameMatchIdx !== undefined) windowText = unescaped.slice(Math.max(0, nameMatchIdx - 500), nameMatchIdx + 1500);
-    }
-    if (!windowText) {
-      // No name match found (or no name provided) -- fall back to the
-      // LAST occurrence rather than the first, since the fuller per-event
-      // object tends to appear later in the payload stream than earlier,
-      // more minimal references to the same id.
-      const lastIdx = candidates[candidates.length - 1];
-      windowText = unescaped.slice(Math.max(0, lastIdx - 500), lastIdx + 1500);
-    }
+  while ((m = objRe.exec(unescaped)) !== null) {
+    const tail = m[1];
+    const startM = tail.match(/"startsAt":"([^"]+)"/);
+    const endM = tail.match(/"endsAt":"([^"]+)"/);
+    if (!startM || !endM) continue;
+    const hasName = !!(eventName && tail.indexOf('"name":"' + eventName + '"') >= 0);
+    const entryM = tail.match(/"entryTime":(\d+)/);
+    const candidate = { startM, endM, entryM, hasName };
+    // Prefer a candidate whose object also contains this event's own name;
+    // otherwise keep the first valid start/end pairing found.
+    if (!best || (hasName && !best.hasName)) best = candidate;
   }
 
-  if (windowText) {
-    const startM = windowText.match(/"startsAt":"([^"]+)"/);
-    const endM = windowText.match(/"endsAt":"([^"]+)"/);
-    const entryM = windowText.match(/"entryTime":(\d+)/); // minutes, when present
-    const tzM = windowText.match(/"timezone":"([^"]+)"/) || unescaped.match(/"timezone":"([^"]+)"/);
+  if (best) {
+    const startM = best.startM, endM = best.endM, entryM = best.entryM;
+    const tzM = unescaped.match(/"timezone":"([^"]+)"/);
     const tz = tzM ? tzM[1] : 'UTC';
 
     function fmtTime(iso) {
