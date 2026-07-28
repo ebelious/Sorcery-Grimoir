@@ -357,12 +357,49 @@ async function loadMoreEvents(page, maxClicks) {
   }
 
   const events = [];
+// The rendered listing-page text only shows a rounded UTC start time, and
+// no end time at all. The page's detail view actually displays both start
+// and end in the venue's own local timezone (confirmed live via
+// screenshot: "6:30 PM EDT" / "10:30 PM EDT") -- and both the precise ISO
+// timestamps AND the venue's IANA timezone (e.g. "America/New_York") are
+// available in Next.js's own RSC JSON payload embedded in the page
+// (page.content(), not innerText). Using that directly gives DST-aware,
+// venue-local times matching the site's own display, rather than the raw
+// UTC values.
+async function extractEventTimes(page, eventId) {
+  if (!eventId) return { start: '', end: '' };
+  try {
+    const html = await page.content();
+    const idIdx = html.indexOf('"id":"' + eventId + '"');
+    if (idIdx < 0) return { start: '', end: '' };
+    const windowText = html.slice(Math.max(0, idIdx - 500), idIdx + 1500);
+    const startM = windowText.match(/"startsAt":"([^"]+)"/);
+    const endM = windowText.match(/"endsAt":"([^"]+)"/);
+    const tzM = windowText.match(/"timezone":"([^"]+)"/) || html.match(/"timezone":"([^"]+)"/);
+    const tz = tzM ? tzM[1] : 'UTC';
+    function fmt(iso) {
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return '';
+      try {
+        return new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(d);
+      } catch (e) {
+        return '';
+      }
+    }
+    return { start: startM ? fmt(startM[1]) : '', end: endM ? fmt(endM[1]) : '' };
+  } catch (e) {
+    return { start: '', end: '' };
+  }
+}
+
   let sampleLogged = false;
 
   for (let i = 0; i < upcoming.length; i++) {
     const e = upcoming[i];
     let address = '';
     let duration = '';
+    let startTime = e.time; // UTC text scraped from the listing page -- fallback if the JSON lookup below fails
+    let endTime = '';
 
     if (e.url && i < MAX_DETAIL_VISITS) {
       try {
@@ -375,6 +412,13 @@ async function loadMoreEvents(page, maxClicks) {
         if (addrLine) address = cleanupAddress(addrLine);
         const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
         if (durLine) duration = durLine;
+
+        const eventIdMatch = e.url.match(/\/events\/([a-f0-9-]+)/i);
+        if (eventIdMatch) {
+          const times = await extractEventTimes(page, eventIdMatch[1]);
+          if (times.start) startTime = times.start;
+          if (times.end) endTime = times.end;
+        }
 
         if (!sampleLogged) {
           console.log('Sample detail page lines (first event, for debugging):', JSON.stringify(detailLines.slice(0, 20), null, 2));
@@ -390,7 +434,8 @@ async function loadMoreEvents(page, maxClicks) {
     events.push({
       name: e.name,
       date: e.dateDisplay,
-      time: e.time,
+      time: startTime,
+      endTime,
       type: e.type,
       price: e.price,
       duration,
