@@ -367,7 +367,7 @@ async function loadMoreEvents(page, maxClicks) {
 // venue-local times matching the site's own display, rather than the raw
 // UTC values.
 async function extractEventTimes(html, eventId) {
-  if (!eventId || !html) return { start: '', end: '' };
+  if (!eventId || !html) return { start: '', end: '', date: '' };
   try {
     // The event data lives inside a <script>self.__next_f.push([1,"..."])</script>
     // tag -- the JSON is serialized as a JS string literal argument, so its
@@ -376,7 +376,7 @@ async function extractEventTimes(html, eventId) {
     // regexes below (written against plain JSON quoting) actually match.
     const unescaped = html.replace(/\\"/g, '"');
     const idIdx = unescaped.indexOf('"id":"' + eventId + '"');
-    if (idIdx < 0) return { start: '', end: '' };
+    if (idIdx < 0) return { start: '', end: '', date: '' };
     const windowText = unescaped.slice(Math.max(0, idIdx - 500), idIdx + 1500);
     const startM = windowText.match(/"startsAt":"([^"]+)"/);
     const endM = windowText.match(/"endsAt":"([^"]+)"/);
@@ -391,9 +391,30 @@ async function extractEventTimes(html, eventId) {
         return '';
       }
     }
-    return { start: startM ? fmt(startM[1]) : '', end: endM ? fmt(endM[1]) : '' };
+    // The listing page's date range is computed from UTC day boundaries, so
+    // an event that's really a single evening in the venue's local time
+    // (e.g. 6:30-10:30 PM EDT) can show as spanning two days ("Aug 7 - Aug
+    // 8") purely because that crosses UTC midnight (10:30 PM EDT = 2:30 AM
+    // UTC the next day). Collapse back to a single local date whenever
+    // start and end actually fall on the same local calendar day.
+    function fmtDate(iso) {
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return '';
+      try {
+        return new Intl.DateTimeFormat('en-US', { timeZone: tz, month: 'short', day: 'numeric', year: 'numeric' }).format(d);
+      } catch (e) {
+        return '';
+      }
+    }
+    let date = '';
+    if (startM && endM) {
+      const startDate = fmtDate(startM[1]);
+      const endDate = fmtDate(endM[1]);
+      if (startDate && endDate) date = startDate === endDate ? startDate : (startDate + ' - ' + endDate);
+    }
+    return { start: startM ? fmt(startM[1]) : '', end: endM ? fmt(endM[1]) : '', date };
   } catch (e) {
-    return { start: '', end: '' };
+    return { start: '', end: '', date: '' };
   }
 }
 
@@ -405,6 +426,7 @@ async function extractEventTimes(html, eventId) {
     let duration = '';
     let startTime = e.time; // UTC text scraped from the listing page -- fallback if the JSON lookup below fails
     let endTime = '';
+    let dateDisplay = e.dateDisplay; // listing-page text (UTC-based) -- overridden below with the local-timezone date when available
 
     if (e.url && i < MAX_DETAIL_VISITS) {
       try {
@@ -424,6 +446,7 @@ async function extractEventTimes(html, eventId) {
           const times = await extractEventTimes(rawHtml, eventIdMatch[1]);
           if (times.start) startTime = times.start;
           if (times.end) endTime = times.end;
+          if (times.date) dateDisplay = times.date;
           if (!sampleLogged) console.log('Time extraction for first event:', JSON.stringify(times));
         }
 
@@ -440,7 +463,7 @@ async function extractEventTimes(html, eventId) {
 
     events.push({
       name: e.name,
-      date: e.dateDisplay,
+      date: dateDisplay,
       time: startTime,
       endTime,
       type: e.type,
