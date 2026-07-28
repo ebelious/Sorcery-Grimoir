@@ -2,8 +2,12 @@ name: Scrape Sorcery Events
 
 on:
   schedule:
-    - cron: '0 */4 * * *'   # every 4 hours
+    - cron: '*/30 * * * *'   # every 30 minutes
   workflow_dispatch:          # allows manual run from GitHub Actions tab
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false  # queue instead of overlapping -- a run already in progress finishes before the next trigger starts
 
 jobs:
   scrape:
