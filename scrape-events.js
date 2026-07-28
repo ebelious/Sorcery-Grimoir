@@ -261,25 +261,29 @@ async function loadMoreEvents(page, maxClicks) {
   await page.waitForSelector('a[href*="/events/"]', { timeout: 15000 }).catch(() => {});
   await loadMoreEvents(page, 40);
 
-  const { parsed, urlsByName, listDiagnostics } = await page.evaluate(({ rangePattern, singlePattern }) => {
+  const { parsed, urlsInOrder, listDiagnostics } = await page.evaluate(({ rangePattern, singlePattern }) => {
     const dateRangeRe = new RegExp(rangePattern, 'i');
     const singleDateRe = new RegExp(singlePattern, 'i');
     const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
 
-    // Map event name -> URL from the anchor tags (used to attach links to
-    // the text-parsed events below).
-    const urlsByName = {};
+    // Collect event URLs in document order (top to bottom), NOT keyed by
+    // event name -- matching by name silently collided whenever two
+    // different events shared a generic name (confirmed live: two separate
+    // "Monday Sorcery" events, one in Marietta GA and one in Nashville TN,
+    // ended up with the identical URL and address because the second
+    // lookup by name just returned the first match). Event cards and their
+    // date-line text both appear in the same top-to-bottom document order,
+    // so pairing stub[k] with urlsInOrder[k] by position avoids the
+    // collision entirely.
+    const urlsInOrder = [];
     const seenUrls = new Set();
     Array.from(document.querySelectorAll('a[href*="/events/"]')).forEach(a => {
       const href = a.getAttribute('href') || '';
       if (!href || href === '/events' || href.startsWith('/events?')) return;
       const url = href.startsWith('http') ? href : 'https://play.sorcerytcg.com' + href;
-      if (seenUrls.has(url)) return;
+      if (seenUrls.has(url)) return; // same card can have multiple links (image + title) to the same URL
       seenUrls.add(url);
-      const card = a.closest('[class]') || a;
-      const heading = card.querySelector('h1,h2,h3,h4,h5,strong');
-      const name = (heading ? heading.innerText : a.innerText || '').trim().split('\n')[0];
-      if (name && !urlsByName[name]) urlsByName[name] = url;
+      urlsInOrder.push(url);
     });
 
     const dateIndexes = [];
@@ -289,7 +293,7 @@ async function loadMoreEvents(page, maxClicks) {
 
     return {
       parsed: { lines, dateIndexes },
-      urlsByName,
+      urlsInOrder,
       listDiagnostics: {
         totalEventLinks: seenUrls.size,
         dateLinesFound: dateIndexes.length,
@@ -307,13 +311,16 @@ async function loadMoreEvents(page, maxClicks) {
     process.exit(1);
   }
 
+  if (urlsInOrder.length !== parsed.dateIndexes.length) {
+    console.log('WARNING: found ' + urlsInOrder.length + ' event links but ' + parsed.dateIndexes.length + ' event entries -- positional URL matching may be misaligned for some events this run.');
+  }
+
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
 
   const stubs = parsed.dateIndexes
-    .map(i => extractFromListing(parsed.lines, i))
-    .filter(e => e.name)
-    .map(e => ({ ...e, url: urlsByName[e.name] || '' }));
+    .map((i, k) => ({ ...extractFromListing(parsed.lines, i), url: urlsInOrder[k] || '' }))
+    .filter(e => e.name);
 
   console.log('Parsed ' + stubs.length + ' events from the listing page.');
 
