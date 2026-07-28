@@ -368,6 +368,7 @@ body.rounded .rd-close{border-radius:6px}
 a{text-decoration:none}img{display:block}
 body{--bg:#1C1B19;--bg2:#242320;--bg3:#2E2C29;--bd:#3A3835;--fg:#BAA67F;--fg2:#918175;--fg3:#5E5148;--red:#EF2F27;--grn:#519F50;--yel:#FBB829;--cyn:#0AAEB3;--wht:#FCE8C3;--bgrn:#98BC37;--bbl:#68A8E4;--life:#D32F2F;--mana:#1565C0}
 body.tg{--bg:#282828;--bg2:#32302F;--bg3:#3C3836;--bd:#504945;--fg:#EBDBB2;--fg2:#BDAE93;--fg3:#7C6F64;--red:#CC241D;--grn:#98971A;--yel:#D79921;--cyn:#689D6A;--wht:#FBF1C7;--bgrn:#B8BB26;--bbl:#83A598;--life:#FB4934;--mana:#83A598;--hi:#D79921}
+body.tgl{--bg:#F2E5BC;--bg2:#EBDBB2;--bg3:#D5C4A1;--bd:#BDAE93;--fg:#3C3836;--fg2:#504945;--fg3:#7C6F64;--red:#9D0006;--grn:#79740E;--yel:#B57614;--cyn:#427B58;--wht:#282828;--bgrn:#98971A;--bbl:#076678;--life:#9D0006;--mana:#076678;--hi:#B57614}
 body.td{--bg:#282A36;--bg2:#323442;--bg3:#44475A;--bd:#6272A4;--fg:#F8F8F2;--fg2:#BFBFBF;--fg3:#6272A4;--red:#FF5555;--grn:#50FA7B;--yel:#F1FA8C;--cyn:#8BE9FD;--wht:#FFF;--bgrn:#69FF94;--bbl:#D6ACFF;--life:#FF6E6E;--mana:#8BE9FD;--hi:#F1FA8C}
 body.tn{--bg:#2E3440;--bg2:#3B4252;--bg3:#434C5E;--bd:#4C566A;--fg:#ECEFF4;--fg2:#D8DEE9;--fg3:#B0BAC8;--red:#BF616A;--grn:#A3BE8C;--yel:#EBCB8B;--cyn:#8FBCBB;--wht:#E5E9F0;--bgrn:#A3BE8C;--bbl:#88C0D0;--life:#BF616A;--mana:#88C0D0;--hi:#EBCB8B}
 body.te{--bg:#272E33;--bg2:#2E383C;--bg3:#374145;--bd:#495156;--fg:#D3C6AA;--fg2:#859289;--fg3:#4F5B58;--red:#E67E80;--grn:#A7C080;--yel:#DBBC7F;--cyn:#83C092;--wht:#D3C6AA;--bgrn:#A7C080;--bbl:#7FBBB3;--life:#E67E80;--mana:#7FBBB3;--hi:#DBBC7F}
@@ -817,7 +818,7 @@ function eSVG(el,sz){
 }
 
 var SETS={'Alpha':{sym:'\u03b1',c:'#FBB829',abbr:'ALP'},'Beta':{sym:'\u03b2',c:'#68A8E4',abbr:'BET'},'Arthurian Legends':{sym:'\u2720',c:'#98BC37',abbr:'ARL'},'Gothic':{sym:'\u2629',c:'#E02C6D',abbr:'GOT'},'Dragonlord':{sym:'\u27e1',c:'#F75341',abbr:'DGL'},'Promotional':{sym:'\u2605',c:'#D699B6',abbr:'PRO'}};
-var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tf',l:'Forest'},{k:'tg',l:'Gruvbox'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
+var THEMES=[{k:'td',l:'Dracula'},{k:'te',l:'Everforest'},{k:'tf',l:'Forest'},{k:'tg',l:'Gruvbox'},{k:'tgl',l:'GruvLight'},{k:'tl',l:'Light'},{k:'tm',l:'Melange'},{k:'ti',l:'Miasma'},{k:'tn',l:'Nord'},{k:'tr',l:'Rosé Pine'},{k:'',l:'Srcery'}];
 var DICE_T=[{s:4,c:1},{s:6,c:1},{s:8,c:1},{s:10,c:1},{s:12,c:1},{s:20,c:1},{s:6,c:2},{s:'custom',c:1}];
 var DIE_COLS=['#FBB829','#F75341','#98BC37','#68A8E4','#E02C6D','#0AAEB3','#FCE8C3','#FF5F00','#FFFFFF','#C0C0C0','#8B5CF6','#F97316','#06B6D4','#84CC16','#F43F5E','#1D4ED8','#2D2D2D'];
 // Index 0 is a special "theme color" slot — always returns the current --hi accent
@@ -1181,7 +1182,7 @@ function resetAllTheme(){
   G.diceFastRoll=false; sv('sg-dfast',false);
   G.diceBgImage=null; sv('sg-dbg',null); // Dice table background: off
 }
-var THEME_HI={'':'#FBB829','tg':'#D79921','td':'#F1FA8C','tn':'#EBCB8B','te':'#DBBC7F','tl':'#D4820A','tm':'#EBC06D','ti':'#d7c483','tr':'#F6C177'};
+var THEME_HI={'':'#FBB829','tg':'#D79921','tgl':'#B57614','td':'#F1FA8C','tn':'#EBCB8B','te':'#DBBC7F','tl':'#D4820A','tm':'#EBC06D','ti':'#d7c483','tr':'#F6C177'};
 function _applyBodyClass(){
   var cls=(G.theme||'');
   if(G.cfg.roundedCorners) cls+=' rounded';
