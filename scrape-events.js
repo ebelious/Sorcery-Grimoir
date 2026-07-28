@@ -366,16 +366,21 @@ async function loadMoreEvents(page, maxClicks) {
 // (page.content(), not innerText). Using that directly gives DST-aware,
 // venue-local times matching the site's own display, rather than the raw
 // UTC values.
-async function extractEventTimes(page, eventId) {
-  if (!eventId) return { start: '', end: '' };
+async function extractEventTimes(html, eventId) {
+  if (!eventId || !html) return { start: '', end: '' };
   try {
-    const html = await page.content();
-    const idIdx = html.indexOf('"id":"' + eventId + '"');
+    // The event data lives inside a <script>self.__next_f.push([1,"..."])</script>
+    // tag -- the JSON is serialized as a JS string literal argument, so its
+    // internal quotes are backslash-escaped (\"id\":\"...\") in the raw HTML
+    // text rather than plain ("id":"..."). Unescape those first so the
+    // regexes below (written against plain JSON quoting) actually match.
+    const unescaped = html.replace(/\\"/g, '"');
+    const idIdx = unescaped.indexOf('"id":"' + eventId + '"');
     if (idIdx < 0) return { start: '', end: '' };
-    const windowText = html.slice(Math.max(0, idIdx - 500), idIdx + 1500);
+    const windowText = unescaped.slice(Math.max(0, idIdx - 500), idIdx + 1500);
     const startM = windowText.match(/"startsAt":"([^"]+)"/);
     const endM = windowText.match(/"endsAt":"([^"]+)"/);
-    const tzM = windowText.match(/"timezone":"([^"]+)"/) || html.match(/"timezone":"([^"]+)"/);
+    const tzM = windowText.match(/"timezone":"([^"]+)"/) || unescaped.match(/"timezone":"([^"]+)"/);
     const tz = tzM ? tzM[1] : 'UTC';
     function fmt(iso) {
       const d = new Date(iso);
@@ -403,7 +408,8 @@ async function extractEventTimes(page, eventId) {
 
     if (e.url && i < MAX_DETAIL_VISITS) {
       try {
-        await page.goto(e.url, { waitUntil: 'networkidle', timeout: 20000 });
+        const resp = await page.goto(e.url, { waitUntil: 'networkidle', timeout: 20000 });
+        const rawHtml = resp ? await resp.text() : '';
         await page.waitForTimeout(1000);
         const detailLines = await page.evaluate(() =>
           document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
@@ -415,9 +421,10 @@ async function extractEventTimes(page, eventId) {
 
         const eventIdMatch = e.url.match(/\/events\/([a-f0-9-]+)/i);
         if (eventIdMatch) {
-          const times = await extractEventTimes(page, eventIdMatch[1]);
+          const times = await extractEventTimes(rawHtml, eventIdMatch[1]);
           if (times.start) startTime = times.start;
           if (times.end) endTime = times.end;
+          if (!sampleLogged) console.log('Time extraction for first event:', JSON.stringify(times));
         }
 
         if (!sampleLogged) {
