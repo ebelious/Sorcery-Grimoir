@@ -5935,10 +5935,10 @@ function _enrichNearbyEvents(){
   var all=(G.evFavItems||[]).concat(G.evItems||[]);
   var need=all.filter(function(e){return e.url&&!e._enriched;});
   if(!need.length)return;
-  var urls=need.slice(0,40).map(function(e){return e.url;});
+  var payload=need.slice(0,40).map(function(e){return {url:e.url,name:e.name||''};});
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/enrich-events',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({urls:urls})
+    body:JSON.stringify({events:payload})
   }).then(function(r){return r.ok?r.json():null;})
   .then(function(d){
     if(!d||!d.results)return;
