@@ -8,6 +8,14 @@
 // file populated with events shaped to match what that UI reads:
 //   { name, date, time, type, price, duration, location, city, state, lat, lng, address, description, url }
 //
+// This scraper only covers the LISTING page (unlimited coverage -- all
+// ~3,000 events, no per-run cap), which doesn't have address/duration/
+// endTime/local-timezone data at all. Those fields are always empty here
+// (populated on-demand instead, by a separate serverless function --
+// enrich-events -- that runs only for the handful of events actually near
+// a user's search, since visiting all 3,000 events' detail pages on every
+// periodic run isn't feasible).
+//
 // lat/lng are geocoded from city+state via Nominatim (OpenStreetMap, free,
 // no API key) and cached across runs in events-geocode-cache.json so the
 // same city isn't re-geocoded every scrape -- this is what lets the app do
@@ -57,7 +65,6 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 const EVENTS_URL = 'https://play.sorcerytcg.com/events?locationType=in-person&radius=25';
-const MAX_DETAIL_VISITS = 250; // cap detail-page visits (address/price/duration lookup) to keep runtime reasonable
 const SEEN_STATE_FILE = 'events-seen-state.json'; // tracks event URLs seen in prior runs, so we only notify about genuinely new events
 
 // Mirrors the app's own favorite-store topic naming (see index.html) --
@@ -122,27 +129,7 @@ const SINGLE_DATE_RE = new RegExp('^([A-Za-z]{2,4}\\.?\\s+)?(' + MONTH + ')\\w*\
 const TIME_RE = /^\d{1,2}:\d{2}\s*(AM|PM)\b/i;
 const PLAYERS_RE = /^\d+\s+Players?$/i;
 const CITY_REGION_RE = /^[^,]+,\s*.+$/; // "City, Region" -- loose, region isn't always a 2-letter US state
-const ADDRESS_RE = /\d{1,6}\s+\S+\s+\S+/; // a street number followed by a multi-word street name, anywhere in the line (not anchored to the start, since some venues prefix the line with "Suite X, ") -- still excludes single-word false positives like "45 Minutes" (duration) or "32 Capacity" since those only have one word after the number
-const NOT_ADDRESS_RE = /\b(minutes?|mins?|hours?|hrs?|capacity|players?)\b/i; // extra safety net against the same class of false positive
 
-// Some venue detail pages show a short address subtitle followed by the
-// full address right after it, and since our line detection just grabs
-// whichever line matches ADDRESS_RE first, the two can end up concatenated
-// into one garbled string with everything repeated (confirmed live:
-// "suite 7, 2177, Kingsley Ave 2177 Kingsley Ave #7, suite 7 Orange Park FL
-// 32073"). If the street number shows up a second time later in the
-// string, treat everything from that second occurrence onward as the real,
-// more complete address and drop the duplicated prefix.
-function cleanupAddress(addr) {
-  if (!addr) return addr;
-  const numMatch = addr.match(/\b(\d{2,6})\b/);
-  if (!numMatch) return addr;
-  const num = numMatch[1];
-  const firstIdx = addr.indexOf(num);
-  const secondIdx = addr.indexOf(num, firstIdx + num.length);
-  if (secondIdx > 0) return addr.slice(secondIdx).trim();
-  return addr;
-}
 const STATUS_RE = /^(Complete|Completed|Upcoming|Cancelled|Canceled|In Progress|Live)$/i;
 // Anything that isn't strictly in the future -- already finished, cancelled,
 // or actively happening right now -- gets excluded from "upcoming".
@@ -346,8 +333,6 @@ async function loadMoreEvents(page, maxClicks) {
   const skipped = stubs.length - upcoming.length;
   console.log('Filtered out ' + skipped + ' completed/ended event(s). Keeping ' + upcoming.length + '.');
 
-  console.log('Visiting up to ' + MAX_DETAIL_VISITS + ' detail pages for street addresses...');
-
   let geocodeCache = {};
   try {
     geocodeCache = JSON.parse(fs.readFileSync(GEOCODE_STATE_FILE, 'utf8'));
@@ -357,124 +342,25 @@ async function loadMoreEvents(page, maxClicks) {
   }
 
   const events = [];
-// The rendered listing-page text only shows a rounded UTC start time, and
-// no end time at all. The page's detail view actually displays both start
-// and end in the venue's own local timezone (confirmed live via
-// screenshot: "6:30 PM EDT" / "10:30 PM EDT") -- and both the precise ISO
-// timestamps AND the venue's IANA timezone (e.g. "America/New_York") are
-// available in Next.js's own RSC JSON payload embedded in the page
-// (page.content(), not innerText). Using that directly gives DST-aware,
-// venue-local times matching the site's own display, rather than the raw
-// UTC values.
-async function extractEventTimes(html, eventId) {
-  if (!eventId || !html) return { start: '', end: '', date: '' };
-  try {
-    // The event data lives inside a <script>self.__next_f.push([1,"..."])</script>
-    // tag -- the JSON is serialized as a JS string literal argument, so its
-    // internal quotes are backslash-escaped (\"id\":\"...\") in the raw HTML
-    // text rather than plain ("id":"..."). Unescape those first so the
-    // regexes below (written against plain JSON quoting) actually match.
-    const unescaped = html.replace(/\\"/g, '"');
-    const idIdx = unescaped.indexOf('"id":"' + eventId + '"');
-    if (idIdx < 0) return { start: '', end: '', date: '' };
-    const windowText = unescaped.slice(Math.max(0, idIdx - 500), idIdx + 1500);
-    const startM = windowText.match(/"startsAt":"([^"]+)"/);
-    const endM = windowText.match(/"endsAt":"([^"]+)"/);
-    const tzM = windowText.match(/"timezone":"([^"]+)"/) || unescaped.match(/"timezone":"([^"]+)"/);
-    const tz = tzM ? tzM[1] : 'UTC';
-    function fmt(iso) {
-      const d = new Date(iso);
-      if (isNaN(d.getTime())) return '';
-      try {
-        return new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(d);
-      } catch (e) {
-        return '';
-      }
-    }
-    // The listing page's date range is computed from UTC day boundaries, so
-    // an event that's really a single evening in the venue's local time
-    // (e.g. 6:30-10:30 PM EDT) can show as spanning two days ("Aug 7 - Aug
-    // 8") purely because that crosses UTC midnight (10:30 PM EDT = 2:30 AM
-    // UTC the next day). Collapse back to a single local date whenever
-    // start and end actually fall on the same local calendar day.
-    function fmtDate(iso) {
-      const d = new Date(iso);
-      if (isNaN(d.getTime())) return '';
-      try {
-        return new Intl.DateTimeFormat('en-US', { timeZone: tz, month: 'short', day: 'numeric', year: 'numeric' }).format(d);
-      } catch (e) {
-        return '';
-      }
-    }
-    let date = '';
-    if (startM && endM) {
-      const startDate = fmtDate(startM[1]);
-      const endDate = fmtDate(endM[1]);
-      if (startDate && endDate) date = startDate === endDate ? startDate : (startDate + ' - ' + endDate);
-    }
-    return { start: startM ? fmt(startM[1]) : '', end: endM ? fmt(endM[1]) : '', date };
-  } catch (e) {
-    return { start: '', end: '', date: '' };
-  }
-}
-
-  let sampleLogged = false;
 
   for (let i = 0; i < upcoming.length; i++) {
     const e = upcoming[i];
-    let address = '';
-    let duration = '';
-    let startTime = e.time; // UTC text scraped from the listing page -- fallback if the JSON lookup below fails
-    let endTime = '';
-    let dateDisplay = e.dateDisplay; // listing-page text (UTC-based) -- overridden below with the local-timezone date when available
-
-    if (e.url && i < MAX_DETAIL_VISITS) {
-      try {
-        const resp = await page.goto(e.url, { waitUntil: 'networkidle', timeout: 20000 });
-        const rawHtml = resp ? await resp.text() : '';
-        await page.waitForTimeout(1000);
-        const detailLines = await page.evaluate(() =>
-          document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean)
-        );
-        const addrLine = detailLines.find(l => ADDRESS_RE.test(l) && !NOT_ADDRESS_RE.test(l) && !TIME_RE.test(l));
-        if (addrLine) address = cleanupAddress(addrLine);
-        const durLine = detailLines.find(l => /^\d+\s*(minutes?|mins?)$/i.test(l) || /round\s*length/i.test(l));
-        if (durLine) duration = durLine;
-
-        const eventIdMatch = e.url.match(/\/events\/([a-f0-9-]+)/i);
-        if (eventIdMatch) {
-          const times = await extractEventTimes(rawHtml, eventIdMatch[1]);
-          if (times.start) startTime = times.start;
-          if (times.end) endTime = times.end;
-          if (times.date) dateDisplay = times.date;
-          if (!sampleLogged) console.log('Time extraction for first event:', JSON.stringify(times));
-        }
-
-        if (!sampleLogged) {
-          console.log('Sample detail page lines (first event, for debugging):', JSON.stringify(detailLines.slice(0, 20), null, 2));
-          sampleLogged = true;
-        }
-      } catch (err) {
-        console.log('  [' + e.name + '] detail page failed -- ' + err.message);
-      }
-    }
-
     const geo = await geocode(e.city, e.state, geocodeCache);
 
     events.push({
       name: e.name,
-      date: dateDisplay,
-      time: startTime,
-      endTime,
+      date: e.dateDisplay,
+      time: e.time, // UTC text from the listing page -- refined to local venue time on-demand when a user actually searches near this event
+      endTime: '', // populated on-demand (see enrich-events function) -- not available from the listing page at all
       type: e.type,
       price: e.price,
-      duration,
+      duration: '', // populated on-demand
       location: e.location,
       city: e.city,
       state: e.state,
       lat: geo ? geo.lat : null,
       lng: geo ? geo.lng : null,
-      address,
+      address: '', // populated on-demand
       description: '',
       storeName: e.storeName,
       url: e.url
