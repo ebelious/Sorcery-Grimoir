@@ -5924,6 +5924,40 @@ function loadLocalEvents(){
 // have coordinates for both the search location and the event; falls back
 // to substring city/state text matching for events that failed to geocode,
 // and to the AI search if the static file itself is unavailable.
+// Fills in address/duration/local-time/local-date for whatever events are
+// actually being shown (favorites + regular results), by calling the
+// on-demand enrich-events function -- this only ever touches the small set
+// of events near an actual search, so it's fast and never hits a coverage
+// cap the way visiting every one of ~3,000 events' detail pages on a
+// periodic scrape would. Runs in the background after the initial (fast,
+// basic-info-only) render, then patches in results without disrupting scroll.
+function _enrichNearbyEvents(){
+  var all=(G.evFavItems||[]).concat(G.evItems||[]);
+  var need=all.filter(function(e){return e.url&&!e._enriched;});
+  if(!need.length)return;
+  var urls=need.slice(0,40).map(function(e){return e.url;});
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/enrich-events',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({urls:urls})
+  }).then(function(r){return r.ok?r.json():null;})
+  .then(function(d){
+    if(!d||!d.results)return;
+    var changed=false;
+    all.forEach(function(e){
+      var info=e.url&&d.results[e.url];
+      if(info){
+        if(info.address)e.address=info.address;
+        if(info.duration)e.duration=info.duration;
+        if(info.time)e.time=info.time;
+        if(info.endTime)e.endTime=info.endTime;
+        if(info.date)e.date=info.date;
+        e._enriched=true;
+        changed=true;
+      }
+    });
+    if(changed)_renderKeepScroll();
+  }).catch(function(){});
+}
 function _loadEventsFromStaticFile(loc){
   var lowerLoc=loc.toLowerCase();
   var haveSearchCoords=G.evLat!=null&&G.evLng!=null;
@@ -5955,7 +5989,7 @@ function _loadEventsFromStaticFile(loc){
       var nonFav=all.filter(function(e){return !(e.url&&favUrls[e.url]);});
       if(!lowerLoc){
         // No location searched -- show favorite-store events only (if any), not the full unfiltered list
-        G.evItems=[];G.evErr=null;render();return;
+        G.evItems=[];G.evErr=null;render();_enrichNearbyEvents();return;
       }
       var filtered=nonFav.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI);});
       if(filtered.length){
@@ -5974,6 +6008,7 @@ function _loadEventsFromStaticFile(loc){
         G.evErr='No Events found in 25 mile radius';
       }
       render();
+      _enrichNearbyEvents();
     })
     .catch(function(){
       // Fallback to Claude API search
