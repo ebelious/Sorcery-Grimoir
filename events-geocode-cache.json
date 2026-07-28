@@ -533,5 +533,629 @@
   "são paulo|sp": {
     "lat": -23.5506507,
     "lng": -46.6333824
+  },
+  "roma|lazio": {
+    "lat": 41.8933203,
+    "lng": 12.4829321
+  },
+  "tijuca|rj": {
+    "lat": -22.9247351,
+    "lng": -43.2327165
+  },
+  "jacksonville|nc": {
+    "lat": 34.7509962,
+    "lng": -77.4309829
+  },
+  "pineville|nc": {
+    "lat": 35.0855409,
+    "lng": -80.8871253
+  },
+  "sayre|pa": {
+    "lat": 41.9789631,
+    "lng": -76.515499
+  },
+  "cleveland|ga": {
+    "lat": 34.5972449,
+    "lng": -83.7633058
+  },
+  "baltimore|md": {
+    "lat": 39.2908816,
+    "lng": -76.610759
+  },
+  "clearfield|ut": {
+    "lat": 41.1135837,
+    "lng": -112.0244841
+  },
+  "ogden|ut": {
+    "lat": 41.2230048,
+    "lng": -111.9738429
+  },
+  "chicago|il": {
+    "lat": 41.8755616,
+    "lng": -87.6244212
+  },
+  "salt lake city|ut": {
+    "lat": 40.7596198,
+    "lng": -111.886797
+  },
+  "canton|mi": {
+    "lat": 32.612602,
+    "lng": -90.0367512
+  },
+  "carrollton|tx": {
+    "lat": 32.9515472,
+    "lng": -96.9034244
+  },
+  "murray|ut": {
+    "lat": 40.6667841,
+    "lng": -111.888417
+  },
+  "pahrump|nv": {
+    "lat": 36.204178,
+    "lng": -116.0260261
+  },
+  "fountain valley|ca": {
+    "lat": 33.7038145,
+    "lng": -117.9627349
+  },
+  "hobart|tas": {
+    "lat": -42.8825088,
+    "lng": 147.3281233
+  },
+  "ipswich|qld": {
+    "lat": -27.6160323,
+    "lng": 152.7608348
+  },
+  "düsseldorf|nrw": {
+    "lat": 51.2254018,
+    "lng": 6.7763137
+  },
+  "stadtbezirk 1|nrw": {
+    "lat": 51.240157,
+    "lng": 6.7816425
+  },
+  "wrexham|wales": {
+    "lat": 53.0465084,
+    "lng": -2.9937869
+  },
+  "lublin|województwo lubelskie": {
+    "lat": 51.250559,
+    "lng": 22.5701022
+  },
+  "göteborg|västra götalands län": {
+    "lat": 57.7072326,
+    "lng": 11.9670171
+  },
+  "rosenheim|by": {
+    "lat": 47.8557873,
+    "lng": 12.1272983
+  },
+  "schwechat|niederösterreich": {
+    "lat": 48.1049968,
+    "lng": 16.5848987
+  },
+  "gdańsk|województwo pomorskie": {
+    "lat": 54.3482907,
+    "lng": 18.6540233
+  },
+  "bochum|nrw": {
+    "lat": 51.4818111,
+    "lng": 7.2196635
+  },
+  "kessel-lo|vlaams gewest": {
+    "lat": 50.8852456,
+    "lng": 4.7313734
+  },
+  "whitley bay|england": {
+    "lat": 55.0422091,
+    "lng": -1.4454353
+  },
+  "lommel|vlaams gewest": {
+    "lat": 51.2305657,
+    "lng": 5.3076895
+  },
+  "lacey township|nj": {
+    "lat": 39.8605724,
+    "lng": -74.2083587
+  },
+  "taylors|sc": {
+    "lat": 34.9203946,
+    "lng": -82.2962269
+  },
+  "brownsburg|in": {
+    "lat": 39.8444409,
+    "lng": -86.3968962
+  },
+  "atiradores|sc": {
+    "lat": -26.3101709,
+    "lng": -48.8637801
+  },
+  "mount sterling|ky": {
+    "lat": 38.0561079,
+    "lng": -83.9431961
+  },
+  "altamonte springs|fl": {
+    "lat": 28.6619154,
+    "lng": -81.3885899
+  },
+  "wakefield|ma": {
+    "lat": 42.506484,
+    "lng": -71.0728306
+  },
+  "shepherdstown|wv": {
+    "lat": 39.4300996,
+    "lng": -77.804161
+  },
+  "west chester township|oh": {
+    "lat": 39.3359319,
+    "lng": -84.4155616
+  },
+  "clifton park|ny": {
+    "lat": 42.8630374,
+    "lng": -73.7747623
+  },
+  "oklahoma city|ok": {
+    "lat": 35.4729886,
+    "lng": -97.5170536
+  },
+  "randolph|ma": {
+    "lat": 42.1626018,
+    "lng": -71.0413386
+  },
+  "conroe|tx": {
+    "lat": 30.3118769,
+    "lng": -95.4560512
+  },
+  "campinas|sp": {
+    "lat": -22.9056391,
+    "lng": -47.059564
+  },
+  "fairfield|ia": {
+    "lat": 41.0072342,
+    "lng": -91.9630039
+  },
+  "spring hill|fl": {
+    "lat": 28.4635266,
+    "lng": -82.5363557
+  },
+  "little elm|tx": {
+    "lat": 33.1626194,
+    "lng": -96.9375051
+  },
+  "phoenix|az": {
+    "lat": 33.4484367,
+    "lng": -112.074141
+  },
+  "san francisco|ca": {
+    "lat": 37.7879363,
+    "lng": -122.4075201
+  },
+  "lake forest|ca": {
+    "lat": 33.6469261,
+    "lng": -117.6859213
+  },
+  "riverside|ca": {
+    "lat": 33.9824949,
+    "lng": -117.374238
+  },
+  "eltham|taranaki region": {
+    "lat": 51.4505687,
+    "lng": 0.0541253
+  },
+  "palmerston north central|manawatū-whanganui region": {
+    "lat": -40.3560841,
+    "lng": 175.6112495
+  },
+  "auckland|auckland": {
+    "lat": -36.852095,
+    "lng": 174.7631803
+  },
+  "bundaberg east|qld": {
+    "lat": -24.8591493,
+    "lng": 152.3730407
+  },
+  "新橋|tokyo": {
+    "lat": 35.6653482,
+    "lng": 139.7598936
+  },
+  "centreville|va": {
+    "lat": 38.837613,
+    "lng": -77.4347283
+  },
+  "hamburg|hh": {
+    "lat": 53.5909051,
+    "lng": 9.9753758
+  },
+  "st. pölten|niederösterreich": {
+    "lat": 48.2043985,
+    "lng": 15.6229118
+  },
+  "churriana de la vega|an": {
+    "lat": 37.1468535,
+    "lng": -3.6420982
+  },
+  "torino|piemonte": {
+    "lat": 45.0677551,
+    "lng": 7.6824892
+  },
+  "blackburn with darwen|england": {
+    "lat": 53.699177,
+    "lng": -2.4709001
+  },
+  "edinburgh|scotland": {
+    "lat": 55.9533456,
+    "lng": -3.1883749
+  },
+  "nottingham|nottinghamshire": {
+    "lat": 52.9534193,
+    "lng": -1.1496461
+  },
+  "parque res. laranjeiras|es": {
+    "lat": 38.7286949,
+    "lng": -9.1501544
+  },
+  "roma|rm - roma": {
+    "lat": 41.8933203,
+    "lng": 12.4829321
+  },
+  "madison heights|mi": {
+    "lat": 42.4858692,
+    "lng": -83.1052028
+  },
+  "lemoyne|pa": {
+    "lat": 40.2412143,
+    "lng": -76.894272
+  },
+  "greensboro|nc": {
+    "lat": 36.0726355,
+    "lng": -79.7919754
+  },
+  "cherry hill township|nj": {
+    "lat": 39.9348351,
+    "lng": -75.0307264
+  },
+  "philadelphia|pa": {
+    "lat": 39.9527237,
+    "lng": -75.1635262
+  },
+  "warsaw|in": {
+    "lat": 41.2381017,
+    "lng": -85.8530544
+  },
+  "waco|tx": {
+    "lat": 31.5491899,
+    "lng": -97.1474628
+  },
+  "mt. juliet|tn": {
+    "lat": 36.200055,
+    "lng": -86.5186054
+  },
+  "independence|mo": {
+    "lat": 39.0924792,
+    "lng": -94.4137923
+  },
+  "cleveland|tn": {
+    "lat": 35.1595182,
+    "lng": -84.8766115
+  },
+  "universal city|tx": {
+    "lat": 29.5480071,
+    "lng": -98.2911235
+  },
+  "bela vista|sp": {
+    "lat": -23.5601219,
+    "lng": -46.6500338
+  },
+  "coconut creek|fl": {
+    "lat": 26.2517482,
+    "lng": -80.1789351
+  },
+  "burnsville|mn": {
+    "lat": 44.7670567,
+    "lng": -93.2773887
+  },
+  "casselberry|fl": {
+    "lat": 28.6714702,
+    "lng": -81.3382005
+  },
+  "longmont|co": {
+    "lat": 40.1672117,
+    "lng": -105.101928
+  },
+  "bellevue|wa": {
+    "lat": 47.6144219,
+    "lng": -122.192337
+  },
+  "fernley|nv": {
+    "lat": 39.6078829,
+    "lng": -119.2506489
+  },
+  "albuquerque|nm": {
+    "lat": 35.0841034,
+    "lng": -106.650985
+  },
+  "murrieta|ca": {
+    "lat": 33.560832,
+    "lng": -117.210656
+  },
+  "bothell|wa": {
+    "lat": 47.7623204,
+    "lng": -122.2054035
+  },
+  "springwood|nsw": {
+    "lat": -33.7017613,
+    "lng": 150.5655467
+  },
+  "phillip|act": {
+    "lat": -35.3470436,
+    "lng": 149.091009
+  },
+  "thomastown|vic": {
+    "lat": -37.6832672,
+    "lng": 145.0081104
+  },
+  "ourense|ourense": {
+    "lat": 42.3438932,
+    "lng": -7.8571773
+  },
+  "næstved|sjælland": {
+    "lat": 55.2328252,
+    "lng": 11.7674102
+  },
+  "les corts|ct": {
+    "lat": 41.3872483,
+    "lng": 2.1205352
+  },
+  "cross plains|wi": {
+    "lat": 43.1116968,
+    "lng": -89.6452197
+  },
+  "walla walla|wa": {
+    "lat": 46.2055155,
+    "lng": -118.5174284
+  },
+  "adelaide|sa": {
+    "lat": -34.9281805,
+    "lng": 138.5999312
+  },
+  "singapore|50531": {
+    "lat": 1.2899175,
+    "lng": 103.8519072
+  },
+  "idstein|he": {
+    "lat": 50.2147,
+    "lng": 8.2902
+  },
+  "centrala stan|västerbottens län": {
+    "lat": 63.8249475,
+    "lng": 20.2680135
+  },
+  "north hampton|nh": {
+    "lat": 42.9689814,
+    "lng": -70.8359489
+  },
+  "horn lake|ms": {
+    "lat": 34.9553719,
+    "lng": -90.0348139
+  },
+  "glendale|wi": {
+    "lat": 43.1250236,
+    "lng": -87.9285922
+  },
+  "tallahassee|fl": {
+    "lat": 30.4380832,
+    "lng": -84.2809332
+  },
+  "hudsonville|mi": {
+    "lat": 42.870889,
+    "lng": -85.865235
+  },
+  "mankato|mn": {
+    "lat": 44.1658533,
+    "lng": -94.0028013
+  },
+  "ralston|ne": {
+    "lat": 41.2016674,
+    "lng": -96.0323796
+  },
+  "martinez|ca": {
+    "lat": 38.0138934,
+    "lng": -122.1338674
+  },
+  "bossier city|la": {
+    "lat": 32.515887,
+    "lng": -93.7336536
+  },
+  "st. petersburg|fl": {
+    "lat": 27.7712264,
+    "lng": -82.6340259
+  },
+  "kent|wa": {
+    "lat": 47.3826903,
+    "lng": -122.2270272
+  },
+  "dubbo|nsw": {
+    "lat": -32.2478964,
+    "lng": 148.6026502
+  },
+  "rådmansvången|skåne län": {
+    "lat": 55.5940101,
+    "lng": 13.0028951
+  },
+  "centra rajons|riga": {
+    "lat": 56.9564723,
+    "lng": 24.11463
+  },
+  "para de minas|mg": {
+    "lat": -19.8668656,
+    "lng": -44.5912664
+  },
+  "granby|qc": {
+    "lat": 45.3990409,
+    "lng": -72.721834
+  },
+  "schofield|wi": {
+    "lat": 44.9096907,
+    "lng": -89.6045659
+  },
+  "appleton|wi": {
+    "lat": 44.2613967,
+    "lng": -88.4069744
+  },
+  "houston|tx": {
+    "lat": 29.7589382,
+    "lng": -95.3676974
+  },
+  "longview|wa": {
+    "lat": 46.1377048,
+    "lng": -122.934462
+  },
+  "palo alto|ca": {
+    "lat": 37.4443293,
+    "lng": -122.1598465
+  },
+  "lethbridge|ab": {
+    "lat": 49.6945782,
+    "lng": -112.8331033
+  },
+  "fort collins|co": {
+    "lat": 40.5871782,
+    "lng": -105.0770113
+  },
+  "launceston|tas": {
+    "lat": -41.4340813,
+    "lng": 147.1373496
+  },
+  "gosford|nsw": {
+    "lat": -33.4240979,
+    "lng": 151.3411475
+  },
+  "poznań|województwo wielkopolskie": {
+    "lat": 52.4082663,
+    "lng": 16.9335199
+  },
+  "montélimar|auvergne-rhône-alpes": {
+    "lat": 44.5579391,
+    "lng": 4.750318
+  },
+  "new trier township|il": {
+    "lat": 42.1085669,
+    "lng": -87.7480392
+  },
+  "franklin|tn": {
+    "lat": 35.925206,
+    "lng": -86.8689419
+  },
+  "idaho falls|id": {
+    "lat": 43.4887907,
+    "lng": -112.03628
+  },
+  "sheffield city centre|england": {
+    "lat": 53.3783713,
+    "lng": -1.4621381
+  },
+  "tyrone|pa": {
+    "lat": 40.6705508,
+    "lng": -78.2383479
+  },
+  "monett|mo": {
+    "lat": 36.9215543,
+    "lng": -93.9231864
+  },
+  "lubbock|tx": {
+    "lat": 33.5855677,
+    "lng": -101.8470215
+  },
+  "kyoto|kyoto city": {
+    "lat": 35.0178192,
+    "lng": 135.7710041
+  },
+  "singapore|050531": {
+    "lat": 1.2841412,
+    "lng": 103.8458779
+  },
+  "zürich|zh": {
+    "lat": 47.3744489,
+    "lng": 8.5410422
+  },
+  "mitcham|vic": {
+    "lat": -37.8180929,
+    "lng": 145.1928003
+  },
+  "louisville|ky": {
+    "lat": 38.2542376,
+    "lng": -85.759407
+  },
+  "toronto|on": {
+    "lat": 43.6534817,
+    "lng": -79.3839347
+  },
+  "williamsburg|va": {
+    "lat": 37.2712497,
+    "lng": -76.700035
+  },
+  "eindhoven|nb": {
+    "lat": 51.4392648,
+    "lng": 5.478633
+  },
+  "taipei|taipei city": {
+    "lat": 25.0612686,
+    "lng": 121.4598089
+  },
+  "hurricane|wv": {
+    "lat": 38.4325896,
+    "lng": -82.0201368
+  },
+  "brighton|england": {
+    "lat": 50.8214626,
+    "lng": -0.1400561
+  },
+  "whitinsville|ma": {
+    "lat": 42.1105682,
+    "lng": -71.6643906
+  },
+  "box hill|vic": {
+    "lat": -37.8215116,
+    "lng": 145.1261267
+  },
+  "strømsø|buskerud": {
+    "lat": 59.7313405,
+    "lng": 10.2367024
+  },
+  "dundee city council|scotland": {
+    "lat": 56.4606527,
+    "lng": -2.9686583
+  },
+  "broadview heights|oh": {
+    "lat": 41.3139426,
+    "lng": -81.6851271
+  },
+  "billings|mt": {
+    "lat": 45.7874957,
+    "lng": -108.49607
+  },
+  "reno|nv": {
+    "lat": 39.5261788,
+    "lng": -119.812658
+  },
+  "concord|ca": {
+    "lat": 37.9768525,
+    "lng": -122.0335624
+  },
+  "pardubice i|pardubický kraj": {
+    "lat": 50.0435396,
+    "lng": 15.7846254
+  },
+  "fort worth|tx": {
+    "lat": 32.753177,
+    "lng": -97.3327459
+  },
+  "christchurch|canterbury": {
+    "lat": -43.530955,
+    "lng": 172.6364343
+  },
+  "maribor|upravna enota maribor": {
+    "lat": 46.5625369,
+    "lng": 15.6497599
   }
 }
