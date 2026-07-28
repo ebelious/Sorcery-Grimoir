@@ -239,10 +239,10 @@ async function loadMoreEvents(page, maxClicks) {
     });
     await page.waitForTimeout(700); // give the lazy-mounted button a moment to appear
     const clicked = await page.evaluate(() => {
-      const els = Array.from(document.querySelectorAll('button, a, div, span'));
+      const els = Array.from(document.querySelectorAll('button, a, [role="button"]'));
       const btn = els.find(el =>
         el.textContent && el.textContent.trim() === 'Load Newer' &&
-        el.offsetParent !== null && el.children.length === 0
+        el.offsetParent !== null
       );
       if (btn) { btn.click(); return true; }
       return false;
