@@ -168,6 +168,18 @@ function toggleFavStore(storeName){
     _renderKeepScroll();
   }
 }
+// Confirmation gate for removing a favorite store from the per-store
+// "<Store> Events" section header -- unfavoriting also unsubscribes from
+// that store's push notifications, so it gets an explicit confirm step
+// rather than removing immediately on tap.
+function showFavStoreRemoveConfirm(storeName){G.favStoreRemoveConfirm=storeName;render();}
+function cancelFavStoreRemoveConfirm(){G.favStoreRemoveConfirm=null;render();}
+function confirmFavStoreRemove(){
+  var sn=G.favStoreRemoveConfirm;
+  G.favStoreRemoveConfirm=null;
+  if(sn)toggleFavStore(sn);
+  else render();
+}
 // Directly subscribes/unsubscribes this device's FCM token to/from one
 // arbitrary topic (used for per-store favorites), as opposed to
 // _fcmSyncTopics() which re-syncs the whole fixed News/Discord/YouTube/
@@ -963,7 +975,7 @@ var G={
   mpCode:null,mpRoom:null,mpRole:null,mpMode:'create',mpBusy:false,mpErr:null,mpConnectedPopup:false,mpMyDeckKey:null,mpLastOpp:null,mpLastCode:null,mpDeckImportedName:null,mpLastOppDiceTs:null,mpScanOpen:false,mpScanErr:null,mpCreateViewMode:'code',
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
-  mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,
+  mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,favStoreRemoveConfirm:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -1078,7 +1090,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evFavItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evFavItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.favStoreRemoveConfirm=null;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -6846,8 +6858,8 @@ function pContent(){
       o((function(){var _i=(G._rd=G._rd||[]).push({t:k.k,b:k.def,segments:k.segments})-1;
         return '<div class="acc rd-entry" onclick="rdPopIdx('+_i+')">'
           +'<div class="acc-h" style="pointer-events:none">'
-          +'<div class="acc-nm" style="flex:1">'+h(k.k)+'</div>'
-          +'<span class="acc-arr" style="color:var(--fg2)">&#9656;</span>'
+          +'<div class="acc-nm" style="flex:1;color:var(--fg)">'+h(k.k)+'</div>'
+          +'<span class="acc-arr" style="color:var(--hi)">&#9656;</span>'
           +'</div>'
           +'</div>';
       })());
@@ -6876,8 +6888,8 @@ function pContent(){
       var _i=(G._faqRd=G._faqRd||[]).push({t:card,sections:[{items:_items}]})-1;
       o('<div class="acc rd-entry" onclick="rdPopFaq('+_i+')">'
         +'<div class="acc-h" style="pointer-events:none">'
-        +'<div class="acc-nm" style="flex:1">'+h(card)+'</div>'
-        +'<div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr" style="color:var(--fg2)">&#9656;</span></div>'
+        +'<div class="acc-nm" style="flex:1;color:var(--fg)">'+h(card)+'</div>'
+        +'<div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr" style="color:var(--hi)">&#9656;</span></div>'
         +'</div>'
         +'</div>');
     });
@@ -7590,13 +7602,6 @@ function pContent(){
 
     if(_evLbl&&!G.evLoading)o('<div style="font-size:10px;color:var(--fg2);margin-bottom:4px">Searching within '+EV_SEARCH_RADIUS_MI+' miles of: <b>'+h(_evLbl)+'</b></div>');
 
-    if(G.favStores&&G.favStores.length){
-      o('<div class="slbl2" style="margin-top:8px">Favorite Stores</div>');
-      G.favStores.forEach(function(s){
-        o('<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:4px"><span style="font-size:13px">'+_evIconStar(true)+' '+h(s)+'</span><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(s)+'" onclick="toggleFavStore(this.dataset.store)">Remove</button></div>');
-      });
-    }
-
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else {
       G._evReg=[];
@@ -7609,7 +7614,7 @@ function pContent(){
           _favByStore[sn].push(e);
         });
         _favStoreOrder.forEach(function(sn){
-        o('<div class="slbl2" style="margin-top:8px">'+_evIconStar(true)+' '+h(sn)+' Events</div>');
+        o('<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"><div class="slbl2" style="margin-top:0">'+_evIconStar(true)+' '+h(sn)+' Events</div><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(sn)+'" onclick="showFavStoreRemoveConfirm(this.dataset.store)">Remove</button></div>');
         o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
         _favByStore[sn].forEach(function(e){
           var _fi=G._evReg.length;
@@ -7620,7 +7625,7 @@ function pContent(){
           var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
           o('<div class="ev-c" style="cursor:pointer;border-color:var(--hi)" onclick="showEvPopup('+_fi+')">');
           o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
           if(e.storeName)o('<div class="ev-mt" style="font-weight:700;color:var(--hi)">'+_evIconStore()+' '+h(e.storeName)+'</div>');
           if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
           if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
@@ -7644,7 +7649,7 @@ function pContent(){
         var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
         o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
         if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
         if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
@@ -7667,7 +7672,7 @@ function pContent(){
         var loc=e.location||e.loc||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
         o('<div class="ev-nm">'+h(e.name||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+'</div>');
         if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
         if(loc)o('<div class="ev-mt" style="color:var(--fg)">'+_evIconPin()+' '+h(loc)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
@@ -7696,7 +7701,7 @@ function pContent(){
         o('</div>');
         o('<div style="padding:14px;overflow-y:auto">');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
-        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">'+_evIconCal()+' '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' '+_evIconClock()+' <b>'+h(_ep.time)+'</b>':'')+'</div>');
+        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">'+_evIconCal()+' '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' '+_evIconClock()+' <b>'+h(_ep.time)+'</b>'+(_ep.endTime?' &ndash; <b>'+h(_ep.endTime)+'</b>':''):'')+'</div>');
         if(_ep.type||_ep.price||_ep.duration){
           var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
           o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
@@ -8587,6 +8592,12 @@ function render(){
       o('<div class="ov" onclick="if(event.target===this)cancelThemeResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset to Default?</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">This will reset all UI layout, theme, and appearance settings to their defaults.</div>');
       o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="cancelThemeResetConfirm()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--hi);color:var(--fg)" onclick="confirmThemeReset()">Reset</button></div></div></div>');
+    }
+
+    if(G.favStoreRemoveConfirm){
+      o('<div class="ov" onclick="if(event.target===this)cancelFavStoreRemoveConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Remove Favorite Store?</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">You will stop getting notified about new events at '+h(G.favStoreRemoveConfirm)+'.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="cancelFavStoreRemoveConfirm()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--hi);color:var(--fg)" onclick="confirmFavStoreRemove()">Remove</button></div></div></div>');
     }
 
     if(G.evLocPopup){
