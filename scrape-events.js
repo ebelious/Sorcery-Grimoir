@@ -78,18 +78,36 @@ const GEOCODE_STATE_FILE = 'events-geocode-cache.json'; // persists city/state -
 // result across runs in GEOCODE_STATE_FILE, so a city already looked up
 // last week never needs a fresh request at all).
 const NOMINATIM_USER_AGENT = 'Sorcery-Grimoir-EventScraper/1.0 (https://github.com/ebelious/Sorcery-Grimoir)';
+async function _nominatimSearch(q) {
+  const res = await fetch(
+    'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(q) + '&format=json&limit=1',
+    { headers: { 'User-Agent': NOMINATIM_USER_AGENT } }
+  );
+  const results = res.ok ? await res.json() : [];
+  return results && results[0];
+}
 async function geocode(city, state, cache) {
   const key = (city + '|' + state).toLowerCase().trim();
   if (cache[key] !== undefined) return cache[key]; // includes cached nulls (a previous failed lookup), so we don't retry those every run either
   const q = [city, state].filter(Boolean).join(', ');
   if (!q) { cache[key] = null; return null; }
   try {
-    const res = await fetch(
-      'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(q) + '&format=json&limit=1',
-      { headers: { 'User-Agent': NOMINATIM_USER_AGENT } }
-    );
-    const results = res.ok ? await res.json() : [];
-    const hit = results && results[0];
+    let hit = await _nominatimSearch(q);
+    // If the exact "city, state" combination doesn't resolve, retry with
+    // progressively simpler queries -- e.g. "Blenheim Central, Marlborough
+    // Region" failed live, almost certainly because "Central" is some kind
+    // of store/area qualifier rather than genuinely part of the place
+    // name, while "Blenheim, Marlborough Region" or just "Blenheim" alone
+    // would very likely succeed. Each retry costs one more rate-limited
+    // request, so this only kicks in on an actual failure, not every call.
+    if (!hit && city && state) {
+      await new Promise(r => setTimeout(r, 1100));
+      hit = await _nominatimSearch(city);
+    }
+    if (!hit && city && city.trim().indexOf(' ') >= 0) {
+      await new Promise(r => setTimeout(r, 1100));
+      hit = await _nominatimSearch(city.trim().split(/\s+/)[0]);
+    }
     cache[key] = hit ? { lat: parseFloat(hit.lat), lng: parseFloat(hit.lon) } : null;
   } catch (e) {
     cache[key] = null;
