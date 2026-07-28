@@ -5728,7 +5728,7 @@ function evSaveLocationPopup(){
     loadLocalEvents();
     return;
   }
-  G.evLoading=true;G.evLoaded=false;G.evErr=null;render();
+  G.evErr=null;render();
   var qs='format=json&limit=1';
   if(city)qs+='&city='+encodeURIComponent(city);
   if(state)qs+='&state='+encodeURIComponent(state);
