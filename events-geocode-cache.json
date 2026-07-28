@@ -1157,5 +1157,9 @@
   "maribor|upravna enota maribor": {
     "lat": 46.5625369,
     "lng": 15.6497599
+  },
+  "hackensack|nj": {
+    "lat": 40.8870781,
+    "lng": -74.0410667
   }
 }
