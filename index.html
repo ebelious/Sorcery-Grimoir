@@ -6859,7 +6859,7 @@ function pContent(){
         return '<div class="acc rd-entry" onclick="rdPopIdx('+_i+')">'
           +'<div class="acc-h" style="pointer-events:none">'
           +'<div class="acc-nm" style="flex:1;color:var(--fg)">'+h(k.k)+'</div>'
-          +'<span class="acc-arr" style="color:var(--hi)">&#9656;</span>'
+          +'<span class="acc-arr" style="color:var(--hi)">'+_evIconArrow()+'</span>'
           +'</div>'
           +'</div>';
       })());
@@ -6889,7 +6889,7 @@ function pContent(){
       o('<div class="acc rd-entry" onclick="rdPopFaq('+_i+')">'
         +'<div class="acc-h" style="pointer-events:none">'
         +'<div class="acc-nm" style="flex:1;color:var(--fg)">'+h(card)+'</div>'
-        +'<div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr" style="color:var(--hi)">&#9656;</span></div>'
+        +'<div class="acc-meta"><span class="acc-cnt">'+faqs.length+'Q</span><span class="acc-arr" style="color:var(--hi)">'+_evIconArrow()+'</span></div>'
         +'</div>'
         +'</div>');
     });
