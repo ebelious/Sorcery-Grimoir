@@ -14,7 +14,10 @@
 // page.content() would show after full hydration, just without needing a
 // browser to get there).
 //
-// Request:  POST { urls: ["https://play.sorcerytcg.com/events/<id>", ...] }
+// Request:  POST { events: [{url, name}, ...] }
+//   name is used to disambiguate the correct event object on the page when
+//   multiple candidates share the requested id (confirmed live -- without
+//   this, results can silently pick up an unrelated event's timestamps).
 //   Capped at MAX_URLS per request -- the app should only ever send the
 //   small set of events actually near a search, not the whole event list.
 // Response: { results: { "<url>": {address, duration, endTime, time, date}, ... } }
@@ -40,7 +43,7 @@ function unescapeHtml(html) {
   return html.replace(/\\"/g, '"');
 }
 
-function extractEventDetails(html, eventId) {
+function extractEventDetails(html, eventId, eventName) {
   const out = { address: '', duration: '', time: '', endTime: '', date: '' };
   if (!eventId || !html) return out;
   const unescaped = unescapeHtml(html);
@@ -60,12 +63,37 @@ function extractEventDetails(html, eventId) {
   out.address = [line, cityM ? cityM[1] : '', stateM ? stateM[1] : '', zipM ? zipM[1] : '']
     .filter(Boolean).join(' ').trim();
 
-  // Start/end/date: found via this specific event's own JSON object,
-  // located by its id, then searching a window around that for
-  // startsAt/endsAt and the venue's IANA timezone (e.g. "America/New_York").
-  const idIdx = unescaped.indexOf('"id":"' + eventId + '"');
-  if (idIdx >= 0) {
-    const windowText = unescaped.slice(Math.max(0, idIdx - 500), idIdx + 1500);
+  // Start/end/date: a real event detail page turned out to contain MANY
+  // objects with their own "id"/"startsAt" fields, not just the one event
+  // requested -- confirmed live, taking just the first "id" match on the
+  // page grabbed a completely unrelated timestamp shared across every
+  // event tested (all four showed the exact same wrong start date).
+  // Disambiguate by requiring the event's own name to also appear near a
+  // candidate id match -- the real event object has both together.
+  function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  const idPattern = new RegExp('"id":"' + escapeRe(eventId) + '"', 'g');
+  const candidates = [];
+  let m;
+  while ((m = idPattern.exec(unescaped)) !== null) candidates.push(m.index);
+
+  let windowText = '';
+  if (candidates.length) {
+    if (eventName) {
+      const namePattern = new RegExp('"name":"' + escapeRe(eventName) + '"');
+      const nameMatchIdx = candidates.find(idx => namePattern.test(unescaped.slice(Math.max(0, idx - 800), idx + 800)));
+      if (nameMatchIdx !== undefined) windowText = unescaped.slice(Math.max(0, nameMatchIdx - 500), nameMatchIdx + 1500);
+    }
+    if (!windowText) {
+      // No name match found (or no name provided) -- fall back to the
+      // LAST occurrence rather than the first, since the fuller per-event
+      // object tends to appear later in the payload stream than earlier,
+      // more minimal references to the same id.
+      const lastIdx = candidates[candidates.length - 1];
+      windowText = unescaped.slice(Math.max(0, lastIdx - 500), lastIdx + 1500);
+    }
+  }
+
+  if (windowText) {
     const startM = windowText.match(/"startsAt":"([^"]+)"/);
     const endM = windowText.match(/"endsAt":"([^"]+)"/);
     const entryM = windowText.match(/"entryTime":(\d+)/); // minutes, when present
@@ -128,18 +156,27 @@ exports.handler = async function (event) {
     return resp(400, { error: 'Invalid JSON body' });
   }
 
-  const urls = Array.isArray(body.urls) ? body.urls.filter(u => typeof u === 'string').slice(0, MAX_URLS) : [];
-  if (!urls.length) return resp(400, { error: 'No urls provided' });
+  // Accepts either { events: [{url, name}, ...] } (name used to
+  // disambiguate the correct object when a page has multiple candidates)
+  // or the older { urls: [...] } shape (name omitted, falls back to a
+  // last-occurrence heuristic).
+  let items = [];
+  if (Array.isArray(body.events)) {
+    items = body.events.filter(e => e && typeof e.url === 'string').slice(0, MAX_URLS);
+  } else if (Array.isArray(body.urls)) {
+    items = body.urls.filter(u => typeof u === 'string').slice(0, MAX_URLS).map(url => ({ url, name: '' }));
+  }
+  if (!items.length) return resp(400, { error: 'No events/urls provided' });
 
   const results = {};
-  await Promise.all(urls.map(async (url) => {
+  await Promise.all(items.map(async (item) => {
     try {
-      const idMatch = url.match(/\/events\/([a-f0-9-]+)/i);
+      const idMatch = item.url.match(/\/events\/([a-f0-9-]+)/i);
       if (!idMatch) return;
-      const res = await fetch(url, { headers: { 'User-Agent': 'Sorcery-Grimoir-EventEnrich/1.0' } });
+      const res = await fetch(item.url, { headers: { 'User-Agent': 'Sorcery-Grimoir-EventEnrich/1.0' } });
       if (!res.ok) return;
       const html = await res.text();
-      results[url] = extractEventDetails(html, idMatch[1]);
+      results[item.url] = extractEventDetails(html, idMatch[1], item.name || '');
     } catch (e) {
       // Skip this one URL -- one failure shouldn't fail the whole batch.
     }
