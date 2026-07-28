@@ -7601,9 +7601,17 @@ function pContent(){
     else {
       G._evReg=[];
       if(G.evFavItems&&G.evFavItems.length){
-        o('<div class="slbl2" style="margin-top:8px">'+_evIconStar(true)+' Favorite Store Events</div>');
-        o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
+        var _favByStore={};
+        var _favStoreOrder=[];
         G.evFavItems.forEach(function(e){
+          var sn=e.storeName||'Unknown Store';
+          if(!_favByStore[sn]){_favByStore[sn]=[];_favStoreOrder.push(sn);}
+          _favByStore[sn].push(e);
+        });
+        _favStoreOrder.forEach(function(sn){
+        o('<div class="slbl2" style="margin-top:8px">'+_evIconStar(true)+' '+h(sn)+' Events</div>');
+        o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
+        _favByStore[sn].forEach(function(e){
           var _fi=G._evReg.length;
           G._evReg.push(e);
           var loc=e.location||e.loc||'';
@@ -7612,7 +7620,7 @@ function pContent(){
           var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
           o('<div class="ev-c" style="cursor:pointer;border-color:var(--hi)" onclick="showEvPopup('+_fi+')">');
           o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-          if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
           if(e.storeName)o('<div class="ev-mt" style="font-weight:700;color:var(--hi)">'+_evIconStore()+' '+h(e.storeName)+'</div>');
           if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
           if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
@@ -7621,6 +7629,7 @@ function pContent(){
           o('</div>');
         });
         o('</div>');
+        });
       }
       if(G.evErr)o('<div style="font-size:11px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
       if(G.evItems&&G.evItems.length){
@@ -7635,7 +7644,7 @@ function pContent(){
         var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
         o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
         if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
         if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
@@ -7658,7 +7667,7 @@ function pContent(){
         var loc=e.location||e.loc||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
         o('<div class="ev-nm">'+h(e.name||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time):'')+'</div>');
         if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
         if(loc)o('<div class="ev-mt" style="color:var(--fg)">'+_evIconPin()+' '+h(loc)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
