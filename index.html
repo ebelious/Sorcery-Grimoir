@@ -1077,7 +1077,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evFavItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -5842,6 +5842,30 @@ function _evIsUpcoming(e){
   if(isNaN(d.getTime()))return true;
   return d.getTime()>=todayStart.getTime();
 }
+// Only show events happening within the next 14 days. For a date-range
+// (recurring series) event, the series counts as "within the week" if its
+// active range overlaps that window at all -- it starts before the window
+// ends AND ends after the window starts -- since a recurring series
+// running through the week will have some occurrence in it even if we
+// can't tell exactly which day from the listing alone.
+function _evWithinWeek(e){
+  var raw=e&&e.date;
+  if(!raw)return true;
+  var str=String(raw);
+  var todayStart=new Date();todayStart.setHours(0,0,0,0);
+  var weekEnd=new Date(todayStart.getTime()+14*24*60*60*1000);
+  if(str.indexOf(' - ')>=0){
+    var parts=str.split(/\s*-\s*/);
+    var start=new Date(parts[0]||'');
+    var end=new Date(parts[1]||'');
+    if(isNaN(start.getTime())||isNaN(end.getTime()))return true;
+    return start.getTime()<=weekEnd.getTime()&&end.getTime()>=todayStart.getTime();
+  }
+  var cleaned=str.replace(/^[A-Za-z]+,\s*/,'').replace(/(\d)(st|nd|rd|th)\b/i,'$1');
+  var d=new Date(cleaned);
+  if(isNaN(d.getTime()))return true;
+  return d.getTime()>=todayStart.getTime()&&d.getTime()<=weekEnd.getTime();
+}
 // Distance in miles between two lat/lng points (haversine formula).
 function _milesBetween(lat1,lng1,lat2,lng2){
   var R=3958.8; // Earth radius in miles
@@ -5851,6 +5875,15 @@ function _milesBetween(lat1,lng1,lat2,lng2){
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
 var EV_SEARCH_RADIUS_MI=25;
+// Minimal line-style SVG icons (matching the header button style elsewhere
+// in the app) used throughout the Events panel in place of emoji.
+function _evIconCal(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';}
+function _evIconClock(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>';}
+function _evIconStore(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v10a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1V9"/></svg>';}
+function _evIconPin(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';}
+function _evIconStar(filled,sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="'+(filled?'currentColor':'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>';}
+function _evIconMap(sz){return '<svg width="'+(sz||14)+'" height="'+(sz||14)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><path d="M9 3v15M15 6v15"/></svg>';}
+function _evIconArrow(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';}
 
 function loadLocalEvents(){
   if(G.evLoading)return;
@@ -5896,20 +5929,29 @@ function _loadEventsFromStaticFile(loc){
   fetch('https://ebelious.github.io/Sorcery-Grimoir/events.json?t='+Date.now())
     .then(function(r){if(!r.ok)throw new Error('not found');return r.json();})
     .then(function(d){
-      var all=(d.events||[]).filter(_evIsUpcoming);
+      var all=(d.events||[]).filter(_evIsUpcoming).filter(_evWithinWeek);
       if(!all.length)throw new Error('empty');
       G.evLoading=false;G.evLoaded=true;
+      // Favorite-store events populate independently of location/radius --
+      // they show above other results whenever a match exists, whether or
+      // not the user has searched a location at all.
+      var favSet=G.favStores||[];
+      G.evFavItems=favSet.length?all.filter(function(e){return favSet.indexOf(e.storeName)>=0;}):[];
+      var favUrls={};
+      G.evFavItems.forEach(function(e){if(e.url)favUrls[e.url]=true;});
+      var nonFav=all.filter(function(e){return !(e.url&&favUrls[e.url]);});
       if(!lowerLoc){
-        G.evItems=all;G.evErr=null;render();return;
+        // No location searched -- show favorite-store events only (if any), not the full unfiltered list
+        G.evItems=[];G.evErr=null;render();return;
       }
-      var filtered=all.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI);});
+      var filtered=nonFav.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI);});
       if(filtered.length){
         G.evItems=filtered;G.evErr=null;
       } else if(haveSearchCoords){
         // Nothing within 25mi -- widen to 50mi instead of falling back to
         // the unfiltered "all events" list. The message shows either way;
         // the wider results (if any) populate below it.
-        G.evItems=all.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI*2);});
+        G.evItems=nonFav.filter(function(e){return withinRadius(e,EV_SEARCH_RADIUS_MI*2);});
         G.evErr='No Events found in 25 mile radius';
       } else {
         // Text-matching fallback (no coordinates for the search location)
@@ -7532,7 +7574,7 @@ function pContent(){
     // Saved location chip (with an X to clear it) or a button to set one
     if(_evLbl){
       o('<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:8px">');
-      o('<span style="flex:1;font-size:13px;cursor:pointer" onclick="evOpenLocPopup()">&#128205; '+h(_evLbl)+'</span>');
+      o('<span style="flex:1;font-size:13px;cursor:pointer" onclick="evOpenLocPopup()">'+_evIconPin()+' '+h(_evLbl)+'</span>');
       o('<button class="fb" style="font-size:11px;padding:6px 9px" onclick="evOpenLocPopup()">Edit</button>');
       o('<button class="fb red" style="font-size:11px;padding:6px 9px" onclick="evClearSavedLocation()">&#x2715;</button>');
       o('</div>');
@@ -7550,18 +7592,41 @@ function pContent(){
     if(G.favStores&&G.favStores.length){
       o('<div class="slbl2" style="margin-top:8px">Favorite Stores</div>');
       G.favStores.forEach(function(s){
-        o('<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:4px"><span style="font-size:13px">&#9733; '+h(s)+'</span><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(s)+'" onclick="toggleFavStore(this.dataset.store)">Remove</button></div>');
+        o('<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:4px"><span style="font-size:13px">'+_evIconStar(true)+' '+h(s)+'</span><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(s)+'" onclick="toggleFavStore(this.dataset.store)">Remove</button></div>');
       });
     }
 
     if(G.evLoading){o('<div class="ld">'+spinIcon()+' Elements Are at Work&hellip;</div>');}
     else {
+      G._evReg=[];
+      if(G.evFavItems&&G.evFavItems.length){
+        o('<div class="slbl2" style="margin-top:8px">'+_evIconStar(true)+' Favorite Store Events</div>');
+        o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
+        G.evFavItems.forEach(function(e){
+          var _fi=G._evReg.length;
+          G._evReg.push(e);
+          var loc=e.location||e.loc||'';
+          var _city=e.city||(loc.split(',')[1]||'').trim();
+          var _state=e.state||(loc.split(',')[2]||loc.split(',')[1]||'').trim().slice(0,2).toUpperCase();
+          var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
+          o('<div class="ev-c" style="cursor:pointer;border-color:var(--hi)" onclick="showEvPopup('+_fi+')">');
+          o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
+          if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+          if(e.storeName)o('<div class="ev-mt" style="font-weight:700;color:var(--hi)">'+_evIconStore()+' '+h(e.storeName)+'</div>');
+          if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
+          if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
+          else if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
+          if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
+          o('</div>');
+        });
+        o('</div>');
+      }
       if(G.evErr)o('<div style="font-size:11px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
       if(G.evItems&&G.evItems.length){
       o('<div class="slbl2" style="margin-top:8px">Results</div>');
-      G._evReg=[];
       o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
-      G.evItems.forEach(function(e,_ei){
+      G.evItems.forEach(function(e){
+        var _ei=G._evReg.length;
         G._evReg.push(e);
         var loc=e.location||e.loc||'';
         var _city=e.city||(loc.split(',')[1]||'').trim();
@@ -7569,35 +7634,35 @@ function pContent(){
         var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
         o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt">&#128197; '+(e.date?h(localDate(e.date)):'')+( e.time?' &#128336; '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
-        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">&#127978; '+h(e.storeName)+'</div>');
-        if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">&#128205; '+h(_cityState)+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
+        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
+        if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
         else if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
         if(e.description)o('<div style="font-size:11px;color:var(--fg2);margin-top:4px;line-height:1.4">'+h(e.description)+'</div>');
-        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network &rarr;</a>');
+        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
         o('</div>');
       });
       o('</div>');
-      } else if(!G.evLoaded&&!G.evErr){
+      } else if(!G.evLoaded&&!G.evErr&&!(G.evFavItems&&G.evFavItems.length)){
         o('<div style="font-size:10px;color:var(--fg2);padding:6px 0">Enter a city or use your location to find events.</div>');
       }
     }
 
     // Saved events
     if(G.evSaved&&G.evSaved.length){
-      o('<div class="slbl2" style="margin-top:10px">&#9733; Saved Events</div>');
+      o('<div class="slbl2" style="margin-top:10px">'+_evIconStar(true)+' Saved Events</div>');
       o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
       G.evSaved.forEach(function(e,si){
         var loc=e.location||e.loc||'';
         o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
         o('<div class="ev-nm">'+h(e.name||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt">&#128197; '+(e.date?h(e.date):'')+(e.time?' &#128336; '+h(e.time):'')+'</div>');
-        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">&#127978; '+h(e.storeName)+'</div>');
-        if(loc)o('<div class="ev-mt" style="color:var(--fg)">&#128205; '+h(loc)+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
+        if(loc)o('<div class="ev-mt" style="color:var(--fg)">'+_evIconPin()+' '+h(loc)+'</div>');
         if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
         if(e.description)o('<div style="font-size:11px;color:var(--fg2);margin-top:4px;line-height:1.4">'+h(e.description)+'</div>');
-        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network &rarr;</a>');
+        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
         o('</div>');
       });
       o('</div>');
@@ -7617,27 +7682,27 @@ function pContent(){
         o('<div class="phdr">');
         o('<button class="p-bk" onclick="closeEvPopup()">&#x2715;</button>');
         o('<div class="p-ttl" style="font-size:16px">Event Details</div>');
-        o('<button class="eadj" style="font-size:16px;border-color:'+(_esaved?'var(--hi)':'var(--bd)')+';color:'+(_esaved?'var(--hi)':'var(--fg2)')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">&#9733;</button>');
+        o('<button class="eadj" style="font-size:16px;border-color:'+(_esaved?'var(--hi)':'var(--bd)')+';color:'+(_esaved?'var(--hi)':'var(--fg2)')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">'+_evIconStar(_esaved,16)+'</button>');
         o('</div>');
         o('<div style="padding:14px;overflow-y:auto">');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
-        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">&#128197; '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' &#128336; <b>'+h(_ep.time)+'</b>':'')+'</div>');
+        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">'+_evIconCal()+' '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' '+_evIconClock()+' <b>'+h(_ep.time)+'</b>':'')+'</div>');
         if(_ep.type||_ep.price||_ep.duration){
           var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
           o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
         }
         if(_ep.storeName){
           var _isFav=isFavStore(_ep.storeName);
-          o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div style="font-size:14px;font-weight:700">&#127978; '+h(_ep.storeName)+'</div><button class="fb" style="padding:4px 8px;font-size:14px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+(_isFav?'&#9733; Favorited':'&#9734; Favorite Store')+'</button></div>');
+          o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div style="font-size:14px;font-weight:700">'+_evIconStore()+' '+h(_ep.storeName)+'</div><button class="fb" style="padding:4px 8px;font-size:14px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+(_isFav?_evIconStar(true)+' Favorited':_evIconStar(false)+' Favorite Store')+'</button></div>');
         }
         var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
-        if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">&#128205; '+h(_epicitystate)+'</div>');
+        if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">'+_evIconPin()+' '+h(_epicitystate)+'</div>');
         if(_eaddr)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
         else if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:10px">'+h(_eloc)+'</div>');
         if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
         o('<div style="display:flex;gap:8px;flex-direction:column">');
-        if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);border-color:var(--grn);color:var(--grn);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">&#x1F5FA; Open in Google Maps</a>');
-        if(_ep.url)o('<a class="ext-lnk" style="padding:11px;text-align:center;background:var(--bg3);font-size:13px" href="'+h(_ep.url)+'" target="_blank">View on Play Network &rarr;</a>');
+        if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;border:1px solid var(--grn);color:var(--fg);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">'+_evIconMap()+' Open in Google Maps</a>');
+        if(_ep.url)o('<a class="ext-lnk" style="padding:11px;text-align:center;font-size:13px;border:1px solid var(--hi);color:var(--fg)" href="'+h(_ep.url)+'" target="_blank">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
         o('</div></div></div></div>');
       }
     }
