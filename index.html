@@ -517,6 +517,9 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .p-ttl{width:100%;text-align:center;font-size:19px;font-weight:700;text-transform:uppercase;color:var(--hi)}
 .p-cl{font-size:11px;padding:3px 6px;border:1px solid var(--bd);color:var(--fg2);text-transform:uppercase}
 .slbl2{font-size:14px;font-weight:700;color:var(--cyn);text-transform:uppercase;letter-spacing:.1em;margin:10px 0 5px}
+.set-grp{background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:14px}
+.set-grp-h{font-size:16px;font-weight:900;color:var(--hi);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.set-grp .slbl2{font-size:11px}
 .fi{font-size:13px;padding:6px 8px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);outline:none;width:100%;font-family:'Courier New',monospace}
 .fi::placeholder{color:var(--fg3)}
 .fr{display:flex;gap:4px;align-items:center;margin-bottom:6px}
@@ -846,14 +849,12 @@ function _ensureDieColorsDiffer(){
 var MENU_S={
   Settings:['Settings'],
   Knowledge:['Rulebook','Codex','FAQ','Links'],
-  Cards:['Card Search','Collection','My Decks'],
+  Cards:['Card Search','My Decks','Collection','Dust Rewards'],
   Stats:['Local Stats','Deck Stats'],
-  Media:['YouTube','News','Discord'],
-  'Play Network':['Events','Rewards'],
-  Artists:['All Artists'],
+  Community:['YouTube','News','Discord','Events','Artists'],
 };
-var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Settings':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','All Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Settings',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
+var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Settings':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Dust Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','Artists':'art'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Settings',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Dust Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
 // ── Events location fields (persistent Country/State/City search) ─────────
 var EV_COUNTRIES=[
   ['us','United States'],['ca','Canada'],['au','Australia'],['nz','New Zealand'],['gb','United Kingdom'],
@@ -6741,21 +6742,21 @@ function pContent(){
     return out.join('');}
   if(p==='themes'){
     o('<div class="set-pop">');
-    o('<div class="slbl2">Starting Life</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Game</div>');
+    o('<div class="slbl2" style="margin-top:0">Starting Life</div>');
     o('<div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:6px"><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.max(10,G.cfg.maxLife-5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">-</button><span style="font-size:32px;font-weight:700;color:var(--fg);min-width:50px;text-align:center;line-height:1">'+G.cfg.maxLife+'</span><button class="eadj" style="width:44px;height:44px;font-size:24px" onclick="G.cfg.maxLife=Math.min(60,G.cfg.maxLife+5);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">+</button></div>');
     o('<div style="text-align:center;font-size:11px;color:var(--fg2);margin-bottom:14px">Applied on next Reset</div>');
     o('<div class="slbl2">Player Name</div>');
-    o('<div class="fr" style="margin-bottom:14px"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:16px;padding:10px 12px"><button class="fb" style="font-size:11px;padding:8px 14px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase;background:transparent" onclick="saveNamesInline()">Save</button></div>');
-    o('<div class="slbl2">UI Layouts</div>');
+    o('<div class="fr" style="margin-bottom:0"><input class="fi" id="ni0" value="'+h(G.cfg.p1)+'" style="font-size:16px;padding:10px 12px"><button class="fb" style="font-size:11px;padding:8px 14px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase;background:transparent" onclick="saveNamesInline()">Save</button></div>');
+    o('</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Appearance</div>');
+    o('<div class="slbl2" style="margin-top:0">UI Layouts</div>');
     o('<div style="display:flex;gap:8px;margin-bottom:14px">');
     o('<button class="fb full" style="flex:1" onclick="p1LayoutCompetitive()">Competitive</button>');
     o('<button class="fb full" style="flex:1" onclick="p1LayoutMinimal()">Minimal</button>');
     o('</div>');
-    o('<div class="slbl2">Dice Settings</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span style="color:var(--hi)">&#8594;</span></button>');
-    o('<div class="slbl2">UI Color</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>UI Color</span><span style="color:var(--hi)">&#8594;</span></button>');
-    o('<div class="slbl2">UI Backgrounds</div>');
     o('<div class="set-row"><span>Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>UI Backgrounds</span><span style="color:var(--hi)">&#8594;</span></button>');
     if(G.cfg.bgImage){
@@ -6775,7 +6776,9 @@ function pContent(){
       o('</div>');
     }
     o('<div class="set-row"><span>Vibration</span><button class="ftag'+(G.cfg.vibrate!==false?' on':'')+'" onclick="G.cfg.vibrate=!(G.cfg.vibrate!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.vibrate!==false?'On':'Off')+'</button></div>');
-    o('<div class="slbl2">Offline Access</div>');
+    o('</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Data &amp; Storage</div>');
+    o('<div class="slbl2" style="margin-top:0">Offline Access</div>');
     o('<div class="set-row"><span>Cache by Default</span><button class="ftag'+(G.cfg.autoCache!==false?' on':'')+'" onclick="toggleAutoCache()">'+(G.cfg.autoCache!==false?'On':'Off')+'</button></div>');
     o('<div style="color:var(--fg2);font-size:11px;margin-bottom:8px">'+(G.offlineCacheCount==null?'Checking cache&hellip;':G.offlineCacheCount+' image'+(G.offlineCacheCount===1?'':'s')+' cached')+'</div>');
     o('<div id="offline-cache-anchor" tabindex="-1" style="outline:none">');
@@ -6800,23 +6803,29 @@ function pContent(){
     o('<div class="slbl2">Backup &amp; Restore</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 8px">Your decks, settings, collection, and stats live in this browser only. Clearing your browser\'s site data/cache can erase them &mdash; export a backup first, or restore one here.</div>');
     o('<div class="fr"><button class="fb" style="flex:1" onclick="exportAllData()">Export Backup</button><button class="fb" style="flex:1" onclick="trigUpAllData()">Restore Backup</button></div>');
-    o('<div class="slbl2">Notifications</div>');
+    o('</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
     o('<div class="set-row"><span>Notifications</span><button class="ftag'+(G.cfg.notifications?' on':'')+'" onclick="toggleNotifications()">'+(G.cfg.notifications?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>News</span><button class="ftag'+(G.cfg.pushNews?' on':'')+'" onclick="togglePushTopic(\'news\')">'+(G.cfg.pushNews?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Discord</span><button class="ftag'+(G.cfg.pushDiscord?' on':'')+'" onclick="togglePushTopic(\'discord\')">'+(G.cfg.pushDiscord?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>YouTube</span><button class="ftag'+(G.cfg.pushYoutube?' on':'')+'" onclick="togglePushTopic(\'youtube\')">'+(G.cfg.pushYoutube?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Rewards</span><button class="ftag'+(G.cfg.pushRewards?' on':'')+'" onclick="togglePushTopic(\'rewards\')">'+(G.cfg.pushRewards?'On':'Off')+'</button></div>');
-    o('<div class="slbl2">UI Buttons</div>');
-    o('<div class="set-row"><span>Dice Buttons in Header</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Reset Button in Header</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Connect Button in Header</span><button class="ftag'+(G.cfg.showConnectInHeader?' on':'')+'" onclick="G.cfg.showConnectInHeader=!G.cfg.showConnectInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showConnectInHeader?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Timer Button in Header</span><button class="ftag'+(G.cfg.showTimerInHeader?' on':'')+'" onclick="G.cfg.showTimerInHeader=!G.cfg.showTimerInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showTimerInHeader?'On':'Off')+'</button></div>');
-    o('<div class="set-row"><span>Global Search Button in Header</span><button class="ftag'+(G.cfg.showSearchInHeader?' on':'')+'" onclick="G.cfg.showSearchInHeader=!G.cfg.showSearchInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showSearchInHeader?'On':'Off')+'</button></div>');
+    o('</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Buttons &amp; Controls</div>');
+    o('<div class="slbl2" style="margin-top:0">Header Buttons</div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Show quick-access icons in the top header bar.</div>');
+    o('<div class="set-row"><span>Dice</span><button class="ftag'+(G.cfg.diceInHeader?' on':'')+'" onclick="G.cfg.diceInHeader=!G.cfg.diceInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Reset</span><button class="ftag'+(G.cfg.showResetInHeader?' on':'')+'" onclick="G.cfg.showResetInHeader=!G.cfg.showResetInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showResetInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Connect</span><button class="ftag'+(G.cfg.showConnectInHeader?' on':'')+'" onclick="G.cfg.showConnectInHeader=!G.cfg.showConnectInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showConnectInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Timer</span><button class="ftag'+(G.cfg.showTimerInHeader?' on':'')+'" onclick="G.cfg.showTimerInHeader=!G.cfg.showTimerInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showTimerInHeader?'On':'Off')+'</button></div>');
+    o('<div class="set-row"><span>Global Search</span><button class="ftag'+(G.cfg.showSearchInHeader?' on':'')+'" onclick="G.cfg.showSearchInHeader=!G.cfg.showSearchInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showSearchInHeader?'On':'Off')+'</button></div>');
+    o('<div class="slbl2">Button Placement</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
+    o('</div>');
     o('<button class="fb" style="font-size:13px;padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="showThemeResetConfirm()">Reset to Default</button>');
     o('</div>');
     return out.join('');}
@@ -8729,9 +8738,8 @@ function render(){
       o('<div class="dbody">');
       
       Object.keys(MENU_S).forEach(function(cat){
-        var _catDot=((cat==='Media'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))||(cat==='Play Network'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
-        if(cat==='Artists'){o('<div class="cro" onclick="openPanel(\'art\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
-        else if(cat==='Settings'){o('<div class="cro" onclick="openPanel(\'themes\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
+        var _catDot=((cat==='Community'&&(G.newsHasNew||G.ytHasNew||G.discordHasNew))||(cat==='Cards'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';
+        if(cat==='Settings'){o('<div class="cro" onclick="openPanel(\'themes\')"><div class="crn">'+cat+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
         else{o('<div class="cro" data-cat="'+cat+'" onclick="openCat(this.dataset.cat)"><div class="crn">'+cat+_catDot+'</div><div style="color:var(--hi)">&#8594;</div></div>');}
       });
       if(!(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){
@@ -8745,7 +8753,7 @@ function render(){
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
-        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew)||(item==='Discord'&&G.discordHasNew)||(item==='Rewards'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
+        MENU_S[G.cat].forEach(function(item){var onclick=item==='Rulebook'?'vibrate(10);window.open(\'https://drive.google.com/file/d/1sgQo0xf0N2teIR0zlyl91g9j6LVncZnr/view\',\'_blank\');goBack()':'openPanel(\''+PM[item]+'\')';var _itemDot=((item==='News'&&G.newsHasNew)||(item==='YouTube'&&G.ytHasNew)||(item==='Discord'&&G.discordHasNew)||(item==='Dust Rewards'&&G.rewardsHasNew))?'<span style="color:var(--red);font-weight:900;margin-left:6px">!</span>':'';o('<div class="cpop-it" onclick="'+onclick+'">' +item+_itemDot+'</div>');});
         o('<button class="cpop-bk" onclick="goBack()"><span style="color:var(--hi)">&larr;</span> Back</button></div></div>');
       }
     }
