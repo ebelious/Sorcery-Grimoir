@@ -6825,7 +6825,7 @@ function pContent(){
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
-    o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
+    if(!G.cfg.hideConfigBtn)o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
     o('</div>');
     o('<button class="fb" style="padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="showThemeResetConfirm()">Reset to Default</button>');
     o('</div>');
