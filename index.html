@@ -586,7 +586,7 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .cm-tag{font-size:10px;padding:3px 7px;border:1px solid var(--bd);font-weight:700;text-transform:uppercase}
 .cm-mt{font-size:11px;color:var(--fg2);text-align:center;line-height:1.8;margin-bottom:6px}
 .cm-rt{font-size:12px;background:var(--bg3);border:1px solid var(--bd);padding:8px;line-height:1.6;margin-bottom:6px;font-family:Georgia,serif}
-.cm-tcg{display:block;font-size:13px;color:var(--bbl);font-weight:700;text-align:center;padding:4px;border:1px solid var(--bbl);margin-bottom:6px}
+.cm-tcg{display:block;font-size:13px;color:var(--fg);font-weight:700;text-align:center;padding:4px;border:1px solid var(--bbl);margin-bottom:6px}
 .qty-row{display:flex;align-items:center;gap:6px;padding-top:6px;border-top:1px solid var(--bd)}
 .qty-lbl{flex:1;font-size:10px;color:var(--fg2)}
 .qty-val{font-size:13px;font-weight:700;min-width:20px;text-align:center}
@@ -7617,7 +7617,7 @@ function pContent(){
 
     o('<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:flex-end">');
     o('<button class="fb" style="font-size:11px;padding:8px 10px" onclick="getLocationAndLoadEvents()">Use My Location</button>');
-    o('<a class="fb" style="font-size:11px;padding:8px 10px;border:1px solid var(--hi);color:var(--fg);text-transform:uppercase;background:transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="'+_pnURL+'" target="_blank">Play Network <span style="color:var(--hi)">&rarr;</span></a>');
+    o('<a class="fb" style="font-size:11px;padding:8px 10px;color:var(--fg);text-transform:uppercase;background:transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box" href="'+_pnURL+'" target="_blank">Play Network <span style="color:var(--hi);margin-left:4px">&rarr;</span></a>');
     o('</div>');
 
     // Saved location chip (with an X to clear it) or a button to set one
@@ -7945,7 +7945,7 @@ function cModal(){
     var flavExp=!!G.accExp[flavKey];
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" data-k="'+flavKey+'" onclick="toggleAcc(this.dataset.k)">');
-    o('<div class="acc-nm" style="font-size:13px">Flavor Text</div>');
+    o('<div class="acc-nm" style="font-size:13px;color:var(--fg)">Flavor Text</div>');
     o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(flavExp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(flavExp){
@@ -7959,7 +7959,7 @@ function cModal(){
     var pCurIdx=((G.cardPrintIdx||0)%c.prints.length+c.prints.length)%c.prints.length;
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" data-k="'+pKey+'" onclick="toggleAcc(this.dataset.k)">');
-    o('<div class="acc-nm" style="font-size:13px">Printings ('+c.prints.length+')</div>');
+    o('<div class="acc-nm" style="font-size:13px;color:var(--fg)">Printings ('+c.prints.length+')</div>');
     o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(pExp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(pExp){
@@ -7988,7 +7988,7 @@ function cModal(){
     var _rdData=JSON.stringify(_rdSecs).replace(/'/g,"\\'").replace(/"/g,'&quot;');
     o('<div class="acc" style="margin-bottom:4px">');
     o('<div class="acc-h" style="display:flex;align-items:center" data-k="'+faqKey+'" onclick="toggleAcc(this.dataset.k)">');
-    o('<div class="acc-nm" style="font-size:13px;flex:1">FAQ & Codex</div>');
+    o('<div class="acc-nm" style="font-size:13px;flex:1;color:var(--fg)">FAQ & Codex</div>');
      o('<span class="acc-arr" style="color:var(--hi);display:inline-block;transform:rotate('+(exp?'90deg':'-90deg')+')">&larr;</span>');
     o('</div>');
     if(exp){
@@ -8021,7 +8021,7 @@ function cModal(){
   }
   o('<div class="price-box">');
   o('<div class="slbl2">Markets</div>');
-  o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer &rarr;</a>');
+  o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer <span style="color:var(--hi)">&rarr;</span></a>');
   o('</div>');
   // Add to Deck section
   var dkKeys=Object.keys(G.decks);
