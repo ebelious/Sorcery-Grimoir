@@ -614,10 +614,10 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .tgb.on{border-color:var(--hi);color:var(--hi)}
 .dtg{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
 .dtb{font-size:13px;padding:8px 12px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg2);text-transform:uppercase;cursor:pointer;border-radius:0}
-.dtb.on{border-color:var(--cyn);color:var(--cyn)}
+.dtb.on{border-color:var(--hi);color:var(--hi)}
 .dc-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
 .dcb{width:28px;height:28px;border:2px solid transparent;cursor:pointer;border-radius:50%}
-.dcb.on{border-color:var(--wht)}
+.dcb.on{border-color:var(--hi)}
 .sc{padding:8px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:5px}
 .sn{font-size:18px;font-weight:700}
 .ss{display:flex;gap:9px;font-size:16px;margin-top:4px}
@@ -6681,16 +6681,16 @@ function pContent(){
     o('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px">');
     [['normal','Normal'],['toad','Frog'],['coin','Coin'],['skull','Skull'],['bullet','Bullet'],['potion','Potion']].forEach(function(s){
       var on=(G.diceShape||'normal')===s[0];
-      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
+      o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:60px;padding:6px 2px;border:2px solid '+(on?'var(--hi)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:14px;color:'+(on?'var(--hi)':'var(--fg2)')+'" onclick="G.diceShape=\''+s[0]+'\';sv(\'sg-dshape\',\''+s[0]+'\');_renderKeepScroll()">'+s[1]+'</button>');
     });
     o('</div>');
-    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'#fff':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_diceApplyColorLive();_renderKeepScroll()"></div>');});o('</div>');
+    o('<div class="slbl2">Die Color</div><div class="dc-row" style="flex-wrap:wrap;gap:5px">');DIE_COLS.forEach(function(col,i){var swatchCol=getDieCol(i);o('<div class="dcb'+(i===G.dieCI?' on':'')+'" style="background:'+swatchCol+';border-color:'+(i===G.dieCI?'var(--hi)':'transparent')+'"'+(i===0?' title="Theme color"':'')+' onclick="G.dieCI='+i+';sv(\'sg-dc\','+i+');_ensureDieColorsDiffer();_diceApplyColorLive();_renderKeepScroll()"></div>');});o('</div>');
     var _texDisabled=!!G.diceBgImage;
     o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Surface Texture</div><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;margin-bottom:2px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
-    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--wht)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--wht)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
+    DICE_TEXTURES.forEach(function(t){var on=(G.diceTexture||'felt')===t.id;o('<button style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:54px;padding:5px 2px;border:2px solid '+(on?'var(--hi)':'var(--bd)')+';border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';background:'+(on?'var(--bg3)':'var(--bg2)')+';cursor:pointer;font-size:9px;color:'+(on?'var(--hi)':'var(--fg2)')+'" onclick="G.diceTexture=\''+t.id+'\';sv(\'sg-dtex\',\''+t.id+'\');_diceTexCache={};_diceUpdateSceneBg();_renderKeepScroll()"><span style="font-size:16px;line-height:1">'+t.icon+'</span>'+t.label+'</button>');});
     o('</div>');
     if((G.diceTexture||'felt')==='felt'){o('<div class="slbl2"'+(_texDisabled?' style="opacity:.4"':'')+'>Felt Color</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:4px'+(_texDisabled?';opacity:.4;pointer-events:none':'')+'">');
-    ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--wht)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
+    ['#14532d','#1e3a5f','#4a1942','#7f1d1d','#1c1c2e','#2d1b0e'].forEach(function(c){o('<div style="width:28px;height:28px;border-radius:4px;border:2px solid '+(G.diceFeltColor===c?'var(--hi)':'var(--bd)')+';background:'+c+';cursor:pointer" onclick="G.diceFeltColor=\''+c+'\';sv(\'sg-felt\',\''+c+'\');_diceUpdateSceneBg();_renderKeepScroll()"></div>');});
     o('<div style="position:relative;width:28px;height:28px;border-radius:4px;border:2px solid var(--bd);overflow:hidden;cursor:pointer" title="Custom"><div style="width:100%;height:100%;background:'+(G.diceFeltColor||'#14532d')+'"></div><input type="color" value="'+(G.diceFeltColor||'#14532d')+'" style="position:absolute;top:-4px;left:-4px;width:150%;height:150%;opacity:0;cursor:pointer" oninput="G.diceFeltColor=this.value;sv(\'sg-felt\',this.value);_diceUpdateSceneBg();_renderKeepScroll()"></div>');
     o('</div>');}
 
@@ -6757,9 +6757,9 @@ function pContent(){
     o('</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span style="color:var(--hi)">&#8594;</span></button>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>UI Color</span><span style="color:var(--hi)">&#8594;</span></button>');
-    o('<div class="set-row"><span>Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
-    o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>UI Backgrounds</span><span style="color:var(--hi)">&#8594;</span></button>');
+    o('<div class="set-row"><span>UI Background Image</span><button class="ftag'+(G.cfg.bgImage?' on':'')+'" onclick="_bgImgToggleNone()">'+(G.cfg.bgImage?'On':'Off')+'</button></div>');
     if(G.cfg.bgImage){
+      o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'bgimg\')"><span>UI Backgrounds</span><span style="color:var(--hi)">&#8594;</span></button>');
       var _op=(G.cfg.bgOpacity!=null?G.cfg.bgOpacity:80);
       var _dk=(G.cfg.bgDarkness!=null?G.cfg.bgDarkness:45);
       o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="flex:1;min-width:0" oninput="_bgLiveOpacity(this.value)" onchange="_bgSetOpacity(this.value)"><input type="number" id="bg-op-num" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
