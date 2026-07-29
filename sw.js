@@ -95,6 +95,16 @@ self.addEventListener('fetch', (event) => {
 const DATA_CACHE = 'sg-data-v1';
 const DATA_FILE_RE = /\/(cards|codex|news|discord|events|rewards)\.json(\?|$)/;
 
+// Minimum size ratio required to overwrite an already-cached data file. A
+// freshly fetched copy is only stored if it's at least this fraction of the
+// size of the copy we already have -- so a truncated / partial (but still
+// HTTP 200) response can't replace a complete cached file with a smaller one.
+// 1 = the new copy must be at least as large as the cached one; lower it (e.g.
+// 0.9) to tolerate small legitimate shrinks. Either way the page is always
+// served the fresh network response -- this only gates what gets persisted
+// offline, so online users still see current data even when a write is skipped.
+const DATA_SHRINK_MIN_RATIO = 1;
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method === 'GET' && DATA_FILE_RE.test(req.url)) {
@@ -102,7 +112,23 @@ self.addEventListener('fetch', (event) => {
       fetch(req)
         .then((networkResponse) => {
           if (autoCacheEnabled && networkResponse && networkResponse.ok) {
-            caches.open(DATA_CACHE).then((cache) => cache.put(req.url.split('?')[0], networkResponse.clone()));
+            const key = req.url.split('?')[0];
+            const forSize = networkResponse.clone();
+            const forPut = networkResponse.clone();
+            caches.open(DATA_CACHE).then((cache) =>
+              Promise.all([
+                forSize.blob().then((b) => b.size),
+                cache.match(key).then((cached) => cached ? cached.blob().then((b) => b.size) : 0)
+              ]).then((sizes) => {
+                const newSize = sizes[0], oldSize = sizes[1];
+                // Nothing cached yet -> always store. Otherwise only overwrite
+                // when the new copy isn't smaller than the guard allows, so a
+                // smaller cache can't replace a larger one.
+                if (oldSize === 0 || newSize >= oldSize * DATA_SHRINK_MIN_RATIO) {
+                  cache.put(key, forPut);
+                }
+              }).catch(() => {}) // if we can't measure sizes, skip the write and keep the existing copy
+            );
           }
           return networkResponse;
         })
