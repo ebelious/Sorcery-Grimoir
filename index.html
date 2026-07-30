@@ -7534,62 +7534,55 @@ function pContent(){
       } else {
         o('<div style="font-size:11px;color:var(--fg3);padding:4px 0 10px;font-style:italic">No spells in deck yet.</div>');
       }
-      // 1b. Power Curve -- minions only (power is a combat stat, not a
-      // cost/type property, so this uses its own independent bin range
-      // rather than reusing the cost-axis bins above). Styled the same
-      // smoothed line+area as the element mana curve up top for visual
-      // consistency, just single-series since it's one stat, not per-element.
+      // 1b. Power Curve -- avg minion power at each mana cost, with the
+      // point value and the minion count at that cost both labeled directly
+      // on the chart (matching the requested reference layout). Sorcery only
+      // has a single Power stat per minion (see the Combat rule: "Simultaneous
+      // damage equal to power" -- no separate Attack/Defense split, and the
+      // card data has no defense field), so this shows one line, not two.
       o('<div class="slbl2" style="margin-top:18px;font-size:11px">Power Curve</div>');
-      var maxPowSeen=0;
+      var powSum={},powCnt={};
       dv.cards.forEach(function(entry){
         var c=cardByName(entry.name);if(!c)return;
         if(cType(c)!=='minion')return;
-        var pw=cPow(c);
-        if(pw!=null&&pw>maxPowSeen)maxPowSeen=pw;
+        var pw=cPow(c);if(pw==null)return;
+        var cost=cMana(c)||0;
+        powSum[cost]=(powSum[cost]||0)+pw*entry.qty;
+        powCnt[cost]=(powCnt[cost]||0)+entry.qty;
       });
-      var powBinCap=Math.max(8,maxPowSeen);
-      var powBinCount=powBinCap+1;
-      var powBins=new Array(powBinCount).fill(0);
-      var hasMinions=false;
-      dv.cards.forEach(function(entry){
-        var c=cardByName(entry.name);if(!c)return;
-        if(cType(c)!=='minion')return;
-        var pw=cPow(c);
-        if(pw==null)return;
-        hasMinions=true;
-        powBins[Math.min(pw,powBinCap)]+=entry.qty;
-      });
-      if(hasMinions){
-        // Independent Y-axis scale from the two curves above (which share
-        // yTop/ySteps) -- this one is fixed to count gridlines of 0,2,4,6,
-        // 8,10 as requested, rather than the shared 0/6/12/18/24 scale.
-        var powYTop=10,powYSteps=5;
-        function pbx(i){return padL+i*(plotW/(powBinCount-1));}
-        function pby(v){return Math.min(padT+plotH,Math.max(padT,padT+plotH-Math.round((v/powYTop)*plotH)));}
-        var powPts=powBins.map(function(v,i){return [pbx(i),pby(v)];});
+      var powCosts=Object.keys(powCnt).map(Number).sort(function(a,b){return a-b;});
+      if(powCosts.length>=2){
+        var powVals=powCosts.map(function(cst){return powSum[cst]/powCnt[cst];});
+        var maxAvgPow=Math.max.apply(null,powVals);
+        var pYTop=Math.max(8,Math.ceil(maxAvgPow/4)*4),pYSteps=2;
+        var pW=300,pPadL=20,pPadR=16,pPadT=26,pPadB=34;
+        var pPlotW=pW-pPadL-pPadR,pH=110+pPadB-22; // extra bottom room for the two-line cost/(n) axis labels
+        var pPlotH=pH-pPadT-pPadB;
+        function pbx(i){return powCosts.length>1?pPadL+i*(pPlotW/(powCosts.length-1)):pPadL+pPlotW/2;}
+        function pby(v){return Math.min(pPadT+pPlotH,Math.max(pPadT,pPadT+pPlotH-Math.round((v/pYTop)*pPlotH)));}
+        var powPts=powVals.map(function(v,i){return [pbx(i),pby(v)];});
         var powPathD='M'+powPts[0][0]+','+powPts[0][1];
-        for(var ppi=0;ppi<powPts.length-1;ppi++){
-          var pxc=(powPts[ppi][0]+powPts[ppi+1][0])/2,pyc=(powPts[ppi][1]+powPts[ppi+1][1])/2;
-          powPathD+=' Q'+powPts[ppi][0]+','+powPts[ppi][1]+' '+pxc+','+pyc;
+        for(var ppi=0;ppi<powPts.length-1;ppi++)powPathD+=' L'+powPts[ppi+1][0]+','+powPts[ppi+1][1];
+        o('<svg width="100%" height="'+pH+'" style="display:block;overflow:visible" viewBox="0 0 '+pW+' '+pH+'" preserveAspectRatio="none">');
+        for(var pgi=0;pgi<=pYSteps;pgi++){
+          var pgy=pPadT+pgi*(pPlotH/pYSteps);
+          var pgv=Math.round(pYTop*(1-pgi/pYSteps));
+          o('<line x1="'+pPadL+'" y1="'+pgy+'" x2="'+(pW-pPadR)+'" y2="'+pgy+'" stroke="var(--bd)" stroke-width="0.5"/>');
+          o('<text x="'+(pPadL-4)+'" y="'+(pgy+3)+'" text-anchor="end" font-size="10" fill="var(--fg3)">'+pgv+'</text>');
         }
-        powPathD+=' L'+powPts[powPts.length-1][0]+','+powPts[powPts.length-1][1];
-        var powAreaD=powPathD+' L'+pbx(powBinCount-1)+','+(padT+plotH)+' L'+pbx(0)+','+(padT+plotH)+' Z';
-        o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">');
-        for(var pgi=0;pgi<=powYSteps;pgi++){
-          var pgy=padT+pgi*(plotH/powYSteps);
-          var pgv=Math.round(powYTop*(1-pgi/powYSteps));
-          o('<line x1="'+padL+'" y1="'+pgy+'" x2="'+(W-padR)+'" y2="'+pgy+'" stroke="var(--bd)" stroke-width="0.5"/>');
-          if(pgv>0)o('<text x="'+(padL-3)+'" y="'+(pgy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+pgv+'</text>');
-        }
-        for(var pxi=0;pxi<powBinCount;pxi++){
-          o('<text x="'+pbx(pxi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(pxi===powBinCount-1?pxi+'+':String(pxi))+'</text>');
-        }
-        o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
-        o('<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
-        o('<path d="'+powAreaD+'" fill="#E0546B" fill-opacity="0.1"/>');
-        o('<path d="'+powPathD+'" fill="none" stroke="#E0546B" stroke-width="1.4" stroke-linecap="round"/>');
+        o('<path d="'+powPathD+'" fill="none" stroke="#E0546B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>');
+        powPts.forEach(function(pt,i){
+          o('<circle cx="'+pt[0]+'" cy="'+pt[1]+'" r="2.4" fill="#E0546B"/>');
+          var labY=pt[1]-8<pPadT+6?pt[1]+14:pt[1]-8; // flip below the point if the label would clip the top edge
+          o('<text x="'+pt[0]+'" y="'+labY+'" text-anchor="middle" font-size="10" font-weight="700" fill="#E0546B">'+(Math.round(powVals[i]*10)/10)+'</text>');
+        });
+        powCosts.forEach(function(cst,i){
+          var lx=pbx(i);
+          o('<text x="'+lx+'" y="'+(pPadT+pPlotH+15)+'" text-anchor="middle" font-size="11" fill="var(--fg2)">'+cst+'</text>');
+          o('<text x="'+lx+'" y="'+(pPadT+pPlotH+27)+'" text-anchor="middle" font-size="9" fill="var(--fg3)">('+powCnt[cst]+')</text>');
+        });
         o('</svg>');
-        o('<div style="text-align:right;font-size:11px;color:var(--fg3);margin-top:2px;margin-bottom:10px">By minion power</div>');
+        o('<div style="display:flex;align-items:center;gap:6px;justify-content:flex-end;margin-top:2px;margin-bottom:10px;font-size:11px;color:var(--fg2);font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:14px;height:2px;background:#E0546B;border-radius:1px"></span>Avg Power<span style="color:var(--fg3);margin-left:6px">(n) = minion count</span></div>');
       } else {
         o('<div style="font-size:11px;color:var(--fg3);padding:4px 0 10px;font-style:italic">No minions in deck yet.</div>');
       }
