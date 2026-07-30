@@ -7508,13 +7508,20 @@ function pContent(){
         for(var bxi=0;bxi<xCount;bxi++){
           (function(bxi){
             var stackY=padT+plotH;
+            var usedH=0; // running total, clamped -- individually clamping
+                         // each segment isn't enough since several clamped
+                         // segments stacked together could still add up past
+                         // the top of the chart and overlap the title above it
             typeKeysActive.forEach(function(t){
               var v=typeBins[t][bxi];
               if(!v)return;
-              var segH=Math.min(plotH,(v/yTop)*plotH);
+              var segH=(v/yTop)*plotH;
+              if(usedH+segH>plotH)segH=Math.max(0,plotH-usedH);
+              if(segH<=0)return;
               var barX=bx(bxi)-barW/2;
               o('<rect x="'+barX+'" y="'+(stackY-segH)+'" width="'+barW+'" height="'+segH+'" fill="'+typeColors[t]+'" fill-opacity="0.85"/>');
               stackY-=segH;
+              usedH+=segH;
             });
           })(bxi);
         }
