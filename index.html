@@ -6806,7 +6806,9 @@ function pContent(){
       o('<div class="set-row"><span>Background Opacity</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_op+'" style="flex:1;min-width:0" oninput="_bgLiveOpacity(this.value)" onchange="_bgSetOpacity(this.value)"><input type="number" id="bg-op-num" min="0" max="100" step="5" value="'+_op+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetOpacity(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
       o('<div class="set-row" style="margin-top:6px"><span>Background Darkness</span><div style="display:flex;align-items:center;gap:6px;flex:1;margin-left:12px"><input type="range" class="bg-range" min="0" max="100" step="5" value="'+_dk+'" style="flex:1;min-width:0" oninput="_bgLiveDarkness(this.value)" onchange="_bgSetDarkness(this.value)"><input type="number" id="bg-dk-num" min="0" max="100" step="5" value="'+_dk+'" class="timer-inp" style="width:48px;height:32px;text-align:center;font-size:14px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:8px" onchange="_bgSetDarkness(this.value)"><span style="color:var(--fg2);font-size:11px">%</span></div></div>');
     }
-    o('<div class="slbl2">UI Options</div>');
+    o('</div>');
+    o('<div class="set-grp"><div class="set-grp-h">Feel &amp; Accessibility</div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Visual comfort and physical feedback.</div>');
     o('<div class="set-row"><span>Rounded Corners</span><button class="ftag'+(G.cfg.roundedCorners?' on':'')+'" onclick="G.cfg.roundedCorners=!G.cfg.roundedCorners;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.roundedCorners?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Hide Divider Lines</span><button class="ftag'+(G.cfg.noBorders?' on':'')+'" onclick="G.cfg.noBorders=!G.cfg.noBorders;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.noBorders?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Plain Font</span><button class="ftag'+(G.cfg.plainFont?' on':'')+'" onclick="G.cfg.plainFont=G.cfg.plainFont?false:\'courier\';sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.plainFont?'On':'Off')+'</button></div>');
@@ -6841,9 +6843,12 @@ function pContent(){
     }
     o('</div>');
     o('<button class="fb red" style="width:100%;margin-top:6px" onclick="clearAllCache()">Clear Cache</button>');
-    o('<div class="slbl2">Backup &amp; Restore</div>');
-    o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 8px">Your decks, settings, collection, and stats live in this browser only. Clearing your browser\'s site data/cache can erase them &mdash; export a backup first, or restore one here.</div>');
-    o('<div class="fr"><button class="fb" style="flex:1" onclick="exportAllData()">Export Backup</button><button class="fb" style="flex:1" onclick="trigUpAllData()">Restore Backup</button></div>');
+    o('<div style="border-top:1px solid var(--bd);margin:18px 0 0"></div>');
+    o('<div style="border:1px solid var(--hi);border-radius:8px;padding:10px;margin-top:14px">');
+    o('<div style="margin-bottom:4px"><span class="slbl2" style="margin:0">Backup &amp; Restore</span></div>');
+    o('<div style="color:var(--fg2);font-size:11px;margin:0 0 8px">Your decks, settings, collection, and stats live in this browser only. Clearing your browser\'s site data/cache can erase them &mdash; export a backup first, or restore one here.</div>');
+    o('<div class="fr" style="margin-bottom:0"><button class="fb" style="flex:1" onclick="exportAllData()">Export Backup</button><button class="fb" style="flex:1" onclick="trigUpAllData()">Restore Backup</button></div>');
+    o('</div>');
     o('</div>');
     o('<div class="set-grp"><div class="set-grp-h">Notifications</div>');
     o('<div style="color:var(--fg2);font-size:11px;margin:-4px 0 6px">Get notified even when the app is closed.</div>');
@@ -6861,10 +6866,11 @@ function pContent(){
     o('<div class="set-row"><span>Connect</span><button class="ftag'+(G.cfg.showConnectInHeader?' on':'')+'" onclick="G.cfg.showConnectInHeader=!G.cfg.showConnectInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showConnectInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Timer</span><button class="ftag'+(G.cfg.showTimerInHeader?' on':'')+'" onclick="G.cfg.showTimerInHeader=!G.cfg.showTimerInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showTimerInHeader?'On':'Off')+'</button></div>');
     o('<div class="set-row"><span>Global Search</span><button class="ftag'+(G.cfg.showSearchInHeader?' on':'')+'" onclick="G.cfg.showSearchInHeader=!G.cfg.showSearchInHeader;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.showSearchInHeader?'On':'Off')+'</button></div>');
+    o('<div style="border-top:1px solid var(--bd);margin:18px 0 0"></div>');
     o('<div class="slbl2">Button Placement</div>');
     o('<div class="set-row"><span>Menu Button Side</span><button class="ftag'+(G.cfg.menuLeft?' on':'')+'" onclick="G.cfg.menuLeft=!G.cfg.menuLeft;sv(\'sg-cfg\',G.cfg);_applyBodyClass();_renderKeepScroll()">'+(G.cfg.menuLeft?'Left':'Right')+'</button></div>');
     o('<div class="set-row"><span>Dice Side (Turn Button)</span><button class="ftag'+(G.cfg.diceLeft!==false?' on':'')+'" onclick="G.cfg.diceLeft=!(G.cfg.diceLeft!==false);sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.diceLeft!==false?'Left':'Right')+'</button></div>');
-    o('<div class="set-row"><span>Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
+    o('<div class="set-row"><span>Show Configuration Button</span><button class="ftag'+(G.cfg.hideConfigBtn?'':' on')+'" onclick="G.cfg.hideConfigBtn=!G.cfg.hideConfigBtn;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.hideConfigBtn?'Off':'On')+'</button></div>');
     if(!G.cfg.hideConfigBtn)o('<div class="set-row"><span>Configuration Button Side</span><button class="ftag'+(G.cfg.p1BtnLeft?' on':'')+'" onclick="G.cfg.p1BtnLeft=!G.cfg.p1BtnLeft;sv(\'sg-cfg\',G.cfg);_renderKeepScroll()">'+(G.cfg.p1BtnLeft?'Left':'Right')+'</button></div>');
     o('</div>');
     o('<button class="fb" style="padding:8px 14px;position:sticky;bottom:0;margin-top:14px;width:100%;box-sizing:border-box" onclick="showThemeResetConfirm()">Reset to Default</button>');
