@@ -980,7 +980,7 @@ var G={
   mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,favStoreRemoveConfirm:null,
   mpShareMode:'create',mpShareCode:null,mpShareRoom:null,mpShareRole:null,mpShareErr:null,mpShareFormUname:null,mpShareFormCode:null,
   mpShareConnectedPopup:false,mpShareAcceptWaiting:false,mpShareDeclinedByName:null,mpShareClosedNotice:null,mpShareLeaveConfirm:false,
-  mpShareDeckPickKey:null,mpShareDeckConfirmed:false,mpShareLastOpp:null,mpSharedDeckImportedName:null,
+  mpShareDeckPickKeys:null,mpShareDeckConfirmed:false,mpShareLastOpp:null,mpSharedDeckImportedIdx:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -5537,7 +5537,19 @@ function _mpShareOpponent(){if(!G.mpShareRoom)return null;return G.mpShareRole==
 function _mpShareOpponentOrLast(){return _mpShareOpponent()||G.mpShareLastOpp;}
 function _mpShareResetFormState(){
   G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeclinedByName=null;G.mpShareClosedNotice=null;
-  G.mpShareLeaveConfirm=false;G.mpShareDeckPickKey=null;G.mpShareDeckConfirmed=false;G.mpSharedDeckImportedName=null;
+  G.mpShareLeaveConfirm=false;G.mpShareDeckPickKeys={};G.mpShareDeckConfirmed=false;G.mpSharedDeckImportedIdx=null;
+}
+function _mpShareTogglePick(key,checked){
+  G.mpShareDeckPickKeys=G.mpShareDeckPickKeys||{};
+  if(checked)G.mpShareDeckPickKeys[key]=true;else delete G.mpShareDeckPickKeys[key];
+  // Native checkbox already reflects its own checked state -- no render()
+  // needed here, which also avoids interrupting the user mid-selection.
+}
+function _mpShareDeckSummary(decks){
+  if(!decks||!decks.length)return '';
+  var names=decks.map(function(d){return d.name||'Deck';});
+  if(names.length<=2)return names.join(', ');
+  return names.slice(0,2).join(', ')+' +'+(names.length-2)+' more';
 }
 function mpShareCreate(){
   var uname=((G.mpShareFormUname!=null?G.mpShareFormUname:G.cfg.p1)||'').trim()||'Player 1';
@@ -5620,16 +5632,16 @@ function mpShareAckDecline(){
   render();
 }
 function mpShareConfirmDeck(){
-  var deckKey=G.mpShareDeckPickKey||'';
-  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
-  if(!deck||!deck.cards||!deck.cards.length){G.mpShareErr='Choose a deck with cards in it.';render();return;}
+  var keys=Object.keys(G.mpShareDeckPickKeys||{}).filter(function(k){return G.decks[k];});
+  var decks=keys.map(function(k){return {name:G.decks[k].name,cards:G.decks[k].cards};}).filter(function(d){return d.cards&&d.cards.length;});
+  if(!decks.length){G.mpShareErr='Choose at least one deck with cards in it.';render();return;}
   var code=G.mpShareCode;
   if(!code)return;
   G.mpBusy=true;G.mpShareErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'selectDeck',code:code,role:G.mpShareRole,deck:deck})
-  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to share deck.');return d;});})
+    body:JSON.stringify({action:'selectDeck',code:code,role:G.mpShareRole,decks:decks})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to share decks.');return d;});})
   .then(function(d){
     G.mpShareRoom=d.room;G.mpBusy=false;G.mpShareDeckConfirmed=true;
     render();
@@ -5670,7 +5682,7 @@ function _mpShareTeardown(){
   G.mpShareLastOpp=_mpShareOpponent()||G.mpShareLastOpp;
   _mpShareStopPoll();
   G.mpShareCode=null;G.mpShareRoom=null;G.mpShareRole=null;
-  G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeckPickKey=null;G.mpShareDeckConfirmed=false;
+  G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeckPickKeys={};G.mpShareDeckConfirmed=false;
 }
 var _mpSharePollTimer=null;
 function _mpShareStartPoll(){if(_mpSharePollTimer)clearInterval(_mpSharePollTimer);_mpSharePollTimer=setInterval(_mpSharePoll,3000);}
@@ -5704,14 +5716,15 @@ function _mpSharePoll(){
 }
 function mpShareViewOppDeck(){
   var opp=_mpShareOpponentOrLast();
-  if(!opp||!opp.deck){alert('Opponent has not shared a deck yet.');return;}
+  if(!opp||!opp.decks||!opp.decks.length){alert('Opponent has not shared any decks yet.');return;}
   openPanel('shrdeck');
 }
-function mpImportSharedDeck(){
+function mpImportSharedDeck(idx){
   var opp=_mpShareOpponentOrLast();
-  if(!opp||!opp.deck){alert('Opponent has not shared a deck yet.');return;}
-  var srcCards=opp.deck.cards||[];
-  var deckName=opp.deck.name||'Shared Deck';
+  if(!opp||!opp.decks||!opp.decks[idx])return;
+  var srcDeck=opp.decks[idx];
+  var srcCards=srcDeck.cards||[];
+  var deckName=srcDeck.name||'Shared Deck';
   var baseName=deckName,n=1;
   while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
   var unmatched=[],matched=[];
@@ -5722,7 +5735,8 @@ function mpImportSharedDeck(){
   });
   G.decks[deckName]={name:deckName,cards:matched,creator:opp.username||''};
   sv('sg-dk',G.decks);
-  G.mpSharedDeckImportedName=deckName;
+  G.mpSharedDeckImportedIdx=G.mpSharedDeckImportedIdx||{};
+  G.mpSharedDeckImportedIdx[idx]=deckName;
   render();
   _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'a shared deck')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
 }
@@ -7946,13 +7960,13 @@ function pContent(){
         o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:10px">');
         o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">You</div>');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srMe?srMe.username:'')+'</div>');
-        if(srMe&&srMe.deck)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(srMe.deck.name)+'</div>');
+        if(srMe&&srMe.decks&&srMe.decks.length)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+srMe.decks.length+' deck'+(srMe.decks.length===1?'':'s')+' shared: '+_mpShareDeckSummary(srMe.decks)+'</div>');
         o('</div>');
         o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">');
         o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Opponent</div>');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srOpp.username||'')+'</div>');
-        if(srOpp.deck)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(srOpp.deck.name)+'</div>');
-        o('<button class="fb gold full" style="margin-top:8px" onclick="mpShareViewOppDeck()">View / Import Deck</button>');
+        if(srOpp.decks&&srOpp.decks.length)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+srOpp.decks.length+' deck'+(srOpp.decks.length===1?'':'s')+' shared: '+_mpShareDeckSummary(srOpp.decks)+'</div>');
+        o('<button class="fb gold full" style="margin-top:8px" onclick="mpShareViewOppDeck()">View / Import Decks</button>');
         o('</div>');
       }
       o('<button class="fb red full" style="padding:16px 12px" onclick="mpShareRequestLeave()">Close Connection</button>');
@@ -8070,33 +8084,44 @@ function pContent(){
   }
   if(p==='shrdeck'){
     var srdOpp=_mpShareOpponentOrLast();
-    if(!srdOpp||!srdOpp.deck){o('<div class="ld">No shared deck.</div>');return out.join('');}
-    var srdSd=srdOpp.deck;
-    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
-    o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(srdSd.name||'Deck')+'</div>');
-    o('<button class="fb gold" onclick="mpImportSharedDeck()">Import</button>');
-    o('</div>');
-    if(G.mpSharedDeckImportedName)o('<div style="font-size:12px;color:var(--grn);margin-bottom:8px">&#10003; Imported as "'+h(G.mpSharedDeckImportedName)+'"</div>');
-    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">@'+h(srdOpp.username||'')+'</div>');
-    var srdTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+    var srdDecks=(srdOpp&&srdOpp.decks)||[];
+    if(!srdOpp||!srdDecks.length){o('<div class="ld">No shared decks.</div>');return out.join('');}
+    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:10px">@'+h(srdOpp.username||'')+' shared '+srdDecks.length+' deck'+(srdDecks.length===1?'':'s')+'</div>');
     var srdTypeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
     var srdTypeOrder=['avatar','aura','artifact','minion','magic','site'];
-    (srdSd.cards||[]).forEach(function(entry){
-      var c=cardByName(entry.name);
-      var t=c?cType(c):'minion';
-      if(!srdTypeGroups[t])t='minion';
-      srdTypeGroups[t].push({entry:entry,card:c});
-    });
-    srdTypeOrder.forEach(function(t){
-      var grp=srdTypeGroups[t];
-      if(!grp.length)return;
-      o('<div class="slbl2" style="margin-top:10px">'+srdTypeLabels[t]+' ('+grp.length+')</div>');
-      grp.forEach(function(g){
-        o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
-        o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
-        o('<span style="font-size:14px;color:var(--fg)'+(g.card?'':';font-style:italic;color:var(--fg2)')+'">'+h(g.entry.name)+'</span>');
-        o('</div>');
-      });
+    srdDecks.forEach(function(deck,di){
+      var srdKey='shrdeck_'+di;
+      var srdExp=G.accExp[srdKey]===true;
+      o('<div style="margin-bottom:14px">');
+      o('<div style="cursor:pointer;display:flex;align-items:center;gap:8px;padding-bottom:5px;border-bottom:1px solid var(--bd)" onclick="toggleAcc(\''+srdKey+'\')">');
+      o('<span style="flex:1;font-size:15px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(deck.name||'Deck')+'</span>');
+      o('<span style="font-size:12px;color:var(--fg3)">'+(srdExp?'&uarr;':'&darr;')+'</span>');
+      o('</div>');
+      o('<div style="display:flex;align-items:center;gap:8px;margin-top:8px">');
+      o('<button class="fb gold" style="flex:1" onclick="mpImportSharedDeck('+di+')">Import This Deck</button>');
+      o('</div>');
+      if(G.mpSharedDeckImportedIdx&&G.mpSharedDeckImportedIdx[di])o('<div style="font-size:12px;color:var(--grn);margin-top:6px">&#10003; Imported as "'+h(G.mpSharedDeckImportedIdx[di])+'"</div>');
+      if(srdExp){
+        var srdTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+        (deck.cards||[]).forEach(function(entry){
+          var c=cardByName(entry.name);
+          var t=c?cType(c):'minion';
+          if(!srdTypeGroups[t])t='minion';
+          srdTypeGroups[t].push({entry:entry,card:c});
+        });
+        srdTypeOrder.forEach(function(t){
+          var grp=srdTypeGroups[t];
+          if(!grp.length)return;
+          o('<div class="slbl2" style="margin-top:10px">'+srdTypeLabels[t]+' ('+grp.length+')</div>');
+          grp.forEach(function(g){
+            o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
+            o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
+            o('<span style="font-size:14px;color:var(--fg)'+(g.card?'':';font-style:italic;color:var(--fg2)')+'">'+h(g.entry.name)+'</span>');
+            o('</div>');
+          });
+        });
+      }
+      o('</div>');
     });
     return out.join('');
   }
@@ -9224,21 +9249,34 @@ function render(){
     }
 
     // Deck-select: shown once both sides have accepted, until THIS side has
-    // confirmed a deck. Picking is local (mpShareDeckPickKey) until Confirm
-    // is tapped -- only then is anything sent to the other side.
+    // confirmed. Picking is local (mpShareDeckPickKeys, a checked-key map)
+    // until Confirm is tapped -- only then is anything sent to the other
+    // side. Multiple decks can be checked at once.
     if(G.mpShareRoom&&!G.mpShareConnectedPopup&&!G.mpShareAcceptWaiting){
       var _srAcc=G.mpShareRoom.accepted;
       var _srBothAcc=!!(_srAcc&&_srAcc.confirmedP1&&_srAcc.confirmedP2);
       var _srMeSel=_mpShareMe();
       if(_srBothAcc&&_srMeSel&&!_srMeSel.deckConfirmed){
-        o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Choose a Deck to Share</div><div class="lp-b">');
+        o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:4px">Choose Decks to Share</div><div style="font-size:11px;color:var(--fg3);margin-bottom:10px">Pick one or more</div><div class="lp-b">');
         if(G.mpShareErr)o('<div style="color:var(--red);font-size:12px;margin-bottom:8px">'+h(G.mpShareErr)+'</div>');
-        var _srDkOpts='<option value="">Choose a deck&hellip;</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpShareDeckPickKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
-        o('<select onclick="event.stopPropagation()" onchange="G.mpShareDeckPickKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box;margin-bottom:4px">'+_srDkOpts+'</select>');
+        var _srDkKeys=Object.keys(G.decks);
+        o('<div style="max-height:220px;overflow-y:auto;border:1px solid var(--bd);border-radius:6px;margin-bottom:4px;text-align:left">');
+        if(!_srDkKeys.length){
+          o('<div style="padding:10px;font-size:13px;color:var(--fg2);font-style:italic">No decks yet.</div>');
+        } else {
+          _srDkKeys.forEach(function(k){
+            var _srChecked=!!(G.mpShareDeckPickKeys&&G.mpShareDeckPickKeys[k]);
+            o('<label style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid var(--bg3);cursor:pointer">');
+            o('<input type="checkbox" onclick="event.stopPropagation()" '+(_srChecked?'checked':'')+' onchange="_mpShareTogglePick(\''+h(k)+'\',this.checked)" style="width:18px;height:18px;flex-shrink:0">');
+            o('<span style="font-size:14px;color:var(--fg);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(G.decks[k].name)+'</span>');
+            o('</label>');
+          });
+        }
+        o('</div>');
         o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpShareRequestLeave()">Close Connection</button><button class="lp-btn ok" style="padding:13px;font-size:15px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareConfirmDeck()">'+(G.mpBusy?'Sharing&hellip;':'Confirm')+'</button></div></div></div>');
       } else if(_srBothAcc&&_srMeSel&&_srMeSel.deckConfirmed&&!(_mpShareOpponent()&&_mpShareOpponent().deckConfirmed)){
         o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
-        o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to choose a deck&hellip;</div>');
+        o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to choose decks&hellip;</div>');
         o('</div></div></div>');
       }
     }
