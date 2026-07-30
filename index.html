@@ -7360,8 +7360,8 @@ function pContent(){
     var yMin=padT, yMax=padT+plotH;
     // Static Y-axis scale: always 0, 6, 12, 18, 24.
     var yStep=6;
-    var yTop=24;
-    var ySteps=4;
+    var yTop=10;
+    var ySteps=5;
     function bx(i){return padL+i*(plotW/(xCount-1));}
     function by(v){return Math.min(yMax,Math.max(yMin,padT+plotH-Math.round((v/yTop)*plotH)));}
     function clampY(y){return Math.min(yMax,Math.max(yMin,y));}
@@ -7425,6 +7425,187 @@ function pContent(){
       o('</div>');
     }
     o('</div>'); // close breakdown card
+    // ─── Additional Stats (collapsible) ───
+    var statsKey='dvstats_'+dvk;
+    var statsExp=G.accExp[statsKey]===true;
+    o('<div style="margin-top:12px">');
+    o('<div style="cursor:pointer;font-size:16px;font-weight:700;color:var(--hi);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between" onclick="toggleAcc(\''+statsKey+'\')">');
+    o('<span>Additional Stats</span>');
+    o('<span style="font-size:12px">'+(statsExp?'&uarr;':'&darr;')+'</span>');
+    o('</div>');
+    if(statsExp){
+      // --- gather per-card data for the sections below ---
+      var typeColors={minion:'#68A8E4',magic:'#B26FE0',aura:'#4FC77A',artifact:'#E0A542'};
+      var typeNames={minion:'Minion',magic:'Magic',aura:'Aura',artifact:'Artifact'};
+      var typeQtyCount={},rarCount={},subCount={},kwCount={};
+      var rarColors={ordinary:'#918175',exceptional:'#68A8E4',elite:'#FED06E',unique:'#FF5C8F'};
+      var typeBins={minion:new Array(binCount).fill(0),magic:new Array(binCount).fill(0),aura:new Array(binCount).fill(0),artifact:new Array(binCount).fill(0)};
+      // The Codex glossary (CODEX_DATA) is a flat alphabetical list with no
+      // category field -- it mixes true keyword abilities (Airborne, Charge,
+      // Stealth...) with general rules terms (Threshold, Mana, Spellbook...).
+      // There's no structural way to tell them apart from the scraped data,
+      // so this is an explicit allowlist of the game's actual keyword
+      // abilities (per the official rulebook's "Common Keyword Abilities"
+      // section and FAQ), matched case-insensitively against each Codex
+      // entry's name. Only entries on this list are ever counted below.
+      var KEYWORD_ABILITIES={airborne:1,ambush:1,burrow:1,burrowing:1,charge:1,deathrite:1,disabled:1,genesis:1,immobile:1,immobilised:1,immobilized:1,lethal:1,movement:1,overwhelm:1,ranged:1,silenced:1,spellcaster:1,stealth:1,submerge:1,voidwalk:1,ward:1};
+      dv.cards.forEach(function(entry){
+        var c=cardByName(entry.name);if(!c)return;
+        var qty=entry.qty;
+        var t=cType(c);
+        typeQtyCount[t]=(typeQtyCount[t]||0)+qty;
+        var rr=cRar(c);
+        rarCount[rr]=(rarCount[rr]||0)+qty;
+        cSub(c).forEach(function(s){if(!s)return;subCount[s]=(subCount[s]||0)+qty;});
+        if(t!=='site'&&t!=='avatar'){
+          var cost=Math.min(cMana(c)||0,binCap);
+          if(typeBins[t])typeBins[t][cost]+=qty;
+        }
+        var txt=cTxt(c);
+        if(txt){
+          CODEX_DATA.forEach(function(k){
+            if(k.k&&k.k.trim()&&KEYWORD_ABILITIES[k.k.trim().toLowerCase()]&&txt.toLowerCase().indexOf(k.k.toLowerCase())>=0){
+              kwCount[k.k]=(kwCount[k.k]||0)+qty;
+            }
+          });
+        }
+      });
+      // Generic horizontal bar list used by the four non-curve sections below.
+      function barList(items,colorFor,maxN){
+        if(!items.length){o('<div style="font-size:11px;color:var(--fg3);padding:4px 0 10px;font-style:italic">No data.</div>');return;}
+        items.sort(function(a,b){return b.v-a.v;});
+        if(maxN&&items.length>maxN)items=items.slice(0,maxN);
+        var maxV=Math.max.apply(null,items.map(function(x){return x.v;}))||1;
+        o('<div style="margin-bottom:10px">');
+        items.forEach(function(it){
+          var pct=Math.round((it.v/maxV)*100);
+          o('<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">');
+          o('<span style="font-size:12px;color:var(--fg2);width:84px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(it.n)+'</span>');
+          o('<div style="flex:1;background:var(--bg3);border-radius:3px;overflow:hidden;height:14px"><div style="width:'+pct+'%;height:100%;background:'+(colorFor?colorFor(it):'var(--hi)')+';border-radius:3px"></div></div>');
+          o('<span style="font-size:12px;font-weight:700;color:var(--fg);width:22px;text-align:right;flex-shrink:0">'+it.v+'</span>');
+          o('</div>');
+        });
+        o('</div>');
+      }
+      // 1. Mana Curve by Type (Spell Type) -- stacked bars sharing the exact
+      // same cost-axis geometry (bx/by/padL/plotW/etc.) as the element curve
+      // above, so the two charts read as directly comparable.
+      o('<div class="slbl2" style="margin-top:0;font-size:11px">Mana Curve by Type</div>');
+      var typeKeysActive=['minion','magic','aura','artifact'].filter(function(t){return typeBins[t].some(function(v){return v>0;});});
+      if(typeKeysActive.length){
+        var barW=(plotW/xCount)*0.6;
+        o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">');
+        for(var sgi=0;sgi<=ySteps;sgi++){
+          var sgy=padT+sgi*(plotH/ySteps);
+          var sgv=Math.round(yTop*(1-sgi/ySteps));
+          o('<line x1="'+padL+'" y1="'+sgy+'" x2="'+(W-padR)+'" y2="'+sgy+'" stroke="var(--bd)" stroke-width="0.5"/>');
+          if(sgv>0)o('<text x="'+(padL-3)+'" y="'+(sgy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+sgv+'</text>');
+        }
+        for(var sxi=0;sxi<xCount;sxi++){
+          o('<text x="'+bx(sxi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(sxi===xCount-1?sxi+'+':String(sxi))+'</text>');
+        }
+        o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+        for(var bxi=0;bxi<xCount;bxi++){
+          (function(bxi){
+            var stackY=padT+plotH;
+            typeKeysActive.forEach(function(t){
+              var v=typeBins[t][bxi];
+              if(!v)return;
+              var segH=Math.min(plotH,(v/yTop)*plotH);
+              var barX=bx(bxi)-barW/2;
+              o('<rect x="'+barX+'" y="'+(stackY-segH)+'" width="'+barW+'" height="'+segH+'" fill="'+typeColors[t]+'" fill-opacity="0.85"/>');
+              stackY-=segH;
+            });
+          })(bxi);
+        }
+        o('</svg>');
+        o('<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;margin-bottom:10px;justify-content:flex-end">');
+        typeKeysActive.forEach(function(t){
+          o('<span style="font-size:13px;color:'+typeColors[t]+';display:flex;align-items:center;gap:3px;font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:10px;height:10px;background:'+typeColors[t]+';border-radius:2px"></span>'+typeNames[t]+'</span>');
+        });
+        o('</div>');
+      } else {
+        o('<div style="font-size:11px;color:var(--fg3);padding:4px 0 10px;font-style:italic">No spells in deck yet.</div>');
+      }
+      // 1b. Power Curve -- minions only (power is a combat stat, not a
+      // cost/type property, so this uses its own independent bin range
+      // rather than reusing the cost-axis bins above). Styled the same
+      // smoothed line+area as the element mana curve up top for visual
+      // consistency, just single-series since it's one stat, not per-element.
+      o('<div class="slbl2" style="margin-top:18px;font-size:11px">Power Curve</div>');
+      var maxPowSeen=0;
+      dv.cards.forEach(function(entry){
+        var c=cardByName(entry.name);if(!c)return;
+        if(cType(c)!=='minion')return;
+        var pw=cPow(c);
+        if(pw!=null&&pw>maxPowSeen)maxPowSeen=pw;
+      });
+      var powBinCap=Math.max(8,maxPowSeen);
+      var powBinCount=powBinCap+1;
+      var powBins=new Array(powBinCount).fill(0);
+      var hasMinions=false;
+      dv.cards.forEach(function(entry){
+        var c=cardByName(entry.name);if(!c)return;
+        if(cType(c)!=='minion')return;
+        var pw=cPow(c);
+        if(pw==null)return;
+        hasMinions=true;
+        powBins[Math.min(pw,powBinCap)]+=entry.qty;
+      });
+      if(hasMinions){
+        // Independent Y-axis scale from the two curves above (which share
+        // yTop/ySteps) -- this one is fixed to count gridlines of 0,2,4,6,
+        // 8,10 as requested, rather than the shared 0/6/12/18/24 scale.
+        var powYTop=10,powYSteps=5;
+        function pbx(i){return padL+i*(plotW/(powBinCount-1));}
+        function pby(v){return Math.min(padT+plotH,Math.max(padT,padT+plotH-Math.round((v/powYTop)*plotH)));}
+        var powPts=powBins.map(function(v,i){return [pbx(i),pby(v)];});
+        var powPathD='M'+powPts[0][0]+','+powPts[0][1];
+        for(var ppi=0;ppi<powPts.length-1;ppi++){
+          var pxc=(powPts[ppi][0]+powPts[ppi+1][0])/2,pyc=(powPts[ppi][1]+powPts[ppi+1][1])/2;
+          powPathD+=' Q'+powPts[ppi][0]+','+powPts[ppi][1]+' '+pxc+','+pyc;
+        }
+        powPathD+=' L'+powPts[powPts.length-1][0]+','+powPts[powPts.length-1][1];
+        var powAreaD=powPathD+' L'+pbx(powBinCount-1)+','+(padT+plotH)+' L'+pbx(0)+','+(padT+plotH)+' Z';
+        o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">');
+        for(var pgi=0;pgi<=powYSteps;pgi++){
+          var pgy=padT+pgi*(plotH/powYSteps);
+          var pgv=Math.round(powYTop*(1-pgi/powYSteps));
+          o('<line x1="'+padL+'" y1="'+pgy+'" x2="'+(W-padR)+'" y2="'+pgy+'" stroke="var(--bd)" stroke-width="0.5"/>');
+          if(pgv>0)o('<text x="'+(padL-3)+'" y="'+(pgy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+pgv+'</text>');
+        }
+        for(var pxi=0;pxi<powBinCount;pxi++){
+          o('<text x="'+pbx(pxi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(pxi===powBinCount-1?pxi+'+':String(pxi))+'</text>');
+        }
+        o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+        o('<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+        o('<path d="'+powAreaD+'" fill="#E0546B" fill-opacity="0.1"/>');
+        o('<path d="'+powPathD+'" fill="none" stroke="#E0546B" stroke-width="1.4" stroke-linecap="round"/>');
+        o('</svg>');
+        o('<div style="text-align:right;font-size:11px;color:var(--fg3);margin-top:2px;margin-bottom:10px">By minion power</div>');
+      } else {
+        o('<div style="font-size:11px;color:var(--fg3);padding:4px 0 10px;font-style:italic">No minions in deck yet.</div>');
+      }
+      // 2. Card Type Quantity
+      o('<div class="slbl2" style="margin-top:18px;font-size:11px">Card Type Quantity</div>');
+      var typeDisplay={avatar:'Avatar',minion:'Minion',magic:'Magic',aura:'Aura',artifact:'Artifact',site:'Site'};
+      var typeBarColors={avatar:'#FF5C8F',minion:typeColors.minion,magic:typeColors.magic,aura:typeColors.aura,artifact:typeColors.artifact,site:'#8FBF6B'};
+      var typeItems=Object.keys(typeQtyCount).map(function(t){return {n:typeDisplay[t]||t,v:typeQtyCount[t],k:t};});
+      barList(typeItems,function(it){return typeBarColors[it.k]||'var(--hi)';});
+      // 3. Rarity
+      o('<div class="slbl2" style="margin-top:18px;font-size:11px">Rarity</div>');
+      var rarItems=Object.keys(rarCount).map(function(r){return {n:r.charAt(0).toUpperCase()+r.slice(1),v:rarCount[r],k:r};});
+      barList(rarItems,function(it){return rarColors[it.k]||'var(--hi)';});
+      // 4. Key Words (real Codex glossary hits, weighted by copies in deck)
+      o('<div class="slbl2" style="margin-top:18px;font-size:11px">Key Words</div>');
+      var kwItems=Object.keys(kwCount).map(function(k){return {n:k,v:kwCount[k]};});
+      barList(kwItems,null,10);
+      // 5. Subtypes
+      o('<div class="slbl2" style="margin-top:18px;font-size:11px">Subtypes</div>');
+      var subItems=Object.keys(subCount).map(function(s){return {n:s,v:subCount[s]};});
+      barList(subItems,null,10);
+    }
+    o('</div>');
     // ─── Hand Preview (draw simulator) ───
     if(!G.dvHand||G.dvHand.deckKey!==dvk){_dvInitHand(dvk);}
     var hp=G.dvHand||{spells:[],sites:[]};
