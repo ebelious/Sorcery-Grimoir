@@ -664,7 +664,7 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .ev-ac-item:active{background:var(--bg2)}
 .ev-ac-none{padding:7px 9px;font-size:10px;color:var(--fg2)}
 .ev-c{padding:10px 10px;background:var(--bg3);border:1px solid var(--bd);margin-bottom:5px;border-radius:0}
-.ev-nm{font-size:13px;font-weight:700}
+.ev-nm{font-size:16px;font-weight:700}
 .ev-mt{font-size:11px;color:var(--fg2);margin-top:3px}
 .price-box{background:var(--bg3);border:1px solid var(--bd);padding:7px;margin-bottom:6px}
 .price-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
@@ -8317,7 +8317,7 @@ function pContent(){
           _favByStore[sn].push(e);
         });
         _favStoreOrder.forEach(function(sn){
-        o('<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"><div class="slbl2" style="margin-top:0">'+_evIconStar(true)+' '+h(sn)+' Events</div><button class="fb red" style="font-size:11px;padding:4px 8px" data-store="'+h(sn)+'" onclick="showFavStoreRemoveConfirm(this.dataset.store)">Remove</button></div>');
+        o('<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px"><div class="slbl2" style="margin-top:0">'+_evIconStar(true)+' '+h(sn)+' Events</div><button class="fb" style="font-size:11px;padding:3px 7px;border:none;background:transparent;color:var(--fg3)" data-store="'+h(sn)+'" title="Remove favorite store" onclick="showFavStoreRemoveConfirm(this.dataset.store)">&#10005;</button></div>');
         o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
         _favByStore[sn].forEach(function(e){
           var _fi=G._evReg.length;
@@ -8326,14 +8326,11 @@ function pContent(){
           var _city=e.city||(loc.split(',')[1]||'').trim();
           var _state=e.state||(loc.split(',')[2]||loc.split(',')[1]||'').trim().slice(0,2).toUpperCase();
           var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
+          var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
           o('<div class="ev-c" style="cursor:pointer;border-color:var(--hi)" onclick="showEvPopup('+_fi+')">');
           o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
-          if(e.storeName)o('<div class="ev-mt" style="font-weight:700;color:var(--hi)">'+_evIconStore()+' '+h(e.storeName)+'</div>');
-          if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
-          if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
-          else if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
-          if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
+          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+          if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
           o('</div>');
         });
         o('</div>');
@@ -8350,15 +8347,11 @@ function pContent(){
         var _city=e.city||(loc.split(',')[1]||'').trim();
         var _state=e.state||(loc.split(',')[2]||loc.split(',')[1]||'').trim().slice(0,2).toUpperCase();
         var _cityState=_city&&_state?_city+', '+_state:_city||_state||'';
+        var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
         o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
         o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+( e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+( e.type?' &middot; '+h(e.type):'')+'</div>');
-        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
-        if(_cityState)o('<div class="ev-mt" style="color:var(--fg);font-weight:700">'+_evIconPin()+' '+h(_cityState)+'</div>');
-        if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
-        else if(loc&&loc!==_cityState)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(loc)+'</div>');
-        if(e.description)o('<div style="font-size:11px;color:var(--fg2);margin-top:4px;line-height:1.4">'+h(e.description)+'</div>');
-        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
         o('</div>');
       });
       o('</div>');
@@ -8373,14 +8366,14 @@ function pContent(){
       o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
       G.evSaved.forEach(function(e,si){
         var loc=e.location||e.loc||'';
+        var _city=e.city||(loc.split(',')[1]||'').trim();
+        var _state=e.state||(loc.split(',')[2]||loc.split(',')[1]||'').trim().slice(0,2).toUpperCase();
+        var _cityState=_city&&_state?_city+', '+_state:_city||_state||loc;
+        var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
         o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
         o('<div class="ev-nm">'+h(e.name||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' '+_evIconClock()+' '+h(e.time)+(e.endTime?' &ndash; '+h(e.endTime):''):'')+'</div>');
-        if(e.storeName)o('<div class="ev-mt" style="font-weight:700">'+_evIconStore()+' '+h(e.storeName)+'</div>');
-        if(loc)o('<div class="ev-mt" style="color:var(--fg)">'+_evIconPin()+' '+h(loc)+'</div>');
-        if(e.address)o('<div class="ev-mt" style="color:var(--fg2);font-size:10px">'+h(e.address)+'</div>');
-        if(e.description)o('<div style="font-size:11px;color:var(--fg2);margin-top:4px;line-height:1.4">'+h(e.description)+'</div>');
-        if(e.url)o('<a class="ext-lnk" style="margin-top:6px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--hi);color:var(--fg)" href="'+h(e.url)+'" target="_blank" onclick="event.stopPropagation()">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
         o('</div>');
       });
       o('</div>');
@@ -8397,10 +8390,17 @@ function pContent(){
         var _esaved=!!(G.evSaved||[]).find(function(x){return (x.name+(x.location||x.loc||''))===_ekey;});
         o('<div class="pbg" onclick="if(event.target===this)closeEvPopup()">');
         o('<div class="panel" style="border-radius:'+(G.cfg.roundedCorners?'8px 8px 0 0':'0')+';max-height:85vh">');
-        o('<div class="phdr">');
-        o('<button class="p-bk" onclick="closeEvPopup()">&#x2715;</button>');
-        o('<div class="p-ttl" style="font-size:16px">Event Details</div>');
-        o('<button class="eadj" style="font-size:16px;border-color:'+(_esaved?'var(--hi)':'var(--bd)')+';color:'+(_esaved?'var(--hi)':'var(--fg2)')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">'+_evIconStar(_esaved,16)+'</button>');
+        o('<div class="phdr" style="flex-wrap:wrap">');
+        o('<button class="p-bk" onclick="closeEvPopup()"><span style="color:var(--hi)">&larr;</span> Back</button>');
+        o('<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;width:100%;padding-left:78px;justify-content:flex-end">');
+        o('<div style="flex:1;min-width:4px"></div>');
+        if(_ep.storeName){
+          var _isFav=isFavStore(_ep.storeName);
+          o('<button class="fb" style="padding:5px 8px;font-size:12px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+_evIconStar(_isFav,13)+' '+h(_ep.storeName)+'</button>');
+        }
+        o('<button class="fb" style="padding:5px 8px;font-size:12px;'+(_esaved?'border-color:var(--hi);color:var(--hi)':'')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">'+_evIconStar(_esaved,13)+' Event</button>');
+        if(_ep.url)o('<a class="fb" style="font-size:11px;padding:6px 9px;color:var(--fg);text-transform:uppercase;background:transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box;white-space:nowrap" href="'+h(_ep.url)+'" target="_blank">Play Network <span style="color:var(--hi);margin-left:4px">&rarr;</span></a>');
+        o('</div>');
         o('</div>');
         o('<div style="padding:14px;overflow-y:auto">');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
@@ -8409,10 +8409,6 @@ function pContent(){
           var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
           o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
         }
-        if(_ep.storeName){
-          var _isFav=isFavStore(_ep.storeName);
-          o('<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div style="font-size:14px;font-weight:700">'+_evIconStore()+' '+h(_ep.storeName)+'</div><button class="fb" style="padding:4px 8px;font-size:14px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+(_isFav?_evIconStar(true)+' Favorited':_evIconStar(false)+' Favorite Store')+'</button></div>');
-        }
         var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
         if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">'+_evIconPin()+' '+h(_epicitystate)+'</div>');
         if(_eaddr)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
@@ -8420,7 +8416,6 @@ function pContent(){
         if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
         o('<div style="display:flex;gap:8px;flex-direction:column">');
         if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;border:1px solid var(--grn);color:var(--fg);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">'+_evIconMap()+' Open in Google Maps</a>');
-        if(_ep.url)o('<a class="ext-lnk" style="padding:11px;text-align:center;font-size:13px;border:1px solid var(--hi);color:var(--fg)" href="'+h(_ep.url)+'" target="_blank">View on Play Network <span style="color:var(--hi)">'+_evIconArrow()+'</span></a>');
         o('</div></div></div></div>');
       }
     }
