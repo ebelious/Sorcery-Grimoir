@@ -9266,8 +9266,19 @@ function render(){
         } else {
           _srDkKeys.forEach(function(k){
             var _srChecked=!!(G.mpShareDeckPickKeys&&G.mpShareDeckPickKeys[k]);
+            // h() HTML-entity-escapes for display text, but that's not
+            // enough here: the browser decodes entities back to literal
+            // characters before evaluating an onXXX attribute as JS, so a
+            // deck name with an apostrophe (e.g. "Mikael's Deck") would
+            // silently break this handler -- the checkbox would still look
+            // checked (that's native browser behavior, independent of the
+            // handler), but _mpShareTogglePick would never actually run, so
+            // it would never end up in mpShareDeckPickKeys. Escaping for the
+            // JS string-literal context (matching safeEntryNm elsewhere in
+            // this file) is what's actually needed here.
+            var _srSafeK=String(k).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
             o('<label style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid var(--bg3);cursor:pointer">');
-            o('<input type="checkbox" onclick="event.stopPropagation()" '+(_srChecked?'checked':'')+' onchange="_mpShareTogglePick(\''+h(k)+'\',this.checked)" style="width:18px;height:18px;flex-shrink:0">');
+            o('<input type="checkbox" onclick="event.stopPropagation()" '+(_srChecked?'checked':'')+' onchange="_mpShareTogglePick(\''+_srSafeK+'\',this.checked)" style="width:18px;height:18px;flex-shrink:0">');
             o('<span style="font-size:14px;color:var(--fg);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(G.decks[k].name)+'</span>');
             o('</label>');
           });
