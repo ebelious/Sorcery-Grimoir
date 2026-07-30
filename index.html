@@ -4034,6 +4034,12 @@ function _updateCacheProgressUI(textId,barId,done,total,label){
 }
 function downloadForOffline(scope){
   if(!('serviceWorker' in navigator)){alert('Offline caching needs a service worker, which this browser doesn\'t support.');return;}
+  // "Cache Card Data" previously only cached images -- cards.json itself was
+  // only ever cached via the separate "Cache App Data" button. Fetching it
+  // here too routes through sw.js's existing network-first data-cache
+  // handler (same one cacheAppData() uses), which already refuses to let a
+  // smaller/truncated response overwrite a larger cached copy.
+  fetch('https://ebelious.github.io/Sorcery-Grimoir/cards.json').catch(function(){});
   function start(rewardsData){
     var urls=_offlineImageUrls(scope,rewardsData);
     if(!urls.length){alert('No cards to cache yet.');return;}
@@ -7073,8 +7079,14 @@ function pContent(){
     o('<div class="set-grp"><div class="set-grp-h">Appearance</div>');
     o('<div class="slbl2" style="margin-top:0">UI Layouts</div>');
     o('<div style="display:flex;gap:8px;margin-bottom:14px">');
-    o('<button class="fb full" style="flex:1" onclick="p1LayoutCompetitive()">Competitive</button>');
-    o('<button class="fb full" style="flex:1" onclick="p1LayoutMinimal()">Minimal</button>');
+    // No single "which layout is active" flag is persisted -- these are
+    // one-shot presets, not a stored mode. Inferring selection by checking
+    // whether the current config exactly matches what each preset sets,
+    // same approach used for the P1 config popup's Layout buttons.
+    var _stIsComp=G.cfg.hideTurnBar===false&&G.cfg.diceInHeader===false;
+    var _stIsMin=G.cfg.hideTurnBar===true&&G.cfg.diceInHeader===true;
+    o('<button class="fb full" style="flex:1;border-color:'+(_stIsComp?'var(--hi)':'var(--bd)')+'" onclick="p1LayoutCompetitive()">Competitive</button>');
+    o('<button class="fb full" style="flex:1;border-color:'+(_stIsMin?'var(--hi)':'var(--bd)')+'" onclick="p1LayoutMinimal()">Minimal</button>');
     o('</div>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'dice\')"><span>Dice Settings</span><span style="color:var(--hi)">&#8594;</span></button>');
     o('<button class="fb full" style="display:flex;align-items:center;justify-content:space-between" onclick="openPanel(\'color\')"><span>UI Color</span><span style="color:var(--hi)">&#8594;</span></button>');
