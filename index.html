@@ -6228,6 +6228,7 @@ function _evIconPin(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" 
 function _evIconStar(filled,sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="'+(filled?'currentColor':'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>';}
 function _evIconMap(sz){return '<svg width="'+(sz||14)+'" height="'+(sz||14)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><path d="M9 3v15M15 6v15"/></svg>';}
 function _evIconArrow(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';}
+function _evIconDollar(sz){return '<svg width="'+(sz||12)+'" height="'+(sz||12)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>';}
 
 function loadLocalEvents(){
   if(G.evLoading)return;
@@ -8396,23 +8397,25 @@ function pContent(){
         o('<div style="flex:1;min-width:4px"></div>');
         if(_ep.storeName){
           var _isFav=isFavStore(_ep.storeName);
-          o('<button class="fb" style="padding:5px 8px;font-size:12px;'+(_isFav?'border-color:var(--hi);color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'">'+_evIconStar(_isFav,13)+' '+h(_ep.storeName)+'</button>');
+          o('<button class="fb" style="padding:5px 8px;font-size:12px;color:var(--fg)'+(_isFav?';border-color:var(--hi)':'')+'" data-store="'+h(_ep.storeName)+'" onclick="toggleFavStore(this.dataset.store)" title="'+(_isFav?'Remove from favorite stores':'Notify me of new events at this store')+'"><span style="color:'+(_isFav?'var(--hi)':'var(--fg)')+'">'+_evIconStar(_isFav,13)+'</span> '+h(_ep.storeName)+'</button>');
         }
-        o('<button class="fb" style="padding:5px 8px;font-size:12px;'+(_esaved?'border-color:var(--hi);color:var(--hi)':'')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()">'+_evIconStar(_esaved,13)+' Event</button>');
+        o('<button class="fb" style="padding:5px 8px;font-size:12px;color:var(--fg)'+(_esaved?';border-color:var(--hi)':'')+'" onclick="'+(_esaved?'evUnsaveKey(\''+h(_ekey)+'\')':'(G.evPopup>=0?evSave(G.evPopup):null)')+';render()"><span style="color:'+(_esaved?'var(--hi)':'var(--fg)')+'">'+_evIconStar(_esaved,13)+'</span> Event</button>');
         if(_ep.url)o('<a class="fb" style="font-size:11px;padding:6px 9px;color:var(--fg);text-transform:uppercase;background:transparent;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;box-sizing:border-box;white-space:nowrap" href="'+h(_ep.url)+'" target="_blank">Play Network <span style="color:var(--hi);margin-left:4px">&rarr;</span></a>');
         o('</div>');
         o('</div>');
         o('<div style="padding:14px;overflow-y:auto">');
         o('<div style="font-size:16px;font-weight:700;color:var(--wht);margin-bottom:10px">'+h(_ep.name||'')+'</div>');
-        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px">'+_evIconCal()+' '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' '+_evIconClock()+' <b>'+h(_ep.time)+'</b>'+(_ep.endTime?' &ndash; <b>'+h(_ep.endTime)+'</b>':''):'')+'</div>');
-        if(_ep.type||_ep.price||_ep.duration){
-          var _epParts=[_ep.type,_ep.price,_ep.duration].filter(Boolean).map(h);
+        if(_ep.date||_ep.time)o('<div style="font-size:13px;margin-bottom:7px"><span style="color:var(--red)">'+_evIconCal()+'</span> '+(_ep.date?h(localDate(_ep.date)):'')+(_ep.time?' - <b>'+h(_ep.time)+'</b>'+(_ep.endTime?' &ndash; <b>'+h(_ep.endTime)+'</b>':''):'')+'</div>');
+        if(_ep.price)o('<div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:7px"><span style="color:var(--grn)">'+_evIconDollar(15)+'</span> '+h(_ep.price)+'</div>');
+        var _epTypeDup=_ep.type&&_ep.name&&_ep.type.trim().toLowerCase()===_ep.name.trim().toLowerCase();
+        var _epType=_epTypeDup?'':_ep.type;
+        if(_epType||_ep.duration){
+          var _epParts=[_epType,_ep.duration].filter(Boolean).map(h);
           o('<div style="font-size:12px;color:var(--fg2);margin-bottom:7px">'+_epParts.join(' &middot; ')+'</div>');
         }
         var _epicitystate=(_ep.city&&_ep.state)?_ep.city+', '+_ep.state:(_ep.city||_ep.state||'');
-        if(_epicitystate)o('<div style="font-size:15px;font-weight:700;color:var(--hi);margin-bottom:4px">'+_evIconPin()+' '+h(_epicitystate)+'</div>');
-        if(_eaddr)o('<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">'+h(_eaddr)+'</div>');
-        else if(_eloc)o('<div style="font-size:13px;font-weight:700;margin-bottom:10px">'+h(_eloc)+'</div>');
+        var _epFullLoc=_eaddr||_epicitystate||_eloc||'';
+        if(_epFullLoc)o('<div style="font-size:14px;font-weight:700;color:var(--fg);margin-bottom:10px"><span style="color:var(--hi)">'+_evIconPin()+'</span> '+h(_epFullLoc)+'</div>');
         if(_ep.description||_ep.desc)o('<div style="font-size:15px;color:var(--fg2);line-height:1.6;margin-bottom:10px;background:var(--bg3);padding:8px;border-radius:3px">'+h(_ep.description||_ep.desc)+'</div>');
         o('<div style="display:flex;gap:8px;flex-direction:column">');
         if(_emaps)o('<a class="ext-lnk" style="padding:11px;text-align:center;border:1px solid var(--grn);color:var(--fg);font-size:13px" href="https://www.google.com/maps/search/?api=1&query='+_emaps+'" target="_blank">'+_evIconMap()+' Open in Google Maps</a>');
