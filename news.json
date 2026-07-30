@@ -1,10 +1,17 @@
 {
-  "updated": "2026-07-30T03:20:50.012Z",
+  "updated": "2026-07-30T06:02:45.225Z",
   "articles": [
+    {
+      "title": "Melbourne Grand Contest: The Realm Comes to Australia",
+      "url": "https://sorcerytcg.com/news/melbourne-grand-contest-the-realm-comes-to-australia",
+      "date": "30 Jul 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/08ba740d80576d32778a6b2873db677a74ff6f63-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Building the Realm's Newest Rivalry: Frost Mage vs. Lavamancer",
       "url": "https://sorcerytcg.com/news/building-the-realm-s-newest-rivalry-frost-mage-vs-lavamancer",
-      "date": "24 Jul 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/45e2929254094035c02e37b87c12b626e00f73f9-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8aa831fe157d274f9cc5f4c017a040717fa5ff3e-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "SCG CON Las Vegas: The Second Grand Contest of 2026",
-      "url": "https://sorcerytcg.com/news/scg-con-las-vegas-the-second-grand-contest-of-2026",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/57d80b4c4057951b9561510a78579283882980a6-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
