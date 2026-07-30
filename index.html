@@ -3540,8 +3540,10 @@ setInterval(function(){
       }
     }
   }
-  _updateChessDisplays();
-  _updateTimerDisplays();
+  if(!_selectOpen){
+    _updateChessDisplays();
+    _updateTimerDisplays();
+  }
   if(_timerJustEnded)render();
 },250);
 
@@ -3695,6 +3697,20 @@ document.addEventListener('input',function(e){
 },true);
 document.addEventListener('focus',function(e){
   if(e.target&&e.target.id&&(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'))_lastInputTs[e.target.id]=Date.now();
+},true);
+// Tracks whether a native <select> currently has focus (i.e. its dropdown
+// may be open). Android WebView/TWA can dismiss an open <select> popup in
+// response to unrelated DOM writes happening on the page underneath it --
+// same root cause as the render()-during-input-focus issue elsewhere in this
+// file, just triggered by direct element updates (e.g. the 250ms match-timer
+// display refresh) rather than a full render(). Periodic DOM writes check
+// this flag and skip themselves while true, resuming once the select blurs.
+var _selectOpen=false;
+document.addEventListener('focus',function(e){
+  if(e.target&&e.target.tagName==='SELECT')_selectOpen=true;
+},true);
+document.addEventListener('blur',function(e){
+  if(e.target&&e.target.tagName==='SELECT')_selectOpen=false;
 },true);
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
@@ -5175,8 +5191,11 @@ function _mpPoll(){
       // <select>), which interrupts/cancels the deck choice mid-selection.
       // Same reasoning applies to the Deck popup's card-search box: rebuilding
       // it out from under an active mobile text input closes the keyboard.
+      // _selectOpen covers this generally (e.g. the card detail popup's
+      // "Add to Deck" select), G.mpRematchPicking is kept for the one case
+      // that isn't a plain focus/blur-tracked <select>.
       var _typingInDvSearch=document.activeElement&&document.activeElement.id==='dv-srch';
-      if(!G.mpRematchPicking&&!_typingInDvSearch)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
+      if(!G.mpRematchPicking&&!_typingInDvSearch&&!_selectOpen)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
 }
 var _mpLifePushTimer=null;
