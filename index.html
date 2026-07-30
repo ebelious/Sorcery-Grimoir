@@ -525,6 +525,7 @@ body.rounded .pbg-center .panel{border-radius:10px!important}
 .fr{display:flex;gap:4px;align-items:center;margin-bottom:6px}
 .fb{font-size:11px;padding:6px 12px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);text-transform:uppercase;cursor:pointer}
 .fb.gold{color:var(--hi);border-color:var(--hi)}
+.connect-pop .fb.gold{color:var(--fg)}
 .fb.red{color:var(--fg);border-color:var(--red)}
 .fb.full{width:100%;margin-top:4px}
 .set-pop .slbl2{margin-top:22px;margin-bottom:14px}
@@ -978,7 +979,7 @@ var G={
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
   mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,favStoreRemoveConfirm:null,
-  mpShareMode:'create',mpShareCode:null,mpShareRoom:null,mpShareRole:null,mpShareErr:null,mpShareFormUname:null,mpShareFormCode:null,
+  mpTopMode:'match',mpShareMode:'create',mpShareCode:null,mpShareRoom:null,mpShareRole:null,mpShareErr:null,mpShareFormUname:null,mpShareFormCode:null,
   mpShareConnectedPopup:false,mpShareAcceptWaiting:false,mpShareDeclinedByName:null,mpShareClosedNotice:null,mpShareLeaveConfirm:false,
   mpShareDeckPickKeys:null,mpShareDeckConfirmed:false,mpShareLastOpp:null,mpSharedDeckImportedIdx:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
@@ -7945,7 +7946,7 @@ function pContent(){
     return out.join('');
   }
   if(p==='connect'){
-    o('<div class="set-pop">');
+    o('<div class="set-pop connect-pop">');
     if(G.mpShareRoom){
       // Live deck-share connection -- entirely separate room/poll from the
       // match system below. Phases: waiting for someone to join -> waiting
@@ -7969,39 +7970,76 @@ function pContent(){
       } else if(!srMyDone||!srOppDone){
         o('<div style="text-align:center;color:var(--fg2);font-size:14px;padding:30px 0">Selecting decks&hellip;</div>');
       } else {
-        o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:10px">');
-        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">You</div>');
-        o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srMe?srMe.username:'')+'</div>');
-        if(srMe&&srMe.decks&&srMe.decks.length)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+srMe.decks.length+' deck'+(srMe.decks.length===1?'':'s')+' shared: '+_mpShareDeckSummary(srMe.decks)+'</div>');
-        o('</div>');
-        o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">');
-        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Opponent</div>');
-        o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srOpp.username||'')+'</div>');
-        if(srOpp.decks&&srOpp.decks.length)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+srOpp.decks.length+' deck'+(srOpp.decks.length===1?'':'s')+' shared: '+_mpShareDeckSummary(srOpp.decks)+'</div>');
-        o('<button class="fb gold full" style="margin-top:8px" onclick="mpShareViewOppDeck()">View / Import Decks</button>');
-        o('</div>');
+        o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:10px">@'+h(srOpp.username||'')+' shared '+srOpp.decks.length+' deck'+(srOpp.decks.length===1?'':'s')+'</div>');
+        var srTypeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
+        var srTypeOrder=['avatar','aura','artifact','minion','magic','site'];
+        srOpp.decks.forEach(function(deck,di){
+          var srKey='cnshrdeck_'+di;
+          var srExp=G.accExp[srKey]===true;
+          o('<div style="margin-bottom:14px">');
+          o('<div style="cursor:pointer;display:flex;align-items:center;gap:8px;padding-bottom:5px;border-bottom:1px solid var(--bd)" onclick="toggleAcc(\''+srKey+'\')">');
+          o('<span style="flex:1;font-size:15px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(deck.name||'Deck')+'</span>');
+          o('<span style="font-size:12px;color:var(--fg3)">'+(srExp?'&uarr;':'&darr;')+'</span>');
+          o('</div>');
+          o('<div style="display:flex;align-items:center;gap:8px;margin-top:8px">');
+          o('<button class="fb gold" style="flex:1" onclick="mpImportSharedDeck('+di+')">Import This Deck</button>');
+          o('</div>');
+          if(G.mpSharedDeckImportedIdx&&G.mpSharedDeckImportedIdx[di])o('<div style="font-size:12px;color:var(--grn);margin-top:6px">&#10003; Imported as "'+h(G.mpSharedDeckImportedIdx[di])+'"</div>');
+          if(srExp){
+            var srTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+            (deck.cards||[]).forEach(function(entry){
+              var c=cardByName(entry.name);
+              var t=c?cType(c):'minion';
+              if(!srTypeGroups[t])t='minion';
+              srTypeGroups[t].push({entry:entry,card:c});
+            });
+            srTypeOrder.forEach(function(t){
+              var grp=srTypeGroups[t];
+              if(!grp.length)return;
+              o('<div class="slbl2" style="margin-top:10px">'+srTypeLabels[t]+' ('+grp.length+')</div>');
+              grp.forEach(function(g){
+                o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
+                o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
+                o('<span style="font-size:14px;color:var(--fg)'+(g.card?'':';font-style:italic;color:var(--fg2)')+'">'+h(g.entry.name)+'</span>');
+                o('</div>');
+              });
+            });
+          }
+          o('</div>');
+        });
       }
       o('<button class="fb red full" style="padding:16px 12px" onclick="mpShareRequestLeave()">Close Connection</button>');
     } else if(!G.mpRoom){
       o('<div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px;text-align:center">&#9876; Connect</div>');
       if(G.mpErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpErr)+'</div>');
-      var mpMode=G.mpMode||'create';
-      o('<div style="display:flex;gap:6px;margin-bottom:16px">');
-      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
-      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
-      o('<button class="fb'+(mpMode==='share'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'share\';G.mpErr=null;_renderKeepScroll()">Share Deck</button>');
+      var mpTopMode=G.mpTopMode||'match';
+      o('<div style="display:flex;gap:8px;margin-bottom:16px">');
+      o('<button class="fb'+(mpTopMode==='match'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpTopMode=\'match\';G.mpErr=null;_renderKeepScroll()">Match</button>');
+      o('<button class="fb'+(mpTopMode==='share'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpTopMode=\'share\';G.mpErr=null;_renderKeepScroll()">Share Deck</button>');
       o('</div>');
       var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpFormDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
       var mpUnameVal=(G.mpFormUname!=null)?G.mpFormUname:(G.cfg.p1||'');
-      if(mpMode==='join'){
-        o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'join\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
-        o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
-      } else if(mpMode==='share'){
+      if(mpTopMode==='match'){
+        // Create/Join sub-toggle, same pattern as the Share Deck sub-toggle below.
+        var mpMode=G.mpMode||'create';
+        o('<div style="display:flex;gap:8px;margin-bottom:14px">');
+        o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1;padding:12px;font-size:14px" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
+        o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1;padding:12px;font-size:14px" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
+        o('</div>');
+        if(mpMode==='join'){
+          o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'join\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--hi)"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
+          o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+          o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
+        } else {
+          o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+          o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'qr\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--hi)"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
+        }
+      } else {
         // Deck-share connection setup -- create/join only at this stage
-        // (mirrors Create/Join Match). Deck selection happens after both
-        // sides connect and accept, via the popups rendered globally below.
+        // (mirrors Create/Join Match above). Deck selection happens after
+        // both sides connect and accept, via the popups rendered globally below.
         if(G.mpShareErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpShareErr)+'</div>');
         var mpShareCJ=G.mpShareMode||'create';
         o('<div style="display:flex;gap:8px;margin-bottom:14px">');
@@ -8010,17 +8048,13 @@ function pContent(){
         o('</div>');
         var mpShareUnameVal=(G.mpShareFormUname!=null)?G.mpShareFormUname:(G.cfg.p1||'');
         if(mpShareCJ==='join'){
-          o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-share-jcode" placeholder="Connection code" value="'+h(G.mpShareFormCode||'')+'" oninput="G.mpShareFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'sharecode\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
+          o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-share-jcode" placeholder="Connection code" value="'+h(G.mpShareFormCode||'')+'" oninput="G.mpShareFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'sharecode\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--hi)"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
           o('<div style="margin-bottom:14px"><input id="mp-share-juname" placeholder="Your username" value="'+h(mpShareUnameVal)+'" oninput="G.mpShareFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
           o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
         } else {
           o('<div style="margin-bottom:14px"><input id="mp-share-cuname" placeholder="Your username" value="'+h(mpShareUnameVal)+'" oninput="G.mpShareFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-          o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:var(--hi)"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
         }
-      } else {
-        o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
-        o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-        o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="G.mpCreateViewMode=\'qr\';mpCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
       }
     } else {
       var mpMe=_mpMe(),mpOpp=_mpOpponent();
