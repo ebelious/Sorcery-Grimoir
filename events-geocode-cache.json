@@ -1245,5 +1245,17 @@
   "mcminnville|or": {
     "lat": 45.2100367,
     "lng": -123.194463
+  },
+  "śródmieście|województwo pomorskie": {
+    "lat": 54.3502045,
+    "lng": 18.6543087
+  },
+  "kharkiv|kharkiv oblast": {
+    "lat": 49.9923181,
+    "lng": 36.2310146
+  },
+  "barcelona|ct": {
+    "lat": 41.3825802,
+    "lng": 2.177073
   }
 }
