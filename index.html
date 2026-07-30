@@ -978,6 +978,9 @@ var G={
   mpMatchSummaryPopup:null,mpRematchPicking:false,mpRematchDeckKey:null,
   mpRematchWaiting:false,mpRematchConfirmPopup:false,mpRematchDeclined:false,mpRematchAccepting:false,mpRematchPendingDeck:null,
   mpMatchAcceptWaiting:false,mpDeclinedByName:null,headerSearchOpen:false,themeResetConfirmPopup:false,favStoreRemoveConfirm:null,
+  mpShareMode:'create',mpShareCode:null,mpShareRoom:null,mpShareRole:null,mpShareErr:null,mpShareFormUname:null,mpShareFormCode:null,
+  mpShareConnectedPopup:false,mpShareAcceptWaiting:false,mpShareDeclinedByName:null,mpShareClosedNotice:null,mpShareLeaveConfirm:false,
+  mpShareDeckPickKey:null,mpShareDeckConfirmed:false,mpShareLastOpp:null,mpSharedDeckImportedName:null,
   mpPendingResult:null,mpResultPopup:null,mpWaitingResult:false,mpResultFinalized:false,mpResultDeclined:false,
   mpFormUname:null,mpFormDeckKey:null,mpFormCode:'',
 };
@@ -1121,10 +1124,10 @@ function boot(){
     openPanel('connect');
     history.replaceState(null,'',location.pathname);
   }
-  var _viewDeckParam=new URLSearchParams(location.search).get('viewdeck');
-  if(_viewDeckParam){
-    G.mpMode='share';G.mpShareSubMode='receive';
-    G.mpShareFormCode=_viewDeckParam.toUpperCase().slice(0,8);
+  var _shareCodeParam=new URLSearchParams(location.search).get('sharecode');
+  if(_shareCodeParam){
+    G.mpMode='share';G.mpShareMode='join';
+    G.mpShareFormCode=_shareCodeParam.toUpperCase().slice(0,8);
     openPanel('connect');
     history.replaceState(null,'',location.pathname);
   }
@@ -5342,7 +5345,7 @@ function _mpOpenScan(target){
 }
 function _mpHandleScanResult(text){
   var target=G._mpScanTarget||'join';
-  var paramName=target==='viewdeck'?'viewdeck':'join';
+  var paramName=target==='sharecode'?'sharecode':'join';
   var codeVal=null;
   try{var u=new URL(text);codeVal=u.searchParams.get(paramName);}catch(e){}
   if(!codeVal)codeVal=text; // fallback: QR just encoded the raw code, not a URL
@@ -5350,7 +5353,7 @@ function _mpHandleScanResult(text){
   _mpCloseScan();
   if(codeVal){
     vibrate(15);
-    if(target==='viewdeck')G.mpShareFormCode=codeVal;
+    if(target==='sharecode')G.mpShareFormCode=codeVal;
     else G.mpFormCode=codeVal;
     render();
   }
@@ -5521,40 +5524,194 @@ function mpImportOppDeck(){
   render();
   _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'opponent')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
 }
-// ── SHARE DECK (deck-only, no live match/room -- separate Netlify function
-// and Blob store from match-sync.js, using the exact same QR/code UX) ──────
-function mpShareDeck(){
-  var deckKey=G.mpShareDeckKey||'';
-  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
-  if(!deck||!deck.cards||!deck.cards.length){G.mpErr='Choose a deck with cards in it to share.';render();return;}
-  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
+// ── SHARE DECK CONNECTION (separate live 2-device room from the match
+// system above -- same QR/code create/join UX, its own poll loop and
+// backend function (share-deck.js) / Blob store, used purely to exchange
+// deck lists rather than run a match). Flow: create/join -> both sides see
+// a Connected popup with Accept/Decline -> once both accept, each side
+// picks and confirms a deck -> once both decks are confirmed, each side can
+// view/import the other's -> closing at any point (by either side, at any
+// stage) requires its own confirmation and notifies the other side.
+function _mpShareMe(){if(!G.mpShareRoom)return null;return G.mpShareRole==='p1'?G.mpShareRoom.p1:G.mpShareRoom.p2;}
+function _mpShareOpponent(){if(!G.mpShareRoom)return null;return G.mpShareRole==='p1'?G.mpShareRoom.p2:G.mpShareRoom.p1;}
+function _mpShareOpponentOrLast(){return _mpShareOpponent()||G.mpShareLastOpp;}
+function _mpShareResetFormState(){
+  G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeclinedByName=null;G.mpShareClosedNotice=null;
+  G.mpShareLeaveConfirm=false;G.mpShareDeckPickKey=null;G.mpShareDeckConfirmed=false;G.mpSharedDeckImportedName=null;
+}
+function mpShareCreate(){
+  var uname=((G.mpShareFormUname!=null?G.mpShareFormUname:G.cfg.p1)||'').trim()||'Player 1';
+  _mpShareStopPoll();
+  _mpShareResetFormState();
+  G.mpBusy=true;G.mpShareErr=null;_renderKeepScroll();
   fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
     method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'share',name:deck.name,cards:deck.cards})
+    body:JSON.stringify({action:'create',username:uname,usercode:_mpUserCode()})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to create connection.');return d;});})
+  .then(function(d){
+    G.mpShareCode=d.code;G.mpShareRoom=d.room;G.mpShareRole='p1';G.mpBusy=false;
+    _mpShareStartPoll();
+    render();
+  }).catch(function(e){G.mpBusy=false;G.mpShareErr=e.message;render();});
+}
+function mpShareJoin(){
+  var code=(G.mpShareFormCode||'').trim().toUpperCase();
+  var uname=((G.mpShareFormUname!=null?G.mpShareFormUname:G.cfg.p1)||'').trim()||'Player 1';
+  if(!code){G.mpShareErr='Enter a connection code.';render();return;}
+  _mpShareStopPoll();
+  _mpShareResetFormState();
+  G.mpBusy=true;G.mpShareErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'join',code:code,username:uname,usercode:_mpUserCode()})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to join connection.');return d;});})
+  .then(function(d){
+    if(d.room&&d.room.p1&&d.room.p1.usercode&&d.room.p1.usercode===_mpUserCode()){
+      // Same device created this code -- close it out rather than let
+      // someone occupy both sides of their own connection.
+      fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'close',code:code,role:'p1'})
+      }).catch(function(){});
+      G.mpBusy=false;G.mpShareCode=null;G.mpShareRoom=null;G.mpShareRole=null;
+      G.mpShareErr="You can't join your own connection. Share the code with someone else instead.";
+      G.mpShareFormCode='';
+      render();
+      return;
+    }
+    G.mpShareCode=d.code;G.mpShareRoom=d.room;G.mpShareRole='p2';G.mpBusy=false;G.mpShareFormCode='';
+    G.mpShareConnectedPopup=true;
+    _mpShareStartPoll();
+    render();
+  }).catch(function(e){G.mpBusy=false;G.mpShareErr=e.message;G.mpShareFormCode='';render();});
+}
+function mpShareAcceptConnect(){
+  G.mpShareConnectedPopup=false;
+  var code=G.mpShareCode;
+  if(!code){G.mpShareErr='Could not find the connection.';render();return;}
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'accept',code:code,role:G.mpShareRole})
+  }).then(function(r){return r.json();})
+  .then(function(d){
+    if(d&&d.room){
+      G.mpShareRoom=d.room;
+      if(d.room.accepted&&d.room.accepted.confirmedP1&&d.room.accepted.confirmedP2){render();return;}
+    }
+    G.mpShareAcceptWaiting=true;
+    render();
+  }).catch(function(e){G.mpShareErr='Failed to accept: '+e.message;render();});
+}
+function mpShareDeclineConnect(){
+  G.mpShareConnectedPopup=false;
+  var code=G.mpShareCode;
+  if(code){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'decline',code:code,role:G.mpShareRole})
+    }).catch(function(){});
+  }
+  _mpShareTeardown();
+  render();
+}
+function mpShareAckDecline(){
+  G.mpShareDeclinedByName=null;
+  _mpShareTeardown();
+  render();
+}
+function mpShareConfirmDeck(){
+  var deckKey=G.mpShareDeckPickKey||'';
+  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  if(!deck||!deck.cards||!deck.cards.length){G.mpShareErr='Choose a deck with cards in it.';render();return;}
+  var code=G.mpShareCode;
+  if(!code)return;
+  G.mpBusy=true;G.mpShareErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'selectDeck',code:code,role:G.mpShareRole,deck:deck})
   }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to share deck.');return d;});})
   .then(function(d){
-    G.mpShareCode=d.code;G.mpBusy=false;
+    G.mpShareRoom=d.room;G.mpBusy=false;G.mpShareDeckConfirmed=true;
     render();
-  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+  }).catch(function(e){G.mpBusy=false;G.mpShareErr=e.message;render();});
 }
-function mpFetchSharedDeck(){
-  var code=(G.mpShareFormCode||'').trim().toUpperCase();
-  if(!code){G.mpErr='Enter a deck code.';render();return;}
-  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
-  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck?action=get&code='+encodeURIComponent(code))
-    .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Deck code not found.');return d;});})
+// Closing requires its own confirmation (separate from the initial
+// Decline), and notifies the other side via the next poll -- covers
+// leaving at any stage after connecting, not just the pre-accept step.
+function mpShareRequestLeave(){G.mpShareLeaveConfirm=true;render();}
+function mpShareCancelLeave(){G.mpShareLeaveConfirm=false;render();}
+function mpShareConfirmLeave(){
+  G.mpShareLeaveConfirm=false;
+  var code=G.mpShareCode;
+  if(code){
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'close',code:code,role:G.mpShareRole})
+    }).catch(function(){});
+  }
+  _mpShareTeardown();
+  render();
+}
+function mpShareAckClosedNotice(){
+  var code=G.mpShareCode;
+  G.mpShareClosedNotice=null;
+  if(code){
+    // Both sides have now acknowledged the close (the closer already knows,
+    // and this side just did) -- safe to clean up the room server-side.
+    fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'delete',code:code})
+    }).catch(function(){});
+  }
+  _mpShareTeardown();
+  render();
+}
+function _mpShareTeardown(){
+  G.mpShareLastOpp=_mpShareOpponent()||G.mpShareLastOpp;
+  _mpShareStopPoll();
+  G.mpShareCode=null;G.mpShareRoom=null;G.mpShareRole=null;
+  G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeckPickKey=null;G.mpShareDeckConfirmed=false;
+}
+var _mpSharePollTimer=null;
+function _mpShareStartPoll(){if(_mpSharePollTimer)clearInterval(_mpSharePollTimer);_mpSharePollTimer=setInterval(_mpSharePoll,3000);}
+function _mpShareStopPoll(){if(_mpSharePollTimer){clearInterval(_mpSharePollTimer);_mpSharePollTimer=null;}}
+function _mpSharePoll(){
+  if(!G.mpShareCode)return;
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck?action=get&code='+encodeURIComponent(G.mpShareCode))
+    .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
-      G.mpBusy=false;
-      G.mpSharedDeck={name:d.name,cards:d.cards||[],code:code};
-      G.mpSharedDeckImportedName=null;
-      openPanel('shrdeck');
-    }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+      if(!d||!d.room)return;
+      var hadOpp=!!_mpShareOpponent();
+      G.mpShareRoom=d.room;
+      if(!hadOpp&&_mpShareOpponent()&&G.mpShareRole==='p1'){
+        G.mpShareConnectedPopup=true;
+        _sendNotification('Connection Request',(_mpShareOpponent().username||'Someone')+' wants to share decks.','connect');
+      }
+      if(d.room.declined&&d.room.declined!==G.mpShareRole&&!G.mpShareDeclinedByName){
+        G.mpShareDeclinedByName=(d.room[d.room.declined]&&d.room[d.room.declined].username)||'Opponent';
+        G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;
+      }
+      if(d.room.accepted&&d.room.accepted.confirmedP1&&d.room.accepted.confirmedP2){
+        G.mpShareAcceptWaiting=false;
+      }
+      if(d.room.closed&&d.room.closedBy!==G.mpShareRole&&!G.mpShareClosedNotice&&!G.mpShareDeclinedByName){
+        var closerName=(d.room[d.room.closedBy]&&d.room[d.room.closedBy].username)||'Opponent';
+        G.mpShareClosedNotice=closerName+' has closed the connection.';
+        _mpShareStopPoll();
+      }
+      if(!_selectOpen&&!_scrollActive)render();
+    }).catch(function(){});
+}
+function mpShareViewOppDeck(){
+  var opp=_mpShareOpponentOrLast();
+  if(!opp||!opp.deck){alert('Opponent has not shared a deck yet.');return;}
+  openPanel('shrdeck');
 }
 function mpImportSharedDeck(){
-  var sd=G.mpSharedDeck;
-  if(!sd)return;
-  var srcCards=sd.cards||[];
-  var deckName=sd.name||'Shared Deck';
+  var opp=_mpShareOpponentOrLast();
+  if(!opp||!opp.deck){alert('Opponent has not shared a deck yet.');return;}
+  var srcCards=opp.deck.cards||[];
+  var deckName=opp.deck.name||'Shared Deck';
   var baseName=deckName,n=1;
   while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
   var unmatched=[],matched=[];
@@ -5563,11 +5720,11 @@ function mpImportSharedDeck(){
     if(c){matched.push({name:cName(c),qty:entry.qty});}
     else{unmatched.push(entry.name+' x'+entry.qty);}
   });
-  G.decks[deckName]={name:deckName,cards:matched};
+  G.decks[deckName]={name:deckName,cards:matched,creator:opp.username||''};
   sv('sg-dk',G.decks);
   G.mpSharedDeckImportedName=deckName;
   render();
-  _sendNotification('Deck Imported','"'+deckName+'" imported from a shared deck code'+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
+  _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'a shared deck')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
 }
 function mpDownloadOppDeckCSV(){
   var opp=_mpOpponentOrLast();
@@ -7763,7 +7920,43 @@ function pContent(){
   }
   if(p==='connect'){
     o('<div class="set-pop">');
-    if(!G.mpRoom){
+    if(G.mpShareRoom){
+      // Live deck-share connection -- entirely separate room/poll from the
+      // match system below. Phases: waiting for someone to join -> waiting
+      // for both sides to accept -> waiting for both sides to confirm a
+      // deck -> both decks visible (view/import), closable at any point.
+      var srMe=_mpShareMe(),srOpp=_mpShareOpponent();
+      var srBothAccepted=!!(G.mpShareRoom.accepted&&G.mpShareRoom.accepted.confirmedP1&&G.mpShareRoom.accepted.confirmedP2);
+      var srMyDone=!!(srMe&&srMe.deckConfirmed);
+      var srOppDone=!!(srOpp&&srOpp.deckConfirmed);
+      o('<div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px;text-align:center">&#128257; Share Deck</div>');
+      if(G.mpShareErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpShareErr)+'</div>');
+      if(!srOpp){
+        o('<div style="text-align:center;margin-bottom:16px">');
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Scan to Connect</div>');
+        o('<div style="display:flex;justify-content:center;margin-bottom:10px"><canvas id="mp-share-qr-canvas" width="200" height="200" style="background:#fff;border-radius:8px;padding:10px;box-sizing:content-box"></canvas></div>');
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Or Connection Code</div>');
+        o('<div style="font-size:24px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpShareCode)+'</div>');
+        o('</div>');
+      } else if(!srBothAccepted){
+        o('<div style="text-align:center;color:var(--fg2);font-size:14px;padding:30px 0">Connecting to '+h(srOpp.username||'opponent')+'&hellip;</div>');
+      } else if(!srMyDone||!srOppDone){
+        o('<div style="text-align:center;color:var(--fg2);font-size:14px;padding:30px 0">Selecting decks&hellip;</div>');
+      } else {
+        o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:10px">');
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">You</div>');
+        o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srMe?srMe.username:'')+'</div>');
+        if(srMe&&srMe.deck)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(srMe.deck.name)+'</div>');
+        o('</div>');
+        o('<div style="border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:16px">');
+        o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Opponent</div>');
+        o('<div style="font-size:16px;font-weight:700;color:var(--wht)">'+h(srOpp.username||'')+'</div>');
+        if(srOpp.deck)o('<div style="font-size:13px;color:var(--fg2);margin-top:2px">'+h(srOpp.deck.name)+'</div>');
+        o('<button class="fb gold full" style="margin-top:8px" onclick="mpShareViewOppDeck()">View / Import Deck</button>');
+        o('</div>');
+      }
+      o('<button class="fb red full" style="padding:16px 12px" onclick="mpShareRequestLeave()">Close Connection</button>');
+    } else if(!G.mpRoom){
       o('<div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px;text-align:center">&#9876; Connect</div>');
       if(G.mpErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpErr)+'</div>');
       var mpMode=G.mpMode||'create';
@@ -7780,30 +7973,23 @@ function pContent(){
         o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
       } else if(mpMode==='share'){
-        // Deck-only sharing, decoupled from the live match/room system above --
-        // same QR/code UX, but backed by a separate endpoint (share-deck.js)
-        // that just stores/retrieves a deck list, not match state.
-        var mpShareSub=G.mpShareSubMode||'send';
+        // Deck-share connection setup -- create/join only at this stage
+        // (mirrors Create/Join Match). Deck selection happens after both
+        // sides connect and accept, via the popups rendered globally below.
+        if(G.mpShareErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpShareErr)+'</div>');
+        var mpShareCJ=G.mpShareMode||'create';
         o('<div style="display:flex;gap:8px;margin-bottom:14px">');
-        o('<button class="fb'+(mpShareSub==='send'?' gold':'')+'" style="flex:1;padding:10px;font-size:13px" onclick="G.mpShareSubMode=\'send\';G.mpErr=null;_renderKeepScroll()">Share My Deck</button>');
-        o('<button class="fb'+(mpShareSub==='receive'?' gold':'')+'" style="flex:1;padding:10px;font-size:13px" onclick="G.mpShareSubMode=\'receive\';G.mpErr=null;_renderKeepScroll()">View Shared Deck</button>');
+        o('<button class="fb'+(mpShareCJ==='create'?' gold':'')+'" style="flex:1;padding:12px;font-size:14px" onclick="G.mpShareMode=\'create\';G.mpShareErr=null;_renderKeepScroll()">Create Code</button>');
+        o('<button class="fb'+(mpShareCJ==='join'?' gold':'')+'" style="flex:1;padding:12px;font-size:14px" onclick="G.mpShareMode=\'join\';G.mpShareErr=null;_renderKeepScroll()">Join Code</button>');
         o('</div>');
-        if(mpShareSub==='receive'){
-          o('<div style="margin-bottom:14px;display:flex;gap:8px;width:100%"><input id="mp-share-code" placeholder="Deck code" value="'+h(G.mpShareFormCode||'')+'" oninput="G.mpShareFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'viewdeck\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
-          o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpFetchSharedDeck()">'+(G.mpBusy?'Loading&hellip;':'View Deck')+'</button>');
+        var mpShareUnameVal=(G.mpShareFormUname!=null)?G.mpShareFormUname:(G.cfg.p1||'');
+        if(mpShareCJ==='join'){
+          o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-share-jcode" placeholder="Connection code" value="'+h(G.mpShareFormCode||'')+'" oninput="G.mpShareFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'sharecode\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
+          o('<div style="margin-bottom:14px"><input id="mp-share-juname" placeholder="Your username" value="'+h(mpShareUnameVal)+'" oninput="G.mpShareFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
         } else {
-          o('<div style="margin-bottom:14px"><select id="mp-share-deck" onclick="event.stopPropagation()" onchange="G.mpShareDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
-          if(!G.mpShareCode){
-            o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareDeck()">'+(G.mpBusy?'Sharing&hellip;':'Share Deck')+'</button>');
-          } else {
-            o('<div style="text-align:center;margin-bottom:16px">');
-            o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Scan to View</div>');
-            o('<div style="display:flex;justify-content:center;margin-bottom:10px"><canvas id="mp-share-qr-canvas" width="200" height="200" style="background:#fff;border-radius:8px;padding:10px;box-sizing:content-box"></canvas></div>');
-            o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Or Deck Code</div>');
-            o('<div style="font-size:24px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpShareCode)+'</div>');
-            o('</div>');
-            o('<button class="fb full" style="padding:14px" onclick="G.mpShareCode=null;_renderKeepScroll()">Share a Different Deck</button>');
-          }
+          o('<div style="margin-bottom:14px"><input id="mp-share-cuname" placeholder="Your username" value="'+h(mpShareUnameVal)+'" oninput="G.mpShareFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareCreate()">'+(G.mpBusy?'Creating&hellip;':'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="14" width="2.5" height="2.5" fill="currentColor"/><rect x="14" y="18.5" width="2.5" height="2.5" fill="currentColor"/><rect x="18.5" y="18.5" width="2.5" height="2.5" fill="currentColor"/></svg><span>Create Code</span>')+'</button>');
         }
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
@@ -7883,14 +8069,15 @@ function pContent(){
     return out.join('');
   }
   if(p==='shrdeck'){
-    var srdSd=G.mpSharedDeck;
-    if(!srdSd){o('<div class="ld">No shared deck loaded.</div>');return out.join('');}
+    var srdOpp=_mpShareOpponentOrLast();
+    if(!srdOpp||!srdOpp.deck){o('<div class="ld">No shared deck.</div>');return out.join('');}
+    var srdSd=srdOpp.deck;
     o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
     o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(srdSd.name||'Deck')+'</div>');
     o('<button class="fb gold" onclick="mpImportSharedDeck()">Import</button>');
     o('</div>');
     if(G.mpSharedDeckImportedName)o('<div style="font-size:12px;color:var(--grn);margin-bottom:8px">&#10003; Imported as "'+h(G.mpSharedDeckImportedName)+'"</div>');
-    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">Code: '+h(srdSd.code||'')+'</div>');
+    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">@'+h(srdOpp.username||'')+'</div>');
     var srdTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
     var srdTypeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
     var srdTypeOrder=['avatar','aura','artifact','minion','magic','site'];
@@ -9008,6 +9195,66 @@ function render(){
       o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpAckDecline()">OK</button></div></div></div>');
     }
 
+    // ── Share Deck connection popups (mirrors the match popups above, same
+    // .ov/.log-pop styling, but entirely separate state/flow) ─────────────
+    if(G.mpShareConnectedPopup&&_mpShareOpponent()){
+      var _srMeP=_mpShareMe(),_srOppP=_mpShareOpponent();
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:14px">&#128257; Share Connection</div><div class="lp-b">');
+      [ {p:_srMeP,lbl:'You'}, {p:_srOppP,lbl:'Opponent'} ].forEach(function(row){
+        o('<div style="display:flex;align-items:center;gap:10px;text-align:left;margin-bottom:10px;padding:8px;border:1px solid var(--bd);border-radius:8px">');
+        o('<div style="flex:1;min-width:0">');
+        o('<div style="font-size:10px;color:var(--fg3);text-transform:uppercase;letter-spacing:.08em">'+row.lbl+'</div>');
+        o('<div style="font-size:15px;font-weight:700;color:var(--wht);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(row.p?row.p.username:'')+'</div>');
+        o('</div></div>');
+      });
+      o('<div style="font-size:11px;color:var(--fg3);margin-top:2px">Accept to choose which deck to share</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpShareDeclineConnect()">Decline</button><button class="lp-btn ok" style="padding:13px;font-size:15px" onclick="mpShareAcceptConnect()">Accept</button></div></div></div>');
+    }
+
+    if(G.mpShareAcceptWaiting&&!G.mpShareConnectedPopup){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to accept&hellip;</div>');
+      o('</div></div></div>');
+    }
+
+    if(G.mpShareDeclinedByName){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Connection Declined</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">'+h(G.mpShareDeclinedByName)+' has declined the connection.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpShareAckDecline()">OK</button></div></div></div>');
+    }
+
+    // Deck-select: shown once both sides have accepted, until THIS side has
+    // confirmed a deck. Picking is local (mpShareDeckPickKey) until Confirm
+    // is tapped -- only then is anything sent to the other side.
+    if(G.mpShareRoom&&!G.mpShareConnectedPopup&&!G.mpShareAcceptWaiting){
+      var _srAcc=G.mpShareRoom.accepted;
+      var _srBothAcc=!!(_srAcc&&_srAcc.confirmedP1&&_srAcc.confirmedP2);
+      var _srMeSel=_mpShareMe();
+      if(_srBothAcc&&_srMeSel&&!_srMeSel.deckConfirmed){
+        o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Choose a Deck to Share</div><div class="lp-b">');
+        if(G.mpShareErr)o('<div style="color:var(--red);font-size:12px;margin-bottom:8px">'+h(G.mpShareErr)+'</div>');
+        var _srDkOpts='<option value="">Choose a deck&hellip;</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpShareDeckPickKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
+        o('<select onclick="event.stopPropagation()" onchange="G.mpShareDeckPickKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box;margin-bottom:4px">'+_srDkOpts+'</select>');
+        o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red)" onclick="mpShareRequestLeave()">Close Connection</button><button class="lp-btn ok" style="padding:13px;font-size:15px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareConfirmDeck()">'+(G.mpBusy?'Sharing&hellip;':'Confirm')+'</button></div></div></div>');
+      } else if(_srBothAcc&&_srMeSel&&_srMeSel.deckConfirmed&&!(_mpShareOpponent()&&_mpShareOpponent().deckConfirmed)){
+        o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Waiting for Opponent</div><div class="lp-b">');
+        o('<div style="font-size:14px;color:var(--fg2)">Waiting for your opponent to choose a deck&hellip;</div>');
+        o('</div></div></div>');
+      }
+    }
+
+    if(G.mpShareLeaveConfirm){
+      o('<div class="ov" onclick="if(event.target===this)mpShareCancelLeave()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Close Connection?</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">The other player will be notified that this connection has been closed.</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="padding:13px;font-size:15px" onclick="mpShareCancelLeave()">Cancel</button><button class="lp-btn" style="padding:13px;font-size:15px;border-color:var(--red);color:var(--red)" onclick="mpShareConfirmLeave()">Close Connection</button></div></div></div>');
+    }
+
+    if(G.mpShareClosedNotice){
+      o('<div class="ov"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Connection Closed</div><div class="lp-b">');
+      o('<div style="font-size:14px;color:var(--fg2)">'+h(G.mpShareClosedNotice)+'</div>');
+      o('</div><div class="lp-btns"><button class="lp-btn" style="flex:none;width:100%;padding:13px;font-size:15px" onclick="mpShareAckClosedNotice()">OK</button></div></div></div>');
+    }
+
     if(G.resetConfirmPopup){
       o('<div class="ov" onclick="if(event.target===this)cancelResetConfirm()"><div class="log-pop" style="text-align:center;max-width:300px;padding:20px"><div class="lp-t" style="font-size:16px;margin-bottom:12px">Reset Match?</div><div class="lp-b">');
       o('<div style="font-size:14px;color:var(--fg2)">This will reset life, mana, and turn tracking for both players.</div>');
@@ -9207,7 +9454,7 @@ function render(){
     }
     if(G.mode===1){try{_diceSyncInlineSlot();_syncP1ButtonPadding();}catch(e){}}
     if(G.panel==='connect'&&G.mpRoom&&G.mpRole==='p1'&&G.mpCode){try{_mpDrawQR();}catch(e){console.error('QR render hook failed:',e);}}
-    if(G.panel==='connect'&&!G.mpRoom&&G.mpMode==='share'&&(G.mpShareSubMode||'send')==='send'&&G.mpShareCode){try{_mpDrawQR('viewdeck',G.mpShareCode,'mp-share-qr-canvas');}catch(e){console.error('Share QR render hook failed:',e);}}
+    if(G.panel==='connect'&&G.mpShareRoom&&G.mpShareRole==='p1'&&!_mpShareOpponent()&&G.mpShareCode){try{_mpDrawQR('sharecode',G.mpShareCode,'mp-share-qr-canvas');}catch(e){console.error('Share QR render hook failed:',e);}}
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
