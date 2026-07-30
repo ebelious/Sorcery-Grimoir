@@ -1,228 +1,244 @@
 {
-  "requestId": "1784956027363-e5n7udi8kzo",
-  "url": "https://curiosa.io/decks/cmqjztmmn016z04jp4c2sq34v",
-  "timestamp": "2026-07-25T05:07:58.736Z",
-  "deckName": "Drenched Hag",
-  "author": "ebelious",
+  "requestId": "1785384219523-43eyux0fyeq",
+  "url": "https://curiosa.io/decks/cmr0zmkay001f04jrwy07jb6r",
+  "timestamp": "2026-07-30T04:05:06.940Z",
+  "deckName": "1st Place - SorceryFest (128p GC) - iNcontrol",
+  "author": "Geoffrey",
   "cards": [
     {
-      "name": "Witch",
+      "name": "Archimago",
       "qty": 1
     },
     {
-      "name": "Aquamarine Core",
+      "name": "Ring of Morrigan",
       "qty": 1
     },
     {
-      "name": "Mix Aqua",
+      "name": "Algor Omphalos",
       "qty": 1
     },
     {
-      "name": "Torshammar Trinket",
-      "qty": 2
-    },
-    {
-      "name": "The Rack",
+      "name": "Torrid Omphalos",
       "qty": 1
     },
     {
-      "name": "Dank Omphalos",
-      "qty": 1
-    },
-    {
-      "name": "Meat Hook",
+      "name": "Cemetery Rats",
       "qty": 2
     },
     {
-      "name": "Lucid Dreamers",
-      "qty": 2
-    },
-    {
-      "name": "Polar Bears",
-      "qty": 3
-    },
-    {
-      "name": "Polar Explorers",
-      "qty": 2
-    },
-    {
-      "name": "Accursed Albatross",
-      "qty": 2
-    },
-    {
-      "name": "Aino",
-      "qty": 1
-    },
-    {
-      "name": "Coy Nixie",
-      "qty": 3
-    },
-    {
-      "name": "Fey Changeling",
-      "qty": 2
-    },
-    {
-      "name": "Lugbog Cat",
-      "qty": 3
-    },
-    {
-      "name": "Nelly Longarms",
-      "qty": 1
-    },
-    {
-      "name": "Abaddon Succubus",
-      "qty": 2
-    },
-    {
-      "name": "Mimic",
-      "qty": 2
-    },
-    {
-      "name": "Ruler of Thul",
-      "qty": 1
-    },
-    {
-      "name": "Sacred Stag",
-      "qty": 2
-    },
-    {
-      "name": "Lacuna Entity",
-      "qty": 2
-    },
-    {
-      "name": "Lilith",
-      "qty": 1
-    },
-    {
-      "name": "Questing Beast",
-      "qty": 1
-    },
-    {
-      "name": "Lord of Lies",
-      "qty": 2
-    },
-    {
-      "name": "Great Old One",
-      "qty": 1
-    },
-    {
-      "name": "Pollimorph",
-      "qty": 2
-    },
-    {
-      "name": "Return to Nature",
-      "qty": 3
-    },
-    {
-      "name": "Riptide",
+      "name": "Kettletop Leprechaun",
       "qty": 4
     },
     {
-      "name": "Overflow",
-      "qty": 4
-    },
-    {
-      "name": "Swap",
-      "qty": 3
-    },
-    {
-      "name": "Mesmerism",
+      "name": "Mover of Mountains",
       "qty": 1
     },
     {
-      "name": "Call of the Sea",
-      "qty": 2
+      "name": "Saint of Redemption",
+      "qty": 1
     },
     {
-      "name": "Babbling Brook",
+      "name": "Sister Stefánia",
+      "qty": 1
+    },
+    {
+      "name": "Root Spider",
       "qty": 3
     },
     {
-      "name": "Cornerstone",
+      "name": "Gargantula",
       "qty": 2
     },
     {
-      "name": "Croaking Swamp",
-      "qty": 3
+      "name": "Paladins of Bazia",
+      "qty": 1
     },
     {
-      "name": "Deep Sea",
-      "qty": 3
+      "name": "Archangel Michael",
+      "qty": 1
     },
     {
-      "name": "Floodplain",
+      "name": "Death Dealer",
+      "qty": 1
+    },
+    {
+      "name": "Assorted Animals",
       "qty": 2
+    },
+    {
+      "name": "Divine Healing",
+      "qty": 3
+    },
+    {
+      "name": "Pendragon Legacy",
+      "qty": 1
+    },
+    {
+      "name": "Tithe",
+      "qty": 1
+    },
+    {
+      "name": "Common Sense",
+      "qty": 4
+    },
+    {
+      "name": "Dispel",
+      "qty": 1
+    },
+    {
+      "name": "Firebolts",
+      "qty": 1
+    },
+    {
+      "name": "Gift of the Wolf",
+      "qty": 4
+    },
+    {
+      "name": "Border Militia",
+      "qty": 3
+    },
+    {
+      "name": "Bury",
+      "qty": 2
+    },
+    {
+      "name": "Landmass",
+      "qty": 4
+    },
+    {
+      "name": "Onslaught",
+      "qty": 2
+    },
+    {
+      "name": "Cave-In",
+      "qty": 2
+    },
+    {
+      "name": "Smite",
+      "qty": 1
+    },
+    {
+      "name": "Earthquake",
+      "qty": 2
+    },
+    {
+      "name": "Poison Nova",
+      "qty": 3
+    },
+    {
+      "name": "Major Explosion",
+      "qty": 2
+    },
+    {
+      "name": "Craterize",
+      "qty": 2
+    },
+    {
+      "name": "Fields of Camlann",
+      "qty": 1
+    },
+    {
+      "name": "Gnome Hollows",
+      "qty": 3
     },
     {
       "name": "Heirloom Lost",
       "qty": 2
     },
     {
-      "name": "Island Leviathan",
-      "qty": 1
+      "name": "Humble Village",
+      "qty": 4
     },
     {
-      "name": "Kelp Cavern",
+      "name": "Mirage",
       "qty": 2
     },
     {
-      "name": "Maelström",
+      "name": "Mirror Realm",
       "qty": 1
     },
     {
-      "name": "River Rapids",
-      "qty": 2
+      "name": "Mount Ussar Sanctuary",
+      "qty": 1
     },
     {
-      "name": "Summer River",
+      "name": "Pillar of Zeiros",
+      "qty": 1
+    },
+    {
+      "name": "Rustic Village",
+      "qty": 1
+    },
+    {
+      "name": "Shallow Grave",
       "qty": 3
     },
     {
-      "name": "Thin Ice",
+      "name": "Sinkhole",
       "qty": 2
     },
     {
-      "name": "Troll Bridge",
+      "name": "Smokestacks of Gnaak",
+      "qty": 1
+    },
+    {
+      "name": "Steppe",
+      "qty": 3
+    },
+    {
+      "name": "Valley of Delight",
       "qty": 2
     },
     {
-      "name": "Undertow",
+      "name": "Wizard's Den",
       "qty": 2
+    },
+    {
+      "name": "Wormelow Tump",
+      "qty": 1
     }
   ],
-  "collection": [],
-  "maybeboard": [
+  "collection": [
     {
-      "name": "Dodge Roll",
+      "name": "Dispel",
       "qty": 1
     },
     {
-      "name": "Plague of Frogs",
+      "name": "Firebolts",
       "qty": 1
     },
     {
-      "name": "Sewer Rats",
+      "name": "Border Militia",
       "qty": 1
     },
     {
-      "name": "Gift of the Frog",
+      "name": "Bury",
       "qty": 1
     },
     {
-      "name": "Magellan Globe",
-      "qty": 2
-    },
-    {
-      "name": "Blade of Thorns",
+      "name": "Flame Strike",
       "qty": 1
     },
     {
-      "name": "Lake Afanc",
+      "name": "Heat Ray",
       "qty": 1
     },
     {
-      "name": "Meat Hook",
+      "name": "Makeshift Barricade",
+      "qty": 1
+    },
+    {
+      "name": "Minor Explosion",
+      "qty": 1
+    },
+    {
+      "name": "Angry Mob",
+      "qty": 1
+    },
+    {
+      "name": "Smite",
       "qty": 1
     }
-  ]
+  ],
+  "maybeboard": []
 }
