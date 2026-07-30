@@ -10,8 +10,8 @@
 // Room shape stored under `code`:
 //   {
 //     created,
-//     p1: { username, usercode, deck: null, deckConfirmed: false },
-//     p2: null | { username, usercode, deck: null, deckConfirmed: false },
+//     p1: { username, usercode, decks: [], deckConfirmed: false },
+//     p2: null | { username, usercode, decks: [], deckConfirmed: false },
 //     accepted: { confirmedP1: false, confirmedP2: false },
 //     declined: null | 'p1' | 'p2',   // set if either side declines the initial connect popup
 //     closed: false,
@@ -24,7 +24,7 @@
 //   POST { action:'join', code, username, usercode } -> { code, room }
 //   POST { action:'accept', code, role } -> { code, room }
 //   POST { action:'decline', code, role } -> { code, room }
-//   POST { action:'selectDeck', code, role, deck:{name,cards} } -> { code, room }
+//   POST { action:'selectDeck', code, role, decks:[{name,cards}, ...] } -> { code, room }
 //   POST { action:'close', code, role } -> { code, room }
 //   POST { action:'delete', code } -> { ok:true }
 //   GET  ?action=get&code=XXXXXXXX -> { code, room }
@@ -56,6 +56,8 @@ function isExpired(room) {
   return !room || (Date.now() - (room.created || 0)) > MAX_AGE_MS;
 }
 
+const MAX_DECKS_PER_PLAYER = 25; // sanity cap -- no reasonable player shares more decks than this in one connection
+
 function sanitizeDeck(deck) {
   const name = String((deck && deck.name) || 'Shared Deck').slice(0, 120);
   const cards = Array.isArray(deck && deck.cards)
@@ -69,11 +71,15 @@ function sanitizeDeck(deck) {
   return { name: name, cards: cards };
 }
 
+function sanitizeDecks(decks) {
+  return Array.isArray(decks) ? decks.slice(0, MAX_DECKS_PER_PLAYER).map(sanitizeDeck).filter(function (d) { return d.cards.length; }) : [];
+}
+
 function newPlayer(username, usercode) {
   return {
     username: (username || '').trim().slice(0, 40),
     usercode: (usercode || '').trim().slice(0, 20),
-    deck: null,
+    decks: [],
     deckConfirmed: false
   };
 }
@@ -186,7 +192,9 @@ exports.handler = async function (event) {
         if (isExpired(room)) return resp(404, { error: 'Connection code not found or expired' });
         if (!room[role]) return resp(400, { error: 'You are not part of this connection.' });
 
-        room[role].deck = sanitizeDeck(body.deck);
+        const decks = sanitizeDecks(body.decks);
+        if (!decks.length) return resp(400, { error: 'Choose at least one deck with cards in it.' });
+        room[role].decks = decks;
         room[role].deckConfirmed = true;
         await store.setJSON(code, room);
         return resp(200, { code, room });
