@@ -7783,9 +7783,10 @@ function pContent(){
         });
         o('</div>');
       }
-      // 1. Mana Curve by Type (Spell Type) -- stacked bars sharing the exact
-      // same cost-axis geometry (bx/by/padL/plotW/etc.) as the element curve
-      // above, so the two charts read as directly comparable.
+      // 1. Mana Curve by Type (Spell Type) -- smoothed line+area per type,
+      // matching the threshold/mana curve chart's own visual style, sharing
+      // the exact same cost-axis geometry (bx/plotW/etc.) as that chart so
+      // the two read as directly comparable. Axis values unchanged.
       o('<div class="slbl2" style="margin-top:0;font-size:11px">Mana Curve by Type</div>');
       var typeKeysActive=['minion','magic','aura','artifact'].filter(function(t){return typeBins[t].some(function(v){return v>0;});});
       if(typeKeysActive.length){
@@ -7793,7 +7794,22 @@ function pContent(){
         // is fixed at 0/6/12/18/24 per explicit instruction) -- this chart
         // keeps its own steps-of-2 scale (0,2,4,6,8,10) untouched by that.
         var typeYTop=10,typeYSteps=5;
-        var barW=(plotW/xCount)*0.6;
+        function typeBy(v){return Math.min(padT+plotH,Math.max(padT,padT+plotH-Math.round((v/typeYTop)*plotH)));}
+        function typeSmoothPoints(bins){
+          var pts=bins.map(function(v,i){return [bx(i),typeBy(v)];});
+          var n=pts.length;
+          var d='M'+pts[0][0]+','+pts[0][1];
+          for(var i=0;i<n-1;i++){
+            var xc=(pts[i][0]+pts[i+1][0])/2;
+            var yc=(pts[i][1]+pts[i+1][1])/2;
+            d+=' Q'+pts[i][0]+','+pts[i][1]+' '+xc+','+yc;
+          }
+          d+=' L'+pts[n-1][0]+','+pts[n-1][1];
+          return d;
+        }
+        function typeAreaPath(pathD,bins){
+          return pathD+' L'+bx(bins.length-1)+','+(padT+plotH)+' L'+bx(0)+','+(padT+plotH)+' Z';
+        }
         o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">');
         for(var sgi=0;sgi<=typeYSteps;sgi++){
           var sgy=padT+sgi*(plotH/typeYSteps);
@@ -7805,30 +7821,16 @@ function pContent(){
           o('<text x="'+bx(sxi)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11" fill="var(--fg3)">'+(sxi===xCount-1?sxi+'+':String(sxi))+'</text>');
         }
         o('<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padR)+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
-        for(var bxi=0;bxi<xCount;bxi++){
-          (function(bxi){
-            var stackY=padT+plotH;
-            var usedH=0; // running total, clamped -- individually clamping
-                         // each segment isn't enough since several clamped
-                         // segments stacked together could still add up past
-                         // the top of the chart and overlap the title above it
-            typeKeysActive.forEach(function(t){
-              var v=typeBins[t][bxi];
-              if(!v)return;
-              var segH=(v/typeYTop)*plotH;
-              if(usedH+segH>plotH)segH=Math.max(0,plotH-usedH);
-              if(segH<=0)return;
-              var barX=bx(bxi)-barW/2;
-              o('<rect x="'+barX+'" y="'+(stackY-segH)+'" width="'+barW+'" height="'+segH+'" fill="'+typeColors[t]+'" fill-opacity="0.85"/>');
-              stackY-=segH;
-              usedH+=segH;
-            });
-          })(bxi);
-        }
+        o('<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="var(--fg3)" stroke-width="0.5"/>');
+        typeKeysActive.forEach(function(t){
+          var tp=typeSmoothPoints(typeBins[t]);
+          o('<path d="'+typeAreaPath(tp,typeBins[t])+'" fill="'+typeColors[t]+'" fill-opacity="0.08"/>');
+          o('<path d="'+tp+'" fill="none" stroke="'+typeColors[t]+'" stroke-width="0.8" stroke-linecap="round"/>');
+        });
         o('</svg>');
         o('<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;margin-bottom:10px;justify-content:flex-end">');
         typeKeysActive.forEach(function(t){
-          o('<span style="font-size:13px;color:'+typeColors[t]+';display:flex;align-items:center;gap:3px;font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:10px;height:10px;background:'+typeColors[t]+';border-radius:2px"></span>'+typeNames[t]+'</span>');
+          o('<span style="font-size:13px;color:'+typeColors[t]+';display:flex;align-items:center;gap:3px;font-family:-apple-system,BlinkMacSystemFont,sans-serif"><span style="display:inline-block;width:14px;height:2px;background:'+typeColors[t]+';border-radius:1px"></span>'+typeNames[t]+'</span>');
         });
         o('</div>');
       } else {
@@ -8297,7 +8299,7 @@ function pContent(){
     // Saved location chip (with an X to clear it) or a button to set one
     if(_evLbl){
       o('<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--bd);background:var(--bg3);margin-bottom:8px">');
-      o('<span style="flex:1;font-size:13px;cursor:pointer" onclick="evOpenLocPopup()">'+_evIconPin()+' '+h(_evLbl)+'</span>');
+      o('<span style="flex:1;font-size:13px;cursor:pointer" onclick="evOpenLocPopup()"><span style="color:var(--hi)">'+_evIconPin()+'</span> '+h(_evLbl)+'</span>');
       o('<button class="fb gold" style="font-size:11px;padding:6px 9px" onclick="loadLocalEvents()">Search</button>');
       o('</div>');
     } else {
@@ -8318,7 +8320,7 @@ function pContent(){
           _favByStore[sn].push(e);
         });
         _favStoreOrder.forEach(function(sn){
-        o('<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px"><div class="slbl2" style="margin-top:0">'+_evIconStar(true)+' '+h(sn)+' Events</div><button class="fb" style="font-size:11px;padding:3px 7px;border:none;background:transparent;color:var(--fg3)" data-store="'+h(sn)+'" title="Remove favorite store" onclick="showFavStoreRemoveConfirm(this.dataset.store)">&#10005;</button></div>');
+        o('<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px"><div class="slbl2" style="margin-top:0;color:var(--fg)"><span style="color:var(--hi)">'+_evIconStar(true)+'</span> '+h(sn)+'</div><button class="fb" style="font-size:11px;padding:3px 7px;border:none;background:transparent;color:var(--fg3)" data-store="'+h(sn)+'" title="Remove favorite store" onclick="showFavStoreRemoveConfirm(this.dataset.store)">&#10005;</button></div>');
         o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
         _favByStore[sn].forEach(function(e){
           var _fi=G._evReg.length;
@@ -8330,7 +8332,7 @@ function pContent(){
           var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
           o('<div class="ev-c" style="cursor:pointer;border-color:var(--hi)" onclick="showEvPopup('+_fi+')">');
           o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+          if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+h(e.time):'')+'</div>');
           if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
           o('</div>');
         });
@@ -8339,7 +8341,7 @@ function pContent(){
       }
       if(G.evErr)o('<div style="font-size:11px;color:var(--fg2);padding:6px 0">'+h(G.evErr)+'</div>');
       if(G.evItems&&G.evItems.length){
-      o('<div class="slbl2" style="margin-top:8px">Results</div>');
+      o('<div class="slbl2" style="margin-top:8px;color:var(--fg)">Results</div>');
       o('<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">');
       G.evItems.forEach(function(e){
         var _ei=G._evReg.length;
@@ -8351,7 +8353,7 @@ function pContent(){
         var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
         o('<div class="ev-c" style="cursor:pointer" onclick="showEvPopup('+_ei+')">');
         o('<div class="ev-nm">'+h(e.name||e.n||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(localDate(e.date)):'')+(e.time?' - '+h(e.time):'')+'</div>');
         if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
         o('</div>');
       });
@@ -8373,7 +8375,7 @@ function pContent(){
         var _secondary=[e.storeName,_cityState].filter(Boolean).join(' - ');
         o('<div class="ev-c" style="cursor:pointer" onclick="G.evPopup=-('+si+'+1);render()">');
         o('<div class="ev-nm">'+h(e.name||'')+'</div>');
-        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' - '+_evIconClock()+' '+h(e.time):'')+'</div>');
+        if(e.date||e.time)o('<div class="ev-mt" style="color:var(--wht)">'+_evIconCal()+' '+(e.date?h(e.date):'')+(e.time?' - '+h(e.time):'')+'</div>');
         if(_secondary)o('<div class="ev-mt">'+_secondary+'</div>');
         o('</div>');
       });
