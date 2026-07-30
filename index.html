@@ -3706,17 +3706,29 @@ document.addEventListener('focus',function(e){
 // all fetch and re-render automatically at startup). That matches the
 // reported symptom: the dropdown only misbehaves the first few times right
 // after opening the app, then is fine once those startup loads have settled.
-// render() itself checks this flag (see render()'s first line) and defers
-// itself instead of tearing down the DOM while a select is open; the deferred
-// render is flushed the moment the select loses focus, so no update is lost
-// -- it's delayed by at most the duration the dropdown was open.
+// The same root cause also interrupts active scrolling in any panel/popup --
+// a background render tearing down and rebuilding the DOM mid-scroll (even
+// though scrollTop is numerically restored afterward) breaks the browser's
+// native touch/momentum scrolling on the destroyed element, which reads as
+// "scrolling keeps getting interrupted, then eventually stops" once those
+// startup loads finish. Both cases share one deferred-render mechanism:
+// render() checks _selectOpen/_scrollActive (see render()'s first line) and
+// defers itself instead of tearing down the DOM while either is true; the
+// deferred render is flushed automatically once both clear, so no update is
+// lost -- it's just delayed until the interaction settles.
 var _selectOpen=false;
-var _renderDeferredForSelect=false;
+var _scrollActive=false;
+var _renderDeferred=false;
 var _selectOpenSafetyTimer=null;
+var _scrollActiveTimer=null;
+function _flushDeferredRenderIfIdle(){
+  if(_selectOpen||_scrollActive)return;
+  if(_renderDeferred){_renderDeferred=false;_renderKeepScroll();}
+}
 function _clearSelectOpen(){
   _selectOpen=false;
   if(_selectOpenSafetyTimer){clearTimeout(_selectOpenSafetyTimer);_selectOpenSafetyTimer=null;}
-  if(_renderDeferredForSelect){_renderDeferredForSelect=false;_renderKeepScroll();}
+  _flushDeferredRenderIfIdle();
 }
 document.addEventListener('focus',function(e){
   if(e.target&&e.target.tagName==='SELECT'){
@@ -3730,6 +3742,20 @@ document.addEventListener('focus',function(e){
 },true);
 document.addEventListener('blur',function(e){
   if(e.target&&e.target.tagName==='SELECT')_clearSelectOpen();
+},true);
+// Scroll events don't bubble, so this listens in the capture phase and
+// checks the actual scrolling element. There's no native "scroll ended"
+// event, so this is debounced: each scroll event pushes the "still
+// scrolling" window out another 200ms, which also naturally covers momentum
+// scrolling that continues after the finger lifts (each momentum tick fires
+// its own scroll event, so the window keeps extending until it actually
+// stops).
+document.addEventListener('scroll',function(e){
+  var t=e.target;
+  if(!t||!t.classList||!(t.classList.contains('cm')||t.classList.contains('panel')))return;
+  _scrollActive=true;
+  if(_scrollActiveTimer)clearTimeout(_scrollActiveTimer);
+  _scrollActiveTimer=setTimeout(function(){_scrollActive=false;_flushDeferredRenderIfIdle();},200);
 },true);
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
@@ -5210,11 +5236,12 @@ function _mpPoll(){
       // <select>), which interrupts/cancels the deck choice mid-selection.
       // Same reasoning applies to the Deck popup's card-search box: rebuilding
       // it out from under an active mobile text input closes the keyboard.
-      // _selectOpen covers this generally (e.g. the card detail popup's
-      // "Add to Deck" select), G.mpRematchPicking is kept for the one case
-      // that isn't a plain focus/blur-tracked <select>.
+      // _selectOpen/_scrollActive cover this generally (e.g. the card detail
+      // popup's "Add to Deck" select, or scrolling any panel/popup),
+      // G.mpRematchPicking is kept for the one case that isn't a plain
+      // focus/blur-tracked <select>.
       var _typingInDvSearch=document.activeElement&&document.activeElement.id==='dv-srch';
-      if(!G.mpRematchPicking&&!_typingInDvSearch&&!_selectOpen)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
+      if(!G.mpRematchPicking&&!_typingInDvSearch&&!_selectOpen&&!_scrollActive)render(); // keeps the synced opponent-life badge (and connect popups) live during the match
     }).catch(function(){});
 }
 var _mpLifePushTimer=null;
@@ -8770,10 +8797,11 @@ function updateHdrGsDrop(){
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
-  // A native <select> popup may currently be open (WebView/TWA dismisses it
-  // if the DOM underneath is rebuilt). Defer instead of dropping the update
-  // -- flushed automatically the moment the select blurs. See _selectOpen.
-  if(_selectOpen){_renderDeferredForSelect=true;return;}
+  // A native <select> popup may be open, or a panel/popup may be mid-scroll
+  // (WebView/TWA dismisses selects and interrupts scroll physics when the
+  // DOM underneath is rebuilt). Defer instead of dropping the update --
+  // flushed automatically once both clear. See _selectOpen/_scrollActive.
+  if(_selectOpen||_scrollActive){_renderDeferred=true;return;}
   try{
     var p0=G.players[0],p1=G.mode>=2?G.players[1]:null;
     var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
