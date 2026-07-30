@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-30T12:12:45.866Z",
+  "updated": "2026-07-30T14:42:25.005Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -493,8 +493,8 @@
       "date": "Jul 30, 2026 - Jul 31, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Brass Dragon Games",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Mt. Juliet, TN",
       "city": "Mt. Juliet",
@@ -503,7 +503,7 @@
       "lng": -86.5186054,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Brass Dragon Games",
       "url": "https://play.sorcerytcg.com/events/44661dd1-10db-42e5-84f3-49e577e5bc4a"
     },
     {
@@ -547,8 +547,8 @@
       "date": "Jul 30, 2026 - Jul 31, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Hole in the wall Hobbies",
-      "price": "Casual Constructed",
+      "type": "Casual Constructed",
+      "price": "FREE",
       "duration": "",
       "location": "Universal City, TX",
       "city": "Universal City",
@@ -557,7 +557,7 @@
       "lng": -98.2911235,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Hole in the wall Hobbies",
       "url": "https://play.sorcerytcg.com/events/d4da9e4a-981f-4fd4-8a06-aad94511d724"
     },
     {
