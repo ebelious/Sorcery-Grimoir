@@ -1,10 +1,17 @@
 {
-  "updated": "2026-07-30T14:33:18.822Z",
+  "updated": "2026-07-30T16:08:24.130Z",
   "articles": [
+    {
+      "title": "Meet the Lavamancer: Frostmage vs. Lavamancer",
+      "url": "https://sorcerytcg.com/news/meet-the-lavamancer",
+      "date": "30 Jul 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f83ba49a0314b4c03b2bff6fc40d3ee30e92c9bf-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Melbourne Grand Contest: The Realm Comes to Australia",
       "url": "https://sorcerytcg.com/news/melbourne-grand-contest-the-realm-comes-to-australia",
-      "date": "30 Jul 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/08ba740d80576d32778a6b2873db677a74ff6f63-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e2cc983a197dd1fff36464e306c331cd694471dc-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Meet Alan Pollack at Gen Con 2026",
-      "url": "https://sorcerytcg.com/news/meet-alan-pollack-at-gen-con-2026",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/8aa831fe157d274f9cc5f4c017a040717fa5ff3e-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
