@@ -159,13 +159,16 @@ function toggleFavStore(storeName){
       sv('sg-favstores',G.favStores);
       _initFirebaseMessaging();
       _fcmSubscribeSingle(topic,true);
-      _renderKeepScroll();
+      // G.evFavItems/G.evItems were split by favorite status the last time
+      // events loaded -- that split is now stale, so re-run the load
+      // rather than just re-rendering with the old categorization.
+      if(G.evLoaded)loadLocalEvents();else _renderKeepScroll();
     });
   } else {
     G.favStores.splice(idx,1);
     sv('sg-favstores',G.favStores);
     _fcmSubscribeSingle(topic,false);
-    _renderKeepScroll();
+    if(G.evLoaded)loadLocalEvents();else _renderKeepScroll();
   }
 }
 // Confirmation gate for removing a favorite store from the per-store
