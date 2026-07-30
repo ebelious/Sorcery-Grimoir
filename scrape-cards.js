@@ -475,6 +475,31 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
     process.exit(1);
   }
 
+  // Card counts should only ever grow (new sets, new prints) -- a drop
+  // almost always means the scrape was incomplete (site changes, a timeout
+  // mid-scroll, a network hiccup) rather than cards genuinely disappearing
+  // from the game. Refuse to overwrite a fuller cards.json with a smaller
+  // one; the workflow step fails (and the commit step after it is skipped,
+  // since GitHub Actions stops the job on a failed step), leaving the
+  // existing file untouched.
+  const existingPath = 'cards.json';
+  let existingCount = 0;
+  if (fs.existsSync(existingPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
+      existingCount = Array.isArray(existing.cards) ? existing.cards.length : 0;
+    } catch (e) {
+      console.warn('Could not parse existing cards.json, proceeding without a comparison baseline:', e.message);
+    }
+  }
+  if (existingCount > 0 && cards.length < existingCount) {
+    console.error(
+      `Refusing to overwrite cards.json: this scrape found ${cards.length} cards, fewer than the ${existingCount} ` +
+      `already on file. Not writing -- investigate before re-running (site layout change, timeout, etc.).`
+    );
+    process.exit(1);
+  }
+
   cards.sort((a, b) => a.n.localeCompare(b.n));
 
   fs.writeFileSync(
