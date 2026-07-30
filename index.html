@@ -8048,7 +8048,7 @@ function cModal(){
     var maxColl=isAvatar?1:maxC;
     var selDk=(G.cmDeckSel&&G.decks[G.cmDeckSel])?G.cmDeckSel:dkKeys[0];
     G.cmDeckSel=selDk;
-    o('<select data-cn="'+h(nm)+'" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--wht);padding:8px;font-size:14px;margin-bottom:10px;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onchange="if(this.value===\'__new__\'){addCardToNewDeck(this.getAttribute(\'data-cn\'))}else{G.cmDeckSel=this.value;_renderKeepScroll()}">');
+    o('<select data-cn="'+h(nm)+'" style="width:100%;background:var(--bg);border:1px solid var(--bd);color:var(--wht);padding:8px;font-size:14px;margin-bottom:10px;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif" onclick="event.stopPropagation()" onchange="if(this.value===\'__new__\'){addCardToNewDeck(this.getAttribute(\'data-cn\'))}else{G.cmDeckSel=this.value;_renderKeepScroll()}">');
     dkKeys.forEach(function(dk){
       o('<option value="'+h(dk)+'"'+(dk===selDk?' selected':'')+'>'+h(G.decks[dk].name)+'</option>');
     });
