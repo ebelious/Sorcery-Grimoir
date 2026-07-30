@@ -7360,8 +7360,8 @@ function pContent(){
     var yMin=padT, yMax=padT+plotH;
     // Static Y-axis scale: always 0, 6, 12, 18, 24.
     var yStep=6;
-    var yTop=10;
-    var ySteps=5;
+    var yTop=24;
+    var ySteps=4;
     function bx(i){return padL+i*(plotW/(xCount-1));}
     function by(v){return Math.min(yMax,Math.max(yMin,padT+plotH-Math.round((v/yTop)*plotH)));}
     function clampY(y){return Math.min(yMax,Math.max(yMin,y));}
@@ -7493,11 +7493,15 @@ function pContent(){
       o('<div class="slbl2" style="margin-top:0;font-size:11px">Mana Curve by Type</div>');
       var typeKeysActive=['minion','magic','aura','artifact'].filter(function(t){return typeBins[t].some(function(v){return v>0;});});
       if(typeKeysActive.length){
+        // Independent Y-axis scale from the threshold/mana curve above (which
+        // is fixed at 0/6/12/18/24 per explicit instruction) -- this chart
+        // keeps its own steps-of-2 scale (0,2,4,6,8,10) untouched by that.
+        var typeYTop=10,typeYSteps=5;
         var barW=(plotW/xCount)*0.6;
         o('<svg width="100%" height="'+H+'" style="display:block;overflow:visible" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">');
-        for(var sgi=0;sgi<=ySteps;sgi++){
-          var sgy=padT+sgi*(plotH/ySteps);
-          var sgv=Math.round(yTop*(1-sgi/ySteps));
+        for(var sgi=0;sgi<=typeYSteps;sgi++){
+          var sgy=padT+sgi*(plotH/typeYSteps);
+          var sgv=Math.round(typeYTop*(1-sgi/typeYSteps));
           o('<line x1="'+padL+'" y1="'+sgy+'" x2="'+(W-padR)+'" y2="'+sgy+'" stroke="var(--bd)" stroke-width="0.5"/>');
           if(sgv>0)o('<text x="'+(padL-3)+'" y="'+(sgy+3)+'" text-anchor="end" font-size="11" fill="var(--fg3)">'+sgv+'</text>');
         }
@@ -7515,7 +7519,7 @@ function pContent(){
             typeKeysActive.forEach(function(t){
               var v=typeBins[t][bxi];
               if(!v)return;
-              var segH=(v/yTop)*plotH;
+              var segH=(v/typeYTop)*plotH;
               if(usedH+segH>plotH)segH=Math.max(0,plotH-usedH);
               if(segH<=0)return;
               var barX=bx(bxi)-barW/2;
