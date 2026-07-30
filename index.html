@@ -3700,17 +3700,36 @@ document.addEventListener('focus',function(e){
 },true);
 // Tracks whether a native <select> currently has focus (i.e. its dropdown
 // may be open). Android WebView/TWA can dismiss an open <select> popup in
-// response to unrelated DOM writes happening on the page underneath it --
-// same root cause as the render()-during-input-focus issue elsewhere in this
-// file, just triggered by direct element updates (e.g. the 250ms match-timer
-// display refresh) rather than a full render(). Periodic DOM writes check
-// this flag and skip themselves while true, resuming once the select blurs.
+// response to ANY DOM write happening on the page underneath it -- not just
+// a full render(), but background data loads landing during the first few
+// seconds after the app opens (cards/codex/changelog/pub-decks/news/YouTube
+// all fetch and re-render automatically at startup). That matches the
+// reported symptom: the dropdown only misbehaves the first few times right
+// after opening the app, then is fine once those startup loads have settled.
+// render() itself checks this flag (see render()'s first line) and defers
+// itself instead of tearing down the DOM while a select is open; the deferred
+// render is flushed the moment the select loses focus, so no update is lost
+// -- it's delayed by at most the duration the dropdown was open.
 var _selectOpen=false;
+var _renderDeferredForSelect=false;
+var _selectOpenSafetyTimer=null;
+function _clearSelectOpen(){
+  _selectOpen=false;
+  if(_selectOpenSafetyTimer){clearTimeout(_selectOpenSafetyTimer);_selectOpenSafetyTimer=null;}
+  if(_renderDeferredForSelect){_renderDeferredForSelect=false;_renderKeepScroll();}
+}
 document.addEventListener('focus',function(e){
-  if(e.target&&e.target.tagName==='SELECT')_selectOpen=true;
+  if(e.target&&e.target.tagName==='SELECT'){
+    _selectOpen=true;
+    // Safety net: if a blur event is ever missed (DOM removal, browser
+    // quirk, etc.) this guarantees rendering resumes instead of the whole
+    // app silently freezing because _selectOpen never clears.
+    if(_selectOpenSafetyTimer)clearTimeout(_selectOpenSafetyTimer);
+    _selectOpenSafetyTimer=setTimeout(_clearSelectOpen,8000);
+  }
 },true);
 document.addEventListener('blur',function(e){
-  if(e.target&&e.target.tagName==='SELECT')_selectOpen=false;
+  if(e.target&&e.target.tagName==='SELECT')_clearSelectOpen();
 },true);
 // Registered once at load (not re-created per popup), so this can't leak or
 // duplicate the way the ad-hoc popup listeners elsewhere in the app can.
@@ -8560,6 +8579,10 @@ function updateHdrGsDrop(){
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
 function render(){
+  // A native <select> popup may currently be open (WebView/TWA dismisses it
+  // if the DOM underneath is rebuilt). Defer instead of dropping the update
+  // -- flushed automatically the moment the select blurs. See _selectOpen.
+  if(_selectOpen){_renderDeferredForSelect=true;return;}
   try{
     var p0=G.players[0],p1=G.mode>=2?G.players[1]:null;
     var visD=DICE_T.filter(function(d){var k=d.c>1?'2d6':String(d.s);return G.vdice[k]!==false;});
