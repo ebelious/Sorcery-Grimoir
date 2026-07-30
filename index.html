@@ -855,7 +855,7 @@ var MENU_S={
   Community:['YouTube','News','Discord','Events','Artists'],
 };
 var PM={'Starting Life':'life','Dice Settings':'dice','Player name':'names','Settings':'themes','Rulebook':'rules','Codex':'codex','FAQ':'faq','Links':'links','Card Search':'cards','Collection':'coll','My Decks':'decks','Local Stats':'sl','Deck Stats':'sd','Meta':'sm','Events':'ev','Dust Rewards':'rewards','YouTube':'yt','News':'news','Discord':'discord','Artists':'art'};
-var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Settings',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Dust Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck'};
+var PT={life:'Starting Life',dice:'Dice Settings',names:'Your Name',themes:'Settings',color:'Color',bgimg:'Backgrounds',rules:'Rulebook',codex:'Codex',faq:'FAQ',links:'Links',cards:'Cards',coll:'Collection',decks:'My Decks',deckview:'Deck',sl:'Local Stats',sd:'Deck Stats',sm:'Meta',ev:'Events',rewards:'Dust Rewards',yt:'YouTube',news:'News',discord:'Discord',art:'Artists',connect:'Connect',mpdeck:'Opponent Deck',shrdeck:'Shared Deck'};
 // ── Events location fields (persistent Country/State/City search) ─────────
 var EV_COUNTRIES=[
   ['us','United States'],['ca','Canada'],['au','Australia'],['nz','New Zealand'],['gb','United Kingdom'],
@@ -1118,6 +1118,13 @@ function boot(){
   if(_joinParam){
     G.mpMode='join';
     G.mpFormCode=_joinParam.toUpperCase().slice(0,8);
+    openPanel('connect');
+    history.replaceState(null,'',location.pathname);
+  }
+  var _viewDeckParam=new URLSearchParams(location.search).get('viewdeck');
+  if(_viewDeckParam){
+    G.mpMode='share';G.mpShareSubMode='receive';
+    G.mpShareFormCode=_viewDeckParam.toUpperCase().slice(0,8);
     openPanel('connect');
     history.replaceState(null,'',location.pathname);
   }
@@ -5262,10 +5269,11 @@ function _mpPushDice(total,label,brk){
     body:JSON.stringify({action:'setDice',code:G.mpCode,role:G.mpRole,dice:{total:total,label:label,brk:brk,ts:Date.now()}})
   }).catch(function(){});
 }
-function _mpDrawQR(){
-  var cv=document.getElementById('mp-qr-canvas');
-  if(!cv||typeof qrcode==='undefined'||!G.mpCode)return;
-  var joinUrl=location.origin+location.pathname+'?join='+encodeURIComponent(G.mpCode);
+function _mpDrawQR(param,code,canvasId){
+  param=param||'join';code=code||G.mpCode;canvasId=canvasId||'mp-qr-canvas';
+  var cv=document.getElementById(canvasId);
+  if(!cv||typeof qrcode==='undefined'||!code)return;
+  var joinUrl=location.origin+location.pathname+'?'+param+'='+encodeURIComponent(code);
   var qr=null;
   // typeNumber 0 ("auto") is documented but has known inconsistent behavior
   // across qrcode-generator builds/versions, so pick the smallest working
@@ -5299,7 +5307,8 @@ function _mpDrawQR(){
 // (not through the normal render() string-building) so an unrelated
 // re-render elsewhere can't tear down an active camera stream mid-scan.
 var _mpScanStream=null,_mpScanRAF=null,_mpScanCanvas=null,_mpScanCtx=null;
-function _mpOpenScan(){
+function _mpOpenScan(target){
+  G._mpScanTarget=target||'join';
   if(typeof jsQR==='undefined'){G.mpErr='QR scanning isn\'t available.';render();return;}
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){G.mpErr='Camera access isn\'t available on this device/browser.';render();return;}
   G.mpScanOpen=true;G.mpScanErr=null;render();
@@ -5332,12 +5341,19 @@ function _mpOpenScan(){
   });
 }
 function _mpHandleScanResult(text){
+  var target=G._mpScanTarget||'join';
+  var paramName=target==='viewdeck'?'viewdeck':'join';
   var codeVal=null;
-  try{var u=new URL(text);codeVal=u.searchParams.get('join');}catch(e){}
+  try{var u=new URL(text);codeVal=u.searchParams.get(paramName);}catch(e){}
   if(!codeVal)codeVal=text; // fallback: QR just encoded the raw code, not a URL
   codeVal=(codeVal||'').trim().toUpperCase().slice(0,8);
   _mpCloseScan();
-  if(codeVal){vibrate(15);G.mpFormCode=codeVal;render();}
+  if(codeVal){
+    vibrate(15);
+    if(target==='viewdeck')G.mpShareFormCode=codeVal;
+    else G.mpFormCode=codeVal;
+    render();
+  }
 }
 function _mpCloseScan(){
   G.mpScanOpen=false;
@@ -5504,6 +5520,54 @@ function mpImportOppDeck(){
   G.mpDeckImportedName=deckName; // shown as an inline confirmation note next to the Import button
   render();
   _sendNotification('Deck Imported','"'+deckName+'" imported from '+(opp.username||'opponent')+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
+}
+// ── SHARE DECK (deck-only, no live match/room -- separate Netlify function
+// and Blob store from match-sync.js, using the exact same QR/code UX) ──────
+function mpShareDeck(){
+  var deckKey=G.mpShareDeckKey||'';
+  var deck=(deckKey&&G.decks[deckKey])?{name:G.decks[deckKey].name,cards:G.decks[deckKey].cards}:null;
+  if(!deck||!deck.cards||!deck.cards.length){G.mpErr='Choose a deck with cards in it to share.';render();return;}
+  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'share',name:deck.name,cards:deck.cards})
+  }).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Failed to share deck.');return d;});})
+  .then(function(d){
+    G.mpShareCode=d.code;G.mpBusy=false;
+    render();
+  }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+}
+function mpFetchSharedDeck(){
+  var code=(G.mpShareFormCode||'').trim().toUpperCase();
+  if(!code){G.mpErr='Enter a deck code.';render();return;}
+  G.mpBusy=true;G.mpErr=null;_renderKeepScroll();
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/share-deck?action=get&code='+encodeURIComponent(code))
+    .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||'Deck code not found.');return d;});})
+    .then(function(d){
+      G.mpBusy=false;
+      G.mpSharedDeck={name:d.name,cards:d.cards||[],code:code};
+      G.mpSharedDeckImportedName=null;
+      openPanel('shrdeck');
+    }).catch(function(e){G.mpBusy=false;G.mpErr=e.message;render();});
+}
+function mpImportSharedDeck(){
+  var sd=G.mpSharedDeck;
+  if(!sd)return;
+  var srcCards=sd.cards||[];
+  var deckName=sd.name||'Shared Deck';
+  var baseName=deckName,n=1;
+  while(G.decks[deckName]){deckName=baseName+' ('+(++n)+')';}
+  var unmatched=[],matched=[];
+  srcCards.forEach(function(entry){
+    var c=cardByName(entry.name);
+    if(c){matched.push({name:cName(c),qty:entry.qty});}
+    else{unmatched.push(entry.name+' x'+entry.qty);}
+  });
+  G.decks[deckName]={name:deckName,cards:matched};
+  sv('sg-dk',G.decks);
+  G.mpSharedDeckImportedName=deckName;
+  render();
+  _sendNotification('Deck Imported','"'+deckName+'" imported from a shared deck code'+(unmatched.length?' ('+unmatched.length+' card(s) unmatched)':'')+'.','decks');
 }
 function mpDownloadOppDeckCSV(){
   var opp=_mpOpponentOrLast();
@@ -7703,17 +7767,44 @@ function pContent(){
       o('<div style="font-size:18px;font-weight:700;color:var(--wht);margin-bottom:4px;text-align:center">&#9876; Connect</div>');
       if(G.mpErr)o('<div style="color:var(--red);font-size:13px;margin-bottom:10px;text-align:center">'+h(G.mpErr)+'</div>');
       var mpMode=G.mpMode||'create';
-      o('<div style="display:flex;gap:8px;margin-bottom:16px">');
-      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1;padding:16px;font-size:16px" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
-      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1;padding:16px;font-size:16px" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
+      o('<div style="display:flex;gap:6px;margin-bottom:16px">');
+      o('<button class="fb'+(mpMode==='create'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'create\';G.mpErr=null;_renderKeepScroll()">Create Match</button>');
+      o('<button class="fb'+(mpMode==='join'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'join\';G.mpErr=null;_renderKeepScroll()">Join Match</button>');
+      o('<button class="fb'+(mpMode==='share'?' gold':'')+'" style="flex:1;padding:14px 4px;font-size:14px" onclick="G.mpMode=\'share\';G.mpErr=null;_renderKeepScroll()">Share Deck</button>');
       o('</div>');
       var mpDkOpts='<option value="">No deck</option>'+Object.keys(G.decks).map(function(k){return '<option value="'+h(k)+'"'+((G.mpFormDeckKey||'')===k?' selected':'')+'>'+h(G.decks[k].name)+'</option>';}).join('');
       var mpUnameVal=(G.mpFormUname!=null)?G.mpFormUname:(G.cfg.p1||'');
       if(mpMode==='join'){
-        o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan()" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
+        o('<div style="margin-bottom:10px;display:flex;gap:8px;width:100%"><input id="mp-code" placeholder="Match code" value="'+h(G.mpFormCode||'')+'" oninput="G.mpFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'join\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
         o('<div style="margin-bottom:10px"><input id="mp-uname2" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck2" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
         o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpJoin()">'+(G.mpBusy?'Joining&hellip;':'Join')+'</button>');
+      } else if(mpMode==='share'){
+        // Deck-only sharing, decoupled from the live match/room system above --
+        // same QR/code UX, but backed by a separate endpoint (share-deck.js)
+        // that just stores/retrieves a deck list, not match state.
+        var mpShareSub=G.mpShareSubMode||'send';
+        o('<div style="display:flex;gap:8px;margin-bottom:14px">');
+        o('<button class="fb'+(mpShareSub==='send'?' gold':'')+'" style="flex:1;padding:10px;font-size:13px" onclick="G.mpShareSubMode=\'send\';G.mpErr=null;_renderKeepScroll()">Share My Deck</button>');
+        o('<button class="fb'+(mpShareSub==='receive'?' gold':'')+'" style="flex:1;padding:10px;font-size:13px" onclick="G.mpShareSubMode=\'receive\';G.mpErr=null;_renderKeepScroll()">View Shared Deck</button>');
+        o('</div>');
+        if(mpShareSub==='receive'){
+          o('<div style="margin-bottom:14px;display:flex;gap:8px;width:100%"><input id="mp-share-code" placeholder="Deck code" value="'+h(G.mpShareFormCode||'')+'" oninput="G.mpShareFormCode=this.value" style="flex:1;min-width:0;padding:10px 6px;text-transform:uppercase;letter-spacing:.15em;text-align:center;font-size:18px;font-weight:700;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box" maxlength="8"><button class="fb" style="flex-shrink:0;width:52px;padding:0;box-sizing:border-box;display:flex;align-items:center;justify-content:center" onclick="_mpOpenScan(\'viewdeck\')" title="Scan QR"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="19" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="19" width="2" height="2" fill="currentColor"/><rect x="16.5" y="16.5" width="2" height="2" fill="currentColor"/><circle cx="18.5" cy="18.5" r="5.4" fill="var(--bg3)" stroke="currentColor" stroke-width="1.3"/><path d="M16 17.3a1 1 0 0 1 1-.9h.4l.35-.6h1.5l.35.6h.4a1 1 0 0 1 1 .9v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-2Z" fill="currentColor"/><circle cx="18.5" cy="18.4" r=".8" fill="var(--bg3)"/></svg></button></div>');
+          o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpFetchSharedDeck()">'+(G.mpBusy?'Loading&hellip;':'View Deck')+'</button>');
+        } else {
+          o('<div style="margin-bottom:14px"><select id="mp-share-deck" onclick="event.stopPropagation()" onchange="G.mpShareDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
+          if(!G.mpShareCode){
+            o('<button class="fb gold full" style="padding:16px;font-size:16px" '+(G.mpBusy?'disabled':'')+' onclick="mpShareDeck()">'+(G.mpBusy?'Sharing&hellip;':'Share Deck')+'</button>');
+          } else {
+            o('<div style="text-align:center;margin-bottom:16px">');
+            o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Scan to View</div>');
+            o('<div style="display:flex;justify-content:center;margin-bottom:10px"><canvas id="mp-share-qr-canvas" width="200" height="200" style="background:#fff;border-radius:8px;padding:10px;box-sizing:content-box"></canvas></div>');
+            o('<div style="font-size:11px;color:var(--fg2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Or Deck Code</div>');
+            o('<div style="font-size:24px;font-weight:700;letter-spacing:.15em;color:var(--hi)">'+h(G.mpShareCode)+'</div>');
+            o('</div>');
+            o('<button class="fb full" style="padding:14px" onclick="G.mpShareCode=null;_renderKeepScroll()">Share a Different Deck</button>');
+          }
+        }
       } else {
         o('<div style="margin-bottom:10px"><input id="mp-uname" placeholder="Your username" value="'+h(mpUnameVal)+'" oninput="G.mpFormUname=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box"></div>');
         o('<div style="margin-bottom:14px"><select id="mp-deck" onclick="event.stopPropagation()" onchange="G.mpFormDeckKey=this.value" style="width:100%;padding:10px;border:1px solid var(--bd);background:var(--bg3);color:var(--fg);border-radius:6px;box-sizing:border-box">'+mpDkOpts+'</select></div>');
@@ -7782,6 +7873,37 @@ function pContent(){
       var grp=mpTypeGroups[t];
       if(!grp.length)return;
       o('<div class="slbl2" style="margin-top:10px">'+mpTypeLabels[t]+' ('+grp.length+')</div>');
+      grp.forEach(function(g){
+        o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
+        o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
+        o('<span style="font-size:14px;color:var(--fg)'+(g.card?'':';font-style:italic;color:var(--fg2)')+'">'+h(g.entry.name)+'</span>');
+        o('</div>');
+      });
+    });
+    return out.join('');
+  }
+  if(p==='shrdeck'){
+    var srdSd=G.mpSharedDeck;
+    if(!srdSd){o('<div class="ld">No shared deck loaded.</div>');return out.join('');}
+    o('<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">');
+    o('<div style="font-size:15px;font-weight:700;color:var(--wht);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(srdSd.name||'Deck')+'</div>');
+    o('<button class="fb gold" onclick="mpImportSharedDeck()">Import</button>');
+    o('</div>');
+    if(G.mpSharedDeckImportedName)o('<div style="font-size:12px;color:var(--grn);margin-bottom:8px">&#10003; Imported as "'+h(G.mpSharedDeckImportedName)+'"</div>');
+    o('<div class="sc" style="color:var(--hi);font-size:13px;font-weight:600;padding:0;background:none;border:none;margin-bottom:8px">Code: '+h(srdSd.code||'')+'</div>');
+    var srdTypeGroups={site:[],avatar:[],aura:[],magic:[],artifact:[],minion:[]};
+    var srdTypeLabels={avatar:'Avatar',aura:'Aura',artifact:'Artifact',minion:'Minion',magic:'Magic',site:'Site'};
+    var srdTypeOrder=['avatar','aura','artifact','minion','magic','site'];
+    (srdSd.cards||[]).forEach(function(entry){
+      var c=cardByName(entry.name);
+      var t=c?cType(c):'minion';
+      if(!srdTypeGroups[t])t='minion';
+      srdTypeGroups[t].push({entry:entry,card:c});
+    });
+    srdTypeOrder.forEach(function(t){
+      var grp=srdTypeGroups[t];
+      if(!grp.length)return;
+      o('<div class="slbl2" style="margin-top:10px">'+srdTypeLabels[t]+' ('+grp.length+')</div>');
       grp.forEach(function(g){
         o('<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd)">');
         o('<span style="font-size:13px;font-weight:700;color:var(--hi);min-width:22px">'+g.entry.qty+'x</span>');
@@ -9085,6 +9207,7 @@ function render(){
     }
     if(G.mode===1){try{_diceSyncInlineSlot();_syncP1ButtonPadding();}catch(e){}}
     if(G.panel==='connect'&&G.mpRoom&&G.mpRole==='p1'&&G.mpCode){try{_mpDrawQR();}catch(e){console.error('QR render hook failed:',e);}}
+    if(G.panel==='connect'&&!G.mpRoom&&G.mpMode==='share'&&(G.mpShareSubMode||'send')==='send'&&G.mpShareCode){try{_mpDrawQR('viewdeck',G.mpShareCode,'mp-share-qr-canvas');}catch(e){console.error('Share QR render hook failed:',e);}}
   }catch(e){
     document.getElementById('app').innerHTML='<div style="padding:16px;color:var(--red);font-size:10px"><b>Error:</b> '+h(e.message)+'<br><button onclick="boot()" style="margin-top:8px;padding:6px 14px;border:1px solid var(--red);color:var(--red);background:transparent">Restart</button></div>';
     console.error(e);
