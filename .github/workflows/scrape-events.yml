@@ -2,7 +2,7 @@ name: Scrape Sorcery Events
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # every 30 minutes
+    - cron: '0 * * * *'      # every hour, on the hour
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 concurrency:
