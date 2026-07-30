@@ -5539,11 +5539,23 @@ function _mpShareResetFormState(){
   G.mpShareConnectedPopup=false;G.mpShareAcceptWaiting=false;G.mpShareDeclinedByName=null;G.mpShareClosedNotice=null;
   G.mpShareLeaveConfirm=false;G.mpShareDeckPickKeys={};G.mpShareDeckConfirmed=false;G.mpSharedDeckImportedIdx=null;
 }
-function _mpShareTogglePick(key,checked){
+function _mpShareTogglePick(key,checked,el){
   G.mpShareDeckPickKeys=G.mpShareDeckPickKeys||{};
   if(checked)G.mpShareDeckPickKeys[key]=true;else delete G.mpShareDeckPickKeys[key];
-  // Native checkbox already reflects its own checked state -- no render()
-  // needed here, which also avoids interrupting the user mid-selection.
+  // Native checkbox already reflects its own checked state, but that alone
+  // is easy to miss (small, and native-checkbox rendering/contrast varies
+  // across browsers/WebView). Highlight the whole row directly via the DOM
+  // instead of a full render() -- instant, and avoids re-rendering the
+  // popup mid-selection.
+  if(el){
+    var label=el.closest('label');
+    if(label){
+      label.style.background=checked?'var(--bg3)':'transparent';
+      label.style.borderLeft='3px solid '+(checked?'var(--hi)':'transparent');
+      var span=label.querySelector('span');
+      if(span){span.style.color=checked?'var(--hi)':'var(--fg)';span.style.fontWeight=checked?'700':'400';}
+    }
+  }
 }
 function _mpShareDeckSummary(decks){
   if(!decks||!decks.length)return '';
@@ -9277,9 +9289,9 @@ function render(){
             // JS string-literal context (matching safeEntryNm elsewhere in
             // this file) is what's actually needed here.
             var _srSafeK=String(k).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-            o('<label style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid var(--bg3);cursor:pointer">');
-            o('<input type="checkbox" onclick="event.stopPropagation()" '+(_srChecked?'checked':'')+' onchange="_mpShareTogglePick(\''+_srSafeK+'\',this.checked)" style="width:18px;height:18px;flex-shrink:0">');
-            o('<span style="font-size:14px;color:var(--fg);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(G.decks[k].name)+'</span>');
+            o('<label style="display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid var(--bg3);cursor:pointer;background:'+(_srChecked?'var(--bg3)':'transparent')+';border-left:3px solid '+(_srChecked?'var(--hi)':'transparent')+'">');
+            o('<input type="checkbox" onclick="event.stopPropagation()" '+(_srChecked?'checked':'')+' onchange="_mpShareTogglePick(\''+_srSafeK+'\',this.checked,this)" style="width:18px;height:18px;flex-shrink:0">');
+            o('<span style="font-size:14px;color:'+(_srChecked?'var(--hi)':'var(--fg)')+';font-weight:'+(_srChecked?'700':'400')+';flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h(G.decks[k].name)+'</span>');
             o('</label>');
           });
         }
