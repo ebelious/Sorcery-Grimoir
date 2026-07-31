@@ -1,4 +1,4 @@
-w<p align="center">
+<p align="center">
 <img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/icons/icon-512.png" alt="Main Dashboard Screen" width="500">
 </p>
 
