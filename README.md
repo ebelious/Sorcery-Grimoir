@@ -8,7 +8,7 @@ This app was designed for readability and minimal feel which can also be customi
 For issues, bugs, features you can either post them on github, or in the #Feedback Discord channel on the SCRCompanion Discord server
 
 ### [Youtube](https://www.youtube.com/@SCRCompanion)   **Like and Subscribe!**
-
+### [Patreon](https://www.patreon.com/cw/SCRCompanion)
 ## Features
 - Easily find any Cards, FAQ or Codex entries quickly with the Global Search
 - Simple and easy to read game counters both both 1 player and 2 player
