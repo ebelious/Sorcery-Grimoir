@@ -14,7 +14,7 @@ Impact-Site-Verification: 3a0e9e54-90c7-4ca7-b050-a40ddad8074e
 <a href="https://www.patreon.com/cw/SCRCompanion">
 <img height="36" style="display:block;" src="https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/main/icons/PATREON_Lockup_Horizontal_BLACK_RGB.png">
 </a>
-</td>
+</td>You will be notified once there is a response.
 
 <td>
 <a href="https://www.youtube.com/@SCRCompanion">
@@ -42,9 +42,10 @@ This app was designed for readability and minimal feel which can also be customi
 ## Features
 - Easy and quick navigation to any Cards, FAQ or Codex entries quickly with the Global Search
 - Simple and easy to read game counters both both 1 player and 2 player views
+- Connect with other local players to collect stats and also share decks
 - Integrated dice rolling with standard die sizes and also an option for custom number of sides (Harbinger with Double Dragon mat)
 - All Cards with attached FAQ and Codex, and Keywords for easily understanding how each card is used
-- Expandable text for individuals with poor eyes 
+- Expandable text/images for individuals with poor eyes 
 - Direct card links to TCGPlayer to assess card value to make fair trades or make purchasing faster
 - All of the amazing artists have the links to see their awesome work in their own menu and linked on every card
 - Allows adding, importing and exporting collections, Decks via csv files or Curiosa Deck Links
