@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31T19:14:13.207Z",
+  "updated": "2026-07-31T20:57:54.329Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -145,24 +145,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c8139c33-f35f-4cfc-89e4-dabf24d3689d"
-    },
-    {
-      "name": "AZ CARD & GAMES Sorcery 31/07/2026",
-      "date": "Fri. Jul 31, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sesto Fiorentino, Toscana",
-      "city": "Sesto Fiorentino",
-      "state": "Toscana",
-      "lat": 43.831721,
-      "lng": 11.1992239,
-      "address": "",
-      "description": "",
-      "storeName": "AZ Card & Games",
-      "url": "https://play.sorcerytcg.com/events/c6fdd558-cc16-45b9-9fdd-d0f7e2b05a75"
     },
     {
       "name": "Startspeler (MULTiPLE) Drafts DRAFT 2",
@@ -457,8 +439,8 @@
       "date": "Sat. Aug 1, 2026",
       "time": "12:00 AM UTC",
       "endTime": "",
-      "type": "Ironheade Video Games",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Port Orchard, WA",
       "city": "Port Orchard",
@@ -467,7 +449,7 @@
       "lng": -122.6384056,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Ironheade Video Games",
       "url": "https://play.sorcerytcg.com/events/981102ed-1116-4e5e-b350-bf7ed4069d38"
     },
     {
@@ -5095,6 +5077,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0f48f979-cd60-4b62-a898-ec08d3ac5a1d"
+    },
+    {
+      "name": "Sorcery Klubnap",
+      "date": "Fri. Aug 7, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "Metagame Kártyabolt",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Budapest, Budapest",
+      "city": "Budapest",
+      "state": "Budapest",
+      "lat": 47.4978789,
+      "lng": 19.0402383,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/17470383-ed83-4b3f-9f9b-f06a6d83bfe4"
     },
     {
       "name": "Torneo Viernes 17:00",
@@ -13449,24 +13449,6 @@
       "url": "https://play.sorcerytcg.com/events/3abb60c4-3bc9-40f0-997c-be552d5d462b"
     },
     {
-      "name": "Thursday Weekly Sorcery",
-      "date": "Thu. Aug 20, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Hex & Company",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "New York, NY",
-      "city": "New York",
-      "state": "NY",
-      "lat": 40.7127281,
-      "lng": -74.0060152,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f016fc2a-9696-414b-bc5c-af98a0828a88"
-    },
-    {
       "name": "Constructed Tournament & Open Play",
       "date": "Aug 20, 2026 - Aug 21, 2026",
       "time": "11:00 PM UTC",
@@ -13483,6 +13465,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3f6ae7d5-88aa-48b1-88a7-c47bb55a2ca5"
+    },
+    {
+      "name": "Thursday Weekly Sorcery",
+      "date": "Thu. Aug 20, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Hex & Company",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "lat": 40.7127281,
+      "lng": -74.0060152,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f016fc2a-9696-414b-bc5c-af98a0828a88"
     },
     {
       "name": "Matrona Sorcery",
@@ -17391,24 +17391,6 @@
       "url": "https://play.sorcerytcg.com/events/e6eb3fdf-fdab-4e6f-976e-b75f686d8f69"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d920d9e0-aef7-4d5b-8598-6ac35d74c2af"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Aug 28, 2026",
       "time": "1:00 AM UTC",
@@ -17425,6 +17407,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c9e322f4-285c-4cdc-9c6a-f15aef215613"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Aug 28, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d920d9e0-aef7-4d5b-8598-6ac35d74c2af"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -26679,24 +26679,6 @@
       "url": "https://play.sorcerytcg.com/events/1cb95d2d-353b-4500-a396-42b2f93450b2"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:00 AM UTC",
@@ -26713,6 +26695,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28819,24 +28819,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/5dab8255-2249-47e2-a214-ab387087735f"
-    },
-    {
-      "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
-      "date": "Thu. Sep 24, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "New World Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Little Elm, TX",
-      "city": "Little Elm",
-      "state": "TX",
-      "lat": 33.1626194,
-      "lng": -96.9375051,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/aea1673f-7c58-49ff-a76b-6b2d696a75ca"
     }
   ]
 }
