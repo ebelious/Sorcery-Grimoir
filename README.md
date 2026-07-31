@@ -1,4 +1,4 @@
-<p align="center">
+w<p align="center">
 <img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/icons/icon-512.png" alt="Main Dashboard Screen" width="500">
 </p>
 
@@ -16,6 +16,7 @@ This app was designed for readability and minimal feel which can also be customi
 
    **[Patreon](https://www.patreon.com/cw/SCRCompanion)** If you would like to support me and this project
 
+<a href='https://ko-fi.com/J5P4246TGS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## Features
 - Easy and quick navigation to any Cards, FAQ or Codex entries quickly with the Global Search
