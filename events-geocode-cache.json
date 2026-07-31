@@ -1285,5 +1285,13 @@
   "praha 8|hlavní město praha": {
     "lat": 50.1191317,
     "lng": 14.4551595
+  },
+  "dillingen/saar|sl": {
+    "lat": 49.3552721,
+    "lng": 6.7243197
+  },
+  "tintwistle|england": {
+    "lat": 53.4719227,
+    "lng": -1.9732931
   }
 }
