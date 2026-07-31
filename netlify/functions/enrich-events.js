@@ -23,8 +23,30 @@
 // Response: { results: { "<url>": {address, duration, endTime, time, date}, ... } }
 //   Any URL that fails to fetch/parse is simply omitted from results
 //   rather than failing the whole request.
+//
+// SECURITY: item.url is attacker-controlled (it comes straight from the
+// POST body) and this function fetch()es it server-side from Netlify's own
+// network context. The only prior validation was a path-shape regex
+// (/\/events\/[a-f0-9-]+/), which never checked the *hostname* -- a URL
+// like "http://169.254.169.254/events/<uuid>" or one pointing at an
+// internal service would have passed that check and been fetched from
+// here, which is a server-side request forgery (SSRF) hole. isAllowedUrl()
+// below enforces an explicit hostname allowlist (only the real Play
+// Network host, over https) before any fetch happens, independent of and
+// in addition to the existing path-shape check.
 
 const MAX_URLS = 40;
+const ALLOWED_HOSTS = new Set(['play.sorcerytcg.com']);
+
+function isAllowedUrl(rawUrl) {
+  let u;
+  try {
+    u = new URL(rawUrl);
+  } catch (e) {
+    return false;
+  }
+  return u.protocol === 'https:' && ALLOWED_HOSTS.has(u.hostname.toLowerCase());
+}
 
 function resp(statusCode, obj) {
   return {
@@ -165,6 +187,11 @@ exports.handler = async function (event) {
   const results = {};
   await Promise.all(items.map(async (item) => {
     try {
+      // Hostname allowlist check FIRST -- see the SECURITY note at the top
+      // of this file. This must run before anything else touches item.url,
+      // and independently of the path-shape regex below (which only ever
+      // checked the path, never the host).
+      if (!isAllowedUrl(item.url)) return;
       const idMatch = item.url.match(/\/events\/([a-f0-9-]+)/i);
       if (!idMatch) return;
       const res = await fetch(item.url, { headers: { 'User-Agent': 'Sorcery-Grimoir-EventEnrich/1.0' } });
