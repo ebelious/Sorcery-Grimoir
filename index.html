@@ -3771,7 +3771,7 @@ document.addEventListener('blur',function(e){
 // stops).
 document.addEventListener('scroll',function(e){
   var t=e.target;
-  if(!t||!t.classList||!(t.classList.contains('cm')||t.classList.contains('panel')))return;
+  if(!t||!t.classList||!(t.classList.contains('cm')||t.classList.contains('panel')||t.classList.contains('sdd')))return;
   _scrollActive=true;
   if(_scrollActiveTimer)clearTimeout(_scrollActiveTimer);
   _scrollActiveTimer=setTimeout(function(){_scrollActive=false;_flushDeferredRenderIfIdle();},200);
