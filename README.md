@@ -14,7 +14,7 @@
 <a href="https://www.patreon.com/cw/SCRCompanion">
 <img height="36" style="display:block;" src="https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/main/icons/PATREON_Lockup_Horizontal_BLACK_RGB.png">
 </a>
-</td>You will be notified once there is a response.
+</td>
 
 <td>
 <a href="https://www.youtube.com/@SCRCompanion">
