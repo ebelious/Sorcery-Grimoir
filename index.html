@@ -501,7 +501,7 @@ body.tr{--bg:#191724;--bg2:#1F1D2E;--bg3:#26233A;--bd:#403D52;--fg:#E0DEF4;--fg2
 .cro{display:flex;align-items:center;justify-content:space-between;padding:14px 13px;border-bottom:1px solid var(--bd);cursor:pointer}
 .cro:active{background:var(--bg3)}
 .crn{font-size:18px;font-weight:700}
-.dfoot{padding:6px 11px;border-top:1px solid var(--bd);text-align:center;flex-shrink:0}
+.dfoot{padding:6px 11px;border-top:1px solid var(--bd);text-align:center;flex-shrink:0;position:relative}
 .app-nm{font-size:15px;font-weight:700;color:var(--hi);letter-spacing:.1em;text-transform:uppercase}
 .app-sb{font-size:11px;color:var(--fg3);text-transform:uppercase;letter-spacing:.1em}
 .cbg{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;padding:14px}
@@ -9502,7 +9502,7 @@ function render(){
           o('<div style="margin-top:auto;text-align:center"><button class="fb" style="margin:12px 0 0" onclick="showInstallHelp()">&#x2B07; Install as App</button></div>');
         }
       }
-      o('</div><div class="dfoot"><a href="https://github.com/ebelious/Sorcery-Grimoir#sorcery-grimoir" target="_blank" style="text-decoration:none"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></a></div></div>');
+      o('</div><div class="dfoot"><a href="https://www.patreon.com/cw/SCRCompanion" target="_blank" title="Support on Patreon" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:1px solid var(--hi);border-radius:'+(G.cfg.roundedCorners?'6px':'0')+';display:flex;align-items:center;justify-content:center;text-decoration:none;background:transparent;overflow:hidden;box-sizing:border-box"><img src="icons/patreon_transparent.png" alt="Patreon" style="width:32px;height:32px;object-fit:contain;display:block"></a><a href="https://github.com/ebelious/Sorcery-Grimoir#sorcery-grimoir" target="_blank" style="text-decoration:none"><div class="app-nm">Sorcery Grimoire</div><div class="app-sb">Contested Realm Companion</div></a></div></div>');
 
       if(G.cat&&!G.panel){
         o('<div class="cbg" onclick="if(event.target===this)closeAll()"><div class="cpop"><div class="cpop-t">'+G.cat+'</div>');
