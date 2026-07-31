@@ -2,6 +2,35 @@
 <img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/icons/icon-512.png" alt="Main Dashboard Screen" width="500">
 </p>
 
+<table align="center" border="0" cellpadding="8" cellspacing="0">
+<tr>
+<td>
+<a href="https://ko-fi.com/J5P4246TGS">
+<img height="36" style="display:block;" src="https://storage.ko-fi.com/cdn/kofi5.png?v=6">
+</a>
+</td>
+
+<td>
+<a href="https://www.patreon.com/cw/SCRCompanion">
+<img height="36" style="display:block;" src="https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/main/icons/PATREON_Lockup_Horizontal_BLACK_RGB.png">
+</a>
+</td>
+
+<td>
+<a href="https://www.youtube.com/@SCRCompanion">
+<img height="36" style="display:block;" src="https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/main/icons/yt_logo.png">
+</a>
+</td>
+
+<td>
+<a href="https://discord.gg/nHu6fWpBA">
+<img height="36" style="display:block;" src="https://raw.githubusercontent.com/ebelious/Sorcery-Grimoir/main/icons/Discord-Logo-Blurple.png">
+</a>
+</td>
+
+</tr>
+</table>
+
 # Sorcery Grimoir
 This is **Sorcery Grimoir**, a Contested Realm Companion application for the seekers and masters of the realm. This app is a multi tool for anyone wanting to play, understand, and/or just interested in Sorcery Contested Realm.
 This app was designed for readability and minimal feel which can also be customized to your liking 
@@ -9,14 +38,6 @@ This app was designed for readability and minimal feel which can also be customi
 ---
 ## Click Here to Launch The App: [Sorcery Grimoir](https://ebelious.github.io/Sorcery-Grimoir/)
 
-
-   **[Discord](https://discord.gg/nHu6fWpBA)** For issues, bugs, features you can either post them on github, or in the #Feedback Discord channel on the SCRCompanion Discord server
-
-   **[Youtube](https://www.youtube.com/@SCRCompanion)** Like and Subscribe!
-
-   **[Patreon](https://www.patreon.com/cw/SCRCompanion)** If you would like to support me and this project
-
-<a href='https://ko-fi.com/J5P4246TGS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi5.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## Features
 - Easy and quick navigation to any Cards, FAQ or Codex entries quickly with the Global Search
@@ -34,6 +55,8 @@ This app was designed for readability and minimal feel which can also be customi
 
 *This was coded using Claude AI, but has been tested for the majority of basic functionality. This is just an HTML/Javascript app hosted here on GitHub Pages. a few minor things do not work as I intended but is still being improved*</br>
 **Working on getting this to a stable version where it is worthy of a release on Google Play Store. Send me a DM in Discord to get Google Play Closed Testing access**
+
+Any issues with bugs, or want feature requests, submit in the Discord channel or here in the Issues on Github
 
 ## Install App to your phone (PWA).
 There are two ways to accomplish this:<br>
