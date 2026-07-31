@@ -44,7 +44,7 @@ This app was designed for readability and minimal feel which can also be customi
 - Simple and easy to read game counters both both 1 player and 2 player views
 - Connect with other local players to collect stats and also share decks
 - Integrated dice rolling with standard die sizes and also an option for custom number of sides (Harbinger with Double Dragon mat)
-- All Cards with attached FAQ and Codex, and Keywords for easily understanding how each card is used
+- All Cards with attached FAQ and Codex for easily understanding how each card is played
 - Expandable text/images for individuals with poor eyes 
 - Direct card links to TCGPlayer to assess card value to make fair trades or make purchasing faster
 - All of the amazing artists have the links to see their awesome work in their own menu and linked on every card
