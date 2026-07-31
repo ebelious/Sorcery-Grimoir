@@ -1,7 +1,7 @@
 <p align="center">
 <img src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/icons/icon-512.png" alt="Main Dashboard Screen" width="500">
 </p>
-Impact-Site-Verification: 3a0e9e54-90c7-4ca7-b050-a40ddad8074e
+
 <table align="center" border="0" cellpadding="8" cellspacing="0">
 <tr>
 <td>
