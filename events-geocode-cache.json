@@ -1293,5 +1293,21 @@
   "tintwistle|england": {
     "lat": 53.4719227,
     "lng": -1.9732931
+  },
+  "sesto fiorentino|toscana": {
+    "lat": 43.831721,
+    "lng": 11.1992239
+  },
+  "jardim goiás|go": {
+    "lat": -16.7024172,
+    "lng": -49.2385974
+  },
+  "lancaster|pa": {
+    "lat": 40.0379958,
+    "lng": -76.3056707
+  },
+  "williamston|sc": {
+    "lat": 34.6184471,
+    "lng": -82.4779053
   }
 }
