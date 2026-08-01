@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-01T20:10:41.055Z",
+  "updated": "2026-08-01T21:47:56.315Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -219,24 +219,6 @@
       "url": "https://play.sorcerytcg.com/events/0cf949d1-9bef-4faa-b68c-d4f0b0ed6fae"
     },
     {
-      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
-      "date": "Sat. Aug 1, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Tokyo Toybox",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Hendersonville, NC",
-      "city": "Hendersonville",
-      "state": "NC",
-      "lat": 35.3187279,
-      "lng": -82.4609528,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/129b0822-e343-4bbc-a782-3a0f6f970b68"
-    },
-    {
       "name": "[Sewercity Sorcery] Saturday Constructed (Freeplay/Learn)",
       "date": "Sat. Aug 1, 2026",
       "time": "5:30 PM UTC",
@@ -439,8 +421,8 @@
       "date": "Sat. Aug 1, 2026",
       "time": "9:00 PM UTC",
       "endTime": "",
-      "type": "Darkside Games",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Las Vegas, NV",
       "city": "Las Vegas",
@@ -449,7 +431,7 @@
       "lng": -115.1484131,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Darkside Games",
       "url": "https://play.sorcerytcg.com/events/26dbcfc8-3f97-48fd-a72c-3e7056e42a25"
     },
     {
@@ -505,6 +487,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/9d5b6069-e285-46b2-a1de-626a1bd8d492"
+    },
+    {
+      "name": "Casual Sorcery Night",
+      "date": "Aug 1, 2026 - Aug 2, 2026",
+      "time": "9:12 PM UTC",
+      "endTime": "",
+      "type": "Great Escape Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/fffb5bb6-2c8c-46d0-a2b1-b0ab36e526c5"
     },
     {
       "name": "Saturday Constructed Sorcery",
@@ -13428,7 +13428,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -13446,7 +13446,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -25686,7 +25686,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -25704,7 +25704,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
