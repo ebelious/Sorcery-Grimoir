@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-01T17:57:05.437Z",
+  "updated": "2026-08-01T18:59:24.011Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -219,24 +219,6 @@
       "url": "https://play.sorcerytcg.com/events/0cf949d1-9bef-4faa-b68c-d4f0b0ed6fae"
     },
     {
-      "name": "Millers Casual Constructed",
-      "date": "Sat. Aug 1, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "North Hampton, NH",
-      "city": "North Hampton",
-      "state": "NH",
-      "lat": 42.9689814,
-      "lng": -70.8359489,
-      "address": "",
-      "description": "",
-      "storeName": "Millers Comics, Cards, and Collectables",
-      "url": "https://play.sorcerytcg.com/events/f336b7ec-b20b-4eb6-a9bf-39ba5e71753c"
-    },
-    {
       "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
       "date": "Sat. Aug 1, 2026",
       "time": "5:00 PM UTC",
@@ -309,24 +291,6 @@
       "url": "https://play.sorcerytcg.com/events/6e6f02bc-6715-470e-b6f5-ae1a04471134"
     },
     {
-      "name": "Sorcery Things",
-      "date": "Sat. Aug 1, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "$5.00",
-      "duration": "",
-      "location": "Brewer, ME",
-      "city": "Brewer",
-      "state": "ME",
-      "lat": 44.7967947,
-      "lng": -68.7621574,
-      "address": "",
-      "description": "",
-      "storeName": "Northeast Collectibles",
-      "url": "https://play.sorcerytcg.com/events/6a7e6e91-1807-4b5b-9b29-94fdb8f3a84e"
-    },
-    {
       "name": "Sorcery Reserva",
       "date": "Sat. Aug 1, 2026",
       "time": "6:00 PM UTC",
@@ -361,24 +325,6 @@
       "description": "",
       "storeName": "Left of Center Gaming",
       "url": "https://play.sorcerytcg.com/events/c0b631ef-516a-4876-be8a-ff0cf13490bf"
-    },
-    {
-      "name": "Sorcery Saturday Constructed",
-      "date": "Sat. Aug 1, 2026",
-      "time": "6:05 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Allegan, MI",
-      "city": "Allegan",
-      "state": "MI",
-      "lat": 42.5867203,
-      "lng": -85.8861492,
-      "address": "",
-      "description": "",
-      "storeName": "Hidden Alley Gaming",
-      "url": "https://play.sorcerytcg.com/events/2aae98e1-7fe8-40ac-9377-68f003e2d661"
     },
     {
       "name": "Saturday Afternoon Casual Sorcery",
@@ -505,6 +451,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/26dbcfc8-3f97-48fd-a72c-3e7056e42a25"
+    },
+    {
+      "name": "Sorcery Constructed Vila Geek Serra",
+      "date": "Aug 1, 2026 - Aug 2, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Parque Res. Laranjeiras, ES",
+      "city": "Parque Res. Laranjeiras",
+      "state": "ES",
+      "lat": 38.7286949,
+      "lng": -9.1501544,
+      "address": "",
+      "description": "",
+      "storeName": "VILA GEEK",
+      "url": "https://play.sorcerytcg.com/events/fb4e51a4-24c0-41c3-b2cd-976a92b2d504"
     },
     {
       "name": "Curio (Baltimore) Saturday Local",
@@ -817,8 +781,8 @@
       "date": "Sun. Aug 2, 2026",
       "time": "1:00 AM UTC",
       "endTime": "",
-      "type": "The Game Shelf",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Kent, WA",
       "city": "Kent",
@@ -827,7 +791,7 @@
       "lng": -122.2270272,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Game Shelf",
       "url": "https://play.sorcerytcg.com/events/4bcef19d-5cfd-4089-9f75-8db159d444f0"
     },
     {
@@ -9126,7 +9090,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -9144,7 +9108,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -28063,42 +28027,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a76fa7e6-338e-4d18-b88b-5dcd2dddb163"
-    },
-    {
-      "name": "Bolsa Sorcery Semanal",
-      "date": "Sep 22, 2026 - Sep 23, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Bolsa do Infinito",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Tijuca, RJ",
-      "city": "Tijuca",
-      "state": "RJ",
-      "lat": -22.9247351,
-      "lng": -43.2327165,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4a0ac510-4929-44c9-b6a5-205850ff141d"
-    },
-    {
-      "name": "Tuesday Sealed",
-      "date": "Tue. Sep 22, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Cold Foil Heroes",
-      "price": "Sealed Tournament",
-      "duration": "",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "lat": 34.1014112,
-      "lng": -84.5192192,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/47c2cac6-3fc2-4409-98b1-89ba0c52d000"
     }
   ]
 }
