@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-01T14:55:11.171Z",
+  "updated": "2026-08-01T15:56:37.935Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -165,24 +165,6 @@
       "url": "https://play.sorcerytcg.com/events/505c0a87-0b27-46ef-a000-64f65a74769e"
     },
     {
-      "name": "Hex Saturday Morning Weekly Play (Constructed)",
-      "date": "Sat. Aug 1, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Hex & Company",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "New York, NY",
-      "city": "New York",
-      "state": "NY",
-      "lat": 40.7127281,
-      "lng": -74.0060152,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c72259a2-2006-4720-9e8a-a872a70dc947"
-    },
-    {
       "name": "Casual Meet Up!",
       "date": "Sat. Aug 1, 2026",
       "time": "3:00 PM UTC",
@@ -201,22 +183,22 @@
       "url": "https://play.sorcerytcg.com/events/6c40a334-9f60-4b29-ae90-31894b790582"
     },
     {
-      "name": "Tokyo Toybox's Cornerstone Event in Hendersonville, NC",
+      "name": "Saturday Afternoon Sorcery",
       "date": "Sat. Aug 1, 2026",
-      "time": "3:00 PM UTC",
+      "time": "3:59 PM UTC",
       "endTime": "",
       "type": "Constructed Tournament",
-      "price": "$20.00",
+      "price": "FREE",
       "duration": "",
-      "location": "Hendersonville, NC",
-      "city": "Hendersonville",
-      "state": "NC",
-      "lat": 35.3187279,
-      "lng": -82.4609528,
+      "location": "New York, NY",
+      "city": "New York",
+      "state": "NY",
+      "lat": 40.7127281,
+      "lng": -74.0060152,
       "address": "",
       "description": "",
-      "storeName": "Tokyo Toybox",
-      "url": "https://play.sorcerytcg.com/events/0fcc1fbb-bd29-4d33-b0ea-52dfdc41305a"
+      "storeName": "Hex & Company",
+      "url": "https://play.sorcerytcg.com/events/acab1925-ea62-4d6a-89ea-c1fa3b75af03"
     },
     {
       "name": "Sorcery Saturday!",
@@ -295,8 +277,8 @@
       "date": "Sat. Aug 1, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Geekified",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Vinton, IA",
       "city": "Vinton",
@@ -305,7 +287,7 @@
       "lng": -92.0239504,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Geekified",
       "url": "https://play.sorcerytcg.com/events/74e08690-314f-462c-b242-fe6250f05fbf"
     },
     {
@@ -5295,24 +5277,6 @@
       "url": "https://play.sorcerytcg.com/events/7a603ea5-0254-4154-bd2b-23eb19011af9"
     },
     {
-      "name": "Saturday Showdown at Sleeved-Up Games",
-      "date": "Sat. Aug 8, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Toledo, OH",
-      "city": "Toledo",
-      "state": "OH",
-      "lat": 41.6529143,
-      "lng": -83.5378173,
-      "address": "",
-      "description": "",
-      "storeName": "Sleeved-Up Games LLC",
-      "url": "https://play.sorcerytcg.com/events/64c58daa-01ba-44f8-9585-e1815084b994"
-    },
-    {
       "name": "Curio Baltimore Sat Locals",
       "date": "Sat. Aug 8, 2026",
       "time": "6:00 PM UTC",
@@ -5365,6 +5329,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6fb5a861-0382-43af-82d5-e1c88220b6f2"
+    },
+    {
+      "name": "Saturday Showdown at Sleeved-Up Games 30 dollar Sealed AL",
+      "date": "Sat. Aug 8, 2026",
+      "time": "6:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Toledo, OH",
+      "city": "Toledo",
+      "state": "OH",
+      "lat": 41.6529143,
+      "lng": -83.5378173,
+      "address": "",
+      "description": "",
+      "storeName": "Sleeved-Up Games LLC",
+      "url": "https://play.sorcerytcg.com/events/64c58daa-01ba-44f8-9585-e1815084b994"
     },
     {
       "name": "Saturday Afternoon Casual Sorcery",
@@ -9198,7 +9180,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -9216,7 +9198,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -9777,24 +9759,6 @@
       "url": "https://play.sorcerytcg.com/events/714ed5d3-d5e1-4a6c-af9c-0c2f39c8a4e4"
     },
     {
-      "name": "Saturday Showdown at Sleeved-Up Games 30 dollar sealed AL",
-      "date": "Sat. Aug 15, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Toledo, OH",
-      "city": "Toledo",
-      "state": "OH",
-      "lat": 41.6529143,
-      "lng": -83.5378173,
-      "address": "",
-      "description": "",
-      "storeName": "Sleeved-Up Games LLC",
-      "url": "https://play.sorcerytcg.com/events/41be2fe1-8c26-48aa-b276-df6ad7a73e72"
-    },
-    {
       "name": "Sorcery Reserva",
       "date": "Sat. Aug 15, 2026",
       "time": "6:00 PM UTC",
@@ -10045,24 +10009,6 @@
       "description": "",
       "storeName": "Tower of Games - Western Branch",
       "url": "https://play.sorcerytcg.com/events/34c96845-8414-4df5-a10b-bba59bf6218d"
-    },
-    {
-      "name": "The Sorcerers Apprentice",
-      "date": "Sat. Aug 15, 2026",
-      "time": "10:15 PM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Toledo, OH",
-      "city": "Toledo",
-      "state": "OH",
-      "lat": 41.6529143,
-      "lng": -83.5378173,
-      "address": "",
-      "description": "",
-      "storeName": "Sleeved-Up Games LLC",
-      "url": "https://play.sorcerytcg.com/events/52fae07b-7b93-496f-9364-c37084f6d757"
     },
     {
       "name": "Learn To Play",
@@ -13554,7 +13500,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -13572,7 +13518,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -17424,7 +17370,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
+      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -17442,7 +17388,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
+      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -24375,24 +24321,6 @@
       "url": "https://play.sorcerytcg.com/events/53861f39-b6c7-48b3-9a96-168616909866"
     },
     {
-      "name": "Saturday Showdown at Sleeved-Up Games 5 dollar constructed",
-      "date": "Sat. Sep 12, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Toledo, OH",
-      "city": "Toledo",
-      "state": "OH",
-      "lat": 41.6529143,
-      "lng": -83.5378173,
-      "address": "",
-      "description": "",
-      "storeName": "Sleeved-Up Games LLC",
-      "url": "https://play.sorcerytcg.com/events/67e07747-6d9a-4ccf-b647-49615db56a06"
-    },
-    {
       "name": "Curio Baltimore Sat Locals",
       "date": "Sat. Sep 12, 2026",
       "time": "6:00 PM UTC",
@@ -24427,6 +24355,24 @@
       "description": "",
       "storeName": "Sleeved-Up Games LLC",
       "url": "https://play.sorcerytcg.com/events/9bf27309-6801-4366-ae39-391317b97966"
+    },
+    {
+      "name": "Saturday Showdown at Sleeved-Up Games",
+      "date": "Sat. Sep 12, 2026",
+      "time": "6:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Toledo, OH",
+      "city": "Toledo",
+      "state": "OH",
+      "lat": 41.6529143,
+      "lng": -83.5378173,
+      "address": "",
+      "description": "",
+      "storeName": "Sleeved-Up Games LLC",
+      "url": "https://play.sorcerytcg.com/events/67e07747-6d9a-4ccf-b647-49615db56a06"
     },
     {
       "name": "Saturday Afternoon Casual Sorcery",
@@ -25830,7 +25776,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
@@ -25848,7 +25794,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Wednesday Constructed Tournament",
@@ -28567,6 +28513,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/9c75892a-e824-428f-8ff8-0a3a63577441"
+    },
+    {
+      "name": "Wednesday Night Nexus",
+      "date": "Wed. Sep 23, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "The Gamers Wharf",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Wyoming, MI",
+      "city": "Wyoming",
+      "state": "MI",
+      "lat": 42.9132581,
+      "lng": -85.7057035,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/14bb1f9a-5f6b-4da8-b97f-9374e9c2754b"
     }
   ]
 }
