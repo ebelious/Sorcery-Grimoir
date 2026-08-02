@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T13:08:35.843Z",
+  "updated": "2026-08-02T14:57:33.613Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -57,24 +57,6 @@
       "url": "https://play.sorcerytcg.com/events/bb6b398d-9ac7-4830-8555-17664cf06bd7"
     },
     {
-      "name": "Semanal",
-      "date": "Sun. Aug 2, 2026",
-      "time": "12:10 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Para de Minas, MG",
-      "city": "Para de Minas",
-      "state": "MG",
-      "lat": -19.8668656,
-      "lng": -44.5912664,
-      "address": "",
-      "description": "",
-      "storeName": "DMG Card Shop",
-      "url": "https://play.sorcerytcg.com/events/67f69f01-b298-419e-a154-0c51dcad89ac"
-    },
-    {
       "name": "Peasants constructed 020826",
       "date": "Sun. Aug 2, 2026",
       "time": "1:00 PM UTC",
@@ -109,24 +91,6 @@
       "description": "",
       "storeName": "Maginarium.pl",
       "url": "https://play.sorcerytcg.com/events/6502f527-b590-4a76-b944-3ec1ba50ad91"
-    },
-    {
-      "name": "Precons Tournament",
-      "date": "Sun. Aug 2, 2026",
-      "time": "1:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Kharkiv, Kharkiv Oblast",
-      "city": "Kharkiv",
-      "state": "Kharkiv Oblast",
-      "lat": 49.9923181,
-      "lng": 36.2310146,
-      "address": "",
-      "description": "",
-      "storeName": "Dice and Drip",
-      "url": "https://play.sorcerytcg.com/events/1d8f4fad-22a7-4ea6-963b-c9d91f803239"
     },
     {
       "name": "Sunday Sorcery Social and Escalation League",
@@ -289,6 +253,24 @@
       "description": "",
       "storeName": "Enter The Battlefield Newmarket",
       "url": "https://play.sorcerytcg.com/events/5312bde0-2db6-45e8-bdab-66177c3ebe1e"
+    },
+    {
+      "name": "Life Link Casual Play",
+      "date": "Sun. Aug 2, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Lifelink Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Charlottesville, VA",
+      "city": "Charlottesville",
+      "state": "VA",
+      "lat": 38.029306,
+      "lng": -78.4766781,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/690905c3-9357-48cb-8499-b99f67b33ab8"
     },
     {
       "name": "Sunday Afternoon - Learn to Play 12PM-3PM",
@@ -475,8 +457,8 @@
       "date": "Sun. Aug 2, 2026",
       "time": "7:00 PM UTC",
       "endTime": "",
-      "type": "Sealed Tournament",
-      "price": "FREE",
+      "type": "Shenanigans Gaming LLC",
+      "price": "Sealed Tournament",
       "duration": "",
       "location": "San Antonio, TX",
       "city": "San Antonio",
@@ -485,7 +467,7 @@
       "lng": -98.4951405,
       "address": "",
       "description": "",
-      "storeName": "Shenanigans Gaming LLC",
+      "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/765a3201-2475-4c4e-9c42-6b0a2faf595a"
     },
     {
@@ -11073,24 +11055,6 @@
       "url": "https://play.sorcerytcg.com/events/a2604abf-02e5-4145-bc70-5ab331c853b7"
     },
     {
-      "name": "Weekly constructed",
-      "date": "Wed. Aug 19, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Rarehuntershop",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "lat": 48.1049968,
-      "lng": 16.5848987,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/fb8b0f52-586e-48b4-bcee-8ee73f7c3234"
-    },
-    {
       "name": "Wednesday Constructed Tournament",
       "date": "Wed. Aug 19, 2026",
       "time": "4:00 PM UTC",
@@ -11107,6 +11071,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3a5f7720-d1c6-44e1-b9c7-b2e37def5c87"
+    },
+    {
+      "name": "Weekly constructed",
+      "date": "Wed. Aug 19, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Rarehuntershop",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Schwechat, Niederösterreich",
+      "city": "Schwechat",
+      "state": "Niederösterreich",
+      "lat": 48.1049968,
+      "lng": 16.5848987,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/fb8b0f52-586e-48b4-bcee-8ee73f7c3234"
     },
     {
       "name": "Yodasdata Sorcery Constructed",
@@ -12171,24 +12153,6 @@
       "url": "https://play.sorcerytcg.com/events/f2d8795b-aafc-49b6-a532-266d4ad3ae66"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Aug 21, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/794806b1-07aa-4fb8-822a-e8e435f30e42"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Aug 21, 2026",
       "time": "1:00 AM UTC",
@@ -12205,6 +12169,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/836fa997-a815-4209-92a3-f40db3f30e67"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Aug 21, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/794806b1-07aa-4fb8-822a-e8e435f30e42"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28945,24 +28927,6 @@
       "description": "",
       "storeName": "Trolls of the Realm",
       "url": "https://play.sorcerytcg.com/events/200980f2-67ca-47ef-aaf5-c6c0c47c9d11"
-    },
-    {
-      "name": "Guślarstwo w Merfolku - Sorcery Open Play",
-      "date": "Sun. Sep 27, 2026",
-      "time": "10:00 AM UTC",
-      "endTime": "",
-      "type": "Merfolk",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/dab7a183-70cf-490d-92a8-9a89e6883698"
     }
   ]
 }
