@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T10:29:19.558Z",
+  "updated": "2026-08-02T11:57:56.582Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -943,8 +943,8 @@
       "date": "Mon. Aug 3, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "TCG ARENA",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "București, București",
       "city": "București",
@@ -953,7 +953,7 @@
       "lng": 26.1009263,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "TCG ARENA",
       "url": "https://play.sorcerytcg.com/events/7a39249b-2f3e-4c57-813d-d96dabe2005c"
     },
     {
@@ -9381,6 +9381,24 @@
       "url": "https://play.sorcerytcg.com/events/af4e58ce-ab4e-45f6-9c6e-7da3fde960ec"
     },
     {
+      "name": "Enigma Constructed",
+      "date": "Sun. Aug 16, 2026",
+      "time": "9:00 AM UTC",
+      "endTime": "",
+      "type": "Park Enigma",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Kranj, Kranj",
+      "city": "Kranj",
+      "state": "Kranj",
+      "lat": 46.2432913,
+      "lng": 14.3549353,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/9e6a0569-1072-4871-9b0a-6c0b97cfa924"
+    },
+    {
       "name": "Sorcery Casuals",
       "date": "Sun. Aug 16, 2026",
       "time": "9:00 AM UTC",
@@ -12153,24 +12171,6 @@
       "url": "https://play.sorcerytcg.com/events/f2d8795b-aafc-49b6-a532-266d4ad3ae66"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Aug 21, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Game Kastle (Sacramento)",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/836fa997-a815-4209-92a3-f40db3f30e67"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Aug 21, 2026",
       "time": "1:00 AM UTC",
@@ -12187,6 +12187,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/794806b1-07aa-4fb8-822a-e8e435f30e42"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Aug 21, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Game Kastle (Sacramento)",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/836fa997-a815-4209-92a3-f40db3f30e67"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28585,24 +28603,6 @@
       "description": "",
       "storeName": "Cards and Comics Connection Inc",
       "url": "https://play.sorcerytcg.com/events/3dbbada5-29a2-4697-9e6e-815d2f516ec0"
-    },
-    {
-      "name": "Sorcerous Saturdays",
-      "date": "Sat. Sep 26, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Geekified",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Vinton, IA",
-      "city": "Vinton",
-      "state": "IA",
-      "lat": 42.1679131,
-      "lng": -92.0239504,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4c87d817-7f88-46e1-9e7c-92d0edf6431d"
     }
   ]
 }
