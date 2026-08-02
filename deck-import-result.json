@@ -1,48 +1,60 @@
 {
-  "requestId": "1785384219523-43eyux0fyeq",
-  "url": "https://curiosa.io/decks/cmr0zmkay001f04jrwy07jb6r",
-  "timestamp": "2026-07-30T04:05:06.940Z",
-  "deckName": "1st Place - SorceryFest (128p GC) - iNcontrol",
-  "author": "Geoffrey",
+  "requestId": "1785640969962-yqd3itbq3jq",
+  "url": "https://curiosa.io/decks/cmo4mknva00ve04jlp7ib3lzt",
+  "timestamp": "2026-08-02T03:23:46.839Z",
+  "deckName": "Scream!",
+  "author": "ebelious",
   "cards": [
     {
-      "name": "Archimago",
+      "name": "Necromancer",
       "qty": 1
     },
     {
-      "name": "Ring of Morrigan",
+      "name": "Crusade",
       "qty": 1
     },
     {
-      "name": "Algor Omphalos",
+      "name": "Eclipse",
       "qty": 1
     },
     {
-      "name": "Torrid Omphalos",
+      "name": "Mix Aer",
       "qty": 1
     },
     {
-      "name": "Cemetery Rats",
-      "qty": 2
+      "name": "Mix Terra",
+      "qty": 1
+    },
+    {
+      "name": "Toolbox",
+      "qty": 3
     },
     {
       "name": "Kettletop Leprechaun",
-      "qty": 4
+      "qty": 3
     },
     {
-      "name": "Mover of Mountains",
-      "qty": 1
+      "name": "Skeleton Mage",
+      "qty": 2
     },
     {
-      "name": "Saint of Redemption",
-      "qty": 1
-    },
-    {
-      "name": "Sister Stefánia",
-      "qty": 1
+      "name": "Field Laborers",
+      "qty": 2
     },
     {
       "name": "Root Spider",
+      "qty": 3
+    },
+    {
+      "name": "Screamer",
+      "qty": 3
+    },
+    {
+      "name": "Stygian Archers",
+      "qty": 3
+    },
+    {
+      "name": "Death Knight",
       "qty": 3
     },
     {
@@ -50,52 +62,48 @@
       "qty": 2
     },
     {
-      "name": "Paladins of Bazia",
-      "qty": 1
+      "name": "Pudge Butcher",
+      "qty": 3
     },
     {
       "name": "Archangel Michael",
       "qty": 1
     },
     {
-      "name": "Death Dealer",
-      "qty": 1
-    },
-    {
-      "name": "Assorted Animals",
+      "name": "Crawling Congregation",
       "qty": 2
     },
     {
-      "name": "Divine Healing",
+      "name": "Daperyll Vampire",
       "qty": 3
     },
     {
-      "name": "Pendragon Legacy",
+      "name": "Returned King",
       "qty": 1
     },
     {
-      "name": "Tithe",
+      "name": "Army of the Dead",
       "qty": 1
     },
     {
-      "name": "Common Sense",
-      "qty": 4
+      "name": "King of the Realm",
+      "qty": 1
+    },
+    {
+      "name": "Conqueror Worm",
+      "qty": 2
     },
     {
       "name": "Dispel",
       "qty": 1
     },
     {
-      "name": "Firebolts",
-      "qty": 1
-    },
-    {
       "name": "Gift of the Wolf",
-      "qty": 4
+      "qty": 3
     },
     {
-      "name": "Border Militia",
-      "qty": 3
+      "name": "Attack by Night",
+      "qty": 2
     },
     {
       "name": "Bury",
@@ -103,55 +111,55 @@
     },
     {
       "name": "Landmass",
-      "qty": 4
+      "qty": 3
     },
     {
-      "name": "Onslaught",
-      "qty": 2
-    },
-    {
-      "name": "Cave-In",
-      "qty": 2
-    },
-    {
-      "name": "Smite",
-      "qty": 1
+      "name": "Undead Ambush",
+      "qty": 3
     },
     {
       "name": "Earthquake",
       "qty": 2
     },
     {
-      "name": "Poison Nova",
+      "name": "Whirling Blades",
+      "qty": 2
+    },
+    {
+      "name": "Bedrock",
       "qty": 3
     },
     {
-      "name": "Major Explosion",
+      "name": "Boulevard of Bones",
       "qty": 2
     },
     {
-      "name": "Craterize",
-      "qty": 2
-    },
-    {
-      "name": "Fields of Camlann",
+      "name": "Briar Patch",
       "qty": 1
     },
     {
-      "name": "Gnome Hollows",
+      "name": "Dark Tower",
+      "qty": 1
+    },
+    {
+      "name": "Den of Evil",
+      "qty": 1
+    },
+    {
+      "name": "Fertile Earth",
       "qty": 3
     },
     {
-      "name": "Heirloom Lost",
+      "name": "Fields of Phyxis",
       "qty": 2
     },
     {
-      "name": "Humble Village",
-      "qty": 4
+      "name": "Gothic Tower",
+      "qty": 1
     },
     {
-      "name": "Mirage",
-      "qty": 2
+      "name": "Lone Tower",
+      "qty": 1
     },
     {
       "name": "Mirror Realm",
@@ -162,53 +170,49 @@
       "qty": 1
     },
     {
-      "name": "Pillar of Zeiros",
-      "qty": 1
-    },
-    {
-      "name": "Rustic Village",
-      "qty": 1
-    },
-    {
-      "name": "Shallow Grave",
+      "name": "Mountain Peaks",
       "qty": 3
+    },
+    {
+      "name": "Rift Valley",
+      "qty": 2
     },
     {
       "name": "Sinkhole",
       "qty": 2
     },
     {
-      "name": "Smokestacks of Gnaak",
+      "name": "Temple of Moloch",
       "qty": 1
     },
     {
-      "name": "Steppe",
+      "name": "Windmill",
       "qty": 3
     },
     {
-      "name": "Valley of Delight",
+      "name": "Wuthering Heights",
       "qty": 2
-    },
-    {
-      "name": "Wizard's Den",
-      "qty": 2
-    },
-    {
-      "name": "Wormelow Tump",
-      "qty": 1
     }
   ],
   "collection": [
+    {
+      "name": "Zap!",
+      "qty": 1
+    },
+    {
+      "name": "Blink",
+      "qty": 1
+    },
     {
       "name": "Dispel",
       "qty": 1
     },
     {
-      "name": "Firebolts",
+      "name": "Displace",
       "qty": 1
     },
     {
-      "name": "Border Militia",
+      "name": "Teleport",
       "qty": 1
     },
     {
@@ -216,29 +220,102 @@
       "qty": 1
     },
     {
-      "name": "Flame Strike",
+      "name": "Grapple Shot",
       "qty": 1
     },
     {
-      "name": "Heat Ray",
+      "name": "Landmass",
       "qty": 1
     },
     {
-      "name": "Makeshift Barricade",
+      "name": "Murder of Crows",
       "qty": 1
     },
     {
-      "name": "Minor Explosion",
-      "qty": 1
-    },
-    {
-      "name": "Angry Mob",
-      "qty": 1
-    },
-    {
-      "name": "Smite",
+      "name": "Arc Lightning",
       "qty": 1
     }
   ],
-  "maybeboard": []
+  "maybeboard": [
+    {
+      "name": "Bedrock",
+      "qty": 3
+    },
+    {
+      "name": "Open Grave",
+      "qty": 1
+    },
+    {
+      "name": "Sinkhole",
+      "qty": 1
+    },
+    {
+      "name": "Dwarven Digging Team",
+      "qty": 1
+    },
+    {
+      "name": "Grim Reaper",
+      "qty": 1
+    },
+    {
+      "name": "Lady Iseult",
+      "qty": 1
+    },
+    {
+      "name": "Mover of Mountains",
+      "qty": 1
+    },
+    {
+      "name": "Arcade of Bones",
+      "qty": 1
+    },
+    {
+      "name": "Attack by Night",
+      "qty": 1
+    },
+    {
+      "name": "Goswhit Helmet",
+      "qty": 1
+    },
+    {
+      "name": "Kiss of Death",
+      "qty": 2
+    },
+    {
+      "name": "Raise Militia",
+      "qty": 1
+    },
+    {
+      "name": "Vanishment",
+      "qty": 1
+    },
+    {
+      "name": "Bane of Aventis",
+      "qty": 1
+    },
+    {
+      "name": "Book of the Dead",
+      "qty": 1
+    },
+    {
+      "name": "Orb of Ba'al Berith",
+      "qty": 1
+    },
+    {
+      "name": "Draconian Bonekite",
+      "qty": 1
+    },
+    {
+      "name": "King of the Realm",
+      "qty": 1
+    },
+    {
+      "name": "Craterize",
+      "qty": 1
+    },
+    {
+      "name": "The Doom of Dilmun",
+      "qty": 1
+    }
+  ]
 }
