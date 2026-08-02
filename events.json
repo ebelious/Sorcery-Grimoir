@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T22:49:37.398Z",
+  "updated": "2026-08-02T23:53:49.117Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -435,24 +435,6 @@
       "url": "https://play.sorcerytcg.com/events/82b37f33-0f03-487e-a2d1-4c1a971b7fa6"
     },
     {
-      "name": "Sunday Sorcery",
-      "date": "Sun. Aug 2, 2026",
-      "time": "8:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "$10.00",
-      "duration": "",
-      "location": "Palo Alto, CA",
-      "city": "Palo Alto",
-      "state": "CA",
-      "lat": 37.4443293,
-      "lng": -122.1598465,
-      "address": "",
-      "description": "",
-      "storeName": "Gamelandia",
-      "url": "https://play.sorcerytcg.com/events/5b2d531a-63d3-405c-a63d-c7677974efa9"
-    },
-    {
       "name": "Weekly Sorcery Night",
       "date": "Sun. Aug 2, 2026",
       "time": "9:00 PM UTC",
@@ -505,24 +487,6 @@
       "description": "",
       "storeName": "Big Brother Comics",
       "url": "https://play.sorcerytcg.com/events/463be1ea-661d-49ff-885e-677745d64e41"
-    },
-    {
-      "name": "Casual Sunday Event",
-      "date": "Sun. Aug 2, 2026",
-      "time": "9:11 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Springfield, OR",
-      "city": "Springfield",
-      "state": "OR",
-      "lat": 44.0462362,
-      "lng": -123.0220289,
-      "address": "",
-      "description": "",
-      "storeName": "Untapped Market",
-      "url": "https://play.sorcerytcg.com/events/2a46d483-a399-4fb0-a67b-37c532a533ae"
     },
     {
       "name": "Constructed Tournament",
@@ -583,8 +547,8 @@
       "date": "Aug 2, 2026 - Aug 3, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Showcase Comics",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Lethbridge, AB",
       "city": "Lethbridge",
@@ -593,7 +557,7 @@
       "lng": -112.8331033,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Showcase Comics",
       "url": "https://play.sorcerytcg.com/events/8f25b88d-544a-41ed-bbb2-fcd0a7b5184a"
     },
     {
@@ -6739,8 +6703,8 @@
       "date": "Wed. Aug 12, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Valkyrie's Vault",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Brownsburg, IN",
       "city": "Brownsburg",
@@ -6749,7 +6713,7 @@
       "lng": -86.3968962,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Valkyrie's Vault",
       "url": "https://play.sorcerytcg.com/events/c5049e09-ed53-42f6-a41a-df3021e2be45"
     },
     {
