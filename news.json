@@ -1,10 +1,17 @@
 {
-  "updated": "2026-08-03T20:39:31.071Z",
+  "updated": "2026-08-03T21:36:10.942Z",
   "articles": [
+    {
+      "title": "Gen Con 2026: Two Grand Contests, One Unforgettable Weekend",
+      "url": "https://sorcerytcg.com/news/gen-con-2026-two-grand-contests-one-unforgettable-weekend",
+      "date": "03 Aug 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/d9eae2384bb308d5adf0b231f26a1f5f6627b491-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Meet the Lavamancer: Frostmage vs. Lavamancer",
       "url": "https://sorcerytcg.com/news/meet-the-lavamancer",
-      "date": "30 Jul 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f83ba49a0314b4c03b2bff6fc40d3ee30e92c9bf-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f0bb98bd8ef84928d2b679b9289e73eba956b297-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "SorceryFest 2026: The Third Grand Contest of the Year",
-      "url": "https://sorcerytcg.com/news/sorceryfest-2026-the-third-grand-contest-of-the-year",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/e2cc983a197dd1fff36464e306c331cd694471dc-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
