@@ -1,38 +1,59 @@
-// Scrapes a single card's TCGPlayer prices and writes the result into
-// Netlify Blobs (read back by get-tcg-price.js). Run by
-// scrape-tcg-price.yml, triggered on demand by trigger-tcg-price.js --
-// not on a periodic schedule like the other scrapers, since prices are
-// only fetched for cards someone's actually looking at.
+// Scrapes TCGPlayer market + listing prices for EVERY card in cards.json,
+// on a periodic 2-hour schedule (scrape-tcg-prices.yml) rather than
+// on-demand. Supersedes the earlier on-demand design
+// (trigger-tcg-price.js/get-tcg-price.js/scrape-tcg-price.js, keyed on a
+// single card at a time) -- those can be removed/left undeployed.
 //
 // Why Playwright (not a plain fetch(), unlike enrich-events.js): TCGPlayer
 // is a Vue single-page app -- confirmed live via view-source, the raw HTML
 // response is just an empty `<div id="app">` shell with no price data at
-// all. Everything (including the prices this script needs) is rendered
-// client-side by JS after the page loads, so a real browser is required.
+// all. Everything is rendered client-side by JS after the page loads, so a
+// real browser is required.
+//
+// Output: tcg-prices.json, a flat map keyed by lowercased card name,
+// committed to the repo -- same convention as cards.json/events.json/
+// discord.json, fetched directly by the client with no Netlify Function
+// involved for reads. This also sidesteps the CORS restriction the earlier
+// Netlify-Function-based design had when tested from a non-whitelisted
+// origin (e.g. a local file) -- a same-origin static JSON fetch has no
+// such restriction.
 //
 // Search results page structure (confirmed live via browser inspection --
 // this is what a rendered page actually contains, which view-source never
-// shows for this site):
+// shows for this SPA):
 //   <section class="product-card__product">
-//     ...
 //     <span class="product-card__title truncate">Card Name</span>       <- exact match target
 //                                                                          (foil variants append " (Foil)" to this
 //                                                                          same field -- no separate class/flag)
 //     <span class="inventory__price-with-shipping">$6.28</span>        <- lowest current listing, with shipping
 //     <span class="product-card__market-price--value">$6.44</span>     <- TCGPlayer's own Market Price
 //   </section>
+// Matching a card to the correct tile: exact (trimmed, case-insensitive)
+// title match against the card's name, which naturally excludes foil
+// tiles for a non-foil request and vice versa -- no separate foil-
+// detection logic needed.
 //
-// Matching a card to the correct tile: compares each tile's title against
-// CARD_NAME with an exact (trimmed, case-insensitive) match. This
-// naturally excludes foil tiles for a non-foil request and vice versa,
-// since "Card Name" !== "Card Name (Foil)" -- no separate foil-detection
-// logic needed beyond the exact-match itself.
+// SCALE WARNING: this is a much bigger scrape than any other script in
+// this repo -- one full page navigation PER CARD (1000+), not a handful of
+// API calls. A single browser/page is reused across all cards (not
+// relaunched per card) to keep this tractable, with a short delay between
+// each card's search to go easier on TCGPlayer's bot detection than
+// hammering it as fast as possible would. Even so, a run of this size is
+// inherently more likely to eventually get rate-limited or blocked than
+// any of the other scrapers here, which only make a handful of requests.
+// If that happens mid-run, whatever cards were already scraped are still
+// merged into the existing tcg-prices.json (a card's last known price is
+// kept until a future run actually replaces it) rather than the whole
+// run's progress being discarded.
 
+const fs = require('fs');
 const { chromium } = require('playwright');
-const { getStore } = require('@netlify/blobs');
 
-const CARD_NAME = (process.env.CARD_NAME || '').trim();
-const SEARCH_URL = 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q=' + encodeURIComponent(CARD_NAME) + '&view=grid';
+const CARDS_FILE = 'cards.json';
+const OUT_FILE = 'tcg-prices.json';
+const DELAY_MS = 1200;       // pause between each card's search
+const NAV_TIMEOUT_MS = 30000;
+const RESULT_TIMEOUT_MS = 15000;
 
 function keyFor(name) {
   return name.trim().toLowerCase();
@@ -44,94 +65,96 @@ function parsePrice(text) {
   return isNaN(n) ? null : n;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function scrapeOne(page, cardName) {
+  const url = 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q=' + encodeURIComponent(cardName) + '&view=grid';
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT_MS });
+  await page.waitForSelector('.product-card__product', { timeout: RESULT_TIMEOUT_MS }).catch(() => {});
+
+  const tiles = await page.$$eval('.product-card__product', (nodes) =>
+    nodes.map((el) => {
+      const titleEl = el.querySelector('.product-card__title');
+      const listingEl = el.querySelector('.inventory__price-with-shipping');
+      const marketEl = el.querySelector('.product-card__market-price--value');
+      return {
+        title: titleEl ? titleEl.textContent.trim() : '',
+        listingText: listingEl ? listingEl.textContent.trim() : '',
+        marketText: marketEl ? marketEl.textContent.trim() : ''
+      };
+    })
+  );
+
+  const targetLower = cardName.toLowerCase();
+  const match = tiles.find((t) => t.title.toLowerCase() === targetLower);
+
+  if (!match) {
+    return { name: cardName, marketPrice: null, marketPriceText: null, listingPrice: null, listingPriceText: null, found: false, updatedAt: Date.now() };
+  }
+  return {
+    name: cardName,
+    marketPrice: parsePrice(match.marketText),
+    marketPriceText: match.marketText || null,
+    listingPrice: parsePrice(match.listingText),
+    listingPriceText: match.listingText || null,
+    found: true,
+    updatedAt: Date.now()
+  };
+}
+
 async function main() {
-  if (!CARD_NAME) {
-    console.error('No CARD_NAME provided.');
+  if (!fs.existsSync(CARDS_FILE)) {
+    console.error('cards.json not found -- nothing to scrape.');
+    process.exit(1);
+  }
+  const cardsData = JSON.parse(fs.readFileSync(CARDS_FILE, 'utf8'));
+  const cards = Array.isArray(cardsData.cards) ? cardsData.cards : [];
+  if (!cards.length) {
+    console.error('cards.json has no cards -- nothing to scrape.');
     process.exit(1);
   }
 
-  const store = (process.env.NETLIFY_SITE_ID && process.env.NETLIFY_API_TOKEN)
-    ? getStore({ name: 'sg-tcg-prices', siteID: process.env.NETLIFY_SITE_ID, token: process.env.NETLIFY_API_TOKEN })
-    : getStore('sg-tcg-prices');
-
-  const key = keyFor(CARD_NAME);
-  let result;
-
-  const browser = await chromium.launch({ headless: true });
-  try {
-    const page = await browser.newPage({
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
-    });
-
-    await page.goto(SEARCH_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
-    // The results are rendered client-side after the page's own JS runs --
-    // wait for at least one result tile, rather than a fixed sleep, so
-    // this doesn't race a slow render on a cold TCGPlayer page load.
-    await page.waitForSelector('.product-card__product', { timeout: 20000 }).catch(() => {});
-
-    const tiles = await page.$$eval('.product-card__product', (nodes) => {
-      return nodes.map((el) => {
-        const titleEl = el.querySelector('.product-card__title');
-        const listingEl = el.querySelector('.inventory__price-with-shipping');
-        const marketEl = el.querySelector('.product-card__market-price--value');
-        return {
-          title: titleEl ? titleEl.textContent.trim() : '',
-          listingText: listingEl ? listingEl.textContent.trim() : '',
-          marketText: marketEl ? marketEl.textContent.trim() : ''
-        };
-      });
-    });
-
-    const targetLower = CARD_NAME.toLowerCase();
-    const match = tiles.find((t) => t.title.toLowerCase() === targetLower);
-
-    if (match) {
-      result = {
-        name: CARD_NAME,
-        marketPrice: parsePrice(match.marketText),
-        marketPriceText: match.marketText || null,
-        listingPrice: parsePrice(match.listingText),
-        listingPriceText: match.listingText || null,
-        found: true,
-        updatedAt: Date.now()
-      };
-      console.log('Found price for "' + CARD_NAME + '": market=' + match.marketText + ' listing=' + match.listingText);
-    } else {
-      result = {
-        name: CARD_NAME,
-        marketPrice: null,
-        marketPriceText: null,
-        listingPrice: null,
-        listingPriceText: null,
-        found: false,
-        updatedAt: Date.now()
-      };
-      console.log('No exact-match tile found for "' + CARD_NAME + '" (' + tiles.length + ' tile(s) on the page).');
+  // Merge into whatever's already there -- a card this run fails to reach
+  // (error, or the run gets cut off) keeps its last known price instead of
+  // losing it.
+  let results = {};
+  if (fs.existsSync(OUT_FILE)) {
+    try {
+      results = JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')) || {};
+    } catch (e) {
+      console.warn('Could not parse existing tcg-prices.json, starting fresh:', e.message);
     }
-  } catch (e) {
-    console.error('Scrape failed:', e.message);
-    result = {
-      name: CARD_NAME,
-      marketPrice: null,
-      marketPriceText: null,
-      listingPrice: null,
-      listingPriceText: null,
-      found: false,
-      error: e.message,
-      updatedAt: Date.now()
-    };
-  } finally {
-    await browser.close();
   }
 
-  await store.setJSON(key, result);
-  // Always clear the pending marker, success or failure, so a future
-  // trigger isn't blocked waiting out the full debounce window for
-  // nothing -- the window in trigger-tcg-price.js is really just a safety
-  // net for the (hopefully rare) case this step itself doesn't run.
-  await store.delete('pending:' + key).catch(() => {});
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+  });
 
-  console.log('Wrote result to Blobs under key "' + key + '".');
+  let found = 0, notFound = 0, failed = 0;
+  for (let i = 0; i < cards.length; i++) {
+    const name = cards[i].n;
+    if (!name) continue;
+    try {
+      const result = await scrapeOne(page, name);
+      results[keyFor(name)] = result;
+      if (result.found) found++; else notFound++;
+    } catch (e) {
+      console.warn('Failed to scrape "' + name + '":', e.message);
+      failed++;
+      // Deliberately not writing anything for this card -- whatever was
+      // already in `results` for it (from a previous run) is left as-is.
+    }
+    if (i % 25 === 0) console.log('Progress: ' + (i + 1) + '/' + cards.length + ' (found=' + found + ' notFound=' + notFound + ' failed=' + failed + ')');
+    await sleep(DELAY_MS);
+  }
+
+  await browser.close();
+
+  fs.writeFileSync(OUT_FILE, JSON.stringify(results, null, 2));
+  console.log('Done. ' + found + ' found, ' + notFound + ' not found on TCGPlayer, ' + failed + ' failed, ' + cards.length + ' total cards. Wrote ' + OUT_FILE + '.');
 }
 
 main().catch((e) => {
