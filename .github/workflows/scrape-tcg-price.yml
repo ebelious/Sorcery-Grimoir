@@ -1,12 +1,13 @@
-name: Scrape TCGPlayer Price
+name: Scrape TCGPlayer Prices
 
 on:
-  workflow_dispatch:
-    inputs:
-      card_name:
-        description: 'Exact card name to look up on TCGPlayer'
-        required: true
-        type: string
+  schedule:
+    - cron: '0 */2 * * *'   # every 2 hours
+  workflow_dispatch:          # allows manual run from GitHub Actions tab
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false  # queue instead of overlapping -- a run already in progress finishes before the next trigger starts
 
 jobs:
   scrape:
@@ -24,7 +25,7 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-          npm install playwright @netlify/blobs
+          npm install playwright
 
       - name: Get installed Playwright version
         id: pw-version
@@ -48,8 +49,18 @@ jobs:
         run: npx playwright install-deps chromium
 
       - name: Run TCGPlayer price scraper
-        env:
-          CARD_NAME: ${{ inputs.card_name }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
-        run: node scrape-tcg-price.js
+        run: node scrape-tcg-prices.js
+
+      - name: Commit tcg-prices.json if changed
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add tcg-prices.json
+          git diff --staged --quiet || git commit -m "chore: update tcg-prices.json [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "Push rejected, pulling and retrying ($i)..."
+            git checkout -- .
+            git pull --rebase origin main
+            sleep 3
+          done
