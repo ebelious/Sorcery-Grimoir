@@ -2,7 +2,7 @@ name: Scrape TCGPlayer Prices
 
 on:
   schedule:
-    - cron: '0 */4 * * *'   # every 2 hours
+    - cron: '0 */12 * * *'   # every 2 hours
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 concurrency:
