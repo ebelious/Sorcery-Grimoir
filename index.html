@@ -1099,7 +1099,7 @@ function boot(){
   G.p1TimerMinutes=ld('sg-p1tm',45);
   G.p1TimerWarnMin=ld('sg-p1tw',5);
   G.p1TimerCritMin=ld('sg-p1tc',1);
-  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evFavItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.favStoreRemoveConfirm=null;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
+  applyTheme(G.theme);_applyBodyClass();if(G.cfg.hi){document.body.style.setProperty('--hi',G.cfg.hi);}initP(G.mode);G.curiosaLoading=false;G.curiosaErr=null;G.curiosaPasteMode=null;G.showCuriosaImport=false;G.newsAddMode=false;G.evPopup=null;G.evAcResults=[];G.readModal=null;G.evCity=null;G.evCityInput='';G.evLat=null;G.evLng=null;G.evLoading=false;G.evLoaded=false;G.evErr=null;G.evItems=null;G.evFavItems=null;G._evLoadSeq=0;G.evLocPopup=false;G.evLocDraftCountry='';G.evLocDraftState='';G.evLocDraftCity='';G.evSaved=ld('sg-evsaved',[])||[];G.favStores=ld('sg-favstores',[])||[];G.tcgPrices=ld('sg-tcgprices',{})||{};G._tcgFetchedFor=null;G.resetConfirmPopup=false;G.headerSearchOpen=false;G.themeResetConfirmPopup=false;G.favStoreRemoveConfirm=null;G.rewardsLoading=false;G.rewardsLoaded=false;G.rewardsErr=null;G.rewardsItems=null;render();_applyBgImage();if(G.cfg.keepAwake)_requestWakeLock();
   if(typeof Notification!=='undefined'&&Notification.permission==='default'&&(G.cfg.notifications||G.cfg.pushNews||G.cfg.pushDiscord||G.cfg.pushYoutube||G.cfg.pushRewards)){
     Notification.requestPermission().then(function(perm){
       if(perm!=='granted'){
@@ -4154,6 +4154,36 @@ function imgSVGfb(slug){
 }
 
 function tcgURL(c){return 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q='+encodeURIComponent(cName(c))+'&view=grid';}
+// Shows the cached price immediately (from localStorage, instant, may be
+// stale or absent), then fetches the latest cached value from the server
+// (which may be newer than what's in localStorage if another device or an
+// earlier visit already refreshed it) and re-renders if it changed. Also
+// fires a background trigger to kick off a fresh scrape for *next* time --
+// this never blocks or shows a loading state, matching the "cache the old
+// value, search again for the new value once you open that card detail
+// again" behavior requested: what's shown now is always last-known-good,
+// and opening the same card later may show a newer price.
+function _loadTcgPrice(cardName){
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/get-tcg-price?name='+encodeURIComponent(cardName))
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d)return;
+      var key=cardName.trim().toLowerCase();
+      var prev=G.tcgPrices[key];
+      if(!prev||prev.updatedAt!==d.updatedAt){
+        G.tcgPrices[key]=d;
+        sv('sg-tcgprices',G.tcgPrices);
+        if(G.selCard&&cName(G.selCard)===cardName)render();
+      }
+    }).catch(function(){});
+  // Fire-and-forget -- the trigger function itself debounces (skips if
+  // already fresh or already in flight), so calling this on every popup
+  // open is safe and doesn't need any client-side throttling of its own.
+  fetch(_NETLIFY_ORIGIN+'/.netlify/functions/trigger-tcg-price',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:cardName})
+  }).catch(function(){});
+}
 // ── FILTER & HELPERS ─────────────────────────────────────────────────────────
 function cFilter(arr,f,q){
   var lq=(q||'').toLowerCase();
@@ -6983,10 +7013,11 @@ function openPanel(id){
 function openCat(cat){vibrate(10);_evACSeq++;G.evAcResults=[];G.evInputFocused=false;G.navStack.push({cat:G.cat,panel:G.panel,menu:G.menu});G.cat=cat;G.panel=null;render();}
 function goBack(){
   var _leavingCard=(G.panel==='card');
+  if(_leavingCard)G._tcgFetchedFor=null;
   _evACSeq++;G.evAcResults=[];G.evInputFocused=false;
   if(G.navStack.length>0){var prev=G.navStack.pop();G.cat=prev.cat;G.panel=prev.panel;if(prev.menu)G.menu=true;G.readModal=prev.readModal||null;G.selCard=('selCard' in prev)?prev.selCard:G.selCard;render();if(prev.readModal){requestAnimationFrame(function(){requestAnimationFrame(function(){var _rb1=document.querySelector('.rd-body');if(_rb1)_rb1.scrollTop=prev.rdScroll||0;});});}if(_dvHandScrollPos!==null){var _sp=_dvHandScrollPos;_dvHandScrollPos=null;requestAnimationFrame(function(){var _pe=document.querySelector('.panel');if(_pe)_pe.scrollTop=_sp;});}else if(_leavingCard){requestAnimationFrame(function(){requestAnimationFrame(function(){var _pe2=document.querySelector('.panel');if(_pe2)_pe2.scrollTop=0;});});}}else{if(G.panel){G.panel=null;render();}else if(G.cat){G.cat=null;render();}else{G.menu=false;render();}}
 }
-function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];G.cardPopupStack=[];_evACSeq++;G.evAcResults=[];G.evInputFocused=false;render();}
+function closeAll(){G.menu=false;G.cat=null;G.panel=null;G.navStack=[];G.cardPopupStack=[];G._tcgFetchedFor=null;_evACSeq++;G.evAcResults=[];G.evInputFocused=false;render();}
 
 // ── PANEL CONTENT ─────────────────────────────────────────────────────────────
 function pContent(){
@@ -8694,7 +8725,15 @@ function cModal(){
   }
   o('<div class="price-box">');
   o('<div class="slbl2">Markets</div>');
-  o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank">TCGPlayer <span style="color:var(--hi)">&rarr;</span></a>');
+  var _tcgNm=cName(c);
+  if(G._tcgFetchedFor!==_tcgNm){G._tcgFetchedFor=_tcgNm;_loadTcgPrice(_tcgNm);}
+  var _tcgP=G.tcgPrices[_tcgNm.trim().toLowerCase()];
+  o('<a class="cm-tcg" href="'+tcgURL(c)+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px">');
+  o('<span>TCGPlayer <span style="color:var(--hi)">&rarr;</span></span>');
+  if(_tcgP&&_tcgP.found){
+    o('<span style="font-size:11px;color:var(--fg2);font-weight:400;text-transform:none">Market <b style="color:var(--grn)">'+h(_tcgP.marketPriceText||'')+'</b>'+(_tcgP.listingPriceText?' &middot; Low <b style="color:var(--fg)">'+h(_tcgP.listingPriceText)+'</b>':'')+'</span>');
+  }
+  o('</a>');
   o('</div>');
   // Add to Deck section
   var dkKeys=Object.keys(G.decks);
