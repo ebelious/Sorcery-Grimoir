@@ -1,12 +1,16 @@
 {
-  "requestId": "1785810419366-3acb8cfukli",
+  "requestId": "1785885547634-lxw6fkszy2",
   "url": "https://curiosa.io/decks/cmqjztmmn016z04jp4c2sq34v",
-  "timestamp": "2026-08-04T02:27:44.237Z",
+  "timestamp": "2026-08-04T23:19:53.647Z",
   "deckName": "Drenched Hag",
   "author": "ebelious",
   "cards": [
     {
       "name": "Witch",
+      "qty": 1
+    },
+    {
+      "name": "Atlantean Fate",
       "qty": 1
     },
     {
@@ -31,6 +35,10 @@
     },
     {
       "name": "Meat Hook",
+      "qty": 2
+    },
+    {
+      "name": "Sewer Rats",
       "qty": 2
     },
     {
@@ -70,6 +78,10 @@
       "qty": 1
     },
     {
+      "name": "Orm Infestor",
+      "qty": 2
+    },
+    {
       "name": "Abaddon Succubus",
       "qty": 2
     },
@@ -78,12 +90,12 @@
       "qty": 2
     },
     {
-      "name": "Ruler of Thul",
+      "name": "Putrid Presence",
       "qty": 1
     },
     {
-      "name": "Sacred Stag",
-      "qty": 2
+      "name": "Ruler of Thul",
+      "qty": 1
     },
     {
       "name": "Lacuna Entity",
@@ -94,28 +106,20 @@
       "qty": 1
     },
     {
-      "name": "Questing Beast",
-      "qty": 1
-    },
-    {
       "name": "Lord of Lies",
       "qty": 2
-    },
-    {
-      "name": "Great Old One",
-      "qty": 1
     },
     {
       "name": "Pollimorph",
       "qty": 2
     },
     {
-      "name": "Return to Nature",
-      "qty": 3
-    },
-    {
       "name": "Riptide",
       "qty": 4
+    },
+    {
+      "name": "Drown",
+      "qty": 1
     },
     {
       "name": "Overflow",
@@ -222,6 +226,10 @@
     },
     {
       "name": "Meat Hook",
+      "qty": 1
+    },
+    {
+      "name": "Questing Beast",
       "qty": 1
     }
   ]
