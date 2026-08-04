@@ -12,6 +12,26 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # Running inside Playwright's own official image instead of installing
+    # Chromium + OS dependencies on a bare runner. That install step
+    # (`playwright install --with-deps` / `install-deps`) does a full
+    # `apt-get update` + installs dozens of system libraries every run --
+    # documented by the Playwright team as commonly taking minutes, and a
+    # frequent source of flakiness when Ubuntu's package mirrors are slow
+    # (see https://github.com/microsoft/playwright/issues/23388, where the
+    # Playwright team's own conclusion was "avoid apt installs, use a
+    # Docker image instead"). This image ships Chromium and every OS
+    # dependency already baked in, so there's nothing left to install here
+    # at all -- Docker layer caching on GitHub-hosted runners handles
+    # pulling it efficiently.
+    #
+    # IMPORTANT: the image tag's version (v1.62.1) must exactly match the
+    # `playwright` npm package version installed below. A mismatch between
+    # the two is the most common cause of "browser executable doesn't
+    # exist" errors with this approach -- if you bump one, bump the other
+    # to match.
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout repo
@@ -25,34 +45,14 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-          npm install playwright
-
-      - name: Get installed Playwright version
-        id: pw-version
-        run: |
-          VERSION=$(node -p "require('./node_modules/playwright/package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Cache Playwright browser binary
-        uses: actions/cache@v4
-        id: pw-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
-
-      - name: Install Chromium (cache miss only -- this is the slow part being cached)
-        if: steps.pw-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-
-      - name: Install OS dependencies only (cache hit -- browser binary already present)
-        if: steps.pw-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+          npm install playwright@1.62.1
 
       - name: Run TCGPlayer price scraper
         run: node scrape-tcg-prices.js
 
       - name: Commit tcg-prices.json if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add tcg-prices.json
