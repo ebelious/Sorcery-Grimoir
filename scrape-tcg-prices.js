@@ -29,9 +29,17 @@
 //     <span class="product-card__market-price--value">$6.44</span>     <- TCGPlayer's own Market Price
 //   </section>
 // Matching a card to the correct tile: exact (trimmed, case-insensitive)
-// title match against the card's name, which naturally excludes foil
-// tiles for a non-foil request and vice versa -- no separate foil-
-// detection logic needed.
+// title match against the card's name for the NON-FOIL price, and an exact
+// match against "<name> (Foil)" for the FOIL price. Because foil tiles are
+// a distinct search result whose title is just the name plus " (Foil)",
+// both are captured from the same results page in one navigation.
+//
+// Output shape per card (foil block only present when a foil tile exists):
+//   {
+//     name, marketPrice, marketPriceText, listingPrice, listingPriceText,
+//     found, updatedAt,
+//     foil: { marketPrice, marketPriceText, listingPrice, listingPriceText, found }
+//   }
 //
 // SCALE WARNING: this is a much bigger scrape than any other script in
 // this repo -- one full page navigation PER CARD (1000+), not a handful of
@@ -69,6 +77,20 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Build the price object for a single matched tile (or a "not found" shell).
+function priceFromTile(tile) {
+  if (!tile) {
+    return { marketPrice: null, marketPriceText: null, listingPrice: null, listingPriceText: null, found: false };
+  }
+  return {
+    marketPrice: parsePrice(tile.marketText),
+    marketPriceText: tile.marketText || null,
+    listingPrice: parsePrice(tile.listingText),
+    listingPriceText: tile.listingText || null,
+    found: true
+  };
+}
+
 async function scrapeOne(page, cardName) {
   const url = 'https://www.tcgplayer.com/search/sorcery-contested-realm/product?q=' + encodeURIComponent(cardName) + '&view=grid';
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT_MS });
@@ -88,20 +110,31 @@ async function scrapeOne(page, cardName) {
   );
 
   const targetLower = cardName.toLowerCase();
-  const match = tiles.find((t) => t.title.toLowerCase() === targetLower);
+  const foilLower = (cardName + ' (Foil)').toLowerCase();
 
-  if (!match) {
-    return { name: cardName, marketPrice: null, marketPriceText: null, listingPrice: null, listingPriceText: null, found: false, updatedAt: Date.now() };
-  }
-  return {
+  // Non-foil tile: exact title match (this naturally excludes the foil tile,
+  // whose title ends in " (Foil)"). Foil tile: exact "<name> (Foil)" match.
+  const match = tiles.find((t) => t.title.toLowerCase() === targetLower);
+  const foilMatch = tiles.find((t) => t.title.toLowerCase() === foilLower);
+
+  const base = priceFromTile(match);
+  const result = {
     name: cardName,
-    marketPrice: parsePrice(match.marketText),
-    marketPriceText: match.marketText || null,
-    listingPrice: parsePrice(match.listingText),
-    listingPriceText: match.listingText || null,
-    found: true,
+    marketPrice: base.marketPrice,
+    marketPriceText: base.marketPriceText,
+    listingPrice: base.listingPrice,
+    listingPriceText: base.listingPriceText,
+    found: base.found,
     updatedAt: Date.now()
   };
+
+  // Only attach a foil block when a foil tile actually exists, so the client
+  // can show a "Foil" line for cards that have foils and omit it otherwise.
+  if (foilMatch) {
+    result.foil = priceFromTile(foilMatch);
+  }
+
+  return result;
 }
 
 async function main() {
@@ -133,7 +166,7 @@ async function main() {
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
   });
 
-  let found = 0, notFound = 0, failed = 0;
+  let found = 0, notFound = 0, failed = 0, foilFound = 0;
   for (let i = 0; i < cards.length; i++) {
     const name = cards[i].n;
     if (!name) continue;
@@ -141,20 +174,21 @@ async function main() {
       const result = await scrapeOne(page, name);
       results[keyFor(name)] = result;
       if (result.found) found++; else notFound++;
+      if (result.foil && result.foil.found) foilFound++;
     } catch (e) {
       console.warn('Failed to scrape "' + name + '":', e.message);
       failed++;
       // Deliberately not writing anything for this card -- whatever was
       // already in `results` for it (from a previous run) is left as-is.
     }
-    if (i % 25 === 0) console.log('Progress: ' + (i + 1) + '/' + cards.length + ' (found=' + found + ' notFound=' + notFound + ' failed=' + failed + ')');
+    if (i % 25 === 0) console.log('Progress: ' + (i + 1) + '/' + cards.length + ' (found=' + found + ' foil=' + foilFound + ' notFound=' + notFound + ' failed=' + failed + ')');
     await sleep(DELAY_MS);
   }
 
   await browser.close();
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(results, null, 2));
-  console.log('Done. ' + found + ' found, ' + notFound + ' not found on TCGPlayer, ' + failed + ' failed, ' + cards.length + ' total cards. Wrote ' + OUT_FILE + '.');
+  console.log('Done. ' + found + ' found (' + foilFound + ' with foil), ' + notFound + ' not found on TCGPlayer, ' + failed + ' failed, ' + cards.length + ' total cards. Wrote ' + OUT_FILE + '.');
 }
 
 main().catch((e) => {
