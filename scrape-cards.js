@@ -121,12 +121,27 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
         const direct = v.src || v.image || v.imageUrl || v.art;
         const img = direct ? unwrapNextImage(direct) : '';
         const flavor = v.flavorText || '';
+        const artist = (v.artist && v.artist.name) ? v.artist.name : '';
         if (!setName && !finishRaw && !rarity) return null;
-        return { set: setName, finish: finishRaw, rarity, img, flavor };
+        return { set: setName, finish: finishRaw, rarity, img, flavor, artist };
       }).filter(Boolean);
       if (out.length) return out;
     }
     return [];
+  }
+
+  // Artist attribution lives on each variant as variant.artist.name (with a
+  // slug), NOT a top-level item.artist. Prefer the Standard-finish printing's
+  // artist, then any printing that has one.
+  function findArtist(item) {
+    if (Array.isArray(item.variants)) {
+      const std = item.variants.find(v => v && v.artist && v.artist.name && v.finish === 'Standard');
+      if (std) return std.artist.name;
+      const any = item.variants.find(v => v && v.artist && v.artist.name);
+      if (any) return any.artist.name;
+    }
+    if (item.artist && item.artist.name) return item.artist.name;
+    return item.artist || item.illustrator || item.artistName || '';
   }
 
   // Subtypes (e.g. Angel, Demon, Beast) aren't a separate structured field
@@ -360,7 +375,7 @@ const RARITY_MAP = { ordinary: 'ordinary', exceptional: 'exceptional', elite: 'e
       s:  setName || (allSets[0] || ''),
       ss: allSets.length ? allSets : (setName ? [setName] : []),
       txt: findText(item),
-      ar: item.artist || item.illustrator || item.artistName || '',
+      ar: findArtist(item),
       th,
       sl: fullSlug,
       img: img || undefined,
