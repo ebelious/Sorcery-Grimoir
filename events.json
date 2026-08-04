@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04T19:22:35.243Z",
+  "updated": "2026-08-04T21:05:18.149Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -235,6 +235,42 @@
       "description": "",
       "storeName": "Cold Foil Heroes",
       "url": "https://play.sorcerytcg.com/events/c454c8c9-ca33-4207-8443-ec7381de05be"
+    },
+    {
+      "name": "Sorcery Weekly Play in Pineville",
+      "date": "Aug 4, 2026 - Aug 5, 2026",
+      "time": "10:00 PM UTC",
+      "endTime": "",
+      "type": "Cosmic Hearth Games - Pineville",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Pineville, NC",
+      "city": "Pineville",
+      "state": "NC",
+      "lat": 35.0855409,
+      "lng": -80.8871253,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/38b8a731-5005-4def-828b-a67942fb82fc"
+    },
+    {
+      "name": "Geek shop",
+      "date": "Aug 4, 2026 - Aug 5, 2026",
+      "time": "10:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Aflitos, PE",
+      "city": "Aflitos",
+      "state": "PE",
+      "lat": -8.0392007,
+      "lng": -34.8967064,
+      "address": "",
+      "description": "",
+      "storeName": "Geek Shop Brasil",
+      "url": "https://play.sorcerytcg.com/events/3e691140-8aa4-4df6-8394-547fdcfdcc35"
     },
     {
       "name": "Constructed TNMT Sorcery",
@@ -541,24 +577,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/1ea841b3-9848-46b1-be33-38b922260db4"
-    },
-    {
-      "name": "Sorcery Weekly Play in Pineville",
-      "date": "Wed. Aug 5, 2026",
-      "time": "12:38 AM UTC",
-      "endTime": "",
-      "type": "Cosmic Hearth Games - Pineville",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pineville, NC",
-      "city": "Pineville",
-      "state": "NC",
-      "lat": 35.0855409,
-      "lng": -80.8871253,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/38b8a731-5005-4def-828b-a67942fb82fc"
     },
     {
       "name": "8/04/26 Fountain Valley Sorcery Constructed Tuesday 7 PM",
@@ -5983,8 +6001,8 @@
       "date": "Wed. Aug 12, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Dragon's Hoard",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Greensboro, NC",
       "city": "Greensboro",
@@ -5993,7 +6011,7 @@
       "lng": -79.7919754,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/91f05257-cba9-48f0-aa17-f1287400ae4e"
     },
     {
@@ -10699,8 +10717,8 @@
       "date": "Wed. Aug 19, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Dragon's Hoard",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Greensboro, NC",
       "city": "Greensboro",
@@ -10709,7 +10727,7 @@
       "lng": -79.7919754,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/26f2d391-ecc5-40c9-8ccc-7866d5632b8e"
     },
     {
@@ -15091,8 +15109,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Dragon's Hoard",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Greensboro, NC",
       "city": "Greensboro",
@@ -15101,7 +15119,7 @@
       "lng": -79.7919754,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/952d345f-9b06-493d-997b-3c6a38ae9cf7"
     },
     {
@@ -15463,6 +15481,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/919a48e7-4abd-4173-853a-33aca2562663"
+    },
+    {
+      "name": "Sorcerers Thursday @Lair",
+      "date": "Thu. Aug 27, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Magic Lair",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Torino, Piemonte",
+      "city": "Torino",
+      "state": "Piemonte",
+      "lat": 45.0677551,
+      "lng": 7.6824892,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/95d3f5c2-2876-4f06-a91e-8f5ce5fd3568"
     },
     {
       "name": "Thistle Tavern Edinburgh 09/07",
@@ -19033,8 +19069,8 @@
       "date": "Wed. Sep 2, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Dragon's Hoard",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Greensboro, NC",
       "city": "Greensboro",
@@ -19043,7 +19079,7 @@
       "lng": -79.7919754,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/c76408a0-cc9e-4337-b874-cbbb70326327"
     },
     {
@@ -28783,42 +28819,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/08cbf9df-c0ab-4eed-842d-d99216e0a35c"
-    },
-    {
-      "name": "MAAK KENNIS MET BETA",
-      "date": "Fri. Sep 25, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "ScheldeSpel",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Oudenaarde, Vlaanderen",
-      "city": "Oudenaarde",
-      "state": "Vlaanderen",
-      "lat": 50.8433705,
-      "lng": 3.6041443,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e5ebfb1c-51b8-4551-a156-f5e40afa3371"
-    },
-    {
-      "name": "Sorcery Weekly",
-      "date": "Fri. Sep 25, 2026",
-      "time": "5:29 PM UTC",
-      "endTime": "",
-      "type": "Spellbound Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Greater London, England",
-      "city": "Greater London",
-      "state": "England",
-      "lat": 51.5074456,
-      "lng": -0.1277653,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/45958d2f-2358-454a-a17e-cfa98e56d821"
     }
   ]
 }
