@@ -24,7 +24,7 @@ jobs:
       - name: Run scraper (twice, 30s apart)
         run: |
           node scrape-discord.js
-          sleep 30
+          sleep 45
           node scrape-discord.js
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
