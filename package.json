@@ -5,6 +5,7 @@
   "description": "Sorcery Grimoire companion app -- scrapers and Netlify functions",
   "dependencies": {
     "firebase-admin": "^12.6.0",
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.1.0",
+    "@netlify/functions": "^2.8.2"
   }
 }
