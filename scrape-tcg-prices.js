@@ -63,6 +63,15 @@ const DELAY_MS = 1200;       // pause between each card's search
 const NAV_TIMEOUT_MS = 30000;
 const RESULT_TIMEOUT_MS = 15000;
 
+// Promo sets are scraped page-by-page and labelled from THIS list, not from the
+// per-tile set text (which TCGPlayer varies by what's in stock, so it's
+// unreliable). Add more { slug, name } here as new promo sets appear.
+const PROMO_SETS = [
+  { slug: 'arthurian-legends-promo', name: 'Arthurian Legends Promo' },
+  { slug: 'dust-reward-promos',      name: 'Dust Reward Promos' }
+];
+const PROMO_MAX_PAGES = 10;
+
 function keyFor(name) {
   return name.trim().toLowerCase();
 }
@@ -96,6 +105,22 @@ async function scrapeOne(page, cardName) {
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT_MS });
   await page.waitForSelector('.product-card__product', { timeout: RESULT_TIMEOUT_MS }).catch(() => {});
 
+  // DEBUG: set TCG_DEBUG_HTML=1 (optionally TCG_DEBUG_CARD="Card Name") to print
+  // the rendered outerHTML of each matching product tile to the log, so the exact
+  // price/set selectors can be confirmed. No effect on normal runs.
+  if (process.env.TCG_DEBUG_HTML && !scrapeOne._dbgDone) {
+    const dbgCard = (process.env.TCG_DEBUG_CARD || '').toLowerCase();
+    if (!dbgCard || cardName.toLowerCase() === dbgCard) {
+      scrapeOne._dbgDone = true;
+      try {
+        const htmls = await page.$$eval('.product-card__product', (ns) => ns.map((n) => n.outerHTML));
+        console.log('\n===== TCG_DEBUG tiles for "' + cardName + '" (' + htmls.length + ' tiles) =====');
+        htmls.forEach((hh, i) => console.log('\n----- tile ' + i + ' -----\n' + hh));
+        console.log('\n===== end TCG_DEBUG =====\n');
+      } catch (e) { console.log('TCG_DEBUG dump failed:', e.message); }
+    }
+  }
+
   const tiles = await page.$$eval('.product-card__product', (nodes) =>
     nodes.map((el) => {
       const q = (sel) => { const e = el.querySelector(sel); return e ? e.textContent.trim() : ''; };
@@ -110,8 +135,13 @@ async function scrapeOne(page, cardName) {
       const rarity = q('.product-card__rarity') || q('.product-card__rarity__variant') || '';
       return {
         title: q('.product-card__title'),
-        listingText: q('.inventory__price-with-shipping'),
-        marketText: q('.product-card__market-price--value'),
+        listingText: q('.inventory__price-with-shipping') ||
+                     q('.product-card__price--value') ||
+                     q('.product-card__price') || '',
+        marketText: q('.product-card__market-price--value') ||
+                    q('.product-card__market-price .product-card__market-price--value') ||
+                    q('[class*="market-price"] [class*="value"]') ||
+                    q('.product-card__market-price') || '',
         set: set,
         rarity: rarity
       };
@@ -170,6 +200,49 @@ async function scrapeOne(page, cardName) {
   return result;
 }
 
+// Walk a promo set's pages directly and return one entry per tile, labelled
+// with the KNOWN set name (from PROMO_SETS) rather than the unreliable per-tile
+// set text.
+async function scrapePromoSet(page, slug, setName) {
+  const out = [];
+  for (let pageNum = 1; pageNum <= PROMO_MAX_PAGES; pageNum++) {
+    const url = 'https://www.tcgplayer.com/search/sorcery-contested-realm/' + slug +
+      '?productLineName=sorcery-contested-realm&view=grid&setName=' + slug + '&page=' + pageNum;
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT_MS });
+    const hasTiles = await page.waitForSelector('.product-card__product', { timeout: RESULT_TIMEOUT_MS })
+      .then(() => true).catch(() => false);
+    if (!hasTiles) break;
+    const tiles = await page.$$eval('.product-card__product', (nodes) =>
+      nodes.map((el) => {
+        const q = (sel) => { const e = el.querySelector(sel); return e ? e.textContent.trim() : ''; };
+        return {
+          title: q('.product-card__title'),
+          listingText: q('.inventory__price-with-shipping') ||
+                       q('.product-card__price--value') || q('.product-card__price') || '',
+          marketText: q('.product-card__market-price--value') ||
+                      q('[class*="market-price"] [class*="value"]') || q('.product-card__market-price') || ''
+        };
+      })
+    );
+    if (!tiles.length) break;
+    tiles.forEach((t) => {
+      if (!t.title) return;
+      const isFoil = /\(foil\)\s*$/i.test(t.title);
+      const name = t.title.replace(/\s*\(foil\)\s*$/i, '').trim();
+      const p = priceFromTile(t);
+      out.push({
+        name: name,
+        set: setName,
+        finish: isFoil ? 'Foil' : 'Normal',
+        marketPrice: p.marketPrice, marketPriceText: p.marketPriceText,
+        listingPrice: p.listingPrice, listingPriceText: p.listingPriceText
+      });
+    });
+    await sleep(DELAY_MS);
+  }
+  return out;
+}
+
 async function main() {
   if (!fs.existsSync(CARDS_FILE)) {
     console.error('cards.json not found -- nothing to scrape.');
@@ -216,6 +289,36 @@ async function main() {
     }
     if (i % 25 === 0) console.log('Progress: ' + (i + 1) + '/' + cards.length + ' (found=' + found + ' foil=' + foilFound + ' notFound=' + notFound + ' failed=' + failed + ')');
     await sleep(DELAY_MS);
+  }
+
+  // ---- Promo-set pass ----
+  // The per-card search mislabels promo tiles' set names, so drop every promo
+  // entry captured above, then re-add them from the promo SET pages where the
+  // set name is known for certain.
+  Object.keys(results).forEach((k) => {
+    const e = results[k];
+    if (e && Array.isArray(e.prints)) e.prints = e.prints.filter((x) => !/promo/i.test(x.set || ''));
+  });
+  for (const ps of PROMO_SETS) {
+    try {
+      const promoEntries = await scrapePromoSet(page, ps.slug, ps.name);
+      console.log('Promo set "' + ps.name + '": ' + promoEntries.length + ' tiles');
+      promoEntries.forEach((pe) => {
+        const key = keyFor(pe.name);
+        let entry = results[key];
+        if (!entry) {
+          entry = results[key] = { name: pe.name, marketPrice: null, marketPriceText: null,
+            listingPrice: null, listingPriceText: null, found: false, updatedAt: Date.now(), prints: [] };
+        }
+        if (!Array.isArray(entry.prints)) entry.prints = [];
+        entry.prints = entry.prints.filter((x) => !(x.set === ps.name && (x.finish || '') === (pe.finish || '')));
+        entry.prints.push({ set: pe.set, finish: pe.finish,
+          marketPrice: pe.marketPrice, marketPriceText: pe.marketPriceText,
+          listingPrice: pe.listingPrice, listingPriceText: pe.listingPriceText });
+      });
+    } catch (e) {
+      console.warn('Promo set "' + ps.name + '" failed:', e.message);
+    }
   }
 
   await browser.close();
