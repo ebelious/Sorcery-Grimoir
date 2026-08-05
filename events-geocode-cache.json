@@ -1373,5 +1373,9 @@
   "espoo|uusimaa": {
     "lat": 60.2049651,
     "lng": 24.6559808
+  },
+  "silverdale|auckland": {
+    "lat": -36.6176801,
+    "lng": 174.6769045
   }
 }
