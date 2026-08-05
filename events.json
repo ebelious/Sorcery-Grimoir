@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-05T19:20:03.217Z",
+  "updated": "2026-08-05T21:01:22.190Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -109,24 +109,6 @@
       "description": "",
       "storeName": "Red Dragon's Vault",
       "url": "https://play.sorcerytcg.com/events/3e7bd3d8-44f9-4177-9a0f-70fb553af598"
-    },
-    {
-      "name": "Wednesday Sorcery MeetUP",
-      "date": "Wed. Aug 5, 2026",
-      "time": "3:52 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Rosenheim, BY",
-      "city": "Rosenheim",
-      "state": "BY",
-      "lat": 47.8557873,
-      "lng": 12.1272983,
-      "address": "",
-      "description": "",
-      "storeName": "BB-Spiele",
-      "url": "https://play.sorcerytcg.com/events/8f9a4bda-66dd-4b27-9627-3bfae33e36b8"
     },
     {
       "name": "Wednesday Constructed Tournament",
@@ -493,8 +475,8 @@
       "date": "Aug 5, 2026 - Aug 6, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
+      "type": "Cards and Comics Connection Inc",
+      "price": "Casual Meetup",
       "duration": "",
       "location": "Conroe, TX",
       "city": "Conroe",
@@ -503,7 +485,7 @@
       "lng": -95.4560512,
       "address": "",
       "description": "",
-      "storeName": "Cards and Comics Connection Inc",
+      "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/88bcec4a-d372-4f18-aefe-37dc265c18ee"
     },
     {
@@ -637,8 +619,8 @@
       "date": "Thu. Aug 6, 2026",
       "time": "1:00 AM UTC",
       "endTime": "",
-      "type": "Games of Livermore",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "$12.00",
       "duration": "",
       "location": "Livermore, CA",
       "city": "Livermore",
@@ -647,7 +629,7 @@
       "lng": -121.768053,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Games of Livermore",
       "url": "https://play.sorcerytcg.com/events/3be76bfa-d5ca-4c80-82d5-ce0d97a74c17"
     },
     {
@@ -2016,7 +1998,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e4bd7848-4d08-4610-a4f3-4c61749197a9"
+      "url": "https://play.sorcerytcg.com/events/9119687a-30b3-4e07-967a-1947d28ca8d8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -2034,7 +2016,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9119687a-30b3-4e07-967a-1947d28ca8d8"
+      "url": "https://play.sorcerytcg.com/events/e4bd7848-4d08-4610-a4f3-4c61749197a9"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -4791,6 +4773,24 @@
       "url": "https://play.sorcerytcg.com/events/f1fda40f-2c31-4a77-a64a-33fcc1aff007"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Aug 11, 2026 - Aug 12, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/233f0d54-6177-4f64-8efe-dc72a1121575"
+    },
+    {
       "name": "Semanal Sorcery Dream Up",
       "date": "Tue. Aug 11, 2026",
       "time": "11:10 PM UTC",
@@ -6858,7 +6858,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -6876,7 +6876,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -9597,6 +9597,24 @@
       "url": "https://play.sorcerytcg.com/events/c6802d26-137c-4907-8342-0a82b49264ac"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Aug 18, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c64328c8-5048-4a8d-8cba-b72b566b6d0f"
+    },
+    {
       "name": "[Sewercity Sorcery] Tuesday Constructed",
       "date": "Aug 18, 2026 - Aug 19, 2026",
       "time": "11:00 PM UTC",
@@ -10299,24 +10317,6 @@
       "url": "https://play.sorcerytcg.com/events/2819f196-b906-4594-ab8a-081b5a336d85"
     },
     {
-      "name": "Casusal meetup",
-      "date": "Aug 19, 2026 - Aug 20, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Québec, QC",
-      "city": "Québec",
-      "state": "QC",
-      "lat": 46.8137431,
-      "lng": -71.2084061,
-      "address": "",
-      "description": "",
-      "storeName": "Game Keeper Verdun",
-      "url": "https://play.sorcerytcg.com/events/b1b71f15-61ca-4ab8-9a5b-db84533dd4a1"
-    },
-    {
       "name": "Beta Sealed @ Game Kastle",
       "date": "Aug 19, 2026 - Aug 20, 2026",
       "time": "10:30 PM UTC",
@@ -10459,6 +10459,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/8f72ad4e-b482-4536-ac49-be04187c0c8b"
+    },
+    {
+      "name": "Casusal meetup",
+      "date": "Aug 19, 2026 - Aug 20, 2026",
+      "time": "11:30 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Québec, QC",
+      "city": "Québec",
+      "state": "QC",
+      "lat": 46.8137431,
+      "lng": -71.2084061,
+      "address": "",
+      "description": "",
+      "storeName": "Game Keeper Verdun",
+      "url": "https://play.sorcerytcg.com/events/b1b71f15-61ca-4ab8-9a5b-db84533dd4a1"
     },
     {
       "name": "Plot Armor Games Sorcery Locals",
@@ -14097,6 +14115,24 @@
       "url": "https://play.sorcerytcg.com/events/7c2093e3-9768-47e6-b4eb-3cb1f6a57ad5"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Aug 25, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/6657f51f-c610-49e1-b319-0d6bc3d3429d"
+    },
+    {
       "name": "Semanal Sorcery Dream Up",
       "date": "Tue. Aug 25, 2026",
       "time": "11:10 PM UTC",
@@ -15195,24 +15231,6 @@
       "url": "https://play.sorcerytcg.com/events/700fe9cd-40f5-4aed-9fe0-a8cdfc73e64c"
     },
     {
-      "name": "Thursday Evening Sorcery",
-      "date": "Thu. Aug 27, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "War Haven Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Warsaw, IN",
-      "city": "Warsaw",
-      "state": "IN",
-      "lat": 41.2381017,
-      "lng": -85.8530544,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/38fe4a50-de3f-403b-9cfc-3a13795a5b20"
-    },
-    {
       "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
       "date": "Aug 27, 2026 - Aug 28, 2026",
       "time": "10:30 PM UTC",
@@ -15229,6 +15247,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/37121143-7d71-4123-994f-73db5ef653da"
+    },
+    {
+      "name": "Thursday Evening Sorcery",
+      "date": "Thu. Aug 27, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "War Haven Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Warsaw, IN",
+      "city": "Warsaw",
+      "state": "IN",
+      "lat": 41.2381017,
+      "lng": -85.8530544,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/38fe4a50-de3f-403b-9cfc-3a13795a5b20"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -18271,6 +18307,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c21a11c6-fcb3-4875-bf49-f9f717842b54"
+    },
+    {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Sep 1, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/60ebfe84-1a3c-4015-8165-50a8727915ca"
     },
     {
       "name": "Weekly Sorcery",
@@ -21657,6 +21711,24 @@
       "url": "https://play.sorcerytcg.com/events/acbb2828-a1a8-4556-9fd3-67eca9caf1f1"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Sep 8, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3e65559b-2301-4655-9ecf-de5b1097de4b"
+    },
+    {
       "name": "Weekly Sorcery",
       "date": "Sep 8, 2026 - Sep 9, 2026",
       "time": "11:30 PM UTC",
@@ -24735,6 +24807,24 @@
       "url": "https://play.sorcerytcg.com/events/072952d6-b47a-4fe3-8c62-2df2fcbd0a9a"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Sep 15, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/2b4134ef-40b9-4794-b648-5c93c009fe61"
+    },
+    {
       "name": "Tuesday Night Jam",
       "date": "Sep 15, 2026 - Sep 16, 2026",
       "time": "11:30 PM UTC",
@@ -25599,24 +25689,6 @@
       "url": "https://play.sorcerytcg.com/events/1cb95d2d-353b-4500-a396-42b2f93450b2"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:00 AM UTC",
@@ -25633,6 +25705,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -27579,6 +27669,24 @@
       "url": "https://play.sorcerytcg.com/events/d3db9812-9d6b-451b-a119-67b7abeff899"
     },
     {
+      "name": "Comic Book World Weekly",
+      "date": "Tue. Sep 22, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Comic Book World",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Louisville, KY",
+      "city": "Louisville",
+      "state": "KY",
+      "lat": 38.2542376,
+      "lng": -85.759407,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3befa467-6160-4e5e-b321-b159e03ae480"
+    },
+    {
       "name": "Tuesday Night Jam",
       "date": "Sep 22, 2026 - Sep 23, 2026",
       "time": "11:30 PM UTC",
@@ -27991,132 +28099,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/91fe385e-25e5-48a1-8425-af201570682a"
-    },
-    {
-      "name": "Weekly Dust Up",
-      "date": "Wed. Sep 23, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Game Grid Clearfield",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Clearfield, UT",
-      "city": "Clearfield",
-      "state": "UT",
-      "lat": 41.1135837,
-      "lng": -112.0244841,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7115d9ef-1293-40b6-83dc-acf04aac707d"
-    },
-    {
-      "name": "Plot Armor Games Sorcery Locals",
-      "date": "Wed. Sep 23, 2026",
-      "time": "11:30 PM UTC",
-      "endTime": "",
-      "type": "Plot Armor Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Spring Hill, FL",
-      "city": "Spring Hill",
-      "state": "FL",
-      "lat": 28.4635266,
-      "lng": -82.5363557,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5dab8255-2249-47e2-a214-ab387087735f"
-    },
-    {
-      "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
-      "date": "Thu. Sep 24, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "New World Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Little Elm, TX",
-      "city": "Little Elm",
-      "state": "TX",
-      "lat": 33.1626194,
-      "lng": -96.9375051,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/aea1673f-7c58-49ff-a76b-6b2d696a75ca"
-    },
-    {
-      "name": "Games of Livermore Sorcery Weekly Play",
-      "date": "Thu. Sep 24, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Games of Livermore",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Livermore, CA",
-      "city": "Livermore",
-      "state": "CA",
-      "lat": 37.6820583,
-      "lng": -121.768053,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b0f27581-3e05-4339-b38b-e2bd1c1e7cf0"
-    },
-    {
-      "name": "Wednesday Night Sorcery",
-      "date": "Thu. Sep 24, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Game Parlour",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7879363,
-      "lng": -122.4075201,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6029105c-a1f8-4b53-9fc9-9814e305be18"
-    },
-    {
-      "name": "Constructed Tournament",
-      "date": "Thu. Sep 24, 2026",
-      "time": "2:30 AM UTC",
-      "endTime": "",
-      "type": "Top Deck Keep",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Riverside, CA",
-      "city": "Riverside",
-      "state": "CA",
-      "lat": 33.9824949,
-      "lng": -117.374238,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a99c3629-1fa0-40d1-8f8b-93d4a0105dd6"
-    },
-    {
-      "name": "Fellows 平日フリー対戦会",
-      "date": "Thu. Sep 24, 2026",
-      "time": "10:00 AM UTC",
-      "endTime": "",
-      "type": "Fellows GAME CAFE&BAL",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "新橋, Tokyo",
-      "city": "新橋",
-      "state": "Tokyo",
-      "lat": 35.6653482,
-      "lng": 139.7598936,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/70151fb2-69fa-499d-9a2e-025e7c278c55"
     }
   ]
 }
