@@ -2,7 +2,7 @@ name: Scrape TCGPlayer Prices
 
 on:
   schedule:
-    - cron: '0 */12 * * *'   # every 2 hours
+    - cron: '0 */12 * * *'   # every 12 hours
   workflow_dispatch:          # allows manual run from GitHub Actions tab
 
 concurrency:
@@ -12,24 +12,8 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    # Running inside Playwright's own official image instead of installing
-    # Chromium + OS dependencies on a bare runner. That install step
-    # (`playwright install --with-deps` / `install-deps`) does a full
-    # `apt-get update` + installs dozens of system libraries every run --
-    # documented by the Playwright team as commonly taking minutes, and a
-    # frequent source of flakiness when Ubuntu's package mirrors are slow
-    # (see https://github.com/microsoft/playwright/issues/23388, where the
-    # Playwright team's own conclusion was "avoid apt installs, use a
-    # Docker image instead"). This image ships Chromium and every OS
-    # dependency already baked in, so there's nothing left to install here
-    # at all -- Docker layer caching on GitHub-hosted runners handles
-    # pulling it efficiently.
-    #
-    # IMPORTANT: the image tag's version (v1.62.1) must exactly match the
-    # `playwright` npm package version installed below. A mismatch between
-    # the two is the most common cause of "browser executable doesn't
-    # exist" errors with this approach -- if you bump one, bump the other
-    # to match.
+    # Playwright's official image (Chromium + OS deps baked in). Image tag
+    # version MUST match the playwright npm version installed below.
     container:
       image: mcr.microsoft.com/playwright:v1.62.1-noble
 

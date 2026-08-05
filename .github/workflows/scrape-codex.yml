@@ -8,6 +8,8 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout repo
@@ -19,15 +21,14 @@ jobs:
           node-version: '24'
 
       - name: Install Playwright
-        run: |
-          npm install playwright
-          npx playwright install chromium --with-deps
+        run: npm install playwright@1.62.1
 
       - name: Run scraper
         run: node scrape-codex.js
 
       - name: Commit codex.json and changelog.json if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add codex.json changelog.json

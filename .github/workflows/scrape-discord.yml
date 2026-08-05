@@ -9,6 +9,9 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # Plain Node container -- this scraper uses fetch(), no browser needed.
+    container:
+      image: node:24-bookworm
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -28,6 +31,7 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       - name: Commit discord.json / discord-state.json if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add discord.json discord-state.json

@@ -8,6 +8,12 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # Runs inside Playwright's official Docker image -- Chromium and every OS
+    # dependency are baked in, so there is no slow `playwright install
+    # --with-deps` apt step. The image tag version MUST match the playwright
+    # npm version installed below (bump both together).
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout repo
@@ -19,15 +25,14 @@ jobs:
           node-version: '24'
 
       - name: Install Playwright
-        run: |
-          npm install playwright
-          npx playwright install chromium --with-deps
+        run: npm install playwright@1.62.1
 
       - name: Run scraper
         run: node scrape-cards.js
 
       - name: Commit cards.json if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add cards.json

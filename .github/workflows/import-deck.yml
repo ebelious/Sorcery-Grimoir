@@ -16,6 +16,10 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # Playwright image ships Chromium, so the whole browser-binary cache dance
+    # from the old bare-runner version is gone -- nothing to install or cache.
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout repo
@@ -26,31 +30,10 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Install npm dependencies
+      - name: Install Playwright
         run: |
           npm install
-          npm install playwright
-
-      - name: Get installed Playwright version
-        id: pw-version
-        run: |
-          VERSION=$(node -p "require('./node_modules/playwright/package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Cache Playwright browser binary
-        uses: actions/cache@v4
-        id: pw-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}-${{ steps.pw-version.outputs.version }}
-
-      - name: Install Chromium (cache miss only -- this is the slow part being cached)
-        if: steps.pw-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-
-      - name: Install OS dependencies only (cache hit -- browser binary already present)
-        if: steps.pw-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+          npm install playwright@1.62.1
 
       - name: Run deck scraper
         env:
@@ -60,6 +43,7 @@ jobs:
 
       - name: Commit deck-import-result.json (to a separate branch, not main -- avoids triggering a GitHub Pages rebuild)
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           cp deck-import-result.json /tmp/deck-import-result.json

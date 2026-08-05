@@ -12,6 +12,8 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout repo
@@ -25,8 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install playwright firebase-admin
-          npx playwright install chromium --with-deps
+          npm install playwright@1.62.1 firebase-admin
 
       - name: Run scraper
         env:
@@ -35,6 +36,7 @@ jobs:
 
       - name: Commit events.json / state files if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add events.json events-geocode-cache.json events-seen-state.json

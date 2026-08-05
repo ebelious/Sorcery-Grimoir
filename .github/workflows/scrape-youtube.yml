@@ -12,6 +12,9 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    # Plain Node container -- this scraper uses fetch(), no browser needed.
+    container:
+      image: node:24-bookworm
 
     steps:
       - name: Checkout repo
@@ -35,6 +38,7 @@ jobs:
 
       - name: Commit youtube-state.json if changed
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add youtube-state.json
