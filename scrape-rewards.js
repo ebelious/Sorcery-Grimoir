@@ -224,6 +224,7 @@ const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
         const first = newRewards[0];
         await admin.messaging().send({
           topic: 'rewards',
+          data: { section: 'rewards' },
           notification: {
             title: 'New Reward Available',
             body: newRewards.length === 1

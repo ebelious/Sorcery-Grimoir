@@ -197,6 +197,7 @@ function findAttachmentImages(attachments) {
       const body = newest.content ? newest.content.slice(0, 140) : 'New Discord update';
       await admin.messaging().send({
         topic: 'discord',
+        data: { section: 'discord' },
         notification: {
           title: 'Discord: ' + (newest.author || 'New message'),
           body

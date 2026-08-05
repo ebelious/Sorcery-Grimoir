@@ -151,6 +151,7 @@ const fs = require('fs');
       }
       await admin.messaging().send({
         topic: 'news',
+        data: { section: 'news' },
         notification: { title, body },
         android: { priority: 'high' },
         webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url } }

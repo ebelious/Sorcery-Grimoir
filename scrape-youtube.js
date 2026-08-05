@@ -107,6 +107,7 @@ function parseLatestEntry(xml, channelName) {
       }
       await admin.messaging().send({
         topic: 'youtube',
+        data: { section: 'yt' },
         notification: {
           title: 'New video: ' + newest.channel,
           body: newest.title
