@@ -98,13 +98,22 @@ async function scrapeOne(page, cardName) {
 
   const tiles = await page.$$eval('.product-card__product', (nodes) =>
     nodes.map((el) => {
-      const titleEl = el.querySelector('.product-card__title');
-      const listingEl = el.querySelector('.inventory__price-with-shipping');
-      const marketEl = el.querySelector('.product-card__market-price--value');
+      const q = (sel) => { const e = el.querySelector(sel); return e ? e.textContent.trim() : ''; };
+      // Set name selector: TCGPlayer's markup varies, so try a few known
+      // candidates and fall back to empty. VERIFY THIS against a live search
+      // page -- if `set` comes back empty, per-printing matching in the app
+      // won't find anything (see note at top of file).
+      const set = q('.product-card__set-name') ||
+                  q('.product-card__set-name__variant') ||
+                  q('.product-card__subtitle') ||
+                  q('.product-card__group') || '';
+      const rarity = q('.product-card__rarity') || q('.product-card__rarity__variant') || '';
       return {
-        title: titleEl ? titleEl.textContent.trim() : '',
-        listingText: listingEl ? listingEl.textContent.trim() : '',
-        marketText: marketEl ? marketEl.textContent.trim() : ''
+        title: q('.product-card__title'),
+        listingText: q('.inventory__price-with-shipping'),
+        marketText: q('.product-card__market-price--value'),
+        set: set,
+        rarity: rarity
       };
     })
   );
@@ -116,6 +125,26 @@ async function scrapeOne(page, cardName) {
   // whose title ends in " (Foil)"). Foil tile: exact "<name> (Foil)" match.
   const match = tiles.find((t) => t.title.toLowerCase() === targetLower);
   const foilMatch = tiles.find((t) => t.title.toLowerCase() === foilLower);
+
+  // Per-printing prices: every tile belonging to THIS card (title equals the
+  // name, with or without a " (Foil)" suffix), one entry per set + finish. A
+  // promo/printing that isn't listed on TCGPlayer simply won't appear here, so
+  // the app shows no price for it.
+  const prints = tiles
+    .filter((t) => t.title.toLowerCase().replace(/\s*\(foil\)\s*$/, '').trim() === targetLower)
+    .map((t) => {
+      const p = priceFromTile(t);
+      return {
+        set: t.set || '',
+        finish: /\(foil\)\s*$/i.test(t.title) ? 'Foil' : 'Normal',
+        rarity: t.rarity || '',
+        marketPrice: p.marketPrice,
+        marketPriceText: p.marketPriceText,
+        listingPrice: p.listingPrice,
+        listingPriceText: p.listingPriceText
+      };
+    })
+    .filter((p) => p.marketPriceText || p.listingPriceText);
 
   const base = priceFromTile(match);
   const result = {
@@ -132,6 +161,10 @@ async function scrapeOne(page, cardName) {
   // can show a "Foil" line for cards that have foils and omit it otherwise.
   if (foilMatch) {
     result.foil = priceFromTile(foilMatch);
+  }
+  // Per-printing prices (set + finish), when any were found.
+  if (prints.length) {
+    result.prints = prints;
   }
 
   return result;
