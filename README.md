@@ -28,6 +28,13 @@
 </a>
 </td>
 
+
+<td>
+<a href="https://www.tcgplayer.com/search/sorcery-contested-realm/product?productLineName=sorcery-contested-realm&view=grid">
+<img height="36" style="display:block;" src="https://github.com/ebelious/Sorcery-Grimoir/blob/main/icons/tcgplayer-logo-full-color-secondary-black.png">
+</a>
+</td>
+
 </tr>
 </table>
 
