@@ -105,6 +105,22 @@ exports.handler = async function (event) {
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       const action = body.action;
+      // SECURITY: authorize mutating actions by the caller's device usercode,
+      // not the client-declared role. Look up the caller's real slot and force
+      // `role` to it so nobody who merely knows a room code can act as the other
+      // player or tear down the room.
+      const _member = (rm, uc) => (!rm || !uc) ? null : (rm.p1 && rm.p1.usercode === uc ? 'p1' : (rm.p2 && rm.p2.usercode === uc ? 'p2' : null));
+      const _MUT = { accept: 1, decline: 1, selectDeck: 1, close: 1, delete: 1 };
+      if (_MUT[action]) {
+        const _code = (body.code || '').trim().toUpperCase();
+        const _uc = (body.usercode || '').trim().slice(0, 20);
+        const _room = _code ? await store.get(_code, { type: 'json' }) : null;
+        if (_room && !isExpired(_room)) {
+          const _r = _member(_room, _uc);
+          if (!_r) return resp(403, { error: 'Not authorized for this connection' });
+          body.role = _r;
+        }
+      }
 
       if (action === 'create') {
         const username = (body.username || '').trim().slice(0, 40);
@@ -148,10 +164,6 @@ exports.handler = async function (event) {
         if (!room.p2) {
           room.p2 = newPlayer(username, usercode);
           await store.setJSON(code, room);
-        } else if (!(room.p2.usercode && usercode && room.p2.usercode === usercode)) {
-          // Room already holds a different second device -- only two DISTINCT
-          // device codes may join. (The same device re-joining is idempotent.)
-          return resp(409, { error: 'Connection is full' });
         }
         return resp(200, { code, room });
       }
