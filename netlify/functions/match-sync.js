@@ -41,11 +41,20 @@ function genCode() {
   return c;
 }
 
+function _redactRoom(room) {
+  if (!room || typeof room !== 'object') return room;
+  const r = Object.assign({}, room);
+  if (r.p1) { r.p1 = Object.assign({}, r.p1); delete r.p1.usercode; }
+  if (r.p2) { r.p2 = Object.assign({}, r.p2); delete r.p2.usercode; }
+  return r;
+}
 function resp(statusCode, obj) {
+  // Never expose either player's usercode -- it is the per-device auth secret.
+  const safe = (obj && obj.room) ? Object.assign({}, obj, { room: _redactRoom(obj.room) }) : obj;
   return {
     statusCode,
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-    body: JSON.stringify(obj)
+    body: JSON.stringify(safe)
   };
 }
 
@@ -74,6 +83,7 @@ exports.handler = async function (event) {
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       const action = body.action;
+      if (body.code != null && !/^[A-Z0-9]{4,12}$/.test(String(body.code).trim().toUpperCase())) return resp(400, { error: 'Invalid code' });
       // SECURITY: authorize mutating actions by the caller's device usercode,
       // not the client-declared role. Look up the caller's real slot and force
       // `role` to it so nobody who merely knows a room code can act as the other
