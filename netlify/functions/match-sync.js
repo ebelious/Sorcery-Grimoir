@@ -106,6 +106,16 @@ exports.handler = async function (event) {
           return resp(403, { error: "You can't join your own match. Share the code with someone else instead." });
         }
 
+        // Membership is keyed on the per-device usercode: only two DISTINCT
+        // devices may occupy a room. The same second device re-joining (e.g.
+        // after a reload) is idempotent; any other device is rejected.
+        if (room.p2) {
+          if (room.p2.usercode && usercode && room.p2.usercode === usercode) {
+            return resp(200, { code, room });
+          }
+          return resp(409, { error: 'Match is full' });
+        }
+
         room.p2 = { username, usercode, deck, ts: Date.now() };
         await store.setJSON(code, room);
         return resp(200, { code, room });

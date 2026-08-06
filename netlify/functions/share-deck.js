@@ -148,6 +148,10 @@ exports.handler = async function (event) {
         if (!room.p2) {
           room.p2 = newPlayer(username, usercode);
           await store.setJSON(code, room);
+        } else if (!(room.p2.usercode && usercode && room.p2.usercode === usercode)) {
+          // Room already holds a different second device -- only two DISTINCT
+          // device codes may join. (The same device re-joining is idempotent.)
+          return resp(409, { error: 'Connection is full' });
         }
         return resp(200, { code, room });
       }
