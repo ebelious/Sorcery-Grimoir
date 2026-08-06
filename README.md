@@ -57,7 +57,7 @@ This app was designed for readability and minimal feel which can also be customi
 - All of the amazing artists have the links to see their awesome work in their own menu and linked on every card
 - Allows adding, importing and exporting collections, Decks via csv files or Curiosa Deck Links
 - Theme the app by color, button options,background images, etc.. 
-- Links to all things Sorcery: News, video, Discord, Events, Artists
+- Links to all things Sorcery: News, Video, Discord, Events, Artists
 - Built-in timer for competitive games along with match timer logs to see match details
 - Simple, easy to use interface
 
