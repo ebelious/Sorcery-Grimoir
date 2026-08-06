@@ -65,6 +65,22 @@ exports.handler = async function (event) {
 
     const body = JSON.parse(event.body || '{}');
     const action = body.action;
+    // SECURITY: authorize mutating actions by the caller's device usercode,
+    // not the client-declared role. Look up the caller's real slot and force
+    // `role` to it so nobody who merely knows a room code can act as the other
+    // player or tear down the room.
+    const _member = (rm, uc) => (!rm || !uc) ? null : (rm.p1 && rm.p1.usercode === uc ? 'p1' : (rm.p2 && rm.p2.usercode === uc ? 'p2' : null));
+    const _MUT = { accept: 1, setTrade: 1, confirm: 1, close: 1 };
+    if (_MUT[action]) {
+      const _code = (body.code || '').trim().toUpperCase();
+      const _uc = (body.usercode || '').trim().slice(0, 20);
+      const _room = _code ? await store.get(_code, { type: 'json' }) : null;
+      if (_room && !isExpired(_room)) {
+        const _r = _member(_room, _uc);
+        if (!_r) return resp(403, { error: 'Not authorized for this connection' });
+        body.role = _r;
+      }
+    }
 
     if (action === 'create') {
       const username = (body.username || '').trim().slice(0, 40);
@@ -88,7 +104,19 @@ exports.handler = async function (event) {
       if (!code || !username) return resp(400, { error: 'Code and username required' });
       const room = await store.get(code, { type: 'json' });
       if (isExpired(room)) return resp(404, { error: 'Connection not found or expired' });
-      if (room.p2) return resp(409, { error: 'Connection is full' });
+      // Membership is keyed on the per-device usercode: a device can NEVER join
+      // its own connection, and a room holds at most two DISTINCT device codes.
+      if (room.p1 && room.p1.usercode && usercode && room.p1.usercode === usercode) {
+        return resp(409, { error: "You can't join your own connection." });
+      }
+      if (room.p2) {
+        // The same second device re-joining (e.g. after a reload/reconnect) is
+        // idempotent; any other device is rejected because the room is full.
+        if (room.p2.usercode && usercode && room.p2.usercode === usercode) {
+          return resp(200, { code, room });
+        }
+        return resp(409, { error: 'Connection is full' });
+      }
       room.p2 = { username, usercode, trade: [], confirmed: false, ts: Date.now() };
       await store.setJSON(code, room);
       return resp(200, { code, room });
