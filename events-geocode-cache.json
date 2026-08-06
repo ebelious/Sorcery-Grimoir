@@ -1377,5 +1377,9 @@
   "silverdale|auckland": {
     "lat": -36.6176801,
     "lng": 174.6769045
+  },
+  "brick|new jersey": {
+    "lat": 40.0707244,
+    "lng": -74.1280562
   }
 }
