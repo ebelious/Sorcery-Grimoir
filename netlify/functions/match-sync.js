@@ -74,6 +74,22 @@ exports.handler = async function (event) {
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       const action = body.action;
+      // SECURITY: authorize mutating actions by the caller's device usercode,
+      // not the client-declared role. Look up the caller's real slot and force
+      // `role` to it so nobody who merely knows a room code can act as the other
+      // player or tear down the room.
+      const _member = (rm, uc) => (!rm || !uc) ? null : (rm.p1 && rm.p1.usercode === uc ? 'p1' : (rm.p2 && rm.p2.usercode === uc ? 'p2' : null));
+      const _MUT = { acceptMatch: 1, declineMatch: 1, proposeResult: 1, confirmResult: 1, cancelResult: 1, setLife: 1, setDice: 1, leave: 1, proposeRematch: 1, cancelRematch: 1, confirmRematch: 1, rematch: 1 };
+      if (_MUT[action]) {
+        const _code = (body.code || '').trim().toUpperCase();
+        const _uc = (body.usercode || '').trim().slice(0, 20);
+        const _room = _code ? await store.get(_code, { type: 'json' }) : null;
+        if (_room && !isExpired(_room)) {
+          const _r = _member(_room, _uc);
+          if (!_r) return resp(403, { error: 'Not authorized for this connection' });
+          body.role = _r;
+        }
+      }
 
       if (action === 'create') {
         const username = (body.username || '').trim().slice(0, 40);
@@ -104,16 +120,6 @@ exports.handler = async function (event) {
 
         if (usercode && room.p1 && room.p1.usercode && room.p1.usercode === usercode) {
           return resp(403, { error: "You can't join your own match. Share the code with someone else instead." });
-        }
-
-        // Membership is keyed on the per-device usercode: only two DISTINCT
-        // devices may occupy a room. The same second device re-joining (e.g.
-        // after a reload) is idempotent; any other device is rejected.
-        if (room.p2) {
-          if (room.p2.usercode && usercode && room.p2.usercode === usercode) {
-            return resp(200, { code, room });
-          }
-          return resp(409, { error: 'Match is full' });
         }
 
         room.p2 = { username, usercode, deck, ts: Date.now() };
