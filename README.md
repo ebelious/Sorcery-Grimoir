@@ -42,7 +42,7 @@
 This is **Sorcery Grimoir**, a Contested Realm Companion application for the seekers and masters of the realm. This app is a multi tool for anyone wanting to play, understand, and/or just interested in Sorcery Contested Realm.
 This app was designed for readability and minimal feel which can also be customized to your liking 
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e375857c-dff8-47ec-b9a6-aa7e0c220442/deploy-status)](https://app.netlify.com/projects/elaborate-mooncake-835943/deploys)
+
 ## Click Here to Launch The App: [Sorcery Grimoir](https://ebelious.github.io/Sorcery-Grimoir/)
 
 
