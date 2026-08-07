@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T15:48:36.404Z",
+  "updated": "2026-08-07T16:45:51.312Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -145,42 +145,6 @@
       "description": "",
       "storeName": "Metagame Kártyabolt",
       "url": "https://play.sorcerytcg.com/events/2f071492-d8f4-4b24-9428-bc8ceec47910"
-    },
-    {
-      "name": "Monstersorcery",
-      "date": "Fri. Aug 7, 2026",
-      "time": "3:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Les Corts, CT",
-      "city": "Les Corts",
-      "state": "CT",
-      "lat": 41.3872483,
-      "lng": 2.1205352,
-      "address": "",
-      "description": "",
-      "storeName": "Monstercards",
-      "url": "https://play.sorcerytcg.com/events/3cd626ca-474e-4b58-b279-00a272d71e2a"
-    },
-    {
-      "name": "Spielraum Weekly",
-      "date": "Fri. Aug 7, 2026",
-      "time": "3:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Vienna, Wien",
-      "city": "Vienna",
-      "state": "Wien",
-      "lat": 48.2032864,
-      "lng": 16.3691936,
-      "address": "",
-      "description": "",
-      "storeName": "SpielRaum GmbH",
-      "url": "https://play.sorcerytcg.com/events/0c9a0ff1-02dd-460f-98ae-35b3453616b8"
     },
     {
       "name": "Geek Haven - Casual Meetup",
