@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T11:41:32.653Z",
+  "updated": "2026-08-07T12:45:41.771Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -55,24 +55,6 @@
       "description": "",
       "storeName": "Game Corner",
       "url": "https://play.sorcerytcg.com/events/3913f387-1b8b-4c9f-be69-25f15bf0cf60"
-    },
-    {
-      "name": "0807 mox saga sorcery",
-      "date": "Fri. Aug 7, 2026",
-      "time": "12:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Yau Ma Tei, Kowloon",
-      "city": "Yau Ma Tei",
-      "state": "Kowloon",
-      "lat": 22.3049255,
-      "lng": 114.1616003,
-      "address": "",
-      "description": "",
-      "storeName": "Mox Saga",
-      "url": "https://play.sorcerytcg.com/events/30942c43-aad6-4230-88b9-9d1449a775cb"
     },
     {
       "name": "Ordinary Mortals - Casual Meetup - Firenze",
@@ -3013,8 +2995,8 @@
       "date": "Tue. Aug 11, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "White Rabbit - Community Game Store (Essen)",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Essen, NRW",
       "city": "Essen",
@@ -3023,7 +3005,7 @@
       "lng": 7.0158171,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "White Rabbit - Community Game Store (Essen)",
       "url": "https://play.sorcerytcg.com/events/f6d3dabc-25e0-433a-900b-58de8be5fbcc"
     },
     {
