@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T06:08:00.714Z",
+  "updated": "2026-08-07T08:10:35.885Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -613,24 +613,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/05be4508-50d4-4ec0-987f-e3f8491cff2d"
-    },
-    {
-      "name": "Friday Night Sorcery",
-      "date": "Fri. Aug 7, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Lismore, NSW",
-      "city": "Lismore",
-      "state": "NSW",
-      "lat": -28.8077608,
-      "lng": 153.2791883,
-      "address": "",
-      "description": "",
-      "storeName": "Unplugged Games",
-      "url": "https://play.sorcerytcg.com/events/f7bcc35c-cdaf-4d23-a6cb-4647d8f271c5"
     },
     {
       "name": "Weekly Community Casuals",
@@ -1897,8 +1879,8 @@
       "date": "Sat. Aug 8, 2026",
       "time": "9:00 PM UTC",
       "endTime": "",
-      "type": "Darkside Games",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Las Vegas, NV",
       "city": "Las Vegas",
@@ -1907,7 +1889,7 @@
       "lng": -115.1484131,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Darkside Games",
       "url": "https://play.sorcerytcg.com/events/2210d7c4-b2c3-44bc-9727-879c41459a89"
     },
     {
@@ -10890,7 +10872,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -10908,7 +10890,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
