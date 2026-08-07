@@ -1,13 +1,393 @@
 {
-  "updated": "2026-08-07T06:58:29.382Z",
+  "updated": "2026-08-07T12:37:23.929Z",
   "source": "https://curiosa.io/decks",
   "decks": [
+    {
+      "name": "Trial of Pudge Butcher",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmroqrktl003104jpw27t9py2",
+      "format": "Constructed",
+      "timestamp": 1786106171873,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Valorous Stance",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsg4m8me00070aj8hpv5lkxb",
+      "format": "Constructed",
+      "timestamp": 1786105652252,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Burn The Witch",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqu3hjrg006d04l7gaw9kajl",
+      "format": "Constructed",
+      "timestamp": 1786105198044,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steam Percy",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshfgwxk00000akhs3lil4co",
+      "format": "Constructed",
+      "timestamp": 1786105036376,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Order of the Dust",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqg8r8ik00o804l8a63cqwjl",
+      "format": "Constructed",
+      "timestamp": 1786104454918,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "[Poorcery] Airborne Attack!",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsbr3u0100080ajdin5qufui",
+      "format": "Constructed",
+      "timestamp": 1786104321087,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "tiny cardboard",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsid11ds000c0akhw6lanfg8",
+      "format": "Constructed",
+      "timestamp": 1786104293739,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Needed cards",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmjznb3ev7ztczofnj0z0sbv7",
+      "format": "Sealed",
+      "timestamp": 1786103955487,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Trades",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshd5vnx000n0aiauglw58zg",
+      "format": "Sealed",
+      "timestamp": 1786103870135,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Aquaphile - GenCon 2026",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmh6tk9uv00vykz04go0vggi3",
+      "format": "Constructed",
+      "timestamp": 1786103738820,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Archimago",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr3z8k9g00eb04jvdxf4wadj",
+      "format": "Constructed",
+      "timestamp": 1786103200959,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Air / Fire final state",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsi897nc000109i3nx4w6ssa",
+      "format": "Constructed",
+      "timestamp": 1786101669810,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": " Muddy Magicky Pigs",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms8xsvh0001004jyo39kixac",
+      "format": "Constructed",
+      "timestamp": 1786101299059,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Mind Games",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsfys49s001a0ai3gv1x40xy",
+      "format": "Constructed",
+      "timestamp": 1786100499116,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Spells on the spectrum v3",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms1zg7d000000aknp6yaipki",
+      "format": "Constructed",
+      "timestamp": 1786100229298,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Idea1",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrzegg9500040akriay49vvn",
+      "format": "Constructed",
+      "timestamp": 1786099620219,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Idea2",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsiryetc00040ai0i8wuh1b9",
+      "format": "Constructed",
+      "timestamp": 1786096861803,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Seering Flames",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsg50n0t00080ajb816919ar",
+      "format": "Constructed",
+      "timestamp": 1786094423287,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Corruptor Reanimator",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms9640d6000e0aks9bvz4uft",
+      "format": "Constructed",
+      "timestamp": 1786094106963,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Corruptor Reanimator, Omens",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshn9zb600020ajfw00v5oqe",
+      "format": "Constructed",
+      "timestamp": 1786094092713,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Push Comes to Shove",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrta39q3000e0ajffb39t5zy",
+      "format": "Constructed",
+      "timestamp": 1786093872205,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Bone Tempest",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmryfoc4400070akjbyiwwbv4",
+      "format": "Constructed",
+      "timestamp": 1786093738698,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Burn",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshhu4pd000t04ky01owz0pi",
+      "format": "Constructed",
+      "timestamp": 1786092986138,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "AOA AUG 26 (1ST place)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsipizry00010ajjglq619om",
+      "format": "Constructed",
+      "timestamp": 1786092842697,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top8 Melb GC 2026 - AE Geo by @Mothking",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsiokei9004c0ahr3jjgld3r",
+      "format": "Constructed",
+      "timestamp": 1786091258440,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top8 Melb GC 2026 - W Necro by Matteo",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsiof0l5002p05l4865b63d2",
+      "format": "Constructed",
+      "timestamp": 1786090918056,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top8 Melb GC 2026 - FE Imposter by @Templar98",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsiocvq200020akur94h37xw",
+      "format": "Constructed",
+      "timestamp": 1786090818435,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top8 Melb GC 2026 - The Ghost of Spirits Past by @TWA",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsiob8x200000bko14mxhk16",
+      "format": "Constructed",
+      "timestamp": 1786090742226,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "3rd Place Melb GC 2026 - Mad Max by @Christopher Latta, Wizard Avatar",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsioackz00060ahya7745mqt",
+      "format": "Constructed",
+      "timestamp": 1786090700321,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top4 Melb GC 2026 - FE Archi by @Morgoth",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsio83lw002h0bjj1ttqzw4f",
+      "format": "Constructed",
+      "timestamp": 1786090595383,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "2nd Place Melb GC 2026 - Truthtelling by @TheRedMouser",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsio6j4g000b0bjjy5owpl1v",
+      "format": "Constructed",
+      "timestamp": 1786090522178,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "1st Place Melb GC 2026 - Crunchy Nut by @Zuul",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsio536u000x0akl7q2v4oox",
+      "format": "Constructed",
+      "timestamp": 1786090454873,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Dirty Cheater",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrx601hf005d04l4b9jfnvzj",
+      "format": "Constructed",
+      "timestamp": 1786089598576,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Messmer (Aggro)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cm7llkmts00bfla03spekpa1s",
+      "format": "Constructed",
+      "timestamp": 1786089431801,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Hallowed Be Thy Name",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrvd7exc004f04la7d82orz1",
+      "format": "Constructed",
+      "timestamp": 1786089140856,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Druid WallStall 2.0",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmil743ff00a1la04hekdsqaa",
+      "format": "Constructed",
+      "timestamp": 1786089041270,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Water Sausages",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsikyh47001d0akqouaytcs4",
+      "format": "Constructed",
+      "timestamp": 1786088639646,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Gates of ember",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsim9345000q0aj4u2lbwote",
+      "format": "Constructed",
+      "timestamp": 1786088611256,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
     {
       "name": "🫧 Effervescence 🫧",
       "author": "",
       "url": "https://curiosa.io/decks/cmsihxtf6000c0akx9vt0ywlo",
       "format": "Constructed",
-      "timestamp": 1786085880625,
+      "timestamp": 1786086743466,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -73,16 +453,6 @@
       "avatar": ""
     },
     {
-      "name": "Druid WallStall 2.0",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmil743ff00a1la04hekdsqaa",
-      "format": "Constructed",
-      "timestamp": 1786084069902,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "55 burgers 55 fries 55 tacos 55 pies 55 cokes 100 tater tots 100 pizzas 100 tenders 100 meatballs 100 coffees 55 wings 55 shakes 55 pancakes 55 pastas 55 peppers & 155 taters. ",
       "author": "",
       "url": "https://curiosa.io/decks/cmrl0p26d000q04jxiqf4uxfo",
@@ -98,16 +468,6 @@
       "url": "https://curiosa.io/decks/cmsik2lj200140ajg7x885156",
       "format": "Constructed",
       "timestamp": 1786083620205,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Idea1",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrzegg9500040akriay49vvn",
-      "format": "Constructed",
-      "timestamp": 1786083299630,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -223,16 +583,6 @@
       "avatar": ""
     },
     {
-      "name": "When Push Comes to Shove",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrta39q3000e0ajffb39t5zy",
-      "format": "Constructed",
-      "timestamp": 1786081452534,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "Nature's Wrath",
       "author": "",
       "url": "https://curiosa.io/decks/cmsakrnf600000bj7934r76ek",
@@ -248,356 +598,6 @@
       "url": "https://curiosa.io/decks/cmp8vebxz00hy04jyal8b5v59",
       "format": "Constructed",
       "timestamp": 1786081256341,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Air / Fire final state",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsi897nc000109i3nx4w6ssa",
-      "format": "Constructed",
-      "timestamp": 1786080986218,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "March of the Unliving",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmix0plzu04q902fn1vvhuln3",
-      "format": "Constructed",
-      "timestamp": 1786080649403,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Choke Templar (Work in progress)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsh3pe2g006d04kz8aaui4sb",
-      "format": "Constructed",
-      "timestamp": 1786080175160,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Forgotten Depths ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmplww0rk01t004jv22zklqxk",
-      "format": "Constructed",
-      "timestamp": 1786079771588,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Eyes Without a Face",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrwwb2ud000i09kujvxj0y4w",
-      "format": "Constructed",
-      "timestamp": 1786079634028,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Mistweaver Sorcerer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmseb0imm00020ajccptb5syn",
-      "format": "Constructed",
-      "timestamp": 1786078993178,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Waterboarding Royale",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmntm1z8s00gi04jx8avo4hqp",
-      "format": "Constructed",
-      "timestamp": 1786078486378,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Dust Ramp",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsdnn3ii00000bi4p5g2vppz",
-      "format": "Constructed",
-      "timestamp": 1786078325278,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "L'Impostore tempestoso",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmr0k8py7000004l1fshmnqcj",
-      "format": "Constructed",
-      "timestamp": 1786078222251,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Geomancer 2.0",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsiaksg4000c0aj6aru3ihgw",
-      "format": "Constructed",
-      "timestamp": 1786077561713,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "This Deck was Revealed to me in a Dream",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmcjc962400ifjy04exdkvpzu",
-      "format": "Constructed",
-      "timestamp": 1786077553165,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Polluted Air",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmoj3nqm0014m04l5soptj49q",
-      "format": "Constructed",
-      "timestamp": 1786077428434,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Savior-Day   (Cornerstone deck list) ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrrc7j0400030ajeobi11317",
-      "format": "Constructed",
-      "timestamp": 1786075840850,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "M - EF- Gothic",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmlmme30m009404jsyhkep9mp",
-      "format": "Constructed",
-      "timestamp": 1786075817124,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Of The Round 4c",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmerrb05x00ueky041xlzv5qu",
-      "format": "Constructed",
-      "timestamp": 1786075736894,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Righteous Fury",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmivgpfue4hui05ebh35ms3xd",
-      "format": "Constructed",
-      "timestamp": 1786075560924,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Lurkers in the Dark (AW Harbinger)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmitfu0c80clq05ebeo09me8j",
-      "format": "Constructed",
-      "timestamp": 1786075532550,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Tower Lords",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmizinvqt2vqa1rfp6p84ijav",
-      "format": "Constructed",
-      "timestamp": 1786075081871,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Powers Combined",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms41lobh001204jl4yzwylvm",
-      "format": "Constructed",
-      "timestamp": 1786075077401,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Evil Wolves ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsh9e0gr00040ag7bc7w2tjc",
-      "format": "Constructed",
-      "timestamp": 1786074330085,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Mushroom Kingdom (Mill)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmse6xht400080ahqch5uwgox",
-      "format": "Constructed",
-      "timestamp": 1786074155413,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Druid Beasts",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmshl9bk500040ajbdgm7w8hq",
-      "format": "Constructed",
-      "timestamp": 1786073690988,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Tectonic pulse",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmo5perow00al04jpoc3nxrvk",
-      "format": "Constructed",
-      "timestamp": 1786073366533,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "court meta combo search",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsi9ugvf00100ajdqs5zu4j2",
-      "format": "Constructed",
-      "timestamp": 1786073163769,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Newbie Ironclad Deck",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmpv8l4oc00p304lb92n63f8v",
-      "format": "Constructed",
-      "timestamp": 1786072115615,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Bark at the Moon",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsibvi8000090bjbhn8p3npi",
-      "format": "Constructed",
-      "timestamp": 1786071841322,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "MudWard ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsi2aktn000f0bkreiumvucp",
-      "format": "Constructed",
-      "timestamp": 1786071014046,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "$ex Panther",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsewexua00000ajb6as1vg27",
-      "format": "Constructed",
-      "timestamp": 1786070942638,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Elemental Void",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrwlsc1i00030ahm1aioa10l",
-      "format": "Constructed",
-      "timestamp": 1786070692538,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Brother! May I Have Some Oats? v. 3.1",
-      "author": "",
-      "url": "https://curiosa.io/decks/cm43x7i8l004q3ree1gbixajv",
-      "format": "Constructed",
-      "timestamp": 1786070624894,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "3: Fire Evil Druid Midrange",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms6p5gca00270ajbasxqpd16",
-      "format": "Constructed",
-      "timestamp": 1786069968147,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Double Drags",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmme7nvd900n904ldmk2m31a0",
-      "format": "Constructed",
-      "timestamp": 1786069508081,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Deathspeaker // Genesis ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms4wzll6000u04jsmrib4mkw",
-      "format": "Constructed",
-      "timestamp": 1786068877973,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Good Times With Weapons",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrfswf72009h04jx72i321ze",
-      "format": "Constructed",
-      "timestamp": 1786068839766,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Bladedancer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsiapd8d000009kwehppov7b",
-      "format": "Constructed",
-      "timestamp": 1786068708893,
       "views": null,
       "elements": [],
       "avatar": ""
