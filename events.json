@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T20:34:22.462Z",
+  "updated": "2026-08-07T21:32:55.566Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -37,24 +37,6 @@
       "description": "",
       "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/c8cca887-504d-446f-b57c-0f8e67f7d074"
-    },
-    {
-      "name": "Game Corner x Weekly event",
-      "date": "Fri. Aug 7, 2026",
-      "time": "9:30 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Christchurch, Canterbury",
-      "city": "Christchurch",
-      "state": "Canterbury",
-      "lat": -43.530955,
-      "lng": 172.6364343,
-      "address": "",
-      "description": "",
-      "storeName": "Game Corner",
-      "url": "https://play.sorcerytcg.com/events/3913f387-1b8b-4c9f-be69-25f15bf0cf60"
     },
     {
       "name": "Friday Afternoon Sorcery",
@@ -129,24 +111,6 @@
       "url": "https://play.sorcerytcg.com/events/2f071492-d8f4-4b24-9428-bc8ceec47910"
     },
     {
-      "name": "TGR Casual Meetup",
-      "date": "Fri. Aug 7, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Chichester, England",
-      "city": "Chichester",
-      "state": "England",
-      "lat": 50.8364862,
-      "lng": -0.7791721,
-      "address": "",
-      "description": "",
-      "storeName": "The Game Room",
-      "url": "https://play.sorcerytcg.com/events/8cf105dd-1d71-4b2f-9e42-0afe43c7fc06"
-    },
-    {
       "name": "Constructed",
       "date": "Fri. Aug 7, 2026",
       "time": "5:00 PM UTC",
@@ -201,24 +165,6 @@
       "url": "https://play.sorcerytcg.com/events/487f776f-d4ca-4172-ba45-29679d07724e"
     },
     {
-      "name": "Friday Afternnon Meet Up",
-      "date": "Fri. Aug 7, 2026",
-      "time": "8:34 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Norfolk, NE",
-      "city": "Norfolk",
-      "state": "NE",
-      "lat": 42.0283379,
-      "lng": -97.4169964,
-      "address": "",
-      "description": "",
-      "storeName": "JC Hobby",
-      "url": "https://play.sorcerytcg.com/events/f65f605c-2db8-42f7-aff2-5625a5de5da2"
-    },
-    {
       "name": "Learn To Play!",
       "date": "Aug 7, 2026 - Aug 8, 2026",
       "time": "9:00 PM UTC",
@@ -235,6 +181,24 @@
       "description": "",
       "storeName": "BrickHammer Hobbies",
       "url": "https://play.sorcerytcg.com/events/d3b726a3-47ed-4e15-9bc9-e3cfa81322da"
+    },
+    {
+      "name": "Paladins Semanal",
+      "date": "Aug 7, 2026 - Aug 8, 2026",
+      "time": "9:20 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Setor Bueno, GO",
+      "city": "Setor Bueno",
+      "state": "GO",
+      "lat": -16.697876,
+      "lng": -49.277922,
+      "address": "",
+      "description": "",
+      "storeName": "Paladins Games Store",
+      "url": "https://play.sorcerytcg.com/events/742cb025-3dee-45da-8c4d-f22d00d9b03b"
     },
     {
       "name": "Friday Sorcery",
@@ -414,7 +378,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e4bd7848-4d08-4610-a4f3-4c61749197a9"
+      "url": "https://play.sorcerytcg.com/events/9119687a-30b3-4e07-967a-1947d28ca8d8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -432,7 +396,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9119687a-30b3-4e07-967a-1947d28ca8d8"
+      "url": "https://play.sorcerytcg.com/events/e4bd7848-4d08-4610-a4f3-4c61749197a9"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -5400,7 +5364,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -5418,7 +5382,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -7743,24 +7707,6 @@
       "url": "https://play.sorcerytcg.com/events/d4deff2f-06e8-4cc9-a2f0-d59c2507f433"
     },
     {
-      "name": "Monday Sorcery",
-      "date": "Tue. Aug 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Stomping Grounds",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Las Vegas, NV",
-      "city": "Las Vegas",
-      "state": "NV",
-      "lat": 36.1674263,
-      "lng": -115.1484131,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
-    },
-    {
       "name": "Gothic Draft Night",
       "date": "Tue. Aug 18, 2026",
       "time": "1:30 AM UTC",
@@ -7777,6 +7723,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cd40b644-4fe1-41be-92b2-1ffb2e3d2058"
+    },
+    {
+      "name": "Monday Sorcery",
+      "date": "Tue. Aug 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Stomping Grounds",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Las Vegas, NV",
+      "city": "Las Vegas",
+      "state": "NV",
+      "lat": 36.1674263,
+      "lng": -115.1484131,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
     },
     {
       "name": "Sorcery Open Play",
@@ -10242,7 +10206,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -10260,7 +10224,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -10423,6 +10387,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/91e57ffa-3109-47bd-8fc1-dafe12ed5bf2"
+    },
+    {
+      "name": "Learn to Play!",
+      "date": "Sat. Aug 22, 2026",
+      "time": "10:00 AM UTC",
+      "endTime": "",
+      "type": "Der SpieleNarr",
+      "price": "Learn To Play",
+      "duration": "",
+      "location": "Hamburg, HH",
+      "city": "Hamburg",
+      "state": "HH",
+      "lat": 53.5909051,
+      "lng": 9.9753758,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/13c0d55c-b4b3-4797-b87c-b3e3cf001ab5"
     },
     {
       "name": "Sorcery Sundays",
@@ -14580,7 +14562,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
+      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -14598,7 +14580,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
+      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -23778,7 +23760,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
@@ -23796,7 +23778,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Wednesday Constructed Tournament",
@@ -24555,24 +24537,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -24589,6 +24553,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28459,42 +28441,6 @@
       "description": "",
       "storeName": "Reliquary Gaming",
       "url": "https://play.sorcerytcg.com/events/ff934059-0499-4610-8bea-adad9e438678"
-    },
-    {
-      "name": "EMPIRE GAMES: Sunday Open Play!",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0ce7034e-856f-47d6-8c1e-de13b0138010"
-    },
-    {
-      "name": "Sorcery Weekly Play at Slick Mimic's",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Slick Mimic's",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Appleton, WI",
-      "city": "Appleton",
-      "state": "WI",
-      "lat": 44.2613967,
-      "lng": -88.4069744,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1ea3d6a3-5f88-4465-ae87-e256e965e9b1"
     }
   ]
 }
