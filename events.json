@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T21:32:55.566Z",
+  "updated": "2026-08-07T22:28:45.177Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -237,22 +237,22 @@
       "url": "https://play.sorcerytcg.com/events/751d555f-63f4-442a-aa0e-408608a1d14d"
     },
     {
-      "name": "Friday Sorcery Constructed",
+      "name": "Sorcery Constructed",
       "date": "Aug 7, 2026 - Aug 8, 2026",
-      "time": "10:30 PM UTC",
+      "time": "10:45 PM UTC",
       "endTime": "",
-      "type": "Nova Games",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
-      "location": "Brick, New Jersey",
-      "city": "Brick",
-      "state": "New Jersey",
+      "location": "Brick Township, NJ",
+      "city": "Brick Township",
+      "state": "NJ",
       "lat": 40.0707244,
       "lng": -74.1280562,
       "address": "",
       "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7ce327e9-4bf7-4cac-8a83-4a9621491978"
+      "storeName": "Nova Games",
+      "url": "https://play.sorcerytcg.com/events/272ec09e-bc76-4260-a040-c32207544d32"
     },
     {
       "name": "Friday Evening Sorcery",
@@ -12117,6 +12117,24 @@
       "url": "https://play.sorcerytcg.com/events/acb480dd-3733-4c3e-9d0a-20ba4537eaba"
     },
     {
+      "name": "Monthly Sorcery - 1st August Event",
+      "date": "Aug 24, 2026 - Aug 25, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Draw 7 Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Muskegon, MI",
+      "city": "Muskegon",
+      "state": "MI",
+      "lat": 43.2341813,
+      "lng": -86.2483921,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/709b074b-8024-41c9-9b06-ee8122a2839d"
+    },
+    {
       "name": "Sorcery at Oinkers",
       "date": "Mon. Aug 24, 2026",
       "time": "11:00 PM UTC",
@@ -13053,24 +13071,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Weekly constructed",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Rarehuntershop",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "lat": 48.1049968,
-      "lng": 16.5848987,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
-    },
-    {
       "name": "Wednesday Constructed Tournament",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -13087,6 +13087,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
+    },
+    {
+      "name": "Weekly constructed",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Rarehuntershop",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Schwechat, Niederösterreich",
+      "city": "Schwechat",
+      "state": "Niederösterreich",
+      "lat": 48.1049968,
+      "lng": 16.5848987,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
     },
     {
       "name": "Weekly Cornerstone",
@@ -16473,6 +16491,24 @@
       "url": "https://play.sorcerytcg.com/events/19c46e03-9d08-443a-b09a-7d7252b6132e"
     },
     {
+      "name": "Monthly Sorcery - 2nd August Event",
+      "date": "Aug 31, 2026 - Sep 1, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Draw 7 Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Muskegon, MI",
+      "city": "Muskegon",
+      "state": "MI",
+      "lat": 43.2341813,
+      "lng": -86.2483921,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/1b0f3464-3960-4c89-a886-759089bd2e1f"
+    },
+    {
       "name": "Casual Monday night",
       "date": "Mon. Aug 31, 2026",
       "time": "10:30 PM UTC",
@@ -18039,24 +18075,6 @@
       "url": "https://play.sorcerytcg.com/events/0dc90ff6-afd2-4843-9734-11a35d1b6833"
     },
     {
-      "name": "GGKC Thursday Night Sorcery",
-      "date": "Thu. Sep 3, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Gamers Getaway KC",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Independence, MO",
-      "city": "Independence",
-      "state": "MO",
-      "lat": 39.0924792,
-      "lng": -94.4137923,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
-    },
-    {
       "name": "Draft Night",
       "date": "Sep 3, 2026 - Sep 4, 2026",
       "time": "11:00 PM UTC",
@@ -18073,6 +18091,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
+    },
+    {
+      "name": "GGKC Thursday Night Sorcery",
+      "date": "Thu. Sep 3, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Gamers Getaway KC",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Independence, MO",
+      "city": "Independence",
+      "state": "MO",
+      "lat": 39.0924792,
+      "lng": -94.4137923,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
     },
     {
       "name": "Casual Constructed",
@@ -23760,7 +23796,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -23778,7 +23814,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Wednesday Constructed Tournament",
@@ -24465,24 +24501,6 @@
       "url": "https://play.sorcerytcg.com/events/1cb95d2d-353b-4500-a396-42b2f93450b2"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Game Kastle (Sacramento)",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 18, 2026",
       "time": "1:00 AM UTC",
@@ -24499,6 +24517,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Game Kastle (Sacramento)",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28405,42 +28441,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/89231fd4-138f-47b2-a98f-77b7e666d1c7"
-    },
-    {
-      "name": "Silvershield Weekly Play",
-      "date": "Sun. Sep 27, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "SilverShield Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Powder Springs, GA",
-      "city": "Powder Springs",
-      "state": "GA",
-      "lat": 33.8595492,
-      "lng": -84.683824,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a5550d8c-60b9-4466-b22f-c707a8803694"
-    },
-    {
-      "name": "Gothic Escalation",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Chesterton, IN",
-      "city": "Chesterton",
-      "state": "IN",
-      "lat": 41.6107243,
-      "lng": -87.0522661,
-      "address": "",
-      "description": "",
-      "storeName": "Reliquary Gaming",
-      "url": "https://play.sorcerytcg.com/events/ff934059-0499-4610-8bea-adad9e438678"
     }
   ]
 }
