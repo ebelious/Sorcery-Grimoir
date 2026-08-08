@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T11:22:58.604Z",
+  "updated": "2026-08-08T12:32:16.848Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -127,24 +127,6 @@
       "description": "",
       "storeName": "Rogue Gaming",
       "url": "https://play.sorcerytcg.com/events/28ab8a8d-8841-43f4-896a-ab5b3cf93b49"
-    },
-    {
-      "name": "Peasant Rumble",
-      "date": "Sat. Aug 8, 2026",
-      "time": "12:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "lat": 48.1049968,
-      "lng": 16.5848987,
-      "address": "",
-      "description": "",
-      "storeName": "Rarehuntershop",
-      "url": "https://play.sorcerytcg.com/events/b5a0d3c0-d8a6-421d-98e2-a82d3ad1d508"
     },
     {
       "name": "Sorcery de Rívia - Canoas",
