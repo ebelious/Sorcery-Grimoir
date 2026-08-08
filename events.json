@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T21:24:03.803Z",
+  "updated": "2026-08-08T22:21:54.644Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -637,8 +637,8 @@
       "date": "Aug 8, 2026 - Aug 9, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Ground Zero Hobby",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Ralston, NE",
       "city": "Ralston",
@@ -647,7 +647,7 @@
       "lng": -96.0323796,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Ground Zero Hobby",
       "url": "https://play.sorcerytcg.com/events/3aa8d933-a0bb-40a5-8e2d-15a9052e009f"
     },
     {
@@ -3387,6 +3387,24 @@
       "url": "https://play.sorcerytcg.com/events/772d1f47-e074-429d-8f25-2709bc01f0fb"
     },
     {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Aug 13, 2026 - Dec 24, 2026",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "The Arcanum Sanctorum",
+      "url": "https://play.sorcerytcg.com/events/5a062af6-c6cf-4133-9f9f-3d01694a620d"
+    },
+    {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
       "date": "Thu. Aug 13, 2026",
       "time": "12:00 AM UTC",
@@ -3873,24 +3891,6 @@
       "url": "https://play.sorcerytcg.com/events/a16e2038-5db9-4157-a279-18c7640469f1"
     },
     {
-      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
-      "date": "Aug 13, 2026 - Aug 14, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Centreville, VA",
-      "city": "Centreville",
-      "state": "VA",
-      "lat": 38.837613,
-      "lng": -77.4347283,
-      "address": "",
-      "description": "",
-      "storeName": "Curio (Centreville Sq)",
-      "url": "https://play.sorcerytcg.com/events/b3222f8b-98e4-4b47-a1ba-b0b92822f240"
-    },
-    {
       "name": "Thursday Evening Sorcery",
       "date": "Thu. Aug 13, 2026",
       "time": "10:30 PM UTC",
@@ -3907,6 +3907,24 @@
       "description": "",
       "storeName": "War Haven Games",
       "url": "https://play.sorcerytcg.com/events/2572aee8-175b-479f-9780-e052c3e6c3ab"
+    },
+    {
+      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
+      "date": "Aug 13, 2026 - Aug 14, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Centreville, VA",
+      "city": "Centreville",
+      "state": "VA",
+      "lat": 38.837613,
+      "lng": -77.4347283,
+      "address": "",
+      "description": "",
+      "storeName": "Curio (Centreville Sq)",
+      "url": "https://play.sorcerytcg.com/events/b3222f8b-98e4-4b47-a1ba-b0b92822f240"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -4215,24 +4233,6 @@
       "url": "https://play.sorcerytcg.com/events/b8281af1-206d-4d54-880b-ba8853d0162a"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Aug 14, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/4aee4875-d953-4cf9-979c-1c5bfb26f0d3"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Aug 14, 2026",
       "time": "1:30 AM UTC",
@@ -4249,6 +4249,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d73ebf56-ab47-414c-88b1-b5582e410ad8"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Aug 14, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/4aee4875-d953-4cf9-979c-1c5bfb26f0d3"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -8391,6 +8409,24 @@
       "url": "https://play.sorcerytcg.com/events/5391b83e-3015-483e-bb96-4cd762d855af"
     },
     {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Aug 20, 2026 - Dec 31, 2026",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3b2a766d-8170-4838-945a-f4c4b17c7266"
+    },
+    {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
       "date": "Thu. Aug 20, 2026",
       "time": "12:00 AM UTC",
@@ -9576,7 +9612,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -9594,7 +9630,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -12477,24 +12513,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Wednesday Constructed Tournament",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "SideQuest",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Gdańsk, Województwo pomorskie",
-      "city": "Gdańsk",
-      "state": "Województwo pomorskie",
-      "lat": 54.3482907,
-      "lng": 18.6540233,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
-    },
-    {
       "name": "Weekly constructed",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -12511,6 +12529,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
+    },
+    {
+      "name": "Wednesday Constructed Tournament",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "SideQuest",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Gdańsk, Województwo pomorskie",
+      "city": "Gdańsk",
+      "state": "Województwo pomorskie",
+      "lat": 54.3482907,
+      "lng": 18.6540233,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
     },
     {
       "name": "Weekly Cornerstone",
@@ -12943,6 +12979,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6ef971e4-0ff8-4681-a305-74666a8244e2"
+    },
+    {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Aug 27, 2026 - Jan 7, 2027",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7d254485-f697-4ba3-8942-c06ebe88da65"
     },
     {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
@@ -17211,6 +17265,24 @@
       "url": "https://play.sorcerytcg.com/events/5c33bed0-2b37-4bf1-ad7e-fa7ea4ba6f4a"
     },
     {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Sep 3, 2026 - Jan 14, 2027",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/b034c3dc-c2d1-4070-9e96-18604e660333"
+    },
+    {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
       "date": "Thu. Sep 3, 2026",
       "time": "12:00 AM UTC",
@@ -20541,6 +20613,24 @@
       "url": "https://play.sorcerytcg.com/events/b22d8e2f-3cb2-4b86-ae58-37e881545390"
     },
     {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Sep 10, 2026 - Jan 21, 2027",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/8edbaca1-1d0c-4b6c-b206-6dba1f9f17e5"
+    },
+    {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
       "date": "Thu. Sep 10, 2026",
       "time": "12:00 AM UTC",
@@ -21045,24 +21135,6 @@
       "url": "https://play.sorcerytcg.com/events/3267e45b-d234-482c-a71f-86f3aadb5c71"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ba1414c9-a6cf-4f88-97ee-8e2271be18f6"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 11, 2026",
       "time": "1:30 AM UTC",
@@ -21079,6 +21151,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/9f4071cf-ddd6-40ea-93bb-4527550f1214"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ba1414c9-a6cf-4f88-97ee-8e2271be18f6"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -23725,6 +23815,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6e2fd9f9-b4af-41ef-a4f8-6fe36687ec61"
+    },
+    {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Sep 17, 2026 - Jan 28, 2027",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/e506dea4-81ed-4c45-ac27-058f94f3ebfa"
     },
     {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
@@ -26643,6 +26751,24 @@
       "url": "https://play.sorcerytcg.com/events/5dab8255-2249-47e2-a214-ab387087735f"
     },
     {
+      "name": "Wednesday Afternoon Sorcery",
+      "date": "Sep 24, 2026 - Feb 4, 2027",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "The Arcanum Sanctorum",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tucson, AZ",
+      "city": "Tucson",
+      "state": "AZ",
+      "lat": 32.2228765,
+      "lng": -110.974847,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3853c0bb-bdbb-4848-9837-a83dab409df9"
+    },
+    {
       "name": "New World Gaming Weekly Wednesdays. CONSTRUCTED",
       "date": "Thu. Sep 24, 2026",
       "time": "12:00 AM UTC",
@@ -27129,24 +27255,6 @@
       "url": "https://play.sorcerytcg.com/events/18348c54-b2fd-4ab9-a21d-3408ca2e2abe"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 25, 2026",
       "time": "1:30 AM UTC",
@@ -27163,6 +27271,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28081,132 +28207,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6862f6de-c6c1-48aa-8393-b238d0d7a287"
-    },
-    {
-      "name": "Casual Sorcery",
-      "date": "Sun. Sep 27, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Tyrone, PA",
-      "city": "Tyrone",
-      "state": "PA",
-      "lat": 40.6705508,
-      "lng": -78.2383479,
-      "address": "",
-      "description": "",
-      "storeName": "Drakes Cards and Games LLC",
-      "url": "https://play.sorcerytcg.com/events/f5f3bd7e-1684-435c-9fa4-a84cdbb3d80e"
-    },
-    {
-      "name": "Sunday Afternoon - Learn to Play 12PM-3PM",
-      "date": "Sun. Sep 27, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Gear Gaming Store",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "Bentonville, AR",
-      "city": "Bentonville",
-      "state": "AR",
-      "lat": 36.3728608,
-      "lng": -94.208787,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2db26f77-028e-4b21-880d-3d872e59cef8"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Sep 27, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "lat": 39.0889469,
-      "lng": -84.4919524,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/89231fd4-138f-47b2-a98f-77b7e666d1c7"
-    },
-    {
-      "name": "Silvershield Weekly Play",
-      "date": "Sun. Sep 27, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "SilverShield Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Powder Springs, GA",
-      "city": "Powder Springs",
-      "state": "GA",
-      "lat": 33.8595492,
-      "lng": -84.683824,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a5550d8c-60b9-4466-b22f-c707a8803694"
-    },
-    {
-      "name": "Gothic Escalation",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Chesterton, IN",
-      "city": "Chesterton",
-      "state": "IN",
-      "lat": 41.6107243,
-      "lng": -87.0522661,
-      "address": "",
-      "description": "",
-      "storeName": "Reliquary Gaming",
-      "url": "https://play.sorcerytcg.com/events/ff934059-0499-4610-8bea-adad9e438678"
-    },
-    {
-      "name": "EMPIRE GAMES: Sunday Open Play!",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0ce7034e-856f-47d6-8c1e-de13b0138010"
-    },
-    {
-      "name": "Sorcery Weekly Play at Slick Mimic's",
-      "date": "Sun. Sep 27, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Slick Mimic's",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Appleton, WI",
-      "city": "Appleton",
-      "state": "WI",
-      "lat": 44.2613967,
-      "lng": -88.4069744,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1ea3d6a3-5f88-4465-ae87-e256e965e9b1"
     }
   ]
 }
