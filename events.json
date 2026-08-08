@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T13:41:10.717Z",
+  "updated": "2026-08-08T14:26:06.397Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -529,8 +529,8 @@
       "date": "Aug 8, 2026 - Aug 9, 2026",
       "time": "8:00 PM UTC",
       "endTime": "",
-      "type": "Draft Tournament",
-      "price": "$20.00",
+      "type": "Hero's Hearth Gaming",
+      "price": "Draft Tournament",
       "duration": "",
       "location": "Cincinnati, OH",
       "city": "Cincinnati",
@@ -539,7 +539,7 @@
       "lng": -84.5127405,
       "address": "",
       "description": "",
-      "storeName": "Hero's Hearth Gaming",
+      "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/eeac5808-98ed-42e4-ab6d-739e87132f3e"
     },
     {
