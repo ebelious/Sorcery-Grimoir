@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T19:24:41.684Z",
+  "updated": "2026-08-08T20:21:33.058Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -367,8 +367,8 @@
       "date": "Sat. Aug 8, 2026",
       "time": "8:00 PM UTC",
       "endTime": "",
-      "type": "The Players Keep",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Horn Lake, MS",
       "city": "Horn Lake",
@@ -377,7 +377,7 @@
       "lng": -90.0348139,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Players Keep",
       "url": "https://play.sorcerytcg.com/events/c6c25955-b83f-4325-8df6-a7824e8cbeef"
     },
     {
@@ -397,6 +397,24 @@
       "description": "",
       "storeName": "Darkside Games",
       "url": "https://play.sorcerytcg.com/events/04db8a9e-a46e-4945-9bba-5c11bb52a263"
+    },
+    {
+      "name": "Casual Sorcery Night",
+      "date": "Aug 8, 2026 - Aug 9, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Great Escape Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7b013a42-0d44-40a7-98c9-982ba446fcf0"
     },
     {
       "name": "Curio (Baltimore) Saturday Local",
@@ -3855,24 +3873,6 @@
       "url": "https://play.sorcerytcg.com/events/a16e2038-5db9-4157-a279-18c7640469f1"
     },
     {
-      "name": "Thursday Evening Sorcery",
-      "date": "Thu. Aug 13, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Warsaw, IN",
-      "city": "Warsaw",
-      "state": "IN",
-      "lat": 41.2381017,
-      "lng": -85.8530544,
-      "address": "",
-      "description": "",
-      "storeName": "War Haven Games",
-      "url": "https://play.sorcerytcg.com/events/2572aee8-175b-479f-9780-e052c3e6c3ab"
-    },
-    {
       "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
       "date": "Aug 13, 2026 - Aug 14, 2026",
       "time": "10:30 PM UTC",
@@ -3889,6 +3889,24 @@
       "description": "",
       "storeName": "Curio (Centreville Sq)",
       "url": "https://play.sorcerytcg.com/events/b3222f8b-98e4-4b47-a1ba-b0b92822f240"
+    },
+    {
+      "name": "Thursday Evening Sorcery",
+      "date": "Thu. Aug 13, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Warsaw, IN",
+      "city": "Warsaw",
+      "state": "IN",
+      "lat": 41.2381017,
+      "lng": -85.8530544,
+      "address": "",
+      "description": "",
+      "storeName": "War Haven Games",
+      "url": "https://play.sorcerytcg.com/events/2572aee8-175b-479f-9780-e052c3e6c3ab"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -5653,6 +5671,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0cd89d9d-2d88-435e-8910-3829c91a5662"
+    },
+    {
+      "name": "Casual Sorcery Night",
+      "date": "Aug 15, 2026 - Aug 16, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Great Escape Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/06b2a541-10cc-4a0e-b58c-4dfbaa2c9688"
     },
     {
       "name": "Weekly Free Play",
@@ -12441,24 +12477,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Weekly constructed",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Rarehuntershop",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "lat": 48.1049968,
-      "lng": 16.5848987,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
-    },
-    {
       "name": "Wednesday Constructed Tournament",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -12475,6 +12493,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
+    },
+    {
+      "name": "Weekly constructed",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Rarehuntershop",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Schwechat, Niederösterreich",
+      "city": "Schwechat",
+      "state": "Niederösterreich",
+      "lat": 48.1049968,
+      "lng": 16.5848987,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
     },
     {
       "name": "Weekly Cornerstone",
@@ -14797,6 +14833,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d6337d3b-d71b-44c1-a70e-e7e821b11054"
+    },
+    {
+      "name": "Casual Sorcery Night",
+      "date": "Aug 29, 2026 - Aug 30, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Great Escape Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/622720df-28d7-4821-bbfa-c9ecde884a1e"
     },
     {
       "name": "Sorcery Saturdays!",
@@ -18687,6 +18741,24 @@
       "url": "https://play.sorcerytcg.com/events/32da63a6-08b6-4233-b79e-b0d2ffe3f1d3"
     },
     {
+      "name": "Casual Sorcery Night",
+      "date": "Sep 5, 2026 - Sep 6, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Great Escape Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/44e0e593-f55a-428a-82e6-61c343a5caa0"
+    },
+    {
       "name": "Weekly Play Saturdays",
       "date": "Sat. Sep 5, 2026",
       "time": "11:00 PM UTC",
@@ -20973,24 +21045,6 @@
       "url": "https://play.sorcerytcg.com/events/3267e45b-d234-482c-a71f-86f3aadb5c71"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/9f4071cf-ddd6-40ea-93bb-4527550f1214"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 11, 2026",
       "time": "1:30 AM UTC",
@@ -21007,6 +21061,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ba1414c9-a6cf-4f88-97ee-8e2271be18f6"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/9f4071cf-ddd6-40ea-93bb-4527550f1214"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -27057,24 +27129,6 @@
       "url": "https://play.sorcerytcg.com/events/18348c54-b2fd-4ab9-a21d-3408ca2e2abe"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 25, 2026",
       "time": "1:30 AM UTC",
@@ -27091,6 +27145,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28495,78 +28567,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/32a3c2e5-7a93-4eca-a2d4-74d5d530ae40"
-    },
-    {
-      "name": "Casual Meetup",
-      "date": "Mon. Sep 28, 2026",
-      "time": "11:06 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Roseville, MN",
-      "city": "Roseville",
-      "state": "MN",
-      "lat": 45.0060767,
-      "lng": -93.1566107,
-      "address": "",
-      "description": "",
-      "storeName": "Gamezenter",
-      "url": "https://play.sorcerytcg.com/events/b6bfa124-4c3d-40d1-804f-7212b0079cc7"
-    },
-    {
-      "name": "Monday Sorcery @ Mike and Taylors",
-      "date": "Mon. Sep 28, 2026",
-      "time": "11:30 PM UTC",
-      "endTime": "",
-      "type": "Mike and Taylor's",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Wentzville, MO",
-      "city": "Wentzville",
-      "state": "MO",
-      "lat": 38.8244136,
-      "lng": -90.8683119,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ab3ef0d3-3caa-4d9c-8c42-0d5f947e02e6"
-    },
-    {
-      "name": "Gongaii Casual Monday",
-      "date": "Tue. Sep 29, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "Gongaii Games, Inc",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Beaverton, OR",
-      "city": "Beaverton",
-      "state": "OR",
-      "lat": 45.4871723,
-      "lng": -122.80378,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0288efbb-0d67-4252-9e14-78895da1fda7"
-    },
-    {
-      "name": "Sorcery Open Play",
-      "date": "Tue. Sep 29, 2026",
-      "time": "2:00 AM UTC",
-      "endTime": "",
-      "type": "Game Theory",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Wasilla, AK",
-      "city": "Wasilla",
-      "state": "AK",
-      "lat": 61.5824216,
-      "lng": -149.442563,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f72cde96-c8d1-4528-a0b2-0643c5ea2832"
     }
   ]
 }
