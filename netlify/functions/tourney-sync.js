@@ -131,14 +131,29 @@ exports.handler = async function (event) {
       room.players = room.players || [];
       // Re-joining from the same device updates that entry instead of duplicating
       // it, so a player can resubmit a corrected deck list.
+      // A name is taken if any OTHER participant uses it -- whether they registered
+      // through the room or were added by hand to the organiser's roster. Checking
+      // only room.players missed the hand-added ones, which is how two players with
+      // the same name could still end up in one event.
+      const taken = (nm) => {
+        const want = String(nm || '').trim().toLowerCase();
+        const others = []
+          .concat(room.players || [])
+          .concat((room.event && room.event.players) || []);
+        return others.some(p => p && p.usercode !== usercode &&
+          String(p.name || '').trim().toLowerCase() === want);
+      };
       const mine = room.players.filter(p => p.usercode === usercode)[0];
       if (mine) {
+        // Re-joining may also change the name, so it has to be checked here too.
+        if (String(mine.name || '').toLowerCase() !== username.toLowerCase() && taken(username))
+          return resp(409, { error: '"' + username + '" is already used in this event. Choose a different name.' });
         mine.name = username; mine.deck = deck || mine.deck;
         mine.deckSubmitted = !!(deck || mine.deck); mine.ts = Date.now();
       } else {
         if (room.players.length >= MAX_PLAYERS) return resp(403, { error: 'This event is full' });
-        if (room.players.some(p => p.name.toLowerCase() === username.toLowerCase()))
-          return resp(409, { error: 'Someone has already registered under that name' });
+        if (taken(username))
+          return resp(409, { error: '"' + username + '" is already used in this event. Choose a different name.' });
         room.players.push({ id: 'r' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36),
           usercode, name: username, deck, deckSubmitted: !!deck, source: 'room', ts: Date.now() });
       }
