@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09T14:28:09.291Z",
+  "updated": "2026-08-09T15:24:47.662Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -169,8 +169,8 @@
       "date": "Sun. Aug 9, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "Tabletop Cincy",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "West Chester Township, OH",
       "city": "West Chester Township",
@@ -179,7 +179,7 @@
       "lng": -84.4155616,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Tabletop Cincy",
       "url": "https://play.sorcerytcg.com/events/19527c01-9ff8-4ffc-ad7f-e0af73c9c46f"
     },
     {
@@ -3211,8 +3211,8 @@
       "date": "Thu. Aug 13, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Gamers Getaway KC",
-      "price": "Draft Tournament",
+      "type": "Draft Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Independence, MO",
       "city": "Independence",
@@ -3221,7 +3221,7 @@
       "lng": -94.4137923,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers Getaway KC",
       "url": "https://play.sorcerytcg.com/events/7b74d62b-5c1c-4957-bc09-000adae2f48e"
     },
     {
