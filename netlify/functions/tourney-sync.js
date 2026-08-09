@@ -105,7 +105,7 @@ exports.handler = async function (event) {
     if (action === 'create') {
       const username = clean(body.username, 40);
       const name = clean(body.name, 60) || 'Local Event';
-      const format = ['constructed', 'peasant', 'sealed', 'draft'].indexOf(body.format) >= 0 ? body.format : 'constructed';
+      const format = ['constructed', 'sealed', 'draft'].indexOf(body.format) >= 0 ? body.format : 'constructed';
       let code;
       for (let i = 0; i < 6; i++) {
         code = genCode();
@@ -158,6 +158,16 @@ exports.handler = async function (event) {
         plannedRounds: parseInt(ev.plannedRounds || 0, 10) || 0,
         cutSize: parseInt(ev.cutSize || 0, 10) || 0,
         pods: parseInt(ev.pods || 0, 10) || 0,
+        // Phase durations, so every device in the room shows the organiser's clock.
+        timers: (function (t) {
+          if (!t || typeof t !== 'object') return undefined;
+          var out = {}, keys = ['draft', 'build', 'packs', 'match', 'round'];
+          keys.forEach(function (k) {
+            var v = parseInt(t[k], 10);
+            if (v > 0 && v <= 180) out[k] = v;
+          });
+          return Object.keys(out).length ? out : undefined;
+        })(ev.timers),
         players: (ev.players || []).slice(0, MAX_PLAYERS).map(p => ({
           id: clean(p.id, 40), name: clean(p.name, 40), dropped: !!p.dropped,
           pod: (p.pod == null ? null : parseInt(p.pod, 10)),
