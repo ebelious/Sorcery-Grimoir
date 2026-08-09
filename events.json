@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09T12:35:19.656Z",
+  "updated": "2026-08-09T13:44:44.888Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -97,8 +97,8 @@
       "date": "Sun. Aug 9, 2026",
       "time": "12:10 PM UTC",
       "endTime": "",
-      "type": "DMG Card Shop",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Para de Minas, MG",
       "city": "Para de Minas",
@@ -107,7 +107,7 @@
       "lng": -44.5912664,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "DMG Card Shop",
       "url": "https://play.sorcerytcg.com/events/088a2f43-cf15-4c6f-8343-0a13a22ebf73"
     },
     {
@@ -133,8 +133,8 @@
       "date": "Sun. Aug 9, 2026",
       "time": "2:00 PM UTC",
       "endTime": "",
-      "type": "David's Good Game Cafe",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Hamden, CT",
       "city": "Hamden",
@@ -143,7 +143,7 @@
       "lng": -72.9020069,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/7b684691-3668-4930-866c-4a0d68b96957"
     },
     {
@@ -24703,8 +24703,8 @@
       "date": "Sun. Sep 20, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "David's Good Game Cafe",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Hamden, CT",
       "city": "Hamden",
@@ -24713,7 +24713,7 @@
       "lng": -72.9020069,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/a1d8a8fc-0332-4801-9a53-8ac1abf187d0"
     },
     {
