@@ -23,7 +23,7 @@
 // Send Messages in Posts, Embed Links, Attach Files.
 //
 // POST { bug, description, log, images:[{name,data}], meta } -> { ok:true, url }
-// "Evidence" is the attachment set (screenshots), not a text field.
+// "Evidence" is the attachment set -- images or short videos -- not a text field.
 
 const { getStore } = require('@netlify/blobs');
 
@@ -42,9 +42,12 @@ const LIM = { thread: 100, field: 1000, footer: 2000 };
 // Attachment ceilings. The debug log is ~180KB worst case; screenshots are the
 // only thing that can get big, and Discord rejects >8MB on an unboosted server.
 const MAX_LOG = 400 * 1024;
-const MAX_IMG = 3 * 1024 * 1024;        // per screenshot
-const MAX_IMG_TOTAL = 4 * 1024 * 1024;  // all screenshots combined
+const MAX_IMG = 3 * 1024 * 1024;        // per attachment
+const MAX_IMG_TOTAL = 4 * 1024 * 1024;  // all attachments combined
 const MAX_FILES = 8;
+// Images and short videos only. Anything else is dropped server-side too, so a
+// hand-crafted request can't smuggle a different file type into the channel.
+const OK_MEDIA = /^(image\/(png|jpe?g|gif|webp|heic|heif|bmp)|video\/(mp4|quicktime|webm|x-matroska|3gpp|mpeg))$/i;
 
 function cors(extra) {
   return Object.assign({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }, extra || {});
@@ -113,7 +116,7 @@ exports.handler = async function (event) {
     } catch (e) {}
   }
 
-  // Decode the screenshots first: they ARE the evidence, so the summary that goes
+  // Decode the attachments first: they ARE the evidence, so the summary that goes
   // into the embed and the report file is derived from them.
   const stampEarly = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const shots = [];
@@ -122,18 +125,20 @@ exports.handler = async function (event) {
   rawImages.forEach((im, ix) => {
     try {
       const src = (im && typeof im === 'string') ? im : (im && im.data) || '';
-      const m = /^data:(image\/[a-z+]+);base64,(.*)$/i.exec(src);
+      const m = /^data:((?:image|video)\/[a-z0-9.+-]+);base64,(.*)$/i.exec(src);
       if (!m) return;
+      const mime = m[1].toLowerCase();
+      if (!OK_MEDIA.test(mime)) return;
       const buf = Buffer.from(m[2], 'base64');
       if (buf.length > MAX_IMG || shotBytes + buf.length > MAX_IMG_TOTAL) return;
       shotBytes += buf.length;
-      const ext = (m[1].split('/')[1] || 'png').replace('jpeg', 'jpg');
-      shots.push({ name: 'evidence_' + stampEarly + '_' + (ix + 1) + '.' + ext, data: buf, type: m[1], kb: Math.ceil(buf.length / 1024) });
+      const ext = (mime.split('/')[1] || 'bin').replace('jpeg', 'jpg').replace('quicktime', 'mov').replace('x-matroska', 'mkv').replace('3gpp', '3gp');
+      shots.push({ name: 'evidence_' + stampEarly + '_' + (ix + 1) + '.' + ext, data: buf, type: mime, kb: Math.ceil(buf.length / 1024), vid: mime.indexOf('video/') === 0 });
     } catch (e) {}
   });
   const evidence = shots.length
-    ? shots.map(sh => '• `' + sh.name + '` (' + sh.kb + ' KB)').join('\n')
-    : 'No screenshots attached';
+    ? shots.map(sh => (sh.vid ? '▶ `' : '• `') + sh.name + '` (' + sh.kb + ' KB)').join('\n')
+    : 'No attachments';
 
   // Long-form text goes in as a file attachment rather than in the embed, so
   // nothing is silently truncated away by Discord's field limits.
