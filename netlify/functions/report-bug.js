@@ -22,7 +22,8 @@
 // The bot needs, on that forum channel: View Channel, Create Posts,
 // Send Messages in Posts, Embed Links, Attach Files.
 //
-// POST { bug, description, evidence, log, image, meta } -> { ok:true, url }
+// POST { bug, description, log, images:[{name,data}], meta } -> { ok:true, url }
+// "Evidence" is the attachment set (screenshots), not a text field.
 
 const { getStore } = require('@netlify/blobs');
 
@@ -41,7 +42,9 @@ const LIM = { thread: 100, field: 1000, footer: 2000 };
 // Attachment ceilings. The debug log is ~180KB worst case; screenshots are the
 // only thing that can get big, and Discord rejects >8MB on an unboosted server.
 const MAX_LOG = 400 * 1024;
-const MAX_IMG = 4 * 1024 * 1024;
+const MAX_IMG = 3 * 1024 * 1024;        // per screenshot
+const MAX_IMG_TOTAL = 4 * 1024 * 1024;  // all screenshots combined
+const MAX_FILES = 8;
 
 function cors(extra) {
   return Object.assign({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }, extra || {});
@@ -84,7 +87,6 @@ exports.handler = async function (event) {
 
   const bug = clip(body.bug, LIM.thread);
   const description = clip(body.description, LIM.field);
-  const evidence = clip(body.evidence, LIM.field);
   const meta = clip(body.meta, LIM.footer);
   if (!bug && !description) return resp(400, { error: 'Please describe the bug before sending.' });
 
@@ -111,6 +113,28 @@ exports.handler = async function (event) {
     } catch (e) {}
   }
 
+  // Decode the screenshots first: they ARE the evidence, so the summary that goes
+  // into the embed and the report file is derived from them.
+  const stampEarly = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const shots = [];
+  let shotBytes = 0;
+  const rawImages = Array.isArray(body.images) ? body.images.slice(0, MAX_FILES) : [];
+  rawImages.forEach((im, ix) => {
+    try {
+      const src = (im && typeof im === 'string') ? im : (im && im.data) || '';
+      const m = /^data:(image\/[a-z+]+);base64,(.*)$/i.exec(src);
+      if (!m) return;
+      const buf = Buffer.from(m[2], 'base64');
+      if (buf.length > MAX_IMG || shotBytes + buf.length > MAX_IMG_TOTAL) return;
+      shotBytes += buf.length;
+      const ext = (m[1].split('/')[1] || 'png').replace('jpeg', 'jpg');
+      shots.push({ name: 'evidence_' + stampEarly + '_' + (ix + 1) + '.' + ext, data: buf, type: m[1], kb: Math.ceil(buf.length / 1024) });
+    } catch (e) {}
+  });
+  const evidence = shots.length
+    ? shots.map(sh => '• `' + sh.name + '` (' + sh.kb + ' KB)').join('\n')
+    : 'No screenshots attached';
+
   // Long-form text goes in as a file attachment rather than in the embed, so
   // nothing is silently truncated away by Discord's field limits.
   const reportLines = [
@@ -119,8 +143,8 @@ exports.handler = async function (event) {
     'DESCRIPTION:',
     (body.description || '(none given)'),
     '',
-    'EVIDENCE:',
-    (body.evidence || '(none given)'),
+    'EVIDENCE (attachments):',
+    (shots.length ? shots.map(sh => sh.name + ' (' + sh.kb + ' KB)').join('\n') : '(none attached)'),
     '',
     'META:',
     (body.meta || '(none)')
@@ -133,7 +157,7 @@ exports.handler = async function (event) {
     timestamp: new Date().toISOString()
   };
   if (description) embed.fields.push({ name: 'Description', value: description });
-  if (evidence) embed.fields.push({ name: 'Evidence', value: evidence });
+  embed.fields.push({ name: 'Evidence', value: clip(evidence, LIM.field) });
 
   const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const files = [];
@@ -153,18 +177,7 @@ exports.handler = async function (event) {
     embed.fields.push({ name: 'Logs', value: 'None attached (debug logging was off)' });
   }
 
-  if (typeof body.image === 'string' && body.image.indexOf('data:image/') === 0) {
-    try {
-      const m = /^data:(image\/[a-z+]+);base64,(.*)$/i.exec(body.image);
-      if (m) {
-        const buf = Buffer.from(m[2], 'base64');
-        if (buf.length <= MAX_IMG) {
-          const ext = (m[1].split('/')[1] || 'png').replace('jpeg', 'jpg');
-          addFile('screenshot_' + stamp + '.' + ext, buf, m[1]);
-        }
-      }
-    } catch (e) {}
-  }
+  shots.forEach(sh => addFile(sh.name, sh.data, sh.type));
 
   // Tag first: on a REQUIRE_TAG forum, posting without one is a hard 400, so fail
   // with something the user can act on rather than letting Discord's error through.
