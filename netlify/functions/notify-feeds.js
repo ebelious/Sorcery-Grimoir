@@ -151,17 +151,24 @@ async function checkDiscord(origin) {
 }
 
 exports.handler = async function (event) {
-  const isScheduled = !!(event && (event.headers || {})['x-nf-event-trigger'] === 'schedule')
-    || !!(event && event.body && (() => { try { return JSON.parse(event.body).next_run !== undefined; } catch (e) { return false; } })());
   let opts = {};
   try { opts = JSON.parse((event && event.body) || '{}'); } catch (e) {}
-
-  // A manual call must be authenticated; the scheduler's own invocation is trusted.
-  if (!isScheduled) {
-    const key = (event.headers || {})['x-send-key'] || (event.headers || {})['X-Send-Key'];
-    if (!process.env.SEND_PUSH_KEY || key !== process.env.SEND_PUSH_KEY) {
-      return { statusCode: 401, body: JSON.stringify({ error: 'Unauthorized' }) };
-    }
+  const isScheduled = !!(event && (event.headers || {})['x-nf-event-trigger'] === 'schedule')
+    || !!(event && event.body && (() => { try { return JSON.parse(event.body).next_run !== undefined; } catch (e) { return false; } })());
+  // The scheduled invocation is NOT authenticated, and Netlify does not guarantee the
+  // header this used to rely on. Rejecting an unrecognised caller with 401 meant that
+  // if the detection failed, the scheduled run was refused every time and nothing was
+  // ever sent -- silently, since nobody reads a cron function's response.
+  //
+  // So the ordinary check now runs for any caller. That is safe: it can only send when
+  // a feed has genuinely changed since the stored state, which is exactly what the
+  // schedule would have sent anyway, and it cannot be used to send arbitrary text.
+  // The key is still required for anything that overrides that: forcing a resend, or
+  // seeding/clearing the stored state.
+  const key = (event.headers || {})['x-send-key'] || (event.headers || {})['X-Send-Key'];
+  const authed = !!(process.env.SEND_PUSH_KEY && key === process.env.SEND_PUSH_KEY);
+  if ((opts.force || opts.reset) && !authed) {
+    return { statusCode: 401, body: JSON.stringify({ error: 'force and reset need x-send-key' }) };
   }
   const dry = !!opts.dry;
   const only = Array.isArray(opts.only) ? opts.only : null;
@@ -172,6 +179,10 @@ exports.handler = async function (event) {
   }
   let state = {};
   try { state = (await st.get(STATE_KEY, { type: 'json' })) || {}; } catch (e) { state = {}; }
+  if (opts.reset) {
+    state = {};
+    try { await st.setJSON(STATE_KEY, state); } catch (e) {}
+  }
 
   const origin = (event && event.headers && event.headers.host) ? 'https://' + event.headers.host : null;
   const checks = [
@@ -192,7 +203,7 @@ exports.handler = async function (event) {
         if (!dry) state[name] = r.latest;
         continue;
       }
-      if (prev === r.latest) {
+      if (prev === r.latest && !opts.force) {
         report.push({ topic: name, action: 'unchanged', latest: r.latest });
         continue;
       }
