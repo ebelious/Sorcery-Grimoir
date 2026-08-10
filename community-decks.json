@@ -1,13 +1,253 @@
 {
-  "updated": "2026-08-10T07:06:49.685Z",
+  "updated": "2026-08-10T12:41:23.604Z",
   "source": "https://curiosa.io/decks",
   "decks": [
+    {
+      "name": "Week Windfire",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsajrffg000b0akn8ethnewn",
+      "format": "Multiplayer",
+      "timestamp": 1786365312649,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Sands of Doom",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsfyj8yx00010ai41ktp7w92",
+      "format": "Constructed",
+      "timestamp": 1786365234117,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Evil wolves",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsn6znrn003n0bkmxeaukdbu",
+      "format": "Constructed",
+      "timestamp": 1786365170121,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Earth GC",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms8pmmk0001m0aj51sjtvc26",
+      "format": "Constructed",
+      "timestamp": 1786364638574,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Shockingly Evil",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmohx37u000nu04l4rxusi6e2",
+      "format": "Constructed",
+      "timestamp": 1786362769239,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Dragonheart",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsn3gyt7000104l41k3qfyeh",
+      "format": "Constructed",
+      "timestamp": 1786362398701,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Rise of the Machine ",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmoovuekq00f204lbru0ruivx",
+      "format": "Constructed",
+      "timestamp": 1786362203643,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "No Longer Human",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmkbaa4qy007b04gyeprlcecp",
+      "format": "Constructed",
+      "timestamp": 1786361778450,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Air Jordans - Mono Air Pathfinder",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsgdpr7d00070akzjhq4wuwq",
+      "format": "Constructed",
+      "timestamp": 1786361732019,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "I don't believe in salads",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmk44pl9a1ixrvxd0754fkrof",
+      "format": "Constructed",
+      "timestamp": 1786361710807,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Ssspicy protected ketchup",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmru6hk0r00000bjer4k3in0h",
+      "format": "Constructed",
+      "timestamp": 1786358393298,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "BatMagEarAir",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsm7dyzm00000bi69eg40s1t",
+      "format": "Constructed",
+      "timestamp": 1786354857596,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fire PF",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmpo6lt9a00av04ld8z1pcr3h",
+      "format": "Constructed",
+      "timestamp": 1786354292713,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steam Punk",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmq5nl0wf001404lbutnj1s7v",
+      "format": "Constructed",
+      "timestamp": 1786353722751,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Air / Fire final state",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsi897nc000109i3nx4w6ssa",
+      "format": "Constructed",
+      "timestamp": 1786353618405,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Imposter Reanimator",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmkl3jqsa00nn04lbb93zjjcs",
+      "format": "Constructed",
+      "timestamp": 1786353015233,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Land Ctrl. (60/30/10)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmlwivw2200b104l55miqh73j",
+      "format": "Constructed",
+      "timestamp": 1786351872708,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Cornerstone Decklist",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsmz0eps00000bhwe1v0dlhp",
+      "format": "Constructed",
+      "timestamp": 1786351120417,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Outer Void",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqz9dzax002904l1iu7ol490",
+      "format": "Constructed",
+      "timestamp": 1786350931684,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "🔥 Mad Max  [ Pathfinder – Fire – Gothic ]",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmj6wcsni2rcy1afqx8mpw8yx",
+      "format": "Constructed",
+      "timestamp": 1786350665962,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "What if I…",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshlicj9000v0ajg8g8ikpsx",
+      "format": "Constructed",
+      "timestamp": 1786349930602,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Holy Wars... The Combo Due",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2x18fc00070ajdpb30pinj",
+      "format": "Constructed",
+      "timestamp": 1786349319996,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Enchantress Control",
+      "author": "",
+      "url": "https://curiosa.io/decks/clf7hjfxc002lmk0gy6nyzgl9",
+      "format": "Constructed",
+      "timestamp": 1786348611989,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Circe’s Island",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsljdzpx000l0aj7xt1z1etm",
+      "format": "Constructed",
+      "timestamp": 1786346574057,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
     {
       "name": "Air water Persecutor",
       "author": "",
       "url": "https://curiosa.io/decks/cmnzagd9n002v04lhkq4i9lx2",
       "format": "Constructed",
-      "timestamp": 1786345528980,
+      "timestamp": 1786345665639,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -33,41 +273,11 @@
       "avatar": ""
     },
     {
-      "name": "Circe’s Island",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsljdzpx000l0aj7xt1z1etm",
-      "format": "Constructed",
-      "timestamp": 1786344014947,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Sands of Doom",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsfyj8yx00010ai41ktp7w92",
-      "format": "Constructed",
-      "timestamp": 1786343235603,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "Just keep swimming!",
       "author": "",
       "url": "https://curiosa.io/decks/cmsjcuif1000k0aj5m1fb6pkz",
       "format": "Constructed",
       "timestamp": 1786343208263,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "🔥 Mad Max  [ Pathfinder – Fire – Gothic ]",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmj6wcsni2rcy1afqx8mpw8yx",
-      "format": "Constructed",
-      "timestamp": 1786342540165,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -388,216 +598,6 @@
       "url": "https://curiosa.io/decks/cmsjs0fy400010aj88tt3e4cs",
       "format": "Constructed",
       "timestamp": 1786330869529,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Cheat from the Ocean",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsea1kah00070ajlylu27367",
-      "format": "Constructed",
-      "timestamp": 1786330858562,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Undead King",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqq5ypea001804jscqqei50s",
-      "format": "Constructed",
-      "timestamp": 1786330797500,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "2nd Place Cornerstone ECG(primer update)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsb3wz83000g0bjesj81qdn5",
-      "format": "Constructed",
-      "timestamp": 1786330777349,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "This Deck was Revealed to me in a Dream",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmcjc962400ifjy04exdkvpzu",
-      "format": "Constructed",
-      "timestamp": 1786330348919,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Archimago",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmmbt82000x09jb42nf0rd9",
-      "format": "Constructed",
-      "timestamp": 1786330330362,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Corrupted Air Fryer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmkhqoe00070aj2s9v83xax",
-      "format": "Constructed",
-      "timestamp": 1786330106735,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Bag O Bones",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsme2enk000b0aj8ue40paw9",
-      "format": "Constructed",
-      "timestamp": 1786330051839,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "From the Void",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmd575z00020ajfvcn2ngro",
-      "format": "Constructed",
-      "timestamp": 1786330029472,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Flying Beefcakes",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmd9dm75900ofik04ahqtjykc",
-      "format": "Constructed",
-      "timestamp": 1786329565407,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Exceptional Elemental City",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmskvjlu9000309jeifho5t7m",
-      "format": "Constructed",
-      "timestamp": 1786328907618,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Mono Earth Wolves",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmskeleqi00050aji18uf91p7",
-      "format": "Constructed",
-      "timestamp": 1786328603055,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Wave of Mutilation (Precon Upgrade)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsml285j000b0bjhv0kzoqmc",
-      "format": "Constructed",
-      "timestamp": 1786328527489,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "test elemental",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmq1j0ka200d604jv017e58ko",
-      "format": "Constructed",
-      "timestamp": 1786327959644,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Simmer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmgunwnnk00e5i904su01tffy",
-      "format": "Constructed",
-      "timestamp": 1786327766425,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Placeholder",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmlenms00010bj9xi2dww5o",
-      "format": "Constructed",
-      "timestamp": 1786327727113,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Placeholder",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmlenj600000bkso25yrudv",
-      "format": "Constructed",
-      "timestamp": 1786327726985,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Calcium attacks",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrh4bw53009604kzhbk3ylv0",
-      "format": "Constructed",
-      "timestamp": 1786327721050,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Placeholder",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmldwed00000ahyt76l1m1j",
-      "format": "Constructed",
-      "timestamp": 1786327691677,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Placeholder",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmlduj700150ahkg82urj5v",
-      "format": "Constructed",
-      "timestamp": 1786327689381,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Beasts Loose in Paradise",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmq02wpst00dg04jmjhijs2i3",
-      "format": "Constructed",
-      "timestamp": 1786326450881,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Landlord Special (Precon Upgrade)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsmjmxtc00000ajc9mg203ya",
-      "format": "Constructed",
-      "timestamp": 1786326445105,
       "views": null,
       "elements": [],
       "avatar": ""
