@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T18:53:17.659Z",
+  "updated": "2026-08-11T19:58:40.004Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -91,24 +91,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e548f9b7-46d7-4244-810d-4afdee52835b"
-    },
-    {
-      "name": "Causal Play",
-      "date": "Tue. Aug 11, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Cork, CO",
-      "city": "Cork",
-      "state": "CO",
-      "lat": 51.8985136,
-      "lng": -8.4726423,
-      "address": "",
-      "description": "",
-      "storeName": "Sandbox",
-      "url": "https://play.sorcerytcg.com/events/31e52cee-1fb5-4a0b-bb8a-3813562cc873"
     },
     {
       "name": "Tuesday night spell slinging",
@@ -583,8 +565,8 @@
       "date": "Wed. Aug 12, 2026",
       "time": "12:38 AM UTC",
       "endTime": "",
-      "type": "Cosmic Hearth Games - Pineville",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Pineville, NC",
       "city": "Pineville",
@@ -593,7 +575,7 @@
       "lng": -80.8871253,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Cosmic Hearth Games - Pineville",
       "url": "https://play.sorcerytcg.com/events/642c4a27-9d7b-4862-b4f1-474d2798f58c"
     },
     {
@@ -2700,7 +2682,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -2718,7 +2700,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -7848,7 +7830,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -7866,7 +7848,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -20559,24 +20541,6 @@
       "url": "https://play.sorcerytcg.com/events/2ae712c7-123b-496f-ac66-914bcb4c60b7"
     },
     {
-      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
-      "date": "Sat. Sep 12, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Tokyo Toybox",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Hendersonville, NC",
-      "city": "Hendersonville",
-      "state": "NC",
-      "lat": 35.3187279,
-      "lng": -82.4609528,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b81d0ed5-bade-4b4a-8948-ca99d715957f"
-    },
-    {
       "name": "SCG CON Baltimore - Grand Contest",
       "date": "Sep 12, 2026 - Sep 13, 2026",
       "time": "5:00 PM UTC",
@@ -20593,6 +20557,24 @@
       "description": "",
       "storeName": "Star City Games Organized Play",
       "url": "https://play.sorcerytcg.com/events/04a106cb-1558-4726-ac59-8cbbe19d7741"
+    },
+    {
+      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
+      "date": "Sat. Sep 12, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Tokyo Toybox",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Hendersonville, NC",
+      "city": "Hendersonville",
+      "state": "NC",
+      "lat": 35.3187279,
+      "lng": -82.4609528,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/b81d0ed5-bade-4b4a-8948-ca99d715957f"
     },
     {
       "name": "Sorcerous Saturdays",
@@ -22338,7 +22320,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -22356,7 +22338,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
@@ -24285,6 +24267,24 @@
       "url": "https://play.sorcerytcg.com/events/3866d952-c858-4fdc-b46b-d58dc2c6e2c1"
     },
     {
+      "name": "Cornerstone Constructed @ DGGC",
+      "date": "Sun. Sep 20, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Hamden, CT",
+      "city": "Hamden",
+      "state": "CT",
+      "lat": 41.3836233,
+      "lng": -72.9020069,
+      "address": "",
+      "description": "",
+      "storeName": "David's Good Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/a1d8a8fc-0332-4801-9a53-8ac1abf187d0"
+    },
+    {
       "name": "Sorcery Sundays at Cold Foil Heroes",
       "date": "Sep 20, 2026 - Sep 21, 2026",
       "time": "4:00 PM UTC",
@@ -24301,24 +24301,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e6dffe16-f2f4-47d6-b8c0-f7f35854623b"
-    },
-    {
-      "name": "Cornerstone Constructed @ DGGC",
-      "date": "Sun. Sep 20, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hamden, CT",
-      "city": "Hamden",
-      "state": "CT",
-      "lat": 41.3836233,
-      "lng": -72.9020069,
-      "address": "",
-      "description": "",
-      "storeName": "David's Good Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/a1d8a8fc-0332-4801-9a53-8ac1abf187d0"
     },
     {
       "name": "Tabletop Cincy Sunday Open Play",
