@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T05:01:55.103Z",
+  "updated": "2026-08-11T05:56:52.518Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -331,8 +331,8 @@
       "date": "Tue. Aug 11, 2026",
       "time": "6:00 AM UTC",
       "endTime": "",
-      "type": "Card Merchant Blenheim",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Blenheim Central, Marlborough Region",
       "city": "Blenheim Central",
@@ -341,7 +341,7 @@
       "lng": null,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Card Merchant Blenheim",
       "url": "https://play.sorcerytcg.com/events/940b96d6-2376-48fb-a3cc-d653205237fc"
     },
     {
@@ -361,6 +361,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/7a8aaaaa-633a-4222-bb48-f3f1689d5ac8"
+    },
+    {
+      "name": "FREE",
+      "date": "Tue. Aug 11, 2026",
+      "time": "8:00 AM UTC",
+      "endTime": "",
+      "type": "Draft Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "",
+      "city": "",
+      "state": "",
+      "lat": null,
+      "lng": null,
+      "address": "",
+      "description": "",
+      "storeName": "Good Games - Woden",
+      "url": "https://play.sorcerytcg.com/events/e0b4304b-65d1-48b2-9c04-4b54dac18422"
     },
     {
       "name": "Tuesday Evening Play",
@@ -2595,24 +2613,6 @@
       "url": "https://play.sorcerytcg.com/events/8a3a9e0e-9cd6-4a37-9356-43f3c99ef1bd"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Aug 14, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5dc96333-b1bd-4d26-a54e-3d8196fd5987"
-    },
-    {
       "name": "Free Constructed Event",
       "date": "Fri. Aug 14, 2026",
       "time": "1:00 AM UTC",
@@ -2629,6 +2629,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/78bd51fe-a7ac-40f7-afb5-1041e56da9be"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Aug 14, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/5dc96333-b1bd-4d26-a54e-3d8196fd5987"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -7599,24 +7617,6 @@
       "url": "https://play.sorcerytcg.com/events/45376631-e345-452f-a858-97b53609c274"
     },
     {
-      "name": "Casual Constructed",
-      "date": "Aug 20, 2026 - Aug 21, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Hole in the wall Hobbies",
-      "price": "Casual Constructed",
-      "duration": "",
-      "location": "Universal City, TX",
-      "city": "Universal City",
-      "state": "TX",
-      "lat": 29.5480071,
-      "lng": -98.2911235,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ab51c8f7-73f6-45c4-a5ee-36220e3f0a10"
-    },
-    {
       "name": "Sorcery",
       "date": "Thu. Aug 20, 2026",
       "time": "11:00 PM UTC",
@@ -7633,6 +7633,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3abb60c4-3bc9-40f0-997c-be552d5d462b"
+    },
+    {
+      "name": "Casual Constructed",
+      "date": "Aug 20, 2026 - Aug 21, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Hole in the wall Hobbies",
+      "price": "Casual Constructed",
+      "duration": "",
+      "location": "Universal City, TX",
+      "city": "Universal City",
+      "state": "TX",
+      "lat": 29.5480071,
+      "lng": -98.2911235,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ab51c8f7-73f6-45c4-a5ee-36220e3f0a10"
     },
     {
       "name": "Constructed Tournament & Open Play",
@@ -11199,24 +11217,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Wednesday Constructed Tournament",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "SideQuest",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Gdańsk, Województwo pomorskie",
-      "city": "Gdańsk",
-      "state": "Województwo pomorskie",
-      "lat": 54.3482907,
-      "lng": 18.6540233,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
-    },
-    {
       "name": "Weekly constructed",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -11233,6 +11233,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
+    },
+    {
+      "name": "Wednesday Constructed Tournament",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "SideQuest",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Gdańsk, Województwo pomorskie",
+      "city": "Gdańsk",
+      "state": "Województwo pomorskie",
+      "lat": 54.3482907,
+      "lng": 18.6540233,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
     },
     {
       "name": "Weekly Cornerstone",
@@ -23349,24 +23367,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -23383,6 +23383,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -27991,24 +28009,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c9aa5dd6-cb67-4260-a3c6-9f911e9879e2"
-    },
-    {
-      "name": "learn to play",
-      "date": "Tue. Sep 29, 2026",
-      "time": "8:51 PM UTC",
-      "endTime": "",
-      "type": "Cold Foil Heroes",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "lat": 34.1014112,
-      "lng": -84.5192192,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c3c22fe4-6a65-49ff-922d-4c3bad616136"
     }
   ]
 }
