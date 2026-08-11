@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T20:39:48.123Z",
+  "updated": "2026-08-11T21:39:37.949Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -183,6 +183,24 @@
       "url": "https://play.sorcerytcg.com/events/cd419f3f-daed-4421-ae06-0181968a22f8"
     },
     {
+      "name": "Casual Meet Up!",
+      "date": "Aug 11, 2026 - Aug 12, 2026",
+      "time": "9:45 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Conway, AR",
+      "city": "Conway",
+      "state": "AR",
+      "lat": 35.0891932,
+      "lng": -92.4398402,
+      "address": "",
+      "description": "",
+      "storeName": "Roll & Play",
+      "url": "https://play.sorcerytcg.com/events/963162f8-a5d5-4468-a7de-27b51bd884f0"
+    },
+    {
       "name": "Bolsa Sorcery Semanal",
       "date": "Aug 11, 2026 - Aug 12, 2026",
       "time": "10:00 PM UTC",
@@ -199,6 +217,24 @@
       "description": "",
       "storeName": "Bolsa do Infinito",
       "url": "https://play.sorcerytcg.com/events/303c3536-bf55-4411-a60c-cf95cd5dd8b8"
+    },
+    {
+      "name": "Tuesday Sorcery Play Night",
+      "date": "Aug 11, 2026 - Aug 12, 2026",
+      "time": "10:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Cleveland, GA",
+      "city": "Cleveland",
+      "state": "GA",
+      "lat": 34.5972449,
+      "lng": -83.7633058,
+      "address": "",
+      "description": "",
+      "storeName": "Arena Games",
+      "url": "https://play.sorcerytcg.com/events/367d6b06-bed7-4dd8-8a9d-33b805b0cf6f"
     },
     {
       "name": "Tuesday Sealed",
@@ -5223,24 +5259,6 @@
       "url": "https://play.sorcerytcg.com/events/d4deff2f-06e8-4cc9-a2f0-d59c2507f433"
     },
     {
-      "name": "Monday Sorcery",
-      "date": "Tue. Aug 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Stomping Grounds",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Las Vegas, NV",
-      "city": "Las Vegas",
-      "state": "NV",
-      "lat": 36.1674263,
-      "lng": -115.1484131,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
-    },
-    {
       "name": "Gothic Draft Night",
       "date": "Tue. Aug 18, 2026",
       "time": "1:30 AM UTC",
@@ -5257,6 +5275,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cd40b644-4fe1-41be-92b2-1ffb2e3d2058"
+    },
+    {
+      "name": "Monday Sorcery",
+      "date": "Tue. Aug 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Stomping Grounds",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Las Vegas, NV",
+      "city": "Las Vegas",
+      "state": "NV",
+      "lat": 36.1674263,
+      "lng": -115.1484131,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
     },
     {
       "name": "Sorcery Open Play",
@@ -7347,24 +7383,6 @@
       "url": "https://play.sorcerytcg.com/events/f2d8795b-aafc-49b6-a532-266d4ad3ae66"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Aug 21, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/836fa997-a815-4209-92a3-f40db3f30e67"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Aug 21, 2026",
       "time": "1:00 AM UTC",
@@ -7381,6 +7399,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/794806b1-07aa-4fb8-822a-e8e435f30e42"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Aug 21, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/836fa997-a815-4209-92a3-f40db3f30e67"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -11685,24 +11721,6 @@
       "url": "https://play.sorcerytcg.com/events/700fe9cd-40f5-4aed-9fe0-a8cdfc73e64c"
     },
     {
-      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Curio (Centreville Sq)",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Centreville, VA",
-      "city": "Centreville",
-      "state": "VA",
-      "lat": 38.837613,
-      "lng": -77.4347283,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/37121143-7d71-4123-994f-73db5ef653da"
-    },
-    {
       "name": "Thursday Evening Sorcery",
       "date": "Thu. Aug 27, 2026",
       "time": "10:30 PM UTC",
@@ -11719,6 +11737,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/38fe4a50-de3f-403b-9cfc-3a13795a5b20"
+    },
+    {
+      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Curio (Centreville Sq)",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Centreville, VA",
+      "city": "Centreville",
+      "state": "VA",
+      "lat": 38.837613,
+      "lng": -77.4347283,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/37121143-7d71-4123-994f-73db5ef653da"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -12009,24 +12045,6 @@
       "url": "https://play.sorcerytcg.com/events/9287ff87-7d0b-4bcf-9218-14618444e185"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/b4c1c447-4beb-47a0-8348-bbe6956ddfc5"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Aug 28, 2026",
       "time": "1:30 AM UTC",
@@ -12043,6 +12061,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/03fa2c6e-9780-4452-be12-5e24951f4473"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Aug 28, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/b4c1c447-4beb-47a0-8348-bbe6956ddfc5"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -23115,24 +23151,6 @@
       "url": "https://play.sorcerytcg.com/events/1cb95d2d-353b-4500-a396-42b2f93450b2"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:00 AM UTC",
@@ -23149,6 +23167,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28459,42 +28495,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f6bcb0ce-2eee-4712-a210-8de344d42550"
-    },
-    {
-      "name": "Wed Weekly!",
-      "date": "Wed. Sep 30, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "The Sorcerer's Inn",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Randolph, MA",
-      "city": "Randolph",
-      "state": "MA",
-      "lat": 42.1626018,
-      "lng": -71.0413386,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5a5571e9-fc96-4676-9291-ed45dfde5cf3"
-    },
-    {
-      "name": "Weekly Casual/League and Learn to Play",
-      "date": "Sep 30, 2026 - Oct 1, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Cards and Comics Connection Inc",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Conroe, TX",
-      "city": "Conroe",
-      "state": "TX",
-      "lat": 30.3118769,
-      "lng": -95.4560512,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e1656577-7188-4e3f-a2a6-9b162e9bf8af"
     }
   ]
 }
