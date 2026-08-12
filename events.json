@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T01:15:31.007Z",
+  "updated": "2026-08-12T04:00:01.106Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -597,30 +597,12 @@
       "url": "https://play.sorcerytcg.com/events/16797b32-3dc9-4772-931d-237ee2c6575a"
     },
     {
-      "name": "8/11/26 Fountain Valley Sorcery Constructed Tuesday 7 PM",
-      "date": "Wed. Aug 12, 2026",
-      "time": "2:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Fountain Valley, CA",
-      "city": "Fountain Valley",
-      "state": "CA",
-      "lat": 33.7038145,
-      "lng": -117.9627349,
-      "address": "",
-      "description": "",
-      "storeName": "Kingslayer Games",
-      "url": "https://play.sorcerytcg.com/events/05ae25e7-9cfa-46ed-bd59-dcba1a6cf348"
-    },
-    {
       "name": "CMD Casual Constructed",
       "date": "Wed. Aug 12, 2026",
       "time": "6:30 AM UTC",
       "endTime": "",
-      "type": "Card Merchant Dunedin",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Dunedin, Otago",
       "city": "Dunedin",
@@ -629,7 +611,7 @@
       "lng": 170.5035755,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Card Merchant Dunedin",
       "url": "https://play.sorcerytcg.com/events/5b1fbb2f-57eb-4b58-a9ce-8f43d22e4d5d"
     },
     {
@@ -4003,8 +3985,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "3:00 AM UTC",
       "endTime": "",
-      "type": "Neutral Grounds Centris",
-      "price": "Draft Tournament",
+      "type": "Draft Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Quezon City, NCR",
       "city": "Quezon City",
@@ -4013,7 +3995,7 @@
       "lng": 121.0486254,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Neutral Grounds Centris",
       "url": "https://play.sorcerytcg.com/events/a23e2a17-1919-4d71-88a8-68f68f35a303"
     },
     {
@@ -4075,8 +4057,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "9:00 AM UTC",
       "endTime": "",
-      "type": "Neutral Grounds Centris",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Quezon City, NCR",
       "city": "Quezon City",
@@ -4085,7 +4067,7 @@
       "lng": 121.0486254,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Neutral Grounds Centris",
       "url": "https://play.sorcerytcg.com/events/f07e5fff-a6bc-4bcc-b1d9-bffd224a282e"
     },
     {
@@ -7884,7 +7866,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -7902,7 +7884,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -10627,8 +10609,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "12:30 AM UTC",
       "endTime": "",
-      "type": "Lonestar Pack Breaks",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Carrollton, TX",
       "city": "Carrollton",
@@ -10637,7 +10619,7 @@
       "lng": -96.9034244,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Lonestar Pack Breaks",
       "url": "https://play.sorcerytcg.com/events/3cd27577-e7b9-4407-8011-f59aae201b9a"
     },
     {
