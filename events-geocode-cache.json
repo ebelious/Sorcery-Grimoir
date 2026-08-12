@@ -1450,5 +1450,9 @@
   "trieste|friuli-venezia giulia": {
     "lat": 45.6496485,
     "lng": 13.7772781
+  },
+  "budapest|pest": {
+    "lat": 47.4942216,
+    "lng": 19.0529846
   }
 }
