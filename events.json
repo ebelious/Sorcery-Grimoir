@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T23:33:50.653Z",
+  "updated": "2026-08-12T01:15:31.007Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -37,24 +37,6 @@
       "description": "",
       "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/c8cca887-504d-446f-b57c-0f8e67f7d074"
-    },
-    {
-      "name": "FREE",
-      "date": "Tue. Aug 11, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Draft Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "",
-      "city": "",
-      "state": "",
-      "lat": null,
-      "lng": null,
-      "address": "",
-      "description": "",
-      "storeName": "Good Games - Woden",
-      "url": "https://play.sorcerytcg.com/events/e0b4304b-65d1-48b2-9c04-4b54dac18422"
     },
     {
       "name": "⭐ Sorcery : Initiation",
@@ -349,8 +331,8 @@
       "date": "Tue. Aug 11, 2026",
       "time": "10:36 PM UTC",
       "endTime": "",
-      "type": "No Land Beyond",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Baltimore, MD",
       "city": "Baltimore",
@@ -359,7 +341,7 @@
       "lng": -76.610759,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "No Land Beyond",
       "url": "https://play.sorcerytcg.com/events/484a5119-1180-4fc6-8a36-3aa955c26875"
     },
     {
@@ -439,8 +421,8 @@
       "date": "Tue. Aug 11, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Game Grid Clearfield",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Clearfield, UT",
       "city": "Clearfield",
@@ -449,7 +431,7 @@
       "lng": -112.0244841,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Game Grid Clearfield",
       "url": "https://play.sorcerytcg.com/events/f1fda40f-2c31-4a77-a64a-33fcc1aff007"
     },
     {
@@ -579,24 +561,6 @@
       "url": "https://play.sorcerytcg.com/events/cb1a5430-40d0-49cd-95c4-e74077372000"
     },
     {
-      "name": "LSPB Tuesday Weekly",
-      "date": "Wed. Aug 12, 2026",
-      "time": "12:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Carrollton, TX",
-      "city": "Carrollton",
-      "state": "TX",
-      "lat": 32.9515472,
-      "lng": -96.9034244,
-      "address": "",
-      "description": "",
-      "storeName": "Lonestar Pack Breaks",
-      "url": "https://play.sorcerytcg.com/events/c6634306-42a1-4c24-82c1-498857ac3e23"
-    },
-    {
       "name": "Riftgate Weekly Play Competitive",
       "date": "Wed. Aug 12, 2026",
       "time": "12:30 AM UTC",
@@ -631,24 +595,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/16797b32-3dc9-4772-931d-237ee2c6575a"
-    },
-    {
-      "name": "Riftgate Arthurian Legends Draft Night",
-      "date": "Wed. Aug 12, 2026",
-      "time": "12:30 AM UTC",
-      "endTime": "",
-      "type": "Draft Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Murray, UT",
-      "city": "Murray",
-      "state": "UT",
-      "lat": 40.6667841,
-      "lng": -111.888417,
-      "address": "",
-      "description": "",
-      "storeName": "Riftgate Games",
-      "url": "https://play.sorcerytcg.com/events/71e62d48-5129-41f8-b68c-e8841f0d5613"
     },
     {
       "name": "8/11/26 Fountain Valley Sorcery Constructed Tuesday 7 PM",
@@ -1965,24 +1911,6 @@
       "url": "https://play.sorcerytcg.com/events/a16e2038-5db9-4157-a279-18c7640469f1"
     },
     {
-      "name": "Thursday Evening Sorcery",
-      "date": "Thu. Aug 13, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Warsaw, IN",
-      "city": "Warsaw",
-      "state": "IN",
-      "lat": 41.2381017,
-      "lng": -85.8530544,
-      "address": "",
-      "description": "",
-      "storeName": "War Haven Games",
-      "url": "https://play.sorcerytcg.com/events/2572aee8-175b-479f-9780-e052c3e6c3ab"
-    },
-    {
       "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
       "date": "Aug 13, 2026 - Aug 14, 2026",
       "time": "10:30 PM UTC",
@@ -1999,6 +1927,24 @@
       "description": "",
       "storeName": "Curio (Centreville Sq)",
       "url": "https://play.sorcerytcg.com/events/b3222f8b-98e4-4b47-a1ba-b0b92822f240"
+    },
+    {
+      "name": "Thursday Evening Sorcery",
+      "date": "Thu. Aug 13, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Warsaw, IN",
+      "city": "Warsaw",
+      "state": "IN",
+      "lat": 41.2381017,
+      "lng": -85.8530544,
+      "address": "",
+      "description": "",
+      "storeName": "War Haven Games",
+      "url": "https://play.sorcerytcg.com/events/2572aee8-175b-479f-9780-e052c3e6c3ab"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -4381,8 +4327,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Newport, KY",
       "city": "Newport",
@@ -4391,7 +4337,7 @@
       "lng": -84.4919524,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Thieves Guild Gaming",
       "url": "https://play.sorcerytcg.com/events/f906ba77-a69c-4798-b8e5-c47252613c89"
     },
     {
@@ -5911,8 +5857,8 @@
       "date": "Wed. Aug 19, 2026",
       "time": "12:30 AM UTC",
       "endTime": "",
-      "type": "Lonestar Pack Breaks",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Carrollton, TX",
       "city": "Carrollton",
@@ -5921,7 +5867,7 @@
       "lng": -96.9034244,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Lonestar Pack Breaks",
       "url": "https://play.sorcerytcg.com/events/f54a51a2-f69a-4891-a911-48ec54d051f5"
     },
     {
@@ -7938,7 +7884,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -7956,7 +7902,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -22446,7 +22392,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
@@ -22464,7 +22410,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Sorcery",
@@ -26301,24 +26247,6 @@
       "url": "https://play.sorcerytcg.com/events/0718a202-d8da-4e2a-ad9c-370cc6c0fb07"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/90c1dc0d-d537-4187-88ad-1e01ef53a719"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 25, 2026",
       "time": "1:00 AM UTC",
@@ -26335,6 +26263,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/15476a2e-5e66-447b-ba1c-a0609412cc62"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/90c1dc0d-d537-4187-88ad-1e01ef53a719"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28459,24 +28405,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a076bf0c-cc7d-4276-8d32-b5f495bce102"
-    },
-    {
-      "name": "EMPIRE GAMES: Wednesday Open Play!",
-      "date": "Wed. Sep 30, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1a5a392d-1db5-4f59-ad57-37b583ab0be8"
     }
   ]
 }
