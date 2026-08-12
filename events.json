@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T07:14:22.157Z",
+  "updated": "2026-08-12T09:05:40.712Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -613,24 +613,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a6eb7b73-6c3e-431e-83c8-e43161c17728"
-    },
-    {
-      "name": "Sorcery TCG - Weekly Showdown",
-      "date": "Wed. Aug 12, 2026",
-      "time": "8:26 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hobart, TAS",
-      "city": "Hobart",
-      "state": "TAS",
-      "lat": -42.8825088,
-      "lng": 147.3281233,
-      "address": "",
-      "description": "",
-      "storeName": "Good Games Hobart",
-      "url": "https://play.sorcerytcg.com/events/51d9e2da-b9e4-4908-aad9-586ffb07258e"
     },
     {
       "name": "Biweekly Keidas casual Games",
