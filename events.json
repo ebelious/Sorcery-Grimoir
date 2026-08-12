@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T21:39:22.771Z",
+  "updated": "2026-08-12T22:34:17.680Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -273,24 +273,6 @@
       "url": "https://play.sorcerytcg.com/events/c29eb282-7c77-4b81-a3b8-368ddf8c2f8e"
     },
     {
-      "name": "Wednesday Locals",
-      "date": "Wed. Aug 12, 2026",
-      "time": "9:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Lacey Township, NJ",
-      "city": "Lacey Township",
-      "state": "NJ",
-      "lat": 39.8605724,
-      "lng": -74.2083587,
-      "address": "",
-      "description": "",
-      "storeName": "Shipwreck Games",
-      "url": "https://play.sorcerytcg.com/events/297b2829-ea5a-4f47-b0da-c7e39a988e27"
-    },
-    {
       "name": "Sorcery Learn to Play + Free Play @ Stevenson Games HBG",
       "date": "Aug 12, 2026 - Aug 13, 2026",
       "time": "10:00 PM UTC",
@@ -331,8 +313,8 @@
       "date": "Wed. Aug 12, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Tabletop Cincy",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "West Chester Township, OH",
       "city": "West Chester Township",
@@ -341,7 +323,7 @@
       "lng": -84.4155616,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Tabletop Cincy",
       "url": "https://play.sorcerytcg.com/events/b41b661c-3854-4112-9e18-ace37e321d1f"
     },
     {
@@ -361,24 +343,6 @@
       "description": "",
       "storeName": "Valkyrie's Vault",
       "url": "https://play.sorcerytcg.com/events/c5049e09-ed53-42f6-a41a-df3021e2be45"
-    },
-    {
-      "name": "Sorcery Semanal",
-      "date": "Wed. Aug 12, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Atiradores, SC",
-      "city": "Atiradores",
-      "state": "SC",
-      "lat": -26.3101709,
-      "lng": -48.8637801,
-      "address": "",
-      "description": "",
-      "storeName": "Dalaran Games",
-      "url": "https://play.sorcerytcg.com/events/c0bc559a-7d58-4359-8a6d-9372d6aa99f1"
     },
     {
       "name": "Learn to Play at Dragon's Hoard",
@@ -451,24 +415,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/def53b1d-dcd5-4079-b366-84a7c3b61403"
-    },
-    {
-      "name": "Wednesday Night Clash!",
-      "date": "Wed. Aug 12, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Matchstick Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Mount Sterling, KY",
-      "city": "Mount Sterling",
-      "state": "KY",
-      "lat": 38.0561079,
-      "lng": -83.9431961,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/09e972e1-1648-4fdd-8ec4-b4c7cdc6b731"
     },
     {
       "name": "Sealed Escalation League",
@@ -853,8 +799,8 @@
       "date": "Thu. Aug 13, 2026",
       "time": "6:30 AM UTC",
       "endTime": "",
-      "type": "FTW Events",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Auckland, Auckland",
       "city": "Auckland",
@@ -863,7 +809,7 @@
       "lng": 174.7631803,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "FTW Events",
       "url": "https://play.sorcerytcg.com/events/9aac3417-ac05-46cc-a42d-e3ad30713fdb"
     },
     {
@@ -2034,7 +1980,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -2052,7 +1998,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -7272,7 +7218,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -7290,7 +7236,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -11898,7 +11844,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
+      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -11916,7 +11862,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c466317b-8717-4bad-a1ea-48277cc0ff1e"
+      "url": "https://play.sorcerytcg.com/events/681357f0-a4a1-4c77-9802-18363918ab2f"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -21852,7 +21798,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -21870,7 +21816,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
