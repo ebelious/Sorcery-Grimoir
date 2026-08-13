@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-13T14:20:03.353Z",
+  "updated": "2026-08-13T15:53:53.472Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -939,12 +939,12 @@
       "url": "https://play.sorcerytcg.com/events/01d3acb9-119f-44e5-ac95-c89797a3abf0"
     },
     {
-      "name": "Pikazard Constructed",
+      "name": "Friday casual",
       "date": "Fri. Aug 14, 2026",
       "time": "3:30 PM UTC",
       "endTime": "",
-      "type": "Pikazard.eu",
-      "price": "Constructed Tournament",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Bratislava, Bratislavský kraj",
       "city": "Bratislava",
@@ -953,8 +953,8 @@
       "lng": 17.1093063,
       "address": "",
       "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/969ac380-0c76-4cfb-93a9-497e48bcc279"
+      "storeName": "Pikazard.eu",
+      "url": "https://play.sorcerytcg.com/events/62cdeba6-ddf5-41dc-a9df-6ef02abddb63"
     },
     {
       "name": "Geek Haven - Casual Meetup",
@@ -1206,7 +1206,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -1224,7 +1224,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -6444,7 +6444,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -6462,7 +6462,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
