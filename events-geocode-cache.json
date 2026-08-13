@@ -1454,5 +1454,9 @@
   "budapest|pest": {
     "lat": 47.4942216,
     "lng": 19.0529846
+  },
+  "istres|provence-alpes-côte d'azur": {
+    "lat": 43.5139051,
+    "lng": 4.9884323
   }
 }
