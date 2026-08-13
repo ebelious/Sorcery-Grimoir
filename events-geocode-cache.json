@@ -1458,5 +1458,13 @@
   "istres|provence-alpes-côte d'azur": {
     "lat": 43.5139051,
     "lng": 4.9884323
+  },
+  "saint-jean-sur-richelieu|qc": {
+    "lat": 45.3056879,
+    "lng": -73.2533401
+  },
+  "karlsruhe|bw": {
+    "lat": 49.0068705,
+    "lng": 8.4034195
   }
 }
