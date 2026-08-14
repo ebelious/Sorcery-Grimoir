@@ -1,10 +1,17 @@
 {
-  "updated": "2026-08-14T22:20:19.582Z",
+  "updated": "2026-08-14T22:44:44.969Z",
   "articles": [
+    {
+      "title": "Welcome to the Realm, Paul Carrick",
+      "url": "https://sorcerytcg.com/news/welcome-to-the-realm-paul-carrick",
+      "date": "10 Aug 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/1899ffdbe817cd74451af403f924a5b986ca84ad-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Everything You Need to Know About the Auckland Card Show",
       "url": "https://sorcerytcg.com/news/everything-you-need-to-know-about-the-auckland-card-show",
-      "date": "05 Aug 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/b8be3f3a9b4bc90b3d0634fe50fbaa3bbef06dff-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/c5bce77d22e2c4e6c7ea202eafb53905a6eba999-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Sorcery's Grand Contest Comes to Italy",
-      "url": "https://sorcerytcg.com/news/sorcery-s-grand-contest-comes-to-italy",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/4938e73e80359ce46fe8d105974fc82242505075-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
