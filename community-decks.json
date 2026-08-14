@@ -1,13 +1,283 @@
 {
-  "updated": "2026-08-14T07:05:51.387Z",
+  "updated": "2026-08-14T12:37:44.513Z",
   "source": "https://curiosa.io/decks",
   "decks": [
+    {
+      "name": "Queen`s heroes",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmkb5ytvp00ah04l5x1z0ey0i",
+      "format": "Constructed",
+      "timestamp": 1786711040659,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Globe Nomad Pathfinder",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsssy0ca00020ajj4mh3rs0r",
+      "format": "Constructed",
+      "timestamp": 1786710985125,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Wind Fury Witch",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmlv0u3zj000r04ju3dddc25l",
+      "format": "Constructed",
+      "timestamp": 1786710759942,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Stardust - Geomancer - Dust -  Gothic",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmitqxtw110gx05ebsu0fyqkz",
+      "format": "Constructed",
+      "timestamp": 1786710567740,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Wishlist",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmslcpmen00060bgbi1eu07gp",
+      "format": "Constructed",
+      "timestamp": 1786710333537,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "The Fallen Magician",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms2bvciu000e0ajd4uzrldtc",
+      "format": "Constructed",
+      "timestamp": 1786710151367,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steamroll Protocol. [Savior]",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmn1teml000c004l8oohqctnq",
+      "format": "Constructed",
+      "timestamp": 1786709667207,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "WA Battlemage",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmss0truv000a0ajf420wp2s1",
+      "format": "Constructed",
+      "timestamp": 1786709038392,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Wake up! Grab a brush and put a little make-up!",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsn92fgo00060ajflh5epdms",
+      "format": "Constructed",
+      "timestamp": 1786708004649,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "To the Sea",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsk704zi00050akpaswmqxk9",
+      "format": "Constructed",
+      "timestamp": 1786707451887,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Necromancer - Expanded - WIP",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsioipns000f0ahrnxh4ysbj",
+      "format": "Constructed",
+      "timestamp": 1786705900540,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Ramp! (the logical roots) ",
+      "author": "",
+      "url": "https://curiosa.io/decks/cml2vjvyv00q704icyqr1nkd6",
+      "format": "Constructed",
+      "timestamp": 1786704964121,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Control",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms83lfum00000ajcr080iebe",
+      "format": "Constructed",
+      "timestamp": 1786704600283,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "My copied deck",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsstgxrk000a04jmqe44ipg0",
+      "format": "Constructed",
+      "timestamp": 1786704067555,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Dank Mud",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsspc49l00010agf3mlza7nh",
+      "format": "Constructed",
+      "timestamp": 1786703434094,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fire Perse",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmss5shw100080ajfjkcrpttd",
+      "format": "Constructed",
+      "timestamp": 1786702947372,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "450 Cube",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsq4yra9000b0ai9e0q02e2v",
+      "format": "Draft",
+      "timestamp": 1786702167295,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Poorcery Steamed Witch (Peasant)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrbwlfwx00hj04ldq369j1mv",
+      "format": "Constructed",
+      "timestamp": 1786701540577,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Somebody Stop Me!",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmq5kyd3800h804lbhr0z9tg7",
+      "format": "Constructed",
+      "timestamp": 1786700545029,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Lethal Smoke",
+      "author": "",
+      "url": "https://curiosa.io/decks/cms8i9gls00000ahzcpqkzwts",
+      "format": "Constructed",
+      "timestamp": 1786699626010,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "lil' bill",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrjequ77018904k18b2gan8e",
+      "format": "Constructed",
+      "timestamp": 1786697990310,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Interrogator Smoke",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrjy545v00nu04l99r36ukvq",
+      "format": "Constructed",
+      "timestamp": 1786697254134,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Reanimator",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmoazgqhl002b04jr8v5268cj",
+      "format": "Constructed",
+      "timestamp": 1786696298255,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Steppe",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmssn1ay800340ai66qmpdybg",
+      "format": "Constructed",
+      "timestamp": 1786694202400,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
     {
       "name": "Deathspeaker",
       "author": "",
       "url": "https://curiosa.io/decks/cmssiqt0i00080bjelah4pox8",
       "format": "Constructed",
-      "timestamp": 1786690868997,
+      "timestamp": 1786694179969,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Lodes o' wolves",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqxa8bn6002w04kv01xmvqxh",
+      "format": "Constructed",
+      "timestamp": 1786693780072,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "faeries",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmounpdq4012604l7th31fmzy",
+      "format": "Constructed",
+      "timestamp": 1786693505396,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Atmospheric Pressures (14.9% oxygen levels) ",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmss2qwij00070bjebl8k2yee",
+      "format": "Constructed",
+      "timestamp": 1786692524541,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -328,276 +598,6 @@
       "url": "https://curiosa.io/decks/cmsqubyew00010ahtkuridkzq",
       "format": "Constructed",
       "timestamp": 1786675587791,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Elemental Void",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrwlsc1i00030ahm1aioa10l",
-      "format": "Constructed",
-      "timestamp": 1786675404733,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Urban Elementalist (Air V. II) ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmmybs2ua00yp04ju4iubdpvi",
-      "format": "Constructed",
-      "timestamp": 1786675035712,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Stardust - Geomancer - Dust -  Gothic",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmitqxtw110gx05ebsu0fyqkz",
-      "format": "Constructed",
-      "timestamp": 1786674543734,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Tap ➔ Say Uncle [TTS]",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2g5n4g000m0ajl1vo6huwl",
-      "format": "Constructed",
-      "timestamp": 1786674295322,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Wake up! Grab a brush and put a little make-up!",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsn92fgo00060ajflh5epdms",
-      "format": "Constructed",
-      "timestamp": 1786673685082,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Budget Necromancer Precon",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmo683yht003t04jrb8wi5ecr",
-      "format": "Constructed",
-      "timestamp": 1786673237533,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Fallen Magician",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms2bvciu000e0ajd4uzrldtc",
-      "format": "Constructed",
-      "timestamp": 1786672934795,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Miststepper",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmn1yha2300z704l4wnbvnxvp",
-      "format": "Constructed",
-      "timestamp": 1786672371290,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "🧙‍♂️midrange💧🪨",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms3ymwpg00000agbujbac8mx",
-      "format": "Constructed",
-      "timestamp": 1786672277407,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Rainbow Knights of the Round",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnmeqqw000rd04jrr0ab8rlf",
-      "format": "Constructed",
-      "timestamp": 1786672231717,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Savior",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss6a2au000c09j65s4zmojm",
-      "format": "Constructed",
-      "timestamp": 1786672229430,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "big braps",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss8ausa00020bhqgrzlsap4",
-      "format": "Constructed",
-      "timestamp": 1786671938189,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Valorous Stance",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsg4m8me00070aj8hpv5lkxb",
-      "format": "Constructed",
-      "timestamp": 1786671646767,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Wet Bones",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss9fq7500020ahxwjasnz7n",
-      "format": "Constructed",
-      "timestamp": 1786670418771,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Fire Perse",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss5shw100080ajfjkcrpttd",
-      "format": "Constructed",
-      "timestamp": 1786668760908,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Exceptional",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmshz3hqp00000ahxi3kyw1oa",
-      "format": "Constructed",
-      "timestamp": 1786668620725,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "defense",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmskikvyv000e04lb2xkhyx8y",
-      "format": "Constructed",
-      "timestamp": 1786668475429,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Speaker for the Dead",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsntbwlz00070ajmfeqoftrb",
-      "format": "Constructed",
-      "timestamp": 1786668376586,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Sorcerer's Castle",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmoqbbe2v00f004ldghv5wpva",
-      "format": "Constructed",
-      "timestamp": 1786668372307,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "All Deserts, No Brakes",
-      "author": "",
-      "url": "https://curiosa.io/decks/clrk0t90k002vcz9v7xohen2p",
-      "format": "Constructed",
-      "timestamp": 1786668339269,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Sir Battlemage",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmckneug10044l1044n9t0jd9",
-      "format": "Constructed",
-      "timestamp": 1786667710220,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Witchy Blam Blam",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsp0gcob000g0aj4jzh6j14o",
-      "format": "Constructed",
-      "timestamp": 1786666813905,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Enchantress? Never heard of her (top 8 SCG Vegas)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnt1f9p9006q04l7y98ldn8w",
-      "format": "Constructed",
-      "timestamp": 1786665916304,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Fire",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss62mb1000w0ajdy1msvwoo",
-      "format": "Constructed",
-      "timestamp": 1786665512295,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Salmons Beyond",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrs2gbqx000009gjsr2540oz",
-      "format": "Constructed",
-      "timestamp": 1786665141096,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Ramp",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmss5kgni000809huakb3yc9f",
-      "format": "Constructed",
-      "timestamp": 1786664642940,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Steam perse",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqm36ur2002404js7y87z1uw",
-      "format": "Constructed",
-      "timestamp": 1786663738841,
       "views": null,
       "elements": [],
       "avatar": ""
