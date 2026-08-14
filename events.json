@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14T22:16:20.704Z",
+  "updated": "2026-08-14T23:16:25.181Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -273,6 +273,24 @@
       "url": "https://play.sorcerytcg.com/events/3dca996f-a939-493a-8dbf-2a0a41280666"
     },
     {
+      "name": "Tower WB Friday Evening Weekly Play (Constructed)",
+      "date": "Aug 14, 2026 - Aug 15, 2026",
+      "time": "10:40 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Chesapeake, VA",
+      "city": "Chesapeake",
+      "state": "VA",
+      "lat": 36.7168315,
+      "lng": -76.2494453,
+      "address": "",
+      "description": "",
+      "storeName": "Tower of Games - Western Branch",
+      "url": "https://play.sorcerytcg.com/events/3485148c-dfe3-48bc-bcda-98388de81715"
+    },
+    {
       "name": "Friday Evening Sorcery",
       "date": "Aug 14, 2026 - Aug 15, 2026",
       "time": "11:00 PM UTC",
@@ -379,6 +397,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/9008bbe9-2599-4dd5-b2c6-ef21dd7d09d2"
+    },
+    {
+      "name": "Stevenson games Weekly Play",
+      "date": "Aug 14, 2026 - Aug 15, 2026",
+      "time": "11:16 PM UTC",
+      "endTime": "",
+      "type": "Sealed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Pikesville, MD",
+      "city": "Pikesville",
+      "state": "MD",
+      "lat": 39.385227,
+      "lng": -76.7080456,
+      "address": "",
+      "description": "",
+      "storeName": "Stevenson Games",
+      "url": "https://play.sorcerytcg.com/events/9ea5d8d4-048d-428b-bb72-5021b877c4ab"
     },
     {
       "name": "Weekly Casual Play",
@@ -15231,6 +15267,24 @@
       "url": "https://play.sorcerytcg.com/events/745ddc77-e82a-4959-803d-68ab41a7abe2"
     },
     {
+      "name": "(9/4) PGS First Friday Draft 6PM",
+      "date": "Sat. Sep 5, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "The Portland Game Store",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c747d55f-8f84-4ee0-a315-46727dc9bb01"
+    },
+    {
       "name": "60/30/10 (aka Benchmark)",
       "date": "Sat. Sep 5, 2026",
       "time": "1:30 AM UTC",
@@ -27721,42 +27775,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ba167bdf-2f33-49c7-bbc9-d3053552ce91"
-    },
-    {
-      "name": "Weekly Community Casuals",
-      "date": "Fri. Oct 2, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Good Games - Woden",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Phillip, ACT",
-      "city": "Phillip",
-      "state": "ACT",
-      "lat": -35.3470436,
-      "lng": 149.091009,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/48f82096-fbb3-4c6f-851b-19d310c6bfef"
-    },
-    {
-      "name": "Casual / Constructed / Sealed @ BlacklistCards",
-      "date": "Fri. Oct 2, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Aussie Brickster Collectables",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Thomastown, VIC",
-      "city": "Thomastown",
-      "state": "VIC",
-      "lat": -37.6832672,
-      "lng": 145.0081104,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/63d2af8a-6046-45c2-bb93-db52f7cd5ccc"
     }
   ]
 }
