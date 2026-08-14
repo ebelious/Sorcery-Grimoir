@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14T11:40:31.902Z",
+  "updated": "2026-08-14T12:47:03.152Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -2829,24 +2829,6 @@
       "url": "https://play.sorcerytcg.com/events/8a5aebf2-fbc0-4da3-9706-5d4a314299ad"
     },
     {
-      "name": "Casual Tournament @ TCG ARENA",
-      "date": "Mon. Aug 17, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "TCG ARENA",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "București, București",
-      "city": "București",
-      "state": "București",
-      "lat": 44.4356445,
-      "lng": 26.1009263,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/83aed254-d497-440d-8204-d84dd088e631"
-    },
-    {
       "name": "WEEKLY MEETUP",
       "date": "Mon. Aug 17, 2026",
       "time": "4:00 PM UTC",
@@ -2863,6 +2845,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/b0f0648a-0518-4120-b81d-1775565fead1"
+    },
+    {
+      "name": "Casual Tournament @ TCG ARENA",
+      "date": "Mon. Aug 17, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "TCG ARENA",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "București, București",
+      "city": "București",
+      "state": "București",
+      "lat": 44.4356445,
+      "lng": 26.1009263,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/83aed254-d497-440d-8204-d84dd088e631"
     },
     {
       "name": "Poniedziałkowe Sorcery",
@@ -10267,8 +10267,8 @@
       "date": "Fri. Aug 28, 2026",
       "time": "11:00 AM UTC",
       "endTime": "",
-      "type": "White Dragon Gaming",
-      "price": "Friday Night Meetup",
+      "type": "Friday Night Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Taoyuan District, Taoyuan City",
       "city": "Taoyuan District",
@@ -10277,7 +10277,7 @@
       "lng": 121.30168,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "White Dragon Gaming",
       "url": "https://play.sorcerytcg.com/events/596862bb-c972-4a44-a39f-6ff3f4434460"
     },
     {
@@ -24645,24 +24645,6 @@
       "url": "https://play.sorcerytcg.com/events/0718a202-d8da-4e2a-ad9c-370cc6c0fb07"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/90c1dc0d-d537-4187-88ad-1e01ef53a719"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 25, 2026",
       "time": "1:00 AM UTC",
@@ -24679,6 +24661,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/15476a2e-5e66-447b-ba1c-a0609412cc62"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/90c1dc0d-d537-4187-88ad-1e01ef53a719"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28945,24 +28945,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/5c6bd3c4-8bfb-4284-ab3c-6270d30ea564"
-    },
-    {
-      "name": "TCA Sorcery Tuesdays",
-      "date": "Tue. Oct 6, 2026",
-      "time": "9:00 PM UTC",
-      "endTime": "",
-      "type": "Trading Card Academy",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Harrison, OH",
-      "city": "Harrison",
-      "state": "OH",
-      "lat": 40.2694328,
-      "lng": -81.1289112,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/78ebedac-0be2-4660-bb37-5aed538ae7a1"
     }
   ]
 }
