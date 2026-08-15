@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T18:18:40.431Z",
+  "updated": "2026-08-15T19:17:41.571Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -435,6 +435,24 @@
       "url": "https://play.sorcerytcg.com/events/bd198257-27a2-4afe-863b-89e050cf4593"
     },
     {
+      "name": "Sealed Tournament",
+      "date": "Sat. Aug 15, 2026",
+      "time": "7:52 PM UTC",
+      "endTime": "",
+      "type": "Galaxy of Games",
+      "price": "Sealed Tournament",
+      "duration": "",
+      "location": "Billings, MT",
+      "city": "Billings",
+      "state": "MT",
+      "lat": 45.7874957,
+      "lng": -108.49607,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/0adcad84-4506-4b3b-9c29-33d850c16dfa"
+    },
+    {
       "name": "Sorcery Saturday",
       "date": "Sat. Aug 15, 2026",
       "time": "8:00 PM UTC",
@@ -451,6 +469,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0c7fcc4a-3c3e-4ade-a3bc-91fb725f4eab"
+    },
+    {
+      "name": "Packfinder Sealed",
+      "date": "Aug 15, 2026 - Aug 16, 2026",
+      "time": "8:00 PM UTC",
+      "endTime": "",
+      "type": "Game Theory",
+      "price": "Sealed Tournament",
+      "duration": "",
+      "location": "Wasilla, AK",
+      "city": "Wasilla",
+      "state": "AK",
+      "lat": 61.5824216,
+      "lng": -149.442563,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f55f5419-4b1f-4250-b90b-97ada9b01e28"
     },
     {
       "name": "Saturday Afternoon Sorcery! @Dice N Duels",
@@ -1443,24 +1479,6 @@
       "url": "https://play.sorcerytcg.com/events/88e5d0be-c2e7-4eaf-ae56-9aaca1ef0f4b"
     },
     {
-      "name": "Sorcery Monthly Draft",
-      "date": "Sun. Aug 16, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Athoria Games Tempe",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Tempe, AZ",
-      "city": "Tempe",
-      "state": "AZ",
-      "lat": 33.4255117,
-      "lng": -111.940016,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3e418f15-b0b5-44a6-8ab2-e0914eb6702f"
-    },
-    {
       "name": "Weekly Sorcery Play",
       "date": "Sun. Aug 16, 2026",
       "time": "7:00 PM UTC",
@@ -1477,6 +1495,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3be99b8d-e53a-46af-b6e5-598269cd3a49"
+    },
+    {
+      "name": "Sorcery Monthly Draft",
+      "date": "Sun. Aug 16, 2026",
+      "time": "7:00 PM UTC",
+      "endTime": "",
+      "type": "Athoria Games Tempe",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Tempe, AZ",
+      "city": "Tempe",
+      "state": "AZ",
+      "lat": 33.4255117,
+      "lng": -111.940016,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3e418f15-b0b5-44a6-8ab2-e0914eb6702f"
     },
     {
       "name": "Trade & Play Sorcery Sunday",
@@ -2163,24 +2199,6 @@
       "url": "https://play.sorcerytcg.com/events/dc36ce58-2449-4aa4-ad6a-519022b8137e"
     },
     {
-      "name": "Gothic Draft Night",
-      "date": "Tue. Aug 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Pixel & Pack Games",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Spokane Valley, WA",
-      "city": "Spokane Valley",
-      "state": "WA",
-      "lat": 47.6571104,
-      "lng": -117.2613936,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/cd40b644-4fe1-41be-92b2-1ffb2e3d2058"
-    },
-    {
       "name": "Monday Sorcery",
       "date": "Tue. Aug 18, 2026",
       "time": "1:30 AM UTC",
@@ -2197,6 +2215,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
+    },
+    {
+      "name": "Gothic Draft Night",
+      "date": "Tue. Aug 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Pixel & Pack Games",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Spokane Valley, WA",
+      "city": "Spokane Valley",
+      "state": "WA",
+      "lat": 47.6571104,
+      "lng": -117.2613936,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/cd40b644-4fe1-41be-92b2-1ffb2e3d2058"
     },
     {
       "name": "Sorcery Open Play",
@@ -3877,8 +3913,8 @@
       "date": "Thu. Aug 20, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "Alphaspel",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Hägersten, Stockholms län",
       "city": "Hägersten",
@@ -3887,7 +3923,7 @@
       "lng": 17.9671408,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Alphaspel",
       "url": "https://play.sorcerytcg.com/events/b7d31c09-3a6f-49dd-9dac-ff4bd913efd0"
     },
     {
@@ -9044,24 +9080,6 @@
       "time": "11:00 PM UTC",
       "endTime": "",
       "type": "Storefront Games",
-      "price": "Storefront: Precon Draft Tourny",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
-    },
-    {
-      "name": "Thursday Evening Sorcery @ Storefront Games",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
       "price": "Casual Meetup",
       "duration": "",
       "location": "Philadelphia, PA",
@@ -9073,6 +9091,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
+    },
+    {
+      "name": "Thursday Evening Sorcery @ Storefront Games",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Storefront Games",
+      "price": "Storefront: Precon Draft Tourny",
+      "duration": "",
+      "location": "Philadelphia, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "lat": 39.9527237,
+      "lng": -75.1635262,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -10803,24 +10839,6 @@
       "url": "https://play.sorcerytcg.com/events/9fee4746-bc42-4728-b922-293648ff891d"
     },
     {
-      "name": "Sorcery Saturday",
-      "date": "Sat. Aug 29, 2026",
-      "time": "8:00 PM UTC",
-      "endTime": "",
-      "type": "The Players Keep",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Horn Lake, MS",
-      "city": "Horn Lake",
-      "state": "MS",
-      "lat": 34.9553719,
-      "lng": -90.0348139,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c1fe6037-c4e2-440b-8833-2b5bd2d5f2ae"
-    },
-    {
       "name": "Gothic Spell Slangin Championship",
       "date": "Aug 29, 2026 - Aug 30, 2026",
       "time": "8:00 PM UTC",
@@ -10837,6 +10855,24 @@
       "description": "",
       "storeName": "Ready Set Ripz",
       "url": "https://play.sorcerytcg.com/events/606cb9fd-77bf-41f4-88ac-e002bd008f67"
+    },
+    {
+      "name": "Sorcery Saturday",
+      "date": "Sat. Aug 29, 2026",
+      "time": "8:00 PM UTC",
+      "endTime": "",
+      "type": "The Players Keep",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Horn Lake, MS",
+      "city": "Horn Lake",
+      "state": "MS",
+      "lat": 34.9553719,
+      "lng": -90.0348139,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c1fe6037-c4e2-440b-8833-2b5bd2d5f2ae"
     },
     {
       "name": "Saturday Afternoon Sorcery! @Dice N Duels",
@@ -27937,42 +27973,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/102ca748-a10c-41db-bcba-79780c610782"
-    },
-    {
-      "name": "Silvershield Weekly Play",
-      "date": "Sun. Oct 4, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "SilverShield Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Powder Springs, GA",
-      "city": "Powder Springs",
-      "state": "GA",
-      "lat": 33.8595492,
-      "lng": -84.683824,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/00b44257-6a37-4e76-a5f5-2655da4e41e8"
-    },
-    {
-      "name": "EMPIRE GAMES: Sunday Open Play!",
-      "date": "Sun. Oct 4, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/98739efc-9ad9-4810-81a6-02a0cc5f68e6"
     }
   ]
 }
