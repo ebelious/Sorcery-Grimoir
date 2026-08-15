@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T00:47:50.377Z",
+  "updated": "2026-08-15T02:11:50.368Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -432,7 +432,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
+      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -450,7 +450,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0bd4d2f-11ed-4464-9e7e-8ee92d6d09fc"
+      "url": "https://play.sorcerytcg.com/events/9b7dc28d-c722-4a9f-9c9a-55d5c54f21fb"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -469,24 +469,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/aa70d70a-ede9-47ea-bcbe-fb6da107823c"
-    },
-    {
-      "name": "Sorcery TCG - Sealed - Cornerstone Event",
-      "date": "Sat. Aug 15, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hobart, TAS",
-      "city": "Hobart",
-      "state": "TAS",
-      "lat": -42.8825088,
-      "lng": 147.3281233,
-      "address": "",
-      "description": "",
-      "storeName": "Good Games Hobart",
-      "url": "https://play.sorcerytcg.com/events/62e5c7f0-e374-42ce-baef-7c53f282a022"
     },
     {
       "name": "Sorcery Open Play Casual Meetup",
@@ -523,42 +505,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/08918380-2d72-4066-ae1a-f8d642944ba3"
-    },
-    {
-      "name": "Friday Night Sorcery: Constructed",
-      "date": "Sat. Aug 15, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Walla Walla, WA",
-      "city": "Walla Walla",
-      "state": "WA",
-      "lat": 46.2055155,
-      "lng": -118.5174284,
-      "address": "",
-      "description": "",
-      "storeName": "Digital Heroes",
-      "url": "https://play.sorcerytcg.com/events/dc71b1b0-b5d6-4732-8cb1-1ebec6eb5255"
-    },
-    {
-      "name": "Beta Sealed Event at Gone Lucid Games",
-      "date": "Sat. Aug 15, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Beta Sealed Event",
-      "price": "FREE",
-      "duration": "",
-      "location": "Clinton, IN",
-      "city": "Clinton",
-      "state": "IN",
-      "lat": 40.2992769,
-      "lng": -86.4692735,
-      "address": "",
-      "description": "",
-      "storeName": "Gone Lucid Games",
-      "url": "https://play.sorcerytcg.com/events/90fdb28b-8ebc-4196-96d2-58dab4c11e2c"
     },
     {
       "name": "Auckland Grand Contest @ Auckland Card Show",
@@ -615,24 +561,6 @@
       "url": "https://play.sorcerytcg.com/events/5639c203-4f49-4c8e-b3d7-b36f03db35d1"
     },
     {
-      "name": "60/30/10 (aka Benchmark)",
-      "date": "Sat. Aug 15, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Hammerhead Games",
-      "url": "https://play.sorcerytcg.com/events/528aa07c-db0b-45ac-b1f5-930a02b5dbef"
-    },
-    {
       "name": "(8/14) Sorcery Constructed - 6:45PM",
       "date": "Sat. Aug 15, 2026",
       "time": "1:45 AM UTC",
@@ -649,24 +577,6 @@
       "description": "",
       "storeName": "The Portland Game Store",
       "url": "https://play.sorcerytcg.com/events/ef460b45-c6e4-41a2-ad64-9fb0a30558d3"
-    },
-    {
-      "name": "Midnight Pudge",
-      "date": "Sat. Aug 15, 2026",
-      "time": "2:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Jardim Goiás, GO",
-      "city": "Jardim Goiás",
-      "state": "GO",
-      "lat": -16.7024172,
-      "lng": -49.2385974,
-      "address": "",
-      "description": "",
-      "storeName": "Pudge Pit",
-      "url": "https://play.sorcerytcg.com/events/71d0d404-6bcc-415c-8733-2b947c469b5a"
     },
     {
       "name": "Beskar Forge's Sorcery Saturdays",
@@ -1045,6 +955,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6f7b810e-392e-41f4-8e46-e0014bd7ac21"
+    },
+    {
+      "name": "Sabadão Semanal Condado",
+      "date": "Sat. Aug 15, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "União da Vitória, PR",
+      "city": "União da Vitória",
+      "state": "PR",
+      "lat": -26.228596,
+      "lng": -51.0869796,
+      "address": "",
+      "description": "",
+      "storeName": "O Condado",
+      "url": "https://play.sorcerytcg.com/events/72e8eaad-be4a-4b3b-b08a-67e83a1e3af1"
     },
     {
       "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
@@ -5742,7 +5670,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -5760,7 +5688,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -6229,6 +6157,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cb649558-f3f8-4913-ae8e-e57b0389f3b6"
+    },
+    {
+      "name": "Sabadão Semanal Condado",
+      "date": "Sat. Aug 22, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "O Condado",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "União da Vitória, PR",
+      "city": "União da Vitória",
+      "state": "PR",
+      "lat": -26.228596,
+      "lng": -51.0869796,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f34bcb21-ea34-4bdd-a117-3b3d3911d1d2"
     },
     {
       "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
@@ -11271,6 +11217,24 @@
       "url": "https://play.sorcerytcg.com/events/ac5be2cf-5a29-4f7c-818d-0a64f4a16f3d"
     },
     {
+      "name": "Sabadão Semanal Condado",
+      "date": "Sat. Aug 29, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "O Condado",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "União da Vitória, PR",
+      "city": "União da Vitória",
+      "state": "PR",
+      "lat": -26.228596,
+      "lng": -51.0869796,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/b02f3b96-82d6-455f-a1a6-60a061bb432d"
+    },
+    {
       "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
       "date": "Sat. Aug 29, 2026",
       "time": "5:00 PM UTC",
@@ -15481,6 +15445,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/4892961c-de98-4021-8469-56ec2b349cda"
+    },
+    {
+      "name": "Sabadão Semanal Condado",
+      "date": "Sat. Sep 5, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "O Condado",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "União da Vitória, PR",
+      "city": "União da Vitória",
+      "state": "PR",
+      "lat": -26.228596,
+      "lng": -51.0869796,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/38cd58b7-568a-4d43-9d83-eedda99c73d8"
     },
     {
       "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
@@ -28693,78 +28675,6 @@
       "description": "",
       "storeName": "Gongaii Games, Inc",
       "url": "https://play.sorcerytcg.com/events/ce84ddaa-96c7-4d0c-8d06-606356456fde"
-    },
-    {
-      "name": "Trade & Play Sorcery Sunday",
-      "date": "Sun. Oct 4, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Camden Cards",
-      "price": "Trade Night",
-      "duration": "",
-      "location": "Camden, TN",
-      "city": "Camden",
-      "state": "TN",
-      "lat": 36.0589486,
-      "lng": -88.0978151,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4b713bb3-69c0-4ef0-b55b-496c7028c65e"
-    },
-    {
-      "name": "Sunday Skirmish",
-      "date": "Sun. Oct 4, 2026",
-      "time": "7:15 PM UTC",
-      "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36849060-1c04-4121-b48f-3d3763e25719"
-    },
-    {
-      "name": "Dane's Games Weekly Play",
-      "date": "Sun. Oct 4, 2026",
-      "time": "8:00 PM UTC",
-      "endTime": "",
-      "type": "Dane's Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "West Chicago, IL",
-      "city": "West Chicago",
-      "state": "IL",
-      "lat": 41.8847507,
-      "lng": -88.2039607,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c06a6650-959b-49e4-aa96-8acb5a0636b9"
-    },
-    {
-      "name": "Sunday Sorcery",
-      "date": "Sun. Oct 4, 2026",
-      "time": "8:30 PM UTC",
-      "endTime": "",
-      "type": "Gamelandia",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Palo Alto, CA",
-      "city": "Palo Alto",
-      "state": "CA",
-      "lat": 37.4443293,
-      "lng": -122.1598465,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f46e9a87-e91d-4817-9d3c-d81d240ef545"
     }
   ]
 }
