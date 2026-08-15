@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T19:17:41.571Z",
+  "updated": "2026-08-15T20:16:14.894Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -435,24 +435,6 @@
       "url": "https://play.sorcerytcg.com/events/bd198257-27a2-4afe-863b-89e050cf4593"
     },
     {
-      "name": "Sealed Tournament",
-      "date": "Sat. Aug 15, 2026",
-      "time": "7:52 PM UTC",
-      "endTime": "",
-      "type": "Galaxy of Games",
-      "price": "Sealed Tournament",
-      "duration": "",
-      "location": "Billings, MT",
-      "city": "Billings",
-      "state": "MT",
-      "lat": 45.7874957,
-      "lng": -108.49607,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0adcad84-4506-4b3b-9c29-33d850c16dfa"
-    },
-    {
       "name": "Sorcery Saturday",
       "date": "Sat. Aug 15, 2026",
       "time": "8:00 PM UTC",
@@ -475,8 +457,8 @@
       "date": "Aug 15, 2026 - Aug 16, 2026",
       "time": "8:00 PM UTC",
       "endTime": "",
-      "type": "Game Theory",
-      "price": "Sealed Tournament",
+      "type": "Sealed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Wasilla, AK",
       "city": "Wasilla",
@@ -485,7 +467,7 @@
       "lng": -149.442563,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Game Theory",
       "url": "https://play.sorcerytcg.com/events/f55f5419-4b1f-4250-b90b-97ada9b01e28"
     },
     {
@@ -1479,24 +1461,6 @@
       "url": "https://play.sorcerytcg.com/events/88e5d0be-c2e7-4eaf-ae56-9aaca1ef0f4b"
     },
     {
-      "name": "Weekly Sorcery Play",
-      "date": "Sun. Aug 16, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Gear Gaming Store",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "Bentonville, AR",
-      "city": "Bentonville",
-      "state": "AR",
-      "lat": 36.3728608,
-      "lng": -94.208787,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3be99b8d-e53a-46af-b6e5-598269cd3a49"
-    },
-    {
       "name": "Sorcery Monthly Draft",
       "date": "Sun. Aug 16, 2026",
       "time": "7:00 PM UTC",
@@ -1513,6 +1477,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3e418f15-b0b5-44a6-8ab2-e0914eb6702f"
+    },
+    {
+      "name": "Weekly Sorcery Play",
+      "date": "Sun. Aug 16, 2026",
+      "time": "7:00 PM UTC",
+      "endTime": "",
+      "type": "Gear Gaming Store",
+      "price": "Learn To Play",
+      "duration": "",
+      "location": "Bentonville, AR",
+      "city": "Bentonville",
+      "state": "AR",
+      "lat": 36.3728608,
+      "lng": -94.208787,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3be99b8d-e53a-46af-b6e5-598269cd3a49"
     },
     {
       "name": "Trade & Play Sorcery Sunday",
@@ -1573,8 +1555,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "7:15 PM UTC",
       "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Cary, NC",
       "city": "Cary",
@@ -1583,7 +1565,7 @@
       "lng": -78.7812081,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "East Coast Gaming",
       "url": "https://play.sorcerytcg.com/events/493bd5d6-ad18-4e70-a35c-6c6021b96810"
     },
     {
@@ -2199,24 +2181,6 @@
       "url": "https://play.sorcerytcg.com/events/dc36ce58-2449-4aa4-ad6a-519022b8137e"
     },
     {
-      "name": "Monday Sorcery",
-      "date": "Tue. Aug 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Stomping Grounds",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Las Vegas, NV",
-      "city": "Las Vegas",
-      "state": "NV",
-      "lat": 36.1674263,
-      "lng": -115.1484131,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
-    },
-    {
       "name": "Gothic Draft Night",
       "date": "Tue. Aug 18, 2026",
       "time": "1:30 AM UTC",
@@ -2233,6 +2197,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cd40b644-4fe1-41be-92b2-1ffb2e3d2058"
+    },
+    {
+      "name": "Monday Sorcery",
+      "date": "Tue. Aug 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Stomping Grounds",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Las Vegas, NV",
+      "city": "Las Vegas",
+      "state": "NV",
+      "lat": 36.1674263,
+      "lng": -115.1484131,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a3da3c5b-2124-4aa3-b707-20128174ace6"
     },
     {
       "name": "Sorcery Open Play",
@@ -2473,8 +2455,8 @@
       "date": "Tue. Aug 18, 2026",
       "time": "5:30 PM UTC",
       "endTime": "",
-      "type": "Made-up Rules",
-      "price": "Sealed Tournament",
+      "type": "Sealed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Utrecht, Utrecht",
       "city": "Utrecht",
@@ -2483,7 +2465,7 @@
       "lng": 5.1215634,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Made-up Rules",
       "url": "https://play.sorcerytcg.com/events/9a1aecb2-ddb3-43d1-aa75-6ef1a194f0ee"
     },
     {
@@ -14007,24 +13989,6 @@
       "url": "https://play.sorcerytcg.com/events/d06ad163-a608-49b2-a946-6574a36c7f3e"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 4, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 4, 2026",
       "time": "1:00 AM UTC",
@@ -14041,6 +14005,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 4, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -27955,24 +27937,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/aa554380-ed71-49a9-807b-eede7cb83366"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Oct 4, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "lat": 39.0889469,
-      "lng": -84.4919524,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/102ca748-a10c-41db-bcba-79780c610782"
     }
   ]
 }
