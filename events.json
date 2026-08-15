@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T11:14:24.370Z",
+  "updated": "2026-08-15T12:22:49.570Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -10317,6 +10317,24 @@
       "url": "https://play.sorcerytcg.com/events/be4583fd-f3bf-4f4b-973c-ddd3e08e1d05"
     },
     {
+      "name": "AL/Beta Draft",
+      "date": "Sat. Aug 29, 2026",
+      "time": "8:30 AM UTC",
+      "endTime": "",
+      "type": "Draft Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Düsseldorf, NRW",
+      "city": "Düsseldorf",
+      "state": "NRW",
+      "lat": 51.2254018,
+      "lng": 6.7763137,
+      "address": "",
+      "description": "",
+      "storeName": "Drachental Games & Magic",
+      "url": "https://play.sorcerytcg.com/events/5e3f108f-fb0f-410c-a44a-29121bddf153"
+    },
+    {
       "name": "Fantasia Saturday Sorcery",
       "date": "Sat. Aug 29, 2026",
       "time": "9:00 AM UTC",
@@ -12441,24 +12459,6 @@
       "url": "https://play.sorcerytcg.com/events/46edfcd2-c77a-4588-b4b9-d4c561ac7d4d"
     },
     {
-      "name": "Contesting for the Realm",
-      "date": "Tue. Sep 1, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Pixel & Pack Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Spokane Valley, WA",
-      "city": "Spokane Valley",
-      "state": "WA",
-      "lat": 47.6571104,
-      "lng": -117.2613936,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f91ece57-c3d8-4300-9db3-d88ff7a1d7cf"
-    },
-    {
       "name": "Monday Sorcery",
       "date": "Tue. Sep 1, 2026",
       "time": "1:30 AM UTC",
@@ -12475,6 +12475,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e2e1b91d-7cdb-4fb9-b8e2-9c844ec5784e"
+    },
+    {
+      "name": "Contesting for the Realm",
+      "date": "Tue. Sep 1, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Pixel & Pack Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Spokane Valley, WA",
+      "city": "Spokane Valley",
+      "state": "WA",
+      "lat": 47.6571104,
+      "lng": -117.2613936,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f91ece57-c3d8-4300-9db3-d88ff7a1d7cf"
     },
     {
       "name": "Sorcery Open Play",
@@ -18165,24 +18183,6 @@
       "url": "https://play.sorcerytcg.com/events/cc13d155-9c53-483e-8cb5-a9ae49a7ffa7"
     },
     {
-      "name": "Friday Night Sorcery!",
-      "date": "Sat. Sep 12, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Puddletown Games & Puzzles",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c8dbbd1a-3f21-426c-a8c2-ddcd7c67be45"
-    },
-    {
       "name": "Cornerstone at Good Games Town Hall!",
       "date": "Sat. Sep 12, 2026",
       "time": "1:00 AM UTC",
@@ -18199,6 +18199,24 @@
       "description": "",
       "storeName": "Good Games Town Hall",
       "url": "https://play.sorcerytcg.com/events/cf5cacb3-89f8-4b28-8bd2-0f782a360cbd"
+    },
+    {
+      "name": "Friday Night Sorcery!",
+      "date": "Sat. Sep 12, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Puddletown Games & Puzzles",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c8dbbd1a-3f21-426c-a8c2-ddcd7c67be45"
     },
     {
       "name": "Sorcery Constructed",
@@ -20322,7 +20340,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -20340,7 +20358,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
@@ -27111,24 +27129,6 @@
       "url": "https://play.sorcerytcg.com/events/7d09fa72-fe8f-4c21-9830-0dbccc941fb5"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Oct 2, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Oct 2, 2026",
       "time": "1:00 AM UTC",
@@ -27145,6 +27145,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e37739b3-9c33-4398-94f8-debff0ec128a"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Oct 2, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28549,24 +28567,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2fa78dfe-b09f-4ac5-a4d4-bbf913a6593e"
-    },
-    {
-      "name": "Gongaii Casual Monday",
-      "date": "Tue. Oct 6, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "Gongaii Games, Inc",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Beaverton, OR",
-      "city": "Beaverton",
-      "state": "OR",
-      "lat": 45.4871723,
-      "lng": -122.80378,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b3eb00eb-7e09-46ea-a21c-755c06987754"
     }
   ]
 }
