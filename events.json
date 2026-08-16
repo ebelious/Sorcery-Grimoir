@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T19:17:20.822Z",
+  "updated": "2026-08-16T20:14:51.771Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -97,8 +97,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "2:00 PM UTC",
       "endTime": "",
-      "type": "David's Good Game Cafe",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Hamden, CT",
       "city": "Hamden",
@@ -107,7 +107,7 @@
       "lng": -72.9020069,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/6f9c2adb-abb1-4ada-b32b-4b8e25123c1c"
     },
     {
@@ -271,24 +271,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e15b7faa-b81e-4394-abf5-6b312670047c"
-    },
-    {
-      "name": "Sorcery Weekly Play at Slick Mimic's",
-      "date": "Sun. Aug 16, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Appleton, WI",
-      "city": "Appleton",
-      "state": "WI",
-      "lat": 44.2613967,
-      "lng": -88.4069744,
-      "address": "",
-      "description": "",
-      "storeName": "Slick Mimic's",
-      "url": "https://play.sorcerytcg.com/events/c0ce682a-e3a1-4c85-923e-5361363303db"
     },
     {
       "name": "Sorcery: Contested Realm play",
@@ -3924,7 +3906,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
+      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
     },
     {
       "name": "Stevenson Games Sorcery",
@@ -3942,7 +3924,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36ed3901-8cec-4a4a-bfcc-33c5cb9e66b8"
+      "url": "https://play.sorcerytcg.com/events/c83dc54b-6297-4057-b72f-4f629c965812"
     },
     {
       "name": "ON THE DRAW WEEKLY LOCALS",
@@ -8337,24 +8319,6 @@
       "url": "https://play.sorcerytcg.com/events/e6eb3fdf-fdab-4e6f-976e-b75f686d8f69"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/c9e322f4-285c-4cdc-9c6a-f15aef215613"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Aug 28, 2026",
       "time": "1:00 AM UTC",
@@ -8371,6 +8335,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d920d9e0-aef7-4d5b-8598-6ac35d74c2af"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Aug 28, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/c9e322f4-285c-4cdc-9c6a-f15aef215613"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -14835,6 +14817,24 @@
       "url": "https://play.sorcerytcg.com/events/2bee63f4-d4ac-4461-89eb-f362904eedf5"
     },
     {
+      "name": "Sunday Sorcery",
+      "date": "Sep 6, 2026 - Sep 7, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "JC Hobby",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Omaha, NE",
+      "city": "Omaha",
+      "state": "NE",
+      "lat": 41.2587459,
+      "lng": -95.9383758,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a238bfa8-155b-4996-b743-65de6caa2e6e"
+    },
+    {
       "name": "Weekly Sorcery Play",
       "date": "Sun. Sep 6, 2026",
       "time": "9:00 PM UTC",
@@ -18343,6 +18343,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/b22f01ed-eea2-430a-8bd9-af44be783c2a"
+    },
+    {
+      "name": "Sunday Sorcery",
+      "date": "Sep 13, 2026 - Sep 14, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "JC Hobby",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Omaha, NE",
+      "city": "Omaha",
+      "state": "NE",
+      "lat": 41.2587459,
+      "lng": -95.9383758,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/2b70a403-0282-4c13-9c87-035b3afb75a6"
     },
     {
       "name": "Sunday Sorcery Contest Realm - Casual play",
@@ -27253,60 +27271,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e419b055-9f12-4a15-83bb-d8340524e480"
-    },
-    {
-      "name": "Mooonday Sooorcery",
-      "date": "Mon. Oct 5, 2026",
-      "time": "7:30 AM UTC",
-      "endTime": "",
-      "type": "Scenic Isle Gaming",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Launceston, TAS",
-      "city": "Launceston",
-      "state": "TAS",
-      "lat": -41.4340813,
-      "lng": 147.1373496,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4d9faeda-e058-4928-b107-ff2c71172c5c"
-    },
-    {
-      "name": "Gosford Sorcery Locals",
-      "date": "Mon. Oct 5, 2026",
-      "time": "7:30 AM UTC",
-      "endTime": "",
-      "type": "Elemental Arcade",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Gosford, NSW",
-      "city": "Gosford",
-      "state": "NSW",
-      "lat": -33.4240979,
-      "lng": 151.3411475,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e05c12ec-40f1-4132-8ed0-3356ce3cfcd7"
-    },
-    {
-      "name": "Constructed w Merfolku",
-      "date": "Mon. Oct 5, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Merfolk",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6fb984ff-dd6b-4a7a-a5f5-b678ad67ba22"
     }
   ]
 }
