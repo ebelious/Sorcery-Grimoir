@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T11:14:39.038Z",
+  "updated": "2026-08-16T12:24:07.583Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -79,8 +79,8 @@
       "date": "Sun. Aug 16, 2026",
       "time": "12:10 PM UTC",
       "endTime": "",
-      "type": "DMG Card Shop",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Para de Minas, MG",
       "city": "Para de Minas",
@@ -89,7 +89,7 @@
       "lng": -44.5912664,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "DMG Card Shop",
       "url": "https://play.sorcerytcg.com/events/b025eeb1-130a-41e4-afdd-4eb0a8376910"
     },
     {
@@ -9367,8 +9367,8 @@
       "date": "Sat. Aug 29, 2026",
       "time": "9:00 AM UTC",
       "endTime": "",
-      "type": "Kelz0r Næstved",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Næstved, Sjælland",
       "city": "Næstved",
@@ -9377,7 +9377,7 @@
       "lng": 11.7674102,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Kelz0r Næstved",
       "url": "https://play.sorcerytcg.com/events/321dcac6-939c-45d7-b7d5-7e7af643be55"
     },
     {
