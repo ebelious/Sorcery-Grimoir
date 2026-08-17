@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17T10:26:03.647Z",
+  "updated": "2026-08-17T11:20:11.514Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -55,24 +55,6 @@
       "description": "",
       "storeName": "The Arcanum Sanctorum",
       "url": "https://play.sorcerytcg.com/events/5a062af6-c6cf-4133-9f9f-3d01694a620d"
-    },
-    {
-      "name": "Into the Abyss",
-      "date": "Mon. Aug 17, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c463d167-304c-4393-a919-33ae28ca1493"
     },
     {
       "name": "Draft Night (Set TBD) w / Prizing @ B&B",
@@ -1281,6 +1263,24 @@
       "url": "https://play.sorcerytcg.com/events/e40c6295-595c-4fe1-aeaa-18102f88f191"
     },
     {
+      "name": "Into the Abyss",
+      "date": "Wed. Aug 19, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c463d167-304c-4393-a919-33ae28ca1493"
+    },
+    {
       "name": "Biweekly Keidas casual Games",
       "date": "Wed. Aug 19, 2026",
       "time": "1:48 PM UTC",
@@ -1549,6 +1549,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/069917e9-7bc5-43ea-b00f-3627f5d75194"
+    },
+    {
+      "name": "CREMOS: Gothic DRAFT",
+      "date": "Wed. Aug 19, 2026",
+      "time": "7:00 PM UTC",
+      "endTime": "",
+      "type": "Draft Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Romanengo, Lombardia",
+      "city": "Romanengo",
+      "state": "Lombardia",
+      "lat": 45.3771765,
+      "lng": 9.784985,
+      "address": "",
+      "description": "",
+      "storeName": "GameLover",
+      "url": "https://play.sorcerytcg.com/events/fec66771-da81-4558-90e7-6fa6d7c2c16c"
     },
     {
       "name": "Joker local night",
@@ -2469,24 +2487,6 @@
       "url": "https://play.sorcerytcg.com/events/034896a5-933a-4135-8da6-fa8925c5c742"
     },
     {
-      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
-      "date": "Aug 20, 2026 - Aug 21, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Centreville, VA",
-      "city": "Centreville",
-      "state": "VA",
-      "lat": 38.837613,
-      "lng": -77.4347283,
-      "address": "",
-      "description": "",
-      "storeName": "Curio (Centreville Sq)",
-      "url": "https://play.sorcerytcg.com/events/e861dacf-6b1d-49f5-bcc2-e12972b17172"
-    },
-    {
       "name": "Thursday Evening Sorcery",
       "date": "Thu. Aug 20, 2026",
       "time": "10:30 PM UTC",
@@ -2503,6 +2503,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e9e56152-e55f-4a4e-9175-6b4b7b484788"
+    },
+    {
+      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
+      "date": "Aug 20, 2026 - Aug 21, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Centreville, VA",
+      "city": "Centreville",
+      "state": "VA",
+      "lat": 38.837613,
+      "lng": -77.4347283,
+      "address": "",
+      "description": "",
+      "storeName": "Curio (Centreville Sq)",
+      "url": "https://play.sorcerytcg.com/events/e861dacf-6b1d-49f5-bcc2-e12972b17172"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -2829,24 +2847,6 @@
       "url": "https://play.sorcerytcg.com/events/cb56475e-4f2a-4bea-8725-96166db41f0a"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Aug 21, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d92f0ae5-5c78-4b34-b076-7ba644371dcc"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Aug 21, 2026",
       "time": "1:30 AM UTC",
@@ -2863,6 +2863,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/e3eff0f6-34f7-4109-aedc-946f9751045b"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Aug 21, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d92f0ae5-5c78-4b34-b076-7ba644371dcc"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -5259,24 +5277,6 @@
       "url": "https://play.sorcerytcg.com/events/eca2f50f-f7d7-4f95-b829-5626217e4bf1"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Aug 24, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5d3dc142-e18a-432d-8bb4-883661e0e475"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Aug 24, 2026",
       "time": "8:30 AM UTC",
@@ -6319,6 +6319,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2292a3e4-01d0-4d81-9643-11f89423506a"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Aug 26, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/5d3dc142-e18a-432d-8bb4-883661e0e475"
     },
     {
       "name": "Sorcery TCG - Weekly Showdown",
@@ -10407,24 +10425,6 @@
       "url": "https://play.sorcerytcg.com/events/b6c6edae-340d-49d6-ae47-02d7dded69d0"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Aug 31, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f784be3d-5f29-43ad-90e7-adfa7f08bd6b"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Aug 31, 2026",
       "time": "8:30 AM UTC",
@@ -11359,6 +11359,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c7c47e19-3148-4cec-afef-db4fdb930a1b"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Sep 2, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f784be3d-5f29-43ad-90e7-adfa7f08bd6b"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -12495,24 +12513,6 @@
       "url": "https://play.sorcerytcg.com/events/d06ad163-a608-49b2-a946-6574a36c7f3e"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 4, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 4, 2026",
       "time": "1:00 AM UTC",
@@ -12529,6 +12529,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 4, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -14331,24 +14349,6 @@
       "url": "https://play.sorcerytcg.com/events/8d264993-bf98-4eec-9b1c-74d84f23186d"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Sep 7, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/de9274ba-33a7-4d43-b6c4-19a530933190"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Sep 7, 2026",
       "time": "8:30 AM UTC",
@@ -15139,6 +15139,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/94acc7a4-ddf6-42fe-a29b-43c3f75ac513"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Sep 9, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/de9274ba-33a7-4d43-b6c4-19a530933190"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -17931,24 +17949,6 @@
       "url": "https://play.sorcerytcg.com/events/d060afcc-1dea-4f57-be11-9ec036efad9e"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Sep 14, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ccb628ee-71b8-4289-817d-20af0243def4"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Sep 14, 2026",
       "time": "8:30 AM UTC",
@@ -18685,6 +18685,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0637a1a5-d142-4258-91e9-e0603c598f7f"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Sep 16, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ccb628ee-71b8-4289-817d-20af0243def4"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -21243,24 +21261,6 @@
       "url": "https://play.sorcerytcg.com/events/911fb3fe-11a8-4b75-aa87-aede8b1c4a61"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Sep 21, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c6bece32-be33-45cf-b697-6276e4d29177"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Sep 21, 2026",
       "time": "8:30 AM UTC",
@@ -21943,6 +21943,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/bdb302a2-7fa7-4185-849a-4d622210eca0"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Sep 23, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c6bece32-be33-45cf-b697-6276e4d29177"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -24213,24 +24231,6 @@
       "url": "https://play.sorcerytcg.com/events/08b887db-db60-4067-a2a4-d3169adf5c29"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Sep 28, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6d01c5b0-e175-41a1-bbdf-a485e959a204"
-    },
-    {
       "name": "Mooonday Sooorcery",
       "date": "Mon. Sep 28, 2026",
       "time": "8:30 AM UTC",
@@ -24895,6 +24895,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/bca73057-335c-41f2-9497-fde634a54658"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Sep 30, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/6d01c5b0-e175-41a1-bbdf-a485e959a204"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -26913,24 +26931,6 @@
       "url": "https://play.sorcerytcg.com/events/e05c12ec-40f1-4132-8ed0-3356ce3cfcd7"
     },
     {
-      "name": "Into the Abyss",
-      "date": "Mon. Oct 5, 2026",
-      "time": "8:15 AM UTC",
-      "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fremantle, WA",
-      "city": "Fremantle",
-      "state": "WA",
-      "lat": -32.0534086,
-      "lng": 115.7586172,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5ff3593d-71be-4239-8fc1-df3173eccdb5"
-    },
-    {
       "name": "Constructed w Merfolku",
       "date": "Mon. Oct 5, 2026",
       "time": "4:00 PM UTC",
@@ -27433,6 +27433,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a8bfd7fd-3b9b-4d2a-b136-aa13cb702ff7"
+    },
+    {
+      "name": "Into the Abyss",
+      "date": "Wed. Oct 7, 2026",
+      "time": "8:15 AM UTC",
+      "endTime": "",
+      "type": "Hightide Tabletop Gaming",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fremantle, WA",
+      "city": "Fremantle",
+      "state": "WA",
+      "lat": -32.0534086,
+      "lng": 115.7586172,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/5ff3593d-71be-4239-8fc1-df3173eccdb5"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -28567,24 +28585,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/80d70cc8-c38f-4309-acbb-ba4c8643ae06"
-    },
-    {
-      "name": "Don't put Mystery into a Cornerstone",
-      "date": "Sat. Oct 10, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Göteborg, Västra Götalands län",
-      "city": "Göteborg",
-      "state": "Västra Götalands län",
-      "lat": 57.7072326,
-      "lng": 11.9670171,
-      "address": "",
-      "description": "",
-      "storeName": "Mystery Shack",
-      "url": "https://play.sorcerytcg.com/events/090e03a2-528c-44e1-8c4a-7286540ac1ab"
     }
   ]
 }
