@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T23:14:44.077Z",
+  "updated": "2026-08-17T00:48:34.186Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -183,24 +183,6 @@
       "url": "https://play.sorcerytcg.com/events/f906ba77-a69c-4798-b8e5-c47252613c89"
     },
     {
-      "name": "FREE",
-      "date": "Sun. Aug 16, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "",
-      "city": "",
-      "state": "",
-      "lat": null,
-      "lng": null,
-      "address": "",
-      "description": "",
-      "storeName": "Middle Davids Candles & Gifts",
-      "url": "https://play.sorcerytcg.com/events/1013fbc6-8dbe-481a-800a-6eedc0f165f1"
-    },
-    {
       "name": "Sorcery Sunday KC!!",
       "date": "Sun. Aug 16, 2026",
       "time": "5:30 PM UTC",
@@ -379,24 +361,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/dc989647-2b81-4c53-aace-01b987563c90"
-    },
-    {
-      "name": "Sorcery Learn to Play",
-      "date": "Sun. Aug 16, 2026",
-      "time": "7:30 PM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hanford, CA",
-      "city": "Hanford",
-      "state": "CA",
-      "lat": 36.3277959,
-      "lng": -119.6461565,
-      "address": "",
-      "description": "",
-      "storeName": "Command Zone Games & Hobbies, LLC",
-      "url": "https://play.sorcerytcg.com/events/88e5d0be-c2e7-4eaf-ae56-9aaca1ef0f4b"
     },
     {
       "name": "Weekly Sorcery Play",
@@ -615,24 +579,6 @@
       "url": "https://play.sorcerytcg.com/events/6dc528e2-216a-4648-8a85-975a608a5e8f"
     },
     {
-      "name": "sorcery sunday",
-      "date": "Sun. Aug 16, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Lethbridge, AB",
-      "city": "Lethbridge",
-      "state": "AB",
-      "lat": 49.6945782,
-      "lng": -112.8331033,
-      "address": "",
-      "description": "",
-      "storeName": "Showcase Comics",
-      "url": "https://play.sorcerytcg.com/events/dd4d13cb-7e2c-4996-bce1-ff0d50d2e27a"
-    },
-    {
       "name": "Domingão",
       "date": "Aug 16, 2026 - Aug 17, 2026",
       "time": "11:00 PM UTC",
@@ -673,8 +619,8 @@
       "date": "Mon. Aug 17, 2026",
       "time": "12:00 AM UTC",
       "endTime": "",
-      "type": "Games Ahoy",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Fort Collins, CO",
       "city": "Fort Collins",
@@ -683,7 +629,7 @@
       "lng": -105.0770113,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Games Ahoy",
       "url": "https://play.sorcerytcg.com/events/aa6a8273-e64f-4862-a305-2d45a9c94c83"
     },
     {
