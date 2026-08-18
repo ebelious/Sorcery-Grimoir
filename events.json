@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T05:23:05.939Z",
+  "updated": "2026-08-18T06:31:03.336Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -367,8 +367,8 @@
       "date": "Tue. Aug 18, 2026",
       "time": "6:00 AM UTC",
       "endTime": "",
-      "type": "Card Merchant Blenheim",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Blenheim Central, Marlborough Region",
       "city": "Blenheim Central",
@@ -377,7 +377,7 @@
       "lng": null,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Card Merchant Blenheim",
       "url": "https://play.sorcerytcg.com/events/ecabfecc-e828-4d4f-9939-89dff7289dc0"
     },
     {
@@ -2037,6 +2037,24 @@
       "url": "https://play.sorcerytcg.com/events/8360a56d-bffe-416c-b099-b67f0361cbea"
     },
     {
+      "name": "Fortnightly Sorcery at CM Silverdale",
+      "date": "Thu. Aug 20, 2026",
+      "time": "7:00 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Silverdale, Auckland",
+      "city": "Silverdale",
+      "state": "Auckland",
+      "lat": -36.6176801,
+      "lng": 174.6769045,
+      "address": "",
+      "description": "",
+      "storeName": "Card Merchant Silverdale",
+      "url": "https://play.sorcerytcg.com/events/2f0dd137-08ad-4537-bbdb-48dc8edec7d0"
+    },
+    {
       "name": "Mighty Cool Games - Thursday Constructed",
       "date": "Thu. Aug 20, 2026",
       "time": "8:00 AM UTC",
@@ -2523,24 +2541,6 @@
       "url": "https://play.sorcerytcg.com/events/45376631-e345-452f-a858-97b53609c274"
     },
     {
-      "name": "Sorcery",
-      "date": "Thu. Aug 20, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Retro Table Top Lorcana",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "cleveland, TN",
-      "city": "cleveland",
-      "state": "TN",
-      "lat": 35.1595182,
-      "lng": -84.8766115,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3abb60c4-3bc9-40f0-997c-be552d5d462b"
-    },
-    {
       "name": "Casual Constructed",
       "date": "Aug 20, 2026 - Aug 21, 2026",
       "time": "11:00 PM UTC",
@@ -2557,6 +2557,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ab51c8f7-73f6-45c4-a5ee-36220e3f0a10"
+    },
+    {
+      "name": "Sorcery",
+      "date": "Thu. Aug 20, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Retro Table Top Lorcana",
+      "price": "Learn To Play",
+      "duration": "",
+      "location": "cleveland, TN",
+      "city": "cleveland",
+      "state": "TN",
+      "lat": 35.1595182,
+      "lng": -84.8766115,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3abb60c4-3bc9-40f0-997c-be552d5d462b"
     },
     {
       "name": "Constructed Tournament & Open Play",
@@ -12549,24 +12567,6 @@
       "url": "https://play.sorcerytcg.com/events/d06ad163-a608-49b2-a946-6574a36c7f3e"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 4, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 4, 2026",
       "time": "1:00 AM UTC",
@@ -12583,6 +12583,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 4, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28279,24 +28297,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f8cbcf00-fa14-4bc7-80cd-774d07332724"
-    },
-    {
-      "name": "SG - Weekly Play",
-      "date": "Thu. Oct 8, 2026",
-      "time": "3:15 PM UTC",
-      "endTime": "",
-      "type": "Skład Gier",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Poznań, Województwo wielkopolskie",
-      "city": "Poznań",
-      "state": "Województwo wielkopolskie",
-      "lat": 52.4082663,
-      "lng": 16.9335199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/50b0d185-da32-4651-8bb5-ed3ccd9e26c1"
     }
   ]
 }
