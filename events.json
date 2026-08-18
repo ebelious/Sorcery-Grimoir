@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T14:26:51.361Z",
+  "updated": "2026-08-18T15:24:53.000Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -91,24 +91,6 @@
       "description": "",
       "storeName": "Tolarie.cz",
       "url": "https://play.sorcerytcg.com/events/4a0e2bcb-69bf-4639-be16-244f39294bcf"
-    },
-    {
-      "name": "Learn To Play CardstoreFRB",
-      "date": "Tue. Aug 18, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "",
-      "city": "",
-      "state": "",
-      "lat": null,
-      "lng": null,
-      "address": "",
-      "description": "",
-      "storeName": "CardstoreFRB",
-      "url": "https://play.sorcerytcg.com/events/2c2f594f-7929-4474-9ba2-c14937b8f28e"
     },
     {
       "name": "Time4Magic Sorcery",
@@ -1501,8 +1483,8 @@
       "date": "Thu. Aug 20, 2026",
       "time": "12:00 AM UTC",
       "endTime": "",
-      "type": "New World Gaming",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Little Elm, TX",
       "city": "Little Elm",
@@ -1511,7 +1493,7 @@
       "lng": -96.9375051,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "New World Gaming",
       "url": "https://play.sorcerytcg.com/events/ae7bd08f-6657-4ed9-be1e-ca4d9680ab82"
     },
     {
@@ -4309,8 +4291,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "Millennium Games",
-      "price": "Draft Tournament",
+      "type": "Draft Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Rochester, NY",
       "city": "Rochester",
@@ -4319,7 +4301,7 @@
       "lng": -77.615214,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Millennium Games",
       "url": "https://play.sorcerytcg.com/events/99389610-b3ca-4091-9d38-e655b2b52c58"
     },
     {
@@ -4987,6 +4969,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3d3f7353-ae52-4d4e-bfbb-1db9bc750269"
+    },
+    {
+      "name": "Monday Afternoon Sorcery",
+      "date": "Aug 24, 2026 - Aug 25, 2026",
+      "time": "8:00 PM UTC",
+      "endTime": "",
+      "type": "MK Kards",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Cambridge, ON",
+      "city": "Cambridge",
+      "state": "ON",
+      "lat": 43.3600536,
+      "lng": -80.3123023,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ba6e9b3c-3074-4d18-b791-4ec1fa268de7"
     },
     {
       "name": "Monday Night Sorcery",
@@ -7136,24 +7136,6 @@
       "time": "11:00 PM UTC",
       "endTime": "",
       "type": "Storefront Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
-    },
-    {
-      "name": "Thursday Evening Sorcery @ Storefront Games",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
       "price": "Storefront: Precon Draft Tourny",
       "duration": "",
       "location": "Philadelphia, PA",
@@ -7165,6 +7147,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
+    },
+    {
+      "name": "Thursday Evening Sorcery @ Storefront Games",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Storefront Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Philadelphia, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "lat": 39.9527237,
+      "lng": -75.1635262,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -18612,7 +18612,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
@@ -18630,7 +18630,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Sorcery",
@@ -28963,24 +28963,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3cad9707-27d9-4b19-9f89-a42e8c13609e"
-    },
-    {
-      "name": "Saturday Spell Slangin",
-      "date": "Sat. Oct 10, 2026",
-      "time": "7:30 PM UTC",
-      "endTime": "",
-      "type": "Ready Set Ripz",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Los Angeles, CA",
-      "city": "Los Angeles",
-      "state": "CA",
-      "lat": 34.0536909,
-      "lng": -118.242766,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/86fff835-6e0b-4218-ac89-c9ce0c706478"
     }
   ]
 }
