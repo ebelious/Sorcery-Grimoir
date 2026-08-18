@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T10:21:40.677Z",
+  "updated": "2026-08-18T11:19:51.131Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -205,8 +205,8 @@
       "date": "Tue. Aug 18, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Sandbox",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Cork, CO",
       "city": "Cork",
@@ -215,7 +215,7 @@
       "lng": -8.4726423,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Sandbox",
       "url": "https://play.sorcerytcg.com/events/8a5053e1-a1b0-4294-9c4f-719eca4f2511"
     },
     {
@@ -6883,8 +6883,8 @@
       "date": "Thu. Aug 27, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Magic Lair",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Torino, Piemonte",
       "city": "Torino",
@@ -6893,7 +6893,7 @@
       "lng": 7.6824892,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Magic Lair",
       "url": "https://play.sorcerytcg.com/events/95d3f5c2-2876-4f06-a91e-8f5ce5fd3568"
     },
     {
