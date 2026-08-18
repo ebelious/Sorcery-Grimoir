@@ -1,10 +1,17 @@
 {
-  "updated": "2026-08-18T17:58:00.082Z",
+  "updated": "2026-08-18T18:23:40.918Z",
   "articles": [
+    {
+      "title": "Meet the Frost Mage: Frost Mage vs. Lavamancer",
+      "url": "https://sorcerytcg.com/news/meet-the-frost-mage",
+      "date": "18 Aug 2026",
+      "source": "sorcerytcg.com",
+      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/9321b4f58ef60a4f6e62373cb8c9dee80c249cae-2000x900.png?w=2000&h=900"
+    },
     {
       "title": "Erik’s Curiosa Expands Retail Access Through Covenant Fulfilled",
       "url": "https://sorcerytcg.com/news/erik-s-curiosa-expands-retail-access-through-covenant-fulfilled",
-      "date": "18 Aug 2026",
+      "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/ddac2bfe1c0a44adaf3616f3095edfc498abec9e-2000x900.png?w=2000&h=900"
     },
@@ -63,13 +70,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/d5283fe4a0a33df286cab748324e7ca1cd3f192e-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "Welcome to Sorcery, Franck Pawlowski!",
-      "url": "https://sorcerytcg.com/news/welcome-to-sorcery-franck-pawlowski",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/31c463e87c6ff0c7db08de3be34cf7d781cf7ec2-2000x900.png?w=2000&h=900"
     },
     {
       "title": "The Dust System",
