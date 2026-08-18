@@ -1526,5 +1526,13 @@
   "florianópolis|sc": {
     "lat": -27.5973002,
     "lng": -48.5496098
+  },
+  "fayetteville|ar": {
+    "lat": 36.0625843,
+    "lng": -94.1574328
+  },
+  "morgantown|west virginia": {
+    "lat": 39.6296809,
+    "lng": -79.9559437
   }
 }
