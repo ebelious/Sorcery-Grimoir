@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T14:26:34.217Z",
+  "updated": "2026-08-19T15:24:59.362Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -223,8 +223,8 @@
       "date": "Wed. Aug 19, 2026",
       "time": "3:52 PM UTC",
       "endTime": "",
-      "type": "BB-Spiele",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Rosenheim, BY",
       "city": "Rosenheim",
@@ -233,7 +233,7 @@
       "lng": 12.1272983,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "BB-Spiele",
       "url": "https://play.sorcerytcg.com/events/a2604abf-02e5-4145-bc70-5ab331c853b7"
     },
     {
@@ -439,8 +439,8 @@
       "date": "Wed. Aug 19, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Tabletop Cincy",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "West Chester Township, OH",
       "city": "West Chester Township",
@@ -449,7 +449,7 @@
       "lng": -84.4155616,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Tabletop Cincy",
       "url": "https://play.sorcerytcg.com/events/8980ffe2-b81f-478d-8387-ed34f1f1c72f"
     },
     {
@@ -709,8 +709,8 @@
       "date": "Aug 19, 2026 - Aug 20, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "The Sorcerer's Inn",
-      "price": "Weekly Meet up",
+      "type": "Weekly Meet up",
+      "price": "FREE",
       "duration": "",
       "location": "Randolph, MA",
       "city": "Randolph",
@@ -719,7 +719,7 @@
       "lng": -71.0413386,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Sorcerer's Inn",
       "url": "https://play.sorcerytcg.com/events/0d4508db-cef4-49f9-a6dc-cb3d2f6f44d8"
     },
     {
@@ -1981,6 +1981,24 @@
       "description": "",
       "storeName": "SpielRaum GmbH",
       "url": "https://play.sorcerytcg.com/events/fd8666cd-7398-4fd1-a83b-c76a3c5bfcee"
+    },
+    {
+      "name": "Sorcery Klubnap",
+      "date": "Fri. Aug 21, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Budapest, Pest",
+      "city": "Budapest",
+      "state": "Pest",
+      "lat": 47.4942216,
+      "lng": 19.0529846,
+      "address": "",
+      "description": "",
+      "storeName": "Metagame Kártyabolt",
+      "url": "https://play.sorcerytcg.com/events/c44a6231-b692-4927-acd9-9293d8474afe"
     },
     {
       "name": "Sorcery Reserva",
@@ -4215,24 +4233,6 @@
       "url": "https://play.sorcerytcg.com/events/fc5277d5-5115-43e4-bf4a-e0cb56a6f8d4"
     },
     {
-      "name": "Weekly Sorcery Night",
-      "date": "Sun. Aug 23, 2026",
-      "time": "9:00 PM UTC",
-      "endTime": "",
-      "type": "Laughing Dragon Tavern Games & Collectibles",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "McFarland, WI",
-      "city": "McFarland",
-      "state": "WI",
-      "lat": 43.0123487,
-      "lng": -89.2897646,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
-    },
-    {
       "name": "BIG BROTHER COMICS - GOTHIC DRAFT - SUNDAY",
       "date": "Aug 23, 2026 - Aug 24, 2026",
       "time": "9:00 PM UTC",
@@ -4249,6 +4249,24 @@
       "description": "",
       "storeName": "Big Brother Comics",
       "url": "https://play.sorcerytcg.com/events/67f315f9-33cd-4739-8cc5-07e4bedc930b"
+    },
+    {
+      "name": "Weekly Sorcery Night",
+      "date": "Sun. Aug 23, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Laughing Dragon Tavern Games & Collectibles",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "McFarland, WI",
+      "city": "McFarland",
+      "state": "WI",
+      "lat": 43.0123487,
+      "lng": -89.2897646,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
     },
     {
       "name": "Weekly Sorcery Play",
@@ -11739,24 +11757,6 @@
       "url": "https://play.sorcerytcg.com/events/0dc90ff6-afd2-4843-9734-11a35d1b6833"
     },
     {
-      "name": "Draft Night",
-      "date": "Sep 3, 2026 - Sep 4, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
-    },
-    {
       "name": "GGKC Thursday Night Sorcery",
       "date": "Thu. Sep 3, 2026",
       "time": "11:00 PM UTC",
@@ -11773,6 +11773,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
+    },
+    {
+      "name": "Draft Night",
+      "date": "Sep 3, 2026 - Sep 4, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "East Coast Gaming",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Cary, NC",
+      "city": "Cary",
+      "state": "NC",
+      "lat": 35.7882893,
+      "lng": -78.7812081,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
     },
     {
       "name": "Casual Constructed",
@@ -12063,24 +12081,6 @@
       "url": "https://play.sorcerytcg.com/events/e9c44c90-6bba-4d3d-899f-abc6d1955ad9"
     },
     {
-      "name": "SCG CON Dallas - Preconstructed",
-      "date": "Fri. Sep 4, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Star City Games Organized Play",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fort Worth, TX",
-      "city": "Fort Worth",
-      "state": "TX",
-      "lat": 32.753177,
-      "lng": -97.3327459,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
-    },
-    {
       "name": "Friday Afternoon Sorcery",
       "date": "Fri. Sep 4, 2026",
       "time": "3:00 PM UTC",
@@ -12097,6 +12097,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
+    },
+    {
+      "name": "SCG CON Dallas - Preconstructed",
+      "date": "Fri. Sep 4, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "Star City Games Organized Play",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fort Worth, TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "lat": 32.753177,
+      "lng": -97.3327459,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
     },
     {
       "name": "Geek Haven - Casual Meetup",
@@ -15645,24 +15663,6 @@
       "url": "https://play.sorcerytcg.com/events/2191714b-282a-43cb-bcee-729d7e3df994"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 11, 2026",
       "time": "1:00 AM UTC",
@@ -15679,6 +15679,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f6df913b-4da8-4ca1-98cf-d7ed71476102"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28891,24 +28909,6 @@
       "description": "",
       "storeName": "Mythic Forge Gaming",
       "url": "https://play.sorcerytcg.com/events/404adc02-3863-49d4-ae6d-b1327e66e82c"
-    },
-    {
-      "name": "Sorcerous Saturdays",
-      "date": "Sat. Oct 10, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Geekified",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Vinton, IA",
-      "city": "Vinton",
-      "state": "IA",
-      "lat": 42.1679131,
-      "lng": -92.0239504,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/50e94055-38de-4515-be59-35eecc59dfaa"
     }
   ]
 }
