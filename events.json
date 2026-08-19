@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T22:18:18.416Z",
+  "updated": "2026-08-19T23:18:05.697Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -237,24 +237,6 @@
       "url": "https://play.sorcerytcg.com/events/07143c3d-fa4e-41cf-8bbb-1a1749fe1265"
     },
     {
-      "name": "Tabletop Cincy Wednesday Open Play",
-      "date": "Wed. Aug 19, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "West Chester Township, OH",
-      "city": "West Chester Township",
-      "state": "OH",
-      "lat": 39.3359319,
-      "lng": -84.4155616,
-      "address": "",
-      "description": "",
-      "storeName": "Tabletop Cincy",
-      "url": "https://play.sorcerytcg.com/events/8980ffe2-b81f-478d-8387-ed34f1f1c72f"
-    },
-    {
       "name": "Casual Constructed Night",
       "date": "Wed. Aug 19, 2026",
       "time": "10:00 PM UTC",
@@ -271,24 +253,6 @@
       "description": "",
       "storeName": "Valkyrie's Vault",
       "url": "https://play.sorcerytcg.com/events/36bb6389-0216-4adb-adfe-18b6d515f90c"
-    },
-    {
-      "name": "Sorcery Semanal",
-      "date": "Wed. Aug 19, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Atiradores, SC",
-      "city": "Atiradores",
-      "state": "SC",
-      "lat": -26.3101709,
-      "lng": -48.8637801,
-      "address": "",
-      "description": "",
-      "storeName": "Dalaran Games",
-      "url": "https://play.sorcerytcg.com/events/522a2d23-8f35-427f-97c8-468c252e93e4"
     },
     {
       "name": "Learn to Play at Dragon's Hoard",
@@ -399,24 +363,6 @@
       "url": "https://play.sorcerytcg.com/events/25df446b-a50a-4d9d-8cd0-a543f85da682"
     },
     {
-      "name": "Sealed Escalation League",
-      "date": "Wed. Aug 19, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Sealed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Charlotte, NC",
-      "city": "Charlotte",
-      "state": "NC",
-      "lat": 35.2272086,
-      "lng": -80.8430827,
-      "address": "",
-      "description": "",
-      "storeName": "Cosmic Hearth Games",
-      "url": "https://play.sorcerytcg.com/events/2819f196-b906-4594-ab8a-081b5a336d85"
-    },
-    {
       "name": "Gothic Draft",
       "date": "Aug 19, 2026 - Aug 20, 2026",
       "time": "10:30 PM UTC",
@@ -433,24 +379,6 @@
       "description": "",
       "storeName": "Dragon's Hoard",
       "url": "https://play.sorcerytcg.com/events/df916001-21ae-453c-b0cf-be3178a14914"
-    },
-    {
-      "name": "Wednesday Night Nexus",
-      "date": "Wed. Aug 19, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Wyoming, MI",
-      "city": "Wyoming",
-      "state": "MI",
-      "lat": 42.9132581,
-      "lng": -85.7057035,
-      "address": "",
-      "description": "",
-      "storeName": "The Gamers Wharf",
-      "url": "https://play.sorcerytcg.com/events/d5253597-5e5a-462d-932e-3f1d28e1a5cd"
     },
     {
       "name": "Sorcery at 4GS Games",
@@ -20905,8 +20833,8 @@
       "date": "Sep 20, 2026 - Sep 21, 2026",
       "time": "7:00 PM UTC",
       "endTime": "",
-      "type": "The Portland Game Store",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Portland, OR",
       "city": "Portland",
@@ -20915,7 +20843,7 @@
       "lng": -122.674194,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Portland Game Store",
       "url": "https://play.sorcerytcg.com/events/de5f7a79-ea27-433f-b2b9-4f4846cd3558"
     },
     {
