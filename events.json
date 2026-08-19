@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T18:23:38.789Z",
+  "updated": "2026-08-19T19:21:29.290Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -1411,8 +1411,8 @@
       "date": "Thu. Aug 20, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Retro Table Top Lorcana",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "cleveland, TN",
       "city": "cleveland",
@@ -1421,7 +1421,7 @@
       "lng": -84.8766115,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Retro Table Top Lorcana",
       "url": "https://play.sorcerytcg.com/events/3abb60c4-3bc9-40f0-997c-be552d5d462b"
     },
     {
@@ -2685,6 +2685,24 @@
       "url": "https://play.sorcerytcg.com/events/f0154072-b011-4f34-8b42-529fcd2a3b0c"
     },
     {
+      "name": "4th Wall Comics - Casual Sorcery and Learn to Play",
+      "date": "Sat. Aug 22, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Lancaster, PA",
+      "city": "Lancaster",
+      "state": "PA",
+      "lat": 40.0379958,
+      "lng": -76.3056707,
+      "address": "",
+      "description": "",
+      "storeName": "4th Wall Comics",
+      "url": "https://play.sorcerytcg.com/events/ea717949-320c-45ca-8e10-4aad8189779e"
+    },
+    {
       "name": "Sorcerous Saturdays",
       "date": "Sat. Aug 22, 2026",
       "time": "5:00 PM UTC",
@@ -3049,8 +3067,8 @@
       "date": "Aug 22, 2026 - Aug 23, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Gamescape",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Tallahassee, FL",
       "city": "Tallahassee",
@@ -3059,7 +3077,7 @@
       "lng": -84.2809332,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamescape",
       "url": "https://play.sorcerytcg.com/events/bcffced7-0a77-4f4a-8484-ee2bfe8e7b5e"
     },
     {
@@ -4039,8 +4057,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "7:15 PM UTC",
       "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Cary, NC",
       "city": "Cary",
@@ -4049,7 +4067,7 @@
       "lng": -78.7812081,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "East Coast Gaming",
       "url": "https://play.sorcerytcg.com/events/bb694410-c286-4ba7-814e-65323515751d"
     },
     {
@@ -11937,24 +11955,6 @@
       "url": "https://play.sorcerytcg.com/events/e9c44c90-6bba-4d3d-899f-abc6d1955ad9"
     },
     {
-      "name": "Friday Afternoon Sorcery",
-      "date": "Fri. Sep 4, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "War Lotus",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Granada, AN",
-      "city": "Granada",
-      "state": "AN",
-      "lat": 37.1734995,
-      "lng": -3.5995337,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
-    },
-    {
       "name": "SCG CON Dallas - Preconstructed",
       "date": "Fri. Sep 4, 2026",
       "time": "3:00 PM UTC",
@@ -11971,6 +11971,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
+    },
+    {
+      "name": "Friday Afternoon Sorcery",
+      "date": "Fri. Sep 4, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "War Lotus",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Granada, AN",
+      "city": "Granada",
+      "state": "AN",
+      "lat": 37.1734995,
+      "lng": -3.5995337,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
     },
     {
       "name": "Geek Haven - Casual Meetup",
@@ -25527,24 +25545,6 @@
       "url": "https://play.sorcerytcg.com/events/7d09fa72-fe8f-4c21-9830-0dbccc941fb5"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Oct 2, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Oct 2, 2026",
       "time": "1:00 AM UTC",
@@ -25561,6 +25561,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e37739b3-9c33-4398-94f8-debff0ec128a"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Oct 2, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28747,24 +28765,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c2a492cd-0f80-4dc8-b234-bfa0c2774556"
-    },
-    {
-      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
-      "date": "Sat. Oct 10, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Tokyo Toybox",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Hendersonville, NC",
-      "city": "Hendersonville",
-      "state": "NC",
-      "lat": 35.3187279,
-      "lng": -82.4609528,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7aa5b75d-b37d-4275-8bf3-e065fa14fe15"
     }
   ]
 }
