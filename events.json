@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T02:15:47.686Z",
+  "updated": "2026-08-19T03:41:27.744Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -489,24 +489,6 @@
       "url": "https://play.sorcerytcg.com/events/27f8eb5a-3a67-4063-9680-a7e6fda463f5"
     },
     {
-      "name": "Tuesday Night Sorcery",
-      "date": "Wed. Aug 19, 2026",
-      "time": "2:15 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Golden, CO",
-      "city": "Golden",
-      "state": "CO",
-      "lat": 39.7546349,
-      "lng": -105.22058,
-      "address": "",
-      "description": "",
-      "storeName": "Atomic Games West",
-      "url": "https://play.sorcerytcg.com/events/e023916b-50cd-404b-b03e-0a3e74042f24"
-    },
-    {
       "name": "CMD Casual Constructed",
       "date": "Wed. Aug 19, 2026",
       "time": "6:30 AM UTC",
@@ -565,8 +547,8 @@
       "date": "Wed. Aug 19, 2026",
       "time": "8:15 AM UTC",
       "endTime": "",
-      "type": "Hightide Tabletop Gaming",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Fremantle, WA",
       "city": "Fremantle",
@@ -575,7 +557,7 @@
       "lng": 115.7586172,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Hightide Tabletop Gaming",
       "url": "https://play.sorcerytcg.com/events/c463d167-304c-4393-a919-33ae28ca1493"
     },
     {
@@ -997,8 +979,8 @@
       "date": "Aug 19, 2026 - Aug 20, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Empire Games",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Anderson, SC",
       "city": "Anderson",
@@ -1007,7 +989,7 @@
       "lng": -82.652962,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Empire Games",
       "url": "https://play.sorcerytcg.com/events/069917e9-7bc5-43ea-b00f-3627f5d75194"
     },
     {
@@ -2167,8 +2149,8 @@
       "date": "Thu. Aug 20, 2026",
       "time": "11:30 PM UTC",
       "endTime": "",
-      "type": "Fox Den Board Game Cafe",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Burnsville, MN",
       "city": "Burnsville",
@@ -2177,7 +2159,7 @@
       "lng": -93.2773887,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Fox Den Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/d02d7f21-df95-4e64-9cb6-bc9446a3934e"
     },
     {
@@ -27039,6 +27021,24 @@
       "url": "https://play.sorcerytcg.com/events/98739efc-9ad9-4810-81a6-02a0cc5f68e6"
     },
     {
+      "name": "Gongaii Cornerstone",
+      "date": "Oct 4, 2026 - Oct 5, 2026",
+      "time": "6:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Beaverton, OR",
+      "city": "Beaverton",
+      "state": "OR",
+      "lat": 45.4871723,
+      "lng": -122.80378,
+      "address": "",
+      "description": "",
+      "storeName": "Gongaii Games, Inc",
+      "url": "https://play.sorcerytcg.com/events/ce84ddaa-96c7-4d0c-8d06-606356456fde"
+    },
+    {
       "name": "Sorcery Weekly Play at Slick Mimic's",
       "date": "Sun. Oct 4, 2026",
       "time": "6:00 PM UTC",
@@ -27109,24 +27109,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/5ba388b0-3ce7-4669-b32e-b279dcf5f421"
-    },
-    {
-      "name": "Gongaii Cornerstone",
-      "date": "Oct 4, 2026 - Oct 5, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Beaverton, OR",
-      "city": "Beaverton",
-      "state": "OR",
-      "lat": 45.4871723,
-      "lng": -122.80378,
-      "address": "",
-      "description": "",
-      "storeName": "Gongaii Games, Inc",
-      "url": "https://play.sorcerytcg.com/events/ce84ddaa-96c7-4d0c-8d06-606356456fde"
     },
     {
       "name": "Trade & Play Sorcery Sunday",
