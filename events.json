@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T11:20:48.802Z",
+  "updated": "2026-08-20T12:33:05.704Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -5653,6 +5653,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/919a48e7-4abd-4173-853a-33aca2562663"
+    },
+    {
+      "name": "Arthurian Legends 'Sorcerer' Draft",
+      "date": "Thu. Aug 27, 2026",
+      "time": "4:30 PM UTC",
+      "endTime": "",
+      "type": "AL 'Sorcerer' Draft",
+      "price": "FREE",
+      "duration": "",
+      "location": "Tintwistle, England",
+      "city": "Tintwistle",
+      "state": "England",
+      "lat": 53.4719227,
+      "lng": -1.9732931,
+      "address": "",
+      "description": "",
+      "storeName": "M n M Gaming Club Ltd",
+      "url": "https://play.sorcerytcg.com/events/fb5b737e-0b98-45b6-98f5-682638ef607f"
     },
     {
       "name": "Sorcerers Thursday @Lair",
@@ -11415,24 +11433,6 @@
       "url": "https://play.sorcerytcg.com/events/e9c44c90-6bba-4d3d-899f-abc6d1955ad9"
     },
     {
-      "name": "Friday Afternoon Sorcery",
-      "date": "Fri. Sep 4, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "War Lotus",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Granada, AN",
-      "city": "Granada",
-      "state": "AN",
-      "lat": 37.1734995,
-      "lng": -3.5995337,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
-    },
-    {
       "name": "SCG CON Dallas - Preconstructed",
       "date": "Fri. Sep 4, 2026",
       "time": "3:00 PM UTC",
@@ -11449,6 +11449,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
+    },
+    {
+      "name": "Friday Afternoon Sorcery",
+      "date": "Fri. Sep 4, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "War Lotus",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Granada, AN",
+      "city": "Granada",
+      "state": "AN",
+      "lat": 37.1734995,
+      "lng": -3.5995337,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
     },
     {
       "name": "Geek Haven - Casual Meetup",
@@ -18939,24 +18957,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -18973,6 +18973,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28945,24 +28963,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/fb061490-5338-4e7b-85ac-d7605d2a9b3f"
-    },
-    {
-      "name": "Sorcery Saturdays",
-      "date": "Sat. Oct 10, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "The Game Parlour",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7879363,
-      "lng": -122.4075201,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/668d52da-5174-4bad-ab75-582ff415d0d4"
     }
   ]
 }
