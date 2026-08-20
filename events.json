@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T20:21:37.579Z",
+  "updated": "2026-08-20T21:21:46.657Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -835,8 +835,8 @@
       "date": "Fri. Aug 21, 2026",
       "time": "1:00 AM UTC",
       "endTime": "",
-      "type": "Tavern of Souls Gaming",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Albuquerque, NM",
       "city": "Albuquerque",
@@ -845,7 +845,7 @@
       "lng": -106.650985,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Tavern of Souls Gaming",
       "url": "https://play.sorcerytcg.com/events/cb56475e-4f2a-4bea-8725-96166db41f0a"
     },
     {
@@ -5623,8 +5623,8 @@
       "date": "Thu. Aug 27, 2026",
       "time": "3:30 PM UTC",
       "endTime": "",
-      "type": "Der SpieleNarr",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Hamburg, HH",
       "city": "Hamburg",
@@ -5633,7 +5633,7 @@
       "lng": 9.9753758,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Der SpieleNarr",
       "url": "https://play.sorcerytcg.com/events/919a48e7-4abd-4173-853a-33aca2562663"
     },
     {
