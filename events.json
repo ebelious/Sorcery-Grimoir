@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T14:29:40.816Z",
+  "updated": "2026-08-20T15:27:51.625Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -457,8 +457,8 @@
       "date": "Aug 20, 2026 - Aug 21, 2026",
       "time": "10:30 PM UTC",
       "endTime": "",
-      "type": "Waterloo Games",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Mechanicsville, VA",
       "city": "Mechanicsville",
@@ -467,7 +467,7 @@
       "lng": -77.3538176,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Waterloo Games",
       "url": "https://play.sorcerytcg.com/events/a528187e-2f02-4721-91e6-8fbe49276031"
     },
     {
@@ -10281,24 +10281,6 @@
       "url": "https://play.sorcerytcg.com/events/0d984dd4-fd7d-42c9-a0d1-4ad2520cb49c"
     },
     {
-      "name": "EMPIRE GAMES: Wednesday Open Play!",
-      "date": "Wed. Sep 2, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Empire Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Anderson, SC",
-      "city": "Anderson",
-      "state": "SC",
-      "lat": 34.5258335,
-      "lng": -82.652962,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5ea8b98e-fe92-45e8-951d-db963c120284"
-    },
-    {
       "name": "Joker local night",
       "date": "Wed. Sep 2, 2026",
       "time": "7:30 PM UTC",
@@ -10351,6 +10333,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6a6ff0b0-0ff6-4744-be41-e4f7f960ba30"
+    },
+    {
+      "name": "Cloud City Championship at Empire Games",
+      "date": "Sep 2, 2026 - Sep 3, 2026",
+      "time": "10:00 PM UTC",
+      "endTime": "",
+      "type": "Empire Games",
+      "price": "Cloud City Championship",
+      "duration": "",
+      "location": "Anderson, SC",
+      "city": "Anderson",
+      "state": "SC",
+      "lat": 34.5258335,
+      "lng": -82.652962,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/5ea8b98e-fe92-45e8-951d-db963c120284"
     },
     {
       "name": "Sorcery Semanal",
@@ -18000,7 +18000,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -18018,7 +18018,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
