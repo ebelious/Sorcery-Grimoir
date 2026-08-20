@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T08:30:01.645Z",
+  "updated": "2026-08-20T09:27:45.379Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -703,6 +703,24 @@
       "description": "",
       "storeName": "Černý rytíř",
       "url": "https://play.sorcerytcg.com/events/3aaef70e-88c0-4bcc-a493-f256492b29a6"
+    },
+    {
+      "name": "Casual constructed",
+      "date": "Thu. Aug 20, 2026",
+      "time": "3:45 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Kraków, Województwo małopolskie",
+      "city": "Kraków",
+      "state": "Województwo małopolskie",
+      "lat": 50.0469432,
+      "lng": 19.9971534,
+      "address": "",
+      "description": "",
+      "storeName": "Guildmage",
+      "url": "https://play.sorcerytcg.com/events/7c081d2c-e790-413a-a53f-6fc4e12d295c"
     },
     {
       "name": "Casual Constructed @ Alphaspel",
@@ -11631,24 +11649,6 @@
       "url": "https://play.sorcerytcg.com/events/0dc90ff6-afd2-4843-9734-11a35d1b6833"
     },
     {
-      "name": "Draft Night",
-      "date": "Sep 3, 2026 - Sep 4, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
-    },
-    {
       "name": "GGKC Thursday Night Sorcery",
       "date": "Thu. Sep 3, 2026",
       "time": "11:00 PM UTC",
@@ -11665,6 +11665,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
+    },
+    {
+      "name": "Draft Night",
+      "date": "Sep 3, 2026 - Sep 4, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "East Coast Gaming",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Cary, NC",
+      "city": "Cary",
+      "state": "NC",
+      "lat": 35.7882893,
+      "lng": -78.7812081,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
     },
     {
       "name": "Casual Constructed",
@@ -11955,24 +11973,6 @@
       "url": "https://play.sorcerytcg.com/events/e9c44c90-6bba-4d3d-899f-abc6d1955ad9"
     },
     {
-      "name": "SCG CON Dallas - Preconstructed",
-      "date": "Fri. Sep 4, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Star City Games Organized Play",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Fort Worth, TX",
-      "city": "Fort Worth",
-      "state": "TX",
-      "lat": 32.753177,
-      "lng": -97.3327459,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
-    },
-    {
       "name": "Friday Afternoon Sorcery",
       "date": "Fri. Sep 4, 2026",
       "time": "3:00 PM UTC",
@@ -11989,6 +11989,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ded7777b-e652-417d-9006-ccff0c462ce5"
+    },
+    {
+      "name": "SCG CON Dallas - Preconstructed",
+      "date": "Fri. Sep 4, 2026",
+      "time": "3:00 PM UTC",
+      "endTime": "",
+      "type": "Star City Games Organized Play",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Fort Worth, TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "lat": 32.753177,
+      "lng": -97.3327459,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/6d734bf8-0820-489c-b694-85303a48121f"
     },
     {
       "name": "Geek Haven - Casual Meetup",
@@ -19479,24 +19497,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -19513,6 +19513,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28441,24 +28459,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f08e4359-3341-47a6-98b5-e683a0cc3362"
-    },
-    {
-      "name": "Storefront Games - Weekly Casual Constructed",
-      "date": "Thu. Oct 8, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a2ea70f3-cb92-4371-91a6-efbe187df186"
     }
   ]
 }
