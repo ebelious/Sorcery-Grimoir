@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T11:20:29.982Z",
+  "updated": "2026-08-21T12:32:20.416Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -73,6 +73,24 @@
       "description": "",
       "storeName": "The Arcanum Sanctorum",
       "url": "https://play.sorcerytcg.com/events/3b2a766d-8170-4838-945a-f4c4b17c7266"
+    },
+    {
+      "name": "FREE",
+      "date": "Fri. Aug 21, 2026",
+      "time": "12:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "",
+      "city": "",
+      "state": "",
+      "lat": null,
+      "lng": null,
+      "address": "",
+      "description": "",
+      "storeName": "Mox Saga",
+      "url": "https://play.sorcerytcg.com/events/db2b6de5-1180-495d-9ed1-1a17f6c64910"
     },
     {
       "name": "Friday Afternoon Sorcery",
@@ -217,6 +235,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3ac19194-ec7e-49eb-a9cf-caf484dfd948"
+    },
+    {
+      "name": "Startspeler Constructed Event",
+      "date": "Fri. Aug 21, 2026",
+      "time": "5:30 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Lommel, Vlaams Gewest",
+      "city": "Lommel",
+      "state": "Vlaams Gewest",
+      "lat": 51.2305657,
+      "lng": 5.3076895,
+      "address": "",
+      "description": "",
+      "storeName": "StartSpeler",
+      "url": "https://play.sorcerytcg.com/events/d38b9bff-538d-409e-9512-c85a31693d4b"
     },
     {
       "name": "Monthly Casual Friday",
@@ -691,8 +727,8 @@
       "date": "Sat. Aug 22, 2026",
       "time": "10:00 AM UTC",
       "endTime": "",
-      "type": "Der SpieleNarr",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Hamburg, HH",
       "city": "Hamburg",
@@ -701,7 +737,7 @@
       "lng": 9.9753758,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Der SpieleNarr",
       "url": "https://play.sorcerytcg.com/events/13c0d55c-b4b3-4797-b87c-b3e3cf001ab5"
     },
     {
@@ -1029,24 +1065,6 @@
       "url": "https://play.sorcerytcg.com/events/5e7f9379-530d-47b7-b2a7-8b60df612230"
     },
     {
-      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Tokyo Toybox",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Hendersonville, NC",
-      "city": "Hendersonville",
-      "state": "NC",
-      "lat": 35.3187279,
-      "lng": -82.4609528,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f0154072-b011-4f34-8b42-529fcd2a3b0c"
-    },
-    {
       "name": "Sorcery Saturday!",
       "date": "Sat. Aug 22, 2026",
       "time": "5:00 PM UTC",
@@ -1063,6 +1081,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/fd0b69cf-06bc-44c2-8b06-5105a583c045"
+    },
+    {
+      "name": "Tokyo Toybox's Weekly Sorcery: Contest Realm League in Hendersonville, NC",
+      "date": "Sat. Aug 22, 2026",
+      "time": "5:00 PM UTC",
+      "endTime": "",
+      "type": "Tokyo Toybox",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Hendersonville, NC",
+      "city": "Hendersonville",
+      "state": "NC",
+      "lat": 35.3187279,
+      "lng": -82.4609528,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f0154072-b011-4f34-8b42-529fcd2a3b0c"
     },
     {
       "name": "4th Wall Comics - Casual Sorcery and Learn to Play",
@@ -10353,24 +10389,6 @@
       "url": "https://play.sorcerytcg.com/events/0dc90ff6-afd2-4843-9734-11a35d1b6833"
     },
     {
-      "name": "Draft Night",
-      "date": "Sep 3, 2026 - Sep 4, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
-    },
-    {
       "name": "GGKC Thursday Night Sorcery",
       "date": "Thu. Sep 3, 2026",
       "time": "11:00 PM UTC",
@@ -10387,6 +10405,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
+    },
+    {
+      "name": "Draft Night",
+      "date": "Sep 3, 2026 - Sep 4, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "East Coast Gaming",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Cary, NC",
+      "city": "Cary",
+      "state": "NC",
+      "lat": 35.7882893,
+      "lng": -78.7812081,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
     },
     {
       "name": "Casual Constructed",
@@ -21765,24 +21801,6 @@
       "url": "https://play.sorcerytcg.com/events/18348c54-b2fd-4ab9-a21d-3408ca2e2abe"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 25, 2026",
       "time": "1:30 AM UTC",
@@ -21799,6 +21817,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28567,42 +28603,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/40cd7986-ab3a-42f3-b530-70582821c98b"
-    },
-    {
-      "name": "Enter the Battlefield - Weekly Constructed",
-      "date": "Sun. Oct 11, 2026",
-      "time": "4:30 PM UTC",
-      "endTime": "",
-      "type": "Enter The Battlefield Newmarket",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newmarket, ON",
-      "city": "Newmarket",
-      "state": "ON",
-      "lat": 44.056258,
-      "lng": -79.461708,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e9490555-9e28-4a06-9f04-b4db4cedcd58"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Oct 11, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "lat": 39.0889469,
-      "lng": -84.4919524,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0d8ca2f6-265b-45ae-aa55-ef228e76bce1"
     }
   ]
 }
