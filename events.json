@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T08:31:47.519Z",
+  "updated": "2026-08-21T09:30:22.427Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -1567,6 +1567,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/bbf7b4c3-b133-4dc5-bc66-ce8f3f5711e4"
+    },
+    {
+      "name": "meet up",
+      "date": "Sat. Aug 22, 2026",
+      "time": "12:30 PM UTC",
+      "endTime": "",
+      "type": "Learn To Play",
+      "price": "FREE",
+      "duration": "",
+      "location": "",
+      "city": "",
+      "state": "",
+      "lat": null,
+      "lng": null,
+      "address": "",
+      "description": "",
+      "storeName": "Arcaneforge.gr",
+      "url": "https://play.sorcerytcg.com/events/97408cda-a90c-4aaa-b5ee-9a2f30e56bf7"
     },
     {
       "name": "Ludiworld - 22/08 Construit",
@@ -9327,24 +9345,6 @@
       "url": "https://play.sorcerytcg.com/events/46edfcd2-c77a-4588-b4b9-d4c561ac7d4d"
     },
     {
-      "name": "Contesting for the Realm",
-      "date": "Tue. Sep 1, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Pixel & Pack Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Spokane Valley, WA",
-      "city": "Spokane Valley",
-      "state": "WA",
-      "lat": 47.6571104,
-      "lng": -117.2613936,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f91ece57-c3d8-4300-9db3-d88ff7a1d7cf"
-    },
-    {
       "name": "Monday Sorcery",
       "date": "Tue. Sep 1, 2026",
       "time": "1:30 AM UTC",
@@ -9361,6 +9361,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e2e1b91d-7cdb-4fb9-b8e2-9c844ec5784e"
+    },
+    {
+      "name": "Contesting for the Realm",
+      "date": "Tue. Sep 1, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Pixel & Pack Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Spokane Valley, WA",
+      "city": "Spokane Valley",
+      "state": "WA",
+      "lat": 47.6571104,
+      "lng": -117.2613936,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f91ece57-c3d8-4300-9db3-d88ff7a1d7cf"
     },
     {
       "name": "Sorcery Open Play",
@@ -28315,24 +28333,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/994282fe-1b77-46ac-b172-c62a07b4084b"
-    },
-    {
-      "name": "Casual / Constructed / Sealed @ BlacklistCards",
-      "date": "Fri. Oct 9, 2026",
-      "time": "7:00 AM UTC",
-      "endTime": "",
-      "type": "Aussie Brickster Collectables",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Thomastown, VIC",
-      "city": "Thomastown",
-      "state": "VIC",
-      "lat": -37.6832672,
-      "lng": 145.0081104,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/90ec2347-d1b6-4758-b38e-150fd09ae0dc"
     }
   ]
 }
