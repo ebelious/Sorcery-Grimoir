@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T05:27:43.445Z",
+  "updated": "2026-08-21T06:34:18.920Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -763,8 +763,8 @@
       "date": "Fri. Aug 21, 2026",
       "time": "5:33 AM UTC",
       "endTime": "",
-      "type": "Neutral Grounds Centris",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "",
       "city": "",
@@ -773,7 +773,7 @@
       "lng": null,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Neutral Grounds Centris",
       "url": "https://play.sorcerytcg.com/events/147f0beb-1b16-4fb5-aab5-86a07384256c"
     },
     {
@@ -8067,6 +8067,24 @@
       "url": "https://play.sorcerytcg.com/events/9b373cc8-800e-41da-85a1-94f9ae2efe5e"
     },
     {
+      "name": "Beta Draft",
+      "date": "Sun. Aug 30, 2026",
+      "time": "3:00 AM UTC",
+      "endTime": "",
+      "type": "Draft Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Quezon City, NCR",
+      "city": "Quezon City",
+      "state": "NCR",
+      "lat": 14.6510546,
+      "lng": 121.0486254,
+      "address": "",
+      "description": "",
+      "storeName": "Neutral Grounds Centris",
+      "url": "https://play.sorcerytcg.com/events/03913a1f-8ceb-429e-9b47-ac64c4c2b0a5"
+    },
+    {
       "name": "Cornerstone Wombat Games",
       "date": "Sun. Aug 30, 2026",
       "time": "8:30 AM UTC",
@@ -8173,6 +8191,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0230d063-eca3-4916-8797-50d4fecc8fbd"
+    },
+    {
+      "name": "Casual Meetup",
+      "date": "Sun. Aug 30, 2026",
+      "time": "11:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Quezon City, NCR",
+      "city": "Quezon City",
+      "state": "NCR",
+      "lat": 14.6510546,
+      "lng": 121.0486254,
+      "address": "",
+      "description": "",
+      "storeName": "Neutral Grounds Centris",
+      "url": "https://play.sorcerytcg.com/events/d4a875ae-5c04-464c-860e-26daee610eae"
     },
     {
       "name": "Semanal",
@@ -19011,24 +19047,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -19045,6 +19063,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -25455,24 +25491,6 @@
       "url": "https://play.sorcerytcg.com/events/7d09fa72-fe8f-4c21-9830-0dbccc941fb5"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Oct 2, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Oct 2, 2026",
       "time": "1:00 AM UTC",
@@ -25489,6 +25507,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e37739b3-9c33-4398-94f8-debff0ec128a"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Oct 2, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -26571,24 +26607,6 @@
       "url": "https://play.sorcerytcg.com/events/6f930514-ec64-4c3f-8998-a051ff25a9a2"
     },
     {
-      "name": "Sorcery Weekly Play at Slick Mimic's",
-      "date": "Sun. Oct 4, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Slick Mimic's",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Appleton, WI",
-      "city": "Appleton",
-      "state": "WI",
-      "lat": 44.2613967,
-      "lng": -88.4069744,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a7ddf2f1-39b6-484e-bb8b-eeab8fc4eeec"
-    },
-    {
       "name": "Weekly Play",
       "date": "Sun. Oct 4, 2026",
       "time": "6:00 PM UTC",
@@ -26604,7 +26622,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3fac7ea5-862e-41ce-a900-3f9b7e1cae04"
+      "url": "https://play.sorcerytcg.com/events/a7ddf2f1-39b6-484e-bb8b-eeab8fc4eeec"
     },
     {
       "name": "Sorcery: Contested Realm play",
@@ -26622,7 +26640,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5ba388b0-3ce7-4669-b32e-b279dcf5f421"
+      "url": "https://play.sorcerytcg.com/events/3fac7ea5-862e-41ce-a900-3f9b7e1cae04"
     },
     {
       "name": "Sunday Constructed Sorcery",
@@ -26640,7 +26658,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4b713bb3-69c0-4ef0-b55b-496c7028c65e"
+      "url": "https://play.sorcerytcg.com/events/5ba388b0-3ce7-4669-b32e-b279dcf5f421"
     },
     {
       "name": "Trade & Play Sorcery Sunday",
@@ -26658,7 +26676,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/36849060-1c04-4121-b48f-3d3763e25719"
+      "url": "https://play.sorcerytcg.com/events/4b713bb3-69c0-4ef0-b55b-496c7028c65e"
     },
     {
       "name": "Sunday Skirmish",
@@ -26676,7 +26694,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c06a6650-959b-49e4-aa96-8acb5a0636b9"
+      "url": "https://play.sorcerytcg.com/events/36849060-1c04-4121-b48f-3d3763e25719"
     },
     {
       "name": "Dane's Games Weekly Play",
@@ -26694,7 +26712,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f46e9a87-e91d-4817-9d3c-d81d240ef545"
+      "url": "https://play.sorcerytcg.com/events/c06a6650-959b-49e4-aa96-8acb5a0636b9"
     },
     {
       "name": "Sunday Sorcery",
@@ -26712,7 +26730,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/82597cdc-d92a-47bd-91ed-53270a0308b8"
+      "url": "https://play.sorcerytcg.com/events/f46e9a87-e91d-4817-9d3c-d81d240ef545"
     },
     {
       "name": "Sunday Sorcery Contest Realm - Casual play",
@@ -26730,7 +26748,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e8b08195-5f0b-4777-a39f-37929dbb0038"
+      "url": "https://play.sorcerytcg.com/events/82597cdc-d92a-47bd-91ed-53270a0308b8"
     },
     {
       "name": "Weekly Sorcery Night",
@@ -26748,7 +26766,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4e0241cf-54d3-4427-a610-ca3e0c1f0c59"
+      "url": "https://play.sorcerytcg.com/events/e8b08195-5f0b-4777-a39f-37929dbb0038"
     },
     {
       "name": "Weekly Sorcery Play",
@@ -26766,7 +26784,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e419b055-9f12-4a15-83bb-d8340524e480"
+      "url": "https://play.sorcerytcg.com/events/4e0241cf-54d3-4427-a610-ca3e0c1f0c59"
     },
     {
       "name": "Sunday Meet Up",
@@ -26784,7 +26802,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/304ec800-6594-4777-a8a4-6b2d37270b92"
+      "url": "https://play.sorcerytcg.com/events/e419b055-9f12-4a15-83bb-d8340524e480"
     },
     {
       "name": "Casual Play at Richmond Republic Draught House",
@@ -26802,7 +26820,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4d9faeda-e058-4928-b107-ff2c71172c5c"
+      "url": "https://play.sorcerytcg.com/events/304ec800-6594-4777-a8a4-6b2d37270b92"
     },
     {
       "name": "Mooonday Sooorcery",
@@ -26820,7 +26838,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e05c12ec-40f1-4132-8ed0-3356ce3cfcd7"
+      "url": "https://play.sorcerytcg.com/events/4d9faeda-e058-4928-b107-ff2c71172c5c"
     },
     {
       "name": "Gosford Sorcery Locals",
@@ -26838,7 +26856,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6fb984ff-dd6b-4a7a-a5f5-b678ad67ba22"
+      "url": "https://play.sorcerytcg.com/events/e05c12ec-40f1-4132-8ed0-3356ce3cfcd7"
     },
     {
       "name": "Constructed w Merfolku",
@@ -26856,7 +26874,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c845f3a6-9373-4ddd-b0cb-58910cd9c00f"
+      "url": "https://play.sorcerytcg.com/events/6fb984ff-dd6b-4a7a-a5f5-b678ad67ba22"
     },
     {
       "name": "WEEKLY MEETUP",
@@ -26874,7 +26892,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5883651b-ebb6-46cb-987e-78fc891e4c5b"
+      "url": "https://play.sorcerytcg.com/events/c845f3a6-9373-4ddd-b0cb-58910cd9c00f"
     },
     {
       "name": "Monday Night Sorcery",
@@ -26892,7 +26910,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d02b1246-fd9c-4f2b-bd70-8b6e4104422c"
+      "url": "https://play.sorcerytcg.com/events/5883651b-ebb6-46cb-987e-78fc891e4c5b"
     },
     {
       "name": "Weekly Constructed",
@@ -26910,7 +26928,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f5a4d291-2096-4ccc-ad96-888f5b22fb82"
+      "url": "https://play.sorcerytcg.com/events/d02b1246-fd9c-4f2b-bd70-8b6e4104422c"
     },
     {
       "name": "Kassar's weekly tournament",
@@ -26928,7 +26946,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a493d258-0e83-4a5b-a200-832aac27f80d"
+      "url": "https://play.sorcerytcg.com/events/f5a4d291-2096-4ccc-ad96-888f5b22fb82"
     },
     {
       "name": "Casual Monday night",
@@ -26946,7 +26964,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d9f9b3ea-cb62-42fc-80f4-7ed9bfe43bf3"
+      "url": "https://play.sorcerytcg.com/events/a493d258-0e83-4a5b-a200-832aac27f80d"
     },
     {
       "name": "Monday Sorcery",
@@ -26964,7 +26982,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b02e0350-1d34-40f4-9e24-474fc80d336e"
+      "url": "https://play.sorcerytcg.com/events/d9f9b3ea-cb62-42fc-80f4-7ed9bfe43bf3"
     },
     {
       "name": "Sorcery Open Play - Weekly",
@@ -26982,7 +27000,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/8f3be040-980a-4242-bb39-996691586089"
+      "url": "https://play.sorcerytcg.com/events/b02e0350-1d34-40f4-9e24-474fc80d336e"
     },
     {
       "name": "Casual Meetup",
@@ -27000,7 +27018,7 @@
       "address": "",
       "description": "",
       "storeName": "Gamezenter",
-      "url": "https://play.sorcerytcg.com/events/2fa78dfe-b09f-4ac5-a4d4-bbf913a6593e"
+      "url": "https://play.sorcerytcg.com/events/8f3be040-980a-4242-bb39-996691586089"
     },
     {
       "name": "Monday Sorcery @ Mike and Taylors",
@@ -27018,7 +27036,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b3eb00eb-7e09-46ea-a21c-755c06987754"
+      "url": "https://play.sorcerytcg.com/events/2fa78dfe-b09f-4ac5-a4d4-bbf913a6593e"
     },
     {
       "name": "Gongaii Casual Monday",
@@ -27036,7 +27054,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/dd797ad1-305d-416e-8424-31420263740f"
+      "url": "https://play.sorcerytcg.com/events/b3eb00eb-7e09-46ea-a21c-755c06987754"
     },
     {
       "name": "Sorcery Open Play",
@@ -27054,7 +27072,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d0f2edb3-d0c8-4992-b8ac-97f9ea13289d"
+      "url": "https://play.sorcerytcg.com/events/dd797ad1-305d-416e-8424-31420263740f"
     },
     {
       "name": "Sorcery Weekly Constructed",
@@ -27072,7 +27090,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4a0fb7a4-7360-46ae-9f41-0dd568c02b27"
+      "url": "https://play.sorcerytcg.com/events/d0f2edb3-d0c8-4992-b8ac-97f9ea13289d"
     },
     {
       "name": "Sorcery - Constructed - Weekly Play",
@@ -27090,7 +27108,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4209b14f-2e7f-47e7-b562-1d2b2f21f58e"
+      "url": "https://play.sorcerytcg.com/events/4a0fb7a4-7360-46ae-9f41-0dd568c02b27"
     },
     {
       "name": "June Tournament",
@@ -27108,7 +27126,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5c6bd3c4-8bfb-4284-ab3c-6270d30ea564"
+      "url": "https://play.sorcerytcg.com/events/4209b14f-2e7f-47e7-b562-1d2b2f21f58e"
     },
     {
       "name": "learn to play",
@@ -27126,7 +27144,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/78ebedac-0be2-4660-bb37-5aed538ae7a1"
+      "url": "https://play.sorcerytcg.com/events/5c6bd3c4-8bfb-4284-ab3c-6270d30ea564"
     },
     {
       "name": "TCA Sorcery Tuesdays",
@@ -27144,7 +27162,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/71522050-8425-4a5f-91fa-34aff8c48641"
+      "url": "https://play.sorcerytcg.com/events/78ebedac-0be2-4660-bb37-5aed538ae7a1"
     },
     {
       "name": "Bolsa Sorcery Semanal",
@@ -27162,7 +27180,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5fa7401b-72cc-49ed-9d0c-0f9896e22235"
+      "url": "https://play.sorcerytcg.com/events/71522050-8425-4a5f-91fa-34aff8c48641"
     },
     {
       "name": "Tuesday Sealed",
@@ -27180,7 +27198,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e7c9873b-93c1-4491-a1ff-904d8fe0dd0a"
+      "url": "https://play.sorcerytcg.com/events/5fa7401b-72cc-49ed-9d0c-0f9896e22235"
     },
     {
       "name": "Sealed Tuesdays",
@@ -27198,7 +27216,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/8c6dd97b-dcdc-4372-9672-1159f43ee8d8"
+      "url": "https://play.sorcerytcg.com/events/e7c9873b-93c1-4491-a1ff-904d8fe0dd0a"
     },
     {
       "name": "Constructed TNMT Sorcery",
@@ -27216,7 +27234,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/8d892c1f-4bf3-44d8-bbc7-e83544c00de1"
+      "url": "https://play.sorcerytcg.com/events/8c6dd97b-dcdc-4372-9672-1159f43ee8d8"
     },
     {
       "name": "Learn To Play",
@@ -27234,7 +27252,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4b18849e-0bb3-4553-a344-ae6b0cf4b28a"
+      "url": "https://play.sorcerytcg.com/events/8d892c1f-4bf3-44d8-bbc7-e83544c00de1"
     },
     {
       "name": "Tuesday Night Casual Sorcery",
@@ -27252,7 +27270,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/633f16d3-3b70-4ba0-93b6-7d96f754d7de"
+      "url": "https://play.sorcerytcg.com/events/4b18849e-0bb3-4553-a344-ae6b0cf4b28a"
     },
     {
       "name": "Game Grid Clearfield Sorcery Night",
@@ -27270,7 +27288,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f34b8abb-37b6-48e3-8099-b00b9bacdda1"
+      "url": "https://play.sorcerytcg.com/events/633f16d3-3b70-4ba0-93b6-7d96f754d7de"
     },
     {
       "name": "Casual sorcery Tuesdays",
@@ -27288,7 +27306,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3177d5f7-6464-4074-a4a9-f9d92a115710"
+      "url": "https://play.sorcerytcg.com/events/f34b8abb-37b6-48e3-8099-b00b9bacdda1"
     },
     {
       "name": "LSPB Tuesday Weekly Locals",
@@ -27306,7 +27324,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3c0dfd35-c565-419c-92ee-a228c66206ac"
+      "url": "https://play.sorcerytcg.com/events/3177d5f7-6464-4074-a4a9-f9d92a115710"
     },
     {
       "name": "Sorcery TCG Organized Play",
@@ -27324,7 +27342,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/05fabdd9-3305-4971-a715-0ae12b8cda52"
+      "url": "https://play.sorcerytcg.com/events/3c0dfd35-c565-419c-92ee-a228c66206ac"
     },
     {
       "name": "Sorcery Weekly Play in Pineville",
@@ -27342,7 +27360,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/155a9e13-57aa-460e-88e8-b4a689a324c5"
+      "url": "https://play.sorcerytcg.com/events/05fabdd9-3305-4971-a715-0ae12b8cda52"
     },
     {
       "name": "Tuesday Night Sorcery",
@@ -27360,7 +27378,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5bd23be3-eeec-4144-b859-0e965d7afee0"
+      "url": "https://play.sorcerytcg.com/events/155a9e13-57aa-460e-88e8-b4a689a324c5"
     },
     {
       "name": "CMD Casual Constructed",
@@ -27378,7 +27396,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a8bfd7fd-3b9b-4d2a-b136-aa13cb702ff7"
+      "url": "https://play.sorcerytcg.com/events/5bd23be3-eeec-4144-b859-0e965d7afee0"
     },
     {
       "name": "Weekly Sorcery Constructed Tournament",
@@ -27396,7 +27414,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5ff3593d-71be-4239-8fc1-df3173eccdb5"
+      "url": "https://play.sorcerytcg.com/events/a8bfd7fd-3b9b-4d2a-b136-aa13cb702ff7"
     },
     {
       "name": "Into the Abyss",
@@ -27414,7 +27432,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d1412c5d-0d0c-47ea-8abd-e0ce1aa6974c"
+      "url": "https://play.sorcerytcg.com/events/5ff3593d-71be-4239-8fc1-df3173eccdb5"
     },
     {
       "name": "Weekly Play at P22",
@@ -27432,7 +27450,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/04f50250-e28b-47b1-8ba7-ad2976f26955"
+      "url": "https://play.sorcerytcg.com/events/d1412c5d-0d0c-47ea-8abd-e0ce1aa6974c"
     },
     {
       "name": "Biweekly Keidas casual Games",
@@ -27450,7 +27468,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b6b0f714-ac50-4455-8003-147631dc748a"
+      "url": "https://play.sorcerytcg.com/events/04f50250-e28b-47b1-8ba7-ad2976f26955"
     },
     {
       "name": "Weekly",
@@ -27468,7 +27486,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/20b0955d-a5e2-47f9-9abe-9e863497e8b0"
+      "url": "https://play.sorcerytcg.com/events/b6b0f714-ac50-4455-8003-147631dc748a"
     },
     {
       "name": "Sorcery Open Play",
@@ -27486,7 +27504,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/fa24b21a-7ae9-4d98-b8ac-fbc1add6c3a3"
+      "url": "https://play.sorcerytcg.com/events/20b0955d-a5e2-47f9-9abe-9e863497e8b0"
     },
     {
       "name": "Weekly",
@@ -27504,7 +27522,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/03dd1b8c-05ec-4fac-ba5b-b72b59d77b5a"
+      "url": "https://play.sorcerytcg.com/events/fa24b21a-7ae9-4d98-b8ac-fbc1add6c3a3"
     },
     {
       "name": "Casual Sorcery",
@@ -27522,7 +27540,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/29cf37d9-7008-4fd3-8aab-9e81c0c830e3"
+      "url": "https://play.sorcerytcg.com/events/03dd1b8c-05ec-4fac-ba5b-b72b59d77b5a"
     },
     {
       "name": "Mystery Weekly Play (Constructed)",
@@ -27540,7 +27558,7 @@
       "address": "",
       "description": "",
       "storeName": "Mystery Shack",
-      "url": "https://play.sorcerytcg.com/events/7286bb59-b9d5-4a57-97d7-318bb79056dd"
+      "url": "https://play.sorcerytcg.com/events/29cf37d9-7008-4fd3-8aab-9e81c0c830e3"
     },
     {
       "name": "Wednesday Constructed Tournament",
@@ -27558,7 +27576,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a948d734-239c-4bb0-85fb-e64b0f6f7d66"
+      "url": "https://play.sorcerytcg.com/events/7286bb59-b9d5-4a57-97d7-318bb79056dd"
     },
     {
       "name": "Weekly Cornerstone",
@@ -27576,7 +27594,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/17c3130e-4752-49af-b5ce-fe21cc407a85"
+      "url": "https://play.sorcerytcg.com/events/a948d734-239c-4bb0-85fb-e64b0f6f7d66"
     },
     {
       "name": "Sorcery at Crach Card Club",
@@ -27594,7 +27612,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/27128af5-1fc4-4907-bd48-0ec45a3b1cb4"
+      "url": "https://play.sorcerytcg.com/events/17c3130e-4752-49af-b5ce-fe21cc407a85"
     },
     {
       "name": "EMPIRE GAMES: Wednesday Open Play!",
@@ -27612,7 +27630,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5e16d9ad-e4c7-4d11-a663-5931df52bece"
+      "url": "https://play.sorcerytcg.com/events/27128af5-1fc4-4907-bd48-0ec45a3b1cb4"
     },
     {
       "name": "Tabletop Cincy Wednesday Open Play",
@@ -27630,7 +27648,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/72b164fb-9af7-457d-beb1-dfbc19b28b00"
+      "url": "https://play.sorcerytcg.com/events/5e16d9ad-e4c7-4d11-a663-5931df52bece"
     },
     {
       "name": "Sorcery Semanal",
@@ -27648,7 +27666,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c50cf620-6935-4faa-bbfd-4042fd53d0ac"
+      "url": "https://play.sorcerytcg.com/events/72b164fb-9af7-457d-beb1-dfbc19b28b00"
     },
     {
       "name": "Layton Gaming Sorcery Local",
@@ -27666,7 +27684,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c8515af3-0b88-4112-a621-5c3084bb229c"
+      "url": "https://play.sorcerytcg.com/events/c50cf620-6935-4faa-bbfd-4042fd53d0ac"
     },
     {
       "name": "Sorcery Draft Night",
@@ -27684,7 +27702,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9f678c15-ee74-484a-a3b6-2e130b8a60eb"
+      "url": "https://play.sorcerytcg.com/events/c8515af3-0b88-4112-a621-5c3084bb229c"
     },
     {
       "name": "Wednesday Night Nexus",
@@ -27702,7 +27720,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/37fb413a-f036-45f4-91db-137ce0bbfc70"
+      "url": "https://play.sorcerytcg.com/events/9f678c15-ee74-484a-a3b6-2e130b8a60eb"
     },
     {
       "name": "Sorcery at 4GS Games",
@@ -27720,7 +27738,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2ff54f36-c0a4-4f33-8b9c-e64430dff4d3"
+      "url": "https://play.sorcerytcg.com/events/37fb413a-f036-45f4-91db-137ce0bbfc70"
     },
     {
       "name": "Sorcery Constructed",
@@ -27738,7 +27756,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/79054b05-d5b0-44cf-b29f-0e6abd9a2ff1"
+      "url": "https://play.sorcerytcg.com/events/2ff54f36-c0a4-4f33-8b9c-e64430dff4d3"
     },
     {
       "name": "Wed Weekly!",
@@ -27756,7 +27774,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c3c1653a-1022-4b3e-8b8b-2c3b9238aaf9"
+      "url": "https://play.sorcerytcg.com/events/79054b05-d5b0-44cf-b29f-0e6abd9a2ff1"
     },
     {
       "name": "Weekly Casual/League and Learn to Play",
@@ -27774,7 +27792,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/80f937e8-efa2-477d-8a1d-3e4c064def62"
+      "url": "https://play.sorcerytcg.com/events/c3c1653a-1022-4b3e-8b8b-2c3b9238aaf9"
     },
     {
       "name": "Sorcery at Shore Gamers",
@@ -27792,7 +27810,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ec91c736-a09a-4d27-b89f-9c626363158b"
+      "url": "https://play.sorcerytcg.com/events/80f937e8-efa2-477d-8a1d-3e4c064def62"
     },
     {
       "name": "Plot Armor Games Sorcery Locals",
@@ -27810,7 +27828,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b35e28a7-7b82-4b33-9a0b-5264abc56341"
+      "url": "https://play.sorcerytcg.com/events/ec91c736-a09a-4d27-b89f-9c626363158b"
     },
     {
       "name": "Wednesday Afternoon Sorcery",
@@ -27828,7 +27846,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6b924c2f-6721-47d0-bc3d-c1b6f1c92b53"
+      "url": "https://play.sorcerytcg.com/events/b35e28a7-7b82-4b33-9a0b-5264abc56341"
     },
     {
       "name": "Sorcery Contested Realm Casual Wednesday's | ABU Games",
@@ -27846,7 +27864,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/28dc6fd4-4e2e-478c-8684-ea4ce2609669"
+      "url": "https://play.sorcerytcg.com/events/6b924c2f-6721-47d0-bc3d-c1b6f1c92b53"
     },
     {
       "name": "Games of Livermore Sorcery Weekly Play",
@@ -27864,7 +27882,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/df957d41-3a6b-4744-a80c-83db55d39126"
+      "url": "https://play.sorcerytcg.com/events/28dc6fd4-4e2e-478c-8684-ea4ce2609669"
     },
     {
       "name": "Wednesday Night Sorcery",
@@ -27882,7 +27900,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5c419663-5663-4d27-aa73-97f4d8323226"
+      "url": "https://play.sorcerytcg.com/events/df957d41-3a6b-4744-a80c-83db55d39126"
     },
     {
       "name": "Mighty Cool Games - Thursday Constructed",
@@ -27900,7 +27918,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f8cbcf00-fa14-4bc7-80cd-774d07332724"
+      "url": "https://play.sorcerytcg.com/events/5c419663-5663-4d27-aa73-97f4d8323226"
     },
     {
       "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
@@ -27918,7 +27936,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/50b0d185-da32-4651-8bb5-ed3ccd9e26c1"
+      "url": "https://play.sorcerytcg.com/events/f8cbcf00-fa14-4bc7-80cd-774d07332724"
     },
     {
       "name": "SG - Weekly Play",
@@ -27936,7 +27954,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4c8afc08-54fe-4d84-a8c0-def1dc393e31"
+      "url": "https://play.sorcerytcg.com/events/50b0d185-da32-4651-8bb5-ed3ccd9e26c1"
     },
     {
       "name": "SpieleNarren Casual",
@@ -27954,7 +27972,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f10c2605-b374-44be-9adb-e66148040b34"
+      "url": "https://play.sorcerytcg.com/events/4c8afc08-54fe-4d84-a8c0-def1dc393e31"
     },
     {
       "name": "TNS Thursday night sorcery",
@@ -27972,7 +27990,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/eb651028-c523-46c9-8b6e-c3eceddcafaa"
+      "url": "https://play.sorcerytcg.com/events/f10c2605-b374-44be-9adb-e66148040b34"
     },
     {
       "name": "Thistle Tavern Edinburgh 09/07",
@@ -27990,7 +28008,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0e71d026-894c-4d96-8a9b-f7f775d4623a"
+      "url": "https://play.sorcerytcg.com/events/eb651028-c523-46c9-8b6e-c3eceddcafaa"
     },
     {
       "name": "Sorcery Constructed Vila Geek Serra",
@@ -28008,7 +28026,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/ac4dd854-2a56-46ac-a17f-43142cd186c6"
+      "url": "https://play.sorcerytcg.com/events/0e71d026-894c-4d96-8a9b-f7f775d4623a"
     },
     {
       "name": "Thursday Night Constructed",
@@ -28026,7 +28044,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f08e4359-3341-47a6-98b5-e683a0cc3362"
+      "url": "https://play.sorcerytcg.com/events/ac4dd854-2a56-46ac-a17f-43142cd186c6"
     },
     {
       "name": "Semanal Sorcery - Refúgio Floripa",
@@ -28044,7 +28062,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a2ea70f3-cb92-4371-91a6-efbe187df186"
+      "url": "https://play.sorcerytcg.com/events/f08e4359-3341-47a6-98b5-e683a0cc3362"
     },
     {
       "name": "Storefront Games - Weekly Casual Constructed",
@@ -28062,7 +28080,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/56095d72-cd0e-4c18-87f4-3d4a1f1a1f5d"
+      "url": "https://play.sorcerytcg.com/events/a2ea70f3-cb92-4371-91a6-efbe187df186"
     },
     {
       "name": "Thursday Evening Sorcery",
@@ -28080,7 +28098,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4efd1a45-abbb-40c9-8fb9-85784040bc10"
+      "url": "https://play.sorcerytcg.com/events/56095d72-cd0e-4c18-87f4-3d4a1f1a1f5d"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -28098,7 +28116,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/84206595-3999-4870-967a-c46bd39ea119"
+      "url": "https://play.sorcerytcg.com/events/4efd1a45-abbb-40c9-8fb9-85784040bc10"
     },
     {
       "name": "GGKC Thursday Night Sorcery",
@@ -28116,7 +28134,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b18a5fce-950c-408f-9b68-706a6ba6aeac"
+      "url": "https://play.sorcerytcg.com/events/84206595-3999-4870-967a-c46bd39ea119"
     },
     {
       "name": "Constructed/Casual",
@@ -28134,7 +28152,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7cf31f6f-4419-4a1e-860c-9015280e3dcc"
+      "url": "https://play.sorcerytcg.com/events/b18a5fce-950c-408f-9b68-706a6ba6aeac"
     },
     {
       "name": "Matrona Sorcery",
@@ -28152,7 +28170,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e99ca760-7329-4fa3-b71d-03ff0da28018"
+      "url": "https://play.sorcerytcg.com/events/7cf31f6f-4419-4a1e-860c-9015280e3dcc"
     },
     {
       "name": "Casual Constructed",
@@ -28170,7 +28188,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5261aa17-2951-4eb4-8359-9a8d7a18ecf0"
+      "url": "https://play.sorcerytcg.com/events/e99ca760-7329-4fa3-b71d-03ff0da28018"
     },
     {
       "name": "Sorcery Free Play",
@@ -28188,7 +28206,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2b52aa3c-4a65-48f3-a3c1-1265cd34b8fd"
+      "url": "https://play.sorcerytcg.com/events/5261aa17-2951-4eb4-8359-9a8d7a18ecf0"
     },
     {
       "name": "Sorcery Open Play @ Mox Portland",
@@ -28206,7 +28224,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1ed76cf2-4a0d-481c-800e-f73a4ad86aad"
+      "url": "https://play.sorcerytcg.com/events/2b52aa3c-4a65-48f3-a3c1-1265cd34b8fd"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28224,7 +28242,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/da943f37-55e1-45db-84ec-75d23e02558d"
+      "url": "https://play.sorcerytcg.com/events/1ed76cf2-4a0d-481c-800e-f73a4ad86aad"
     },
     {
       "name": "Zulus Casual Constructed",
@@ -28242,7 +28260,7 @@
       "address": "",
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/a44367f2-a517-4d99-a561-fab760abd22f"
+      "url": "https://play.sorcerytcg.com/events/da943f37-55e1-45db-84ec-75d23e02558d"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28260,7 +28278,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9c797ded-1da8-4b1e-a499-90ce8cc84444"
+      "url": "https://play.sorcerytcg.com/events/a44367f2-a517-4d99-a561-fab760abd22f"
     },
     {
       "name": "Friday Night Sorcery",
@@ -28278,7 +28296,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/994282fe-1b77-46ac-b172-c62a07b4084b"
+      "url": "https://play.sorcerytcg.com/events/9c797ded-1da8-4b1e-a499-90ce8cc84444"
     },
     {
       "name": "Weekly Community Casuals",
@@ -28296,7 +28314,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/90ec2347-d1b6-4758-b38e-150fd09ae0dc"
+      "url": "https://play.sorcerytcg.com/events/994282fe-1b77-46ac-b172-c62a07b4084b"
     },
     {
       "name": "Casual / Constructed / Sealed @ BlacklistCards",
@@ -28314,7 +28332,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/569a8b7d-06d5-4e18-a7e6-7120df15221e"
+      "url": "https://play.sorcerytcg.com/events/90ec2347-d1b6-4758-b38e-150fd09ae0dc"
     },
     {
       "name": "Sorcery - October Monthly Event",
@@ -28332,385 +28350,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/34a97193-53b4-44cc-83e4-99f57857a2d3"
-    },
-    {
-      "name": "Friday Afternoon Sorcery",
-      "date": "Fri. Oct 9, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "War Lotus",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Granada, AN",
-      "city": "Granada",
-      "state": "AN",
-      "lat": 37.1734995,
-      "lng": -3.5995337,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/bc171c2d-7714-4093-a8c7-86d49142f2df"
-    },
-    {
-      "name": "Sorcery Reserva",
-      "date": "Fri. Oct 9, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Reserva GameStore",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Mooca, SP",
-      "city": "Mooca",
-      "state": "SP",
-      "lat": -23.5606808,
-      "lng": -46.5971924,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/feeb6080-dc7c-48df-91b2-aad4cc29fa62"
-    },
-    {
-      "name": "SCG CON Los Angeles - Preconstructed",
-      "date": "Fri. Oct 9, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Star City Games Organized Play",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Los Angeles, CA",
-      "city": "Los Angeles",
-      "state": "CA",
-      "lat": 34.0536909,
-      "lng": -118.242766,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e9c44bf9-b7f6-4694-8c47-9048b0ac2542"
-    },
-    {
-      "name": "RIDDERS, FEEËN EN KASTELEN",
-      "date": "Fri. Oct 9, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "ScheldeSpel",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Oudenaarde, Vlaanderen",
-      "city": "Oudenaarde",
-      "state": "Vlaanderen",
-      "lat": 50.8433705,
-      "lng": 3.6041443,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/00f6c5cc-78f8-4eff-8bba-93cea35d4b8b"
-    },
-    {
-      "name": "Sorcery Weekly",
-      "date": "Fri. Oct 9, 2026",
-      "time": "5:29 PM UTC",
-      "endTime": "",
-      "type": "Spellbound Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Greater London, England",
-      "city": "Greater London",
-      "state": "England",
-      "lat": 51.5074456,
-      "lng": -0.1277653,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f018e2dd-45a6-4f08-b595-341c98065df1"
-    },
-    {
-      "name": "Weekly du Soir",
-      "date": "Fri. Oct 9, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "Carta'Ludik",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Lyon, Auvergne-Rhône-Alpes",
-      "city": "Lyon",
-      "state": "Auvergne-Rhône-Alpes",
-      "lat": 45.7578137,
-      "lng": 4.8320114,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9445de3f-84f2-4088-b72e-f348fc0ac640"
-    },
-    {
-      "name": "SCG CON Los Angeles - Sorcery Sealed",
-      "date": "Oct 9, 2026 - Oct 10, 2026",
-      "time": "8:00 PM UTC",
-      "endTime": "",
-      "type": "Star City Games Organized Play",
-      "price": "Sealed Tournament",
-      "duration": "",
-      "location": "Los Angeles, CA",
-      "city": "Los Angeles",
-      "state": "CA",
-      "lat": 34.0536909,
-      "lng": -118.242766,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/bfeacc98-7eee-4875-a239-578a2acd63c6"
-    },
-    {
-      "name": "Friday Constructed",
-      "date": "Fri. Oct 9, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Gone Lucid Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Clinton, IN",
-      "city": "Clinton",
-      "state": "IN",
-      "lat": 40.2992769,
-      "lng": -86.4692735,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f7b4d77d-2d60-4a2b-9cdf-3a391b6dd4ea"
-    },
-    {
-      "name": "Friday Evening Sorcery",
-      "date": "Oct 9, 2026 - Oct 10, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Hasty Goblin Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Bloomfield, NJ",
-      "city": "Bloomfield",
-      "state": "NJ",
-      "lat": 40.7934789,
-      "lng": -74.1979277,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4fbcb350-a361-452b-bca5-9b9141f8ca6d"
-    },
-    {
-      "name": "Weekly Casual Play",
-      "date": "Fri. Oct 9, 2026",
-      "time": "11:30 PM UTC",
-      "endTime": "",
-      "type": "Madtown Hobby",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Cross Plains, WI",
-      "city": "Cross Plains",
-      "state": "WI",
-      "lat": 43.1116968,
-      "lng": -89.6452197,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/eda7fca5-b1a2-45d4-8b6f-2de5b50926bd"
-    },
-    {
-      "name": "ON THE DRAW WEEKLY LOCALS",
-      "date": "Fri. Oct 9, 2026",
-      "time": "11:45 PM UTC",
-      "endTime": "",
-      "type": "On The Draw",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pottstown, PA",
-      "city": "Pottstown",
-      "state": "PA",
-      "lat": 40.2452976,
-      "lng": -75.6496424,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/44d59543-8068-4151-9e1e-e25bf3cc042c"
-    },
-    {
-      "name": "PGS Casual Fridays Sorcery Open Play",
-      "date": "Sat. Oct 10, 2026",
-      "time": "12:45 AM UTC",
-      "endTime": "",
-      "type": "The Portland Game Store",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/2921d534-fd36-4268-bbbd-30c40ec8b96a"
-    },
-    {
-      "name": "The \"I'm not at SCGCON-LA so I guess I'll go to Hammerhead\" Event",
-      "date": "Sat. Oct 10, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Hammerhead Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/02804ad9-2737-4638-8589-c686ee39414a"
-    },
-    {
-      "name": "Sorcery Constructed",
-      "date": "Sat. Oct 10, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "A Hidden Fortress",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Simi Valley, CA",
-      "city": "Simi Valley",
-      "state": "CA",
-      "lat": 34.2677404,
-      "lng": -118.7538071,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5131be50-8ef0-435a-9050-0ef69bd87d1d"
-    },
-    {
-      "name": "Learn To Play",
-      "date": "Sat. Oct 10, 2026",
-      "time": "1:47 AM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Orange Park, FL",
-      "city": "Orange Park",
-      "state": "FL",
-      "lat": 30.1654707,
-      "lng": -81.7016346,
-      "address": "",
-      "description": "",
-      "storeName": "Variant",
-      "url": "https://play.sorcerytcg.com/events/b5cb0253-4f5e-4b2c-8872-7effc7126e8a"
-    },
-    {
-      "name": "Midnight Pudge",
-      "date": "Sat. Oct 10, 2026",
-      "time": "2:00 AM UTC",
-      "endTime": "",
-      "type": "Pudge Pit",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Jardim Goiás, GO",
-      "city": "Jardim Goiás",
-      "state": "GO",
-      "lat": -16.7024172,
-      "lng": -49.2385974,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/80d70cc8-c38f-4309-acbb-ba4c8643ae06"
-    },
-    {
-      "name": "Beskar Forge's Sorcery Saturdays",
-      "date": "Sat. Oct 10, 2026",
-      "time": "6:00 AM UTC",
-      "endTime": "",
-      "type": "Beskar Forge Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Victoria Park, WA",
-      "city": "Victoria Park",
-      "state": "WA",
-      "lat": -31.9723554,
-      "lng": 115.8954511,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/090e03a2-528c-44e1-8c4a-7286540ac1ab"
-    },
-    {
-      "name": "Don't put Mystery into a Cornerstone",
-      "date": "Sat. Oct 10, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Göteborg, Västra Götalands län",
-      "city": "Göteborg",
-      "state": "Västra Götalands län",
-      "lat": 57.7072326,
-      "lng": 11.9670171,
-      "address": "",
-      "description": "",
-      "storeName": "Mystery Shack",
-      "url": "https://play.sorcerytcg.com/events/9ec60b7b-0646-4ae4-ab18-fe7841111d59"
-    },
-    {
-      "name": "Sorcery Weekly Sat Afternoon CTGH",
-      "date": "Sat. Oct 10, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Games Haven Chinatown",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Singapore, 50531",
-      "city": "Singapore",
-      "state": "50531",
-      "lat": 1.2899175,
-      "lng": 103.8519072,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d1e5bde6-5ba0-43cc-8d50-6fecbee6a531"
-    },
-    {
-      "name": "Cornerstone Kelz0r Næstved October 2026",
-      "date": "Sat. Oct 10, 2026",
-      "time": "9:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Næstved, Sjælland",
-      "city": "Næstved",
-      "state": "Sjælland",
-      "lat": 55.2328252,
-      "lng": 11.7674102,
-      "address": "",
-      "description": "",
-      "storeName": "Kelz0r Næstved",
-      "url": "https://play.sorcerytcg.com/events/46f5e74f-8d70-4b69-b3dc-7cf23982fcf9"
-    },
-    {
-      "name": "Geek Haven - Cornerstone Event",
-      "date": "Sat. Oct 10, 2026",
-      "time": "10:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bonn, NRW",
-      "city": "Bonn",
-      "state": "NRW",
-      "lat": 50.7352621,
-      "lng": 7.1024635,
-      "address": "",
-      "description": "",
-      "storeName": "Geek Haven",
-      "url": ""
+      "url": "https://play.sorcerytcg.com/events/81a33e9a-9eca-4b6b-a63e-02c5f216f435"
     }
   ]
 }
