@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T15:26:43.958Z",
+  "updated": "2026-08-21T16:24:36.091Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -127,24 +127,6 @@
       "description": "",
       "storeName": "Geek Haven",
       "url": "https://play.sorcerytcg.com/events/1cae01d3-b842-4a8b-a689-b9446f30fb1a"
-    },
-    {
-      "name": "Pikazard Constructed",
-      "date": "Fri. Aug 21, 2026",
-      "time": "3:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bratislava, Bratislavský kraj",
-      "city": "Bratislava",
-      "state": "Bratislavský kraj",
-      "lat": 48.1516988,
-      "lng": 17.1093063,
-      "address": "",
-      "description": "",
-      "storeName": "Pikazard.eu",
-      "url": "https://play.sorcerytcg.com/events/0ac6e41b-c55c-45e4-9639-f15a3646574a"
     },
     {
       "name": "Spielraum Weekly",
@@ -4417,8 +4399,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "10:30 PM UTC",
       "endTime": "",
-      "type": "The Gamers Wharf",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Wyoming, MI",
       "city": "Wyoming",
@@ -4427,7 +4409,7 @@
       "lng": -85.7057035,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Gamers Wharf",
       "url": "https://play.sorcerytcg.com/events/12833882-79c3-48aa-a8a1-d965014a0c31"
     },
     {
