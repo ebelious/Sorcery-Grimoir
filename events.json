@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T20:18:28.541Z",
+  "updated": "2026-08-21T21:18:11.004Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -109,24 +109,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/08ad2fde-7aa4-437f-b5b9-d31d61ecab00"
-    },
-    {
-      "name": "Geek Haven - Casual Meetup",
-      "date": "Fri. Aug 21, 2026",
-      "time": "3:30 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bonn, NRW",
-      "city": "Bonn",
-      "state": "NRW",
-      "lat": 50.7352621,
-      "lng": 7.1024635,
-      "address": "",
-      "description": "",
-      "storeName": "Geek Haven",
-      "url": "https://play.sorcerytcg.com/events/1cae01d3-b842-4a8b-a689-b9446f30fb1a"
     },
     {
       "name": "Sorcery Reserva",
@@ -253,6 +235,24 @@
       "description": "",
       "storeName": "Cosmic Cardboard",
       "url": "https://play.sorcerytcg.com/events/e89b45de-ffa7-4e00-b72d-31ee2bbb546b"
+    },
+    {
+      "name": "Paladins Semanal",
+      "date": "Aug 21, 2026 - Aug 22, 2026",
+      "time": "10:00 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Setor Bueno, GO",
+      "city": "Setor Bueno",
+      "state": "GO",
+      "lat": -16.697876,
+      "lng": -49.277922,
+      "address": "",
+      "description": "",
+      "storeName": "Paladins Games Store",
+      "url": "https://play.sorcerytcg.com/events/d9715335-7be8-482e-9f94-e33ac3a5e61c"
     },
     {
       "name": "Friday Constructed",
@@ -2575,6 +2575,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/99c2d219-1751-4169-b78b-801470cf4328"
+    },
+    {
+      "name": "Casual Constructed",
+      "date": "Aug 23, 2026 - Aug 24, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Action City Comics",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Kings County, NY",
+      "city": "Kings County",
+      "state": "NY",
+      "lat": 40.64559,
+      "lng": -73.9558866,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d708c0bd-64b1-4da4-b63f-3012137e0553"
     },
     {
       "name": "sorcery sunday",
@@ -14511,24 +14529,6 @@
       "url": "https://play.sorcerytcg.com/events/2191714b-282a-43cb-bcee-729d7e3df994"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 11, 2026",
       "time": "1:00 AM UTC",
@@ -14545,6 +14545,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f6df913b-4da8-4ca1-98cf-d7ed71476102"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -18489,24 +18507,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -18523,6 +18523,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28477,42 +28495,6 @@
       "description": "",
       "storeName": "Sleeved-Up Games LLC",
       "url": "https://play.sorcerytcg.com/events/781dfb0d-c2ce-4802-bfd1-41f1d816edc8"
-    },
-    {
-      "name": "Northern Louisiana Cornerstone",
-      "date": "Oct 10, 2026 - Oct 11, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bossier City, LA",
-      "city": "Bossier City",
-      "state": "LA",
-      "lat": 32.515887,
-      "lng": -93.7336536,
-      "address": "",
-      "description": "",
-      "storeName": "The Basement",
-      "url": "https://play.sorcerytcg.com/events/3bbd2978-ac0a-40a3-bc2b-d43e3a47c6c4"
-    },
-    {
-      "name": "Saturday Casual Play",
-      "date": "Sat. Oct 10, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Impulse Collectibles LLC",
-      "price": "Learn To Play",
-      "duration": "",
-      "location": "Olive Branch, MS",
-      "city": "Olive Branch",
-      "state": "MS",
-      "lat": 34.9617605,
-      "lng": -89.8295315,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3cad9707-27d9-4b19-9f89-a42e8c13609e"
     }
   ]
 }
