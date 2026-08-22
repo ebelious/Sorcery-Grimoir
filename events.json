@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22T00:47:37.450Z",
+  "updated": "2026-08-22T02:12:45.834Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -219,24 +219,6 @@
       "url": "https://play.sorcerytcg.com/events/d9715335-7be8-482e-9f94-e33ac3a5e61c"
     },
     {
-      "name": "Friday Constructed",
-      "date": "Fri. Aug 21, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Clinton, IN",
-      "city": "Clinton",
-      "state": "IN",
-      "lat": 40.2992769,
-      "lng": -86.4692735,
-      "address": "",
-      "description": "",
-      "storeName": "Gone Lucid Games",
-      "url": "https://play.sorcerytcg.com/events/05cf83e7-6eac-4301-82d4-4cfb777e14e2"
-    },
-    {
       "name": "Sorcery Draft",
       "date": "Aug 21, 2026 - Aug 22, 2026",
       "time": "10:30 PM UTC",
@@ -453,12 +435,30 @@
       "url": "https://play.sorcerytcg.com/events/e095914b-6556-49af-ae23-ee154dc95d69"
     },
     {
+      "name": "Casual Constructed",
+      "date": "Sat. Aug 22, 2026",
+      "time": "1:25 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Billings, MT",
+      "city": "Billings",
+      "state": "MT",
+      "lat": 45.7874957,
+      "lng": -108.49607,
+      "address": "",
+      "description": "",
+      "storeName": "Galaxy of Games",
+      "url": "https://play.sorcerytcg.com/events/d4dc9c90-f84a-4473-93e4-5d76bd8deeec"
+    },
+    {
       "name": "Sorcery Constructed",
       "date": "Sat. Aug 22, 2026",
       "time": "1:30 AM UTC",
       "endTime": "",
-      "type": "A Hidden Fortress",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Simi Valley, CA",
       "city": "Simi Valley",
@@ -467,7 +467,7 @@
       "lng": -118.7538071,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "A Hidden Fortress",
       "url": "https://play.sorcerytcg.com/events/8226fc3e-2a44-4b04-8198-00089cdae019"
     },
     {
@@ -487,60 +487,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cf5972a8-a203-49e0-b5d3-fa5fc3a95bc1"
-    },
-    {
-      "name": "Draft Night @ Hammerhead",
-      "date": "Sat. Aug 22, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Draft Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Hammerhead Games",
-      "url": "https://play.sorcerytcg.com/events/74668e2d-2447-46e3-be91-7fe3bee0e2f5"
-    },
-    {
-      "name": "(8/21) Sorcery Constructed - 6:45PM",
-      "date": "Sat. Aug 22, 2026",
-      "time": "1:45 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "The Portland Game Store",
-      "url": "https://play.sorcerytcg.com/events/6b6a0d57-7017-47c1-b2d5-dae0fd2722a2"
-    },
-    {
-      "name": "Midnight Pudge",
-      "date": "Sat. Aug 22, 2026",
-      "time": "2:00 AM UTC",
-      "endTime": "",
-      "type": "Pudge Pit",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Jardim Goiás, GO",
-      "city": "Jardim Goiás",
-      "state": "GO",
-      "lat": -16.7024172,
-      "lng": -49.2385974,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c17fd82a-6365-47d1-be4b-b5783ccaa457"
     },
     {
       "name": "Learn to Play Sorcery",
@@ -6793,8 +6739,8 @@
       "date": "Sat. Aug 29, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "KAB Sports Cards",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Billings, MT",
       "city": "Billings",
@@ -6803,7 +6749,7 @@
       "lng": -108.49607,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "KAB Sports Cards",
       "url": "https://play.sorcerytcg.com/events/41c41f6c-e6dc-442e-9e6d-caa27a040be7"
     },
     {
@@ -15159,24 +15105,6 @@
       "url": "https://play.sorcerytcg.com/events/96cf65e7-769f-4df2-8480-031205f0576b"
     },
     {
-      "name": "Sorcery Constructed",
-      "date": "Sat. Sep 12, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "A Hidden Fortress",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Simi Valley, CA",
-      "city": "Simi Valley",
-      "state": "CA",
-      "lat": 34.2677404,
-      "lng": -118.7538071,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/cae635d2-053e-4af5-a7df-9ff32f487fa8"
-    },
-    {
       "name": "60/30/10 (aka Benchmark)",
       "date": "Sat. Sep 12, 2026",
       "time": "1:30 AM UTC",
@@ -15193,6 +15121,24 @@
       "description": "",
       "storeName": "Hammerhead Games",
       "url": "https://play.sorcerytcg.com/events/0f439fc5-31de-4abc-95ac-9e7cb31e64c5"
+    },
+    {
+      "name": "Sorcery Constructed",
+      "date": "Sat. Sep 12, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "A Hidden Fortress",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Simi Valley, CA",
+      "city": "Simi Valley",
+      "state": "CA",
+      "lat": 34.2677404,
+      "lng": -118.7538071,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/cae635d2-053e-4af5-a7df-9ff32f487fa8"
     },
     {
       "name": "Sorcery Constructed",
@@ -22017,24 +21963,6 @@
       "url": "https://play.sorcerytcg.com/events/0718a202-d8da-4e2a-ad9c-370cc6c0fb07"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/15476a2e-5e66-447b-ba1c-a0609412cc62"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 25, 2026",
       "time": "1:00 AM UTC",
@@ -22051,6 +21979,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/90c1dc0d-d537-4187-88ad-1e01ef53a719"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/15476a2e-5e66-447b-ba1c-a0609412cc62"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28783,42 +28729,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/fb061490-5338-4e7b-85ac-d7605d2a9b3f"
-    },
-    {
-      "name": "Sorcery Saturdays",
-      "date": "Sat. Oct 10, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "The Game Parlour",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "San Francisco, CA",
-      "city": "San Francisco",
-      "state": "CA",
-      "lat": 37.7879363,
-      "lng": -122.4075201,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/668d52da-5174-4bad-ab75-582ff415d0d4"
-    },
-    {
-      "name": "Weekly Play Saturdays",
-      "date": "Sat. Oct 10, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Atlantis Hobby",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Mankato, MN",
-      "city": "Mankato",
-      "state": "MN",
-      "lat": 44.1658533,
-      "lng": -94.0028013,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/eaae75a5-1841-4cef-8cca-c35563b7f4ed"
     }
   ]
 }
