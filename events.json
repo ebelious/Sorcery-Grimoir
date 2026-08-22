@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22T17:15:20.092Z",
+  "updated": "2026-08-22T18:19:08.466Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -219,24 +219,6 @@
       "url": "https://play.sorcerytcg.com/events/b542047b-2c4b-4a75-bba0-6edc307bdff7"
     },
     {
-      "name": "Saturday Morning Casual Play",
-      "date": "Sat. Aug 22, 2026",
-      "time": "2:15 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Allegan, MI",
-      "city": "Allegan",
-      "state": "MI",
-      "lat": 42.5867203,
-      "lng": -85.8861492,
-      "address": "",
-      "description": "",
-      "storeName": "Hidden Alley Gaming",
-      "url": "https://play.sorcerytcg.com/events/0470197c-c7f6-4565-86fa-facceb8ff332"
-    },
-    {
       "name": "Casual Learn and Play",
       "date": "Aug 22, 2026 - Aug 23, 2026",
       "time": "2:30 PM UTC",
@@ -277,8 +259,8 @@
       "date": "Sat. Aug 22, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "9 Realms Relics",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Boise, ID",
       "city": "Boise",
@@ -287,7 +269,7 @@
       "lng": -116.200886,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "9 Realms Relics",
       "url": "https://play.sorcerytcg.com/events/80cc52bb-ac42-4757-a7c0-a88ed75b2825"
     },
     {
@@ -325,24 +307,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f34bcb21-ea34-4bdd-a117-3b3d3911d1d2"
-    },
-    {
-      "name": "Sorcery 22/08",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Buenos Aires, Cdad. Autónoma de Buenos Aires",
-      "city": "Buenos Aires",
-      "state": "Cdad. Autónoma de Buenos Aires",
-      "lat": null,
-      "lng": null,
-      "address": "",
-      "description": "",
-      "storeName": "El Abismo de Helm Wargames",
-      "url": "https://play.sorcerytcg.com/events/5e7f9379-530d-47b7-b2a7-8b60df612230"
     },
     {
       "name": "Sorcery Saturday!",
@@ -399,42 +363,6 @@
       "url": "https://play.sorcerytcg.com/events/ea717949-320c-45ca-8e10-4aad8189779e"
     },
     {
-      "name": "Sorcerous Saturdays",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Geekified",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Vinton, IA",
-      "city": "Vinton",
-      "state": "IA",
-      "lat": 42.1679131,
-      "lng": -92.0239504,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/65d1c106-9713-4922-9718-054b5d221369"
-    },
-    {
-      "name": "Weekly Play",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Concord, NC",
-      "city": "Concord",
-      "state": "NC",
-      "lat": 35.4094178,
-      "lng": -80.5800049,
-      "address": "",
-      "description": "",
-      "storeName": "Cosmic Hearth Games",
-      "url": "https://play.sorcerytcg.com/events/d01362c1-8946-44ec-96c2-0af7f593d02c"
-    },
-    {
       "name": "CORNERSTONE | ABU Games",
       "date": "Aug 22, 2026 - Aug 23, 2026",
       "time": "5:30 PM UTC",
@@ -451,6 +379,24 @@
       "description": "",
       "storeName": "ABU Games",
       "url": "https://play.sorcerytcg.com/events/e89cd0de-9ce3-4be6-bd45-8b8436833cfc"
+    },
+    {
+      "name": "Sorcery Constructed Vila Geek Serra",
+      "date": "Sat. Aug 22, 2026",
+      "time": "5:30 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Parque Res. Laranjeiras, ES",
+      "city": "Parque Res. Laranjeiras",
+      "state": "ES",
+      "lat": 38.7286949,
+      "lng": -9.1501544,
+      "address": "",
+      "description": "",
+      "storeName": "VILA GEEK",
+      "url": "https://play.sorcerytcg.com/events/bebdf0f9-ff75-41e5-9819-f3db3c67f60a"
     },
     {
       "name": "[Sewercity Sorcery] Saturday Constructed (Freeplay/Learn)",
@@ -541,24 +487,6 @@
       "description": "",
       "storeName": "Commander Games",
       "url": "https://play.sorcerytcg.com/events/f334bf8b-0613-4d74-821d-7d651fe25b52"
-    },
-    {
-      "name": "Saturday Sorcery!",
-      "date": "Sat. Aug 22, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Matchstick Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Mount Sterling, KY",
-      "city": "Mount Sterling",
-      "state": "KY",
-      "lat": 38.0561079,
-      "lng": -83.9431961,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/9bb5201c-7da7-4552-8c0e-5f959ae54d61"
     },
     {
       "name": "Weekly Casual Meetup",
@@ -1015,8 +943,8 @@
       "date": "Sat. Aug 22, 2026",
       "time": "11:30 PM UTC",
       "endTime": "",
-      "type": "The Basement",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Bossier City, LA",
       "city": "Bossier City",
@@ -1025,7 +953,7 @@
       "lng": -93.7336536,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Basement",
       "url": "https://play.sorcerytcg.com/events/eaca6bb1-5e67-40d3-aa56-2534e3e07629"
     },
     {
@@ -3423,24 +3351,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Weekly constructed",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Rarehuntershop",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Schwechat, Niederösterreich",
-      "city": "Schwechat",
-      "state": "Niederösterreich",
-      "lat": 48.1049968,
-      "lng": 16.5848987,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
-    },
-    {
       "name": "Wednesday Constructed Tournament",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -3457,6 +3367,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
+    },
+    {
+      "name": "Weekly constructed",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Rarehuntershop",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Schwechat, Niederösterreich",
+      "city": "Schwechat",
+      "state": "Niederösterreich",
+      "lat": 48.1049968,
+      "lng": 16.5848987,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
     },
     {
       "name": "Weekly Cornerstone",
@@ -4521,24 +4449,6 @@
       "url": "https://play.sorcerytcg.com/events/700fe9cd-40f5-4aed-9fe0-a8cdfc73e64c"
     },
     {
-      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "10:30 PM UTC",
-      "endTime": "",
-      "type": "Curio (Centreville Sq)",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Centreville, VA",
-      "city": "Centreville",
-      "state": "VA",
-      "lat": 38.837613,
-      "lng": -77.4347283,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/37121143-7d71-4123-994f-73db5ef653da"
-    },
-    {
       "name": "Thursday Evening Sorcery",
       "date": "Thu. Aug 27, 2026",
       "time": "10:30 PM UTC",
@@ -4555,6 +4465,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/38fe4a50-de3f-403b-9cfc-3a13795a5b20"
+    },
+    {
+      "name": "CURIO CENTREVILLE THURSDAY NIGHT LOCALS",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "10:30 PM UTC",
+      "endTime": "",
+      "type": "Curio (Centreville Sq)",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Centreville, VA",
+      "city": "Centreville",
+      "state": "VA",
+      "lat": 38.837613,
+      "lng": -77.4347283,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/37121143-7d71-4123-994f-73db5ef653da"
     },
     {
       "name": "Thursday Evening Sorcery @ Storefront Games",
@@ -8085,24 +8013,6 @@
       "url": "https://play.sorcerytcg.com/events/46edfcd2-c77a-4588-b4b9-d4c561ac7d4d"
     },
     {
-      "name": "Monday Sorcery",
-      "date": "Tue. Sep 1, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Stomping Grounds",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Las Vegas, NV",
-      "city": "Las Vegas",
-      "state": "NV",
-      "lat": 36.1674263,
-      "lng": -115.1484131,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e2e1b91d-7cdb-4fb9-b8e2-9c844ec5784e"
-    },
-    {
       "name": "Contesting for the Realm",
       "date": "Tue. Sep 1, 2026",
       "time": "1:30 AM UTC",
@@ -8119,6 +8029,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f91ece57-c3d8-4300-9db3-d88ff7a1d7cf"
+    },
+    {
+      "name": "Monday Sorcery",
+      "date": "Tue. Sep 1, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Stomping Grounds",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Las Vegas, NV",
+      "city": "Las Vegas",
+      "state": "NV",
+      "lat": 36.1674263,
+      "lng": -115.1484131,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/e2e1b91d-7cdb-4fb9-b8e2-9c844ec5784e"
     },
     {
       "name": "Sorcery Open Play",
@@ -28837,24 +28765,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/984c34b2-78eb-4b14-aff6-29e0ab4507a5"
-    },
-    {
-      "name": "Monday Night Sorcery",
-      "date": "Mon. Oct 12, 2026",
-      "time": "9:33 PM UTC",
-      "endTime": "",
-      "type": "Moon Mountain Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Greensburg, KY",
-      "city": "Greensburg",
-      "state": "KY",
-      "lat": 37.2608936,
-      "lng": -85.4988548,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/05d4b298-5e64-4669-ad1f-b1e527bd3c5d"
     }
   ]
 }
