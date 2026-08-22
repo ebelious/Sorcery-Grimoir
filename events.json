@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-22T18:19:08.466Z",
+  "updated": "2026-08-22T19:19:09.652Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -345,24 +345,6 @@
       "url": "https://play.sorcerytcg.com/events/f0154072-b011-4f34-8b42-529fcd2a3b0c"
     },
     {
-      "name": "4th Wall Comics - Casual Sorcery and Learn to Play",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Lancaster, PA",
-      "city": "Lancaster",
-      "state": "PA",
-      "lat": 40.0379958,
-      "lng": -76.3056707,
-      "address": "",
-      "description": "",
-      "storeName": "4th Wall Comics",
-      "url": "https://play.sorcerytcg.com/events/ea717949-320c-45ca-8e10-4aad8189779e"
-    },
-    {
       "name": "CORNERSTONE | ABU Games",
       "date": "Aug 22, 2026 - Aug 23, 2026",
       "time": "5:30 PM UTC",
@@ -379,78 +361,6 @@
       "description": "",
       "storeName": "ABU Games",
       "url": "https://play.sorcerytcg.com/events/e89cd0de-9ce3-4be6-bd45-8b8436833cfc"
-    },
-    {
-      "name": "Sorcery Constructed Vila Geek Serra",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Parque Res. Laranjeiras, ES",
-      "city": "Parque Res. Laranjeiras",
-      "state": "ES",
-      "lat": 38.7286949,
-      "lng": -9.1501544,
-      "address": "",
-      "description": "",
-      "storeName": "VILA GEEK",
-      "url": "https://play.sorcerytcg.com/events/bebdf0f9-ff75-41e5-9819-f3db3c67f60a"
-    },
-    {
-      "name": "[Sewercity Sorcery] Saturday Constructed (Freeplay/Learn)",
-      "date": "Sat. Aug 22, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "St. Louis, MO",
-      "city": "St. Louis",
-      "state": "MO",
-      "lat": 38.6254063,
-      "lng": -90.190009,
-      "address": "",
-      "description": "",
-      "storeName": "Game Nite",
-      "url": "https://play.sorcerytcg.com/events/8ac34b55-b1c6-47af-9f4a-c952c38330c3"
-    },
-    {
-      "name": "Sunrise 1º Evento",
-      "date": "Sat. Aug 22, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Camaçari, BA",
-      "city": "Camaçari",
-      "state": "BA",
-      "lat": -12.6998188,
-      "lng": -38.3260762,
-      "address": "",
-      "description": "",
-      "storeName": "Sunrise Kingdom",
-      "url": "https://play.sorcerytcg.com/events/07e3a35a-4d36-4dc7-9a8e-f2b12aed7447"
-    },
-    {
-      "name": "Saturday Showdown at Sleeved-Up Games",
-      "date": "Sat. Aug 22, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Toledo, OH",
-      "city": "Toledo",
-      "state": "OH",
-      "lat": 41.6529143,
-      "lng": -83.5378173,
-      "address": "",
-      "description": "",
-      "storeName": "Sleeved-Up Games LLC",
-      "url": "https://play.sorcerytcg.com/events/2c07a94c-3043-480e-bfef-673c6b11507b"
     },
     {
       "name": "Curio Baltimore Sat Locals",
@@ -505,24 +415,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0601de54-5b87-42f6-826f-6c7891f66c6d"
-    },
-    {
-      "name": "Sorcery Saturday Constructed",
-      "date": "Sat. Aug 22, 2026",
-      "time": "6:05 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Allegan, MI",
-      "city": "Allegan",
-      "state": "MI",
-      "lat": 42.5867203,
-      "lng": -85.8861492,
-      "address": "",
-      "description": "",
-      "storeName": "Hidden Alley Gaming",
-      "url": "https://play.sorcerytcg.com/events/e3506202-eaf1-4afc-823c-4827ce881bb5"
     },
     {
       "name": "8/22/26 Fountain Valley Sorcery Qube Draft Saturday 1130 AM",
@@ -595,6 +487,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/48e84353-5806-4d2f-8b87-c8739337b2c8"
+    },
+    {
+      "name": "CornerStone Event | ABU Games",
+      "date": "Aug 22, 2026 - Aug 23, 2026",
+      "time": "7:07 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Boise, ID",
+      "city": "Boise",
+      "state": "ID",
+      "lat": 43.6166163,
+      "lng": -116.200886,
+      "address": "",
+      "description": "",
+      "storeName": "ABU Games",
+      "url": "https://play.sorcerytcg.com/events/f22bc58b-a6ad-4ce7-ab18-143bba1c9890"
     },
     {
       "name": "Weekly Play - Constructed Format",
@@ -3351,24 +3261,6 @@
       "url": "https://play.sorcerytcg.com/events/a8678299-6916-4c88-a419-685afa96afa1"
     },
     {
-      "name": "Wednesday Constructed Tournament",
-      "date": "Wed. Aug 26, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "SideQuest",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Gdańsk, Województwo pomorskie",
-      "city": "Gdańsk",
-      "state": "Województwo pomorskie",
-      "lat": 54.3482907,
-      "lng": 18.6540233,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
-    },
-    {
       "name": "Weekly constructed",
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
@@ -3385,6 +3277,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3b77448d-17a5-428d-84a5-c9a248d19e7b"
+    },
+    {
+      "name": "Wednesday Constructed Tournament",
+      "date": "Wed. Aug 26, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "SideQuest",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Gdańsk, Województwo pomorskie",
+      "city": "Gdańsk",
+      "state": "Województwo pomorskie",
+      "lat": 54.3482907,
+      "lng": 18.6540233,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/903befc6-8cae-4303-acd8-fb0c6eed92cc"
     },
     {
       "name": "Weekly Cornerstone",
@@ -4490,24 +4400,6 @@
       "time": "11:00 PM UTC",
       "endTime": "",
       "type": "Storefront Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
-    },
-    {
-      "name": "Thursday Evening Sorcery @ Storefront Games",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
       "price": "Storefront: Precon Draft Tourny",
       "duration": "",
       "location": "Philadelphia, PA",
@@ -4519,6 +4411,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
+    },
+    {
+      "name": "Thursday Evening Sorcery @ Storefront Games",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Storefront Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Philadelphia, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "lat": 39.9527237,
+      "lng": -75.1635262,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -16920,7 +16830,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -16938,7 +16848,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
@@ -28729,42 +28639,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f9a19771-d800-4153-9959-9ab0e0f469da"
-    },
-    {
-      "name": "Constructed w Merfolku",
-      "date": "Mon. Oct 12, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Merfolk",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/b5836ab4-0704-4f79-b949-afe6914eaf92"
-    },
-    {
-      "name": "WEEKLY MEETUP",
-      "date": "Mon. Oct 12, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Tolarie.cz",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pardubice, Pardubický kraj",
-      "city": "Pardubice",
-      "state": "Pardubický kraj",
-      "lat": 50.0385812,
-      "lng": 15.7791356,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/984c34b2-78eb-4b14-aff6-29e0ab4507a5"
     }
   ]
 }
