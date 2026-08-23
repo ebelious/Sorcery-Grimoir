@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T06:29:03.293Z",
+  "updated": "2026-08-23T07:28:22.185Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -847,24 +847,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/def876ea-ebef-4844-927e-93ca7068b698"
-    },
-    {
-      "name": "Saturday Casual Play",
-      "date": "Sun. Aug 23, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Kent, WA",
-      "city": "Kent",
-      "state": "WA",
-      "lat": 47.3826903,
-      "lng": -122.2270272,
-      "address": "",
-      "description": "",
-      "storeName": "The Game Shelf",
-      "url": "https://play.sorcerytcg.com/events/c11d7fd5-837d-4dd9-937f-5b7ca97fbbdc"
     },
     {
       "name": "Casual Sorcery @ COLLECT.GG",
