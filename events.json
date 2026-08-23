@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T08:22:12.006Z",
+  "updated": "2026-08-23T09:22:14.460Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -869,10 +869,10 @@
     {
       "name": "Tournoi Sorcery Construit",
       "date": "Sun. Aug 23, 2026",
-      "time": "8:30 AM UTC",
+      "time": "8:42 AM UTC",
       "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
+      "type": "Game Me More",
+      "price": "Constructed Tournament",
       "duration": "",
       "location": "Istres, Provence-Alpes-Côte d'Azur",
       "city": "Istres",
@@ -881,8 +881,8 @@
       "lng": 4.9884323,
       "address": "",
       "description": "",
-      "storeName": "Game Me More",
-      "url": "https://play.sorcerytcg.com/events/532be40e-9b6a-42fd-bef8-c8171031ae46"
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3b2c6e15-6f8c-4b5a-a6d6-d1ef0a9d899e"
     },
     {
       "name": "Spelgalaxen weekly",
@@ -1515,24 +1515,6 @@
       "url": "https://play.sorcerytcg.com/events/fc5277d5-5115-43e4-bf4a-e0cb56a6f8d4"
     },
     {
-      "name": "Weekly Sorcery Night",
-      "date": "Sun. Aug 23, 2026",
-      "time": "9:00 PM UTC",
-      "endTime": "",
-      "type": "Laughing Dragon Tavern Games & Collectibles",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "McFarland, WI",
-      "city": "McFarland",
-      "state": "WI",
-      "lat": 43.0123487,
-      "lng": -89.2897646,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
-    },
-    {
       "name": "BIG BROTHER COMICS - GOTHIC DRAFT - SUNDAY",
       "date": "Aug 23, 2026 - Aug 24, 2026",
       "time": "9:00 PM UTC",
@@ -1549,6 +1531,24 @@
       "description": "",
       "storeName": "Big Brother Comics",
       "url": "https://play.sorcerytcg.com/events/67f315f9-33cd-4739-8cc5-07e4bedc930b"
+    },
+    {
+      "name": "Weekly Sorcery Night",
+      "date": "Sun. Aug 23, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Laughing Dragon Tavern Games & Collectibles",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "McFarland, WI",
+      "city": "McFarland",
+      "state": "WI",
+      "lat": 43.0123487,
+      "lng": -89.2897646,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
     },
     {
       "name": "Weekly Sorcery Play",
@@ -9759,24 +9759,6 @@
       "url": "https://play.sorcerytcg.com/events/d06ad163-a608-49b2-a946-6574a36c7f3e"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 4, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 4, 2026",
       "time": "1:00 AM UTC",
@@ -9793,6 +9775,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 4, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -9907,8 +9907,8 @@
       "date": "Fri. Sep 4, 2026",
       "time": "8:00 AM UTC",
       "endTime": "",
-      "type": "Good Games - Woden",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Phillip, ACT",
       "city": "Phillip",
@@ -9917,7 +9917,7 @@
       "lng": 149.091009,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Good Games - Woden",
       "url": "https://play.sorcerytcg.com/events/09f64039-53d9-4050-871c-ea6d02d863a9"
     },
     {
@@ -27273,24 +27273,6 @@
       "url": "https://play.sorcerytcg.com/events/e99ca760-7329-4fa3-b71d-03ff0da28018"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Oct 9, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Game Kastle (Sacramento)",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5261aa17-2951-4eb4-8359-9a8d7a18ecf0"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Oct 9, 2026",
       "time": "1:00 AM UTC",
@@ -27307,6 +27289,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/2b52aa3c-4a65-48f3-a3c1-1265cd34b8fd"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Oct 9, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Game Kastle (Sacramento)",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/5261aa17-2951-4eb4-8359-9a8d7a18ecf0"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -27991,24 +27991,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/fba62648-1165-4bec-b4d1-014f650a892a"
-    },
-    {
-      "name": "Curio Baltimore Sat Locals",
-      "date": "Sat. Oct 10, 2026",
-      "time": "6:00 PM UTC",
-      "endTime": "",
-      "type": "CURIO (BALTIMORE)",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Woodlawn, MD",
-      "city": "Woodlawn",
-      "state": "MD",
-      "lat": 39.305436,
-      "lng": -76.7539156,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/81914d33-6771-44b3-bb25-fe67d5a3d886"
     }
   ]
 }
