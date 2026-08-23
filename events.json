@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T00:52:31.819Z",
+  "updated": "2026-08-23T02:22:17.296Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -867,30 +867,12 @@
       "url": "https://play.sorcerytcg.com/events/9fb0711a-bf31-4332-93de-cf8904c7049f"
     },
     {
-      "name": "Constructed Locals @ PoG 23 August",
-      "date": "Sun. Aug 23, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "A$20.00",
-      "duration": "",
-      "location": "Melbourne, VIC",
-      "city": "Melbourne",
-      "state": "VIC",
-      "lat": -37.8142454,
-      "lng": 144.9631732,
-      "address": "",
-      "description": "",
-      "storeName": "Plenty of Games",
-      "url": "https://play.sorcerytcg.com/events/452d36dc-e9e6-4723-8690-89d6aed4d1dd"
-    },
-    {
       "name": "Saturday Casual Play",
       "date": "Sun. Aug 23, 2026",
       "time": "1:00 AM UTC",
       "endTime": "",
-      "type": "The Game Shelf",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Kent, WA",
       "city": "Kent",
@@ -899,7 +881,7 @@
       "lng": -122.2270272,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Game Shelf",
       "url": "https://play.sorcerytcg.com/events/c11d7fd5-837d-4dd9-937f-5b7ca97fbbdc"
     },
     {
@@ -925,8 +907,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "1:30 AM UTC",
       "endTime": "",
-      "type": "Rip N Card Trick LLC",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "$45.00",
       "duration": "",
       "location": "McMinnville, OR",
       "city": "McMinnville",
@@ -935,7 +917,7 @@
       "lng": -123.194463,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Rip N Card Trick LLC",
       "url": "https://play.sorcerytcg.com/events/eee718b2-5a5e-4974-8455-fee4b7e947ca"
     },
     {
@@ -1303,8 +1285,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Gear Gaming Store",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Bentonville, AR",
       "city": "Bentonville",
@@ -1313,7 +1295,7 @@
       "lng": -94.208787,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gear Gaming Store",
       "url": "https://play.sorcerytcg.com/events/93e81d1d-2a66-4a1a-b917-d2df2c3b5e51"
     },
     {
@@ -1393,8 +1375,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "The Eldritch Bastion",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Ashland, OH",
       "city": "Ashland",
@@ -1403,7 +1385,7 @@
       "lng": -82.2360391,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Eldritch Bastion",
       "url": "https://play.sorcerytcg.com/events/14f7a8d0-0356-4fcb-aa57-707db84ab7de"
     },
     {
@@ -4328,24 +4310,6 @@
       "time": "11:00 PM UTC",
       "endTime": "",
       "type": "Storefront Games",
-      "price": "Storefront: Precon Draft Tourny",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
-    },
-    {
-      "name": "Thursday Evening Sorcery @ Storefront Games",
-      "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
       "price": "Casual Meetup",
       "duration": "",
       "location": "Philadelphia, PA",
@@ -4357,6 +4321,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/82208504-2a23-481e-861a-206a5d7e595d"
+    },
+    {
+      "name": "Thursday Evening Sorcery @ Storefront Games",
+      "date": "Aug 27, 2026 - Aug 28, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Storefront Games",
+      "price": "Storefront: Precon Draft Tourny",
+      "duration": "",
+      "location": "Philadelphia, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "lat": 39.9527237,
+      "lng": -75.1635262,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -9169,8 +9151,8 @@
       "date": "Sep 2, 2026 - Sep 3, 2026",
       "time": "11:30 PM UTC",
       "endTime": "",
-      "type": "Game Keeper Verdun",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Québec, QC",
       "city": "Québec",
@@ -9179,7 +9161,7 @@
       "lng": -71.2084061,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Game Keeper Verdun",
       "url": "https://play.sorcerytcg.com/events/c837ca65-448b-491a-bd9c-6c3a2f38e599"
     },
     {
@@ -16830,7 +16812,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -16848,7 +16830,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
