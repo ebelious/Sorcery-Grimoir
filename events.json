@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T14:17:26.396Z",
+  "updated": "2026-08-23T15:16:35.655Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -145,24 +145,6 @@
       "description": "",
       "storeName": "David's Good Game Cafe",
       "url": "https://play.sorcerytcg.com/events/ed5eaafa-eb90-45ed-9c09-e59dad897b28"
-    },
-    {
-      "name": "Great Stories Cornerstone Event",
-      "date": "Sun. Aug 23, 2026",
-      "time": "2:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Whitinsville, MA",
-      "city": "Whitinsville",
-      "state": "MA",
-      "lat": 42.1105682,
-      "lng": -71.6643906,
-      "address": "",
-      "description": "",
-      "storeName": "Great Stories Comics and Games",
-      "url": "https://play.sorcerytcg.com/events/af6b88e1-86d1-4d41-a465-a71fb5c79f2b"
     },
     {
       "name": "CFH Cornerstone",
@@ -5743,6 +5725,24 @@
       "description": "",
       "storeName": "MaRo Games",
       "url": "https://play.sorcerytcg.com/events/cf57e8f4-c889-44ed-b69b-96e635780cf0"
+    },
+    {
+      "name": "Beta Draft",
+      "date": "Sun. Aug 30, 2026",
+      "time": "9:30 AM UTC",
+      "endTime": "",
+      "type": "Bay Games",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Whitley Bay, England",
+      "city": "Whitley Bay",
+      "state": "England",
+      "lat": 55.0422091,
+      "lng": -1.4454353,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/f601fbec-204f-4a37-85eb-618d57d59bc3"
     },
     {
       "name": "MegaGame Sorcery Sealed League: Week 1",
@@ -15930,7 +15930,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Meet Up!",
@@ -15948,7 +15948,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Sorcery",
@@ -16707,24 +16707,6 @@
       "url": "https://play.sorcerytcg.com/events/50644655-8504-4b9b-b71d-87f33ac66306"
     },
     {
-      "name": "Constructed Tournament & Open Play",
-      "date": "Sep 17, 2026 - Sep 18, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "The Guildhouse",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Franklin, TN",
-      "city": "Franklin",
-      "state": "TN",
-      "lat": 35.925206,
-      "lng": -86.8689419,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e2d32a92-6fc7-4fe2-9542-cbda039969eb"
-    },
-    {
       "name": "Thursday Evening Sorcery @ Storefront Games",
       "date": "Sep 17, 2026 - Sep 18, 2026",
       "time": "11:00 PM UTC",
@@ -16741,6 +16723,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c03b321b-b6c4-4b35-9270-483a2eb24f03"
+    },
+    {
+      "name": "Constructed Tournament & Open Play",
+      "date": "Sep 17, 2026 - Sep 18, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "The Guildhouse",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Franklin, TN",
+      "city": "Franklin",
+      "state": "TN",
+      "lat": 35.925206,
+      "lng": -86.8689419,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/e2d32a92-6fc7-4fe2-9542-cbda039969eb"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -28891,42 +28891,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/81db0681-93f0-4f24-b100-4a49eddaa54e"
-    },
-    {
-      "name": "SG - Weekly Play",
-      "date": "Thu. Oct 15, 2026",
-      "time": "3:15 PM UTC",
-      "endTime": "",
-      "type": "Skład Gier",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Poznań, Województwo wielkopolskie",
-      "city": "Poznań",
-      "state": "Województwo wielkopolskie",
-      "lat": 52.4082663,
-      "lng": 16.9335199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/dc3801ed-fcef-40c9-87e7-cc9199edc559"
-    },
-    {
-      "name": "SpieleNarren Casual",
-      "date": "Thu. Oct 15, 2026",
-      "time": "3:30 PM UTC",
-      "endTime": "",
-      "type": "Der SpieleNarr",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Hamburg, HH",
-      "city": "Hamburg",
-      "state": "HH",
-      "lat": 53.5909051,
-      "lng": 9.9753758,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/4e6f6e3d-28fe-496c-a3e6-bfc4bd00f00d"
     }
   ]
 }
