@@ -1,4 +1,4 @@
-\// Lets two devices connect locally by sharing a short match code: each side
+// Lets two devices connect locally by sharing a short match code: each side
 // posts their own {username, deck} into a shared "room", and the other side
 // polls for it. Backed by Netlify Blobs (free on Netlify's Free plan, no
 // credit card, no separate service) instead of Firebase, since Firestore
@@ -264,6 +264,27 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
+      /* Asking for the clock to be stopped or started, from the device that does not keep
+         it. Only one device writes the clock, or two writers would fight over it -- so the
+         other asks instead, and the keeper does it on its next look. The ask is left on the
+         room until it is acted on; a stale one is ignored by its timestamp. */
+      if (action === 'setTimerReq') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        room.clockReq = {
+          by: role,
+          want: body.want === 'resume' ? 'resume' : 'pause',
+          ts: Date.now()
+        };
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
       /* The room's clock.
          One device keeps it -- the one that started the match -- and the other follows, so
          there is never a question of which is right. What is stored is not a countdown but
@@ -298,6 +319,8 @@ exports.handler = async function (event) {
           turnNum: Math.max(1, Math.min(9999, parseInt(t.turnNum, 10) || 1)),
           ts: Date.now()
         };
+        /* the keeper says which ask it has dealt with, so it is not acted on twice */
+        if (body.ackReq) room.clockReq = null;
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
