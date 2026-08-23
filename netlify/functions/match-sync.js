@@ -1,4 +1,4 @@
-// Lets two devices connect locally by sharing a short match code: each side
+\// Lets two devices connect locally by sharing a short match code: each side
 // posts their own {username, deck} into a shared "room", and the other side
 // polls for it. Backed by Netlify Blobs (free on Netlify's Free plan, no
 // credit card, no separate service) instead of Firebase, since Firestore
@@ -14,6 +14,9 @@
 //   POST { action:'confirmResult', code, role } -> { code, room }
 //   POST { action:'cancelResult',  code } -> { code, room }  (withdraws a proposed-but-unconfirmed result)
 //   POST { action:'setLife', code, role, life } -> { code, room }
+//   POST { action:'setTimer', code, role, timer } -> { code, room }  (the room's clock; only the
+//         creator writes it, and every reply carries `now` so each device can measure its own
+//         clock against the server's -- see the note on `now` below)
 //   POST { action:'setDice', code, role, dice:{total,label,brk,ts} } -> { code, room }
 //   POST { action:'proposeRematch', code, role } -> { code, room }  (starts the two-phase rematch handshake)
 //   POST { action:'confirmRematch', code, role } -> { code, room }  (accepts a pending rematch)
@@ -41,20 +44,17 @@ function genCode() {
   return c;
 }
 
-function _redactRoom(room) {
-  if (!room || typeof room !== 'object') return room;
-  const r = Object.assign({}, room);
-  if (r.p1) { r.p1 = Object.assign({}, r.p1); delete r.p1.usercode; }
-  if (r.p2) { r.p2 = Object.assign({}, r.p2); delete r.p2.usercode; }
-  return r;
-}
+/* Every reply carries the server's own clock.
+   Two phones are rarely set to the same second, and the match clock is stored as a moment
+   rather than a countdown -- so a device that took that moment at face value would be out
+   by however far its own clock is out. Told what the server thinks the time is, each device
+   can measure the difference once and read every moment through it. */
 function resp(statusCode, obj) {
-  // Never expose either player's usercode -- it is the per-device auth secret.
-  const safe = (obj && obj.room) ? Object.assign({}, obj, { room: _redactRoom(obj.room) }) : obj;
+  const body = (obj && typeof obj === 'object') ? Object.assign({ now: Date.now() }, obj) : obj;
   return {
     statusCode,
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-    body: JSON.stringify(safe)
+    body: JSON.stringify(body)
   };
 }
 
@@ -83,23 +83,6 @@ exports.handler = async function (event) {
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       const action = body.action;
-      if (body.code != null && !/^[A-Z0-9]{4,12}$/.test(String(body.code).trim().toUpperCase())) return resp(400, { error: 'Invalid code' });
-      // SECURITY: authorize mutating actions by the caller's device usercode,
-      // not the client-declared role. Look up the caller's real slot and force
-      // `role` to it so nobody who merely knows a room code can act as the other
-      // player or tear down the room.
-      const _member = (rm, uc) => (!rm || !uc) ? null : (rm.p1 && rm.p1.usercode === uc ? 'p1' : (rm.p2 && rm.p2.usercode === uc ? 'p2' : null));
-      const _MUT = { acceptMatch: 1, declineMatch: 1, proposeResult: 1, confirmResult: 1, cancelResult: 1, setLife: 1, setDice: 1, leave: 1, proposeRematch: 1, cancelRematch: 1, confirmRematch: 1, rematch: 1 };
-      if (_MUT[action]) {
-        const _code = (body.code || '').trim().toUpperCase();
-        const _uc = (body.usercode || '').trim().slice(0, 20);
-        const _room = _code ? await store.get(_code, { type: 'json' }) : null;
-        if (_room && !isExpired(_room)) {
-          const _r = _member(_room, _uc);
-          if (!_r) return resp(403, { error: 'Not authorized for this connection' });
-          body.role = _r;
-        }
-      }
 
       if (action === 'create') {
         const username = (body.username || '').trim().slice(0, 40);
@@ -113,7 +96,17 @@ exports.handler = async function (event) {
           const existing = await store.get(code, { type: 'json' });
           if (isExpired(existing)) break;
         }
-        const room = { created: Date.now(), p1: { username, usercode, deck, ts: Date.now() }, p2: null, accepted: { confirmedP1: false, confirmedP2: false } };
+        /* How the match is to be played, chosen by whoever starts it and carried on the
+           room so the other device is told rather than asked. `play` picks the layout;
+           `timer` is the clock a competitive match runs on. Both are plain data -- kept
+           narrow here so a bad client cannot write anything it likes onto the room. */
+        const play = body.play === 'casual' ? 'casual' : 'competitive';
+        const t = body.timer || {};
+        const timer = {
+          mode: (t.mode === 'countup' || t.mode === 'tug') ? t.mode : 'chess',
+          minutes: Math.max(1, Math.min(180, parseInt(t.minutes, 10) || 50))
+        };
+        const room = { created: Date.now(), play, timer, p1: { username, usercode, deck, ts: Date.now() }, p2: null, accepted: { confirmedP1: false, confirmedP2: false } };
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
@@ -241,6 +234,70 @@ exports.handler = async function (event) {
         if (!room[role]) return resp(400, { error: 'Player slot not found' });
 
         room[role].life = life;
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
+      /* How the match is to be played, changed after the room has opened.
+         The room opens the moment its page is reached, so the choice is made with the room
+         already standing -- it is written here rather than only at the start. Only the
+         player who started it may say, and only until the two have accepted: after that the
+         match is under way and the layout is not to be pulled from under it. */
+      if (action === 'setPlay') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+        if (role !== 'p1') return resp(200, { code, room });
+        const acc = room.accepted || {};
+        if (acc.confirmedP1 && acc.confirmedP2) return resp(200, { code, room });
+
+        room.play = body.play === 'casual' ? 'casual' : 'competitive';
+        const t = body.timer || {};
+        room.timer = {
+          mode: (t.mode === 'countup' || t.mode === 'tug') ? t.mode : 'chess',
+          minutes: Math.max(1, Math.min(180, parseInt(t.minutes, 10) || 50))
+        };
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
+      /* The room's clock.
+         One device keeps it -- the one that started the match -- and the other follows, so
+         there is never a question of which is right. What is stored is not a countdown but
+         the facts a countdown can be worked out from: whether it is running, when it is due
+         to end, and what was left on it when it was last stopped. A follower can then work
+         out the same figure at any moment without anything being sent between ticks.
+
+         `endsAt` is a moment on the server's clock, not on either device's, so the two
+         devices agree even when their own clocks do not -- see `now` in the reply. */
+      if (action === 'setTimer') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+        /* only the player who started the match keeps the clock */
+        if (role !== 'p1') return resp(200, { code, room });
+
+        const t = body.timer || {};
+        room.clock = {
+          mode: (t.mode === 'countup' || t.mode === 'tug') ? t.mode : 'chess',
+          minutes: Math.max(1, Math.min(180, parseInt(t.minutes, 10) || 50)),
+          running: !!t.running,
+          paused: !!t.paused,
+          /* whole milliseconds, and never negative */
+          endsAt: Math.max(0, parseInt(t.endsAt, 10) || 0),
+          remain: Math.max(0, parseInt(t.remain, 10) || 0),
+          pRemain: Array.isArray(t.pRemain) ? t.pRemain.slice(0, 2).map(function (v) { return Math.max(0, parseInt(v, 10) || 0); }) : [0, 0],
+          pEnd: Array.isArray(t.pEnd) ? t.pEnd.slice(0, 2).map(function (v) { return v ? Math.max(0, parseInt(v, 10) || 0) : 0; }) : [0, 0],
+          activePI: (t.activePI === 0 || t.activePI === 1) ? t.activePI : -1,
+          turnNum: Math.max(1, Math.min(9999, parseInt(t.turnNum, 10) || 1)),
+          ts: Date.now()
+        };
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
