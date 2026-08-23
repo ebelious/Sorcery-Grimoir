@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T13:28:09.129Z",
+  "updated": "2026-08-23T14:17:26.396Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -127,24 +127,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/92c75f56-cbe2-4418-bf64-6109ec7e7197"
-    },
-    {
-      "name": "Niedzielne Granie w Maginarium vol 3",
-      "date": "Sun. Aug 23, 2026",
-      "time": "1:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Śródmieście, Województwo pomorskie",
-      "city": "Śródmieście",
-      "state": "Województwo pomorskie",
-      "lat": 54.3502045,
-      "lng": 18.6543087,
-      "address": "",
-      "description": "",
-      "storeName": "Maginarium.pl",
-      "url": "https://play.sorcerytcg.com/events/4b49fa04-f745-4582-96cf-6fb69ea968d9"
     },
     {
       "name": "Sunday Sorcery Social and Escalation League",
