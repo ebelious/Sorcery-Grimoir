@@ -1,13 +1,243 @@
 {
-  "updated": "2026-08-23T06:20:57.215Z",
+  "updated": "2026-08-23T12:16:27.590Z",
   "source": "https://curiosa.io/decks",
   "decks": [
     {
-      "name": "AoA BurnPit",
+      "name": "Miststepper",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmn1yha2300z704l4wnbvnxvp",
+      "format": "Constructed",
+      "timestamp": 1787487201826,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Within The Reach Of Flames",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt4iuihb00w104jr25z6f66i",
+      "format": "Constructed",
+      "timestamp": 1787487115569,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Necropyromancy",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt1oqxrx00as04jsy93d9v04",
+      "format": "Constructed",
+      "timestamp": 1787485892832,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "⛰️ Ramptacular [ Sorcerer – Dust – Gothic ]",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmo1culd2000604jkzb20qr1f",
+      "format": "Constructed",
+      "timestamp": 1787485578642,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Wake up! Grab a brush and put a little make-up!",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsn92fgo00060ajflh5epdms",
+      "format": "Constructed",
+      "timestamp": 1787484612741,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "55 burgers 55 fries 55 tacos 55 pies 55 cokes 100 tater tots 100 pizzas 100 tenders 100 meatballs 100 coffees 55 wings 55 shakes 55 pancakes 55 pastas 55 peppers & 155 taters. ",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrl0p26d000q04jxiqf4uxfo",
+      "format": "Constructed",
+      "timestamp": 1787483984144,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "The Red Mask - 2026 Cornerstone 1st Place",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt0nt4ci00az04kv8j4zlyi8",
+      "format": "Constructed",
+      "timestamp": 1787482468621,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Flamethrower",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt2sp8sg00ea04l8xm59s5y4",
+      "format": "Constructed",
+      "timestamp": 1787480618325,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Top-Rising Cream",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmscltqvy00020ajglgahem4e",
+      "format": "Constructed",
+      "timestamp": 1787479755297,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "No Mercy",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmk52c9mp00i804jy0lajeoef",
+      "format": "Constructed",
+      "timestamp": 1787479007724,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "JayRoc Torrid Geomancer",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt37qk2n00if04jukp6h44jc",
+      "format": "Constructed",
+      "timestamp": 1787478998459,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Duplicator",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt5iybmb00cb04ldp6vqg4uw",
+      "format": "Constructed",
+      "timestamp": 1787475164973,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Spies at the Gate",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt2yb2lc003e04jv9an6t856",
+      "format": "Constructed",
+      "timestamp": 1787474892355,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Fire benders in the Spirit realm",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr37ieh500vl04lewfkm47v9",
+      "format": "Constructed",
+      "timestamp": 1787473838539,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Deathspeaker | Self Mill",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt2bi1ah000004kyfs7vjewy",
+      "format": "Constructed",
+      "timestamp": 1787470997163,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Overflow Sorcerer",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqklit33001y04jriai522nm",
+      "format": "Constructed",
+      "timestamp": 1787470911097,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "FrazEtta force",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsv9lzhl001q04jrexjhxkkn",
+      "format": "Constructed",
+      "timestamp": 1787470498304,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Ordinary People (poorcery) ",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt4z39jv00f404juunxxo3x1",
+      "format": "Constructed",
+      "timestamp": 1787470177370,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "1st Place AZ Cornerstone RE:(birth)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmshlicj9000v0ajg8g8ikpsx",
+      "format": "Constructed",
+      "timestamp": 1787467954370,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "By the Pound - 3",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsuqx6y4000i04laxygfw9gz",
+      "format": "Constructed",
+      "timestamp": 1787467714291,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Splash Mountain",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr818bfb00p004l5yzutxgmp",
+      "format": "Constructed",
+      "timestamp": 1787467553947,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Necro",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt4tr9c1005p04js8098uzqt",
+      "format": "Constructed",
+      "timestamp": 1787467131249,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Cornerstone 2nd place - slip n slide - Mono Water Druid",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsf87osa00010akwfkdhg6o2",
+      "format": "Constructed",
+      "timestamp": 1787466368525,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "AoA BurnPit BBQ",
       "author": "",
       "url": "https://curiosa.io/decks/cmt5dvtai007r04l4t6hqtpvt",
       "format": "Constructed",
-      "timestamp": 1787465919297,
+      "timestamp": 1787466330427,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -33,31 +263,11 @@
       "avatar": ""
     },
     {
-      "name": "Splash Mountain",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmr818bfb00p004l5yzutxgmp",
-      "format": "Constructed",
-      "timestamp": 1787465158571,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "Midsommar",
       "author": "",
       "url": "https://curiosa.io/decks/clxwjmbrd000j4e17rkwwrx5l",
       "format": "Constructed",
       "timestamp": 1787465138881,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Spies at the Gate",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt2yb2lc003e04jv9an6t856",
-      "format": "Constructed",
-      "timestamp": 1787465057450,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -93,26 +303,6 @@
       "avatar": ""
     },
     {
-      "name": "Deathspeaker | Self Mill",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt2bi1ah000004kyfs7vjewy",
-      "format": "Constructed",
-      "timestamp": 1787464541153,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Top-Rising Cream",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmscltqvy00020ajglgahem4e",
-      "format": "Constructed",
-      "timestamp": 1787464274989,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "The Fates Decide Harbinger",
       "author": "",
       "url": "https://curiosa.io/decks/cmpzsc5z700kc04l098t2u57j",
@@ -138,6 +328,16 @@
       "url": "https://curiosa.io/decks/cmr0bjnpp00gx04jpf2k4yzgx",
       "format": "Constructed",
       "timestamp": 1787462175847,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "Mother Earth's Hex",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt5b8h79000a04l2nm41jpvz",
+      "format": "Constructed",
+      "timestamp": 1787460940437,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -173,31 +373,11 @@
       "avatar": ""
     },
     {
-      "name": "Overflow Sorcerer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqklit33001y04jriai522nm",
-      "format": "Constructed",
-      "timestamp": 1787459647742,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "She Thick",
       "author": "",
       "url": "https://curiosa.io/decks/cmt577x6m00ey04jo6tdn8xk8",
       "format": "Constructed",
       "timestamp": 1787458585694,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The Red Mask - 2026 Cornerstone 1st Place",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt0nt4ci00az04kv8j4zlyi8",
-      "format": "Constructed",
-      "timestamp": 1787458489639,
       "views": null,
       "elements": [],
       "avatar": ""
@@ -418,186 +598,6 @@
       "url": "https://curiosa.io/decks/cmsewexua00000ajb6as1vg27",
       "format": "Constructed",
       "timestamp": 1787448953908,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Pond - poorcery",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmr5oiv5q00aq04l1n3r3jsqu",
-      "format": "Constructed",
-      "timestamp": 1787448433814,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Miststepper",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmn1yha2300z704l4wnbvnxvp",
-      "format": "Constructed",
-      "timestamp": 1787447777289,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Shoot Em Up",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt3wla1800n704l31655omq9",
-      "format": "Constructed",
-      "timestamp": 1787447573457,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "teste",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt53rq1o00d104l7ka6smi83",
-      "format": "Constructed",
-      "timestamp": 1787446961010,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "chudsecutor",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt51ld6v000c04lauxuvmffs",
-      "format": "Constructed",
-      "timestamp": 1787444146467,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Interrogate Smoke",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqctv5so00dz04l2yj2agkw6",
-      "format": "Constructed",
-      "timestamp": 1787443752738,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "chudmancer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsj87ekp00000akz6yiezddo",
-      "format": "Constructed",
-      "timestamp": 1787442500566,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Peer into the Abyss",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmstvdv0p014p04l83965pixj",
-      "format": "Constructed",
-      "timestamp": 1787442185517,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "chudshaper",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrs9jub8000u0akm3m3th0pj",
-      "format": "Constructed",
-      "timestamp": 1787442091559,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Enchantress Shenanigans",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmp5wn4c400nu04jmpxatl1re",
-      "format": "Constructed",
-      "timestamp": 1787442075731,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Budget Corruption combo",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt4cnv5o006o04l1peiqmycu",
-      "format": "Constructed",
-      "timestamp": 1787441638777,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Pudge city",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsv1k61s00an04jmzydw4f1u",
-      "format": "Constructed",
-      "timestamp": 1787441498375,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Slow-Burning Fire",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmstlwemp00oa04l8hm7kjkku",
-      "format": "Constructed",
-      "timestamp": 1787441492680,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Ordinary People (poorcery) ",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt4z39jv00f404juunxxo3x1",
-      "format": "Constructed",
-      "timestamp": 1787440521851,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "Gingerbread",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsxfq7hm003k04jjg162q8g7",
-      "format": "Constructed",
-      "timestamp": 1787440483589,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "1#Iron",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsgo6y4l00010aj3vg44og5q",
-      "format": "Constructed",
-      "timestamp": 1787440473673,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "WEDDING PARTY",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnxs4sav00li04k03x2mtew1",
-      "format": "Multiplayer",
-      "timestamp": 1787440063994,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "The agro percy",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt0nifs4008e04kvr6yn5qnt",
-      "format": "Constructed",
-      "timestamp": 1787439877873,
       "views": null,
       "elements": [],
       "avatar": ""
