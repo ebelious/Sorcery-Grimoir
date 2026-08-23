@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T12:24:53.844Z",
+  "updated": "2026-08-23T13:28:09.129Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -127,42 +127,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/92c75f56-cbe2-4418-bf64-6109ec7e7197"
-    },
-    {
-      "name": "Dice Saloon - Sorcery Contested Realm Tournament - August",
-      "date": "Sun. Aug 23, 2026",
-      "time": "12:45 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Brighton, England",
-      "city": "Brighton",
-      "state": "England",
-      "lat": 50.8214626,
-      "lng": -0.1400561,
-      "address": "",
-      "description": "",
-      "storeName": "Dice Saloon Ltd",
-      "url": "https://play.sorcerytcg.com/events/fd2261bb-49a8-4f0b-8d64-a2026819e2e1"
-    },
-    {
-      "name": "Semanal DMG",
-      "date": "Sun. Aug 23, 2026",
-      "time": "12:50 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Para de Minas, MG",
-      "city": "Para de Minas",
-      "state": "MG",
-      "lat": -19.8668656,
-      "lng": -44.5912664,
-      "address": "",
-      "description": "",
-      "storeName": "DMG Card Shop",
-      "url": "https://play.sorcerytcg.com/events/c5e73bdc-962c-49b6-ab38-7678b98e0972"
     },
     {
       "name": "Niedzielne Granie w Maginarium vol 3",
@@ -313,8 +277,8 @@
       "date": "Sun. Aug 23, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "Storming Good Games",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Indianapolis, IN",
       "city": "Indianapolis",
@@ -323,7 +287,7 @@
       "lng": -86.1583502,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Storming Good Games",
       "url": "https://play.sorcerytcg.com/events/3d59583f-1c0d-44e5-a9c3-0edff54fdd7d"
     },
     {
