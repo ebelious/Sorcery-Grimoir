@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T11:15:47.274Z",
+  "updated": "2026-08-23T12:24:53.844Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -147,6 +147,24 @@
       "url": "https://play.sorcerytcg.com/events/fd2261bb-49a8-4f0b-8d64-a2026819e2e1"
     },
     {
+      "name": "Semanal DMG",
+      "date": "Sun. Aug 23, 2026",
+      "time": "12:50 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Para de Minas, MG",
+      "city": "Para de Minas",
+      "state": "MG",
+      "lat": -19.8668656,
+      "lng": -44.5912664,
+      "address": "",
+      "description": "",
+      "storeName": "DMG Card Shop",
+      "url": "https://play.sorcerytcg.com/events/c5e73bdc-962c-49b6-ab38-7678b98e0972"
+    },
+    {
       "name": "Niedzielne Granie w Maginarium vol 3",
       "date": "Sun. Aug 23, 2026",
       "time": "1:00 PM UTC",
@@ -289,6 +307,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d59f9fba-18d3-4afa-967b-cadc33725378"
+    },
+    {
+      "name": "Learn to Play Sorcery!",
+      "date": "Sun. Aug 23, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Storming Good Games",
+      "price": "Learn To Play",
+      "duration": "",
+      "location": "Indianapolis, IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "lat": 39.7683331,
+      "lng": -86.1583502,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3d59583f-1c0d-44e5-a9c3-0edff54fdd7d"
     },
     {
       "name": "Sunday Sorcery at Cardboard Castle",
@@ -687,24 +723,6 @@
       "url": "https://play.sorcerytcg.com/events/fc5277d5-5115-43e4-bf4a-e0cb56a6f8d4"
     },
     {
-      "name": "Weekly Sorcery Night",
-      "date": "Sun. Aug 23, 2026",
-      "time": "9:00 PM UTC",
-      "endTime": "",
-      "type": "Laughing Dragon Tavern Games & Collectibles",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "McFarland, WI",
-      "city": "McFarland",
-      "state": "WI",
-      "lat": 43.0123487,
-      "lng": -89.2897646,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
-    },
-    {
       "name": "BIG BROTHER COMICS - GOTHIC DRAFT - SUNDAY",
       "date": "Aug 23, 2026 - Aug 24, 2026",
       "time": "9:00 PM UTC",
@@ -721,6 +739,24 @@
       "description": "",
       "storeName": "Big Brother Comics",
       "url": "https://play.sorcerytcg.com/events/67f315f9-33cd-4739-8cc5-07e4bedc930b"
+    },
+    {
+      "name": "Weekly Sorcery Night",
+      "date": "Sun. Aug 23, 2026",
+      "time": "9:00 PM UTC",
+      "endTime": "",
+      "type": "Laughing Dragon Tavern Games & Collectibles",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "McFarland, WI",
+      "city": "McFarland",
+      "state": "WI",
+      "lat": 43.0123487,
+      "lng": -89.2897646,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/599d260e-37a3-4593-a43c-8dabf8d1db97"
     },
     {
       "name": "Weekly Sorcery Play",
@@ -8931,24 +8967,6 @@
       "url": "https://play.sorcerytcg.com/events/d06ad163-a608-49b2-a946-6574a36c7f3e"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Sep 4, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Sep 4, 2026",
       "time": "1:00 AM UTC",
@@ -8965,6 +8983,24 @@
       "description": "",
       "storeName": "Game Kastle (Sacramento)",
       "url": "https://play.sorcerytcg.com/events/8e0c4121-d394-4722-92f3-f519bf76dbbd"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Sep 4, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d666481e-a438-45ef-841c-33706986ee22"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28945,42 +28981,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/4e6f6e3d-28fe-496c-a3e6-bfc4bd00f00d"
-    },
-    {
-      "name": "TNS Thursday night sorcery",
-      "date": "Thu. Oct 15, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "The Board Room Bridgnorth",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Bridgnorth, England",
-      "city": "Bridgnorth",
-      "state": "England",
-      "lat": 52.5345626,
-      "lng": -2.4194132,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/62f92213-b1fc-4a94-8721-83c71bd8943c"
-    },
-    {
-      "name": "Thistle Tavern Edinburgh 09/07",
-      "date": "Thu. Oct 15, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "Thistle Tavern",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Edinburgh, Scotland",
-      "city": "Edinburgh",
-      "state": "Scotland",
-      "lat": 55.9533456,
-      "lng": -3.1883749,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/de5247e8-9a79-4636-8ae6-5cd804640439"
     }
   ]
 }
