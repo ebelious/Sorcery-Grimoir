@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T16:28:53.151Z",
+  "updated": "2026-08-24T17:25:36.845Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -145,24 +145,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/a97f0ddf-87e2-4b46-8e21-2bb778c5ed88"
-    },
-    {
-      "name": "Constructed w Merfolku",
-      "date": "Mon. Aug 24, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "",
-      "description": "",
-      "storeName": "Merfolk",
-      "url": "https://play.sorcerytcg.com/events/564dc036-7db8-417f-b9b3-8a4694d2ebf6"
     },
     {
       "name": "WEEKLY MEETUP",
@@ -343,6 +325,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/42b9fd47-3e04-4457-b7be-2b3c254d553b"
+    },
+    {
+      "name": "Mega Geek Semanal",
+      "date": "Aug 24, 2026 - Aug 25, 2026",
+      "time": "11:05 PM UTC",
+      "endTime": "",
+      "type": "MegaGeek",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "São Paulo, SP",
+      "city": "São Paulo",
+      "state": "SP",
+      "lat": -23.5506507,
+      "lng": -46.6333824,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/27c39065-71f6-4d09-ae0b-056eb771bb70"
     },
     {
       "name": "Casual Meetup",
@@ -16365,24 +16365,6 @@
       "url": "https://play.sorcerytcg.com/events/1cb95d2d-353b-4500-a396-42b2f93450b2"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 18, 2026",
       "time": "1:00 AM UTC",
@@ -16399,6 +16381,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/1a62a13d-1cb2-4a89-8296-cdda5a0e2faa"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/43afb111-e389-4e3c-bda0-f49a210cdc1a"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28909,24 +28909,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
-    },
-    {
-      "name": "Casual Meet Up!",
-      "date": "Fri. Oct 16, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Roll & Play",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Conway, AR",
-      "city": "Conway",
-      "state": "AR",
-      "lat": 35.0891932,
-      "lng": -92.4398402,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1f8ceb3f-0ca6-4bc8-a23c-1818ffc179fe"
     }
   ]
 }
