@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T04:38:59.854Z",
+  "updated": "2026-08-24T05:33:28.436Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -703,6 +703,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/18b94ad1-2997-4521-9998-1bee49781611"
+    },
+    {
+      "name": "Monday Night Sorcery @ Good Games Belconnen",
+      "date": "Mon. Aug 24, 2026",
+      "time": "8:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Belconnen, ACT",
+      "city": "Belconnen",
+      "state": "ACT",
+      "lat": -35.2274338,
+      "lng": 149.0431454,
+      "address": "",
+      "description": "",
+      "storeName": "Good Games Belconnen",
+      "url": "https://play.sorcerytcg.com/events/1e7970d0-c9f5-497a-9b6c-93af43ed9c48"
     },
     {
       "name": "Mooonday Sooorcery",
@@ -18489,24 +18507,6 @@
       "url": "https://play.sorcerytcg.com/events/246bb912-33bc-427f-89cf-3b2d47e062cc"
     },
     {
-      "name": "Sorcery Tournament",
-      "date": "Sun. Sep 20, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Emerald Haven",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Longview, WA",
-      "city": "Longview",
-      "state": "WA",
-      "lat": 46.1377048,
-      "lng": -122.934462,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/af57372e-f060-4b2f-a131-f3978f47d725"
-    },
-    {
       "name": "Sorcery Semanal Utopia",
       "date": "Sun. Sep 20, 2026",
       "time": "7:00 PM UTC",
@@ -18523,6 +18523,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/bb28a6e2-8159-483b-8cf6-cc2f1d5d7b37"
+    },
+    {
+      "name": "Sorcery Tournament",
+      "date": "Sun. Sep 20, 2026",
+      "time": "7:00 PM UTC",
+      "endTime": "",
+      "type": "Emerald Haven",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Longview, WA",
+      "city": "Longview",
+      "state": "WA",
+      "lat": 46.1377048,
+      "lng": -122.934462,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/af57372e-f060-4b2f-a131-f3978f47d725"
     },
     {
       "name": "(9/20) Horrible Hybrid Showdown 12PM",
@@ -28153,24 +28171,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/3170bf51-36ab-45e4-85fe-dbcc0cd3609b"
-    },
-    {
-      "name": "Sorcery Weekly Constructed",
-      "date": "Tue. Oct 13, 2026",
-      "time": "7:30 AM UTC",
-      "endTime": "",
-      "type": "Good Games Town Hall",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Sydney, NSW",
-      "city": "Sydney",
-      "state": "NSW",
-      "lat": -33.8698439,
-      "lng": 151.2082848,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/69ea9ccb-0516-4782-b6e1-d2dbce9da370"
     }
   ]
 }
