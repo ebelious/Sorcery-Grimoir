@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-23T23:15:10.642Z",
+  "updated": "2026-08-24T00:50:32.144Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -345,24 +345,6 @@
       "url": "https://play.sorcerytcg.com/events/cafc8c9c-e1d8-4cf1-a048-43b87613cb5b"
     },
     {
-      "name": "FREE",
-      "date": "Sun. Aug 23, 2026",
-      "time": "6:45 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "",
-      "city": "",
-      "state": "",
-      "lat": null,
-      "lng": null,
-      "address": "",
-      "description": "",
-      "storeName": "Reliquary Gaming",
-      "url": "https://play.sorcerytcg.com/events/4d6cf5a8-a334-4a92-bcba-043bd6b9d335"
-    },
-    {
       "name": "Weekly Play",
       "date": "Sun. Aug 23, 2026",
       "time": "6:52 PM UTC",
@@ -685,24 +667,6 @@
       "description": "",
       "storeName": "Reliquary Gaming",
       "url": "https://play.sorcerytcg.com/events/6f258272-c216-4de1-bfed-a1381a42656e"
-    },
-    {
-      "name": "Foco Draft",
-      "date": "Mon. Aug 24, 2026",
-      "time": "12:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Fort Collins, CO",
-      "city": "Fort Collins",
-      "state": "CO",
-      "lat": 40.5871782,
-      "lng": -105.0770113,
-      "address": "",
-      "description": "",
-      "storeName": "Games Ahoy",
-      "url": "https://play.sorcerytcg.com/events/eca2f50f-f7d7-4f95-b829-5626217e4bf1"
     },
     {
       "name": "Casual Play at Richmond Republic Draught House",
