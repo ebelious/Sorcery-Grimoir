@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T13:45:22.824Z",
+  "updated": "2026-08-24T14:35:54.538Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -2041,8 +2041,8 @@
       "date": "Aug 27, 2026 - Jan 7, 2027",
       "time": "12:00 AM UTC",
       "endTime": "",
-      "type": "The Arcanum Sanctorum",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Tucson, AZ",
       "city": "Tucson",
@@ -2051,7 +2051,7 @@
       "lng": -110.974847,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "The Arcanum Sanctorum",
       "url": "https://play.sorcerytcg.com/events/7d254485-f697-4ba3-8942-c06ebe88da65"
     },
     {
@@ -27111,6 +27111,24 @@
       "url": "https://play.sorcerytcg.com/events/ceb079f1-b6ee-42d3-9c74-bd0ad04ea542"
     },
     {
+      "name": "Gothic Store Kit Championship #1 @ Guardian Cards and Comics",
+      "date": "Sun. Oct 11, 2026",
+      "time": "3:15 PM UTC",
+      "endTime": "",
+      "type": "Guardian Cards and Comics",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "St Albans City, VT",
+      "city": "St Albans City",
+      "state": "VT",
+      "lat": 44.8107911,
+      "lng": -73.0833607,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/23763a1f-744b-4aa9-b97a-ee3d5424e2ec"
+    },
+    {
       "name": "Sorcery Sundays at Cold Foil Heroes",
       "date": "Oct 11, 2026 - Oct 12, 2026",
       "time": "4:00 PM UTC",
@@ -28963,24 +28981,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f4e129db-40ba-4ae5-bae7-f7880b99109a"
-    },
-    {
-      "name": "Weekly du Soir",
-      "date": "Fri. Oct 16, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "Carta'Ludik",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Lyon, Auvergne-Rhône-Alpes",
-      "city": "Lyon",
-      "state": "Auvergne-Rhône-Alpes",
-      "lat": 45.7578137,
-      "lng": 4.8320114,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/76dd7ae7-bb39-4012-b3d8-300685d2e197"
     }
   ]
 }
