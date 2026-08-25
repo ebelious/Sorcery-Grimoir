@@ -1610,5 +1610,9 @@
   "broadmead|england": {
     "lat": 51.4577074,
     "lng": -2.5891175
+  },
+  "singapore|singapore": {
+    "lat": 1.2899175,
+    "lng": 103.8519072
   }
 }
