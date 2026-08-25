@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T04:32:57.657Z",
+  "updated": "2026-08-25T05:26:32.775Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -10209,24 +10209,6 @@
       "url": "https://play.sorcerytcg.com/events/a5ba51a4-d72d-4e24-ba90-43a9627cc045"
     },
     {
-      "name": "Sunday Sorcery!",
-      "date": "Sun. Sep 6, 2026",
-      "time": "7:00 PM UTC",
-      "endTime": "",
-      "type": "Learn To Play",
-      "price": "FREE",
-      "duration": "",
-      "location": "Silverdale, WA",
-      "city": "Silverdale",
-      "state": "WA",
-      "lat": 47.6594091,
-      "lng": -122.6766317,
-      "address": "",
-      "description": "",
-      "storeName": "CardtropolisTCG",
-      "url": "https://play.sorcerytcg.com/events/18b2f353-99db-42e6-9e0d-66ccd163f41d"
-    },
-    {
       "name": "Sunday Constructed Sorcery",
       "date": "Sun. Sep 6, 2026",
       "time": "7:00 PM UTC",
@@ -10315,6 +10297,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c20a1754-d605-4c50-8218-c8520a111988"
+    },
+    {
+      "name": "Sunday Sorcery!",
+      "date": "Sun. Sep 6, 2026",
+      "time": "8:00 PM UTC",
+      "endTime": "",
+      "type": "Learn To Play",
+      "price": "FREE",
+      "duration": "",
+      "location": "Silverdale, WA",
+      "city": "Silverdale",
+      "state": "WA",
+      "lat": 47.6594091,
+      "lng": -122.6766317,
+      "address": "",
+      "description": "",
+      "storeName": "CardtropolisTCG",
+      "url": "https://play.sorcerytcg.com/events/18b2f353-99db-42e6-9e0d-66ccd163f41d"
     },
     {
       "name": "Dane's Games Weekly Play",
