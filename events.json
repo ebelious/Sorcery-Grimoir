@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T05:26:32.775Z",
+  "updated": "2026-08-25T06:34:09.533Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -439,8 +439,8 @@
       "date": "Tue. Aug 25, 2026",
       "time": "6:00 AM UTC",
       "endTime": "",
-      "type": "Card Merchant Blenheim",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Blenheim Central, Marlborough Region",
       "city": "Blenheim Central",
@@ -449,7 +449,7 @@
       "lng": null,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Card Merchant Blenheim",
       "url": "https://play.sorcerytcg.com/events/2ae22050-ad07-43bb-8db6-f925ba4f0bae"
     },
     {
