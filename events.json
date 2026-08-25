@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T11:21:30.238Z",
+  "updated": "2026-08-25T12:33:42.981Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -199,6 +199,24 @@
       "description": "",
       "storeName": "Sandbox",
       "url": "https://play.sorcerytcg.com/events/1b02a4fb-d84d-4cbc-b96c-50935e197c66"
+    },
+    {
+      "name": "Sorcery at Excelsior! (Constructed)",
+      "date": "Tue. Aug 25, 2026",
+      "time": "5:30 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Broadmead, England",
+      "city": "Broadmead",
+      "state": "England",
+      "lat": 51.4577074,
+      "lng": -2.5891175,
+      "address": "",
+      "description": "",
+      "storeName": "Excelsior! Games",
+      "url": "https://play.sorcerytcg.com/events/0c5a8628-f8de-4d7a-ba2e-97103f6a3833"
     },
     {
       "name": "Tuesday night spell slinging",
@@ -2487,24 +2505,6 @@
       "url": "https://play.sorcerytcg.com/events/a4b2eb79-6c84-4491-b793-9280c30a35e6"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/b4c1c447-4beb-47a0-8348-bbe6956ddfc5"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Aug 28, 2026",
       "time": "1:30 AM UTC",
@@ -2521,6 +2521,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/03fa2c6e-9780-4452-be12-5e24951f4473"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Aug 28, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/b4c1c447-4beb-47a0-8348-bbe6956ddfc5"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -5511,24 +5529,6 @@
       "url": "https://play.sorcerytcg.com/events/547f9557-fb65-4f9e-9c03-79505ec5f2cd"
     },
     {
-      "name": "Draft Night (Set TBD) w / Prizing @ B&B",
-      "date": "Mon. Aug 31, 2026",
-      "time": "10:45 AM UTC",
-      "endTime": "",
-      "type": "Battle & Board",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Raleigh, NC",
-      "city": "Raleigh",
-      "state": "NC",
-      "lat": 35.7803977,
-      "lng": -78.6390989,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a4a382cb-adda-4943-a395-7f14d3fc6c44"
-    },
-    {
       "name": "Casual Tournament @ TCG ARENA",
       "date": "Mon. Aug 31, 2026",
       "time": "4:00 PM UTC",
@@ -5707,6 +5707,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d5fce55b-e263-40b5-9307-c30cf5e793e2"
+    },
+    {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Aug 31, 2026 - Sep 1, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/bc188248-e691-4193-a6d6-5a46f146d904"
     },
     {
       "name": "Sorcery at Oinkers",
@@ -10245,6 +10263,24 @@
       "url": "https://play.sorcerytcg.com/events/a05a016d-ab32-4c83-b7e6-f458d2cb278a"
     },
     {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Sep 7, 2026 - Sep 8, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/6423e9eb-cf62-459d-80ed-e18e1f3fe4ef"
+    },
+    {
       "name": "Sorcery at Oinkers",
       "date": "Mon. Sep 7, 2026",
       "time": "11:00 PM UTC",
@@ -12117,24 +12153,6 @@
       "url": "https://play.sorcerytcg.com/events/3267e45b-d234-482c-a71f-86f3aadb5c71"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/9f4071cf-ddd6-40ea-93bb-4527550f1214"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 11, 2026",
       "time": "1:30 AM UTC",
@@ -12151,6 +12169,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/ba1414c9-a6cf-4f88-97ee-8e2271be18f6"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/9f4071cf-ddd6-40ea-93bb-4527550f1214"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -14455,6 +14491,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/801aa0ef-8da4-491e-aaa2-d5b8f24bc750"
+    },
+    {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Mon. Sep 14, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/cc0e2d96-7392-44b4-ae22-eb92d875bab9"
     },
     {
       "name": "Sorcery at Oinkers",
@@ -18273,6 +18327,24 @@
       "url": "https://play.sorcerytcg.com/events/65d4687a-62a3-4234-ae71-35fb440a441e"
     },
     {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Sep 21, 2026 - Sep 22, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a31c2758-31b5-471b-956b-919797742d34"
+    },
+    {
       "name": "Sorcery at Oinkers",
       "date": "Mon. Sep 21, 2026",
       "time": "11:00 PM UTC",
@@ -21387,24 +21459,6 @@
       "url": "https://play.sorcerytcg.com/events/bbe4fb36-6286-4cd8-a52a-610c76f948f6"
     },
     {
-      "name": "Beta Draft",
-      "date": "Sep 27, 2026 - Sep 28, 2026",
-      "time": "9:30 PM UTC",
-      "endTime": "",
-      "type": "Bay Games",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Whitley Bay, England",
-      "city": "Whitley Bay",
-      "state": "England",
-      "lat": 55.0422091,
-      "lng": -1.4454353,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/a1f83446-e99b-4bb4-b362-cfcaa5054569"
-    },
-    {
       "name": "Sunday Meet Up",
       "date": "Sun. Sep 27, 2026",
       "time": "9:30 PM UTC",
@@ -21421,6 +21475,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/08b887db-db60-4067-a2a4-d3169adf5c29"
+    },
+    {
+      "name": "Beta Draft",
+      "date": "Sep 27, 2026 - Sep 28, 2026",
+      "time": "9:30 PM UTC",
+      "endTime": "",
+      "type": "Bay Games",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Whitley Bay, England",
+      "city": "Whitley Bay",
+      "state": "England",
+      "lat": 55.0422091,
+      "lng": -1.4454353,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/a1f83446-e99b-4bb4-b362-cfcaa5054569"
     },
     {
       "name": "Casual Play at Richmond Republic Draught House",
@@ -21637,6 +21709,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/d8fdd152-59ed-46d7-b62b-89dcbc0f4260"
+    },
+    {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Mon. Sep 28, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/9f3499a5-6c5c-4e47-ae8b-9ba1b32b398a"
     },
     {
       "name": "Monday Sorcery",
@@ -24627,6 +24717,24 @@
       "url": "https://play.sorcerytcg.com/events/a493d258-0e83-4a5b-a200-832aac27f80d"
     },
     {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Oct 5, 2026 - Oct 6, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/98a31555-5719-4176-a6fb-090feaa453ec"
+    },
+    {
       "name": "Monday Sorcery",
       "date": "Mon. Oct 5, 2026",
       "time": "11:00 PM UTC",
@@ -27525,6 +27633,24 @@
       "url": "https://play.sorcerytcg.com/events/25865344-2338-48c0-b3a4-c384d5d5e3e7"
     },
     {
+      "name": "Sorcery Night @ Battle & Board",
+      "date": "Mon. Oct 12, 2026",
+      "time": "10:45 PM UTC",
+      "endTime": "",
+      "type": "Battle & Board",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Raleigh, NC",
+      "city": "Raleigh",
+      "state": "NC",
+      "lat": 35.7803977,
+      "lng": -78.6390989,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/7fcfc306-9144-4696-8fb5-cad95666a1f8"
+    },
+    {
       "name": "Monday Sorcery",
       "date": "Mon. Oct 12, 2026",
       "time": "11:00 PM UTC",
@@ -28623,24 +28749,6 @@
       "url": "https://play.sorcerytcg.com/events/de2bbea6-b1b6-4cc6-a7b5-ceb50db584ae"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Oct 16, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0cc65de-66c3-4be8-941d-4c9be74ff1da"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Oct 16, 2026",
       "time": "1:00 AM UTC",
@@ -28657,6 +28765,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/05ec1d14-67cb-418f-9124-fcf1904c06c9"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Oct 16, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c0cc65de-66c3-4be8-941d-4c9be74ff1da"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28800,7 +28926,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1f8ceb3f-0ca6-4bc8-a23c-1818ffc179fe"
+      "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
     },
     {
       "name": "Casual Meet Up!",
@@ -28818,7 +28944,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
+      "url": "https://play.sorcerytcg.com/events/1f8ceb3f-0ca6-4bc8-a23c-1818ffc179fe"
     },
     {
       "name": "Sorcery Reserva",
@@ -28873,132 +28999,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/76dd7ae7-bb39-4012-b3d8-300685d2e197"
-    },
-    {
-      "name": "Monthly Casual Friday",
-      "date": "Fri. Oct 16, 2026",
-      "time": "5:30 PM UTC",
-      "endTime": "",
-      "type": "The Happy Halfling",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Eindhoven, NB",
-      "city": "Eindhoven",
-      "state": "NB",
-      "lat": 51.4392648,
-      "lng": 5.478633,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0bd07fdc-4da1-4abc-a8a3-add9c5d92b14"
-    },
-    {
-      "name": "Friday Constructed",
-      "date": "Fri. Oct 16, 2026",
-      "time": "10:00 PM UTC",
-      "endTime": "",
-      "type": "Gone Lucid Games",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Clinton, IN",
-      "city": "Clinton",
-      "state": "IN",
-      "lat": 40.2992769,
-      "lng": -86.4692735,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/6c264183-62d7-49ee-b654-112ebc516376"
-    },
-    {
-      "name": "Linage Locals",
-      "date": "Fri. Oct 16, 2026",
-      "time": "10:56 PM UTC",
-      "endTime": "",
-      "type": "Linage Cards",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Oviedo, FL",
-      "city": "Oviedo",
-      "state": "FL",
-      "lat": 28.6702526,
-      "lng": -81.2084941,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/164a6459-2087-405f-97a6-66ff39357592"
-    },
-    {
-      "name": "Friday Evening Sorcery",
-      "date": "Oct 16, 2026 - Oct 17, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Hasty Goblin Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Bloomfield, NJ",
-      "city": "Bloomfield",
-      "state": "NJ",
-      "lat": 40.7934789,
-      "lng": -74.1979277,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3ce84b0f-0720-4f6c-9023-a0a84dc69442"
-    },
-    {
-      "name": "Weekly Casual Play",
-      "date": "Fri. Oct 16, 2026",
-      "time": "11:30 PM UTC",
-      "endTime": "",
-      "type": "Madtown Hobby",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Cross Plains, WI",
-      "city": "Cross Plains",
-      "state": "WI",
-      "lat": 43.1116968,
-      "lng": -89.6452197,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/5df75d40-7a53-4a5c-aaf7-10c3711d308b"
-    },
-    {
-      "name": "ON THE DRAW WEEKLY LOCALS",
-      "date": "Fri. Oct 16, 2026",
-      "time": "11:45 PM UTC",
-      "endTime": "",
-      "type": "On The Draw",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Pottstown, PA",
-      "city": "Pottstown",
-      "state": "PA",
-      "lat": 40.2452976,
-      "lng": -75.6496424,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/e014d00e-4ef2-4697-8489-ab1e1abbcf2e"
-    },
-    {
-      "name": "PGS Casual Fridays Sorcery Open Play",
-      "date": "Sat. Oct 17, 2026",
-      "time": "12:45 AM UTC",
-      "endTime": "",
-      "type": "The Portland Game Store",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3dd40e12-1a10-4ff4-adca-8812fef5483b"
     }
   ]
 }
