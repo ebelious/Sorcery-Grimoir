@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T16:28:54.792Z",
+  "updated": "2026-08-25T17:26:13.233Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -109,24 +109,6 @@
       "description": "",
       "storeName": "Time4Magic",
       "url": "https://play.sorcerytcg.com/events/68b39dd0-9d6e-4e9e-8306-3b3fa81b70fc"
-    },
-    {
-      "name": "Lyktan draft",
-      "date": "Tue. Aug 25, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Draft Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Barkarby, Stockholms län",
-      "city": "Barkarby",
-      "state": "Stockholms län",
-      "lat": 59.4051955,
-      "lng": 17.8643513,
-      "address": "",
-      "description": "",
-      "storeName": "Butik Lyktan",
-      "url": "https://play.sorcerytcg.com/events/8ad61b31-0f99-4d29-ade0-617f669ebba3"
     },
     {
       "name": "Casual",
@@ -493,8 +475,8 @@
       "date": "Tue. Aug 25, 2026",
       "time": "11:10 PM UTC",
       "endTime": "",
-      "type": "Dream Up TCG",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Vila Mariana, SP",
       "city": "Vila Mariana",
@@ -503,7 +485,7 @@
       "lng": -46.6327408,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Dream Up TCG",
       "url": "https://play.sorcerytcg.com/events/92f12f5e-ec35-49ac-979f-327a452bc039"
     },
     {
@@ -1821,6 +1803,24 @@
       "url": "https://play.sorcerytcg.com/events/919a48e7-4abd-4173-853a-33aca2562663"
     },
     {
+      "name": "MEETUP",
+      "date": "Thu. Aug 27, 2026",
+      "time": "3:30 PM UTC",
+      "endTime": "",
+      "type": "Černý rytíř",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Praha 8, Hlavní město Praha",
+      "city": "Praha 8",
+      "state": "Hlavní město Praha",
+      "lat": 50.1191317,
+      "lng": 14.4551595,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/ce4cdcbe-cef1-4f30-a62f-86eb6256b63f"
+    },
+    {
       "name": "Sorcery time",
       "date": "Thu. Aug 27, 2026",
       "time": "3:45 PM UTC",
@@ -2473,8 +2473,8 @@
       "date": "Fri. Aug 28, 2026",
       "time": "1:00 AM UTC",
       "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Portland, OR",
       "city": "Portland",
@@ -2483,7 +2483,7 @@
       "lng": -122.674194,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Mox Boarding House Portland",
       "url": "https://play.sorcerytcg.com/events/d920d9e0-aef7-4d5b-8598-6ac35d74c2af"
     },
     {
@@ -4777,8 +4777,8 @@
       "date": "Sun. Aug 30, 2026",
       "time": "3:30 PM UTC",
       "endTime": "",
-      "type": "Guardian Cards and Comics",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "St Albans City, VT",
       "city": "St Albans City",
@@ -4787,7 +4787,7 @@
       "lng": -73.0833607,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Guardian Cards and Comics",
       "url": "https://play.sorcerytcg.com/events/ee8fdfbf-85e1-4932-ab45-9834dc370ece"
     },
     {
@@ -12117,24 +12117,6 @@
       "url": "https://play.sorcerytcg.com/events/2191714b-282a-43cb-bcee-729d7e3df994"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Sep 11, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Sep 11, 2026",
       "time": "1:00 AM UTC",
@@ -12151,6 +12133,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f6df913b-4da8-4ca1-98cf-d7ed71476102"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/ebfff7af-ba15-4e4e-b395-03d5560361a9"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -12535,8 +12535,8 @@
       "date": "Sep 11, 2026 - Sep 12, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Guardian Cards and Comics",
-      "price": "Sealed Tournament",
+      "type": "Sealed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "St Albans City, VT",
       "city": "St Albans City",
@@ -12545,7 +12545,7 @@
       "lng": -73.0833607,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Guardian Cards and Comics",
       "url": "https://play.sorcerytcg.com/events/c3f498d9-17d0-4574-b3e7-e09621d33153"
     },
     {
@@ -16077,24 +16077,6 @@
       "url": "https://play.sorcerytcg.com/events/50644655-8504-4b9b-b71d-87f33ac66306"
     },
     {
-      "name": "Thursday Evening Sorcery @ Storefront Games",
-      "date": "Sep 17, 2026 - Sep 18, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Storefront Games",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Philadelphia, PA",
-      "city": "Philadelphia",
-      "state": "PA",
-      "lat": 39.9527237,
-      "lng": -75.1635262,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c03b321b-b6c4-4b35-9270-483a2eb24f03"
-    },
-    {
       "name": "Constructed Tournament & Open Play",
       "date": "Sep 17, 2026 - Sep 18, 2026",
       "time": "11:00 PM UTC",
@@ -16111,6 +16093,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e2d32a92-6fc7-4fe2-9542-cbda039969eb"
+    },
+    {
+      "name": "Thursday Evening Sorcery @ Storefront Games",
+      "date": "Sep 17, 2026 - Sep 18, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "Storefront Games",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Philadelphia, PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "lat": 39.9527237,
+      "lng": -75.1635262,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c03b321b-b6c4-4b35-9270-483a2eb24f03"
     },
     {
       "name": "Casual Hangout Smash Play",
@@ -20019,24 +20019,6 @@
       "url": "https://play.sorcerytcg.com/events/18348c54-b2fd-4ab9-a21d-3408ca2e2abe"
     },
     {
-      "name": "The Hungry Dragon: Sorcery Weekly Play",
-      "date": "Fri. Sep 25, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "The Hungry Dragon",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Murrieta, CA",
-      "city": "Murrieta",
-      "state": "CA",
-      "lat": 33.560832,
-      "lng": -117.210656,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
-    },
-    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Sep 25, 2026",
       "time": "1:30 AM UTC",
@@ -20053,6 +20035,24 @@
       "description": "",
       "storeName": "Zulu's Board Game Cafe",
       "url": "https://play.sorcerytcg.com/events/2de3a217-2604-43b2-aa84-3ac35567f85a"
+    },
+    {
+      "name": "The Hungry Dragon: Sorcery Weekly Play",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "The Hungry Dragon",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murrieta, CA",
+      "city": "Murrieta",
+      "state": "CA",
+      "lat": 33.560832,
+      "lng": -117.210656,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c944800c-7507-42a1-bd9f-f570544f9078"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -21085,8 +21085,8 @@
       "date": "Sun. Sep 27, 2026",
       "time": "3:30 PM UTC",
       "endTime": "",
-      "type": "Guardian Cards and Comics",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "St Albans City, VT",
       "city": "St Albans City",
@@ -21095,7 +21095,7 @@
       "lng": -73.0833607,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Guardian Cards and Comics",
       "url": "https://play.sorcerytcg.com/events/bce5290e-6d29-4b29-a827-207af1069c39"
     },
     {
@@ -27133,8 +27133,8 @@
       "date": "Sun. Oct 11, 2026",
       "time": "3:15 PM UTC",
       "endTime": "",
-      "type": "Guardian Cards and Comics",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "St Albans City, VT",
       "city": "St Albans City",
@@ -27143,7 +27143,7 @@
       "lng": -73.0833607,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Guardian Cards and Comics",
       "url": "https://play.sorcerytcg.com/events/23763a1f-744b-4aa9-b97a-ee3d5424e2ec"
     },
     {
@@ -28945,24 +28945,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/0d6a6275-38d4-49ac-a3bf-34883ab0e9f2"
-    },
-    {
-      "name": "Casual Meet Up!",
-      "date": "Fri. Oct 16, 2026",
-      "time": "3:00 PM UTC",
-      "endTime": "",
-      "type": "Roll & Play",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Conway, AR",
-      "city": "Conway",
-      "state": "AR",
-      "lat": 35.0891932,
-      "lng": -92.4398402,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
     },
     {
       "name": "Casual Meet Up!",
