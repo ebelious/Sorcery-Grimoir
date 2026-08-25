@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T20:21:54.236Z",
+  "updated": "2026-08-25T21:21:38.051Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -205,8 +205,8 @@
       "date": "Tue. Aug 25, 2026",
       "time": "8:51 PM UTC",
       "endTime": "",
-      "type": "Cold Foil Heroes",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "Woodstock, GA",
       "city": "Woodstock",
@@ -215,7 +215,7 @@
       "lng": -84.5192192,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Cold Foil Heroes",
       "url": "https://play.sorcerytcg.com/events/65e2fef9-cd16-44a0-932b-c6b567f45c29"
     },
     {
@@ -961,8 +961,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "LotusVale",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Bochum, NRW",
       "city": "Bochum",
@@ -971,7 +971,7 @@
       "lng": 7.2196635,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "LotusVale",
       "url": "https://play.sorcerytcg.com/events/28e59c47-ea7b-427f-9b7b-b3f8ec2f43c8"
     },
     {
@@ -2021,7 +2021,7 @@
     {
       "name": "Birthday Bash at the Forge",
       "date": "Aug 27, 2026 - Aug 28, 2026",
-      "time": "8:00 PM UTC",
+      "time": "10:00 PM UTC",
       "endTime": "",
       "type": "Casual Meetup",
       "price": "FREE",
@@ -2293,8 +2293,8 @@
       "date": "Thu. Aug 27, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Gamers Getaway KC",
-      "price": "Draft Tournament",
+      "type": "Draft Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Independence, MO",
       "city": "Independence",
@@ -2303,7 +2303,7 @@
       "lng": -94.4137923,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers Getaway KC",
       "url": "https://play.sorcerytcg.com/events/d247145f-f8c3-4016-8eab-91e1722ac166"
     },
     {
@@ -6091,8 +6091,8 @@
       "date": "Tue. Sep 1, 2026",
       "time": "4:00 PM UTC",
       "endTime": "",
-      "type": "White Rabbit - Community Game Store (Essen)",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Essen, NRW",
       "city": "Essen",
@@ -6101,7 +6101,7 @@
       "lng": 7.0158171,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "White Rabbit - Community Game Store (Essen)",
       "url": "https://play.sorcerytcg.com/events/44275232-65d8-4668-bc5f-41be02090888"
     },
     {
@@ -17481,6 +17481,24 @@
       "url": "https://play.sorcerytcg.com/events/223d9ef3-c8fa-4afb-b1ae-518d464346ce"
     },
     {
+      "name": "Constructed Tournament",
+      "date": "Sun. Sep 20, 2026",
+      "time": "12:00 AM UTC",
+      "endTime": "",
+      "type": "Riftgate Games",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Murray, UT",
+      "city": "Murray",
+      "state": "UT",
+      "lat": 40.6667841,
+      "lng": -111.888417,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/3c6b0bdf-d484-44ed-96b8-d67f3968eeff"
+    },
+    {
       "name": "Sorcery @ COLLECT.GG",
       "date": "Sun. Sep 20, 2026",
       "time": "1:00 AM UTC",
@@ -23205,24 +23223,6 @@
       "url": "https://play.sorcerytcg.com/events/7d09fa72-fe8f-4c21-9830-0dbccc941fb5"
     },
     {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Oct 2, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
-    },
-    {
       "name": "Sorcery Open Play @ Mox Portland",
       "date": "Fri. Oct 2, 2026",
       "time": "1:00 AM UTC",
@@ -23239,6 +23239,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/e37739b3-9c33-4398-94f8-debff0ec128a"
+    },
+    {
+      "name": "Sorcery Free Play",
+      "date": "Fri. Oct 2, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sacramento, CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "lat": 38.5810606,
+      "lng": -121.493895,
+      "address": "",
+      "description": "",
+      "storeName": "Game Kastle (Sacramento)",
+      "url": "https://play.sorcerytcg.com/events/04a037fa-0181-4e72-b0e9-cb1e4c86eb13"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28945,24 +28963,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/cb4666db-d608-4e05-a2cf-b0695be30cca"
-    },
-    {
-      "name": "Casual / Constructed / Sealed @ BlacklistCards",
-      "date": "Fri. Oct 16, 2026",
-      "time": "7:00 AM UTC",
-      "endTime": "",
-      "type": "Aussie Brickster Collectables",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Thomastown, VIC",
-      "city": "Thomastown",
-      "state": "VIC",
-      "lat": -37.6832672,
-      "lng": 145.0081104,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/0545ecaa-2ffd-448f-a9db-351ee8c1dfcf"
     }
   ]
 }
