@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T17:26:13.233Z",
+  "updated": "2026-08-25T18:29:12.835Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -259,8 +259,8 @@
       "date": "Aug 25, 2026 - Aug 26, 2026",
       "time": "10:00 PM UTC",
       "endTime": "",
-      "type": "Bolsa do Infinito",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "R$30.00",
       "duration": "",
       "location": "Tijuca, RJ",
       "city": "Tijuca",
@@ -269,7 +269,7 @@
       "lng": -43.2327165,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Bolsa do Infinito",
       "url": "https://play.sorcerytcg.com/events/96456afa-b929-4daa-9557-0b775324c262"
     },
     {
@@ -9799,8 +9799,8 @@
       "date": "Sun. Sep 6, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "Gamers' Haunt",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Asheville, NC",
       "city": "Asheville",
@@ -9809,7 +9809,7 @@
       "lng": -82.5508407,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers' Haunt",
       "url": "https://play.sorcerytcg.com/events/f04f7c06-643c-4393-b024-f383d9f3598c"
     },
     {
@@ -14047,8 +14047,8 @@
       "date": "Sun. Sep 13, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "Gamers' Haunt",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Asheville, NC",
       "city": "Asheville",
@@ -14057,7 +14057,7 @@
       "lng": -82.5508407,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers' Haunt",
       "url": "https://play.sorcerytcg.com/events/04bf9fe3-5736-4ccd-bccc-ea38371b7768"
     },
     {
@@ -17899,8 +17899,8 @@
       "date": "Sun. Sep 20, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "Gamers' Haunt",
-      "price": "Casual Meetup",
+      "type": "Casual Meetup",
+      "price": "FREE",
       "duration": "",
       "location": "Asheville, NC",
       "city": "Asheville",
@@ -17909,7 +17909,7 @@
       "lng": -82.5508407,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Gamers' Haunt",
       "url": "https://play.sorcerytcg.com/events/5e82242e-8d08-4565-8cee-cbfe4227fcc6"
     },
     {
