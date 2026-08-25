@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T12:33:42.981Z",
+  "updated": "2026-08-25T13:44:00.887Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -763,8 +763,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "8:26 AM UTC",
       "endTime": "",
-      "type": "Good Games Hobart",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Hobart, TAS",
       "city": "Hobart",
@@ -773,7 +773,7 @@
       "lng": 147.3281233,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Good Games Hobart",
       "url": "https://play.sorcerytcg.com/events/fe37a4ad-c505-4f4e-bd9b-bb86ca29442d"
     },
     {
