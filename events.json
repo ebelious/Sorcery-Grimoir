@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T03:48:21.142Z",
+  "updated": "2026-08-26T04:34:09.331Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -559,24 +559,6 @@
       "description": "",
       "storeName": "COLLECT.GG",
       "url": "https://play.sorcerytcg.com/events/8b7f3765-e88f-432c-b51b-6ddcfbc4f9e0"
-    },
-    {
-      "name": "Tuesday Night Sorcery",
-      "date": "Wed. Aug 26, 2026",
-      "time": "2:15 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Golden, CO",
-      "city": "Golden",
-      "state": "CO",
-      "lat": 39.7546349,
-      "lng": -105.22058,
-      "address": "",
-      "description": "",
-      "storeName": "Atomic Games West",
-      "url": "https://play.sorcerytcg.com/events/bd0c7009-7b7e-44de-879c-e459ca8c7f28"
     },
     {
       "name": "CMD Casual Constructed",
@@ -1375,8 +1357,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "Game Grid Clearfield",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Clearfield, UT",
       "city": "Clearfield",
@@ -1385,7 +1367,7 @@
       "lng": -112.0244841,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Game Grid Clearfield",
       "url": "https://play.sorcerytcg.com/events/eb672a6f-b756-421a-b7a8-7cbcc6547cd5"
     },
     {
