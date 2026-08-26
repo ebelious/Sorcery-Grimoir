@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T13:49:08.808Z",
+  "updated": "2026-08-26T14:38:25.326Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -181,24 +181,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f0064666-94f1-4fff-ac04-4ccf0499ce49"
-    },
-    {
-      "name": "Fantsu Tre Bi-Weekly",
-      "date": "Wed. Aug 26, 2026",
-      "time": "2:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Tampere, Pirkanmaa",
-      "city": "Tampere",
-      "state": "Pirkanmaa",
-      "lat": 61.4977988,
-      "lng": 23.7616335,
-      "address": "",
-      "description": "",
-      "storeName": "Fantasiapelit Tudeer",
-      "url": "https://play.sorcerytcg.com/events/09a8934d-0d0c-4862-8118-db6714217b60"
     },
     {
       "name": "Weekly",
@@ -727,8 +709,8 @@
       "date": "Wed. Aug 26, 2026",
       "time": "11:00 PM UTC",
       "endTime": "",
-      "type": "4GS Games",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Augusta, GA",
       "city": "Augusta",
@@ -737,7 +719,7 @@
       "lng": -81.9748429,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "4GS Games",
       "url": "https://play.sorcerytcg.com/events/cf48f9a9-a5a5-46f5-96c7-e610fd5951e2"
     },
     {
@@ -11019,24 +11001,6 @@
       "url": "https://play.sorcerytcg.com/events/1a344949-bab2-4935-9fdd-1cb88b0b9224"
     },
     {
-      "name": "Rencontre Sorcery",
-      "date": "Thu. Sep 10, 2026",
-      "time": "6:00 AM UTC",
-      "endTime": "",
-      "type": "Odysseo",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "CERNAY, Grand Est",
-      "city": "CERNAY",
-      "state": "Grand Est",
-      "lat": 47.8086824,
-      "lng": 7.1787669,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/76f57d4f-ca09-4a0f-94a5-d831238ab2af"
-    },
-    {
       "name": "Mighty Cool Games - Thursday Constructed",
       "date": "Thu. Sep 10, 2026",
       "time": "8:00 AM UTC",
@@ -12117,24 +12081,6 @@
       "url": "https://play.sorcerytcg.com/events/96cf65e7-769f-4df2-8480-031205f0576b"
     },
     {
-      "name": "Sorcery Constructed",
-      "date": "Sat. Sep 12, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "A Hidden Fortress",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Simi Valley, CA",
-      "city": "Simi Valley",
-      "state": "CA",
-      "lat": 34.2677404,
-      "lng": -118.7538071,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/cae635d2-053e-4af5-a7df-9ff32f487fa8"
-    },
-    {
       "name": "60/30/10 (aka Benchmark)",
       "date": "Sat. Sep 12, 2026",
       "time": "1:30 AM UTC",
@@ -12151,6 +12097,24 @@
       "description": "",
       "storeName": "Hammerhead Games",
       "url": "https://play.sorcerytcg.com/events/0f439fc5-31de-4abc-95ac-9e7cb31e64c5"
+    },
+    {
+      "name": "Sorcery Constructed",
+      "date": "Sat. Sep 12, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "A Hidden Fortress",
+      "price": "Constructed Tournament",
+      "duration": "",
+      "location": "Simi Valley, CA",
+      "city": "Simi Valley",
+      "state": "CA",
+      "lat": 34.2677404,
+      "lng": -118.7538071,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/cae635d2-053e-4af5-a7df-9ff32f487fa8"
     },
     {
       "name": "Sorcery Constructed",
@@ -15717,24 +15681,6 @@
       "url": "https://play.sorcerytcg.com/events/c5a66f0f-06fe-4a1c-a4d4-12adb12ce949"
     },
     {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Sep 18, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Sep 18, 2026",
       "time": "1:30 AM UTC",
@@ -15751,6 +15697,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/7a188c0f-079b-43a4-a6da-94c3f2b9f993"
+    },
+    {
+      "name": "Zulus Casual Constructed",
+      "date": "Fri. Sep 18, 2026",
+      "time": "1:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Bothell, WA",
+      "city": "Bothell",
+      "state": "WA",
+      "lat": 47.7623204,
+      "lng": -122.2054035,
+      "address": "",
+      "description": "",
+      "storeName": "Zulu's Board Game Cafe",
+      "url": "https://play.sorcerytcg.com/events/fd9fa0f3-30a4-4052-abe0-1464e34604ab"
     },
     {
       "name": "Friday Afternoon Sorcery @ Fluke and Box",
@@ -28227,24 +28191,6 @@
       "url": "https://play.sorcerytcg.com/events/de2bbea6-b1b6-4cc6-a7b5-ceb50db584ae"
     },
     {
-      "name": "Sorcery Open Play @ Mox Portland",
-      "date": "Fri. Oct 16, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Mox Boarding House Portland",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Portland, OR",
-      "city": "Portland",
-      "state": "OR",
-      "lat": 45.5202471,
-      "lng": -122.674194,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c0cc65de-66c3-4be8-941d-4c9be74ff1da"
-    },
-    {
       "name": "Sorcery Free Play",
       "date": "Fri. Oct 16, 2026",
       "time": "1:00 AM UTC",
@@ -28261,6 +28207,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/05ec1d14-67cb-418f-9124-fcf1904c06c9"
+    },
+    {
+      "name": "Sorcery Open Play @ Mox Portland",
+      "date": "Fri. Oct 16, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Portland",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Portland, OR",
+      "city": "Portland",
+      "state": "OR",
+      "lat": 45.5202471,
+      "lng": -122.674194,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c0cc65de-66c3-4be8-941d-4c9be74ff1da"
     },
     {
       "name": "Casual Play at Mission Bowling Club",
@@ -28945,6 +28909,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/6fc268df-9ce0-4c07-9aee-ea86e1ebf50f"
+    },
+    {
+      "name": "CG Sealed - Dragon Quest 20261017",
+      "date": "Oct 17, 2026 - Oct 18, 2026",
+      "time": "6:00 PM UTC",
+      "endTime": "",
+      "type": "Sealed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Monett, MO",
+      "city": "Monett",
+      "state": "MO",
+      "lat": 36.9215543,
+      "lng": -93.9231864,
+      "address": "",
+      "description": "",
+      "storeName": "Commander Games",
+      "url": "https://play.sorcerytcg.com/events/187f8740-5aca-406e-a923-bf44677cd8f1"
     }
   ]
 }
