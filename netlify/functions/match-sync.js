@@ -49,8 +49,20 @@ function genCode() {
    rather than a countdown -- so a device that took that moment at face value would be out
    by however far its own clock is out. Told what the server thinks the time is, each device
    can measure the difference once and read every moment through it. */
+function _redactRoom(room) {
+  if (!room || typeof room !== 'object') return room;
+  const r = Object.assign({}, room);
+  if (r.p1) { r.p1 = Object.assign({}, r.p1); delete r.p1.usercode; }
+  if (r.p2) { r.p2 = Object.assign({}, r.p2); delete r.p2.usercode; }
+  return r;
+}
+
 function resp(statusCode, obj) {
-  const body = (obj && typeof obj === 'object') ? Object.assign({ now: Date.now() }, obj) : obj;
+  // Never expose either player's usercode -- it is the per-device auth secret,
+  // and it is the SAME secret share-deck/trade-sync/tourney-sync authenticate
+  // with. `now` is still added below: the client reads it for clock sync.
+  const safe = (obj && obj.room) ? Object.assign({}, obj, { room: _redactRoom(obj.room) }) : obj;
+  const body = (safe && typeof safe === 'object') ? Object.assign({ now: Date.now() }, safe) : safe;
   return {
     statusCode,
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
@@ -83,6 +95,33 @@ exports.handler = async function (event) {
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       const action = body.action;
+      // Reject a malformed code outright. Empty/absent codes are deliberately
+      // left alone so the existing per-action handling is unchanged.
+      if (body.code != null && body.code !== '' &&
+          !/^[A-Z0-9]{4,12}$/.test(String(body.code).trim().toUpperCase())) {
+        return resp(400, { error: 'Invalid code' });
+      }
+      // SECURITY: authorize mutating actions by the caller's device usercode,
+      // not the client-declared role. Look up the caller's real slot and force
+      // `role` to it, so nobody who merely knows a match code can act as the
+      // other player, fake a result, drive the clock, or delete the room.
+      const _member = (rm, uc) => (!rm || !uc) ? null : (rm.p1 && rm.p1.usercode === uc ? 'p1' : (rm.p2 && rm.p2.usercode === uc ? 'p2' : null));
+      const _MUT = {
+        leave: 1, acceptMatch: 1, declineMatch: 1,
+        proposeResult: 1, confirmResult: 1, cancelResult: 1,
+        setLife: 1, setDice: 1, setPlay: 1, setTimer: 1, setTimerReq: 1,
+        proposeRematch: 1, confirmRematch: 1, cancelRematch: 1, rematch: 1
+      };
+      if (_MUT[action]) {
+        const _code = (body.code || '').trim().toUpperCase();
+        const _uc = (body.usercode || '').trim().slice(0, 20);
+        const _room = _code ? await store.get(_code, { type: 'json' }) : null;
+        if (_room && !isExpired(_room)) {
+          const _r = _member(_room, _uc);
+          if (!_r) return resp(403, { error: 'Not authorized for this match' });
+          body.role = _r;
+        }
+      }
 
       if (action === 'create') {
         const username = (body.username || '').trim().slice(0, 40);
