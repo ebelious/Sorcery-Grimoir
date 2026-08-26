@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T07:41:58.364Z",
+  "updated": "2026-08-26T08:35:36.963Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -597,24 +597,6 @@
       "url": "https://play.sorcerytcg.com/events/5d3dc142-e18a-432d-8bb4-883661e0e475"
     },
     {
-      "name": "Sorcery TCG - Weekly Showdown",
-      "date": "Wed. Aug 26, 2026",
-      "time": "8:26 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Hobart, TAS",
-      "city": "Hobart",
-      "state": "TAS",
-      "lat": -42.8825088,
-      "lng": 147.3281233,
-      "address": "",
-      "description": "",
-      "storeName": "Good Games Hobart",
-      "url": "https://play.sorcerytcg.com/events/fe37a4ad-c505-4f4e-bd9b-bb86ca29442d"
-    },
-    {
       "name": "Weekly Play at P22",
       "date": "Wed. Aug 26, 2026",
       "time": "11:30 AM UTC",
@@ -703,6 +685,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/f0064666-94f1-4fff-ac04-4ccf0499ce49"
+    },
+    {
+      "name": "Fantsu Tre Bi-Weekly",
+      "date": "Wed. Aug 26, 2026",
+      "time": "2:00 PM UTC",
+      "endTime": "",
+      "type": "Casual Meetup",
+      "price": "FREE",
+      "duration": "",
+      "location": "Tampere, Pirkanmaa",
+      "city": "Tampere",
+      "state": "Pirkanmaa",
+      "lat": 61.4977988,
+      "lng": 23.7616335,
+      "address": "",
+      "description": "",
+      "storeName": "Fantasiapelit Tudeer",
+      "url": "https://play.sorcerytcg.com/events/09a8934d-0d0c-4862-8118-db6714217b60"
     },
     {
       "name": "Weekly",
@@ -7635,24 +7635,6 @@
       "url": "https://play.sorcerytcg.com/events/0dc90ff6-afd2-4843-9734-11a35d1b6833"
     },
     {
-      "name": "Draft Night",
-      "date": "Sep 3, 2026 - Sep 4, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "East Coast Gaming",
-      "price": "Draft Tournament",
-      "duration": "",
-      "location": "Cary, NC",
-      "city": "Cary",
-      "state": "NC",
-      "lat": 35.7882893,
-      "lng": -78.7812081,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
-    },
-    {
       "name": "GGKC Thursday Night Sorcery",
       "date": "Thu. Sep 3, 2026",
       "time": "11:00 PM UTC",
@@ -7669,6 +7651,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/27cfcb89-4fa8-45cb-b3c9-b6103e771ddc"
+    },
+    {
+      "name": "Draft Night",
+      "date": "Sep 3, 2026 - Sep 4, 2026",
+      "time": "11:00 PM UTC",
+      "endTime": "",
+      "type": "East Coast Gaming",
+      "price": "Draft Tournament",
+      "duration": "",
+      "location": "Cary, NC",
+      "city": "Cary",
+      "state": "NC",
+      "lat": 35.7882893,
+      "lng": -78.7812081,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/c5f45b3b-d454-4c84-85d0-13458adec802"
     },
     {
       "name": "Constructed Tournament & Open Play",
@@ -11671,8 +11671,8 @@
       "date": "Thu. Sep 10, 2026",
       "time": "5:00 PM UTC",
       "endTime": "",
-      "type": "Odysseo",
-      "price": "Learn To Play",
+      "type": "Learn To Play",
+      "price": "FREE",
       "duration": "",
       "location": "CERNAY, Grand Est",
       "city": "CERNAY",
@@ -11681,7 +11681,7 @@
       "lng": 7.1787669,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Odysseo",
       "url": "https://play.sorcerytcg.com/events/482ea1f4-d195-4676-9ce8-4d6c74b57556"
     },
     {
@@ -12603,24 +12603,6 @@
       "url": "https://play.sorcerytcg.com/events/cc13d155-9c53-483e-8cb5-a9ae49a7ffa7"
     },
     {
-      "name": "Cornerstone at Good Games Town Hall!",
-      "date": "Sat. Sep 12, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sydney, NSW",
-      "city": "Sydney",
-      "state": "NSW",
-      "lat": -33.8698439,
-      "lng": 151.2082848,
-      "address": "",
-      "description": "",
-      "storeName": "Good Games Town Hall",
-      "url": "https://play.sorcerytcg.com/events/cf5cacb3-89f8-4b28-8bd2-0f782a360cbd"
-    },
-    {
       "name": "Friday Night Sorcery!",
       "date": "Sat. Sep 12, 2026",
       "time": "1:00 AM UTC",
@@ -12637,6 +12619,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/c8dbbd1a-3f21-426c-a8c2-ddcd7c67be45"
+    },
+    {
+      "name": "Cornerstone at Good Games Town Hall!",
+      "date": "Sat. Sep 12, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Sydney, NSW",
+      "city": "Sydney",
+      "state": "NSW",
+      "lat": -33.8698439,
+      "lng": 151.2082848,
+      "address": "",
+      "description": "",
+      "storeName": "Good Games Town Hall",
+      "url": "https://play.sorcerytcg.com/events/cf5cacb3-89f8-4b28-8bd2-0f782a360cbd"
     },
     {
       "name": "Friday Night Sorcery: Booster Draft",
@@ -28747,24 +28747,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/37274ed9-8ad0-40fc-a57f-2ae57501c7a9"
-    },
-    {
-      "name": "Casual Constructed",
-      "date": "Thu. Oct 15, 2026",
-      "time": "11:19 PM UTC",
-      "endTime": "",
-      "type": "Hole in the wall Hobbies",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Universal City, TX",
-      "city": "Universal City",
-      "state": "TX",
-      "lat": 29.5480071,
-      "lng": -98.2911235,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/de2bbea6-b1b6-4cc6-a7b5-ceb50db584ae"
     }
   ]
 }
