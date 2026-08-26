@@ -1618,5 +1618,13 @@
   "cernay|grand est": {
     "lat": 47.8086824,
     "lng": 7.1787669
+  },
+  "karlstad|värmlands län": {
+    "lat": 59.3809146,
+    "lng": 13.5027631
+  },
+  "new kensington|pa": {
+    "lat": 40.5697893,
+    "lng": -79.7647705
   }
 }
