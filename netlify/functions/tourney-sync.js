@@ -68,11 +68,25 @@ function redact(room, usercode) {
     (out.players || []).forEach(p => {
       const mine = usercode && p.usercode === usercode;
       if (!mine) { delete p.deck; p.deckSubmitted = !!p.deckSubmitted; }
-      delete p.usercode;
     });
     if (out.event && out.event.players) {
-      out.event.players.forEach(p => { if (!(usercode && p.usercode === usercode)) delete p.deck; delete p.usercode; });
+      out.event.players.forEach(p => { if (!(usercode && p.usercode === usercode)) delete p.deck; });
     }
+  }
+  // Strip every OTHER participant's usercode -- for the organiser too. It is the
+  // per-device auth secret that match-sync / share-deck / trade-sync also
+  // authenticate with, so handing a roster full of them to whoever opened the
+  // room would let them act as those players elsewhere. Players are correlated
+  // by `p.id`, which is untouched.
+  //
+  // The CALLER'S OWN usercode is deliberately left in place: it is already
+  // theirs, it is not a leak, and the app matches its own roster entry on it
+  // (organiser de-dupe on re-registration, and the "is this name taken by
+  // someone other than me" check).
+  const _keep = usercode || null;
+  (out.players || []).forEach(p => { if (!_keep || p.usercode !== _keep) delete p.usercode; });
+  if (out.event && out.event.players) {
+    out.event.players.forEach(p => { if (!_keep || p.usercode !== _keep) delete p.usercode; });
   }
   return out;
 }
