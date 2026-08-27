@@ -41,6 +41,25 @@ function findEmbedImages(embeds) {
   embeds.forEach(e => { const u = (e.image && e.image.url) || (e.thumbnail && e.thumbnail.url); if (u) out.push({ url: e.url || null, image: u }); });
   return out;
 }
+// This app's channel FOLLOWS the real announcement channel, so what lands here is a
+// crosspost: a copy with its own local id. Discord attaches `message_reference` to
+// that copy pointing at the ORIGINAL (source guild/channel/message), and flags it
+// IS_CROSSPOST (1 << 1). Linking to the local copy sends a reader to our mirror
+// rather than the real thread, so prefer the reference whenever it is present and
+// complete. Anything posted directly in our own channel has no reference and still
+// links to itself, exactly as before.
+const FLAG_IS_CROSSPOST = 1 << 1;
+function permalinkFor(m) {
+  const ref = m && m.message_reference;
+  if (ref && ref.message_id && ref.channel_id && ref.guild_id) {
+    return 'https://discord.com/channels/' + ref.guild_id + '/' + ref.channel_id + '/' + ref.message_id;
+  }
+  return 'https://discord.com/channels/' + GUILD_ID + '/' + CHANNEL_ID + '/' + m.id;
+}
+function isCrosspost(m) {
+  return !!(m && (((m.flags || 0) & FLAG_IS_CROSSPOST) || (m.message_reference && m.message_reference.message_id)));
+}
+
 function findAttachmentImages(attachments) {
   if (!Array.isArray(attachments)) return [];
   return attachments.filter(a => a.content_type && a.content_type.indexOf('image/') === 0).map(a => ({ url: null, image: a.url }));
@@ -71,7 +90,9 @@ async function buildFeed() {
         images: findEmbedImages(m.embeds).concat(findAttachmentImages(m.attachments)),
         timestamp: m.timestamp ? new Date(m.timestamp).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '',
         channel: channelDisplayName,
-        url: 'https://discord.com/channels/' + GUILD_ID + '/' + CHANNEL_ID + '/' + m.id
+        url: permalinkFor(m),
+        // so the client can tell a mirrored post from one of our own
+        crosspost: isCrosspost(m)
       };
     });
   return { messages, updated: new Date().toISOString() };
