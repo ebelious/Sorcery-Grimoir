@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T23:26:20.359Z",
+  "updated": "2026-08-28T08:15:02.036Z",
   "source": "https://play.sorcerytcg.com/events?locationType=in-person&radius=25",
   "events": [
     {
@@ -507,24 +507,6 @@
       "url": "https://play.sorcerytcg.com/events/c94f7469-911b-4717-89ad-8bd5ec938b43"
     },
     {
-      "name": "Casual Hangout Smash Play",
-      "date": "Thu. Aug 27, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Asa Norte, DF",
-      "city": "Asa Norte",
-      "state": "DF",
-      "lat": -15.7627976,
-      "lng": -47.883951,
-      "address": "",
-      "description": "",
-      "storeName": "Smash Play",
-      "url": "https://play.sorcerytcg.com/events/055f34de-1cd7-4290-881c-8c834696eb56"
-    },
-    {
       "name": "Draft and Constructed",
       "date": "Thu. Aug 27, 2026",
       "time": "11:00 PM UTC",
@@ -687,24 +669,6 @@
       "url": "https://play.sorcerytcg.com/events/f3893e23-a730-4eb7-9419-e9b2e1438c4d"
     },
     {
-      "name": "Fox Den's Thursday Sorcery Locals",
-      "date": "Thu. Aug 27, 2026",
-      "time": "11:30 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Burnsville, MN",
-      "city": "Burnsville",
-      "state": "MN",
-      "lat": 44.7670567,
-      "lng": -93.2773887,
-      "address": "",
-      "description": "",
-      "storeName": "Fox Den Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/10c51956-de9c-4e3a-91c5-68db96c5b766"
-    },
-    {
       "name": "Stormcrow Tournament Prep",
       "date": "Aug 27, 2026 - Aug 28, 2026",
       "time": "11:40 PM UTC",
@@ -721,42 +685,6 @@
       "description": "",
       "storeName": "Stormcrow Games",
       "url": "https://play.sorcerytcg.com/events/90906fc8-0626-4858-8071-ec8e4c754ff1"
-    },
-    {
-      "name": "The Gamer's Nest Sorcery Play",
-      "date": "Fri. Aug 28, 2026",
-      "time": "12:30 AM UTC",
-      "endTime": "",
-      "type": "TGN Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Longmont, CO",
-      "city": "Longmont",
-      "state": "CO",
-      "lat": 40.1672117,
-      "lng": -105.101928,
-      "address": "",
-      "description": "",
-      "storeName": "GAMERS NEST LLC",
-      "url": "https://play.sorcerytcg.com/events/e6eb3fdf-fdab-4e6f-976e-b75f686d8f69"
-    },
-    {
-      "name": "Sorcery Free Play",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Sacramento, CA",
-      "city": "Sacramento",
-      "state": "CA",
-      "lat": 38.5810606,
-      "lng": -121.493895,
-      "address": "",
-      "description": "",
-      "storeName": "Game Kastle (Sacramento)",
-      "url": "https://play.sorcerytcg.com/events/c9e322f4-285c-4cdc-9c6a-f15aef215613"
     },
     {
       "name": "Sorcery Open Play @ Mox Portland",
@@ -795,60 +723,6 @@
       "url": "https://play.sorcerytcg.com/events/ad301090-419b-4169-9a02-ee024df91bb4"
     },
     {
-      "name": "Thursday Night Constructed",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Albuquerque, NM",
-      "city": "Albuquerque",
-      "state": "NM",
-      "lat": 35.0841034,
-      "lng": -106.650985,
-      "address": "",
-      "description": "",
-      "storeName": "Tavern of Souls Gaming",
-      "url": "https://play.sorcerytcg.com/events/9287ff87-7d0b-4bcf-9218-14618444e185"
-    },
-    {
-      "name": "Casual Meetup",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:00 AM UTC",
-      "endTime": "",
-      "type": "Casual Meetup",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bellevue, WA",
-      "city": "Bellevue",
-      "state": "WA",
-      "lat": 47.6144219,
-      "lng": -122.192337,
-      "address": "",
-      "description": "",
-      "storeName": "Mox Boarding House Bellevue",
-      "url": "https://play.sorcerytcg.com/events/a4b2eb79-6c84-4491-b793-9280c30a35e6"
-    },
-    {
-      "name": "Zulus Casual Constructed",
-      "date": "Fri. Aug 28, 2026",
-      "time": "1:30 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Bothell, WA",
-      "city": "Bothell",
-      "state": "WA",
-      "lat": 47.7623204,
-      "lng": -122.2054035,
-      "address": "",
-      "description": "",
-      "storeName": "Zulu's Board Game Cafe",
-      "url": "https://play.sorcerytcg.com/events/b4c1c447-4beb-47a0-8348-bbe6956ddfc5"
-    },
-    {
       "name": "The Hungry Dragon: Sorcery Weekly Play",
       "date": "Fri. Aug 28, 2026",
       "time": "1:30 AM UTC",
@@ -883,24 +757,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/09fb447e-0e8a-4148-b1b3-3663c8b6f608"
-    },
-    {
-      "name": "Friday Night Sorcery",
-      "date": "Fri. Aug 28, 2026",
-      "time": "8:00 AM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Lismore, NSW",
-      "city": "Lismore",
-      "state": "NSW",
-      "lat": -28.8077608,
-      "lng": 153.2791883,
-      "address": "",
-      "description": "",
-      "storeName": "Unplugged Games",
-      "url": "https://play.sorcerytcg.com/events/f81bb554-b1c2-4202-a278-8e8b3bf8e96c"
     },
     {
       "name": "Weekly Community Casuals",
@@ -955,6 +811,24 @@
       "description": "",
       "storeName": "White Dragon Gaming",
       "url": "https://play.sorcerytcg.com/events/596862bb-c972-4a44-a39f-6ff3f4434460"
+    },
+    {
+      "name": "0828 練習賽",
+      "date": "Fri. Aug 28, 2026",
+      "time": "11:30 AM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Taipei, Taipei City",
+      "city": "Taipei",
+      "state": "Taipei City",
+      "lat": 25.0612686,
+      "lng": 121.4598089,
+      "address": "",
+      "description": "",
+      "storeName": "CardMaster",
+      "url": "https://play.sorcerytcg.com/events/4b7b0008-64b1-48d1-ba79-1bd03cbe4d0d"
     },
     {
       "name": "Friday Afternoon Sorcery",
@@ -1339,8 +1213,8 @@
       "date": "Fri. Aug 28, 2026",
       "time": "11:30 PM UTC",
       "endTime": "",
-      "type": "Madtown Hobby",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Cross Plains, WI",
       "city": "Cross Plains",
@@ -1349,7 +1223,7 @@
       "lng": -89.6452197,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Madtown Hobby",
       "url": "https://play.sorcerytcg.com/events/609439cb-1a4d-470d-8c79-6f532f48ebe4"
     },
     {
@@ -5835,6 +5709,24 @@
       "url": "https://play.sorcerytcg.com/events/1cab9caa-482c-4cfc-bd8d-e5e01ddaa31f"
     },
     {
+      "name": "Casual Constructed @ Alphaspel",
+      "date": "Thu. Sep 3, 2026",
+      "time": "4:00 PM UTC",
+      "endTime": "",
+      "type": "Constructed Tournament",
+      "price": "FREE",
+      "duration": "",
+      "location": "Hägersten, Stockholms län",
+      "city": "Hägersten",
+      "state": "Stockholms län",
+      "lat": 59.3039831,
+      "lng": 17.9671408,
+      "address": "",
+      "description": "",
+      "storeName": "Alphaspel",
+      "url": "https://play.sorcerytcg.com/events/6b42ce6c-084d-4d16-aa37-3e36e2a6e84c"
+    },
+    {
       "name": "TNS Thursday night sorcery",
       "date": "Thu. Sep 3, 2026",
       "time": "5:00 PM UTC",
@@ -7477,8 +7369,8 @@
       "date": "Sep 5, 2026 - Sep 6, 2026",
       "time": "7:00 PM UTC",
       "endTime": "",
-      "type": "Game Grid Layton",
-      "price": "Constructed Tournament",
+      "type": "Constructed Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Layton, UT",
       "city": "Layton",
@@ -7487,7 +7379,7 @@
       "lng": -111.9741925,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Game Grid Layton",
       "url": "https://play.sorcerytcg.com/events/51eabae2-0c8b-4914-b4b9-c7a13d4025d2"
     },
     {
@@ -10677,6 +10569,24 @@
       "url": "https://play.sorcerytcg.com/events/cd04b132-3eaf-41bf-9759-cde4882e7023"
     },
     {
+      "name": "Casual Meetup",
+      "date": "Fri. Sep 11, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Bellevue",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Bellevue, WA",
+      "city": "Bellevue",
+      "state": "WA",
+      "lat": 47.6144219,
+      "lng": -122.192337,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/02b3af3c-4010-4fc7-a9ce-d076fa91ad01"
+    },
+    {
       "name": "Thursday Night Constructed",
       "date": "Fri. Sep 11, 2026",
       "time": "1:00 AM UTC",
@@ -11109,24 +11019,6 @@
       "url": "https://play.sorcerytcg.com/events/458e9344-097d-4c3d-acf3-c2e11a93734a"
     },
     {
-      "name": "GC x Cornerstone x Constructed",
-      "date": "Sep 11, 2026 - Sep 12, 2026",
-      "time": "11:00 PM UTC",
-      "endTime": "",
-      "type": "Constructed Tournament",
-      "price": "FREE",
-      "duration": "",
-      "location": "Christchurch, Canterbury",
-      "city": "Christchurch",
-      "state": "Canterbury",
-      "lat": -43.530955,
-      "lng": 172.6364343,
-      "address": "",
-      "description": "",
-      "storeName": "Game Corner",
-      "url": "https://play.sorcerytcg.com/events/1912deb0-9518-4006-bd9b-03483597aa2b"
-    },
-    {
       "name": "Meta Chasers SorceryNight",
       "date": "Fri. Sep 11, 2026",
       "time": "11:00 PM UTC",
@@ -11251,6 +11143,24 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/96cf65e7-769f-4df2-8480-031205f0576b"
+    },
+    {
+      "name": "GC x Cornerstone x Constructed",
+      "date": "Sat. Sep 12, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Sealed Cornerstone x Saturday",
+      "price": "FREE",
+      "duration": "",
+      "location": "Christchurch, Canterbury",
+      "city": "Christchurch",
+      "state": "Canterbury",
+      "lat": -43.530955,
+      "lng": 172.6364343,
+      "address": "",
+      "description": "",
+      "storeName": "Game Corner",
+      "url": "https://play.sorcerytcg.com/events/1912deb0-9518-4006-bd9b-03483597aa2b"
     },
     {
       "name": "Sorcery Constructed",
@@ -11743,8 +11653,8 @@
       "date": "Sat. Sep 12, 2026",
       "time": "6:00 PM UTC",
       "endTime": "",
-      "type": "Undercity Games",
-      "price": "Draft Tournament",
+      "type": "Draft Tournament",
+      "price": "FREE",
       "duration": "",
       "location": "Eau Claire, WI",
       "city": "Eau Claire",
@@ -11753,7 +11663,7 @@
       "lng": -91.4984941,
       "address": "",
       "description": "",
-      "storeName": "No Players",
+      "storeName": "Undercity Games",
       "url": "https://play.sorcerytcg.com/events/221d9752-f152-4d51-86d3-e8e98547499d"
     },
     {
@@ -13878,7 +13788,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
+      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
     },
     {
       "name": "Casual Meet Up!",
@@ -13896,7 +13806,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/7a0afb0c-833e-48d9-9c1f-f31bed3198b3"
+      "url": "https://play.sorcerytcg.com/events/d01fb3c7-d170-4a19-be11-3a0c2cc8a651"
     },
     {
       "name": "Casual Sorcery",
@@ -18721,6 +18631,24 @@
       "description": "",
       "storeName": "Tavern of Souls Gaming",
       "url": "https://play.sorcerytcg.com/events/18348c54-b2fd-4ab9-a21d-3408ca2e2abe"
+    },
+    {
+      "name": "Casual Meetup",
+      "date": "Fri. Sep 25, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Bellevue",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Bellevue, WA",
+      "city": "Bellevue",
+      "state": "WA",
+      "lat": 47.6144219,
+      "lng": -122.192337,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/03add435-5d80-430b-8188-a86eb3b11061"
     },
     {
       "name": "Zulus Casual Constructed",
@@ -24897,6 +24825,24 @@
       "url": "https://play.sorcerytcg.com/events/1ed76cf2-4a0d-481c-800e-f73a4ad86aad"
     },
     {
+      "name": "Casual Meetup",
+      "date": "Fri. Oct 9, 2026",
+      "time": "1:00 AM UTC",
+      "endTime": "",
+      "type": "Mox Boarding House Bellevue",
+      "price": "Casual Meetup",
+      "duration": "",
+      "location": "Bellevue, WA",
+      "city": "Bellevue",
+      "state": "WA",
+      "lat": 47.6144219,
+      "lng": -122.192337,
+      "address": "",
+      "description": "",
+      "storeName": "No Players",
+      "url": "https://play.sorcerytcg.com/events/d141bb28-a4cc-4929-9afd-b2e5df337415"
+    },
+    {
       "name": "Zulus Casual Constructed",
       "date": "Fri. Oct 9, 2026",
       "time": "1:30 AM UTC",
@@ -27828,7 +27774,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
+      "url": "https://play.sorcerytcg.com/events/1f8ceb3f-0ca6-4bc8-a23c-1818ffc179fe"
     },
     {
       "name": "Casual Meet Up!",
@@ -27846,7 +27792,7 @@
       "address": "",
       "description": "",
       "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/1f8ceb3f-0ca6-4bc8-a23c-1818ffc179fe"
+      "url": "https://play.sorcerytcg.com/events/d37f803a-d33c-4cca-b245-ff04d3615704"
     },
     {
       "name": "Sorcery Reserva",
@@ -28693,114 +28639,6 @@
       "description": "",
       "storeName": "No Players",
       "url": "https://play.sorcerytcg.com/events/094cea4c-f7b6-45f0-996a-bda1cfa6943f"
-    },
-    {
-      "name": "Guślarstwo w Merfolku - Sorcery Open Play",
-      "date": "Sun. Oct 18, 2026",
-      "time": "10:00 AM UTC",
-      "endTime": "",
-      "type": "Merfolk",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Pruszków, Województwo mazowieckie",
-      "city": "Pruszków",
-      "state": "Województwo mazowieckie",
-      "lat": 52.1626141,
-      "lng": 20.8080199,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/27c00f2d-3dfc-480d-b697-7a0883a7c6f5"
-    },
-    {
-      "name": "Sorcery Sundays at Cold Foil Heroes",
-      "date": "Oct 18, 2026 - Oct 19, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Cold Foil Heroes",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "lat": 34.1014112,
-      "lng": -84.5192192,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/21ec9d81-6742-46da-aaec-1173f1e36908"
-    },
-    {
-      "name": "Tabletop Cincy Sunday Open Play",
-      "date": "Sun. Oct 18, 2026",
-      "time": "4:00 PM UTC",
-      "endTime": "",
-      "type": "Tabletop Cincy",
-      "price": "Casual Meetup",
-      "duration": "",
-      "location": "West Chester Township, OH",
-      "city": "West Chester Township",
-      "state": "OH",
-      "lat": 39.3359319,
-      "lng": -84.4155616,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/3b1fd6c7-fe11-4d91-a57b-cbc5813aaa6b"
-    },
-    {
-      "name": "Constructed Tournament",
-      "date": "Sun. Oct 18, 2026",
-      "time": "4:30 PM UTC",
-      "endTime": "",
-      "type": "Cold Foil Heroes",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Woodstock, GA",
-      "city": "Woodstock",
-      "state": "GA",
-      "lat": 34.1014112,
-      "lng": -84.5192192,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/f523f56b-e13e-420a-948d-2ea97bdb0d63"
-    },
-    {
-      "name": "Enter the Battlefield - Weekly Constructed",
-      "date": "Sun. Oct 18, 2026",
-      "time": "4:30 PM UTC",
-      "endTime": "",
-      "type": "Enter The Battlefield Newmarket",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newmarket, ON",
-      "city": "Newmarket",
-      "state": "ON",
-      "lat": 44.056258,
-      "lng": -79.461708,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/51e24149-cf2d-4e10-b3a8-3a2b1e2ac7a4"
-    },
-    {
-      "name": "Thieves Guild Sunday Locals",
-      "date": "Sun. Oct 18, 2026",
-      "time": "5:00 PM UTC",
-      "endTime": "",
-      "type": "Thieves Guild Gaming",
-      "price": "Constructed Tournament",
-      "duration": "",
-      "location": "Newport, KY",
-      "city": "Newport",
-      "state": "KY",
-      "lat": 39.0889469,
-      "lng": -84.4919524,
-      "address": "",
-      "description": "",
-      "storeName": "No Players",
-      "url": "https://play.sorcerytcg.com/events/53dd7eb6-f8a8-42f6-a6bd-e05ea92417e6"
     }
   ]
 }
