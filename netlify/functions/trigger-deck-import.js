@@ -13,7 +13,7 @@
 //     Fine-grained tokens, with Actions: Read and write permission on this
 //     repo, or a classic token with the "workflow" scope).
 //
-// Request body: { "url": "https://curiosa.io/decks/...", "requestId": "..." }
+// Request body: { "url": "https://sorcerytcg.com/decks/...", "requestId": "..." }
 
 const ALLOWED_ORIGINS = [
   'https://ebelious.github.io',
@@ -52,15 +52,25 @@ exports.handler = async function (event) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON body' }) };
   }
 
-  const url = (payload.url || '').trim();
+  let url = (payload.url || '').trim();   /* reassigned below when an old link is rewritten */
   const requestId = (payload.requestId || String(Date.now())).trim();
 
   if (!url) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing deck url' }) };
   }
-  if (!/^https:\/\/curiosa\.io\/decks\//.test(url)) {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'URL must be a curiosa.io deck link (https://curiosa.io/decks/...)' }) };
+  /* Both hosts, and the old one is rewritten rather than merely tolerated.
+     Decks live on sorcerytcg.com now and the host this used to insist on is gone, so a
+     link from the current site was refused outright while the only link it accepted could
+     no longer be fetched -- the gate rejected everything that works and admitted only what
+     does not.
+     Old links are still admitted, because they are all over people's notes, but they are
+     rewritten before anything is done with them since following them would fail.
+     Still an exact-shape check against named hosts: that is what stops this being pointed
+     at an arbitrary address, so it stays a list rather than becoming a looser pattern. */
+  if (!/^https:\/\/(www\.)?(sorcerytcg\.com|curiosa\.io)\/decks\//.test(url)) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'URL must be a Sorcery deck link (https://sorcerytcg.com/decks/...)' }) };
   }
+  url = url.replace(/^https:\/\/(www\.)?curiosa\.io/, 'https://sorcerytcg.com');
 
   const token = process.env.GITHUB_TOKEN;
   if (!token) {
