@@ -36,7 +36,13 @@
 // in addition to the existing path-shape check.
 
 const MAX_URLS = 40;
-const ALLOWED_HOSTS = new Set(['play.sorcerytcg.com']);
+/* Events moved to the main site and the old Play Network host is gone, so the allowlist
+   follows them. Both are kept for now: an event URL saved before the move still names the
+   old host, and a saved URL is data we do not control.
+   This is an SSRF guard, so it stays an explicit list of hostnames rather than becoming a
+   pattern -- the whole point is that a URL pointing anywhere else, including an internal
+   address, is refused before anything is fetched. */
+const ALLOWED_HOSTS = new Set(['sorcerytcg.com', 'www.sorcerytcg.com', 'play.sorcerytcg.com']);
 
 function isAllowedUrl(rawUrl) {
   let u;
