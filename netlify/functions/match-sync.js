@@ -17,6 +17,10 @@
 //   POST { action:'setTimer', code, role, timer } -> { code, room }  (the room's clock; only the
 //         creator writes it, and every reply carries `now` so each device can measure its own
 //         clock against the server's -- see the note on `now` below)
+//   POST { action:'setTurn', code, role, turn:{num,active:'p1'|'p2'|null} } -> { code, room }
+//         (the shared turn: which turn it is and who is on the move. Unlike the clock,
+//          EITHER player writes this -- each one says when they take their own turn and
+//          when they hand it back, and neither can claim the other's.)
 //   POST { action:'setDice', code, role, dice:{total,label,brk,ts} } -> { code, room }
 //   POST { action:'proposeRematch', code, role } -> { code, room }  (starts the two-phase rematch handshake)
 //   POST { action:'confirmRematch', code, role } -> { code, room }  (accepts a pending rematch)
@@ -30,6 +34,7 @@
 // room shape: { created, p1:{username,deck,life,dice,ts}, p2:{username,deck,life,dice,ts}|null,
 //               accepted:{confirmedP1,confirmedP2}|undefined,
 //               declined:'p1'|'p2'|null,
+//               turn:{num,active:'p1'|'p2'|null,by,ts}|null,
 //               result:{proposerWon,turns,duration,confirmedP1,confirmedP2}|null,
 //               rematch:{confirmedP1,confirmedP2}|null }
 
@@ -109,7 +114,7 @@ exports.handler = async function (event) {
       const _MUT = {
         leave: 1, acceptMatch: 1, declineMatch: 1,
         proposeResult: 1, confirmResult: 1, cancelResult: 1,
-        setLife: 1, setDice: 1, setPlay: 1, setTimer: 1, setTimerReq: 1,
+        setLife: 1, setDice: 1, setPlay: 1, setTimer: 1, setTimerReq: 1, setTurn: 1,
         proposeRematch: 1, confirmRematch: 1, cancelRematch: 1, rematch: 1
       };
       if (_MUT[action]) {
@@ -364,6 +369,39 @@ exports.handler = async function (event) {
         return resp(200, { code, room });
       }
 
+      /* The shared turn.
+         The clock has one keeper because two writers would fight over a single countdown.
+         A turn is not like that: there is exactly one player it can be handed to and
+         exactly one who can hand it on, so each side writes its own move and the other
+         reads it. That is why this is not folded into setTimer -- the follower could not
+         write that, so it could never say it had ended its turn.
+
+         `active` is who is on the move, or null between turns. A player may only claim it
+         for themselves; `role` is already forced to the caller's real slot above, so
+         claiming the other side is refused rather than trusted. */
+      if (action === 'setTurn') {
+        const code = (body.code || '').trim().toUpperCase();
+        const role = body.role === 'p2' ? 'p2' : 'p1';
+        if (!code) return resp(400, { error: 'Code required' });
+
+        const room = await store.get(code, { type: 'json' });
+        if (isExpired(room)) return resp(404, { error: 'Match code not found or expired' });
+
+        const t = body.turn || {};
+        const active = (t.active === 'p1' || t.active === 'p2') ? t.active : null;
+        if (active && active !== role) {
+          return resp(403, { error: 'Only the player taking the turn may claim it' });
+        }
+        room.turn = {
+          num: Math.max(1, Math.min(9999, parseInt(t.num, 10) || 1)),
+          active: active,
+          by: role,
+          ts: Date.now()
+        };
+        await store.setJSON(code, room);
+        return resp(200, { code, room });
+      }
+
       if (action === 'setDice') {
         const code = (body.code || '').trim().toUpperCase();
         const role = body.role === 'p2' ? 'p2' : 'p1';
@@ -439,6 +477,9 @@ exports.handler = async function (event) {
         room[role].ts = Date.now();
         room.result = null;
         room.rematch = null;
+        /* a new game starts at turn one with nobody on the move, or the next match would
+           begin partway through the last one's turn order */
+        room.turn = null;
         await store.setJSON(code, room);
         return resp(200, { code, room });
       }
