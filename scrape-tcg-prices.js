@@ -25,7 +25,18 @@
 //     <span class="product-card__title truncate">Card Name</span>       <- exact match target
 //                                                                          (foil variants append " (Foil)" to this
 //                                                                          same field -- no separate class/flag)
-//     <span class="inventory__price-with-shipping">$6.28</span>        <- lowest current listing, with shipping
+//     <span class="inventory__price-with-shipping">$6.28</span>        <- lowest listing PLUS shipping
+//     <span class="product-card__price--value">$4.99</span>            <- lowest listing on its own
+//
+// The with-shipping figure was being read first and written out as "listingPrice", which the
+// app shows beside Market. It is not the same number: it has postage folded into it, and on
+// a cheap card that is most of the price. Measured across the 2,928 printing rows in the
+// live file, 354 of them sit more than three dollars above their own market price, while the
+// cards under a dollar sit a few cents BELOW it -- which is what a mixture looks like, some
+// tiles answering with shipping and the rest falling through to the plain figure.
+// The plain figure is now preferred and the with-shipping one kept only as a fallback, so a
+// tile that offers nothing else still yields a price rather than none. Which one was used is
+// counted and printed at the end of a run.
 //     <span class="product-card__market-price--value">$6.44</span>     <- TCGPlayer's own Market Price
 //   </section>
 // Matching a card to the correct tile: exact (trimmed, case-insensitive)
@@ -87,6 +98,26 @@ function sleep(ms) {
 }
 
 // Build the price object for a single matched tile (or a "not found" shell).
+/* Which element the listing price came from, over the whole run. A run that reports
+   everything as "with-shipping" means the plain selectors are gone and this needs looking at
+   again; one that reports "none" for many tiles means the listing price is missing rather
+   than wrong. Either way it is stated instead of guessed at. */
+const LISTING_SOURCES = {};
+function noteListingSource(tile) {
+  if (!tile) return;
+  const k = tile.listingFrom || 'unknown';
+  LISTING_SOURCES[k] = (LISTING_SOURCES[k] || 0) + 1;
+  /* When both are on the tile, the gap between them IS the postage -- worth seeing once,
+     because it is the size of the error this is correcting. */
+  if (tile.listingFrom && tile.listingFrom !== 'with-shipping' && tile.listingShipText) {
+    const plain = parsePrice(tile.listingText), ship = parsePrice(tile.listingShipText);
+    if (plain != null && ship != null && ship > plain) {
+      LISTING_SOURCES._shippingSeen = (LISTING_SOURCES._shippingSeen || 0) + 1;
+      LISTING_SOURCES._shippingTotal = (LISTING_SOURCES._shippingTotal || 0) + (ship - plain);
+    }
+  }
+}
+
 function priceFromTile(tile) {
   if (!tile) {
     return { marketPrice: null, marketPriceText: null, listingPrice: null, listingPriceText: null, found: false };
@@ -135,9 +166,17 @@ async function scrapeOne(page, cardName) {
       const rarity = q('.product-card__rarity') || q('.product-card__rarity__variant') || '';
       return {
         title: q('.product-card__title'),
-        listingText: q('.inventory__price-with-shipping') ||
-                     q('.product-card__price--value') ||
-                     q('.product-card__price') || '',
+        /* Cheapest-first, and shipping last. Every candidate is returned as well, so a run
+           can say what it actually found rather than only what it chose. */
+        listingText: q('.product-card__price--value') ||
+                     q('.product-card__price') ||
+                     q('.inventory__price') ||
+                     q('.inventory__price-with-shipping') || '',
+        listingFrom: (q('.product-card__price--value') ? 'price--value'
+                    : q('.product-card__price')        ? 'product-card__price'
+                    : q('.inventory__price')           ? 'inventory__price'
+                    : q('.inventory__price-with-shipping') ? 'with-shipping' : 'none'),
+        listingShipText: q('.inventory__price-with-shipping') || '',
         marketText: q('.product-card__market-price--value') ||
                     q('.product-card__market-price .product-card__market-price--value') ||
                     q('[class*="market-price"] [class*="value"]') ||
@@ -176,6 +215,7 @@ async function scrapeOne(page, cardName) {
     })
     .filter((p) => p.marketPriceText || p.listingPriceText);
 
+  tiles.forEach(noteListingSource);
   const base = priceFromTile(match);
   const result = {
     name: cardName,
@@ -217,8 +257,14 @@ async function scrapePromoSet(page, slug, setName) {
         const q = (sel) => { const e = el.querySelector(sel); return e ? e.textContent.trim() : ''; };
         return {
           title: q('.product-card__title'),
-          listingText: q('.inventory__price-with-shipping') ||
-                       q('.product-card__price--value') || q('.product-card__price') || '',
+          listingText: q('.product-card__price--value') ||
+                       q('.product-card__price') ||
+                       q('.inventory__price') ||
+                       q('.inventory__price-with-shipping') || '',
+          listingFrom: (q('.product-card__price--value') ? 'price--value'
+                      : q('.product-card__price')        ? 'product-card__price'
+                      : q('.inventory__price')           ? 'inventory__price'
+                      : q('.inventory__price-with-shipping') ? 'with-shipping' : 'none'),
           marketText: q('.product-card__market-price--value') ||
                       q('[class*="market-price"] [class*="value"]') || q('.product-card__market-price') || ''
         };
@@ -325,6 +371,15 @@ async function main() {
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(results, null, 2));
   console.log('Done. ' + found + ' found (' + foilFound + ' with foil), ' + notFound + ' not found on TCGPlayer, ' + failed + ' failed, ' + cards.length + ' total cards. Wrote ' + OUT_FILE + '.');
+  const seen = LISTING_SOURCES._shippingSeen || 0;
+  console.log('Listing prices read from: ' + JSON.stringify(
+    Object.keys(LISTING_SOURCES).filter((k) => k[0] !== '_')
+      .reduce((o, k) => { o[k] = LISTING_SOURCES[k]; return o; }, {})));
+  if (seen) {
+    console.log('Tiles carrying both figures: ' + seen +
+      ', postage averaging $' + ((LISTING_SOURCES._shippingTotal / seen).toFixed(2)) +
+      ' -- that is what the old reading was adding.');
+  }
 }
 
 main().catch((e) => {
