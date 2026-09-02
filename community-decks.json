@@ -1,11 +1,491 @@
 {
-  "updated": "2026-09-01T20:15:54.674Z",
+  "updated": "2026-09-02T01:45:04.399Z",
   "source": "https://curiosa.io/decks",
   "decks": [
     {
-      "name": "View A Knighthood Earned In Blood (WIP)",
+      "name": "View Sacrifice",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtjf3z1l00000akyoske94vt",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Tides Of Sapphire",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmri8w2d800q004l7s4hd0w7k",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Hermit",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtgwht18000l0agkrn07wz5n",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Liches & Witches",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmopdacdx00fu04l8ddbq6ai3",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View What Rough Beast, Its Hour Come 'Round at Last, Slouches Towards Bethlehem to Be Born? (2)",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtfx8lyu00070ajf4hltio8e",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Splash Mountain",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr818bfb00p004l5yzutxgmp",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View WAVESHAPER",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmmtwm101001q04l4n90d301r",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Undertow",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmthttoqk00090aj6bph5t7in",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Kilario",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmthbytsh00000aja6h3f725i",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Boat",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmrwujtuq00020akhn9jcot8y",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Pudge city",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsv1k61s00an04jmzydw4f1u",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View The Ghost of Spirits Past",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmivho1l74iwl05eb67nvrk1e",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Tectonic pulse",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmo5perow00al04jpoc3nxrvk",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Common Control",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmte2foxk00090ajbh63ttr2d",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Knights",
+      "author": "",
+      "url": "https://curiosa.io/decks/cm4biqrg6007j32425o4ymia7",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View LOCK.DECK",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj04i68000b0ahznvuma7vw",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Top-Rising Cream",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmscltqvy00020ajglgahem4e",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Pseudo-Aggro Persecutor",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr46kxau00jx04jyt281gzgk",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Persecutor",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj7an0w000l0ajjyhwnkvla",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Deathspeaker",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtb0kk2d00at04l7k3kpc9uv",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Dank Fae",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsh4uqjj00080ahwqduojud4",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Deathspeaker Fiery Control",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsy105oa00w504jz0y34tdo8",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Week Windfire",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmsajrffg000b0akn8ethnewn",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Hooky",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtgg674a000y0ajd3897dzcu",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Middle ages",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmoyv92jd00me04kyp0bkmtjj",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Marriage Combo",
+      "author": "",
+      "url": "https://curiosa.io/decks/cm2b7pdbj002lkqiwcf5t87zr",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Tolarian Evil",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj78iwr00010akxm93m5e7x",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Crusade",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt2b7ac600pp04jojkd20l3q",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Nuclear Jesus",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmthjeq8y000g09j6u4i05t96",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Jodorowsky's Dune",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr522hcg00v204kzojjuubjw",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Deck",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtalwgl900cw04l481rbkxyt",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View E/F/W Deathspeaker Pyromancer",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmthx6uji00040agq5lbq5zd7",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View First Deck",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt3c6wyk00tp04l25ggzoj5e",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Arthurian Knights",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj6ml4c000h0aht6wxwne99",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Top Interrogator GenCon 2026",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmnw89k4p00pb04l75fi731a7",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View The Fun Bailiffs",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj61dzo002a04l7bn5s4ar0",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Denial of Wolves 🜁🜄🜂🜃",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmt7m3zc9006e04kyovbdzs3o",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View BaeBlade Burst",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmk7fx8dn018304jpojvdtpcu",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View EFA Midrange Post Gothic",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmro1fqve009j04jrqcudw7k3",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Smoked Meats",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqzt3fst00hz04js0x4mzf4g",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View L'Impostore tempestoso",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmr0k8py7000004l1fshmnqcj",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Reborn",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtikafsb000e0bkmuc6rz5g3",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View I'm pasta",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtb7bxm7004o04jxjhv2jude",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Beasts Loose in Paradise",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmq02wpst00dg04jmjhijs2i3",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Knighthood In Blood Reborn (WIP)",
       "author": "",
       "url": "https://curiosa.io/decks/cmth77ie200010aklx7dp5y25",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Archimago, Controll",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmtj48mmr00050ajk3qfk7qhx",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Demonic Incursion",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmqygsbtu003904l840ywpngs",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Scorched Earth Imposter",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmre1wbce004z04l7v8jic8bs",
+      "format": "",
+      "timestamp": null,
+      "views": null,
+      "elements": [],
+      "avatar": ""
+    },
+    {
+      "name": "View Aurageddon",
+      "author": "",
+      "url": "https://curiosa.io/decks/cmgsrffvc002tl804kbk3lvbn",
       "format": "",
       "timestamp": null,
       "views": null,
@@ -43,39 +523,9 @@
       "avatar": ""
     },
     {
-      "name": "View First Deck",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt3c6wyk00tp04l25ggzoj5e",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Reborn",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtikafsb000e0bkmuc6rz5g3",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "View Saviorino",
       "author": "",
       "url": "https://curiosa.io/decks/cmri326o800q304ld3p2luby5",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Hooky",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtgg674a000y0ajd3897dzcu",
       "format": "",
       "timestamp": null,
       "views": null,
@@ -123,16 +573,6 @@
       "avatar": ""
     },
     {
-      "name": "View Elemental Wolves and Dragons 🜁🜄🜂🜃",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt7m3zc9006e04kyovbdzs3o",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
       "name": "View The Bone Chalet at Bottomless Pit",
       "author": "",
       "url": "https://curiosa.io/decks/cms0q27g800000bjiwhus5h0h",
@@ -156,446 +596,6 @@
       "name": "View Exceptional Courtship",
       "author": "",
       "url": "https://curiosa.io/decks/cms0zfrvi000m0ahuazny74g6",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Spoken Death",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt7whi1b006n04l72d8souv9",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Wake up! Grab a brush and put a little make-up!",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsn92fgo00060ajflh5epdms",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Skeleton Factory",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsw7xdlc00nr04jxx3kliu67",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Big Dawg Deck",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrd4xhda008504ifqphj8qlh",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View TAA - Mark",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnrg1p5e00l904jqwmmzfnz3",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Corruptor Combo",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmmb1j1hc01mo04k06pc2y2df",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Earth Air Sorcerer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtfd45ix000c0aja6raru5mj",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View To the Pain 🔪 Interrogator",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmlqsjwi7006q04ij1ml4nsiz",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Archimago 🤌🍝 - Gothic Update",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmjn91zow1ye1zofnw1jhzth0",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Splash Mountain",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmr818bfb00p004l5yzutxgmp",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Court-Ordered Demolition",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt0gcnk200h004kwprl2ja57",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Interrogator Mono Air",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtitzjjd00000ajgiowm24sy",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Archimago Control",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt3ua8ig00dd04jrdhy940zv",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Common Control",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmte2foxk00090ajbh63ttr2d",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Geoink",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtiy50ro000309klbsc2i7y4",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View E/F/W Deathspeaker Pyromancer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmthx6uji00040agq5lbq5zd7",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View 🇧🇷 Roots Bloody Roots",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmk9l8p9s005304k3rtcgs1sm",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Valar Morghulis",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmt9frufk00cu04k01ezmzpfh",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View SPEEEEEED",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtiu7ld6000f0bjje0sddj9u",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View HornOfBoromir",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnopcs6i009j04lbhhkpbvn0",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View The Undead Horde",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmnl9nmt200hq04l6ecim3nt5",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View 0 affinity exceptional aggro",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsy675y400w404jvbz3mvpca",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Waveshaper",
-      "author": "",
-      "url": "https://curiosa.io/decks/cms0mx863000h04i974qxgsls",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Dank Fae",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsh4uqjj00080ahwqduojud4",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Aggro",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmq3p674d005i04jrzidse5l4",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View EF greed",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtg0zn8300050al0lbsnaqfp",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Evil Plans",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmshrg93800030akuf3xgv5ve",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Cadê o baiano?",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsv54nxz00q804l7pnf8vqoy",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Liquid Changeling",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmomktg02009o04i9hhldlbcp",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Into the void",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtf5m0vv00000aj69ms1afjl",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View ArchiGeddon",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtirzwhy000c0ajcwkv1vi2y",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View The Crystal Ship",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmrclxjy800z404l9y9it91nu",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Waveshaper",
-      "author": "",
-      "url": "https://curiosa.io/decks/cm2awrkv20028vjms1qndg6sk",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Undertow",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmthttoqk00090aj6bph5t7in",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Tempo Elementalist",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmsw9t5mt00i004ifrnvaii9o",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Walkin' with the beast",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmr9g9mr300bb04l4gtpmkfmn",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Red Deck Wins Budgetless",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtirsuef000b0ahzg6nb29te",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Magician Monstrosity (The Original)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmj090od82mvb02fnqksvgo21",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Higgs Boson Blues",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqataxaw002j04l9ve2bx474",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Red Deck Wins",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtdqqeqa00040ahsxofkv4l1",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Beasts Loose in Paradise",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmq02wpst00dg04jmjhijs2i3",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Creator, Destroyer",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqc7c1f3004v04jitmrfjk2q",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View THE ALL FOIL MEMORY CUBE (WIP)",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmqphq09d002v04l8095tub6o",
-      "format": "",
-      "timestamp": null,
-      "views": null,
-      "elements": [],
-      "avatar": ""
-    },
-    {
-      "name": "View Shockingly Amazing",
-      "author": "",
-      "url": "https://curiosa.io/decks/cmtiowerx000d04jx0nil1ys5",
       "format": "",
       "timestamp": null,
       "views": null,
