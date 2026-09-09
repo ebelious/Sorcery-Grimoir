@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-09T17:16:42.750Z",
+  "updated": "2026-09-09T19:47:22.501Z",
   "articles": [
+    {
+      "title": "9 Sept 2026",
+      "url": "https://sorcerytcg.com/news/experience-avatar-of-the-realm",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "8 Sept 2026",
       "url": "https://sorcerytcg.com/news/germany-s-grand-contest-brings-sorcerers-together-in-gelsenkirchen",
@@ -75,13 +81,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/08ba740d80576d32778a6b2873db677a74ff6f63-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "24 Jul 2026",
-      "url": "https://sorcerytcg.com/news/building-the-realm-s-newest-rivalry-frost-mage-vs-lavamancer",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/45e2929254094035c02e37b87c12b626e00f73f9-2000x900.png?w=2000&h=900"
     }
   ]
 }
