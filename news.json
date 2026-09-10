@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-10T18:16:48.753Z",
+  "updated": "2026-09-10T20:53:56.747Z",
   "articles": [
+    {
+      "title": "10 Sept 2026",
+      "url": "https://sorcerytcg.com/news/new-tools-arrive-in-the-sorcery-events-system",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "10 Sept 2026",
       "url": "https://sorcerytcg.com/news/more-gothic-is-on-the-way",
@@ -73,13 +79,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/d9eae2384bb308d5adf0b231f26a1f5f6627b491-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "30 Jul 2026",
-      "url": "https://sorcerytcg.com/news/meet-the-lavamancer",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/f83ba49a0314b4c03b2bff6fc40d3ee30e92c9bf-2000x900.png?w=2000&h=900"
     }
   ]
 }
