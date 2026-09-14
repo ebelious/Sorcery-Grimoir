@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-14T12:40:31.991Z",
+  "updated": "2026-09-14T18:11:49.778Z",
   "articles": [
+    {
+      "title": "14 Sept 2026",
+      "url": "https://sorcerytcg.com/news/community-spotlight-sorcery-sweden",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "11 Sept 2026",
       "url": "https://sorcerytcg.com/news/the-realm-gathers-at-scg-con-dallas",
@@ -70,13 +76,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/ddac2bfe1c0a44adaf3616f3095edfc498abec9e-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "10 Aug 2026",
-      "url": "https://sorcerytcg.com/news/welcome-to-the-realm-paul-carrick",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/1899ffdbe817cd74451af403f924a5b986ca84ad-2000x900.png?w=2000&h=900"
     }
   ]
 }
