@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-15T18:04:52.780Z",
+  "updated": "2026-09-15T21:14:01.476Z",
   "articles": [
+    {
+      "title": "15 Sept 2026",
+      "url": "https://sorcerytcg.com/news/the-sorcery-shop-is-back-online",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "14 Sept 2026",
       "url": "https://sorcerytcg.com/news/community-spotlight-sorcery-sweden",
@@ -69,13 +75,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/9321b4f58ef60a4f6e62373cb8c9dee80c249cae-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "18 Aug 2026",
-      "url": "https://sorcerytcg.com/news/erik-s-curiosa-expands-retail-access-through-covenant-fulfilled",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/ddac2bfe1c0a44adaf3616f3095edfc498abec9e-2000x900.png?w=2000&h=900"
     }
   ]
 }
