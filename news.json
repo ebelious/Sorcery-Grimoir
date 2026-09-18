@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-18T17:56:37.882Z",
+  "updated": "2026-09-18T20:03:47.344Z",
   "articles": [
+    {
+      "title": "18 Sept 2026",
+      "url": "https://sorcerytcg.com/news/the-realm-is-a-big-place",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "15 Sept 2026",
       "url": "https://sorcerytcg.com/news/the-sorcery-shop-is-back-online",
@@ -68,13 +74,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/ed694c8760422530259c68f7e2ddd54b1fd037e8-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "18 Aug 2026",
-      "url": "https://sorcerytcg.com/news/meet-the-frost-mage",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/9321b4f58ef60a4f6e62373cb8c9dee80c249cae-2000x900.png?w=2000&h=900"
     }
   ]
 }
