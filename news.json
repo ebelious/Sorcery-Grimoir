@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-25T14:47:04.029Z",
+  "updated": "2026-09-25T18:56:05.111Z",
   "articles": [
+    {
+      "title": "25 Sept 2026",
+      "url": "https://sorcerytcg.com/news/it-s-a-trap-introducing-a-new-mechanic-to-sorcery",
+      "date": "",
+      "source": "sorcerytcg.com"
+    },
     {
       "title": "18 Sept 2026",
       "url": "https://sorcerytcg.com/news/the-realm-is-a-big-place",
@@ -67,13 +73,6 @@
       "date": "",
       "source": "sorcerytcg.com",
       "image": "https://cdn.sanity.io/images/vg9ve3gy/production/fcc751da60a24765afddeee2aef45b1ed167fa10-2000x900.png?w=2000&h=900"
-    },
-    {
-      "title": "19 Aug 2026",
-      "url": "https://sorcerytcg.com/news/mastery-creativity-and-wonder-at-the-new-zealand-grand-contest",
-      "date": "",
-      "source": "sorcerytcg.com",
-      "image": "https://cdn.sanity.io/images/vg9ve3gy/production/ed694c8760422530259c68f7e2ddd54b1fd037e8-2000x900.png?w=2000&h=900"
     }
   ]
 }
