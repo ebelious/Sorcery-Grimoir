@@ -1,245 +1,127 @@
-// Scrapes the Sorcery Play Network Reward Store catalogue
-// (https://play.sorcerytcg.com/rewards), powered by Carde.io.
+// Dust rewards catalogue, from Team Covenant's store -- the publisher moved Dust
+// redemption there (https://www.teamcovenant.com/games/sorcery-tcg?category=Dust).
 //
-// Same situation as scrape-events.js: this is a client-rendered SPA with no
-// documented public API, so this uses Playwright to load the page and read
-// the rendered DOM. The catalogue has a "Point Amount" filter, suggesting
-// each reward is redeemable for a certain number of points.
+// No browser needed. Confirmed from a HAR of that page: the storefront is a
+// Next.js shell with no products in its HTML, and the page fills itself from ONE
+// unauthenticated JSON call, which is what this reads:
 //
-// NOTE: I couldn't inspect the live rendered page's exact DOM/class names
-// (no browser access in the environment this was written in), so the
-// selectors below are a best-effort guess. If this comes back with 0
-// rewards, check the workflow's logs -- diagnostic output below shows what
-// was actually found on the page, which is the fastest way to tell me what
-// to fix.
- 
-const { chromium } = require('playwright');
+//   GET https://www.teamcovenant.com/api/games-page?slug=sorcery-tcg
+//   -> { allProductImages, pageComponents:[...], pageCategories:[{id,display_name,...}] }
+//
+// Each pageComponent carries `page_category` (a category id) and, for a product
+// tile, `product_basic_component_id.product`. The Dust tab is the category whose
+// display_name is "Dust" -- resolved by NAME here rather than hard-coding its id
+// (112 at the time of writing), so a renumbering on their side does not empty the
+// feed. Everything below mirrors the site's own page JS (also in the HAR):
+//   * a Dust price is `product.dust_price` when it is a finite number > 0
+//   * "Out of stock" is shown when !(hasAvailableInventory && is_available)
+//   * images are served through Supabase's image renderer:
+//       https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/<storage_location>?width=..&quality=..&resize=contain
+//
+// Output: rewards.json, the same shape the app already reads
+//   { updated, total, rewards:[ { name, points, image, url, soldOut, slug, sku, limit } ] }
+// `name`, `points`, `image`, `url`, `soldOut` are what index.html uses; the rest is
+// carried along because it costs nothing and is there. Newest first, so the app's
+// new-reward check (which looks at the first entry's name) fires on a genuinely
+// new item rather than on a re-sort.
+//
+// Product pages: the HAR shows no per-product URL for these tiles (they render
+// inline on the category page), so `url` is the category page for every entry.
+// If Team Covenant adds product pages, set PRODUCT_URL below.
+//
+// Node 18+ (global fetch). No dependencies.
+
 const fs = require('fs');
- 
-const REWARDS_URL = 'https://play.sorcerytcg.com/rewards';
- 
-(async () => {
-  console.log('Launching browser...');
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
- 
-  console.log('Fetching ' + REWARDS_URL + '...');
-  await page.goto(REWARDS_URL, {
-    waitUntil: 'networkidle',
-    timeout: 30000
+
+const API_URL      = 'https://www.teamcovenant.com/api/games-page?slug=sorcery-tcg';
+const CATEGORY     = 'Dust';
+const PAGE_URL     = 'https://www.teamcovenant.com/games/sorcery-tcg?category=Dust';
+const IMG_BASE     = 'https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/';
+const IMG_WIDTH    = 600;     // the app shows these in ~130px tiles; 600 covers 3x screens
+const OUT_FILE     = 'rewards.json';
+const PRODUCT_URL  = null;    // e.g. (p) => 'https://www.teamcovenant.com/products/' + p.slug -- unknown, see note above
+
+function imageUrl(img) {
+  const loc = img && img.storage_location;
+  if (!loc) return '';
+  return IMG_BASE + loc + '?width=' + IMG_WIDTH + '&quality=100&resize=contain';
+}
+
+function dustPrice(p) {
+  const n = Number(p && p.dust_price);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+async function main() {
+  const res = await fetch(API_URL, {
+    headers: {
+      'Accept': 'application/json',
+      'Referer': PAGE_URL,
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    }
   });
- 
-  await page.waitForTimeout(3000);
-  // Reward items are likely cards with an image and a point cost; try a few
-  // reasonable selector guesses for "something that looks like a catalogue
-  // item" before falling back to just scanning for point-amount text.
-  await page.waitForSelector('img', { timeout: 15000 }).catch(() => {});
- 
-  // The catalogue almost certainly has more items than a single initial
-  // render shows (confirmed: only 24 were being found despite the site
-  // having more). Repeatedly scroll to the bottom and/or click any "Load
-  // More"/"Show More" button until the page stops growing, so pagination or
-  // infinite-scroll gets fully exhausted before we extract anything.
-  let previousHeight = 0;
-  let scrollIterations = 0;
-  for (let i = 0; i < 25; i++) {
-    const currentHeight = await page.evaluate(() => document.body.scrollHeight);
-    if (currentHeight === previousHeight) break;
-    previousHeight = currentHeight;
-    scrollIterations++;
- 
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
- 
-    // Click a "Load More"/"Show More" button if one exists and is visible.
-    const clicked = await page.evaluate(() => {
-      const btn = Array.from(document.querySelectorAll('button, a')).find(el => {
-        const t = (el.innerText || '').trim().toLowerCase();
-        return (t === 'load more' || t === 'show more' || t.includes('load more') || t.includes('show more'))
-          && el.offsetParent !== null;
-      });
-      if (btn) { btn.click(); return true; }
-      return false;
-    });
- 
-    await page.waitForTimeout(clicked ? 1500 : 1000);
-  }
- 
-  const { rewards, diagnostics } = await page.evaluate(() => {
-    // Known non-reward UI text to skip (nav, filters, headers, etc.)
-    const SKIP = new Set([
-      'Events', 'Rewards', 'Login', 'Reward Store', 'Catalogue:', 'Filters',
-      'Tags', 'Min', 'Max', 'TagsMinMax', 'Point Amount', 'Powered By',
-      'Give us a Follow!', 'Links', 'Policies', 'Sold Out'
-    ]);
-    const NUM_RE = /^[\d,]+$/;
- 
-    // Images that are clearly site chrome, not reward art -- exclude these
-    // from both the direct lookup and the positional fallback below.
-    const NON_REWARD_IMG_RE = /sorcery_logo|cardeio-logo|brand\/|dust/i;
-    // Confirmed real reward-image CDN pattern (e.g.
-    // https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_arthurian_legends_foot_soldier_pack.webp)
-    // -- used to prefer high-confidence matches when multiple candidates exist.
-    const REWARD_IMG_RE = /cardeio-images\/sorcery\/rewards\//i;
-    const catalogueImgs = Array.from(document.querySelectorAll('img')).filter(img => {
-      const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
-      return src && !NON_REWARD_IMG_RE.test(src);
-    });
-    // For the positional fallback, prefer confirmed-pattern images if there
-    // are enough of them; otherwise fall back to the broader candidate list.
-    const confirmedImgs = catalogueImgs.filter(img => {
-      const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
-      return REWARD_IMG_RE.test(src);
-    });
- 
-    function findImageForName(nameLine) {
-      // Broaden beyond exact-leaf-node matching: any element whose full
-      // (possibly nested) text content equals the name, walking up several
-      // ancestor levels looking for the nearest <img>. Among any images
-      // found, prefer ones matching the confirmed reward-image CDN pattern.
-      const candidates = Array.from(document.querySelectorAll('body *')).filter(
-        el => el.textContent && el.textContent.trim() === nameLine && el.children.length <= 2
-      );
-      let fallback = '';
-      for (const start of candidates) {
-        let node = start;
-        for (let depth = 0; depth < 6 && node; depth++) {
-          const img = node.querySelector ? node.querySelector('img') : null;
-          if (img) {
-            const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
-            if (src && !NON_REWARD_IMG_RE.test(src)) {
-              if (REWARD_IMG_RE.test(src)) return src; // high confidence, use immediately
-              if (!fallback) fallback = src;
-            }
-          }
-          node = node.parentElement;
-        }
-      }
-      return fallback;
-    }
- 
-    const lines = document.body.innerText.split('\n').map(l => l.trim()).filter(Boolean);
-    const results = [];
- 
-    for (let i = 0; i < lines.length; i++) {
-      const nameLine = lines[i];
-      const nextLine = lines[i + 1];
-      if (SKIP.has(nameLine) || NUM_RE.test(nameLine)) continue;
-      if (!nextLine || !NUM_RE.test(nextLine)) continue;
-      // nameLine is immediately followed by a bare number -- treat as a
-      // reward: name + points cost.
-      const points = parseInt(nextLine.replace(/,/g, ''), 10);
-      const soldOut = lines[i + 2] === 'Sold Out';
- 
-      let image = findImageForName(nameLine);
-      let url = '';
-      const nameEls = Array.from(document.querySelectorAll('body *')).filter(
-        el => el.children.length === 0 && el.innerText && el.innerText.trim() === nameLine
-      );
-      if (nameEls.length) {
-        const card = nameEls[0].closest('[class]') || nameEls[0];
-        const link = card.tagName === 'A' ? card : card.closest('a[href]') || card.querySelector('a[href]');
-        if (link) {
-          const href = link.getAttribute('href');
-          if (href) url = href.startsWith('http') ? href : 'https://play.sorcerytcg.com' + href;
-        }
-      }
- 
-      results.push({ name: nameLine, points, soldOut, image, url });
-      i += soldOut ? 2 : 1; // skip past the consumed points (and "Sold Out") line(s)
-    }
- 
-    // Positional fallback: if a reward still has no image but the number of
-    // catalogue images lines up closely with the number of rewards found,
-    // assume DOM order matches display order and pair them by index. Prefer
-    // the confirmed-CDN-pattern image list when it's plausible (close to the
-    // reward count); otherwise fall back to the broader candidate list.
-    const missingCount = results.filter(r => !r.image).length;
-    const fallbackImgs = Math.abs(confirmedImgs.length - results.length) <= 3 ? confirmedImgs : catalogueImgs;
-    if (missingCount && Math.abs(fallbackImgs.length - results.length) <= 3) {
-      results.forEach((r, idx) => {
-        if (!r.image && fallbackImgs[idx]) {
-          r.image = fallbackImgs[idx].getAttribute('src') || fallbackImgs[idx].getAttribute('data-src') || '';
-        }
-      });
-    }
- 
-    return {
-      rewards: results.slice(0, 300),
-      diagnostics: {
-        totalLines: lines.length,
-        rewardsParsed: results.length,
-        catalogueImagesFound: catalogueImgs.length,
-        confirmedPatternImagesFound: confirmedImgs.length,
-        rewardsWithImage: results.filter(r => r.image).length,
-        bodyTextSample: document.body.innerText.slice(0, 500)
-      }
-    };
-  });
- 
-  console.log('Scroll/load-more iterations performed:', scrollIterations);
-  console.log('Diagnostics:', JSON.stringify(diagnostics, null, 2));
- 
-  await browser.close();
- 
-  if (!rewards.length) {
-    console.error('No rewards found -- page may not have rendered correctly, or selectors need updating. See diagnostics above.');
-    fs.writeFileSync('rewards.json', JSON.stringify({ updated: new Date().toISOString(), rewards: [] }, null, 2));
+  if (!res.ok) throw new Error('games-page HTTP ' + res.status);
+  const data = await res.json();
+
+  const cats = Array.isArray(data.pageCategories) ? data.pageCategories : [];
+  const dustCat = cats.find(c => c && String(c.display_name || '').trim().toLowerCase() === CATEGORY.toLowerCase());
+  if (!dustCat) {
+    console.error('No "' + CATEGORY + '" category in pageCategories. Categories seen: ' +
+      cats.map(c => c && c.display_name).join(', '));
     process.exit(1);
   }
- 
-  // Capture the previously-known reward set before overwriting, to detect
-  // genuinely new additions to the catalogue.
-  let previousNames = null;
-  try {
-    const existing = JSON.parse(fs.readFileSync('rewards.json', 'utf8'));
-    if (Array.isArray(existing.rewards)) {
-      previousNames = new Set(existing.rewards.map(r => r.name));
-    }
-  } catch (e) {
-    console.log('No existing rewards.json -- first run, will not notify');
+
+  const comps = Array.isArray(data.pageComponents) ? data.pageComponents : [];
+  const rewards = [];
+  const seen = new Set();
+  for (const pc of comps) {
+    if (!pc || pc.page_category !== dustCat.id) continue;
+    const pb = pc.product_basic_component_id;
+    const p = pb && pb.product;
+    if (!p) continue;
+    if (pb.is_visible === false) continue;                 // hidden tile
+    if (p.is_archived || (p.status && p.status !== 'published')) continue;
+    const points = dustPrice(p);
+    if (points === null) continue;                         // not a Dust item
+    const key = p.sku || p.slug || p.id;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    rewards.push({
+      name: String(p.name || p.internal_display_name || '').trim(),
+      points: points,
+      image: imageUrl(p.main_image),
+      url: PRODUCT_URL ? PRODUCT_URL(p) : PAGE_URL,
+      soldOut: !(p.hasAvailableInventory && p.is_available),
+      slug: p.slug || '',
+      sku: p.sku || '',
+      limit: (typeof p.limit_per_customer === 'number') ? p.limit_per_customer : null,
+      created: p.created_at || ''
+    });
   }
- 
-  const output = {
-    updated: new Date().toISOString(),
-    source: REWARDS_URL,
-    rewards
-  };
- 
-  fs.writeFileSync('rewards.json', JSON.stringify(output, null, 2));
-  console.log('Done -- scraped ' + rewards.length + ' rewards to rewards.json');
- 
-  // Notify subscribers via Firebase Cloud Messaging if any reward wasn't
-  // present last run. `previousNames` is null on the very first run (no
-  // rewards.json yet) -- skip notifying in that case so setup doesn't blast
-  // everyone with every existing reward at once.
-  if (previousNames) {
-    const newRewards = rewards.filter(r => !previousNames.has(r.name));
-    if (newRewards.length) {
-      try {
-        const admin = require('firebase-admin');
-        if (!admin.apps.length) {
-          const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-          admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
-        }
-        const first = newRewards[0];
-        await admin.messaging().send({
-          topic: 'rewards',
-          data: { section: 'rewards' },
-          notification: {
-            title: 'New Reward Available',
-            body: newRewards.length === 1
-              ? first.name + (first.points != null ? ' -- ' + first.points.toLocaleString() + ' pts' : '')
-              : newRewards.length + ' new rewards added to the catalogue'
-          },
-          android: { priority: 'high' },
-          webpush: { headers: { Urgency: 'high' }, fcmOptions: { link: first.url || REWARDS_URL } }
-        });
-        console.log('Sent FCM notification for ' + newRewards.length + ' new reward(s)');
-      } catch (e) {
-        console.log('FCM notification failed (non-fatal): ' + e.message);
-      }
-    } else {
-      console.log('No new rewards since last run.');
-    }
+
+  // newest first; ties keep the page's own order
+  rewards.sort((a, b) => (b.created || '').localeCompare(a.created || ''));
+
+  if (!rewards.length) {
+    console.error('No Dust rewards found -- not writing ' + OUT_FILE + '.');
+    process.exit(1);
   }
-})();
+
+  // Same guard as scrape-cards.js: a much smaller result is far more likely a
+  // partial/changed response than a real catalogue shrink. Refuse to overwrite
+  // a fuller file with one under half its size.
+  let existingCount = 0;
+  if (fs.existsSync(OUT_FILE)) {
+    try { existingCount = (JSON.parse(fs.readFileSync(OUT_FILE, 'utf8')).rewards || []).length; } catch (e) {}
+  }
+  if (existingCount > 0 && rewards.length < existingCount / 2) {
+    console.error('Refusing to overwrite ' + OUT_FILE + ': found ' + rewards.length + ' rewards, previous file had ' + existingCount + '.');
+    process.exit(1);
+  }
+
+  fs.writeFileSync(OUT_FILE, JSON.stringify({ updated: new Date().toISOString(), total: rewards.length, rewards }, null, 2));
+  const soldOut = rewards.filter(r => r.soldOut).length;
+  console.log('Wrote ' + OUT_FILE + ': ' + rewards.length + ' Dust rewards (' + soldOut + ' out of stock).');
+}
+
+main().catch(e => { console.error(e); process.exit(1); });
