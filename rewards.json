@@ -1,286 +1,314 @@
 {
-  "updated": "2026-08-27T07:16:17.654Z",
-  "source": "https://play.sorcerytcg.com/rewards",
+  "updated": "2026-09-26T17:30:22.485Z",
+  "total": 28,
   "rewards": [
     {
-      "name": "AL - Promo - Arthurian Legends Foot Soldier (4 Pack)",
-      "points": 200,
+      "name": "Playmat - Primordial Spring",
+      "points": 800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3358.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_arthurian_legends_foot_soldier_pack.webp",
-      "url": ""
-    },
-    {
-      "name": "AL - Promo - Briar Patch (Foil, 3 Pack)",
-      "points": 500,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_briar_patch_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "AL - Promo - Camelot (Foil)",
-      "points": 1500,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_camelot_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "AL - Promo - Druid (Foil, 4 Pack)",
-      "points": 1000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_druid_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "AL - Promo - King Arthur (Foil)",
-      "points": 2000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_king_arthur_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "AL - Promo - Warhorse (Foil)",
-      "points": 1000,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_warhorse_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "Fields of Phyxis (3 Pack)",
-      "points": 200,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-FieldsOfPhyxisAlt.png",
-      "url": ""
-    },
-    {
-      "name": "Fields of Phyxis (Foil) (3 Pack)",
-      "points": 1200,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-FieldsOfPhyxisAltFOIL.png",
-      "url": ""
-    },
-    {
-      "name": "Haystack (3 Pack)",
-      "points": 200,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HaystackAlt.png",
-      "url": ""
-    },
-    {
-      "name": "Haystack (Foil) (3 Pack)",
-      "points": 1200,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HaystackAltFOIL.png",
-      "url": ""
-    },
-    {
-      "name": "Painting - Briar Patch",
-      "points": 25000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/erik_briar_patch_paitning.webp",
-      "url": ""
+      "slug": "playmat-primordial-spring",
+      "sku": "SOR-DUS-037",
+      "limit": 1,
+      "created": "2026-09-01T18:34:42.242809+00:00"
     },
     {
       "name": "Playmat - Mirror Realm",
       "points": 800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3394.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_mirror_realm.webp",
-      "url": ""
+      "slug": "new-product-name",
+      "sku": "SOR-DUS-036",
+      "limit": 1,
+      "created": "2026-09-01T18:32:38.911195+00:00"
     },
     {
-      "name": "Playmat - Primordial Spring",
+      "name": "Playmat - Roots of Ydrassil",
       "points": 800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3364.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_primordial_spring.webp",
-      "url": ""
-    },
-    {
-      "name": "Playmat - Roots of Yggdrasil",
-      "points": 800,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_roots_of_ydrassil.webp",
-      "url": ""
+      "slug": "playmat-roots-of-ydrassil",
+      "sku": "SOR-DUS-035",
+      "limit": 1,
+      "created": "2026-09-01T18:28:25.7756+00:00"
     },
     {
       "name": "Playmat - Watchtower",
       "points": 800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/watchtower-playmat.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/playmat_watchtower.webp",
-      "url": ""
+      "slug": "playmat-watchtower",
+      "sku": "SOR-DUS-034",
+      "limit": 1,
+      "created": "2026-09-01T18:26:31.272222+00:00"
     },
     {
-      "name": "Preconstructed Decks (Alpha)",
-      "points": 8000,
+      "name": "Waypoint Portal",
+      "points": 400,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3226-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "waypoint-portal-non-foil",
+      "sku": "SOR-DUS-033",
+      "limit": 3,
+      "created": "2026-09-01T18:21:57.559614+00:00"
+    },
+    {
+      "name": "Pudge Butcher",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2981-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "pudge-butcher-non-foil",
+      "sku": "SOR-DUS-001",
+      "limit": 3,
+      "created": "2026-09-01T18:18:49.707647+00:00"
+    },
+    {
+      "name": "Draft Sites Set (Foil)",
+      "points": 500,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2862-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "draft-sites-foil",
+      "sku": "SOR-DUS-005",
+      "limit": 3,
+      "created": "2026-09-01T18:16:20.302767+00:00"
+    },
+    {
+      "name": "Rubble Set (Foil)",
+      "points": 500,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2866.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "rubble-foil",
+      "sku": "SOR-DUS-004",
+      "limit": 3,
+      "created": "2026-09-01T18:14:23.471536+00:00"
+    },
+    {
+      "name": "Foot Soldier Set (Beta)",
+      "points": 400,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2993-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "foot-soldier-non-foil",
+      "sku": "SOR-DUS-003",
+      "limit": 3,
+      "created": "2026-09-01T18:12:27.135566+00:00"
+    },
+    {
+      "name": "Overflowing Court Set",
+      "points": 300,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3204-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "overflowing-court-non-foil",
+      "sku": "SOR-DUS-032",
+      "limit": 3,
+      "created": "2026-09-01T18:04:52.385654+00:00"
+    },
+    {
+      "name": "Mock Court Set",
+      "points": 300,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3220-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Box-AlphaPrecon.png",
-      "url": ""
+      "slug": "mock-court-non-foil",
+      "sku": "SOR-DUS-031",
+      "limit": 3,
+      "created": "2026-09-01T18:02:56.769036+00:00"
     },
     {
-      "name": "Promo - Cloud City (Foil)",
+      "name": "Mobbed Court Set",
+      "points": 300,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3233-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "mobbed-court-non-foil",
+      "sku": "SOR-DUS-030",
+      "limit": 3,
+      "created": "2026-09-01T18:01:16.719919+00:00"
+    },
+    {
+      "name": "Court of Equity Set",
+      "points": 300,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3261-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "court-of-equity-non-foil",
+      "sku": "SOR-DUS-029",
+      "limit": 3,
+      "created": "2026-09-01T17:59:40.694583+00:00"
+    },
+    {
+      "name": "Overflowing Court Set (Foil)",
+      "points": 1800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3192-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "overflowing-court-foil",
+      "sku": "SOR-DUS-028",
+      "limit": 1,
+      "created": "2026-09-01T17:57:21.895573+00:00"
+    },
+    {
+      "name": "Mock Court Set (Foil)",
+      "points": 1800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3209-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "mock-court-foil",
+      "sku": "SOR-DUS-027",
+      "limit": 1,
+      "created": "2026-09-01T17:55:48.185173+00:00"
+    },
+    {
+      "name": "Mobbed Court Set (Foil)",
+      "points": 1800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3181-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "mobbed-court-foil",
+      "sku": "SOR-DUS-026",
+      "limit": 1,
+      "created": "2026-09-01T17:52:21.13645+00:00"
+    },
+    {
+      "name": "Court of Equity Set (Foil)",
+      "points": 1800,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3257.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "court-of-equity-foil",
+      "sku": "SOR-DUS-025",
+      "limit": 1,
+      "created": "2026-09-01T17:49:52.257672+00:00"
+    },
+    {
+      "name": "Druid (Revised)",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3413.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "druid-revised",
+      "sku": "SOR-DUS-024",
+      "limit": 3,
+      "created": "2026-09-01T17:46:50.809356+00:00"
+    },
+    {
+      "name": "River of Blood Set",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3151-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "river-of-blood-foil",
+      "sku": "SOR-DUS-016",
+      "limit": 1,
+      "created": "2026-09-01T17:22:47.248583+00:00"
+    },
+    {
+      "name": "Haystack Set",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3148-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "haystack-foil",
+      "sku": "SOR-DUS-015",
+      "limit": 1,
+      "created": "2026-09-01T17:20:27.142313+00:00"
+    },
+    {
+      "name": "Fields of Phyxis Set",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3132-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "fields-of-phyxis-foil",
+      "sku": "SOR-DUS-014",
+      "limit": 1,
+      "created": "2026-09-01T17:18:09.895814+00:00"
+    },
+    {
+      "name": "Foot Soldier Set (Arthurian Legends)",
+      "points": 200,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3128-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "arthurian-legends-foot-soldiers",
+      "sku": "SOR-DUS-013",
+      "limit": 3,
+      "created": "2026-09-01T17:14:24.004577+00:00"
+    },
+    {
+      "name": "War Horse (Foil)",
+      "points": 1000,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3049-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "war-horse-foil",
+      "sku": "SOR-DUS-011",
+      "limit": 3,
+      "created": "2026-09-01T17:00:10.885389+00:00"
+    },
+    {
+      "name": "Briar Patch Set (Foil)",
+      "points": 500,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3020-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "briar-patch-foil",
+      "sku": "SOR-DUS-010",
+      "limit": 3,
+      "created": "2026-09-01T16:58:18.372806+00:00"
+    },
+    {
+      "name": "Camelot (Foil)",
+      "points": 1500,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3002-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": false,
+      "slug": "camelot-foil",
+      "sku": "SOR-DUS-009",
+      "limit": 3,
+      "created": "2026-09-01T16:55:28.387768+00:00"
+    },
+    {
+      "name": "King Arthur (Foil)",
+      "points": 2000,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2921-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
+      "soldOut": true,
+      "slug": "king-arthur-foil",
+      "sku": "SOR-DUS-008",
+      "limit": 3,
+      "created": "2026-09-01T16:53:24.251726+00:00"
+    },
+    {
+      "name": "Cloud City (Foil)",
       "points": 1400,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2961-4.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_cloud_city_foil.webp",
-      "url": ""
+      "slug": "promo-cloud-city-foil",
+      "sku": "SOR-DUS-006",
+      "limit": 3,
+      "created": "2026-08-31T20:38:42.895046+00:00"
     },
     {
-      "name": "Promo - Court of Equity (2-pack)",
+      "name": "Sorcerer (Foil)",
       "points": 300,
+      "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF2895-3.jpg?width=600&quality=100&resize=contain",
+      "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
       "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtEquity.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Court of Equity Foil (2-pack)",
-      "points": 1800,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtEquityFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Druid (Updated)",
-      "points": 200,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-DruidUpdate.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Foil Draft Sites (4 Pack)",
-      "points": 500,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_draft_sites_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - Foot Soldier (3 Pack)",
-      "points": 400,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_foot_soldier_pack.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - Harbinger (Foil) (Precon)",
-      "points": 1000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-HarbingerFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Mobbed Court (2-pack)",
-      "points": 300,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMobbed.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Mobbed Court Foil (2-pack)",
-      "points": 1800,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMobbedFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Mock Court (2-pack)",
-      "points": 300,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMock.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Mock Court Foil (2-pack)",
-      "points": 1800,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtMockFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Necromancer (Foil) (Precon)",
-      "points": 1000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-NecromancerFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Overflowing Court (2-pack)",
-      "points": 300,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtOverflowing.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Overflowing Court Foil (2-pack)",
-      "points": 1800,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-CourtOverflowingFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Persecutor (Foil) (Precon)",
-      "points": 1000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-PersecutorFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Pudge Butcher",
-      "points": 200,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_pudge_butcher.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - Rubble (Foil, 4 Pack)",
-      "points": 500,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_rubble_pack.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - Savior (Foil) (Precon)",
-      "points": 1000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-SaviorFoil.png",
-      "url": ""
-    },
-    {
-      "name": "Promo - Sorcerer - Foil",
-      "points": 300,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_sorcerer_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - The Colour out of Space (Foil)",
-      "points": 1800,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_the_colour_out_of_space_foil.webp",
-      "url": ""
-    },
-    {
-      "name": "Promo - Waypoint Portal",
-      "points": 400,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/promo_waypoint_portal.webp",
-      "url": ""
-    },
-    {
-      "name": "River of Blood (3 Pack)",
-      "points": 200,
-      "soldOut": false,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-RiverOfBloodAlt.png",
-      "url": ""
-    },
-    {
-      "name": "River of Blood (Foil) (3 Pack)",
-      "points": 1200,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/StoreReward-Card-RiverOfBloodAltFOIL.png",
-      "url": ""
-    },
-    {
-      "name": "Sorcery: Contested Realm - Alpha Box",
-      "points": 12000,
-      "soldOut": true,
-      "image": "https://storage.googleapis.com/cardeio-images/sorcery/rewards/alpha_booster_box.webp",
-      "url": ""
+      "slug": "promo-sorcerer-foil",
+      "sku": "SOR-DUS-002",
+      "limit": 3,
+      "created": "2026-08-31T20:11:38.505071+00:00"
     }
   ]
 }
