@@ -1,0 +1,43 @@
+# Collectr market prices for every card in cards.json -> collectr-prices.json, committed to
+# the repo and read straight by the app from GitHub Pages (no Netlify function involved).
+# Plain fetch(): no browser, no Playwright, no dependencies -- so no npm install step.
+
+name: Scrape Collectr prices
+
+on:
+  schedule:
+    - cron: '30 */6 * * *'   # every 6 hours, at :30 (the TCGPlayer sweep runs on its own schedule)
+  workflow_dispatch:         # and by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collectr-prices
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Scrape Collectr
+        run: node scrape-collectr-prices.js
+
+      - name: Commit collectr-prices.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add collectr-prices.json
+          if git diff --cached --quiet; then
+            echo "No price changes."
+          else
+            git commit -m "Update Collectr prices"
+            git push
+          fi
