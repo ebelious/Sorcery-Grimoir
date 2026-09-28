@@ -25,21 +25,45 @@ const OUT_FILE = 'collectr-prices.json';
 const DELAY_MS = 350;                     // between requests: easy on their API
 const CATEGORY = 'Sorcery: Contested Realm';
 
+// Exactly the headers the Collectr web app sends (read from a browser session's HAR): the
+// API sits behind CloudFront, which answers 403 to a request that does not look like the
+// app's own -- the fetch headers Origin/Referer and the Sec-Fetch-* set are what it checks.
 const HDRS = {
-  'Accept': 'application/json',
+  'Accept': 'application/json, text/plain, */*',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Accept-Encoding': 'gzip, deflate, br',
   'Origin': 'https://app.getcollectr.com',
   'Referer': 'https://app.getcollectr.com/',
-  'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-site',
+  'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:156.0) Gecko/20100101 Firefox/156.0',
+  'Connection': 'keep-alive'
 };
+// If the API still refuses, it is refusing the runner's address, not the request; a run
+// that is refused this many times in a row stops rather than logging a thousand lines.
+const GIVE_UP_AFTER = 12;
+let consecutiveRefusals = 0;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const keyFor = (n) => n.trim().toLowerCase();
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 async function getJSON(url) {
-  const r = await fetch(url, { headers: HDRS });
-  if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + url);
-  return r.json();
+  // one retry after a pause for a transient refusal; a second 403 is counted
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const r = await fetch(url, { headers: HDRS });
+    if (r.ok) { consecutiveRefusals = 0; return r.json(); }
+    if (r.status === 403 || r.status === 429) {
+      if (attempt === 0) { await sleep(1500); continue; }
+      consecutiveRefusals++;
+      if (consecutiveRefusals >= GIVE_UP_AFTER) {
+        console.error('Refused ' + GIVE_UP_AFTER + ' times in a row (HTTP ' + r.status + '): the API is blocking this address, not these requests. Stopping; the existing file is kept.');
+        process.exit(2);
+      }
+    }
+    throw new Error('HTTP ' + r.status + ' ' + url);
+  }
 }
 
 // Every Sorcery product whose name is exactly the card's name, plain or "(Foil)".
