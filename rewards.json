@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T12:26:11.746Z",
+  "updated": "2026-10-01T22:20:30.795Z",
   "total": 28,
   "rewards": [
     {
@@ -117,7 +117,7 @@
       "points": 300,
       "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3220-4.jpg?width=600&quality=100&resize=contain",
       "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
-      "soldOut": true,
+      "soldOut": false,
       "slug": "mock-court-non-foil",
       "sku": "SOR-DUS-031",
       "limit": 3,
