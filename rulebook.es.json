@@ -1,7 +1,7 @@
 {
  "lang": "es",
  "rules": 3,
- "count": 608,
+ "count": 611,
  "of": 613,
  "t": {
   "10.ed9c2722": "Los sites tienen algunas Characteristics clave:",
@@ -81,6 +81,7 @@
   "1y.d3688f49": "Los Artifacts tienen un cuadro de texto de juego que describe sus habilidades especiales.",
   "1z.299d9f20": "Esta unidad puede hacer Fly mientras está en la Surface, obteniendo los siguientes beneficios:",
   "1z.4d301a4b": "Hacer Cast de un Spell desde tu Hand si son Spellcasters (consulta la página 17) o,",
+  "21.809ef1ef": "Al atacar, los Oversized Units siguen haciendo Target a un solo Enemy o Site.",
   "21.cf82da0e": "Cuando esta unidad muere, haz lo indicado antes de colocarla en el Cemetery.",
   "23.7266be73": "Cuando un Minion tiene Damage igual o superior a su Power, muere.",
   "23.b1ccb955": "Un Unit o Site no puede tener varios Wards, y los Minions Evil no pueden tener Ward.",
@@ -369,6 +370,7 @@
   "7i.0e38163e": "Si un efecto hace que una unit «dé un paso» o «dé hasta X pasos», esto no es Forced Movement, y la unit puede modificar esos pasos con sus habilidades. Las units que no pueden moverse activando sus propias habilidades tampoco pueden realizar ningún paso otorgado por estos efectos.",
   "7k.aaec5b92": "El juego utiliza términos y palabras clave que es importante conocer. Cuando aparecen, están en negrita no solo para ayudarte a identificar palabras y conceptos importantes, sino también para indicarte que puedes encontrar más información sobre ellos en el glosario, a partir de la página 32.",
   "7m.49ec19db": "Fire es el elemento del Desire y la Destruction, dispuesto a hacer lo que sea necesario para asegurar la victoria en el Realm. Una afinidad con Fire te otorga una variedad de Spells y habilidades explosivas que pueden crear ráfagas de velocidad o quemar por igual a amigos y enemigos en grandes llamaradas.",
+  "7m.b926e6ac": "Para tus primeras partidas, quizá quieras usar mazos preconstruidos, que te llevarán directamente a la acción. O puedes crear tus propios mazos, equilibrando y ajustando sus Power para adaptarlos a tu estilo de juego (consulta la página 26). ¡El mundo de Sorcery te ofrece posibilidades infinitas!",
   "7m.ea81768d": "Si la resolución de un evento activa una ability, se insertará un nuevo evento en el Storyline. El nuevo evento se añade en el momento actual e interrumpe temporalmente los eventos restantes del Storyline. Una vez que este nuevo evento se haya resuelto, la historia continuará.",
   "7s.c94cfa6f": "El Elemental Threshold no se gasta como el Mana. Es simplemente un Affinity mínimo que debes tener para los Elements indicados para usar algunas cartas. Todos los Artifacts y la mayoría de las habilidades no tienen Threshold alguno, así que solo debes asegurarte de poder pagar los costes asociados para usarlos.",
   "7t.f4c6bbed": "Here y There: «Here» y «There» se refieren a la ubicación o ubicaciones que ocupa una carta. Para la mayoría de las cartas, como los Avatars, los Minions y los Artifacts, eso significa una ubicación. Para la mayoría de las Auras, significa el área de 2x2 que ocupan. Para los Sites, significa dos ubicaciones: su Surface y su Subsurface.",
@@ -492,6 +494,7 @@
   "d.b6cd251f": "Secuencia del turno",
   "d.eedff4b5": "Jugar Sites",
   "d4.038b2d85": "Un Storyline comienza cada vez que una unit lanza un spell o activa una ability; en ese momento, uno o más eventos se colocan en los puntos pertinentes del Storyline y luego se resuelven en orden, uno a uno. A veces, la resolución de un spell, efecto o evento hará que se divida en varios eventos más pequeños (p. ej., los distintos steps del movimiento de una unit), que se colocan cada uno en sus puntos pertinentes del Storyline antes de que el Storyline continúe desarrollándose.",
+  "df.5b1ae393": "En las insondables profundidades del Void infinito, grandes seres compiten por el control de reinos fantásticos, donde una poderosa Magic impregna a todo ser vivo, e incluso a la tierra misma. Asume el papel de un poderoso Avatar en uno de estos Realm y aprovecha las energías arcanas de los cuatro Element —Air, Earth, Fire y Water— para hacer Summon de Beast míticas, hacer Conjure de Artifact antiguos y lanzar (Cast) una gran variedad de Spell poderosos más allá de toda imaginación. ¿Reclamarás el dominio sobre este Realm en disputa?",
   "df.6691eab1": "Normalmente las units ocupan una sola ubicación mientras están en el realm, pero algunas units pueden ocupar varias ubicaciones a la vez debido a su enorme tamaño. Estas Oversized Units siguen las reglas normales de summon, así que eliges un único site que controles cuando lanzas el spell de Minion. Al entrar en el realm, eliges un área de 2x2 que pueda ocupar legalmente, la cual debe incluir la ubicación de summon. Para representar las ubicaciones del Minion, coloca la carta en la intersección de esos sites.",
   "e.29143896": "Striking First",
   "e.40d52220": "Here y There",
