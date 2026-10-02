@@ -1,7 +1,7 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3316,
+ "count": 3317,
  "of": 3318,
  "t": {
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
@@ -2323,6 +2323,7 @@
   "e.0cc4ccb2": "kaarten (maximaal",
   "e.0e7338ec": "Melissa Benson",
   "e.0ff3b491": "Dit deck kopiëren",
+  "e.11e1a617": "✗ {n} probleem{n}",
   "e.1454c037": "ontbreken nog,",
   "e.15c9b006": "Met ruil akkoord gaan",
   "e.1a87b4f8": "heeft minder uitgegeven",
