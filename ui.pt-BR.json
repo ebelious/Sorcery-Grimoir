@@ -1,7 +1,7 @@
 {
  "lang": "pt-BR",
  "rules": 2,
- "count": 3316,
+ "count": 3317,
  "of": 3318,
  "t": {
   "10.04705788": "Acesso à câmera negado ou indisponível.",
@@ -2323,6 +2323,7 @@
   "e.0cc4ccb2": "cartas (máximo",
   "e.0e7338ec": "Melissa Benson",
   "e.0ff3b491": "Copiar este deck",
+  "e.11e1a617": "✗ {n} problema{n}",
   "e.1454c037": "ainda faltando,",
   "e.15c9b006": "Concordar com a troca",
   "e.1a87b4f8": "gastou menos",
