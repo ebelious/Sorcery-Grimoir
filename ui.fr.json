@@ -1,8 +1,8 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3316,
- "of": 3318,
+ "count": 3317,
+ "of": 3319,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
   "10.04a90236": "Impossible d’écrire la sauvegarde. {n}",
@@ -2795,6 +2795,7 @@
   "j.38d7be83": "Merlwyb Bloefhiswyn",
   "j.3baa0cad": "Tournoi terminé",
   "j.3cccaa3d": "Barre de tour et horloges",
+  "j.44ab45f6": "Livre de règles · page {n}",
   "j.462dfa5d": "Jullus pyr Norbanus",
   "j.504ef17c": "Cuchulainn de 4e création",
   "j.5166dc72": "Trolls of the Realm",
