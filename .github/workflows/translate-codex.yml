@@ -1,0 +1,71 @@
+name: Translate Codex & FAQ
+
+# Keeps codex.pt-BR.json in step with codex.json, translating only what is new or changed.
+# Runs after each Codex scrape, and every three hours besides: the first translation is too
+# large for one run, so it is done a batch at a time (TX_MAX_UNITS pieces per run) until done.
+# When nothing needs translating, Claude Code is not even installed and nothing is committed.
+on:
+  workflow_run:
+    workflows: ["Scrape Sorcery Codex & FAQ"]
+    types: [completed]
+  schedule:
+    - cron: '30 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# one at a time: two runs at once would translate the same pieces twice
+concurrency:
+  group: translate-codex
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    # after a scrape, only when the scrape succeeded
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TX_LANG: pt-BR
+      TX_MODEL: sonnet
+      TX_MAX_UNITS: '400'
+
+    steps:
+      - name: Checkout repo (latest, with the scrape's commit)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Count what needs translating
+        id: plan
+        run: node translate-codex.js --count
+
+      - name: Install Claude Code
+        if: steps.plan.outputs.pending != '0'
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Translate what is new or changed
+        if: steps.plan.outputs.pending != '0'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: node translate-codex.js
+
+      - name: Commit codex.pt-BR.json if changed
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add "codex.${TX_LANG}.json"
+          git diff --staged --quiet || git commit -m "chore: update codex.${TX_LANG}.json [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "Push rejected, pulling and retrying ($i)..."
+            git pull --rebase origin main
+            sleep 3
+          done
