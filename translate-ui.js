@@ -25,6 +25,10 @@ const LANG = process.env.TX_LANG || 'pt-BR';
 // extract-rulebook.py from rulebook.pdf) into rulebook.<lang>.json -- translated as rules text, its game
 // terms checked as the Codex's are
 const KIND = process.env.TX_KIND === 'rulebook' ? 'rulebook' : 'ui';
+// the rulebook's files are at 3: made before it, a piece left exactly as the English (and not just a game
+// term -- "Decks", say) is made once more
+const RULES_BASE = 2;
+const RULES = KIND === 'rulebook' ? 3 : RULES_BASE;
 const SRC = KIND === 'rulebook' ? 'rulebook-strings.en.json' : 'ui-strings.en.json';
 const OUT = (KIND === 'rulebook' ? 'rulebook.' : 'ui.') + LANG + '.json';
 const GLOSSARY = 'codex-glossary.' + LANG + '.json';   // the same glossary as the Codex's
@@ -34,7 +38,6 @@ const CHUNK_UNITS = Math.max(1, parseInt(process.env.TX_CHUNK_UNITS || '60', 10)
 const CHUNK_CHARS = Math.max(1000, parseInt(process.env.TX_CHUNK_CHARS || '8000', 10));
 const FAKE = process.env.TX_FAKE === '1';
 // the version of the game-term rules a file's translations were made under (see main: older ones redone)
-const RULES = 2;
 const COUNT_ONLY = process.argv.includes('--count');
 const LANG_NAMES = {
   'pt-BR': 'Brazilian Portuguese (pt-BR)', de: 'German (de)', es: 'Spanish (es)', fr: 'French (fr)',
@@ -170,7 +173,8 @@ function prompt(glossary, cardNames) {
     KIND === 'rulebook'
       ? 'You translate the official rulebook of the trading card game Sorcery: Contested Realm from English into ' + lang + ', a paragraph, heading or list item at a time. This is game rules text: keep its exact meaning, conditions and numbers, and write clear, natural ' + lang + '. A heading stays a short heading.'
       : 'You translate the interface of a phone app -- buttons, labels, settings, headings, hints and messages -- from English into ' + lang + '. The app is Sorcery Grimoire, a companion app for the trading card game Sorcery: Contested Realm.',
-    'The input is a JSON array of objects {"id","text"}. Reply with ONLY a JSON array of objects {"id","text"}: every id from the input, once each, with its text translated. No other words, no code fences.',
+    'The input is a JSON array of objects {"id","text"}, some with "keep": the game terms in that text that must stay in English -- keep every one of them in English, in the form the text uses (it may be plural or a verb form), whatever its meaning in the sentence.' +
+    ' Reply with ONLY a JSON array of objects {"id","text"}: every id from the input, once each, with its text translated. No other words, no code fences.',
     'Rules:',
     '1. Write natural ' + lang + ' as a well-made app would: short labels stay short (a button of one or two words gets one or two words), sentences read naturally. Keep the meaning exact. Keep the capitalisation style: a Title Case label becomes a short label with the first letter capitalised; text in CAPITALS stays in capitals.',
     '2. Keep every tag exactly as written (<b>, <i>, <em>, <strong>, <br>, <u>, <small>, <sup>, <sub>, <code> and their closing tags); translate the words inside them; a tagged phrase may move to where the grammar needs it, but stays whole. Do not add tags.',
@@ -188,6 +192,22 @@ function prompt(glossary, cardNames) {
 function fakeTranslate(items) {
   // stand-in for testing the pipeline: each piece marked, every tag and its contents untouched
   return items.map((it) => ({ id: it.id, text: '[' + LANG + '] ' + it.text }));
+}
+
+// A second try, in the same run, for what was refused: the same pieces sent again, each told exactly what
+// was wrong with its first translation ("keep these English words exactly: Power, Element"; "keep every tag").
+// One refusal for a game term is usually the translator reading a defined term as an ordinary word; named,
+// it keeps it. What is refused again is left for the next run, and shows in English until then.
+function retryRefused(redo, sysPrompt, accept) {
+  if (!redo.length) return 0;
+  const items = redo.map((r) => ({ id: r.id, text: r.text, must: r.why }));
+  const extra = '\nSome items carry "must": the reason their previous translation was refused. Fix exactly that: when it names game terms, those exact English words must appear unchanged in the translation; when it names tags or placeholders, keep every one as in the input. Reply with the same JSON array format.';
+  const res = callClaude(items, sysPrompt + extra);
+  if (!res.ok) { console.log('  second try: ' + res.why); return 0; }
+  let ok = 0;
+  (Array.isArray(res.items) ? res.items : []).forEach((it) => { if (it && accept(it)) ok++; });
+  console.log('  second try: ' + ok + ' of ' + redo.length + ' kept.');
+  return ok;
 }
 
 function callClaude(items, sysPrompt) {
@@ -244,7 +264,12 @@ function main() {
   if (redo) console.log(redo + ' translations gave a game term in ' + LANG + ': they are made again.');
   // Made under older rules (before every Codex title was kept in English): any piece with a game term or
   // Codex title in it is made once more under the rules as they are now.
-  if (rulesWere && rulesWere < RULES) {
+  if (KIND === 'rulebook' && rulesWere === RULES_BASE) {
+    const all = gl0.keep.concat(gl0.codex);
+    let again = 0;
+    units.forEach((m, k) => { if (typeof t[k] === 'string' && t[k] === m && !onlyATerm(m, all)) { delete t[k]; again++; } });
+    if (again) console.log(again + ' rulebook pieces were left in English: they are made again.');
+  } else if (rulesWere && rulesWere < RULES) {
     const all = gl0.keep.concat(gl0.codex);
     let again = 0;
     // ... and any left exactly as the English, unless it is nothing but a game term: an everyday word
@@ -279,7 +304,10 @@ function main() {
   todo.forEach((k) => {
     const s = units.get(k);
     if (cur.length && (cur.length >= CHUNK_UNITS || chars + s.length > CHUNK_CHARS)) { chunks.push(cur); cur = []; chars = 0; }
-    cur.push({ id: k, text: s }); chars += s.length;
+    // the game terms this piece holds that must stay in English -- exactly the ones its translation is
+    // checked for -- sent with it, so the translator is told for each piece, not only in general
+    const keepHere = (KIND === 'rulebook' ? termsIn(s, glossary.keep.concat(glossary.codex)) : capTermsIn(s, glossary.keep).concat(midCapTermsIn(s, glossary.codex)));
+    cur.push(keepHere.length ? { id: k, text: s, keep: keepHere } : { id: k, text: s }); chars += s.length;
   });
   if (cur.length) chunks.push(cur);
 
@@ -287,7 +315,9 @@ function main() {
   chunks.forEach((items, n) => {
     const joined = items.map((i) => i.text).join('\n');
     const names = allNames.filter((nm) => joined.indexOf(nm) >= 0).slice(0, 80);
-    const res = callClaude(items, prompt(glossary, names));
+    const sysP = prompt(glossary, names);
+    const res = callClaude(items, sysP);
+    const redo = [];
     if (!res.ok) { console.log('Batch ' + (n + 1) + '/' + chunks.length + ': ' + res.why + ' -- will try again next run.'); refused += items.length; return; }
     const want = new Set(items.map((i) => i.id));
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
@@ -297,9 +327,13 @@ function main() {
       // where the same word is an ordinary one ("climb the sausage tower"); a Codex title, where it is plainly
       // the term (midCapTermsIn).
       const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, KIND === 'rulebook' ? glossary.keep.concat(glossary.codex) : capTermsIn(units.get(it.id), glossary.keep).concat(midCapTermsIn(units.get(it.id), glossary.codex)));
-      if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
+      if (why) { console.log('  ' + it.id + ' not kept (' + why + ')'); redo.push({ id: it.id, text: units.get(it.id), why }); return; }
       t[it.id] = it.text; kept++;
     });
+    // checked the same way as the first answers
+    const accept = (it) => { if (!redo.some((r) => r.id === it.id)) return false; const w = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, KIND === 'rulebook' ? glossary.keep.concat(glossary.codex) : capTermsIn(units.get(it.id), glossary.keep).concat(midCapTermsIn(units.get(it.id), glossary.codex))); if (w) return false; t[it.id] = it.text; kept++; return true; };
+    const second = retryRefused(redo, sysP, accept);
+    refused += redo.length - second;
     refused += want.size;   // any id missing from the reply
     save(OUT, units, t, data.updated);   // kept as it goes: a run cut short loses nothing already done
     console.log('Batch ' + (n + 1) + '/' + chunks.length + ': ' + items.length + ' sent.');
