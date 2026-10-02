@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3317,
+ "count": 3319,
  "of": 3319,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
@@ -109,6 +109,7 @@
   "15.da14257e": "Le flipper de Matt Sutton. Pourchassez ORBIT.",
   "16.17260316": "Choisissez au moins un deck contenant des cartes.",
   "16.1f3fce73": "est laissé dessus. Il reviendra au maximum de",
+  "16.30657f83": "Max {n} cop{n} of {n} allowed ({n}{n}).{n}",
   "16.35775b83": "Chaque carte est classée là où l'indique sa propre ligne.",
   "16.4b4448d7": "Rapport publié sur le forum des bugs. Merci !",
   "16.87fdbf9f": "Seul l’organisateur de l’événement peut attribuer les places.",
@@ -307,6 +308,7 @@
   "1u.6a3ddb04": "se limite à un deck, un classeur ou une boîte — ou à ce qui n’a pas été classé",
   "1u.821bec1a": "Chaque deck ne peut avoir qu'1 Avatar. Retirez d'abord l'Avatar actuel.",
   "1u.8cd87b8f": "Survie en solo : tenez quatre Villages face à une horde infinie d'Undead.",
+  "1u.93c0a749": "{n} non-foil cop{n} moved out of foil-only containers to Unplaced.",
   "1u.a7341379": "Saisissez dans la <b>barre de recherche</b> pour trouver des cartes par nom ou par texte de règle.",
   "1u.cc4582c2": "ne contient que des foils : les cartes foil y sont placées, les autres restent non classées.",
   "1u.e63c8cd3": "affiché tel que projeté — les têtes de série et les confrontations changent à mesure que les résultats arrivent.",
