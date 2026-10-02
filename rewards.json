@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T17:27:17.700Z",
+  "updated": "2026-10-02T21:49:22.994Z",
   "total": 28,
   "rewards": [
     {
@@ -128,7 +128,7 @@
       "points": 300,
       "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3233-4.jpg?width=600&quality=100&resize=contain",
       "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
-      "soldOut": false,
+      "soldOut": true,
       "slug": "mobbed-court-non-foil",
       "sku": "SOR-DUS-030",
       "limit": 3,
