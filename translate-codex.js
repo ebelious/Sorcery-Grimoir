@@ -258,7 +258,8 @@ function main() {
   const gl0 = loadGlossary();
   gl0.codex = codexTerms(gl0);
   let redo = 0;
-  units.forEach((m, k) => { if (typeof t[k] === 'string' && (keepsTerms(m, t[k], gl0.keep) || keepsTerms(m, t[k], capTermsIn(m, gl0.codex)))) { delete t[k]; redo++; } });
+  // rules text: every Codex term in it is the game's term, however it is written (life, minions, Adjacent)
+  units.forEach((m, k) => { if (typeof t[k] === 'string' && keepsTerms(m, t[k], gl0.keep.concat(gl0.codex))) { delete t[k]; redo++; } });
   if (redo) console.log(redo + ' translations gave a game term in ' + LANG + ': they are made again.');
   // Made under older rules (before every Codex title was kept in English): any piece with a game term or
   // Codex title in it is made once more under the rules as they are now.
@@ -306,7 +307,7 @@ function main() {
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
       if (!it || !want.has(it.id)) return;
       want.delete(it.id);
-      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep) || keepsTerms(units.get(it.id), it.text, capTermsIn(units.get(it.id), glossary.codex));
+      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep.concat(glossary.codex));
       if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
       t[it.id] = it.text; kept++;
     });
