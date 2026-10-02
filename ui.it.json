@@ -1,7 +1,7 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 3310,
+ "count": 3311,
  "of": 3318,
  "t": {
   "10.04705788": "Accesso alla fotocamera negato o non disponibile.",
@@ -172,6 +172,7 @@
   "1a5.ae95cc90": "Suggeriamo 50 minuti per partita, un tempo più che sufficiente per la grande maggioranza delle partite di Sorcery giocate a un ritmo ragionevole. Tuttavia, controlla con l'organizzatore del torneo o con lo staff quanto durerà ogni turno durante l'evento. Usa questo tempo condiviso con il tuo avversario in modo rispettoso. Un po' di riflessione va bene, ma assicurati di giocare abbastanza velocemente da non raggiungere il limite di tempo. I turni senza limite di tempo possono verificarsi nelle finali o nelle partite decisive, secondo le istruzioni dell'organizzatore del torneo. Queste partite senza limite di tempo garantiscono un risultato decisivo, ma ai giocatori si chiede comunque di giocare a un ritmo ragionevole. Se stai ancora giocando quando viene dichiarato il termine del tempo, si giocheranno tre turni bonus. Completa il turno in corso, poi inizia a contare i turni. Ad esempio, se il tempo scade durante il tuo turno, finirai il tuo turno. Poi il tuo avversario farà un turno (1), poi tu (2), poi il tuo avversario (3). Se la partita non è ancora finita dopo i turni bonus, applica questi spareggi finali: • Se esattamente un giocatore è a Death's Door, perde. • Altrimenti, perdono entrambi i giocatori. Nota: viene registrato come pareggio da zero punti nel play network. Ci aspettiamo un ritmo ragionevole. I giudici possono intervenire se necessario. Il tempo è una risorsa condivisa tra i due giocatori e ognuno dovrebbe sforzarsi di usarlo con attenzione e in modo equilibrato. È anche ragionevole aspettarsi che, se un giocatore ottiene nuove informazioni importanti, possa aver bisogno di un po' di tempo per adattarsi. In definitiva, i giudici devono usare il loro giudizio. I giudici possono applicare qualsiasi rimedio ritengano opportuno, tra cui avvertire il giocatore, concedere all'avversario tempo extra o turni bonus, assegnare una sconfitta nella partita, ecc.",
   "1b.54acf2a7": "Non è stato possibile scrivere il backup su questo dispositivo.",
   "1b.554a74a8": "Cancellare tutta la cronologia delle partite? L'operazione non può essere annullata.",
+  "1b.6f416f59": "ordina l'elenco per Name, Cost, Power o Rarity.",
   "1b.92174ed6": "Solo l'organizzatore dell'evento può avviare il top cut.",
   "1b.b332c298": "Tocca Aggiorna per caricare gli ultimi aggiornamenti di Discord.",
   "1b.d7d30a4a": "(facoltativo, lascia vuoto se stai solo giudicando)",
