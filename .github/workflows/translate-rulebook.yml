@@ -1,0 +1,82 @@
+name: Translate Rulebook
+
+# Keeps rulebook.<lang>.json, for each language below, in step with rulebook-strings.en.json (the
+# rulebook's text, made by extract-rulebook.py from rulebook.pdf), translating only what is new or changed:
+# translate-ui.js with TX_KIND=rulebook -- the rules text translated as rules text, every Codex term kept in
+# English. Runs when rulebook-strings.en.json is pushed (a new rulebook), every hour besides until each
+# language is complete, and by hand. When nothing needs translating, Claude Code is not installed and
+# nothing is committed.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rulebook-strings.en.json'
+      - 'codex-glossary.*.json'
+  schedule:
+    - cron: '20 * * * *'   # hourly: a run with nothing to translate ends in seconds
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translate-rulebook
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # one language after another (each starts from the commit the one before it made): Brazilian
+    # Portuguese, German, Spanish, French, Italian, Dutch, Swedish. A language is added here, with its
+    # glossary file (codex-glossary.<lang>.json), and nothing else changes.
+    strategy:
+      matrix:
+        lang: [pt-BR, de, es, fr, it, nl, sv]
+      max-parallel: 1
+      fail-fast: false
+    env:
+      TX_LANG: ${{ matrix.lang }}
+      TX_KIND: rulebook
+      TX_MODEL: sonnet
+      TX_MAX_UNITS: '700'
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Count what needs translating
+        id: plan
+        run: node translate-ui.js --count
+
+      - name: Install Claude Code
+        if: steps.plan.outputs.pending != '0'
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Translate what is new or changed
+        if: steps.plan.outputs.pending != '0'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: node translate-ui.js
+
+      - name: Commit rulebook.<lang>.json if changed
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          if [ ! -f "rulebook.${TX_LANG}.json" ]; then echo "No rulebook.${TX_LANG}.json to commit."; exit 0; fi
+          git add "rulebook.${TX_LANG}.json"
+          git diff --staged --quiet || git commit -m "chore: update rulebook.${TX_LANG}.json [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "Push rejected, pulling and retrying ($i)..."
+            git pull --rebase origin main
+            sleep 3
+          done
