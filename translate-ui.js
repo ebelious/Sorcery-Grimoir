@@ -21,8 +21,12 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const LANG = process.env.TX_LANG || 'pt-BR';
-const SRC = 'ui-strings.en.json';
-const OUT = 'ui.' + LANG + '.json';
+// TX_KIND=rulebook: the same job for the rulebook's text (rulebook-strings.en.json, made by
+// extract-rulebook.py from rulebook.pdf) into rulebook.<lang>.json -- translated as rules text, its game
+// terms checked as the Codex's are
+const KIND = process.env.TX_KIND === 'rulebook' ? 'rulebook' : 'ui';
+const SRC = KIND === 'rulebook' ? 'rulebook-strings.en.json' : 'ui-strings.en.json';
+const OUT = (KIND === 'rulebook' ? 'rulebook.' : 'ui.') + LANG + '.json';
 const GLOSSARY = 'codex-glossary.' + LANG + '.json';   // the same glossary as the Codex's
 const MODEL = process.env.TX_MODEL || 'sonnet';
 const MAX_UNITS = Math.max(1, parseInt(process.env.TX_MAX_UNITS || '1500', 10));
@@ -163,7 +167,9 @@ function prompt(glossary, cardNames) {
   const lang = LANG_NAMES[LANG] || LANG;
   const terms = Object.keys(glossary.terms);
   return [
-    'You translate the interface of a phone app -- buttons, labels, settings, headings, hints and messages -- from English into ' + lang + '. The app is Sorcery Grimoire, a companion app for the trading card game Sorcery: Contested Realm.',
+    KIND === 'rulebook'
+      ? 'You translate the official rulebook of the trading card game Sorcery: Contested Realm from English into ' + lang + ', a paragraph, heading or list item at a time. This is game rules text: keep its exact meaning, conditions and numbers, and write clear, natural ' + lang + '. A heading stays a short heading.'
+      : 'You translate the interface of a phone app -- buttons, labels, settings, headings, hints and messages -- from English into ' + lang + '. The app is Sorcery Grimoire, a companion app for the trading card game Sorcery: Contested Realm.',
     'The input is a JSON array of objects {"id","text"}. Reply with ONLY a JSON array of objects {"id","text"}: every id from the input, once each, with its text translated. No other words, no code fences.',
     'Rules:',
     '1. Write natural ' + lang + ' as a well-made app would: short labels stay short (a button of one or two words gets one or two words), sentences read naturally. Keep the meaning exact. Keep the capitalisation style: a Title Case label becomes a short label with the first letter capitalised; text in CAPITALS stays in capitals.',
@@ -233,7 +239,7 @@ function main() {
   let redo = 0;
   units.forEach((m, k) => {
     if (typeof t[k] !== 'string') return;
-    if (keepsTerms(m, t[k], capTermsIn(m, gl0.keep).concat(midCapTermsIn(m, gl0.codex)))) { delete t[k]; redo++; }
+    if (keepsTerms(m, t[k], KIND === 'rulebook' ? gl0.keep.concat(gl0.codex) : capTermsIn(m, gl0.keep).concat(midCapTermsIn(m, gl0.codex)))) { delete t[k]; redo++; }
   });
   if (redo) console.log(redo + ' translations gave a game term in ' + LANG + ': they are made again.');
   // Made under older rules (before every Codex title was kept in English): any piece with a game term or
@@ -290,7 +296,7 @@ function main() {
       // In the app's text a named term is checked where it is written capitalised ("Coin Threshold"), not
       // where the same word is an ordinary one ("climb the sausage tower"); a Codex title, where it is plainly
       // the term (midCapTermsIn).
-      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, capTermsIn(units.get(it.id), glossary.keep).concat(midCapTermsIn(units.get(it.id), glossary.codex)));
+      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, KIND === 'rulebook' ? glossary.keep.concat(glossary.codex) : capTermsIn(units.get(it.id), glossary.keep).concat(midCapTermsIn(units.get(it.id), glossary.codex)));
       if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
       t[it.id] = it.text; kept++;
     });
