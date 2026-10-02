@@ -1,7 +1,7 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3317,
+ "count": 3318,
  "of": 3318,
  "t": {
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
@@ -269,6 +269,7 @@
   "1m.21e3490f": "{n} paren Uniques — Duplicator staat maximaal {n} toe ({n})",
   "1m.55b73ef0": "Peddel, power-ups, lasers en zwevers. Maak elke steen kapot.",
   "1m.5749a616": "Alpha/Beta/Arthurian/Gothic — veteraan van Magic: The Gathering",
+  "1n.157dc7c6": "Deze zone leegmaken? {n} card{n} aan de kant van {n} worden verwijderd.",
   "1n.d60f9e67": "Voor de volgende kaarten is errata uitgegeven voor gebruik in 2HD:",
   "1n.dd3dad77": "tabblad naar de standaardwaarden. De andere tabbladen blijven zoals ze zijn.",
   "1o.154dc556": "Het menu is vol: twaalf rijen, zes per kant. Verwijder er eerst een.",
