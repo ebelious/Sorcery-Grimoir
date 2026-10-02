@@ -9,7 +9,7 @@
 //
 // Usage:   node translate-ui.js            translate up to TX_MAX_UNITS new/changed pieces
 //          node translate-ui.js --count    only count them; writes pending=<n> for the workflow
-// Settings: TX_LANG (pt-BR), TX_MODEL (sonnet), TX_MAX_UNITS (600), TX_CHUNK_UNITS (60),
+// Settings: TX_LANG (pt-BR), TX_MODEL (sonnet), TX_MAX_UNITS (1500), TX_CHUNK_UNITS (60),
 //           TX_CHUNK_CHARS (8000), TX_FAKE=1 (no Claude: a stand-in, for testing)
 // The English is the app's own; it is still only handed to Claude as text to translate, one turn, no
 // tools, and kept only if it passes the checks.
@@ -25,7 +25,7 @@ const SRC = 'ui-strings.en.json';
 const OUT = 'ui.' + LANG + '.json';
 const GLOSSARY = 'codex-glossary.' + LANG + '.json';   // the same glossary as the Codex's
 const MODEL = process.env.TX_MODEL || 'sonnet';
-const MAX_UNITS = Math.max(1, parseInt(process.env.TX_MAX_UNITS || '600', 10));
+const MAX_UNITS = Math.max(1, parseInt(process.env.TX_MAX_UNITS || '1500', 10));
 const CHUNK_UNITS = Math.max(1, parseInt(process.env.TX_CHUNK_UNITS || '60', 10));
 const CHUNK_CHARS = Math.max(1000, parseInt(process.env.TX_CHUNK_CHARS || '8000', 10));
 const FAKE = process.env.TX_FAKE === '1';
@@ -176,7 +176,13 @@ function save(file, units, t, srcUpdated) {
 }
 
 function main() {
-  if (!fs.existsSync(SRC)) { console.log(SRC + ' not found -- nothing to translate.'); output('pending', 0); return; }
+  if (!fs.existsSync(SRC)) {
+    // Not a quiet 'nothing to do': without its English the job can make nothing, and saying so plainly
+    // beats the commit step failing later on a file that was never made.
+    console.error(SRC + ' was not found in ' + process.cwd() + ' -- it must be in the root of the repo, beside this script' + ' (commit the ui-strings.en.json delivered with the app).');
+    output('pending', 0);
+    process.exit(1);
+  }
   const data = JSON.parse(fs.readFileSync(SRC, 'utf8'));
   const units = collectUnits(data);
   let t = {};
@@ -196,7 +202,12 @@ function main() {
   let asIs = 0;
   pending.forEach((k) => { if (onlyATerm(units.get(k), glossary.keep)) { t[k] = units.get(k); asIs++; } });
   if (asIs) { console.log(asIs + ' pieces are only a game term: kept in English without asking.'); save(OUT, units, t, data.updated); }
-  const todo = pending.filter((k) => typeof t[k] !== 'string').slice(0, MAX_UNITS);
+  // what people see first (the first-launch screens, the menus, Settings -- 'first' in the list) before the rest
+  const firstKeys = new Set((data.first || []).filter((m) => typeof m === 'string').map(key));
+  const waiting = pending.filter((k) => typeof t[k] !== 'string');
+  const todo = waiting.filter((k) => firstKeys.has(k)).concat(waiting.filter((k) => !firstKeys.has(k))).slice(0, MAX_UNITS);
+  const firstLeft = waiting.filter((k) => firstKeys.has(k)).length;
+  if (firstLeft) console.log(firstLeft + ' of them are on the first screens: those go first.');
   if (!todo.length) { output('pending', 0); return; }
   const chunks = []; let cur = [], chars = 0;
   todo.forEach((k) => {
