@@ -26,8 +26,8 @@
 },
 {
 "t": "h",
-"text": "Introduction...........................3",
-"u": "Introduction...........................3"
+"text": "Introduction",
+"u": "Introduction"
 },
 {
 "t": "p",
@@ -36,8 +36,8 @@
 },
 {
 "t": "h",
-"text": "Gameplay....................................3",
-"u": "Gameplay....................................3"
+"text": "Gameplay",
+"u": "Gameplay"
 },
 {
 "t": "p",
@@ -51,13 +51,13 @@
 },
 {
 "t": "h",
-"text": "The Four Elements.................4",
-"u": "The Four Elements.................4"
+"text": "The Four Elements",
+"u": "The Four Elements"
 },
 {
 "t": "h",
-"text": "Cards...........................................5",
-"u": "Cards...........................................5"
+"text": "Cards",
+"u": "Cards"
 },
 {
 "t": "p",
@@ -66,8 +66,8 @@
 },
 {
 "t": "h",
-"text": "Card Types.................................5",
-"u": "Card Types.................................5"
+"text": "Card Types",
+"u": "Card Types"
 },
 {
 "t": "p",
@@ -106,8 +106,8 @@
 },
 {
 "t": "h",
-"text": "Game Zones..............................10",
-"u": "Game Zones..............................10"
+"text": "Game Zones",
+"u": "Game Zones"
 },
 {
 "t": "p",
@@ -131,18 +131,23 @@
 },
 {
 "t": "h",
-"text": "Setup..........................................11",
-"u": "Setup..........................................11"
+"text": "Setup",
+"u": "Setup"
 },
 {
 "t": "h",
-"text": "Winning the Game................11",
-"u": "Winning the Game................11"
+"text": "Winning the Game",
+"u": "Winning the Game"
 },
 {
 "t": "p",
-"text": "Death’s Door & Death Blow.................................11 Navigating the Realm",
-"u": "Death’s Door &amp; Death Blow.................................11 Navigating the Realm"
+"text": "Death’s Door & Death Blow",
+"u": "Death’s Door &amp; Death Blow"
+},
+{
+"t": "p",
+"text": "Navigating the Realm",
+"u": "Navigating the Realm"
 },
 {
 "t": "p",
@@ -206,8 +211,8 @@
 },
 {
 "t": "h",
-"text": "Turn Summary........................16",
-"u": "Turn Summary........................16"
+"text": "Turn Summary",
+"u": "Turn Summary"
 },
 {
 "t": "p",
@@ -226,8 +231,8 @@
 },
 {
 "t": "h",
-"text": "Casting Spells........................17",
-"u": "Casting Spells........................17"
+"text": "Casting Spells",
+"u": "Casting Spells"
 },
 {
 "t": "p",
@@ -260,9 +265,9 @@
 "u": "Casting Magics"
 },
 {
-"t": "h",
-"text": "Activating Abilities............20",
-"u": "Activating Abilities............20"
+"t": "p",
+"text": "Activating Abilities",
+"u": "Activating Abilities"
 },
 {
 "t": "p",
@@ -316,8 +321,8 @@
 },
 {
 "t": "h",
-"text": "Advanced Concepts..............27",
-"u": "Advanced Concepts..............27"
+"text": "Advanced Concepts",
+"u": "Advanced Concepts"
 },
 {
 "t": "p",
@@ -371,8 +376,8 @@
 },
 {
 "t": "h",
-"text": "Quick Reference Guide.......36",
-"u": "Quick Reference Guide.......36"
+"text": "Quick Reference Guide",
+"u": "Quick Reference Guide"
 },
 {
 "t": "p",
@@ -741,18 +746,8 @@
 },
 {
 "t": "li",
-"text": "Each artifact has a",
-"u": "Each artifact has a"
-},
-{
-"t": "h",
-"text": "mana",
-"u": "mana"
-},
-{
-"t": "p",
-"text": "cost that you must pay to play it.",
-"u": "cost that you must pay to play it."
+"text": "Each artifact has a mana cost that you must pay to play it.",
+"u": "Each artifact has a mana cost that you must pay to play it."
 },
 {
 "t": "li",
@@ -776,8 +771,13 @@
 },
 {
 "t": "p",
-"text": "Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions. Monuments",
-"u": "Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions. Monuments"
+"text": "Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions.",
+"u": "Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions."
+},
+{
+"t": "h",
+"text": "Monuments",
+"u": "Monuments"
 },
 {
 "t": "p",
@@ -1231,33 +1231,13 @@
 },
 {
 "t": "p",
-"text": "The Cave Trolls (3) occupy the",
-"u": "The Cave Trolls (3) occupy the"
-},
-{
-"t": "h",
-"text": "Underground",
-"u": "Underground"
+"text": "The Cave Trolls (3) occupy the Underground region under the site in its square.",
+"u": "The Cave Trolls (3) occupy the Underground region under the site in its square."
 },
 {
 "t": "p",
-"text": "region under the site in its square.",
-"u": "region under the site in its square."
-},
-{
-"t": "p",
-"text": "The Sea Serpent (4) and Diluvian Kraken (5) occupy the",
-"u": "The Sea Serpent (4) and Diluvian Kraken (5) occupy the"
-},
-{
-"t": "h",
-"text": "Surface",
-"u": "Surface"
-},
-{
-"t": "p",
-"text": "region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square.",
-"u": "region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square."
+"text": "The Sea Serpent (4) and Diluvian Kraken (5) occupy the Surface region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square.",
+"u": "The Sea Serpent (4) and Diluvian Kraken (5) occupy the Surface region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square."
 }
 ]
 },
@@ -1266,33 +1246,13 @@
 "blocks": [
 {
 "t": "p",
-"text": "These nine squares are",
-"u": "These nine squares are"
-},
-{
-"t": "h",
-"text": "nearby",
-"u": "nearby"
+"text": "These nine squares are nearby the card",
+"u": "These nine squares are nearby the card"
 },
 {
 "t": "p",
-"text": "the card",
-"u": "the card"
-},
-{
-"t": "p",
-"text": "These five squares are",
-"u": "These five squares are"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
-},
-{
-"t": "p",
-"text": "to the card",
-"u": "to the card"
+"text": "These five squares are adjacent to the card",
+"u": "These five squares are adjacent to the card"
 },
 {
 "t": "h",
@@ -1321,8 +1281,8 @@
 },
 {
 "t": "p",
-"text": "“Here” and “There” are used to contextually refer to the location (s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface.",
-"u": "“Here” and “There” are used to contextually refer to the location (s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface."
+"text": "“Here” and “There” are used to contextually refer to the location(s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface.",
+"u": "“Here” and “There” are used to contextually refer to the location(s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface."
 },
 {
 "t": "h",
@@ -1376,103 +1336,23 @@
 },
 {
 "t": "p",
-"text": "The King is",
-"u": "The King is"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
+"text": "The King is adjacent to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is nearby the King.",
+"u": "The King is adjacent to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is nearby the King."
 },
 {
 "t": "p",
-"text": "to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is",
-"u": "to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is"
-},
-{
-"t": "h",
-"text": "nearby",
-"u": "nearby"
+"text": "The King is not adjacent to the Headless Haunt because the Haunt is in the Void region.",
+"u": "The King is not adjacent to the Headless Haunt because the Haunt is in the Void region."
 },
 {
 "t": "p",
-"text": "the King.",
-"u": "the King."
+"text": "The Cave Trolls are not adjacent to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not nearby the King because it is submerged.",
+"u": "The Cave Trolls are not adjacent to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not nearby the King because it is submerged."
 },
 {
 "t": "p",
-"text": "The King is not",
-"u": "The King is not"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
-},
-{
-"t": "p",
-"text": "to the Headless Haunt because the Haunt is in the Void region.",
-"u": "to the Headless Haunt because the Haunt is in the Void region."
-},
-{
-"t": "p",
-"text": "The Cave Trolls are not",
-"u": "The Cave Trolls are not"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
-},
-{
-"t": "p",
-"text": "to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not",
-"u": "to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not"
-},
-{
-"t": "h",
-"text": "nearby",
-"u": "nearby"
-},
-{
-"t": "p",
-"text": "the King because it is submerged.",
-"u": "the King because it is submerged."
-},
-{
-"t": "p",
-"text": "The Pufferfish and Cave Trolls are not",
-"u": "The Pufferfish and Cave Trolls are not"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
-},
-{
-"t": "p",
-"text": "to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not",
-"u": "to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not"
-},
-{
-"t": "h",
-"text": "adjacent",
-"u": "adjacent"
-},
-{
-"t": "p",
-"text": "to the Headless Haunt, nor are the Cave Trolls",
-"u": "to the Headless Haunt, nor are the Cave Trolls"
-},
-{
-"t": "h",
-"text": "nearby",
-"u": "nearby"
-},
-{
-"t": "p",
-"text": "the Headless Haunt.",
-"u": "the Headless Haunt."
+"text": "The Pufferfish and Cave Trolls are not adjacent to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not adjacent to the Headless Haunt, nor are the Cave Trolls nearby the Headless Haunt.",
+"u": "The Pufferfish and Cave Trolls are not adjacent to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not adjacent to the Headless Haunt, nor are the Cave Trolls nearby the Headless Haunt."
 },
 {
 "t": "h",
@@ -2056,18 +1936,8 @@
 },
 {
 "t": "p",
-"text": "Remember: Losing life like this is",
-"u": "Remember: Losing life like this is"
-},
-{
-"t": "h",
-"text": "not",
-"u": "not"
-},
-{
-"t": "p",
-"text": "damage.",
-"u": "damage."
+"text": "Remember: Losing life like this is not damage.",
+"u": "Remember: Losing life like this is not damage."
 },
 {
 "t": "p",
@@ -2236,13 +2106,8 @@
 },
 {
 "t": "p",
-"text": "Sorcery: Contested Realm",
-"u": "Sorcery: Contested Realm"
-},
-{
-"t": "p",
-"text": "is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:",
-"u": "is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:"
+"text": "Sorcery: Contested Realm is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:",
+"u": "Sorcery: Contested Realm is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:"
 },
 {
 "t": "li",
@@ -2861,23 +2726,8 @@
 },
 {
 "t": "p",
-"text": "Note: When an Avatar is at",
-"u": "Note: When an Avatar is at"
-},
-{
-"t": "h",
-"text": "death’s door",
-"u": "death’s door"
-},
-{
-"t": "p",
-"text": ", only damage will deliver a",
-"u": ", only damage will deliver a"
-},
-{
-"t": "h",
-"text": "death blow",
-"u": "death blow"
+"text": "Note: When an Avatar is at death’s door, only damage will deliver a death blow.",
+"u": "Note: When an Avatar is at death’s door, only damage will deliver a death blow."
 },
 {
 "t": "h",
@@ -3681,18 +3531,8 @@
 },
 {
 "t": "p",
-"text": "Target: Spells and abilities can only target things within the",
-"u": "Target: Spells and abilities can only target things within the"
-},
-{
-"t": "h",
-"text": "Spellcaster’s",
-"u": "Spellcaster’s"
-},
-{
-"t": "p",
-"text": "or referencing card’s same region.",
-"u": "or referencing card’s same region."
+"text": "Target: Spells and abilities can only target things within the Spellcaster’s or referencing card’s same region.",
+"u": "Target: Spells and abilities can only target things within the Spellcaster’s or referencing card’s same region."
 },
 {
 "t": "p",
@@ -3771,13 +3611,8 @@
 },
 {
 "t": "p",
-"text": "Sorcery: Contested Realm",
-"u": "Sorcery: Contested Realm"
-},
-{
-"t": "p",
-"text": "is built around the four classical elements:",
-"u": "is built around the four classical elements:"
+"text": "Sorcery: Contested Realm is built around the four classical elements:",
+"u": "Sorcery: Contested Realm is built around the four classical elements:"
 },
 {
 "t": "h",
@@ -3995,15 +3830,15 @@
 "strings": [
 "December 2025",
 "Table of Contents",
-"Introduction...........................3",
+"Introduction",
 "Using this Rulebook",
-"Gameplay....................................3",
+"Gameplay",
 "How to Win",
 "Decks",
-"The Four Elements.................4",
-"Cards...........................................5",
+"The Four Elements",
+"Cards",
 "The Golden Rule",
-"Card Types.................................5",
+"Card Types",
 "Avatars",
 "Sites",
 "Spells",
@@ -4011,14 +3846,15 @@
 "Artifacts",
 "Auras",
 "Magics",
-"Game Zones..............................10",
+"Game Zones",
 "The Realm",
 "Atlas and Spellbook Decks",
 "Cemetery",
 "Hand",
-"Setup..........................................11",
-"Winning the Game................11",
-"Death’s Door &amp; Death Blow.................................11 Navigating the Realm",
+"Setup",
+"Winning the Game",
+"Death’s Door &amp; Death Blow",
+"Navigating the Realm",
 "Areas of the Realm",
 "Squares",
 "The Void",
@@ -4030,18 +3866,18 @@
 "Adjacent and Nearby",
 "Adjacent and Nearby Locations",
 "Steps",
-"Turn Summary........................16",
+"Turn Summary",
 "1. Start Phase",
 "2. Main Phase",
 "3. End Phase",
-"Casting Spells........................17",
+"Casting Spells",
 "Mana",
 "Elemental Threshold",
 "Casting Minions",
 "Casting Artifacts",
 "Casting Auras",
 "Casting Magics",
-"Activating Abilities............20",
+"Activating Abilities",
 "Tapping a Card",
 "Playing Sites",
 "Basic Abilities",
@@ -4051,7 +3887,7 @@
 "Intercept",
 "Pick Up or Drop Artifacts",
 "Building Your Own",
-"Advanced Concepts..............27",
+"Advanced Concepts",
 "Special Abilities",
 "Advanced Movement Concepts",
 "Damage Grids",
@@ -4062,17 +3898,14 @@
 "The Storyline",
 "Glossary of Terms and",
 "Keywords",
-"Quick Reference Guide.......36",
+"Quick Reference Guide",
 "Common Keyword Abilities",
-"Introduction",
 "In the unfathomable depths of the infinite void, great beings vie for control of fantastical realms, where powerful magic imbues every living thing, and even the land itself. Take on the role of a powerful Avatar in one of these realms, and tap into the arcane energies of the four elements—Air, Earth, Fire, and Water— to summon mythical beasts, conjure ancient artifacts, and cast an array of powerful spells beyond all imagining. Will you claim dominion over this contested realm?",
 "The goal of this rulebook is to get you up to speed and ready to play your first games of Sorcery: Contested Realm. For new players, carry on from here, have someone guide you through a game, or visit www.sorcerytcg.com/how-to-play where you’ll find tutorial videos and more. For experienced players, this rulebook will handle most of your queries, but you can also explore the Codex (curiosa.io/codex) for even more detail.",
 "The game uses terms and keywords that are important to know. When these come up, they have been bolded to not only help you identify important words and concepts, but to also tell you that you can find more information about that word in the glossary, starting on page 32.",
-"Gameplay",
 "In a game of Sorcery: Contested Realm, you interact with the realm as a powerful Avatar. You will have a spellbook, a deck of cards that will allow you to cast spells that summon minions, conjure artifacts, and more. You will also have access to your atlas, a deck of cards that allow you to add wondrous sites to the play area that both expand your domain and empower you to cast even more devastating spells.",
 "Avatars are summoned to a contested realm with one goal: to vanquish their opponents and claim sole dominion. In order to win, you must defeat any opposing Avatar by first reducing their life total to zero, placing them at death’s door, and then delivering a final death blow to the weakened Avatar. This severs the enemy’s connection to the realm and grants you victory!",
 "For your first few games, you might want to use preconstructed decks, which will get you straight into the action. Or you can craft your own decks, balancing and tuning their powers to fit your play style (see page 26). The world of Sorcery grants you endless possibilities!",
-"The Four Elements",
 "Sorcery: Contested Realm is built around the four classical elements: Air, Earth, Fire, and Water. Most spells in a spellbook are tied to these elements, giving Avatars the power to manipulate the magic of the realms. Each element has strengths and weaknesses. Certain abilities can be common in one element yet very rare in another. The four elements and their characteristics are:",
 "Air",
 "Air is the element of Knowledge and Power, dabbling in forces beyond mortal control to acquire the magical means to respond to any battlefield situation. An attunement with air grants you both mobility and tactical options thanks to its ability to teleport units around the realm and to increase its available spells.",
@@ -4082,9 +3915,7 @@
 "Fire is the element of Desire and Destruction, willing to do whatever it takes to secure victory in the realm. An attunement with fire grants you an array of explosive spells and abilities that can create bursts of speed or burn friend and foe alike in great gouts of flame.",
 "Water",
 "Water is the element of Charm and Trickery, ready to adapt and disrupt the strategies of the enemy as it manipulates all. An attunement with water grants you a powerful homefield advantage that will slowly engulf the realm and the ability to position the enemy right where you want them.",
-"Card Types",
 "There are three main categories of cards: Avatars, sites, and spells. Spells further break down into four card types: minion, artifact, aura, and magic. The following pages will describe each type.",
-"Cards",
 "In Sorcery: Contested Realm, your cards are what allow you to influence the realm and do battle with your opponent. Some cards will bend or even break the rules in this rulebook, in these cases the card’s text takes precedence. Before we dig into how cards function in detail, it is important to keep one key rule in mind at all times:",
 "Some text is intentionally informal or necessarily compact. Use common sense and be cool.",
 "Your Avatar represents you and your connection to the realm. Though but a pale echo of your true might, everything you do within the realm is done through your Avatar. Avatars have some key characteristics:",
@@ -4121,14 +3952,13 @@
 "Note: You are free to use anything you want to represent tokens.",
 "Artifacts are various relics, edifices, tools, gear, gadgets, devices, and baubles, often charged with lasting enchantments by wizards of old. Artifacts have some key characteristics on their card:",
 "Each artifact has a name.",
-"Each artifact has a",
-"mana",
-"cost that you must pay to play it.",
+"Each artifact has a mana cost that you must pay to play it.",
 "Artifacts have a type line that describes key things about that card, such as subtypes and rarity.",
 "Artifacts have a game text box that describes their special abilities.",
 "Note: Unlike other spells, artifacts do not typically require an elemental threshold to play.",
 "Artifact Subtypes",
-"Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions. Monuments",
+"Artifacts have a variety of subtypes, including armor, weapons, relics, devices, documents, automatons, or monuments. While most artifacts are standard objects that can be carried into battle, others such as automatons and monuments have some further characteristics and restrictions.",
+"Monuments",
 "Monuments are an artifact subtype that cannot be carried.",
 "Automatons",
 "Automatons are artifacts that are minions. As such, they have a power rating (5), have the same basic abilities as regular minions, and cannot be carried like regular artifacts.",
@@ -4145,7 +3975,6 @@
 "Auras also have an elemental threshold that your elemental affinity must meet in order to be played.",
 "Auras have a type line that describes key things about that card, such as rarity.",
 "Auras have a game text box that describes their special abilities.",
-"Game Zones",
 "In Sorcery: Contested Realm, players share the main and biggest part of the play area—the realm. However, each player has their own decks, cemetery, and hand. These are the game’s main zones.",
 "The realm is a 5x4 square grid where most cards are played. These twenty squares begin as pieces of the void that you and your opponent may fill in with sites as you expand your domains.",
 "Atlas and Spellbook",
@@ -4157,13 +3986,10 @@
 "Players may freely examine the contents of any cemetery at any time and the order of the cards in a cemetery is irrelevant.",
 "Cards drawn from your spellbook or atlas decks are kept in your hand. Your hand should remain hidden from your opponents, however the number of atlas and spellbook cards you hold may be observed and asked, due to the card backs being distinguishable.",
 "There is no maximum hand size and the order of the cards in your hand is irrelevant.",
-"Winning the Game",
 "The game ends when a player has vanquished all opposing Avatars, securing their hold on the realm! In order to do this, you’ll need to get them to death’s door, then follow up with a death blow.",
 "Alternatively, if either player attempts to draw a card from an empty deck, they immediately lose.",
-"Death’s Door &amp; Death Blow",
 "As an Avatar loses life, from either taking damage directly or their sites being attacked, its connection with the realm weakens. When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the wounded Avatar becomes immune to damage for the rest of that turn.",
 "After that brief and desperate window, any damage dealt to the Avatar is a death blow, finally severing their connection to the realm and signaling their defeat.",
-"Setup",
 "Now that you’re familiar with the components, follow these steps to set up a two-player game of Sorcery.",
 "Step 1: Set Up the Realm",
 "Clear some space in the middle of the table for the realm.",
@@ -4176,7 +4002,6 @@
 "Step 5: Draw Starting Hand",
 "Each player draws three cards from their atlas and three cards from their spellbook. If you’re not satisfied with your initial hand, you may take one mulligan.",
 "To take a mulligan, return up to three cards from your hand to the bottom of their respective decks in any order. Then redraw the same number of cards you returned from each deck.",
-"Navigating the Realm",
 "In Sorcery: Contested Realm battles are often won or lost in the way you position and maneuver your units. The following pages will cover how to navigate both the square grid and the layers of the realm.",
 "The realm is split into twenty squares. These squares begin as pieces of the void that you and your opponent may fill in with sites as you expand your domains.",
 "The void is a region of incorporeal nothingness on top of which you will build your physical domain. Any minion that somehow finds its way into the void (whether in whole or in part) is immediately banished (removed from the game) unless it has an ability that specifically allows it to exist there (such as Voidwalk).",
@@ -4205,22 +4030,14 @@
 "Note: Most abilities from cards in the realm affect things within the region where the card is located. Similarly, in the case of spells, their affects typically apply to the same region as its Spellcaster. However, some cards can effect specific areas, regions, or even the whole realm, regardless of the card’s own region.",
 "For example: The Porcupine Pufferfish (1) occupies the Underwater region under the site in its square.",
 "The Headless Haunt (2) occupies a square in the Void region.",
-"The Cave Trolls (3) occupy the",
-"Underground",
-"region under the site in its square.",
-"The Sea Serpent (4) and Diluvian Kraken (5) occupy the",
-"Surface",
-"region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square.",
-"These nine squares are",
-"nearby",
-"the card",
-"These five squares are",
-"adjacent",
-"to the card",
+"The Cave Trolls (3) occupy the Underground region under the site in its square.",
+"The Sea Serpent (4) and Diluvian Kraken (5) occupy the Surface region atop the sites in their squares, as does the King of the Realm (6) atop the site in his square.",
+"These nine squares are nearby the card",
+"These five squares are adjacent to the card",
 "Perhaps the single most important key concept to understand is how to identify areas in the realm relative to your card’s position.",
 "A location is defined as one region in one square.",
 "Here and There",
-"“Here” and “There” are used to contextually refer to the location (s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface.",
+"“Here” and “There” are used to contextually refer to the location(s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface.",
 "Targeting",
 "Sometimes you will need to target things in the realm. Spells and abilities can only target things within the Spellcaster’s or referencing card’s same region.",
 "Sometimes a card will need to identify something in an adjacent or nearby square.",
@@ -4228,20 +4045,11 @@
 "Nearby: Refers to the card’s own square, and all squares that surround it, including those diagonally.",
 "Only locations that are in the same region as the referencing card (or its Spellcaster) are considered adjacent or nearby locations.",
 "In this example, the King of the Realm is beset by enemies on nearly all sides! Some pose a greater threat than others. Let’s take a closer look.",
-"The King is",
-"to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is",
-"the King.",
-"The King is not",
-"to the Headless Haunt because the Haunt is in the Void region.",
-"The Cave Trolls are not",
-"to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not",
-"the King because it is submerged.",
-"The Pufferfish and Cave Trolls are not",
-"to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not",
-"to the Headless Haunt, nor are the Cave Trolls",
-"the Headless Haunt.",
+"The King is adjacent to the Sea Serpent because it is next to him on the surface of the site and therefore in the same region. Similarly, the Diluvian Kraken is nearby the King.",
+"The King is not adjacent to the Headless Haunt because the Haunt is in the Void region.",
+"The Cave Trolls are not adjacent to the King because they are burrowed and are therefore in a different region. Similarly, the Porcupine Pufferfish is not nearby the King because it is submerged.",
+"The Pufferfish and Cave Trolls are not adjacent to each other as they are in different regions, underwater and underground, respectively. Similarly, the Pufferfish is not adjacent to the Headless Haunt, nor are the Cave Trolls nearby the Headless Haunt.",
 "A step is the minimum unit of distance between two adjacent locations. Some card abilities will have an effect that will happen a step away or even several steps away from where the card is or its origin point. In these cases, it will say that it happens X steps away.",
-"Turn Summary",
 "Sorcery: Contested Realm is played over a series of turns. Players take their turns, one at a time, following this sequence of phases:",
 "Start Phase",
 "The start phase is the first phase you complete during your turn. All abilities that last “Until next turn” now end. Then:",
@@ -4269,7 +4077,6 @@
 "For example, your sites each provide one mana that you can spend this turn. Currently, that number is three. Note that your opponent’s Aqueduct does not provide you mana. In your hand, you have some minions and a site.",
 "You could play both the Sedge Crabs and Polar Explorers as their total mana cost is three.",
 "You don’t currently have enough mana to play Captain Baldassare with his mana cost of four. However, you do have a site, Maelström, that you can play using your Avatar’s ability. Playing Maelström would bring your total available mana up to four, allowing you to play Captain Baldassare, saving the Crabs and Explorers for a later turn.",
-"Casting Spells",
 "Spells are the main way Avatars and other Spellcasters influence the realm. Any card in your hand that is not a site is a spell. You cast these spells to summon minions, conjure artifacts or auras, and invoke magics.",
 "To cast a spell from your hand, you need to identify a Spellcaster under your control to cast it. The Spellcaster and its location are by whom and where the spell is being cast. Once you have identified the Spellcaster, spells often have two requirements to play: a mana cost and an elemental threshold.",
 "All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only gain mana during your turn and lose any unspent mana at the end of your turn.",
@@ -4294,7 +4101,6 @@
 "When an artifact spell is cast, it is conjured into the realm atop any site you control or directly into the waiting hands of one of your units. A unit can carry any number of artifacts.",
 "When an aura spell is cast, it conjures the aura at the intersection of four squares, though some specify the border between two, or even just a single square. Auras are said to occupy the surface of any sites at those squares, as well as any void, affecting them (or other things located at those sites) in some way.",
 "Magics are the only cards in the game that do not enter play when they are cast, and do not have a lasting presence in the realm. A magic spell simply does what it says it does, and then goes to its owner’s cemetery.",
-"Activating Abilities",
 "Avatars, minions, artifacts, and auras may all have abilities that can be activated simply by stating your intention to do so, making any relevant choices (like picking targets), and paying any associated costs. Unlike spells, which use mana costs most often, abilities will use a variety of costs including things like tapping, paying life, sacrificing a minion, or discarding cards, among other things. Only the controller of a card can use its activated abilities, and only during the main phase of their own turn when nothing else is already happening.",
 "Sites come into play through your Avatar’s activated ability: “Tap → Play or draw a site”. However, there are some other cards that can bring them into play as well.",
 "When you play a site, it must be placed:",
@@ -4337,9 +4143,7 @@
 "Multiple Combatants",
 "If more than two units are involved in a fight (usually as a result of intercepting or defending), the controller of each side may allocate their units’ damage among the enemy as they wish.",
 "For example, the Amazon Warriors attack your opponent’s undefended Red Desert striking it for 5 damage. Your opponent’s Avatar of Fire then loses five life.",
-"Remember: Losing life like this is",
-"not",
-"damage.",
+"Remember: Losing life like this is not damage.",
 "Continuing our attack example, the Amazon Warriors suffer two damage from the Rimland Nomads. While this does not kill them, if they take three more damage this turn, they will die. On the other hand, the Nomads suffer five damage, well exceeding its power of two and so it immediately dies.",
 "Damage to Minions",
 "Damage dealt to minions persists until the end of the turn. A minion that accumulates damage greater than or equal to its power immediately dies and is placed in its owner’s cemetery.",
@@ -4366,8 +4170,7 @@
 "When an enemy using the Move and Attack ability finishes its movement and then chooses not to attack, any of your units there may tap to intercept and fight that enemy.",
 "Units can not move when they intercept. They must already be at the enemy’s location.",
 "Building Your Own Decks",
-"Sorcery: Contested Realm",
-"is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:",
+"Sorcery: Contested Realm is a customizable trading card game, which means that you can choose what cards go into your deck. When you’re ready to construct your own deck, there are a few rules you must follow to build decks fit for play:",
 "You need to choose and include exactly one Avatar card.",
 "Your Atlas must contain at least 30 site cards.",
 "Your Spellbook must contain at least 60 spell cards.",
@@ -4380,7 +4183,6 @@
 "up to two copies of any elite cards",
 "only one copy of any unique cards in a deck",
 "Your Avatar does not count toward any of those totals, and is not in that sense a part of either of your decks.",
-"Advanced Concepts",
 "Most cards in Sorcery have one or more special abilities printed in their game text box that change the default rules of the game or grant new interactions outside of the basic abilities.",
 "Passive Ability",
 "A passive ability has an ongoing effect that is always active, as long as the card is in the relevant game zone. Typically, this zone will be the realm, but some cards have abilities that specify things they do, or enable you to do, while in your hand, or while in the cemetery, etc.",
@@ -4474,10 +4276,7 @@
 "Damage and Life Loss",
 "Generally, units take damage from fighting and from the effects of spells and abilities. Damage dealt to minions accumulates until the end of turn when it is healed, while damage dealt to an Avatar causes them to lose life instead. Sometimes an Avatar will suffer life loss directly from things like a site being damaged.",
 "When a minion has damage on it equal to or greater than its power, it dies.",
-"Note: When an Avatar is at",
-"death’s door",
-", only damage will deliver a",
-"death blow",
+"Note: When an Avatar is at death’s door, only damage will deliver a death blow.",
 "Dead",
 "Dead cards are minions that can be found in any cemetery.",
 "Death Blow",
@@ -4594,6 +4393,7 @@
 "Transform",
 "When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer",
 "a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation.",
+"Underground",
 "The lower level of a land site is part of the underground region.",
 "Underwater",
 "The lower level of a water site is part of the underwater region.",
@@ -4610,7 +4410,7 @@
 "If a warded site or unit would be damaged, destroyed, or targeted by an opponent’s spell or special ability, the Ward breaks instead.",
 "A unit or site can’t have multiple Wards, and Evil minions can’t be warded.",
 "Nearby Adjacent",
-"Quick Reference Guide",
+"Sorcery: Contested Realm",
 "Turn Sequence",
 "Step 1: Untap all of your cards in the realm.",
 "Step 2: All of your sites provide their mana.",
@@ -4622,9 +4422,7 @@
 "Regions: Surface, Underground, Underwater, and the Void are all separate regions in the game.",
 "Location: The exact location of a card is determined by its square and by the region that it occupies.",
 "Here &amp; There: “Here” and “There” refer to the location(s) that a card occupies. For most cards, such as avatars, minions, and artifacts, that means one location. For most auras, it means the 2x2 area they occupy. For sites, it means two locations, their surface and subsurface.",
-"Target: Spells and abilities can only target things within the",
-"Spellcaster’s",
-"or referencing card’s same region.",
+"Target: Spells and abilities can only target things within the Spellcaster’s or referencing card’s same region.",
 "Adjacent: Refers to the card’s own square and the squares that it shares a border with.",
 "Nearby: Refers to the card’s own square and all squares that surround it, including those diagonally.",
 "The Golden Rule Remember",
@@ -4636,7 +4434,7 @@
 "Step 2: Players remove all damage from their minions in the realm.",
 "Step 3: Effects that last for your turn now end.",
 "Step 4: Your turn ends.",
-"is built around the four classical elements:",
+"Sorcery: Contested Realm is built around the four classical elements:",
 "Air Water",
 "Many units have keyword abilities printed in their game text which have rules associated with them. The most common of these keywords are listed below as well as in the glossary (page 32).",
 "This unit can be safely summoned to, exist in, and operate normally underground. When taking a step, it can move from the surface of a land site to the underground level there, or vice versa.",
