@@ -29,6 +29,8 @@ const MAX_UNITS = Math.max(1, parseInt(process.env.TX_MAX_UNITS || '1500', 10));
 const CHUNK_UNITS = Math.max(1, parseInt(process.env.TX_CHUNK_UNITS || '60', 10));
 const CHUNK_CHARS = Math.max(1000, parseInt(process.env.TX_CHUNK_CHARS || '8000', 10));
 const FAKE = process.env.TX_FAKE === '1';
+// the version of the game-term rules a file's translations were made under (see main: older ones redone)
+const RULES = 2;
 const COUNT_ONLY = process.argv.includes('--count');
 const LANG_NAMES = {
   'pt-BR': 'Brazilian Portuguese (pt-BR)', de: 'German (de)', es: 'Spanish (es)', fr: 'French (fr)',
@@ -84,8 +86,8 @@ function check(src, tr) {
 }
 
 // ── The glossary: what stays in English (editable; see codex-glossary.<lang>.json) ──
-const DEFAULT_KEEP = ["Avatar", "Minion", "Magic", "Aura", "Artifact", "Spell", "Airborne", "Burrowing", "Deathrite", "Flood", "Flooded", "Genesis", "Immobile", "Lance", "Landbound", "Lethal", "Ranged", "Spellcaster", "Stealth", "Submerge", "Voidwalk", "Waterbound", "Silenced", "Atlas", "Spellbook", "Cemetery", "Realm", "Underground", "Underwater", "Subsurface", "Threshold", "Mana", "Affinity", "Death's Door", "Death Blow", "Summoning Sickness", "Air", "Earth", "Fire", "Water", "Exceptional", "Angel", "Beast", "Demon", "Dragon", "Dwarf", "Faerie", "Giant", "Gnome", "Goblin", "Merfolk", "Monster", "Mortal", "Ogre", "Sphinx", "Troll", "Undead", "Armor", "Automaton", "Instrument", "Monument", "Potion", "Relic", "Weapon", "Desert", "River", "Tower", "Village", "Knight", "Royalty", "Evil", "Arthurian Legends", "Dragonlord", "Gothic", "Codex"];
-const DEFAULT_GAME = ["Tap", "Untap", "Attack", "Defend", "Intercept", "Move", "Fight", "Strike", "Draw", "Discard", "Banish", "Summon", "Conjure", "Cast", "Dispel", "Sacrifice", "Teleport", "Transform", "Traverse", "Burrow", "Unburrow", "Kill", "Pick Up", "Drop", "Carry", "Fly", "Collection", "Hand", "Site", "Token", "Unit", "Charge", "Disabled", "Movement", "Ward", "Void", "Surface", "Power", "Ordinary", "Elite", "Unique", "Spirit", "Device", "Document", "Alpha", "Beta"];
+const DEFAULT_KEEP = ["Avatar", "Minion", "Magic", "Aura", "Artifact", "Spell", "Airborne", "Burrowing", "Deathrite", "Flood", "Flooded", "Genesis", "Immobile", "Lance", "Landbound", "Lethal", "Ranged", "Spellcaster", "Stealth", "Submerge", "Voidwalk", "Waterbound", "Silenced", "Atlas", "Spellbook", "Cemetery", "Realm", "Underground", "Underwater", "Subsurface", "Threshold", "Mana", "Affinity", "Death's Door", "Death Blow", "Summoning Sickness", "Air", "Earth", "Fire", "Water", "Exceptional", "Angel", "Beast", "Demon", "Dragon", "Dwarf", "Faerie", "Giant", "Gnome", "Goblin", "Merfolk", "Monster", "Mortal", "Ogre", "Sphinx", "Troll", "Undead", "Armor", "Automaton", "Instrument", "Monument", "Potion", "Relic", "Weapon", "Desert", "River", "Tower", "Village", "Knight", "Royalty", "Evil", "Arthurian Legends", "Dragonlord", "Gothic", "Codex", "Power"];
+const DEFAULT_GAME = ["Tap", "Untap", "Attack", "Defend", "Intercept", "Move", "Fight", "Strike", "Draw", "Discard", "Banish", "Summon", "Conjure", "Cast", "Dispel", "Sacrifice", "Teleport", "Transform", "Traverse", "Burrow", "Unburrow", "Kill", "Pick Up", "Drop", "Carry", "Fly", "Collection", "Hand", "Site", "Token", "Unit", "Charge", "Disabled", "Movement", "Ward", "Void", "Surface", "Ordinary", "Elite", "Unique", "Spirit", "Device", "Document", "Alpha", "Beta"];
 function loadGlossary() {
   let g = {};
   try { g = JSON.parse(fs.readFileSync(GLOSSARY, 'utf8')); } catch (e) {}
@@ -93,9 +95,45 @@ function loadGlossary() {
     keep: Array.isArray(g.keep) ? g.keep : DEFAULT_KEEP,
     game: Array.isArray(g.keep_when_game_term) ? g.keep_when_game_term : DEFAULT_GAME,
     terms: (g.terms && typeof g.terms === 'object') ? g.terms : {},
-    notes: g.notes || ''
+    notes: g.notes || '',
+    everyday: Array.isArray(g.codex_everyday_words) ? g.codex_everyday_words : null
   };
 }
+// ── Codex terms ──
+// Every Codex entry title is a game term: the term itself stays in English wherever it is written -- in the
+// Codex's own text describing other entries, and in the app -- and only the words around it are translated.
+// Titles that are also ordinary English words (glossary 'codex_everyday_words': you, here, top, card,
+// search ...) are left to the translator: kept where they mean the game's term, translated otherwise.
+// The rest are checked where the English writes them as the term: capitalised ("Starting Life",
+// "Activated Ability") -- and, in the Codex, linked, which is checked already, word for word.
+const DEFAULT_EVERYDAY = ["You", "Here", "There", "Top", "Bottom", "Under", "Below", "Atop", "Near", "Nearby", "Closest", "Forward", "Zero", "Random", "Copy", "Search", "Enter", "Lose", "Step", "Stops", "Path", "Square", "Region", "Location", "Border", "Corner", "Top Border", "Card", "Die", "Hand", "Play", "Replace", "Interact", "Look At", "Pick Up", "Drop", "Move", "Setup", "Storyline", "Collection", "Site", "Token", "Unit", "Disabled", "Tap", "Its Location", "Its Site", "For Free", "On the Ground", "Normal Size", "Row and Column", "May and Can", "Can vs. Can't", "Turn Overview", "Updated Cards", "Tournament Rules", "Winning the Game", "When it Arrives"];
+function codexTerms(glossary) {
+  let titles = [];
+  try { titles = (JSON.parse(fs.readFileSync('codex.json', 'utf8')).codex || []).map((c) => c && c.k).filter((k) => typeof k === 'string' && k.trim()); } catch (e) {}
+  const everyday = new Set((glossary.everyday || DEFAULT_EVERYDAY).map((w) => w.toLowerCase()));
+  const keep = new Set(glossary.keep.map((w) => w.toLowerCase()));
+  return Array.from(new Set(titles)).filter((t) => !everyday.has(t.toLowerCase()) && !keep.has(t.toLowerCase()));
+}
+
+// In the app's text, a Codex title (other than the named terms in 'keep') is checked only where it is
+// plainly the term: capitalised in the middle of a sentence ("the small counter for your opponent's
+// Life"). Not at the start of a sentence, where every word has a capital ("Fly as far as you can"),
+// and not in a heading written in Title Case, where every word has one too ("Concessions & Intentional
+// Draws") -- there the translator's instructions alone decide.
+function midCapTermsIn(src, list) {
+  const p = plainOf(src);
+  // a heading in Title Case: every word but the small ones capitalised, and no full stop at the end
+  const SMALL = /^(a|an|the|of|and|or|to|in|on|for|at|by|with|vs|from|into|per)$/i;
+  const words = p.split(/[^A-Za-z\u00c0-\u024f']+/).filter((w) => w && !SMALL.test(w));
+  if (words.length > 1 && !/[.!?]\s*$/.test(p.trim()) && words.every((w) => /^[A-Z0-9]/.test(w))) return [];
+  return list.filter((term) => new RegExp("[a-z0-9,;)\\]'\u2019]\\s+" + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + '(s|es)?(?![A-Za-z])').test(p));
+}
+// the terms the English writes as terms: capitalised as listed
+function capTermsIn(src, list) {
+  const p = plainOf(src);
+  return list.filter((term) => new RegExp('(^|[^A-Za-z])' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + '(s|es)?(?![A-Za-z])').test(p));
+}
+
 
 // ── Game terms stay in English ──
 // 'keep' terms (card types, keyword abilities, zones, elements, rarities, subtypes ...) are kept in every
@@ -133,6 +171,7 @@ function prompt(glossary, cardNames) {
     '3. Keep every {n} exactly as written: it stands for a number the app fills in. Keep &amp; &lt; &gt; as written, and keep symbols, arrows and punctuation marks such as \u2014 \u2026 \u00b7 \u2192.',
     '4. Keep in English, exactly as written: Sorcery Grimoire, Sorcery: Contested Realm, Curiosa, sorcerytcg.com, YouTube, Discord, TCGPlayer, Patreon, Ko-fi, GitHub, Google, Android, card names, set names and artists\u2019 names. Names of countries and regions are translated.',
     '5. Keep the game\u2019s own words in English, in whatever form they take (singular or plural, capitalised or not): card types, keyword abilities, zones, elements, rarities and subtypes -- ' + glossary.keep.join(', ') + '. Keep the game\u2019s actions and terms in English too where they mean the game\u2019s action or thing (tap a minion, attack, draw a card, a site in the Atlas), and translate them where they are ordinary words about the app or the phone (tap the screen, the official site, this device): ' + glossary.game.join(', ') + '. Build the ' + lang + ' sentence around the English words, adding the articles and prepositions it needs.',
+    glossary.codex && glossary.codex.length ? 'Codex terms: every title of a Codex entry is a game term, and the term itself is never translated -- wherever it appears, in any form (singular or plural, capitalised or not), it stays in English and only the words around it are translated: ' + glossary.codex.join('; ') + '. These Codex titles are also ordinary English words: keep them in English where they mean the game\u2019s term, and translate them where they are ordinary words (for example "you", "your", "here", "the top of the screen", "tap the screen"): ' + (glossary.everyday || DEFAULT_EVERYDAY).join('; ') + '. In particular, "you" and "your" speaking to the reader are always translated; "You" stays in English only where the text uses it as the game\u2019s defined term.' : '',
     cardNames.length ? '6. These card names appear in this batch; keep them in English exactly: ' + cardNames.join('; ') + '.' : '',
     terms.length ? '7. Use these translations consistently: ' + terms.map((t) => t + ' = ' + glossary.terms[t]).join('; ') + '.' : '',
     glossary.notes ? '8. ' + glossary.notes : '',
@@ -167,7 +206,7 @@ function save(file, units, t, srcUpdated) {
   // only the translations still in use, in a stable order, so a commit shows only real changes
   const keep = {};
   Array.from(units.keys()).sort().forEach((k) => { if (typeof t[k] === 'string') keep[k] = t[k]; });
-  const body = { lang: LANG, count: Object.keys(keep).length, of: units.size, t: keep };
+  const body = { lang: LANG, rules: RULES, count: Object.keys(keep).length, of: units.size, t: keep };
   const next = JSON.stringify(body, null, 1) + '\n';
   let prev = '';
   try { prev = fs.readFileSync(file, 'utf8'); } catch (e) {}
@@ -185,22 +224,43 @@ function main() {
   }
   const data = JSON.parse(fs.readFileSync(SRC, 'utf8'));
   const units = collectUnits(data);
-  let t = {};
-  try { t = (JSON.parse(fs.readFileSync(OUT, 'utf8')).t) || {}; } catch (e) {}
+  let t = {}, rulesWere = 0;
+  try { const prev = JSON.parse(fs.readFileSync(OUT, 'utf8')); t = prev.t || {}; rulesWere = prev.rules || 1; } catch (e) {}
+  // Translations already kept are checked again against the glossary as it is now: one that gives a
+  // game term in another language (made before that term was added) is dropped and made again.
+  const gl0 = loadGlossary();
+  gl0.codex = codexTerms(gl0);
+  let redo = 0;
+  units.forEach((m, k) => {
+    if (typeof t[k] !== 'string') return;
+    if (keepsTerms(m, t[k], capTermsIn(m, gl0.keep).concat(midCapTermsIn(m, gl0.codex)))) { delete t[k]; redo++; }
+  });
+  if (redo) console.log(redo + ' translations gave a game term in ' + LANG + ': they are made again.');
+  // Made under older rules (before every Codex title was kept in English): any piece with a game term or
+  // Codex title in it is made once more under the rules as they are now.
+  if (rulesWere && rulesWere < RULES) {
+    const all = gl0.keep.concat(gl0.codex);
+    let again = 0;
+    // ... and any left exactly as the English, unless it is nothing but a game term: an everyday word
+    // such as "Search" or "Card" was sometimes kept in English as if it were the term
+    units.forEach((m, k) => { if (typeof t[k] === 'string' && (termsIn(m, all).length || (t[k] === m && !onlyATerm(m, all)))) { delete t[k]; again++; } });
+    if (again) console.log(again + ' translations made under the earlier rules hold a game term: they are made again under the current ones.');
+  }
   const pending = Array.from(units.keys()).filter((k) => typeof t[k] !== 'string');
   console.log(units.size + ' pieces of English; ' + (units.size - pending.length) + ' already translated; ' + pending.length + ' new or changed.');
 
   if (COUNT_ONLY || !pending.length) {
     const had = fs.existsSync(OUT);
-    if (save(OUT, units, t, data.updated) && had) console.log('Dropped the translations of pieces no longer in the English.');
+    if (save(OUT, units, t, data.updated) && had) console.log('Updated ' + OUT + ' (translations no longer in use, or to be made again, taken out).');
     output('pending', pending.length);
     return;
   }
 
   const glossary = loadGlossary();
+  glossary.codex = codexTerms(glossary);
   const allNames = loadCardNames();
   let asIs = 0;
-  pending.forEach((k) => { if (onlyATerm(units.get(k), glossary.keep)) { t[k] = units.get(k); asIs++; } });
+  pending.forEach((k) => { if (onlyATerm(units.get(k), glossary.keep.concat(glossary.codex))) { t[k] = units.get(k); asIs++; } });
   if (asIs) { console.log(asIs + ' pieces are only a game term: kept in English without asking.'); save(OUT, units, t, data.updated); }
   // what people see first (the first-launch screens, the menus, Settings -- 'first' in the list) before the rest
   const firstKeys = new Set((data.first || []).filter((m) => typeof m === 'string').map(key));
@@ -227,11 +287,10 @@ function main() {
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
       if (!it || !want.has(it.id)) return;
       want.delete(it.id);
-      // In the app's text a game term is checked only where it is written as one -- capitalised, as the
-      // app writes its card types, abilities and filters ("Coin Threshold", "Minion") -- not where the
-      // same word is an ordinary one ("climb the sausage tower", in a mini-game's description).
-      const capKeep = glossary.keep.filter((term) => new RegExp('(^|[^A-Za-z])' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + '(s|es)?(?![A-Za-z])').test(plainOf(units.get(it.id))));
-      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, capKeep);
+      // In the app's text a named term is checked where it is written capitalised ("Coin Threshold"), not
+      // where the same word is an ordinary one ("climb the sausage tower"); a Codex title, where it is plainly
+      // the term (midCapTermsIn).
+      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, capTermsIn(units.get(it.id), glossary.keep).concat(midCapTermsIn(units.get(it.id), glossary.codex)));
       if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
       t[it.id] = it.text; kept++;
     });
