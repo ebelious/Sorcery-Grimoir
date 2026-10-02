@@ -1,7 +1,7 @@
 {
  "lang": "sv",
  "rules": 2,
- "count": 608,
+ "count": 610,
  "of": 650,
  "t": {
   "10.4b7993f3": "under siten på sin square.",
@@ -358,6 +358,7 @@
   "7g.91f72269": "Ett step är den minsta avståndsenheten mellan två adjacent locations. Vissa kortabilities har en effekt som sker ett step bort eller till och med flera steps bort från där kortet befinner sig eller dess startpunkt. I dessa fall står det att det sker X steps bort.",
   "7i.0e38163e": "Om en effekt får en unit att ”ta ett steg” eller ”ta upp till X steg” är detta inte forced movement, och unit kan modifiera dessa steg med sina abilities. Units som inte kan röra sig genom att aktivera sina egna abilities kan inte heller ta några steg som dessa effekter ger.",
   "7k.aaec5b92": "Spelet använder termer och nyckelord som är viktiga att känna till. När de förekommer har de markerats med fetstil, både för att hjälpa dig att känna igen viktiga ord och begrepp och för att visa att du kan hitta mer information om ordet i ordlistan, som börjar på sidan 32.",
+  "7m.49ec19db": "Fire är begärets och förstörelsens element, berett att göra vad som helst för att säkra segern i realmet. En samhörighet med Fire ger dig en uppsättning explosiva Spells och förmågor som kan skapa utbrott av fart eller bränna både vän och fiende i väldiga flamströmmar.",
   "7m.ea81768d": "Om avgörandet av en händelse utlöser en Ability infogas en ny händelse på Storyline. Den nya händelsen läggs till i det aktuella ögonblicket och avbryter tillfälligt alla återstående händelser på Storyline. När den nya händelsen har avgjorts fortsätter berättelsen.",
   "7t.f4c6bbed": "Here &amp; There: “Here” och “There” syftar på den eller de platser som ett kort upptar. För de flesta kort, som Avatars, Minions och Artifacts, betyder det en plats. För de flesta Auras betyder det området på 2x2 som de upptar. För Sites betyder det två platser: deras Surface och Subsurface.",
   "7v.e38d4a8f": "En passive ability har en ongoing effect som alltid är aktiv, så länge kortet befinner sig i den relevanta zone. Vanligtvis är denna zone Realm, men vissa kort har abilities som anger saker de gör, eller som gör att du kan göra, medan de är i din hand, eller medan de är i Cemetery, osv.",
@@ -417,6 +418,7 @@
   "9c.f088bc2e": "Du har för närvarande inte tillräckligt med Mana för att spela Captain Baldassare med hans Mana Cost på fyra. Du har dock en site, Maelström, som du kan spela med din Avatars ability. Om du spelar Maelström ökar din totala tillgängliga Mana till fyra, vilket gör att du kan spela Captain Baldassare och spara Crabs och Explorers till en senare tur.",
   "9d.f0267162": "Du äger alla de kort du tar med till ett spel Sorcery. Du är därför ägare till de korten. Ett korts ägare ändras inte under spelets gång. Ett kort returneras alltid till sin ägares Hand, blandas in i sin ägares kortlek eller skickas till sin ägares Cemetery, oavsett vem som kontrollerar kortet när det lämnar spel.",
   "9p.1d1f0eb7": "Eftersom elemental Affinity inte spenderas eller förloras när du spelar kort behöver du bara kontrollera varje korts elemental Threshold och se om din Affinity är lika med eller större än Threshold. Det betyder att du kan spela både Illusionist och Explorers denna tur, eftersom de bara kräver en Threshold på två, jämfört med din Affinity på tre.",
+  "9s.55cfd0fc": "Tokens är små kort som fungerar ungefär på samma sätt som vanliga kort så länge de befinner sig i realmet. Den största skillnaden mellan kort och Tokens är att Tokens aldrig ingår i en spelares lek och att de aldrig formellt kan finnas i någon zone utom i realmet. Om en Token skulle placeras någon annanstans tas den i stället bort från spelet helt.",
   "9t.6197f60e": "Denna unit får röra sig upp till X ytterligare steps när den använder abilities Move and Attack eller Defend. För att flytta flera steps på en gång väljer du en destination och en path dit och gör sedan en Traverse längs den path:en ett step i taget. Du kan behöva avgöra automatiska triggers (eller tillämpa passive abilities som alltid är aktiva), och några av dem kan avbryta unitens rörelse i förtid.",
   "9z.f0f44afc": "Denna Unit får flytta upp till X ytterligare steg när den använder basförmågorna Move and Attack eller Defend. För att flytta flera steg på en gång väljer du en destination och en Path dit och Traverse sedan den Path ett steg i taget. Du kan behöva avgöra automatiska utlösare (eller tillämpa ”alltid på”-Passive Abilities), av vilka vissa kan stoppa Unitens rörelse i förtid.",
   "a.0750ace2": "Card Types",
