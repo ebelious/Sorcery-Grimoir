@@ -192,7 +192,8 @@ function prompt(glossary, cardNames) {
   const terms = Object.keys(glossary.terms);
   return [
     'You translate rules text for the trading card game Sorcery: Contested Realm from English into ' + lang + '.',
-    'The input is a JSON array of objects {"id","text"}. Reply with ONLY a JSON array of objects {"id","text"}: every id from the input, once each, with its text translated. No other words, no code fences.',
+    'The input is a JSON array of objects {"id","text"}, some with "keep": the game terms in that text that must stay in English -- keep every one of them in English, in the form the text uses (it may be plural or a verb form), whatever its meaning in the sentence.' +
+    ' Reply with ONLY a JSON array of objects {"id","text"}: every id from the input, once each, with its text translated. No other words, no code fences.',
     'Rules:',
     '1. This is game rules text. Keep its exact meaning, conditions, numbers and wording precision. Write clear, natural ' + lang + '.',
     '2. The text uses these tags: <b>, <i>, <term>, <card>, each with its closing tag. Keep every tag. Translate the words inside <b> and <i>. Never change the words inside <card>...</card> or <term>...</term>: copy them character for character, since they are card names and Codex entries the app links to. A tagged phrase may move to where the grammar needs it, but must stay whole. Do not add tags.',
@@ -209,6 +210,22 @@ function prompt(glossary, cardNames) {
 function fakeTranslate(items) {
   // stand-in for testing the pipeline: each piece marked, every tag and its contents untouched
   return items.map((it) => ({ id: it.id, text: '[' + LANG + '] ' + it.text }));
+}
+
+// A second try, in the same run, for what was refused: the same pieces sent again, each told exactly what
+// was wrong with its first translation ("keep these English words exactly: Power, Element"; "keep every tag").
+// One refusal for a game term is usually the translator reading a defined term as an ordinary word; named,
+// it keeps it. What is refused again is left for the next run, and shows in English until then.
+function retryRefused(redo, sysPrompt, accept) {
+  if (!redo.length) return 0;
+  const items = redo.map((r) => ({ id: r.id, text: r.text, must: r.why }));
+  const extra = '\nSome items carry "must": the reason their previous translation was refused. Fix exactly that: when it names game terms, those exact English words must appear unchanged in the translation; when it names tags or placeholders, keep every one as in the input. Reply with the same JSON array format.';
+  const res = callClaude(items, sysPrompt + extra);
+  if (!res.ok) { console.log('  second try: ' + res.why); return 0; }
+  let ok = 0;
+  (Array.isArray(res.items) ? res.items : []).forEach((it) => { if (it && accept(it)) ok++; });
+  console.log('  second try: ' + ok + ' of ' + redo.length + ' kept.');
+  return ok;
 }
 
 function callClaude(items, sysPrompt) {
@@ -293,7 +310,10 @@ function main() {
   todo.forEach((k) => {
     const s = units.get(k);
     if (cur.length && (cur.length >= CHUNK_UNITS || chars + s.length > CHUNK_CHARS)) { chunks.push(cur); cur = []; chars = 0; }
-    cur.push({ id: k, text: s }); chars += s.length;
+    // the game terms this piece holds that must stay in English -- exactly the ones its translation is
+    // checked for -- sent with it, so the translator is told for each piece, not only in general
+    const keepHere = termsIn(s, glossary.keep.concat(glossary.codex));
+    cur.push(keepHere.length ? { id: k, text: s, keep: keepHere } : { id: k, text: s }); chars += s.length;
   });
   if (cur.length) chunks.push(cur);
 
@@ -301,16 +321,22 @@ function main() {
   chunks.forEach((items, n) => {
     const joined = items.map((i) => i.text).join('\n');
     const names = allNames.filter((nm) => joined.indexOf(nm) >= 0).slice(0, 80);
-    const res = callClaude(items, prompt(glossary, names));
+    const sysP = prompt(glossary, names);
+    const res = callClaude(items, sysP);
+    const redo = [];
     if (!res.ok) { console.log('Batch ' + (n + 1) + '/' + chunks.length + ': ' + res.why + ' -- will try again next run.'); refused += items.length; return; }
     const want = new Set(items.map((i) => i.id));
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
       if (!it || !want.has(it.id)) return;
       want.delete(it.id);
       const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep.concat(glossary.codex));
-      if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
+      if (why) { console.log('  ' + it.id + ' not kept (' + why + ')'); redo.push({ id: it.id, text: units.get(it.id), why }); return; }
       t[it.id] = it.text; kept++;
     });
+    // checked the same way as the first answers
+    const accept = (it) => { if (!redo.some((r) => r.id === it.id)) return false; const w = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep.concat(glossary.codex)); if (w) return false; t[it.id] = it.text; kept++; return true; };
+    const second = retryRefused(redo, sysP, accept);
+    refused += redo.length - second;
     refused += want.size;   // any id missing from the reply
     save(OUT, units, t, data.updated);   // kept as it goes: a run cut short loses nothing already done
     console.log('Batch ' + (n + 1) + '/' + chunks.length + ': ' + items.length + ' sent.');
