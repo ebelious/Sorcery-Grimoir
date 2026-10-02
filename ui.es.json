@@ -1,7 +1,7 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3310,
+ "count": 3312,
  "of": 3318,
  "t": {
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
@@ -173,6 +173,7 @@
   "1a5.ae95cc90": "Sugerimos 50 minutos por partida, que deberían ser tiempo de sobra para la gran mayoría de las partidas de Sorcery jugadas a un ritmo razonable. Aun así, consulta con el organizador del torneo o el personal para confirmar cuánto durarán las rondas durante el evento. Usa este tiempo que compartes con tu oponente con respeto. Pensar un poco está bien, pero procura jugar con la rapidez suficiente para que la partida no llegue al límite de tiempo. Pueden darse rondas sin límite de tiempo en finales o partidas decisivas, según las instrucciones del organizador del torneo. Estas partidas sin límite de tiempo garantizan que haya un resultado decisivo, pero se sigue esperando que los jugadores mantengan un ritmo razonable. Si todavía estáis jugando cuando se acabe el tiempo, se jugarán tres turnos adicionales. Completa el turno actual y luego empieza a contar turnos. Por ejemplo, si se acaba el tiempo en tu turno, terminarás tu turno. Después, tu oponente jugará un turno (1), luego tú (2) y luego tu oponente (3). Si la partida sigue sin terminar tras los turnos adicionales, aplica estos desempates finales: • Si exactamente un jugador está en Death's Door, pierde. • Si no, ambos jugadores pierden. Nota: Esto se registra como un empate de cero puntos en la red de juego. Esperamos un ritmo razonable. Los jueces pueden intervenir si es necesario. El tiempo es un recurso compartido entre ambos jugadores, y cada jugador debe procurar usarlo con criterio y de forma equitativa. También es razonable esperar que, si un jugador obtiene mucha información nueva, necesite algo de tiempo para adaptarse. Al final, los jueces deben usar su criterio. Los jueces pueden aplicar cualquier remedio que consideren apropiado, incluido advertir al jugador, conceder tiempo extra o turnos adicionales al oponente, aplicar una partida perdida, etc.",
   "1b.54acf2a7": "No se pudo escribir la copia de seguridad en este dispositivo.",
   "1b.554a74a8": "¿Borrar todo el historial de partidas? Esta acción no se puede deshacer.",
+  "1b.6f416f59": "ordena la lista por Name, Cost, Power o Rarity.",
   "1b.92174ed6": "Solo el organizador del evento puede iniciar el corte a la fase final.",
   "1b.b332c298": "Toca Actualizar para cargar las últimas novedades de Discord.",
   "1b.d7d30a4a": "(opcional, déjalo vacío si solo estás arbitrando)",
@@ -2784,6 +2785,7 @@
   "j.1a9bf559": "Reabrir inscripción",
   "j.1e68f01f": "Lo que comparte una partida",
   "j.1eab28d4": "Collection actualizada.",
+  "j.20138b07": "del lado de) y añadir",
   "j.2eb47f51": "Buscar en el reglamento",
   "j.2eca0253": "¿Restablecer el color del encabezado?",
   "j.2f6de562": "Por qué no es legal",
