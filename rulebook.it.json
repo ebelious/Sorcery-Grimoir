@@ -1,7 +1,7 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 593,
+ "count": 596,
  "of": 650,
  "t": {
   "10.4b7993f3": "region under il site nel loro square.",
@@ -212,6 +212,7 @@
   "4b.23aa384d": "Se un effetto ordina a una Unit di compiere uno step o di muoversi di uno step, la Unit può modificare il proprio step tramite abilità come Airborne, Voidwalk, Burrowing e Submerge.",
   "4b.2c39cde5": "Una Unit è un termine collettivo che comprende sia gli Avatar sia i Minion. Alcune carte possono specificare uno di questi tipi di Unit, ma la maggior parte riguarda le Unit in generale.",
   "4b.7b1bbcdb": "Nota: non c'è limite al numero di Minion che possono occupare lo stesso Site, anche se raramente è una buona idea concentrare le tue forze in un unico punto!",
+  "4c.8bac18d8": "Per esempio, le Amazon Warriors attaccano (Attack) la Red Desert non difesa del tuo avversario, colpendola (Strike) per 5 Damage. L'Avatar of Fire del tuo avversario perde quindi cinque Life.",
   "4c.a9023746": "La Main Phase è il momento in cui si svolgono la maggior parte delle azioni e degli eventi di Sorcery. Durante questa fase, alle tue Unit possono essere ordinati due tipi di azioni. Possono:",
   "4c.e59687b7": "I tuoi Unit possono fare Cast di Spell e attivare le proprie Ability. Puoi compiere queste azioni tutte le volte che hai le risorse per farlo, e nell'ordine che preferisci.",
   "4d.461b49a2": "La riga del tipo di una Spell o di un site indica la rarity della carta. Questo ti dice quante copie di quella carta puoi avere nel tuo mazzo. Ogni giocatore può includere:",
@@ -234,6 +235,7 @@
   "4p.c7e95cd0": "Quando una oversized unit viene teleported, deve esserlo in una location o in un insieme di location conforme alle sue restrizioni di dimensione e che sia per il resto legale da occupare per quella unit.",
   "4q.aff4590a": "Le carte nel Realm possono essere tappate come risorsa, spendendo la loro energia come costo per attivare varie Ability. Le Ability di Tap di solito sono scritte come “Tap → testo dell'Ability”.",
   "4q.c95f8b78": "Se una carta ti ordina di scegliere un Target fino a X step di distanza, non puoi applicare abilità di movimento; conti semplicemente un Square Adjacent per step, senza cambiare Region.",
+  "4r.15ca4355": "Quando una Spell di tipo Minion viene lanciata (cast), evoca (summon) il Minion sotto il tuo controllo su uno qualsiasi dei tuoi Site, e questo rimane nel Realm finché qualcosa non lo fa uscire dal gioco.",
   "4s.f3e7014f": "Nota: gli Avatar non guariscono automaticamente alla fine del turno, a differenza di come viene rimosso il damage dai Minion; tuttavia possono guarire usando Spell e altri effetti delle carte.",
   "4t.954f3aa6": "Le carte nel Realm possono essere Tap come costo per attivare varie Ability. Un giocatore può anche dover fare il Tap di una carta come costo relativo ad altri Spell o Ability di altre carte.",
   "4u.94676ab0": "I Site e le altre carte forniscono Affinity elementale (ad es.). L'Elemental Threshold è la Affinity minima richiesta per lanciare una determinata Spell, o per attivare o far scattare alcune Ability.",
@@ -386,6 +388,7 @@
   "8p.872d836c": "Man mano che un Avatar perde Life, sia subendo Damage direttamente sia perché i suoi Site vengono attaccati, il suo legame con il Realm si indebolisce. Quando la Life di un Avatar scende a 0, esso si trova a Death's Door e non può più guadagnare Life. In quel momento, l'Avatar Wounded diventa immune ai Damage per il resto di quel turno.",
   "8p.9219ecc6": "Ogni Unit può fare Tap per attivare l'Ability Move and Attack, che le permette di muoversi facoltativamente e poi di attaccare facoltativamente qualcosa nella sua Location. Quando usi questa Ability, dichiara il percorso di movimento previsto e risolvilo. Dopo aver risolto tutto il movimento, decidi se attaccare in quella Location (vedi pagina 22).",
   "8q.5399d830": "Se le tue Unit hanno abilità che potenziano il movimento, o se sono in gioco effetti che modificano il movimento, potresti scegliere di dichiarare un percorso più complesso. Mentre risolvi ogni step, verifichi che sia uno step legale in quel momento. Se non lo è, non compi quello step e continui a risolvere ciò che resta.",
+  "8t.112092e0": "Quando viene lanciata una Spell di tipo Aura, conjure l'Aura all'intersezione di quattro Square, anche se alcune specificano il confine tra due Square, o persino un solo Square. Si dice che le Aura occupino la Surface di qualsiasi Site in quegli Square, così come qualsiasi Void, influenzandoli (o influenzando altre cose situate in quei Site) in qualche modo.",
   "8x.b3e21379": "In genere, le Unit subiscono Damage combattendo (Fight) e per gli effetti di Spell e abilità. Il Damage inflitto ai Minion si accumula fino alla fine del turno, quando viene curato, mentre il Damage inflitto a un Avatar gli fa invece perdere Life. A volte un Avatar subisce direttamente una perdita di Life per cose come un Site danneggiato.",
   "8z.ab6ef293": "Cemetery del suo proprietario. Un giocatore può essere costretto a fare Sacrifice di qualcosa se un effetto glielo ordina. Quando un Minion viene Sacrificed, muore davvero e i suoi Deathrite scattano, se applicabile. Se qualcosa viene Sacrificed per pagare il Cost di un'Ability, non viene messo nel Cemetery finché quell'Ability non è stata risolta.",
   "9.1e1c71c5": "End Phase",
