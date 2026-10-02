@@ -1,0 +1,79 @@
+name: Translate App Text
+
+# Keeps ui.<lang>.json, for each language below, in step with ui-strings.en.json (every piece of English the app shows),
+# translating only what is new or changed. Runs when ui-strings.en.json is pushed (a new app build
+# with new or changed words), every three hours besides (the first translation is done a batch at a
+# time, TX_MAX_UNITS pieces per run), and by hand. When nothing needs translating, Claude Code is not
+# even installed and nothing is committed.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ui-strings.en.json'
+      - 'codex-glossary.*.json'
+  schedule:
+    - cron: '50 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: translate-ui
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    # one language after another (each starts from the commit the one before it made): Brazilian
+    # Portuguese, German, Spanish, French, Italian, Dutch, Swedish. A language is added here, with its
+    # glossary file (codex-glossary.<lang>.json), and nothing else changes.
+    strategy:
+      matrix:
+        lang: [pt-BR, de, es, fr, it, nl, sv]
+      max-parallel: 1
+      fail-fast: false
+    env:
+      TX_LANG: ${{ matrix.lang }}
+      TX_MODEL: sonnet
+      TX_MAX_UNITS: '300'
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Count what needs translating
+        id: plan
+        run: node translate-ui.js --count
+
+      - name: Install Claude Code
+        if: steps.plan.outputs.pending != '0'
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Translate what is new or changed
+        if: steps.plan.outputs.pending != '0'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: node translate-ui.js
+
+      - name: Commit ui.<lang>.json if changed
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add "ui.${TX_LANG}.json"
+          git diff --staged --quiet || git commit -m "chore: update ui.${TX_LANG}.json [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "Push rejected, pulling and retrying ($i)..."
+            git pull --rebase origin main
+            sleep 3
+          done
