@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3314,
+ "count": 3316,
  "of": 3318,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
@@ -1588,6 +1588,7 @@
   "9.1169b83a": "Un de moins",
   "9.139d1591": "Darkscale",
   "9.152a8268": "touchez {n}",
+  "9.15a000cf": "Par Rarity",
   "9.17011501": "Tennessee",
   "9.17897598": "Threshold",
   "9.1a35daad": "shell {n}",
@@ -2144,6 +2145,7 @@
   "c.bc61ac9d": "Détails de la carte",
   "c.bf920ed8": "lecture auto {n}",
   "c.c0a4bc7b": "Son de défilement",
+  "c.c121deb1": "Rondes suisses",
   "c.c13af91d": "Les éléments",
   "c.c1cc8cea": "Ajouté à {n}",
   "c.c1fb017d": "Ark Angel MR",
