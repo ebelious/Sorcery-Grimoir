@@ -2,8 +2,8 @@ name: Translate App Text
 
 # Keeps ui.<lang>.json, for each language below, in step with ui-strings.en.json (every piece of English the app shows),
 # translating only what is new or changed. Runs when ui-strings.en.json is pushed (a new app build
-# with new or changed words), every three hours besides (the first translation is done a batch at a
-# time, TX_MAX_UNITS pieces per run), and by hand. When nothing needs translating, Claude Code is not
+# with new or changed words), every hour besides (a first translation is done a batch at a time,
+# TX_MAX_UNITS pieces per language per run, the first screens' pieces first), and by hand. When nothing needs translating, Claude Code is not
 # even installed and nothing is committed.
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - 'ui-strings.en.json'
       - 'codex-glossary.*.json'
   schedule:
-    - cron: '50 */3 * * *'
+    - cron: '50 * * * *'   # hourly: a run with nothing to translate ends in seconds
   workflow_dispatch:
 
 permissions:
@@ -25,7 +25,7 @@ concurrency:
 jobs:
   translate:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     # one language after another (each starts from the commit the one before it made): Brazilian
     # Portuguese, German, Spanish, French, Italian, Dutch, Swedish. A language is added here, with its
     # glossary file (codex-glossary.<lang>.json), and nothing else changes.
@@ -37,7 +37,7 @@ jobs:
     env:
       TX_LANG: ${{ matrix.lang }}
       TX_MODEL: sonnet
-      TX_MAX_UNITS: '300'
+      TX_MAX_UNITS: '1500'
 
     steps:
       - name: Checkout repo
@@ -69,6 +69,7 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+          if [ ! -f "ui.${TX_LANG}.json" ]; then echo "No ui.${TX_LANG}.json to commit."; exit 0; fi
           git add "ui.${TX_LANG}.json"
           git diff --staged --quiet || git commit -m "chore: update ui.${TX_LANG}.json [skip ci]"
           for i in 1 2 3 4 5; do
