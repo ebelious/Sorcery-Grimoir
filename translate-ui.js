@@ -227,7 +227,11 @@ function main() {
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
       if (!it || !want.has(it.id)) return;
       want.delete(it.id);
-      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep);
+      // In the app's text a game term is checked only where it is written as one -- capitalised, as the
+      // app writes its card types, abilities and filters ("Coin Threshold", "Minion") -- not where the
+      // same word is an ordinary one ("climb the sausage tower", in a mini-game's description).
+      const capKeep = glossary.keep.filter((term) => new RegExp('(^|[^A-Za-z])' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + '(s|es)?(?![A-Za-z])').test(plainOf(units.get(it.id))));
+      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, capKeep);
       if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
       t[it.id] = it.text; kept++;
     });
