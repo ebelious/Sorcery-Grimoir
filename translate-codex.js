@@ -47,7 +47,10 @@ const CHUNK_UNITS = Math.max(1, parseInt(process.env.TX_CHUNK_UNITS || '40', 10)
 const CHUNK_CHARS = Math.max(1000, parseInt(process.env.TX_CHUNK_CHARS || '9000', 10));
 const FAKE = process.env.TX_FAKE === '1';
 const COUNT_ONLY = process.argv.includes('--count');
-const LANG_NAMES = { 'pt-BR': 'Brazilian Portuguese (pt-BR)' };
+const LANG_NAMES = {
+  'pt-BR': 'Brazilian Portuguese (pt-BR)', de: 'German (de)', es: 'Spanish (es)', fr: 'French (fr)',
+  it: 'Italian (it)', nl: 'Dutch (nl)', sv: 'Swedish (sv)'
+};
 
 // ── The pieces, and their fingerprints. index.html has the same three functions
 //    (_cxTxEsc, _cxTxMarkup, _cxTxKey); they must stay identical or nothing will match. ──
@@ -123,17 +126,35 @@ function check(src, tr) {
 }
 
 // ── The glossary: what stays in English (editable; see codex-glossary.<lang>.json) ──
-const DEFAULT_KEEP = [
-  'Airborne', 'Burrowing', 'Charge', 'Deathrite', 'Disabled', 'Flood', 'Genesis', 'Immobile', 'Lance',
-  'Landbound', 'Lethal', 'Movement', 'Ranged', 'Spellcaster', 'Stealth', 'Submerge', 'Voidwalk', 'Ward',
-  'Waterbound', 'Avatar', 'Atlas', 'Spellbook', 'Collection', 'Cemetery', 'Void', 'Realm',
-  "Death's Door", 'Death Blow', 'Alpha', 'Beta', 'Arthurian Legends', 'Dragonlord', 'Gothic', 'Codex'
-];
+const DEFAULT_KEEP = ["Avatar", "Minion", "Magic", "Aura", "Artifact", "Spell", "Airborne", "Burrowing", "Deathrite", "Flood", "Flooded", "Genesis", "Immobile", "Lance", "Landbound", "Lethal", "Ranged", "Spellcaster", "Stealth", "Submerge", "Voidwalk", "Waterbound", "Silenced", "Atlas", "Spellbook", "Cemetery", "Realm", "Underground", "Underwater", "Subsurface", "Threshold", "Mana", "Affinity", "Death's Door", "Death Blow", "Summoning Sickness", "Air", "Earth", "Fire", "Water", "Exceptional", "Angel", "Beast", "Demon", "Dragon", "Dwarf", "Faerie", "Giant", "Gnome", "Goblin", "Merfolk", "Monster", "Mortal", "Ogre", "Sphinx", "Troll", "Undead", "Armor", "Automaton", "Instrument", "Monument", "Potion", "Relic", "Weapon", "Desert", "River", "Tower", "Village", "Knight", "Royalty", "Evil", "Arthurian Legends", "Dragonlord", "Gothic", "Codex"];
+const DEFAULT_GAME = ["Tap", "Untap", "Attack", "Defend", "Intercept", "Move", "Fight", "Strike", "Draw", "Discard", "Banish", "Summon", "Conjure", "Cast", "Dispel", "Sacrifice", "Teleport", "Transform", "Traverse", "Burrow", "Unburrow", "Kill", "Pick Up", "Drop", "Carry", "Fly", "Collection", "Hand", "Site", "Token", "Unit", "Charge", "Disabled", "Movement", "Ward", "Void", "Surface", "Power", "Ordinary", "Elite", "Unique", "Spirit", "Device", "Document", "Alpha", "Beta"];
 function loadGlossary() {
-  try {
-    const g = JSON.parse(fs.readFileSync(GLOSSARY, 'utf8'));
-    return { keep: Array.isArray(g.keep) ? g.keep : DEFAULT_KEEP, terms: (g.terms && typeof g.terms === 'object') ? g.terms : {}, notes: g.notes || '' };
-  } catch (e) { return { keep: DEFAULT_KEEP, terms: {}, notes: '' }; }
+  let g = {};
+  try { g = JSON.parse(fs.readFileSync(GLOSSARY, 'utf8')); } catch (e) {}
+  return {
+    keep: Array.isArray(g.keep) ? g.keep : DEFAULT_KEEP,
+    game: Array.isArray(g.keep_when_game_term) ? g.keep_when_game_term : DEFAULT_GAME,
+    terms: (g.terms && typeof g.terms === 'object') ? g.terms : {},
+    notes: g.notes || ''
+  };
+}
+
+// ── Game terms stay in English ──
+// 'keep' terms (card types, keyword abilities, zones, elements, rarities, subtypes ...) are kept in every
+// form -- minion/minions, Avatar/avatars -- and checked: a translation that drops one that its English has
+// is not kept (tried again next run). A piece that is nothing but one such term is not sent at all: its
+// translation is the term itself. 'keep_when_game_term' terms (tap, attack, draw ... and words that are
+// also everyday words) are left to the translator's judgement, as the prompt explains.
+const plainOf = (m) => String(m).replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\u2019/g, "'");
+const termRe = (t, forms) => new RegExp('(^|[^A-Za-z\u00c0-\u024f])' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + (forms ? "(s|es|'s)?" : '') + '(?![A-Za-z\u00c0-\u024f])', 'i');
+function termsIn(src, keep) { const p = plainOf(src); return keep.filter((t) => termRe(t, true).test(p)); }
+function keepsTerms(src, tr, keep) {
+  const lost = termsIn(src, keep).filter((t) => !termRe(t, true).test(plainOf(tr)) && !new RegExp('(^|[^A-Za-z])' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]"), 'i').test(plainOf(tr)));
+  return lost.length ? 'game term not kept: ' + lost.join(', ') : null;
+}
+function onlyATerm(src, keep) {
+  const p = plainOf(src).trim().replace(/[.:!?]$/, '');
+  return keep.some((t) => new RegExp('^' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, "['\u2019]") + "(s|es)?$", 'i').test(p));
 }
 function loadCardNames() {
   try {
@@ -152,7 +173,7 @@ function prompt(glossary, cardNames) {
     '1. This is game rules text. Keep its exact meaning, conditions, numbers and wording precision. Write clear, natural ' + lang + '.',
     '2. The text uses these tags: <b>, <i>, <term>, <card>, each with its closing tag. Keep every tag. Translate the words inside <b> and <i>. Never change the words inside <card>...</card> or <term>...</term>: copy them character for character, since they are card names and Codex entries the app links to. A tagged phrase may move to where the grammar needs it, but must stay whole. Do not add tags.',
     '3. Keep &amp; &lt; &gt; exactly as written, and keep every line break (\\n) where it is. Keep a leading "• " on a line.',
-    '4. Keep in English, exactly as written: card names, set names, and these game terms: ' + glossary.keep.join(', ') + '.',
+    '4. Keep the game\u2019s own words in English, exactly as written, in whatever form they take (singular or plural, a verb in any tense: tap, taps, tapped, tapping; capitalised or not): card names, set names, card types, keyword abilities, zones, elements, rarities and subtypes -- ' + glossary.keep.join(', ') + ' -- and the game\u2019s actions and terms: ' + glossary.game.join(', ') + '. Build the ' + lang + ' sentence around them, adding the articles and prepositions it needs (in Portuguese, for example: "um minion", "no Atlas", "dar tap").',
     cardNames.length ? '5. These card names appear in this batch; keep them in English exactly: ' + cardNames.join('; ') + '.' : '5. Keep any card name in English exactly.',
     terms.length ? '6. Use these translations consistently: ' + terms.map((t) => t + ' = ' + glossary.terms[t]).join('; ') + '.' : '',
     glossary.notes ? '7. ' + glossary.notes : '',
@@ -213,7 +234,11 @@ function main() {
 
   const glossary = loadGlossary();
   const allNames = loadCardNames();
-  const todo = pending.slice(0, MAX_UNITS);
+  let asIs = 0;
+  pending.forEach((k) => { if (onlyATerm(units.get(k), glossary.keep)) { t[k] = units.get(k); asIs++; } });
+  if (asIs) { console.log(asIs + ' pieces are only a game term: kept in English without asking.'); save(OUT, units, t, data.updated); }
+  const todo = pending.filter((k) => typeof t[k] !== 'string').slice(0, MAX_UNITS);
+  if (!todo.length) { output('pending', 0); return; }
   const chunks = []; let cur = [], chars = 0;
   todo.forEach((k) => {
     const s = units.get(k);
@@ -232,7 +257,7 @@ function main() {
     (Array.isArray(res.items) ? res.items : []).forEach((it) => {
       if (!it || !want.has(it.id)) return;
       want.delete(it.id);
-      const why = check(units.get(it.id), it.text);
+      const why = check(units.get(it.id), it.text) || keepsTerms(units.get(it.id), it.text, glossary.keep);
       if (why) { refused++; console.log('  ' + it.id + ' not kept (' + why + ')'); return; }
       t[it.id] = it.text; kept++;
     });
