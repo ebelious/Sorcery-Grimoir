@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "rules": 3,
- "count": 609,
+ "count": 611,
  "of": 613,
  "t": {
   "10.ed9c2722": "Les sites ont quelques Characteristics clés :",
@@ -378,6 +378,7 @@
   "7w.fab9a6f3": "Les Artifacts ont divers Subtypes, notamment Armor, Weapons, Relics, dispositifs, documents, Automatons ou Monuments. Si la plupart des Artifacts sont des objets standards qui peuvent être portés au combat, d'autres, comme les Automatons et les Monuments, ont des Characteristics et des restrictions supplémentaires.",
   "7x.2ce3a308": "Certaines Units peuvent Carry d'autres Units. Une Unit dotée de cette Ability les Pick Up ou les Drop de la même manière et au même moment que pour des Artifacts (voir page 25). Les Units qui ont Airborne, Burrowing, Submerge ou Voidwalk confèrent ces Abilities aux Units qu'elles Carry tant qu'elles sont Carry.",
   "7y.37df9d53": "Certains Spells peuvent exiger une Affinity avec différents Elements. Comme pour les autres Spells, vous devez pouvoir remplir tout le Threshold requis d'un Spell pour le lancer. Par exemple, pour lancer Sir Pelleas, vous devrez contrôler des sites offrant au moins un symbole de Threshold Air et deux symboles de Threshold Water.",
+  "7z.62ee35a3": "L'Water est l'Element du Charme et de la Ruse, prête à s'adapter aux stratégies de l'Enemy et à les perturber en manipulant tout. Une affinité avec l'eau vous confère un puissant avantage à domicile qui engloutira lentement le Realm, ainsi que la capacité (Ability) de placer l'Enemy exactement là où vous le souhaitez.",
   "7z.871bdfee": "Pour Tap une carte, tournez-la de 90° vers la droite depuis sa position verticale. Une carte ainsi tournée de 90° est « Tap », tandis qu’une carte verticale est « Untap ». Les cartes peuvent aussi être Untap à certains moments de la partie. Pour cela, il suffit de la tourner de 90° vers la gauche pour la remettre en position verticale.",
   "8.1c2e6ddd": "Immobile",
   "8.1e2eb9ef": "Interact",
@@ -411,6 +412,7 @@
   "8p.9219ecc6": "Chaque Unit peut Tap pour activer l'Ability Move and Attack, qui lui permet, au choix, de Move, puis, au choix, d'Attack quelque chose à son Location. Lorsque vous utilisez cette Ability, déclarez le Path de Movement prévu et résolvez-le. Une fois tout le Movement résolu, décidez alors si vous Attack à ce Location (voir page 22).",
   "8q.5399d830": "Si vos Units ont des capacités qui améliorent le déplacement, ou si des effets modifiant le déplacement sont en jeu, vous pouvez choisir de déclarer un chemin plus complexe. Au fur et à mesure que vous résolvez chaque step, vous vérifiez qu’il est légal à ce moment-là. S’il ne l’est pas, vous n’effectuez pas ce step et vous continuez à résoudre ce qui reste.",
   "8t.112092e0": "Lorsqu’un Spell d’Aura est lancé, il conjure (Conjure) l’Aura à l’intersection de quatre cases, bien que certains précisent la bordure entre deux cases, voire une seule case. On dit que les Auras occupent la Surface de tous les Sites situés sur ces cases, ainsi que tout Void, et qu’elles les affectent (ou affectent d’autres éléments situés sur ces Sites) d’une certaine manière.",
+  "8t.4bd76061": "L'Air est l'Element de la Connaissance et du Power : il s'aventure parmi des forces échappant au contrôle des Mortal afin d'acquérir les moyens magiques de répondre à toute situation sur le champ de bataille. Une affinité avec l'air vous procure à la fois de la mobilité et des options tactiques, grâce à sa capacité (Ability) à Teleport des unités à travers le Realm et à accroître les Spell dont vous disposez.",
   "8u.331c41d0": "Le Void est une région de néant incorporel sur laquelle vous allez bâtir votre domaine physique. Tout Minion qui se retrouve d'une manière ou d'une autre dans le Void (en tout ou en partie) est immédiatement Banished (retiré de la partie), sauf s'il possède une ability qui lui permet expressément d'y exister (comme Voidwalk).",
   "8v.4e658a68": "Vous ne pouvez Attack que des unités Enemy ou la Surface de sites Enemy qui se trouvent à votre emplacement. Lorsque vous utilisez la Basic Ability Move and Attack, vous devez résoudre tout mouvement avant de déclarer et de résoudre votre Attack. En résolvant l'Attack, vous confirmez qu'il s'agit d'une Target légale à ce moment-là ; si c'est le cas, votre unité a attaqué.",
   "8x.b3e21379": "En général, les units subissent des Damage lors des fights et par les effets des Spells et des Abilities. Les Damage infligés aux Minions s’accumulent jusqu’à la fin du tour, où ils sont soignés, tandis que les Damage infligés à un Avatar lui font perdre des Life à la place. Parfois, un Avatar subit directement une perte de Life, par exemple lorsqu’un site est endommagé.",
