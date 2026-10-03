@@ -38,6 +38,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const LANG = process.env.TX_LANG || 'pt-BR';
+const CJK = /^(ja|ko|zh)/.test(LANG);   // written without the Latin alphabet's length (see check)
 const SRC = 'codex.json';
 const OUT = 'codex.' + LANG + '.json';
 const GLOSSARY = 'codex-glossary.' + LANG + '.json';
@@ -51,7 +52,8 @@ const RULES = 2;
 const COUNT_ONLY = process.argv.includes('--count');
 const LANG_NAMES = {
   'pt-BR': 'Brazilian Portuguese (pt-BR)', de: 'German (de)', es: 'Spanish (es)', fr: 'French (fr)',
-  it: 'Italian (it)', nl: 'Dutch (nl)', sv: 'Swedish (sv)'
+  it: 'Italian (it)', nl: 'Dutch (nl)', sv: 'Swedish (sv)',
+  ja: 'Japanese (ja)', ko: 'Korean (ko)'
 };
 
 // ── The pieces, and their fingerprints. index.html has the same three functions
@@ -123,7 +125,9 @@ function check(src, tr) {
   }
   if (!/<(b|i)>/.test(src) && /<(b|i)>/.test(tr)) return 'added formatting';
   const r = tr.length / Math.max(1, src.length);
-  if (src.length > 20 && (r < 0.4 || r > 2.8)) return 'length';
+  // Japanese and Korean write in far fewer characters than English (a sentence is often a third of the
+  // length or less), so their floor is lower; the ceiling is the same.
+  if (src.length > 20 && (r < (CJK ? 0.12 : 0.4) || r > 2.8)) return 'length';
   return null;
 }
 
