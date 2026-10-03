@@ -1,7 +1,7 @@
 {
  "lang": "nl",
  "rules": 3,
- "count": 611,
+ "count": 613,
  "of": 613,
  "t": {
   "10.ed9c2722": "Sites hebben enkele belangrijke Characteristics:",
@@ -373,6 +373,7 @@
   "7m.49ec19db": "Fire is het element van Verlangen en Vernietiging, bereid alles te doen om de overwinning in het Realm veilig te stellen. Een band met Fire geeft je een scala aan explosieve Spells en abilities die uitbarstingen van snelheid kunnen veroorzaken of vriend en vijand verbranden in enorme vuurstralen.",
   "7m.b926e6ac": "Voor je eerste paar spellen wil je misschien vooraf samengestelde decks gebruiken, zodat je meteen in de actie zit. Of je kunt je eigen decks samenstellen en de Power ervan balanceren en afstemmen op jouw speelstijl (zie pagina 26). De wereld van Sorcery biedt je eindeloze mogelijkheden!",
   "7m.ea81768d": "Als het afhandelen van een event een ability triggert, wordt er een nieuw event in de Storyline ingevoegd. Het nieuwe event wordt op het huidige moment toegevoegd en onderbreekt tijdelijk de resterende events op de Storyline. Zodra dit nieuwe event is afgehandeld, gaat het verhaal verder.",
+  "7r.7a0d7144": "Earth is het Element van Enduring Strength, gekenmerkt door de nadruk op het inzetten en versterken van krijgsmachten in het hele Realm. Een verbondenheid met Earth geeft je de Ability om invloed uit te oefenen op je Atlas en op Minions die de strijd kunnen domineren door samenwerking en pure vechtkracht (Power).",
   "7s.c94cfa6f": "Elemental Threshold wordt niet uitgegeven zoals Mana. Het is simpelweg een minimale Affinity die je voor de genoemde Elements moet hebben om sommige kaarten te gebruiken. Alle Artifacts en de meeste abilities hebben helemaal geen Threshold, dus je hoeft alleen te zorgen dat je eventuele bijbehorende Costs kunt betalen om ze te gebruiken.",
   "7t.f4c6bbed": "Here &amp; There: “Here” en “There” verwijzen naar de Location(s) die een Card inneemt. Voor de meeste Cards, zoals Avatars, Minions en Artifacts, is dat één Location. Voor de meeste Auras is dat het gebied van 2x2 dat ze innemen. Voor Sites zijn dat twee Locations: hun Surface en Subsurface.",
   "7v.e38d4a8f": "Een passive ability heeft een ongoing effect dat altijd actief is, zolang de kaart zich in de relevante game zone bevindt. Meestal is dit zone de Realm, maar sommige kaarten hebben abilities die aangeven wat ze doen, of wat jij mag doen, terwijl ze in je Hand zijn, of in het Cemetery, enzovoort.",
@@ -440,6 +441,7 @@
   "9p.1d1f0eb7": "Omdat elementaire Affinity niet wordt uitgegeven of verloren bij het spelen van kaarten, hoef je alleen de Elemental Threshold van elke kaart te controleren en te kijken of je Affinity gelijk is aan of hoger dan de Threshold. Dit betekent dat je deze beurt zowel de Illusionist als de Explorers kunt spelen, omdat ze elk maar een Threshold van twee vereisen, tegenover je Affinity van drie.",
   "9s.55cfd0fc": "Tokens zijn kleine kaarten die in het Realm min of meer hetzelfde werken als gewone kaarten. Het grote verschil tussen kaarten en tokens is dat tokens nooit deel uitmaken van het deck van een speler en formeel alleen in het Realm kunnen bestaan, in geen enkele andere Zone. Als een token ergens anders geplaatst zou worden, wordt het in plaats daarvan volledig uit het spel verwijderd.",
   "9t.6197f60e": "Deze unit mag tot X extra Steps zetten bij het gebruiken van de abilities Move and Attack of Defend. Om meerdere Steps tegelijk te zetten, kies je een bestemming en een Path ernaartoe en Traverse je dat Path één Step per keer. Mogelijk moet je automatische triggers afhandelen (of “altijd actieve” Passive Abilities toepassen), waarvan sommige de beweging van de unit voortijdig kunnen Stoppen.",
+  "9x.276a8d72": "Spells vertegenwoordigen alle magische kracht die je in dit Realm kunt inzetten. Hieronder vallen Minions die je helpen om je landen te Defenden en de Enemy te Attacken, krachtige Artifacts die je helpen het machtsevenwicht (Power) te laten doorslaan, Magic van gekanaliseerde energie die vijanden overweldigt, en Auras van blijvende elementaire magie om je wil op te leggen aan gebieden van het Realm.",
   "9z.f0f44afc": "Deze Unit mag tot X extra steps zetten bij het gebruik van de basic abilities Move and Attack of Defend. Om meerdere steps tegelijk te zetten, kies je een bestemming en een Path ernaartoe, en doorloop je dat Path step voor step (Traverse). Mogelijk moet je automatische triggers afhandelen (of “altijd actieve” Passive Abilities toepassen), waarvan sommige de beweging van de Unit voortijdig kunnen stoppen.",
   "a.0750ace2": "Card Types",
   "a.17bf2cea": "Mana gebruiken",
