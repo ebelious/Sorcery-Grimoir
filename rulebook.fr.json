@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "rules": 3,
- "count": 611,
+ "count": 612,
  "of": 613,
  "t": {
   "10.ed9c2722": "Les sites ont quelques Characteristics clés :",
@@ -372,6 +372,7 @@
   "7m.49ec19db": "Fire est l'Element du Désir et de la Destruction, prêt à tout pour assurer la victoire dans le Realm. Une affinité avec le feu vous offre un éventail de Spells et de capacités explosifs, capables de créer des élans de vitesse ou de brûler amis et ennemis dans de grandes gerbes de flammes.",
   "7m.b926e6ac": "Pour vos premières parties, vous voudrez peut-être utiliser des decks préconstruits, qui vous plongeront directement dans l'action. Vous pouvez aussi créer vos propres decks, en équilibrant et en ajustant leurs Power pour les adapter à votre style de jeu (voir page 26). Le monde de Sorcery vous offre des possibilités infinies !",
   "7m.ea81768d": "Si la résolution d'un événement déclenche une ability, un nouvel événement est inséré dans la Storyline. Le nouvel événement est ajouté à l'instant présent et interrompt temporairement les événements restants de la Storyline. Une fois ce nouvel événement résolu, l'histoire reprend son cours.",
+  "7r.7a0d7144": "Earth est l'Element de la Force Durable, défini par son accent sur le déploiement et le renforcement des forces martiales à travers le Realm. Une affinité avec Earth vous confère l'Ability d'influencer votre Atlas et vos Minions, qui peuvent dominer le combat grâce au travail d'équipe et à leur pure Power de combat.",
   "7s.c94cfa6f": "Le Threshold élémentaire n'est pas dépensé comme le Mana. C'est simplement une Affinity minimale que vous devez avoir pour les Elements indiqués afin d'utiliser certaines cartes. Tous les Artifacts et la plupart des Abilities n'ont aucun Threshold, vous devez donc seulement vous assurer de pouvoir payer les Costs associés pour les utiliser.",
   "7t.f4c6bbed": "Here &amp; There : « Here » et « There » désignent le ou les emplacements qu'occupe une carte. Pour la plupart des cartes, comme les Avatars, les Minions et les Artifacts, il s'agit d'un seul emplacement. Pour la plupart des Auras, il s'agit de la zone de 2x2 qu'elles occupent. Pour les Sites, il s'agit de deux emplacements : leur Surface et leur Subsurface.",
   "7v.e38d4a8f": "Une passive ability produit un ongoing effect toujours actif, tant que la carte se trouve dans la zone de jeu concernée. En général, cette zone est le Realm, mais certaines cartes ont des capacités qui précisent ce qu'elles font, ou ce qu'elles vous permettent de faire, lorsqu'elles sont dans votre Hand, dans le Cemetery, etc.",
