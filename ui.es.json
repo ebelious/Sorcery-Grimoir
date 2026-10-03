@@ -1,8 +1,8 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3334,
- "of": 3334,
+ "count": 3336,
+ "of": 3336,
  "t": {
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
   "10.04a90236": "No se pudo escribir la copia de seguridad. {n}",
@@ -3113,6 +3113,7 @@
   "q.767b8800": "No se pudo enviar el informe.",
   "q.827bc23c": "Avanzar el cuadro a",
   "q.86255295": "Jugabilidad básica y reglas",
+  "q.866c805d": "#v2-quick .v2q-tmr .v2q-mq",
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "en el Spellbook/Atlas y",
   "q.9acc69b2": "Sin mazo — las manos son aleatorias",
@@ -3148,6 +3149,7 @@
   "r.ceef3b63": "de esta carta en la maybeboard.",
   "r.de2e03a1": "No se pudo iniciar la importación:",
   "r.ec02e543": "c&gt;7 · las caras",
+  "r.ec441a62": "#v2-quick .v2q-dsel .v2q-mq",
   "r.eee8e8f4": "Ver tu publicación en Discord →",
   "r.fee01a2e": "Mazos publicados más vistos",
   "s.0d8d5173": "Ajustes › General: 12 Omens",
