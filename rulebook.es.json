@@ -1,7 +1,7 @@
 {
  "lang": "es",
  "rules": 3,
- "count": 612,
+ "count": 613,
  "of": 613,
  "t": {
   "10.ed9c2722": "Los sites tienen algunas Characteristics clave:",
@@ -373,6 +373,7 @@
   "7m.49ec19db": "Fire es el elemento del Desire y la Destruction, dispuesto a hacer lo que sea necesario para asegurar la victoria en el Realm. Una afinidad con Fire te otorga una variedad de Spells y habilidades explosivas que pueden crear ráfagas de velocidad o quemar por igual a amigos y enemigos en grandes llamaradas.",
   "7m.b926e6ac": "Para tus primeras partidas, quizá quieras usar mazos preconstruidos, que te llevarán directamente a la acción. O puedes crear tus propios mazos, equilibrando y ajustando sus Power para adaptarlos a tu estilo de juego (consulta la página 26). ¡El mundo de Sorcery te ofrece posibilidades infinitas!",
   "7m.ea81768d": "Si la resolución de un evento activa una ability, se insertará un nuevo evento en el Storyline. El nuevo evento se añade en el momento actual e interrumpe temporalmente los eventos restantes del Storyline. Una vez que este nuevo evento se haya resuelto, la historia continuará.",
+  "7r.7a0d7144": "Earth es el Element de la Fuerza Perdurable, definido por su enfoque en desplegar y potenciar las fuerzas marciales a lo largo del Realm. Una sintonía con Earth te otorga la Ability de influir en tu Atlas y en Minions capaces de dominar la batalla mediante el trabajo en equipo y el puro Power de combate.",
   "7s.c94cfa6f": "El Elemental Threshold no se gasta como el Mana. Es simplemente un Affinity mínimo que debes tener para los Elements indicados para usar algunas cartas. Todos los Artifacts y la mayoría de las habilidades no tienen Threshold alguno, así que solo debes asegurarte de poder pagar los costes asociados para usarlos.",
   "7t.f4c6bbed": "Here y There: «Here» y «There» se refieren a la ubicación o ubicaciones que ocupa una carta. Para la mayoría de las cartas, como los Avatars, los Minions y los Artifacts, eso significa una ubicación. Para la mayoría de las Auras, significa el área de 2x2 que ocupan. Para los Sites, significa dos ubicaciones: su Surface y su Subsurface.",
   "7v.e38d4a8f": "Una Passive Ability tiene un Ongoing Effect que siempre está activo, mientras la carta esté en la Zone de juego pertinente. Normalmente, esta Zone será el Realm, pero algunas cartas tienen habilidades que especifican cosas que hacen, o que te permiten hacer, mientras están en tu Hand, o mientras están en el Cemetery, etc.",
