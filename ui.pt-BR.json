@@ -1,8 +1,8 @@
 {
  "lang": "pt-BR",
  "rules": 2,
- "count": 3334,
- "of": 3334,
+ "count": 3336,
+ "of": 3336,
  "t": {
   "10.04705788": "Acesso à câmera negado ou indisponível.",
   "10.04a90236": "Não foi possível gravar o backup. {n}",
@@ -3113,6 +3113,7 @@
   "q.767b8800": "Não foi possível enviar o relatório.",
   "q.827bc23c": "Avançar a chave para a",
   "q.86255295": "Jogabilidade básica e regras",
+  "q.866c805d": "#v2-quick .v2q-tmr .v2q-mq",
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "no Spellbook/Atlas e",
   "q.9acc69b2": "Sem deck — as Hands são aleatórias",
@@ -3148,6 +3149,7 @@
   "r.ceef3b63": "deste card no maybeboard.",
   "r.de2e03a1": "Não foi possível iniciar a importação:",
   "r.ec02e543": "c&gt;7 · as caras",
+  "r.ec441a62": "#v2-quick .v2q-dsel .v2q-mq",
   "r.eee8e8f4": "Ver sua publicação no Discord →",
   "r.fee01a2e": "Decks publicados mais vistos",
   "s.0d8d5173": "Configurações › Geral: 12 Omens",
