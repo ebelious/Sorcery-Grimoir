@@ -1,6 +1,6 @@
 name: Translate Codex & FAQ
 
-# Keeps codex.pt-BR.json in step with codex.json, translating only what is new or changed.
+# Keeps codex.<lang>.json, for each language below, in step with codex.json, translating only what is new or changed.
 # Runs after each Codex scrape, and every three hours besides: the first translation is too
 # large for one run, so it is done a batch at a time (TX_MAX_UNITS pieces per run) until done.
 # When nothing needs translating, Claude Code is not even installed and nothing is committed.
@@ -26,10 +26,18 @@ jobs:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # one language after another (each starts from the commit the one before it made): Brazilian
+    # Portuguese, German, Spanish, French, Italian, Dutch, Swedish, Japanese, Korean. A language is added here, with its
+    # glossary file (codex-glossary.<lang>.json), and nothing else changes.
+    strategy:
+      matrix:
+        lang: [pt-BR, de, es, fr, it, nl, sv, ja, ko]
+      max-parallel: 1
+      fail-fast: false
     env:
-      TX_LANG: pt-BR
+      TX_LANG: ${{ matrix.lang }}
       TX_MODEL: sonnet
-      TX_MAX_UNITS: '400'
+      TX_MAX_UNITS: '200'
 
     steps:
       - name: Checkout repo (latest, with the scrape's commit)
@@ -56,11 +64,12 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: node translate-codex.js
 
-      - name: Commit codex.pt-BR.json if changed
+      - name: Commit codex.<lang>.json if changed
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+          if [ ! -f "codex.${TX_LANG}.json" ]; then echo "No codex.${TX_LANG}.json to commit."; exit 0; fi
           git add "codex.${TX_LANG}.json"
           git diff --staged --quiet || git commit -m "chore: update codex.${TX_LANG}.json [skip ci]"
           for i in 1 2 3 4 5; do
