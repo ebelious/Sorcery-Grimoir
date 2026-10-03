@@ -1,8 +1,8 @@
 {
  "lang": "pt-BR",
  "rules": 2,
- "count": 3333,
- "of": 3333,
+ "count": 3334,
+ "of": 3334,
  "t": {
   "10.04705788": "Acesso à câmera negado ou indisponível.",
   "10.04a90236": "Não foi possível gravar o backup. {n}",
@@ -1906,6 +1906,7 @@
   "b.08c844c0": "Tela cheia",
   "b.0a0c11e8": "Coreia do Sul",
   "b.0aa420e8": "Não adicionado —",
+  "b.0babbd70": "Voltar ao topo",
   "b.13aa4373": "Enviar relatório",
   "b.1522c923": "Constructed",
   "b.16923e35": "Deck compartilhado",
