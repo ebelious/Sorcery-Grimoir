@@ -1,8 +1,8 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3332,
- "of": 3332,
+ "count": 3333,
+ "of": 3333,
  "t": {
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
   "10.04a90236": "No se pudo escribir la copia de seguridad. {n}",
@@ -1721,6 +1721,7 @@
   "9.c507dbe2": "Retractaciones",
   "9.c5090d44": "Wisconsin",
   "9.c6987946": "modo {n}p",
+  "9.c6998b3a": "{n} mostrados",
   "9.ca302fe7": "Maulskull",
   "9.cc75630e": "Argentina",
   "9.cd434814": "Daivadipa",
