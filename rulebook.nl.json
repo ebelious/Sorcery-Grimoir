@@ -1,7 +1,7 @@
 {
  "lang": "nl",
  "rules": 3,
- "count": 610,
+ "count": 611,
  "of": 613,
  "t": {
   "10.ed9c2722": "Sites hebben enkele belangrijke Characteristics:",
@@ -287,6 +287,7 @@
   "5f.3dcd7d5a": "De Cave Trolls zijn niet Adjacent aan de King, omdat ze burrowed zijn en dus in een andere regio zitten. Op dezelfde manier is de Porcupine Pufferfish niet nearby de King, omdat die submerged is.",
   "5f.a6dbc656": "Als een kaart het Realm verlaat, blijven al zijn events op de Storyline staan, maar kunnen ze niet worden afgehandeld. Als een event niet kan worden afgehandeld wanneer het aan de beurt is, negeer je het gewoon en ga je door naar het volgende event.",
   "5f.e5d986b9": "Wanneer een Oversized Unit beweegt, kies je een richting en alle delen ervan bewegen in die richting. Als een deel ervan niet in de gekozen richting kan bewegen, kan hij helemaal niet in die richting bewegen.",
+  "5f.eb4f4e1c": "Al je Spellcasters gebruiken Mana om hun Spells te casten en sommige abilities kunnen ook uit deze Power putten (Draw). Je kunt alleen Mana krijgen tijdens je beurt en onbestede Mana verlies je aan het einde van je beurt.",
   "5g.d08e3bea": "Minions met Stealth kunnen niet als Target worden gekozen door Spells of abilities van je tegenstanders (inclusief attacks), ze kunnen niet worden geïntercept, hun attacks kunnen niet worden gedefend en Projectiles kunnen ze niet raken.",
   "5h.052f7386": "Artifacts zijn allerlei Relics, bouwwerken, gereedschappen, uitrusting, snufjes, devices en snuisterijen, vaak opgeladen met blijvende betoveringen door tovenaars van weleer. Artifacts hebben enkele belangrijke Characteristics op hun kaart:",
   "5h.aac6248a": "Er zijn drie hoofdcategorieën kaarten: Avatars, sites en Spells. Spells vallen verder uiteen in vier Card Types: Minion, Artifact, Aura en Magic. Op de volgende pagina's wordt elk type beschreven.",
