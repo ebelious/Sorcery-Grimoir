@@ -1,8 +1,8 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 3333,
- "of": 3333,
+ "count": 3334,
+ "of": 3334,
  "t": {
   "10.04705788": "Accesso alla fotocamera negato o non disponibile.",
   "10.04a90236": "Non è stato possibile scrivere il backup. {n}",
@@ -1906,6 +1906,7 @@
   "b.08c844c0": "Schermo intero",
   "b.0a0c11e8": "Corea del Sud",
   "b.0aa420e8": "Non aggiunto —",
+  "b.0babbd70": "Torna su",
   "b.13aa4373": "Invia segnalazione",
   "b.1522c923": "Constructed",
   "b.16923e35": "Mazzo condiviso",
