@@ -1,7 +1,7 @@
 {
  "lang": "ja",
  "rules": 3,
- "count": 612,
+ "count": 613,
  "of": 613,
  "t": {
   "10.ed9c2722": "Site には次のような主な Characteristics があります。",
@@ -20,6 +20,7 @@
   "18.df87eddc": "このunitはAirborneを持つunitもInterceptできます。",
   "19.056ff61c": "自身の能力のいずれかを起動する(20ページ参照)",
   "19.6555acf0": "ステップ2: 自分のすべてのSiteがManaを生み出します。",
+  "19.8790981e": "Adjacentなwater sitesが連なった、ひとまとまりの集まり。",
   "19.d210cd29": "ステップ1: Realmにある自分のすべてのカードをUntapします。",
   "1a.439552c7": "注意:このようにLifeを失うことはDamageではありません。",
   "1b.b80bbd6b": "同値の場合は、Active Playerが選びます。",
