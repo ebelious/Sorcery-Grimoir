@@ -1,8 +1,8 @@
 {
  "lang": "de",
  "rules": 2,
- "count": 3334,
- "of": 3334,
+ "count": 3336,
+ "of": 3336,
  "t": {
   "10.04705788": "Kamerazugriff verweigert oder nicht verfügbar.",
   "10.04a90236": "Das Backup konnte nicht gespeichert werden. {n}",
@@ -3113,6 +3113,7 @@
   "q.767b8800": "Der Bericht konnte nicht gesendet werden.",
   "q.827bc23c": "Das Turnier-Bracket weiterschalten auf",
   "q.86255295": "Grundlegendes Gameplay &amp; Regeln",
+  "q.866c805d": "#v2-quick .v2q-tmr .v2q-mq",
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "im Spellbook/Atlas und",
   "q.9acc69b2": "Kein Deck — Hände sind zufällig",
@@ -3148,6 +3149,7 @@
   "r.ceef3b63": "von dieser Karte im Maybeboard.",
   "r.de2e03a1": "Der Import konnte nicht gestartet werden:",
   "r.ec02e543": "c&gt;7 · die teuren",
+  "r.ec441a62": "#v2-quick .v2q-dsel .v2q-mq",
   "r.eee8e8f4": "Deinen Beitrag in Discord ansehen →",
   "r.fee01a2e": "Meistgesehene veröffentlichte Decks",
   "s.0d8d5173": "Einstellungen › Allgemein: 12 Omen",
