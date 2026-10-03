@@ -1,7 +1,7 @@
 {
  "lang": "es",
  "rules": 3,
- "count": 611,
+ "count": 612,
  "of": 613,
  "t": {
   "10.ed9c2722": "Los sites tienen algunas Characteristics clave:",
@@ -287,6 +287,7 @@
   "5f.3dcd7d5a": "Los Cave Trolls no son Adjacent al King porque están enterrados y, por tanto, en una región diferente. Del mismo modo, el Porcupine Pufferfish no está cerca del King porque está sumergido.",
   "5f.a6dbc656": "Si una carta sale del Realm, cualquiera de sus eventos permanece en la Storyline pero no puede resolverse. Si algún evento no puede resolverse cuando le llega el turno, simplemente ignóralo y continúa con el siguiente evento.",
   "5f.e5d986b9": "Cuando una Oversized Unit se mueve, eliges una dirección y todas sus partes se mueven en esa dirección. Si alguna parte no puede moverse en la dirección elegida, entonces no puede moverse en esa dirección en absoluto.",
+  "5f.eb4f4e1c": "Todos tus Spellcasters usan Mana para lanzar sus Spells, y algunas abilities también pueden Draw de este Power. Solo puedes ganar Mana durante tu turno y pierdes todo el Mana no gastado al final de tu turno.",
   "5g.d08e3bea": "Los Minions con Stealth no pueden ser objetivo de Spells ni de habilidades de tus oponentes (incluidos los Attacks), no pueden ser interceptados, sus Attacks no pueden ser defendidos y los Projectiles no pueden alcanzarlos.",
   "5h.052f7386": "Los Artifacts son diversas Relics, edificios, herramientas, equipo, artilugios, dispositivos y baratijas, a menudo cargados con encantamientos duraderos por magos de antaño. Los Artifacts tienen algunas Characteristics clave en su carta:",
   "5h.aac6248a": "Hay tres categorías principales de cartas: Avatars, sites y Spells. Los Spells se dividen a su vez en cuatro Card Types: Minion, Artifact, Aura y Magic. Las siguientes páginas describen cada tipo.",
