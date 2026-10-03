@@ -1,8 +1,8 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3333,
- "of": 3333,
+ "count": 3334,
+ "of": 3334,
  "t": {
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
   "10.04a90236": "No se pudo escribir la copia de seguridad. {n}",
@@ -1906,6 +1906,7 @@
   "b.08c844c0": "Pantalla completa",
   "b.0a0c11e8": "Corea del Sur",
   "b.0aa420e8": "No añadido —",
+  "b.0babbd70": "Volver arriba",
   "b.13aa4373": "Enviar informe",
   "b.1522c923": "Constructed",
   "b.16923e35": "Mazo compartido",
