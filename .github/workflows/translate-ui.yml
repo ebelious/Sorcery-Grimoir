@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     # one language after another (each starts from the commit the one before it made): Brazilian
-    # Portuguese, German, Spanish, French, Italian, Dutch, Swedish. A language is added here, with its
+    # Portuguese, German, Spanish, French, Italian, Dutch, Swedish, Japanese, Korean. A language is added here, with its
     # glossary file (codex-glossary.<lang>.json), and nothing else changes.
     strategy:
       matrix:
-        lang: [pt-BR, de, es, fr, it, nl, sv]
+        lang: [pt-BR, de, es, fr, it, nl, sv, ja, ko]
       max-parallel: 1
       fail-fast: false
     env:
