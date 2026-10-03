@@ -1,7 +1,7 @@
 {
  "lang": "de",
  "rules": 3,
- "count": 612,
+ "count": 613,
  "of": 613,
  "t": {
   "10.ed9c2722": "Sites haben einige wichtige Characteristics:",
@@ -340,6 +340,7 @@
   "6k.48c4aa11": "Sorcery: Contested Realm ist ein anpassbares Sammelkartenspiel, das heißt, du kannst selbst wählen, welche Karten in dein Deck kommen. Wenn du bereit bist, dein eigenes Deck zu bauen, gibt es ein paar Regeln, die du befolgen musst, um spielbereite Decks zu erstellen:",
   "6p.201e7d1e": "Pro Grid-Feld kann es nur ein Site geben. Sites werden daher in der Regel auf einem Adjacent Void platziert und erweitern so dauerhaft die physischen Grenzen deines Herrschaftsbereichs im Realm. Sites können auch auf Rubble ausgespielt werden und ersetzen es dann vollständig.",
   "6p.f29eb533": "Wird ein Site zerstört, kommt er wie üblich auf den Cemetery seines Besitzers, doch statt ein neues Void zu erzeugen, wird der Site durch Rubble ersetzt. Rubble ist ein neutraler Land Site, den kein Spieler kontrolliert und der weder Mana noch Threshold liefert.",
+  "6v.b30ebf51": "Wenn du eine Enemy Unit mit einem Attack angreifst – entweder weil du das von Anfang an vorhattest oder weil dein Gegner verteidigt hat (siehe Seite 24) –, kommt es zum Fight zwischen den beteiligten Units. Im Fight führen die Units gleichzeitig einen Strike gegeneinander aus. Wenn eine Unit einen Strike ausführt, verursacht sie Damage in Höhe ihrer Power.",
   "6v.c99ed301": "Units, die zuerst Strike ausführen, handeln ihre Strikes ab, bevor ihr Target seine abhandeln kann. Wenn mehrere Units im selben Fight zuerst Strike ausführen können, führen sie alle gleichzeitig Strike aus. Danach führen alle überlebenden Units ohne diese Ability ihre Strikes aus.",
   "6w.56f76582": "Manche Karten können sich innerhalb des Realm oder in einem festgelegten Bereich frei bewegen. Wenn eine Unit die Abilities Move and Attack oder Defend einsetzt, verbraucht sie beim Bewegen keine Steps, solange Start- und Zielort des Steps die Bedingung „Moves Freely“ erfüllen.",
   "6x.973e7aac": "Ein Keyword ist ein Wort oder eine Wendung, die als Kurzform für einen längeren Regeltext dient. Keywords vermitteln Konzepte, die mehr Text brauchen, als auf eine Karte passt. Die ausführlicheren Erklärungen findest du im Glossar auf Seite 32.",
