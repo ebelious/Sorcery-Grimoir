@@ -1,8 +1,8 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 3334,
- "of": 3334,
+ "count": 3336,
+ "of": 3336,
  "t": {
   "10.04705788": "Accesso alla fotocamera negato o non disponibile.",
   "10.04a90236": "Non è stato possibile scrivere il backup. {n}",
@@ -3113,6 +3113,7 @@
   "q.767b8800": "Impossibile inviare la segnalazione.",
   "q.827bc23c": "Fai avanzare il tabellone a",
   "q.86255295": "Gioco di base e regole",
+  "q.866c805d": "#v2-quick .v2q-tmr .v2q-mq",
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "nello Spellbook/Atlas e",
   "q.9acc69b2": "Nessun mazzo — le mani sono casuali",
@@ -3148,6 +3149,7 @@
   "r.ceef3b63": "di questa carta nel maybeboard.",
   "r.de2e03a1": "Impossibile avviare l'importazione:",
   "r.ec02e543": "c&gt;7 · quelle costose",
+  "r.ec441a62": "#v2-quick .v2q-dsel .v2q-mq",
   "r.eee8e8f4": "Vedi il tuo post su Discord →",
   "r.fee01a2e": "Mazzi pubblicati più visti",
   "s.0d8d5173": "Impostazioni › Generali: 12 Omens",
