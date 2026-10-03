@@ -1,8 +1,8 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3334,
- "of": 3334,
+ "count": 3336,
+ "of": 3336,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
   "10.04a90236": "Impossible d’écrire la sauvegarde. {n}",
@@ -3113,6 +3113,7 @@
   "q.767b8800": "Impossible d’envoyer le rapport.",
   "q.827bc23c": "Faire avancer le tableau jusqu'à la",
   "q.86255295": "Règles et gameplay de base",
+  "q.866c805d": "#v2-quick .v2q-tmr .v2q-mq",
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "dans le Spellbook/Atlas et",
   "q.9acc69b2": "Aucun deck — les mains sont aléatoires",
@@ -3148,6 +3149,7 @@
   "r.ceef3b63": "de cette carte dans la maybeboard.",
   "r.de2e03a1": "Impossible de lancer l’importation :",
   "r.ec02e543": "c&gt;7 · les plus chères",
+  "r.ec441a62": "#v2-quick .v2q-dsel .v2q-mq",
   "r.eee8e8f4": "Voir votre publication sur Discord →",
   "r.fee01a2e": "Decks publiés les plus consultés",
   "s.0d8d5173": "Réglages › Général : 12 présages",
