@@ -1,8 +1,8 @@
 {
  "lang": "de",
  "rules": 2,
- "count": 3333,
- "of": 3333,
+ "count": 3334,
+ "of": 3334,
  "t": {
   "10.04705788": "Kamerazugriff verweigert oder nicht verfügbar.",
   "10.04a90236": "Das Backup konnte nicht gespeichert werden. {n}",
@@ -1906,6 +1906,7 @@
   "b.08c844c0": "Vollbild",
   "b.0a0c11e8": "Südkorea",
   "b.0aa420e8": "Nicht hinzugefügt —",
+  "b.0babbd70": "Nach oben",
   "b.13aa4373": "Bericht senden",
   "b.1522c923": "Constructed",
   "b.16923e35": "Geteiltes Deck",
