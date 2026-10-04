@@ -1,8 +1,8 @@
 {
  "lang": "pt-BR",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Acesso à câmera negado ou indisponível.",
   "10.04a90236": "Não foi possível gravar o backup. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "A hora exibida no topo do menu principal.",
   "17.3e2d6304": "Etapa {n} – Escolha a estrutura do seu torneio",
   "17.423ce616": "Nenhum deck ainda. Toque em + Novo deck para criar um.",
+  "17.42cdbe61": "O TCGplayer não tem anúncios para esta impressão.",
   "17.47c3aafc": "Somente o organizador do evento pode encerrar o evento.",
   "17.52256a50": "Anexo {n}: Exemplos de situações complicadas",
   "17.52696357": "avatar, minion, magic, aura, site, artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Legal para",
   "9.c507dbe2": "Voltar jogada",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "modo {n}p",
   "9.c6998b3a": "{n} exibidos",
   "9.ca302fe7": "Maulskull",
