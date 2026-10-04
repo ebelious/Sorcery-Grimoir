@@ -1,8 +1,8 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
   "10.04a90236": "Impossible d’écrire la sauvegarde. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "L’heure affichée en haut du menu principal.",
   "17.3e2d6304": "Étape {n} – Choisissez la structure de votre tournoi",
   "17.423ce616": "Aucun deck pour le moment. Touchez + Nouveau deck pour en créer un.",
+  "17.42cdbe61": "TCGplayer n’a aucune offre pour cette impression.",
   "17.47c3aafc": "Seul l’organisateur de l’événement peut mettre fin à l’événement.",
   "17.52256a50": "Annexe {n} : exemples de situations délicates",
   "17.52696357": "Avatar, Minion, Magic, Aura, Site, Artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Légal pour",
   "9.c507dbe2": "Annulations de coup",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "mode {n}p",
   "9.c6998b3a": "{n} affiché(s)",
   "9.ca302fe7": "Maulskull",
