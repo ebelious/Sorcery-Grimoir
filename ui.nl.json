@@ -1,8 +1,8 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3375,
- "of": 3375,
+ "count": 3376,
+ "of": 3376,
  "t": {
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
   "10.04a90236": "De back-up kon niet worden geschreven. {n}",
@@ -3147,6 +3147,7 @@
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "in de Spellbook/Atlas en",
   "q.9acc69b2": "Geen deck — handen zijn willekeurig",
+  "q.9f2c4562": "Importeren van Sorcerytcg.com",
   "q.a41c21ca": "Positie &amp; zoom resetten?",
   "q.a862accf": "Cosmic Armored Weapon Beta",
   "q.af0d0498": "{n} docs -&gt; {n} rijen{n}",
