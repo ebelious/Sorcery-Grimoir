@@ -1,8 +1,8 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3375,
- "of": 3375,
+ "count": 3376,
+ "of": 3376,
  "t": {
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
   "10.04a90236": "Impossible d’écrire la sauvegarde. {n}",
@@ -3147,6 +3147,7 @@
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "dans le Spellbook/Atlas et",
   "q.9acc69b2": "Aucun deck — les mains sont aléatoires",
+  "q.9f2c4562": "Importer depuis Sorcerytcg.com",
   "q.a41c21ca": "Réinitialiser la position et le zoom ?",
   "q.a862accf": "Cosmic Armored Weapon Beta",
   "q.af0d0498": "{n} documents -&gt; {n} lignes{n}",
