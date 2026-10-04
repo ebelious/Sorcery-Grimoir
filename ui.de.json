@@ -1,8 +1,8 @@
 {
  "lang": "de",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Kamerazugriff verweigert oder nicht verfügbar.",
   "10.04a90236": "Das Backup konnte nicht gespeichert werden. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "Die Uhrzeit, die oben im Hauptmenü angezeigt wird.",
   "17.3e2d6304": "Schritt {n} – Turnierstruktur wählen",
   "17.423ce616": "Noch keine Decks. Tippe auf + Neues Deck, um eines zu erstellen.",
+  "17.42cdbe61": "Für diese Auflage gibt es kein Angebot bei TCGplayer.",
   "17.47c3aafc": "Nur der Veranstalter des Events kann das Event beenden.",
   "17.52256a50": "Anhang {n}: Beispiele für knifflige Situationen",
   "17.52696357": "Avatar, Minion, Magic, Aura, Site, Artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Zulässig für",
   "9.c507dbe2": "Zugrücknahmen",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "Modus {n}p",
   "9.c6998b3a": "{n} angezeigt",
   "9.ca302fe7": "Maulskull",
