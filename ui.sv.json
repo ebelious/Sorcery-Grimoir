@@ -1,8 +1,8 @@
 {
  "lang": "sv",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Kameraåtkomst nekades eller är inte tillgänglig.",
   "10.04a90236": "Säkerhetskopian kunde inte skrivas. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "Tiden som visas överst i huvudmenyn.",
   "17.3e2d6304": "Steg {n} – Välj din turneringsstruktur",
   "17.423ce616": "Inga lekar ännu. Tryck på + Ny lek för att skapa en.",
+  "17.42cdbe61": "TCGplayer har ingen annons för den här utgåvan.",
   "17.47c3aafc": "Endast evenemangets arrangör kan avsluta evenemanget.",
   "17.52256a50": "Tillägg {n}: Exempel på knepiga situationer",
   "17.52696357": "avatar, minion, magic, aura, site, artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Tillåten för",
   "9.c507dbe2": "Ångra drag",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "läge {n}p",
   "9.c6998b3a": "{n} visas",
   "9.ca302fe7": "Maulskull",
