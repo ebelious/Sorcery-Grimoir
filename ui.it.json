@@ -1,8 +1,8 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 3375,
- "of": 3375,
+ "count": 3376,
+ "of": 3376,
  "t": {
   "10.04705788": "Accesso alla fotocamera negato o non disponibile.",
   "10.04a90236": "Non è stato possibile scrivere il backup. {n}",
@@ -3147,6 +3147,7 @@
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "nello Spellbook/Atlas e",
   "q.9acc69b2": "Nessun mazzo — le mani sono casuali",
+  "q.9f2c4562": "Importa da Sorcerytcg.com",
   "q.a41c21ca": "Reimpostare posizione e zoom?",
   "q.a862accf": "Cosmic Armored Weapon Beta",
   "q.af0d0498": "{n} documenti -&gt; {n} righe{n}",
