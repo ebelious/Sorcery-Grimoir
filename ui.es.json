@@ -1,8 +1,8 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
   "10.04a90236": "No se pudo escribir la copia de seguridad. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "La hora que se muestra en la parte superior del menú principal.",
   "17.3e2d6304": "Paso {n} – Elige la estructura de tu torneo",
   "17.423ce616": "Aún no hay mazos. Toca + Nuevo mazo para crear uno.",
+  "17.42cdbe61": "TCGplayer no tiene ninguna oferta para esta impresión.",
   "17.47c3aafc": "Solo el organizador del evento puede finalizar el evento.",
   "17.52256a50": "Anexo {n}: Ejemplos de situaciones complicadas",
   "17.52696357": "avatar, minion, magic, aura, site, artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Legal para",
   "9.c507dbe2": "Retractaciones",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "modo {n}p",
   "9.c6998b3a": "{n} mostrados",
   "9.ca302fe7": "Maulskull",
