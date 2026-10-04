@@ -1,8 +1,8 @@
 {
  "lang": "sv",
  "rules": 2,
- "count": 3375,
- "of": 3375,
+ "count": 3376,
+ "of": 3376,
  "t": {
   "10.04705788": "Kameraåtkomst nekades eller är inte tillgänglig.",
   "10.04a90236": "Säkerhetskopian kunde inte skrivas. {n}",
@@ -3147,6 +3147,7 @@
   "q.878e891a": "nordC3|{n}|{n}x{n}|{n}|{n}",
   "q.950dff03": "i Spellbook/Atlas och",
   "q.9acc69b2": "Ingen lek — händerna är slumpmässiga",
+  "q.9f2c4562": "Importera från Sorcerytcg.com",
   "q.a41c21ca": "Återställa position &amp; zoom?",
   "q.a862accf": "Cosmic Armored Weapon Beta",
   "q.af0d0498": "{n} dokument -&gt; {n} rader{n}",
