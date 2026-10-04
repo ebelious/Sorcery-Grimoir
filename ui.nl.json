@@ -1,8 +1,8 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3371,
- "of": 3371,
+ "count": 3373,
+ "of": 3373,
  "t": {
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
   "10.04a90236": "De back-up kon niet worden geschreven. {n}",
@@ -128,6 +128,7 @@
   "17.1282f2c9": "De tijd bovenaan het hoofdmenu.",
   "17.3e2d6304": "Stap {n} – Kies je toernooiformat",
   "17.423ce616": "Nog geen decks. Tik op + Nieuw deck om er een te maken.",
+  "17.42cdbe61": "TCGplayer heeft geen aanbod voor deze uitgave.",
   "17.47c3aafc": "Alleen de organisator van het evenement kan het evenement beëindigen.",
   "17.52256a50": "Bijlage {n}: Voorbeelden van lastige situaties",
   "17.52696357": "Avatar, Minion, Magic, Aura, Site, Artifact",
@@ -1734,6 +1735,7 @@
   "9.c4cc2075": "Toegestaan voor",
   "9.c507dbe2": "Takebacks",
   "9.c5090d44": "Wisconsin",
+  "9.c6717000": "TCGplayer",
   "9.c6987946": "modus {n}p",
   "9.c6998b3a": "{n} weergegeven",
   "9.ca302fe7": "Maulskull",
