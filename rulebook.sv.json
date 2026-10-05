@@ -1,7 +1,7 @@
 {
  "lang": "sv",
  "rules": 3,
- "count": 611,
+ "count": 612,
  "of": 613,
  "t": {
   "10.ed9c2722": "Sites har några viktiga Characteristics:",
@@ -380,6 +380,7 @@
   "7w.fab9a6f3": "Artifacts har en mängd Subtypes, bland annat Armor, Weapons, Relics, Devices, Documents, Automatons eller Monuments. De flesta Artifacts är vanliga föremål som kan bäras in i strid, men andra, som Automatons och Monuments, har ytterligare Characteristics och begränsningar.",
   "7x.2ce3a308": "Vissa units kan bära andra units. En unit med denna ability plockar upp eller släpper dem på samma sätt och vid samma tidpunkt som artifacts (se sidan 25). Units som har Airborne, Burrowing, Submerge eller Voidwalk ger dessa abilities till de units de bär medan de bärs.",
   "7y.37df9d53": "Vissa spells kan kräva Affinity med olika Elements. Precis som med andra spells måste du kunna uppfylla hela en Spells krav på Threshold för att kunna Cast den. För att till exempel Cast Sir Pelleas måste du kontrollera sites med minst en Air- och två Water-Threshold-symboler.",
+  "7z.62ee35a3": "Water är Charm- och Trickery-elementet, redo att anpassa sig efter och störa Enemy:s strategier medan det manipulerar allt. En samklang med Water ger dig en kraftfull hemmaplansfördel som sakta kommer att översvämma Realm, och Ability att placera Enemy precis där du vill ha dem.",
   "7z.871bdfee": "För att Tap ett kort vrider du det 90° åt höger från dess upprätta position. Ett kort som har vridits 90° på detta sätt är ”tapped”, medan ett upprätt kort är ”untapped”. Kort kan också Untap vid vissa tidpunkter i spelet. För att göra det vrider du det helt enkelt 90° åt vänster tillbaka till upprätt position.",
   "8.1c2e6ddd": "Immobile",
   "8.1e2eb9ef": "Interact",
