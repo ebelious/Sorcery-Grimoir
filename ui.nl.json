@@ -1,8 +1,8 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3376,
- "of": 3376,
+ "count": 3377,
+ "of": 3377,
  "t": {
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
   "10.04a90236": "De back-up kon niet worden geschreven. {n}",
@@ -1827,6 +1827,7 @@
   "a.6ce94745": "masterfoil",
   "a.6d14144d": "coinpirate",
   "a.6d6a0e3a": "script {n}",
+  "a.708a3911": "Lokale tijd",
   "a.737bf179": "Batsquatch",
   "a.74c32a1a": "online {n}",
   "a.75844381": "use strict",
