@@ -2,7 +2,7 @@
  "lang": "es",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2719,
+ "count": 2720,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "El Site que es reemplazado es Banished.",
@@ -295,6 +295,7 @@
   "1h.5955ee95": "Si juego esto bajo mi Avatar, ¿me he detenido allí?",
   "1h.60ebc246": "¿Son todos los Strike contra otras Unit simultáneos?",
   "1h.68bc0142": "Activa habilidades que ocurren al final del turno.",
+  "1h.6d246e70": "¿Esto impide que la Magic Enemy dañe a mis Beast?",
   "1h.7617c422": "¿Pueden dispararse Projectile Enemy desde la ubicación de Morien?",
   "1h.8a475be7": "¿Qué ocurre si mi oponente obtiene el control de mi Morgana?",
   "1h.8fa9116c": "¿Cómo te sigue automáticamente Cerberus in Chains?",
