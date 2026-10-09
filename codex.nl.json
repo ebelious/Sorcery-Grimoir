@@ -2,7 +2,7 @@
  "lang": "nl",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2723,
+ "count": 2724,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "De Site die wordt vervangen, wordt Banished.",
@@ -2068,6 +2068,7 @@
   "6u.f980b3b5": "Lord of Greed mag en moet een Carriable Artifact van overal in de Realm nemen, ook van een andere Unit die dezelfde locatie met hem deelt. In dit geval betekent \"elders\" overal behalve de Hands van Lord of Greed! Hij neemt ook van bondgenoten.",
   "6v.785da083": "Als je bijvoorbeeld de Basic Ability Move and Attack gebruikt, kan een Immobile Unit geen stappen zetten, hoewel hij op die locatie nog wel kan Attack-en en Defend-en. Een Immobile Unit zou met <card>Leap Attack</card> geen stappen kunnen zetten, maar kan nog wel Strike-n.",
   "6v.a2146849": "<card>• Heat Ray</card>, <card>Ice Lance</card>, <card>Rhongomyniad</card> - Het Projectile moet de Unit die het Damage zal toebrengen daadwerkelijk raken. Ook kunnen deze de caster geen Damage toebrengen. Dit komt overeen met de ontwerpintentie en spelers speelden ze al op deze manier.",
+  "6w.12616f79": "Ja. De Flooded rubble geeft jou geen Affinity (omdat jij die niet controleert), maar de Island Leviathan zelf geeft wel Affinity, want dat sluit aan bij The Golden Rule. Als het Monster doodgaat, verlies je die Affinity uiteraard.",
   "6w.12d18e3c": "Als een Oversized Unit een Artifact carriet, blijft het Artifact op één locatie en behoudt het zijn relatieve positie ten opzichte van de Oversized Unit. Zie \"<term>Oversized Units</term>\" en \"<term>Teleporting Oversized Units</term>\" voor meer details.",
   "6w.5036d732": "Als een Artifact niet <term>can't</term> be dropped, mag het niet worden gekozen voor de \"<term>Drop</term>\"-Basic Ability. Ook heeft elk effect dat \"drop\" specificeert geen invloed op dat Artifact, bijv. <card>Shameless Squire</card> of <card>Attack by Night</card>.",
   "6x.134cff0a": "Attack-triggers worden nog steeds vervuld (bijv. Captain Baldassare), maar de Attack eindigt verder (ervan uitgaande dat er geen units meer zijn om te Fight). De aanvaller zal niet Strike, en het Target van de Attack keert niet terug naar het oorspronkelijke Target (indien aanwezig).",
