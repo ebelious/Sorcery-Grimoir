@@ -2,7 +2,7 @@
  "lang": "ko",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2722,
+ "count": 2723,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "교체되는 Site는 Banished돼요.",
@@ -882,6 +882,7 @@
   "2g.ccbdaff0": "• Fields of Camlann은 선택된 Minion이 아니더라도 Key Bearer를 파괴하지 않아요.",
   "2g.d118abfe": "0걸음 이동하기로 선택하면(예: unit이 Immobile이라서), 무언가를 Strike하나요?",
   "2g.dbf1ae71": "네! 카드 텍스트에 “영향을 받는 칸”이라고 되어 있으며, 여기에는 Surface, Subsurface, Void가 포함돼요.",
+  "2g.dc414744": "Geomancer가 Boulevard of Bones에 Adjacent한 Rubble을 만들면, 스켈레톤도 만들어지나요?",
   "2g.dd63dedc": "Site가 파괴되면 그 카드를 소유자의 Cemetery에 넣고, 그 자리에 Rubble Token을 남겨요.",
   "2g.ddfb8581": "당신의 Collection에는 캐주얼 플레이 중 게임 밖에서 소유한 모든 카드가 포함돼요.",
   "2g.f821a57e": "아니요. Triggered Ability이기 때문에 Beast가 Realm과 상호작용한 것으로 취급되지 않아요.",
