@@ -2,7 +2,7 @@
  "lang": "es",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2724,
+ "count": 2725,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "El Site que es reemplazado es Banished.",
@@ -1612,6 +1612,7 @@
   "4e.55ced75f": "Por defecto, un efecto con un Damage Grid puede orientarse de modo que la cuadrícula quede parcialmente fuera del Realm, siempre que la fuente o el cuadrado de origen esté en el Realm.",
   "4e.657e17d0": "Sí. Se reduce a la mitad la Healing (redondeando hacia abajo), y luego otra vez a la mitad (redondeando hacia abajo). Así que <card>Divine Healing</card> curaría 1 con dos Rivers of Blood en juego.",
   "4e.8e9eb8aa": "¿Esta Ability protege a mis Minions de efectos de movimiento como el Burrowing forzoso (p. ej., Bury), el Submerge (p. ej., Drown) y el teletransporte (p. ej., Chaos Twister)?",
+  "4e.abfd9d80": "Suponiendo que controlas y eres propietario del Site Adjacent, la Ability de Mirage puede modificar las restricciones de juego de Pathfinder, lo que te permite devolver el Site a tu Hand.",
   "4e.b1f01666": "¿Recibo las cartas inmediatamente cuando mi Minion que lleva el tesoro se mueve a la Surface, incluso en medio de otra cosa (como defender o atacar)?",
   "4f.07cde22a": "Harás Summon de Bruin, voltearás, ... ¡y luego perderás de inmediato la partida porque ya no tienes un Avatar en juego! ¿Quizá no incluyas a Druid en tu Collection?",
   "4f.0b17ce73": "Los Enemy siempre son Units, a menos que el texto de la carta especifique lo contrario. Por ejemplo, <card>Fade</card> usa \"enemy Site\", que significa \"un Site que controla un oponente\".",
