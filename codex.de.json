@@ -2,7 +2,7 @@
  "lang": "de",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2722,
+ "count": 2723,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "Die ersetzte Site wird Banished.",
@@ -1003,6 +1003,7 @@
   "2p.8f2442d5": "<i>Sorcery</i> soll so gespielt werden, wie du und deine Freunde es am schönsten findet!",
   "2p.a198ae22": "Wird der Zustand der Storyline archiviert? Wird die Storyline in ihren gespeicherten Zustand zurückversetzt?",
   "2p.be6f5060": "Ja. Nur Units können tappen, daher könnte ein Spellcaster Artifact oder eine Site den Demon nicht freilassen.",
+  "2p.d909277b": "Wenn ich einen Earth Site mit der zweiten Ability ausspiele, platziere ich dann auch einen Rubble in einem Adjacent Void?",
   "2p.f286cb0a": "Der Spieler mit dem King erhält den Vorteil, da er den Mortal kontrolliert, sobald er im Spiel ist.",
   "2q.0031d152": "Wie viel Mana wird erzeugt, wenn ein Ordinary Tower (z. B. Lone Tower) durch den Effekt von Abundance ins Spiel gebracht wird?",
   "2q.0251ff8e": "Probier dieses Rätsel: Welchen Spell werde ich Draw? Reingelegt! Keinen von beiden! (Ja, du kannst einen Site Draw.)",
