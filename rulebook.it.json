@@ -1,7 +1,7 @@
 {
  "lang": "it",
  "rules": 3,
- "count": 604,
+ "count": 605,
  "of": 606,
  "t": {
   "10.ed9c2722": "I site hanno alcune Characteristics fondamentali:",
@@ -61,6 +61,7 @@
   "1t.41584820": "Ogni Magic ha un Mana Cost che devi pagare per giocarlo.",
   "1t.6f52fec3": "Il livello inferiore di un Land Site fa parte della regione Underground.",
   "1t.824d20c7": "Il livello inferiore di un Water Site fa parte della regione Underwater.",
+  "1t.88c35463": "Fase 3. Infine, fai il draw di una carta dal tuo Spellbook o dall'Atlas.",
   "1t.96a81bfa": "Nota: i giocatori possono fare Tap solo di carte untapped e Untap di carte tapped.",
   "1u.2e3cfdc8": "Le Aura hanno una casella di testo di gioco che descrive le loro Special Ability.",
   "1u.4bd284be": "Un Minion disabled può comunque essere spostato forzatamente o Tapped dagli effetti",
