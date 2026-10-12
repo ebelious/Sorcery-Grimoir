@@ -1,0 +1,105 @@
+name: Update Rulebook
+
+# Makes every file the app reads about the rulebook from rulebook.pdf (rulebook-files.py):
+#   rulebook.pdf               made phone-sized if it is the large official file (pictures to 1200 px)
+#   rulebook-strings.en.json   the text to translate (extract-rulebook.py)
+#   rulebook-text.json         the text the app's global search reads
+#   rulebook.json              sizes and SHA-256 of the three files above: what the app checks on
+#                              Manually Pull Data
+# and commits whichever changed. When the text changed, it starts Translate Rulebook straight away, which
+# translates only the new or changed pieces (unchanged pieces keep their translations).
+#
+# Two ways to give it a new rulebook:
+#   - up to 25 MB (the app-sized copy): upload it to the repo root as rulebook.pdf
+#     (Add file -> Upload files). The push starts this job.
+#   - the official file (about 73 MB, too big for the web upload): Releases -> Draft a new release,
+#     attach the PDF, publish. Publishing starts this job, which takes the release's one PDF.
+# It can also be run by hand (Actions -> Update Rulebook -> Run workflow) on the rulebook.pdf in the repo.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rulebook.pdf'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the rulebook files; read the release's PDF
+  actions: write    # start Translate Rulebook
+
+concurrency:
+  group: update-rulebook
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      # pinned: the text must come out the same way every time, or unchanged paragraphs would be
+      # translated again (these are the versions the current rulebook-strings.en.json was checked with)
+      - name: Install PDF tools
+        run: pip install pdfplumber==0.11.10 pdfminer.six==20260107 pypdfium2==5.13.0 pymupdf==1.28.2 Pillow==12.3.0
+
+      - name: Take the PDF from the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/rb"
+          gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.pdf' --dir "$RUNNER_TEMP/rb" --clobber
+          n=$(find "$RUNNER_TEMP/rb" -maxdepth 1 -type f -name '*.pdf' | wc -l)
+          if [ "$n" != "1" ]; then
+            echo "::error::The release must have exactly one PDF attached ($n found)."
+            exit 1
+          fi
+          cp "$(find "$RUNNER_TEMP/rb" -maxdepth 1 -type f -name '*.pdf')" rulebook.pdf
+
+      - name: Make the rulebook files
+        run: python3 rulebook-files.py rulebook.pdf
+
+      - name: Commit the rulebook files if changed
+        id: commit
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add rulebook.pdf rulebook-strings.en.json rulebook-text.json rulebook.json
+          if git diff --staged --quiet -- rulebook-strings.en.json; then
+            echo "text_changed=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "text_changed=1" >> "$GITHUB_OUTPUT"
+          fi
+          if git diff --staged --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git commit -m "chore: update rulebook files [skip ci]"
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            echo "Push rejected, pulling and retrying ($i)..."
+            git pull --rebase origin main
+            sleep 3
+          done
+          echo "::error::Could not push the rulebook files."
+          exit 1
+
+      # a commit made by this job does not start other jobs by itself, so the translation is started here
+      - name: Start Translate Rulebook
+        if: steps.commit.outputs.text_changed == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run translate-rulebook.yml --repo "$GITHUB_REPOSITORY" --ref main
