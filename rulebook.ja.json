@@ -1,7 +1,7 @@
 {
  "lang": "ja",
  "rules": 3,
- "count": 604,
+ "count": 605,
  "of": 606,
  "t": {
   "10.ed9c2722": "Site には次のような主な Characteristics があります。",
@@ -182,6 +182,7 @@
   "3x.238e19a8": "このMoveの間、Defendするunitは、Airborne、Burrowing、Movement +X、Submerge、Voidwalkなど、あらゆるMove能力を使用できます。",
   "3y.3b5de08a": "トーナメントでは、SpellbookおよびAtlasと合わせてRarityのルールに従った10枚のCollectionでプレイすることが推奨されます。",
   "3y.95f8873d": "25ページ参照）。Airborne、Burrowing、Submerge、Voidwalkを持つunitは、carryしている間、それらの能力をcarryされているunitに与えます。",
+  "3y.d6cf07a4": "一部のUnitは他のUnitをCarryできます。このAbilityを持つUnitは、Artifactの場合と同じ方法とタイミングで、それらをPick UpまたはDropします(参照:",
   "4.0ed762f9": "Fire",
   "4.1cc05547": "Dead",
   "4.4078ad2a": "Mana",
