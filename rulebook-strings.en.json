@@ -6,13 +6,13 @@
 "blocks": [
 {
 "t": "p",
-"text": "December 2025",
-"u": "December 2025"
+"text": "October 2026",
+"u": "October 2026"
 },
 {
 "t": "p",
-"text": "December 2025",
-"u": "December 2025"
+"text": "October 2026",
+"u": "October 2026"
 }
 ]
 },
@@ -338,6 +338,11 @@
 "t": "p",
 "text": "Damage Grids",
 "u": "Damage Grids"
+},
+{
+"t": "p",
+"text": "Traps",
+"u": "Traps"
 },
 {
 "t": "p",
@@ -1396,18 +1401,13 @@
 },
 {
 "t": "p",
-"text": "Step 2. All of your sites now provide their mana for this turn.",
-"u": "Step 2. All of your sites now provide their mana for this turn."
+"text": "Step 2. Trigger abilities that happen at the start of the turn.",
+"u": "Step 2. Trigger abilities that happen at the start of the turn."
 },
 {
 "t": "p",
-"text": "Step 3. Trigger abilities that happen at the start of the turn.",
-"u": "Step 3. Trigger abilities that happen at the start of the turn."
-},
-{
-"t": "p",
-"text": "Step 4. Finally, draw a card from either your spellbook or atlas.",
-"u": "Step 4. Finally, draw a card from either your spellbook or atlas."
+"text": "Step 3. Finally, draw a card from either your spellbook or atlas.",
+"u": "Step 3. Finally, draw a card from either your spellbook or atlas."
 },
 {
 "t": "h",
@@ -1458,11 +1458,6 @@
 "t": "p",
 "text": "Step 3. Effects that last for your turn now end.",
 "u": "Step 3. Effects that last for your turn now end."
-},
-{
-"t": "p",
-"text": "Step 4. Your turn ends.",
-"u": "Step 4. Your turn ends."
 },
 {
 "t": "p",
@@ -1536,33 +1531,33 @@
 },
 {
 "t": "p",
-"text": "All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only gain mana during your turn and lose any unspent mana at the end of your turn.",
-"u": "All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only gain mana during your turn and lose any unspent mana at the end of your turn."
+"text": "All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only spend mana during your turn.",
+"u": "All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only spend mana during your turn."
 },
 {
 "t": "h",
-"text": "Gaining Mana",
-"u": "Gaining Mana"
+"text": "Available Mana",
+"u": "Available Mana"
 },
 {
 "t": "p",
-"text": "At the start of your turn, all of your sites provide one mana each, forming a mana pool for you to draw from. When one of your sites enters the realm, it immediately provides one mana. If you lose a site, the mana it provided this turn is not removed from your mana pool. If you gain control of an enemy’s site during your turn, it does not provide you with mana until your next turn.",
-"u": "At the start of your turn, all of your sites provide one mana each, forming a mana pool for you to draw from. When one of your sites enters the realm, it immediately provides one mana. If you lose a site, the mana it provided this turn is not removed from your mana pool. If you gain control of an enemy’s site during your turn, it does not provide you with mana until your next turn."
+"text": "Your available mana is usually equal to the number of sites you control. If you gain or lose a site during your turn, your available mana changes immediately.",
+"u": "Your available mana is usually equal to the number of sites you control. If you gain or lose a site during your turn, your available mana changes immediately."
 },
 {
 "t": "p",
-"text": "Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your pool for the current turn.",
-"u": "Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your pool for the current turn."
+"text": "Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your available mana for the current turn.",
+"u": "Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your available mana for the current turn."
 },
 {
 "t": "h",
-"text": "Using Mana",
-"u": "Using Mana"
+"text": "Spent Mana",
+"u": "Spent Mana"
 },
 {
 "t": "p",
-"text": "Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. To cast that spell, you must be able to pay the cost from your available mana. You cannot pay a mana cost if the amount required exceeds the mana available.",
-"u": "Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. To cast that spell, you must be able to pay the cost from your available mana. You cannot pay a mana cost if the amount required exceeds the mana available."
+"text": "Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if it would cause your total spent mana to exceed your available mana.",
+"u": "Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if it would cause your total spent mana to exceed your available mana."
 }
 ]
 },
@@ -2320,6 +2315,11 @@
 "n": 29,
 "blocks": [
 {
+"t": "p",
+"text": "For example, you tap your Avatar to play Sulfur Vents. You choose where to play it and place it there face down with a Wasteland on top. Now, or in any future turn, you may pay the Sulfur Vent’s trap cost of 1 mana to flip it face up, remove the Wasteland, and deal 1 damage to each adjacent minion.",
+"u": "For example, you tap your Avatar to play Sulfur Vents. You choose where to play it and place it there face down with a Wasteland on top. Now, or in any future turn, you may pay the Sulfur Vent’s trap cost of 1 mana to flip it face up, remove the Wasteland, and deal 1 damage to each adjacent minion."
+},
+{
 "t": "h",
 "text": "Damage Grids",
 "u": "Damage Grids"
@@ -2341,43 +2341,18 @@
 },
 {
 "t": "h",
-"text": "Occupying Multiple Sites",
-"u": "Occupying Multiple Sites"
+"text": "Traps",
+"u": "Traps"
 },
 {
 "t": "p",
-"text": "Units normally occupy only one location while in the realm, however some units may occupy multiple locations at once due to their enormous size. Such oversized units follow the regular rules for summoning, so you choose a single site you control when you cast the minion spell. As they enter the realm, you choose a 2x2 area that it can legally occupy, which must include the summoning location. To represent the minion’s locations, place the card at the intersection of those sites.",
-"u": "Units normally occupy only one location while in the realm, however some units may occupy multiple locations at once due to their enormous size. Such oversized units follow the regular rules for summoning, so you choose a single site you control when you cast the minion spell. As they enter the realm, you choose a 2x2 area that it can legally occupy, which must include the summoning location. To represent the minion’s locations, place the card at the intersection of those sites."
+"text": "Some sites have the special ability to be played facedown and activated later in the game. These sites have the Trap keyword followed by a mana cost. When you play a Trap site, you must place it facedown with a Spire, Stream, Valley, or Wasteland on top of it, whichever matches the trap’s element. A trap site is treated exactly like that site until the trap is sprung!",
+"u": "Some sites have the special ability to be played facedown and activated later in the game. These sites have the Trap keyword followed by a mana cost. When you play a Trap site, you must place it facedown with a Spire, Stream, Valley, or Wasteland on top of it, whichever matches the trap’s element. A trap site is treated exactly like that site until the trap is sprung!"
 },
 {
 "t": "p",
-"text": "An oversized unit is at each of the sites (or void squares) that it occupies, so it can be standing on both land and water sites (or void squares) at the same time. Therefore, if grid damage is dealt to multiple such locations, oversized units take damage equal to the sum of the damage dealt on all of the locations they occupy.",
-"u": "An oversized unit is at each of the sites (or void squares) that it occupies, so it can be standing on both land and water sites (or void squares) at the same time. Therefore, if grid damage is dealt to multiple such locations, oversized units take damage equal to the sum of the damage dealt on all of the locations they occupy."
-},
-{
-"t": "p",
-"text": "The same applies in general for any effect that checks whether something is true about an oversized unit’s site.",
-"u": "The same applies in general for any effect that checks whether something is true about an oversized unit’s site."
-},
-{
-"t": "p",
-"text": "When an oversized unit moves, you choose a direction and all parts of it move in that direction. If any part of it can’t move in the chosen direction, then it can’t move in that direction at all.",
-"u": "When an oversized unit moves, you choose a direction and all parts of it move in that direction. If any part of it can’t move in the chosen direction, then it can’t move in that direction at all."
-},
-{
-"t": "p",
-"text": "When attacking, oversized units still target only a single enemy or site.",
-"u": "When attacking, oversized units still target only a single enemy or site."
-},
-{
-"t": "h",
-"text": "Teleporting Oversized Units",
-"u": "Teleporting Oversized Units"
-},
-{
-"t": "p",
-"text": "When an oversized unit is teleported, it must be to a location or set of locations that conforms to its size restrictions and is otherwise legal for that unit to occupy.",
-"u": "When an oversized unit is teleported, it must be to a location or set of locations that conforms to its size restrictions and is otherwise legal for that unit to occupy."
+"text": "Once per game, as an activated ability, you may pay a Trap’s cost to flip it faceup. When you do, remove the reminder site and resolve the Trap’s effect.",
+"u": "Once per game, as an activated ability, you may pay a Trap’s cost to flip it faceup. When you do, remove the reminder site and resolve the Trap’s effect."
 }
 ]
 },
@@ -2656,8 +2631,8 @@
 },
 {
 "t": "p",
-"text": "Some units can carry other units. A unit with this ability, picks them up or drops them in the",
-"u": "Some units can carry other units. A unit with this ability, picks them up or drops them in the"
+"text": "Some units can carry other units. A unit with this ability, picks them up or drops them in the same manner and time as it would artifacts (see",
+"u": "Some units can carry other units. A unit with this ability, picks them up or drops them in the same manner and time as it would artifacts (see"
 },
 {
 "t": "h",
@@ -2666,8 +2641,8 @@
 },
 {
 "t": "p",
-"text": "same manner and time as it would artifacts (see page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried.",
-"u": "same manner and time as it would artifacts (see page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried."
+"text": "page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried.",
+"u": "page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried."
 },
 {
 "t": "p",
@@ -2756,8 +2731,8 @@
 },
 {
 "t": "p",
-"text": "When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage",
-"u": "When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage"
+"text": "When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage for the rest of the current turn. After that brief",
+"u": "When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage for the rest of the current turn. After that brief"
 }
 ]
 },
@@ -2766,8 +2741,8 @@
 "blocks": [
 {
 "t": "p",
-"text": "for the rest of the current turn. After that brief and desperate window, any damage dealt to the Avatar is a death blow, ending the game.",
-"u": "for the rest of the current turn. After that brief and desperate window, any damage dealt to the Avatar is a death blow, ending the game."
+"text": "and desperate window, any damage dealt to the Avatar is a death blow, ending the game.",
+"u": "and desperate window, any damage dealt to the Avatar is a death blow, ending the game."
 },
 {
 "t": "h",
@@ -2806,6 +2781,21 @@
 },
 {
 "t": "h",
+"text": "East and West",
+"u": "East and West"
+},
+{
+"t": "p",
+"text": "From the First Player’s point of view, the East is the eight squares to the right of the central column. The West is the eight squares to the left.",
+"u": "From the First Player’s point of view, the East is the eight squares to the right of the central column. The West is the eight squares to the left."
+},
+{
+"t": "p",
+"text": "The Far East or Far West are the squares in those outer columns.",
+"u": "The Far East or Far West are the squares in those outer columns."
+},
+{
+"t": "h",
 "text": "Elemental Affinity and Threshold",
 "u": "Elemental Affinity and Threshold"
 },
@@ -2833,16 +2823,6 @@
 "t": "p",
 "text": "A unit (including Avatars) that is controlled by an opponent.",
 "u": "A unit (including Avatars) that is controlled by an opponent."
-},
-{
-"t": "h",
-"text": "Evil",
-"u": "Evil"
-},
-{
-"t": "p",
-"text": "A minion is considered evil if it is a demon, undead, or monster. Evil minions can’t be warded.",
-"u": "A minion is considered evil if it is a demon, undead, or monster. Evil minions can’t be warded."
 },
 {
 "t": "h",
@@ -2918,7 +2898,12 @@
 "t": "p",
 "text": "This unit can’t take steps.",
 "u": "This unit can’t take steps."
+}
+]
 },
+{
+"n": 34,
+"blocks": [
 {
 "t": "h",
 "text": "Interact",
@@ -2928,12 +2913,7 @@
 "t": "p",
 "text": "A unit interacts with the realm if it strikes, deals damage, casts a spell, or activates a special ability.",
 "u": "A unit interacts with the realm if it strikes, deals damage, casts a spell, or activates a special ability."
-}
-]
 },
-{
-"n": 34,
-"blocks": [
 {
 "t": "h",
 "text": "Lance",
@@ -2996,13 +2976,8 @@
 },
 {
 "t": "p",
-"text": "Mana can come from several sources, but sites are the most common. When they first come into play as well as at the start of your turn, sites provide one mana each. Other cards might add to this total.",
-"u": "Mana can come from several sources, but sites are the most common. When they first come into play as well as at the start of your turn, sites provide one mana each. Other cards might add to this total."
-},
-{
-"t": "p",
-"text": "You use this mana to cast spells or activate abilities. At the end of your turn, any remaining mana is lost, whether or not you used it that turn.",
-"u": "You use this mana to cast spells or activate abilities. At the end of your turn, any remaining mana is lost, whether or not you used it that turn."
+"text": "During your turn, your Avatar and other Spellcasters use mana to cast spells. Your available mana is usually equal to the number of sites you control. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if the total would exceed your available mana.",
+"u": "During your turn, your Avatar and other Spellcasters use mana to cast spells. Your available mana is usually equal to the number of sites you control. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if the total would exceed your available mana."
 },
 {
 "t": "h",
@@ -3021,13 +2996,8 @@
 },
 {
 "t": "p",
-"text": "When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long",
-"u": "When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long"
-},
-{
-"t": "p",
-"text": "as the starting and ending locations of the step satisfy the moves freely condition.",
-"u": "as the starting and ending locations of the step satisfy the moves freely condition."
+"text": "When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long as the starting and ending locations of the step satisfy the moves freely condition.",
+"u": "When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long as the starting and ending locations of the step satisfy the moves freely condition."
 },
 {
 "t": "h",
@@ -3123,16 +3093,6 @@
 "t": "p",
 "text": "Note: Use Rubble tokens or a face down site to represent rubble on a square.",
 "u": "Note: Use Rubble tokens or a face down site to represent rubble on a square."
-},
-{
-"t": "h",
-"text": "Sacrifice",
-"u": "Sacrifice"
-},
-{
-"t": "p",
-"text": "Sacrificing is removing something you control from the realm and placing it directly in its",
-"u": "Sacrificing is removing something you control from the realm and placing it directly in its"
 }
 ]
 },
@@ -3140,9 +3100,14 @@
 "n": 35,
 "blocks": [
 {
+"t": "h",
+"text": "Sacrifice",
+"u": "Sacrifice"
+},
+{
 "t": "p",
-"text": "owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved.",
-"u": "owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved."
+"text": "Sacrificing is removing something you control from the realm and placing it directly in its owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved.",
+"u": "Sacrificing is removing something you control from the realm and placing it directly in its owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved."
 },
 {
 "t": "p",
@@ -3356,13 +3321,23 @@
 },
 {
 "t": "p",
-"text": "When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer",
-"u": "When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer"
+"text": "When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation.",
+"u": "When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation."
+},
+{
+"t": "h",
+"text": "Trap (X)",
+"u": "Trap (X)"
 },
 {
 "t": "p",
-"text": "a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation.",
-"u": "a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation."
+"text": "Trap sites are played facedown, with a marker of matching element on top.",
+"u": "Trap sites are played facedown, with a marker of matching element on top."
+},
+{
+"t": "p",
+"text": "Once per game, you may pay the traps cost to flip it faceup and resolve its effect.",
+"u": "Once per game, you may pay the traps cost to flip it faceup and resolve its effect."
 },
 {
 "t": "h",
@@ -3486,11 +3461,6 @@
 },
 {
 "t": "p",
-"text": "Step 2: All of your sites provide their mana.",
-"u": "Step 2: All of your sites provide their mana."
-},
-{
-"t": "p",
 "text": "Step 3: Trigger abilities that happen at the start of the turn.",
 "u": "Step 3: Trigger abilities that happen at the start of the turn."
 },
@@ -3598,11 +3568,6 @@
 "t": "p",
 "text": "Step 3: Effects that last for your turn now end.",
 "u": "Step 3: Effects that last for your turn now end."
-},
-{
-"t": "p",
-"text": "Step 4: Your turn ends.",
-"u": "Step 4: Your turn ends."
 },
 {
 "t": "h",
@@ -3828,7 +3793,7 @@
 }
 ],
 "strings": [
-"December 2025",
+"October 2026",
 "Table of Contents",
 "Introduction",
 "Using this Rulebook",
@@ -3891,6 +3856,7 @@
 "Special Abilities",
 "Advanced Movement Concepts",
 "Damage Grids",
+"Traps",
 "Occupying Multiple Sites",
 "Ownership and Control",
 "Projectiles",
@@ -4054,9 +4020,8 @@
 "Start Phase",
 "The start phase is the first phase you complete during your turn. All abilities that last “Until next turn” now end. Then:",
 "Step 1. All of your cards that are tapped now untap.",
-"Step 2. All of your sites now provide their mana for this turn.",
-"Step 3. Trigger abilities that happen at the start of the turn.",
-"Step 4. Finally, draw a card from either your spellbook or atlas.",
+"Step 2. Trigger abilities that happen at the start of the turn.",
+"Step 3. Finally, draw a card from either your spellbook or atlas.",
 "Main Phase",
 "The main phase is where most of Sorcery ’s actions and events take place. During this phase, your units can be ordered to do two types of actions. They can:",
 "Cast a spell from your hand if they are a spellcaster (see page 17) or,",
@@ -4067,7 +4032,6 @@
 "Step 1. Trigger abilities that happen at the end of the turn.",
 "Step 2. Players remove all damage from their minions in the realm.",
 "Step 3. Effects that last for your turn now end.",
-"Step 4. Your turn ends.",
 "Note: Avatars do not heal automatically at the end of the turn in the same way as damage is removed from minions, however they can heal using spells and other card effects.",
 "Establishing Your Domain",
 "During your first Main Phase, your Avatar needs to establish their domain within the realm. To do this, you must use your Avatar’s ability to play a site to your Avatar’s square.",
@@ -4079,12 +4043,12 @@
 "You don’t currently have enough mana to play Captain Baldassare with his mana cost of four. However, you do have a site, Maelström, that you can play using your Avatar’s ability. Playing Maelström would bring your total available mana up to four, allowing you to play Captain Baldassare, saving the Crabs and Explorers for a later turn.",
 "Spells are the main way Avatars and other Spellcasters influence the realm. Any card in your hand that is not a site is a spell. You cast these spells to summon minions, conjure artifacts or auras, and invoke magics.",
 "To cast a spell from your hand, you need to identify a Spellcaster under your control to cast it. The Spellcaster and its location are by whom and where the spell is being cast. Once you have identified the Spellcaster, spells often have two requirements to play: a mana cost and an elemental threshold.",
-"All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only gain mana during your turn and lose any unspent mana at the end of your turn.",
-"Gaining Mana",
-"At the start of your turn, all of your sites provide one mana each, forming a mana pool for you to draw from. When one of your sites enters the realm, it immediately provides one mana. If you lose a site, the mana it provided this turn is not removed from your mana pool. If you gain control of an enemy’s site during your turn, it does not provide you with mana until your next turn.",
-"Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your pool for the current turn.",
-"Using Mana",
-"Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. To cast that spell, you must be able to pay the cost from your available mana. You cannot pay a mana cost if the amount required exceeds the mana available.",
+"All of your Spellcasters use mana to cast their spells and some abilities may also draw from this power. You can only spend mana during your turn.",
+"Available Mana",
+"Your available mana is usually equal to the number of sites you control. If you gain or lose a site during your turn, your available mana changes immediately.",
+"Other card types might also provide mana turn-after-turn in a manner similar to sites, or simply increase your available mana for the current turn.",
+"Spent Mana",
+"Spells cost mana to cast. This is identified by the card’s mana cost in the upper left hand corner. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if it would cause your total spent mana to exceed your available mana.",
 "For example, your Floodplain, Autumn River, and Maelström sites each grant you one affinity, however Boneyard does not. So your affinity is currently three. Note that your opponent’s Aqueduct does not grant you affinity.",
 "In your hand, you have some minions, including Adept Illusionist and Polar Explorers, both of which you want to play this turn.",
 "Because elemental affinity is not spent or lost when playing cards, you just need to check each card’s elemental threshold and see if your affinity is equal to or greater than the threshold. This means that you can play both the Illusionist and Explorers this turn since they each only require a threshold of two, compared to your affinity of three.",
@@ -4207,16 +4171,12 @@
 "Carrying Units",
 "Some units can carry other units. A unit with this ability, picks them up or drops them in the same manner and time as it would artifacts (see page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried.",
 "A unit being carried may still cast spells or activate abilities as normal. If the carried unit moves to a location that the carrying unit doesn’t occupy, the unit ceases to be carried.",
+"For example, you tap your Avatar to play Sulfur Vents. You choose where to play it and place it there face down with a Wasteland on top. Now, or in any future turn, you may pay the Sulfur Vent’s trap cost of 1 mana to flip it face up, remove the Wasteland, and deal 1 damage to each adjacent minion.",
 "Some cards have abilities that deal damage or otherwise affect units or multiple sites over a wide area. To simplify rules text and illustrate the extent of these spells, some cards contain a damage grid in their rules box.",
 "Damage grids may use a bold square to indicate the center of the card’s effect, or a dot to show the Spellcaster’s location on the grid.",
 "By default, a damage grid indicates that the ability deals damage to each unit at locations within the area of effect and within the same region, though cards may specify otherwise.",
-"Units normally occupy only one location while in the realm, however some units may occupy multiple locations at once due to their enormous size. Such oversized units follow the regular rules for summoning, so you choose a single site you control when you cast the minion spell. As they enter the realm, you choose a 2x2 area that it can legally occupy, which must include the summoning location. To represent the minion’s locations, place the card at the intersection of those sites.",
-"An oversized unit is at each of the sites (or void squares) that it occupies, so it can be standing on both land and water sites (or void squares) at the same time. Therefore, if grid damage is dealt to multiple such locations, oversized units take damage equal to the sum of the damage dealt on all of the locations they occupy.",
-"The same applies in general for any effect that checks whether something is true about an oversized unit’s site.",
-"When an oversized unit moves, you choose a direction and all parts of it move in that direction. If any part of it can’t move in the chosen direction, then it can’t move in that direction at all.",
-"When attacking, oversized units still target only a single enemy or site.",
-"Teleporting Oversized Units",
-"When an oversized unit is teleported, it must be to a location or set of locations that conforms to its size restrictions and is otherwise legal for that unit to occupy.",
+"Some sites have the special ability to be played facedown and activated later in the game. These sites have the Trap keyword followed by a mana cost. When you play a Trap site, you must place it facedown with a Spire, Stream, Valley, or Wasteland on top of it, whichever matches the trap’s element. A trap site is treated exactly like that site until the trap is sprung!",
+"Once per game, as an activated ability, you may pay a Trap’s cost to flip it faceup. When you do, remove the reminder site and resolve the Trap’s effect.",
 "Cardinal directions from the card",
 "For example, your Lava Salamander casts a Firebolts spell to the right towards the opponent’s House Arn Bannerman. Each of the three projectiles travel in the chosen cardinal direction, starting at the Salamander’s location and travelling over the Arid Desert, avoiding the burrowed Cave Trolls, which are not in the same region. When they arrive at the Rustic Village, you can have the first two projectiles hit the Bannerman, which suffers two damage and dies. Unfortunately, the third projectile then hits your own Seasoned Sellsword, since projectiles hit friend and foe alike!",
 "A projectile’s flight begins at the shooting unit’s location and travels within the same region in a cardinal direction. Its flight continues until it either reaches the edge of its region or it reaches the first unit (enemy or ally) along its path, ignoring any allies at the projectile’s starting location. Different projectiles will have different effects, but will most often deal damage to the impacted unit.",
@@ -4263,9 +4223,9 @@
 "This card can’t be disabled, silenced, immobilized, or transformed, can’t gain or lose abilities, and its characteristics (like power) can’t be changed.",
 "Cardinal Directions",
 "When a card talks about a cardinal direction, it includes all of the squares in the direction indicated on the card to the front, rear, left and right.",
-"Some units can carry other units. A unit with this ability, picks them up or drops them in the",
+"Some units can carry other units. A unit with this ability, picks them up or drops them in the same manner and time as it would artifacts (see",
 "Glossary of Terms and Keywords",
-"same manner and time as it would artifacts (see page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried.",
+"page 25). Units that have Airborne, Burrowing, Submerge, or Voidwalk confer those abilities to units they are carrying while they are carried.",
 "Charge",
 "This unit can tap, or be tapped, to pay for costs associated with any ability on the turn it is summoned.",
 "Collection",
@@ -4282,8 +4242,8 @@
 "Death Blow",
 "When an Avatar is at death’s door, any damage dealt to them is a death blow, signaling their defeat.",
 "Death’s Door",
-"When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage",
-"for the rest of the current turn. After that brief and desperate window, any damage dealt to the Avatar is a death blow, ending the game.",
+"When an Avatar’s life is reduced to 0, they are now at death’s door and can no longer gain life. At that moment, the Avatar becomes immune to damage for the rest of the current turn. After that brief",
+"and desperate window, any damage dealt to the Avatar is a death blow, ending the game.",
 "Deathrite",
 "When this unit dies, do what is stated before placing it in the cemetery.",
 "Dies, Destroyed, &amp; Killed",
@@ -4291,14 +4251,15 @@
 "Disable",
 "While disabled, a minion loses all abilities (including basic abilities like Move and Attack), doesn’t strike when fighting, can’t cast spells, and can’t take any action granted by another card or effect (ie. strike, shoot a projectile, take a step, etc.).",
 "A disabled minion can still be forcibly moved or tapped by effects.",
+"East and West",
+"From the First Player’s point of view, the East is the eight squares to the right of the central column. The West is the eight squares to the left.",
+"The Far East or Far West are the squares in those outer columns.",
 "Elemental Affinity and Threshold",
 "Sites and other cards provide elemental affinity (e.g.). Elemental threshold is the minimum affinity required to cast a given spell, or to trigger or activate some abilities.",
 "Elite",
 "You may include two copies of a card that has the keyword “Elite” in its type line.",
 "Enemy",
 "A unit (including Avatars) that is controlled by an opponent.",
-"Evil",
-"A minion is considered evil if it is a demon, undead, or monster. Evil minions can’t be warded.",
 "Exceptional",
 "You may include three copies of a card that has the keyword “Exceptional” in its type line.",
 "Fight",
@@ -4326,13 +4287,11 @@
 "Life",
 "Life represents the amount of damage that your Avatar can endure before it is placed on death’s door. As your Avatar incurs damage, its overall life will decrease accordingly.",
 "The exact location of a card is determined by its square and by the region that it occupies.",
-"Mana can come from several sources, but sites are the most common. When they first come into play as well as at the start of your turn, sites provide one mana each. Other cards might add to this total.",
-"You use this mana to cast spells or activate abilities. At the end of your turn, any remaining mana is lost, whether or not you used it that turn.",
+"During your turn, your Avatar and other Spellcasters use mana to cast spells. Your available mana is usually equal to the number of sites you control. Track how much mana you’ve spent each turn—you can’t cast a spell or use an ability if the total would exceed your available mana.",
 "Movement +X",
 "This unit may move up to X additional steps when using the Move and Attack or Defend basic abilities. To move multiple steps at once, choose a destination and a path to it then traverse that path one step at a time. You may need to resolve automatic triggers (or apply “always on” passive abilities), some of which may prematurely stop the motion of the unit.",
 "Moves Freely",
-"When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long",
-"as the starting and ending locations of the step satisfy the moves freely condition.",
+"When this unit uses the Move and Attack or Defend abilities they spend no steps when moving, as long as the starting and ending locations of the step satisfy the moves freely condition.",
 "Nearby",
 "Refers to the card’s own square, and all squares that surround it, including those diagonally.",
 "Ordinary",
@@ -4349,8 +4308,7 @@
 "A site that has been destroyed is placed in its owner’s cemetery as normal, but rather than reverting back to the void, the site is instead replaced with rubble. Rubble is a neutral land site that no player controls, and provides no mana or threshold.",
 "Note: Use Rubble tokens or a face down site to represent rubble on a square.",
 "Sacrifice",
-"Sacrificing is removing something you control from the realm and placing it directly in its",
-"owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved.",
+"Sacrificing is removing something you control from the realm and placing it directly in its owner’s cemetery. A player may be forced to sacrifice something if an effect instructs them to do so. When a minion is sacrificed, it does indeed die, and its Deathrites trigger, if applicable. If something is sacrificed to pay the cost of an ability, it is not placed in the cemetery until after that ability has resolved.",
 "A dying unit cannot be sacrificed. When a site is sacrificed, it is replaced by rubble. Even indestructible things can be sacrificed, if a cost or effect otherwise informs you of the need to sacrifice something.",
 "Silence",
 "A card that is silenced loses all printed and granted abilities.",
@@ -4391,8 +4349,10 @@
 "To tap a card, turn a it 90° to the right, from an upright position. Only untapped cards and tokens in play can be tapped. All of your cards in play automatically (and necessarily) untap at the start of your turn.",
 "Target",
 "Transform",
-"When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer",
-"a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation.",
+"When a card is transformed it is considered the same game object as its previous version. It is controlled by the same player and does not suffer a new turn of summoning sickness. If one card transforms into another card, the original card is removed from the game after the transformation.",
+"Trap (X)",
+"Trap sites are played facedown, with a marker of matching element on top.",
+"Once per game, you may pay the traps cost to flip it faceup and resolve its effect.",
 "Underground",
 "The lower level of a land site is part of the underground region.",
 "Underwater",
@@ -4413,7 +4373,6 @@
 "Sorcery: Contested Realm",
 "Turn Sequence",
 "Step 1: Untap all of your cards in the realm.",
-"Step 2: All of your sites provide their mana.",
 "Step 3: Trigger abilities that happen at the start of the turn.",
 "Step 4: End the Start Phase by drawing a card from either your spellbook or atlas.",
 "Navigation Terms",
@@ -4433,7 +4392,6 @@
 "Step 1: Trigger abilities that happen at the end of the turn.",
 "Step 2: Players remove all damage from their minions in the realm.",
 "Step 3: Effects that last for your turn now end.",
-"Step 4: Your turn ends.",
 "Sorcery: Contested Realm is built around the four classical elements:",
 "Air Water",
 "Many units have keyword abilities printed in their game text which have rules associated with them. The most common of these keywords are listed below as well as in the glossary (page 32).",

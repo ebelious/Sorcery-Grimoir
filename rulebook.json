@@ -1,0 +1,19 @@
+{
+  "v": 1,
+  "edition": "October 2026",
+  "pages": 38,
+  "files": {
+    "rulebook.pdf": {
+      "bytes": 17848137,
+      "sha256": "516a0bdea06bdd8df261f583578a1e05013a182f05e1c183d7e21542d065a217"
+    },
+    "rulebook-strings.en.json": {
+      "bytes": 231991,
+      "sha256": "6bad7d5211f92e7a22d6f92588310af8be0a7ed351dbe333fc592c8ca531e159"
+    },
+    "rulebook-text.json": {
+      "bytes": 76288,
+      "sha256": "5f8419edd714ad84eacdc76b43c05b312be7dcbc3a57a57fd2c6d1c0ac7dddc5"
+    }
+  }
+}
