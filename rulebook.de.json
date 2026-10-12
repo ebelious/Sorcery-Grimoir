@@ -1,7 +1,7 @@
 {
  "lang": "de",
  "rules": 3,
- "count": 604,
+ "count": 605,
  "of": 606,
  "t": {
   "10.ed9c2722": "Sites haben einige wichtige Characteristics:",
@@ -61,6 +61,7 @@
   "1t.41584820": "Jede Magic hat Mana Cost, die du bezahlen musst, um sie zu spielen.",
   "1t.6f52fec3": "Die untere Ebene eines Land Site gehört zur Underground-Region.",
   "1t.824d20c7": "Die untere Ebene eines Water Site gehört zur Underwater-Region.",
+  "1t.88c35463": "Schritt 3. Zum Schluss ziehst du eine Karte entweder aus deinem Spellbook oder aus deinem Atlas. (Draw)",
   "1t.96a81bfa": "Hinweis: Spieler können nur untapped Karten tappen und getappte Karten untappen.",
   "1u.2e3cfdc8": "Auras haben ein Spieltextfeld, das ihre Special Abilities beschreibt.",
   "1u.4bd284be": "Ein Disabled Minion kann durch Effekte trotzdem zwangsweise bewegt oder getappt werden",
