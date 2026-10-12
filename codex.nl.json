@@ -2,7 +2,7 @@
  "lang": "nl",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2724,
+ "count": 2725,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "De Site die wordt vervangen, wordt Banished.",
@@ -1297,6 +1297,7 @@
   "3d.99db1b47": "Een Avatar stopt wanneer er geen verdere beweging meer is voor die Unit op de Storyline. Een Unit moet eerst bewegen om te kunnen stoppen.",
   "3d.b3825975": "Hoe handel ik dit effect af als de controle over de Minion verandert tussen Fights (bijv. omdat er eerder Infiltrate op is gecast)?",
   "3d.be632f98": "Nee, \"duwen\" is een vorm van Forced Movement, waarmee iets niet van regio kan veranderen tenzij er specifiek staat dat dat kan.",
+  "3d.d70f83aa": "Als de Spellcaster nearby Maddening Bells is, maar de Spell iets beïnvloedt dat niet nearby is, geldt er dan nog steeds een extra cost van 2 Mana?",
   "3d.d917c19e": "Effecten die type en subtype veranderen, bijv. <card>Corruptor</card>, <card>Enchantress</card>, <card>Tombstone Wardens</card>",
   "3e.0bef3f2d": "Sites hebben Characteristics, specifiek <term>site characteristics</term>, en zijn een van de zes Card Types in het spel.",
   "3e.22fafb35": "Je mag de kaarten in je Hand bekijken. Je tegenstander mag weten wat de achterkant is van de kaarten (Spell of Site) die je in je Hand hebt.",
