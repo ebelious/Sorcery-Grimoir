@@ -1,7 +1,7 @@
 {
  "lang": "ko",
  "rules": 3,
- "count": 604,
+ "count": 606,
  "of": 606,
  "t": {
   "10.ed9c2722": "Site에는 몇 가지 핵심 Characteristics가 있어요:",
@@ -193,6 +193,7 @@
   "4.c8e3517f": "Void",
   "4.fda11053": "Ward",
   "41.45b2b5f9": "이 예시에서 King of the Realm은 거의 모든 방향에서 적에게 둘러싸여 있어요! 어떤 적은 다른 적보다 더 위협적이에요. 자세히 살펴볼까요.",
+  "42.cce68fb5": "모든 Spellcaster는 Mana를 사용해 Spell을 Cast하며, 일부 능력도 이 Power를 Draw할 수 있어요. Mana는 자신의 턴에만 사용할 수 있어요.",
   "43.1141e7c1": "다른 Card Type도 Site와 비슷한 방식으로 매 턴 Mana를 제공하거나, 현재 턴의 사용 가능한 Mana를 늘려 주기도 해요.",
   "43.5ca07181": "First Player의 관점에서 동쪽은 중앙 열의 오른쪽에 있는 8개의 칸이에요. 서쪽은 왼쪽에 있는 8개의 칸이에요.",
   "43.da4555b1": "site가 없는 square는 Void 지역의 일부예요. Avatar는 Void 위치에 절대 들어갈 수 없어요. 그곳의 Minion은 Voidwalk가 없으면 Banished돼요.",
@@ -468,6 +469,7 @@
   "be.ede07981": "Sorcery: Contested Realm에서 여러분은 강력한 Avatar가 되어 Realm과 상호작용합니다. 여러분에게는 Spellbook이 있는데, 이는 Spell을 Cast해 Minion을 Summon하고 Artifact를 Conjure하는 등의 일을 할 수 있게 해 주는 카드 덱입니다. 또한 Atlas도 사용할 수 있는데, 이는 놀라운 Site를 플레이 영역에 추가할 수 있게 해 주는 카드 덱으로, 여러분의 영역을 넓혀 주고 더욱 강력한 Spell을 Cast할 수 있게 해 줍니다.",
   "bf.c05141ea": "그런 다음 이어지는 Fight에서 Nomads를 제외할지 정할 수 있어요. Nomads가 남으면 전투에 참여하게 되고, 상대가 Nomads에게 Damage를 배분할 수 있어요. 하지만 Sand Worm과 Nomads가 함께라면 Amazon Warriors를 쓰러뜨릴 수 있으므로 남기는 것도 좋은 방법일 수 있어요. Nomads를 제외하기로 하면 Nomads에게는 Damage를 배분할 수 없지만, Sand Worm이 혼자서 Warriors를 상대하게 돼요.",
   "bh.51e14c03": "Projectile의 비행은 발사하는 유닛의 위치에서 시작하며, 같은 지역 안에서 사방 방향 중 하나로 나아가요. 비행은 지역의 가장자리에 닿거나 경로상 처음 만나는 유닛(Enemy 또는 Ally)에 닿을 때까지 이어지며, Projectile의 출발 위치에 있는 Ally는 무시해요. Projectile마다 효과는 다르지만, 대부분 맞은 유닛에게 Damage를 입혀요.",
+  "bj.5ea84a51": "Sacrifice는 자신이 조종하는 대상을 Realm에서 제거하고 그 소유자의 Cemetery에 직접 놓는 것을 말해요. 효과가 지시하면 플레이어는 무언가를 Sacrifice해야 할 수도 있어요. Minion이 Sacrifice되면 실제로 죽은 것으로 처리되며, 해당되는 경우 그 Minion의 Deathrite가 발동해요. 어떤 대상이 Ability의 Cost를 지불하기 위해 Sacrifice된 경우, 그 Ability의 처리가 끝난 후에야 Cemetery에 놓여요.",
   "bs.fc67d05f": "이 규칙서의 목표는 여러분이 Sorcery: Contested Realm의 첫 게임을 즐길 수 있도록 빠르게 익히게 돕는 것입니다. 새로운 플레이어라면 여기서부터 계속 읽거나, 다른 사람에게 게임 진행을 안내받거나, www.sorcerytcg.com/how-to-play에서 튜토리얼 영상 등을 확인해 보세요. 경험 많은 플레이어라면 이 규칙서로 대부분의 궁금증이 풀리겠지만, Codex(curiosa.io/codex)에서 더 자세한 내용도 살펴볼 수 있습니다.",
   "c.0df243b9": "Strike First",
   "c.20bca90e": "Moves Freely",
