@@ -1,7 +1,7 @@
 {
  "lang": "sv",
  "rules": 3,
- "count": 612,
+ "count": 613,
  "of": 613,
  "t": {
   "10.ed9c2722": "Sites har några viktiga Characteristics:",
@@ -441,6 +441,7 @@
   "9p.1d1f0eb7": "Eftersom elemental Affinity inte spenderas eller förloras när du spelar kort behöver du bara kontrollera varje korts elemental Threshold och se om din Affinity är lika med eller större än Threshold. Det betyder att du kan spela både Illusionist och Explorers denna tur, eftersom de bara kräver en Threshold på två, jämfört med din Affinity på tre.",
   "9s.55cfd0fc": "Tokens är små kort som fungerar ungefär på samma sätt som vanliga kort så länge de befinner sig i realmet. Den största skillnaden mellan kort och Tokens är att Tokens aldrig ingår i en spelares lek och att de aldrig formellt kan finnas i någon zone utom i realmet. Om en Token skulle placeras någon annanstans tas den i stället bort från spelet helt.",
   "9t.6197f60e": "Denna unit får röra sig upp till X ytterligare steps när den använder abilities Move and Attack eller Defend. För att flytta flera steps på en gång väljer du en destination och en path dit och gör sedan en Traverse längs den path:en ett step i taget. Du kan behöva avgöra automatiska triggers (eller tillämpa passive abilities som alltid är aktiva), och några av dem kan avbryta unitens rörelse i förtid.",
+  "9x.276a8d72": "Spells representerar all den magiska kraft du kan uppbåda i detta Realm. Hit hör Minions som hjälper dig att Defend dina länder och Attack Enemy, kraftfulla Artifacts som hjälper dig att vända Power-balansen, Magic av kanaliserad energi som överväldigar fiender, och Auras av bestående elementär magi som låter dig påtvinga områden i Realm din vilja.",
   "9z.f0f44afc": "Denna Unit får flytta upp till X ytterligare steg när den använder basförmågorna Move and Attack eller Defend. För att flytta flera steg på en gång väljer du en destination och en Path dit och Traverse sedan den Path ett steg i taget. Du kan behöva avgöra automatiska utlösare (eller tillämpa ”alltid på”-Passive Abilities), av vilka vissa kan stoppa Unitens rörelse i förtid.",
   "a.0750ace2": "Card Types",
   "a.17bf2cea": "Använda Mana",
