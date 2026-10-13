@@ -1,8 +1,8 @@
 {
  "lang": "ja",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>不具合</b>:短いタイトル。必須です。",
   "10.04705788": "カメラへのアクセスが拒否されたか、利用できません。",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "送信に失敗しました: {n}",
   "g.c3fb9eb1": "{n}:Life {n}{n}",
   "g.c773dd12": "· Collection {n}枚",
+  "g.c803387f": "アップデートあり",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Beta Booster Box",
