@@ -1,8 +1,8 @@
 {
  "lang": "fr",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Bogue</b> : un titre court. Obligatoire.",
   "10.04705788": "Accès à la caméra refusé ou indisponible.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "échec de l'envoi : {n}",
   "g.c3fb9eb1": "{n} : vie {n}{n}",
   "g.c773dd12": "· {n} Collection",
+  "g.c803387f": "Mise à jour disponible",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Beta Booster Box",
