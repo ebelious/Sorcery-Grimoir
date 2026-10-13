@@ -1,8 +1,8 @@
 {
  "lang": "nl",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Bug</b>: een korte titel. Verplicht.",
   "10.04705788": "Cameratoegang geweigerd of niet beschikbaar.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "verzenden mislukt: {n}",
   "g.c3fb9eb1": "{n}: leven {n}{n}",
   "g.c773dd12": "· {n} collectie",
+  "g.c803387f": "Update beschikbaar",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Beta Booster Box",
