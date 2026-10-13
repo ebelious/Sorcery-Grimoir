@@ -1,8 +1,8 @@
 {
  "lang": "pt-BR",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Bug</b>: um título curto. Obrigatório.",
   "10.04705788": "Acesso à câmera negado ou indisponível.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "falha no envio: {n}",
   "g.c3fb9eb1": "{n}: Life {n}{n}",
   "g.c773dd12": "· coleção {n}",
+  "g.c803387f": "Atualização disponível",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Booster Box Beta",
