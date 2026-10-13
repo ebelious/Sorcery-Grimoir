@@ -1,8 +1,8 @@
 {
  "lang": "it",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Bug</b>: un titolo breve. Obbligatorio.",
   "10.04705788": "Accesso alla fotocamera negato o non disponibile.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "invio non riuscito: {n}",
   "g.c3fb9eb1": "{n}: vita {n}{n}",
   "g.c773dd12": "· {n} Collection",
+  "g.c803387f": "Aggiornamento disponibile",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Beta Booster Box",
