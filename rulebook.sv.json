@@ -1,7 +1,7 @@
 {
  "lang": "sv",
  "rules": 3,
- "count": 604,
+ "count": 605,
  "of": 606,
  "t": {
   "10.ed9c2722": "Sites har några viktiga Characteristics:",
@@ -61,6 +61,7 @@
   "1t.41584820": "Varje Magic har en Mana cost som du måste betala för att spela den.",
   "1t.6f52fec3": "Den nedre nivån av en Land Site är en del av Underground.",
   "1t.824d20c7": "Den nedre nivån av en Water Site är en del av Underwater.",
+  "1t.88c35463": "Steg 3. Dra slutligen ett kort (Draw) från antingen din Spellbook eller din Atlas.",
   "1t.96a81bfa": "Observera: Spelare kan bara Tap untapped kort och Untap tapped kort.",
   "1u.2e3cfdc8": "Auras har en speltextruta som beskriver deras specialförmågor.",
   "1u.4bd284be": "En Disabled minion kan fortfarande tvångsflyttas eller tappas av effekter",
