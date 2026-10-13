@@ -1,8 +1,8 @@
 {
  "lang": "es",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Error</b>: un título breve. Obligatorio.",
   "10.04705788": "Acceso a la cámara denegado o no disponible.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "el envío falló: {n}",
   "g.c3fb9eb1": "{n}: vida {n}{n}",
   "g.c773dd12": "· Collection de {n}",
+  "g.c803387f": "Actualización disponible",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Caja de sobres de Beta",
