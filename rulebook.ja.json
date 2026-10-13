@@ -1,7 +1,7 @@
 {
  "lang": "ja",
  "rules": 3,
- "count": 605,
+ "count": 606,
  "of": 606,
  "t": {
   "10.ed9c2722": "Site には次のような主な Characteristics があります。",
@@ -193,6 +193,7 @@
   "4.c8e3517f": "Void",
   "4.fda11053": "Ward",
   "41.45b2b5f9": "この例では、King of the Realm はほぼ四方を敵に囲まれています!他より大きな脅威となるものもいます。詳しく見てみましょう。",
+  "42.cce68fb5": "あなたのSpellcasterはすべて、Spellを唱えるためにManaを使用し、一部のabilityもこのPowerからDrawします。Manaを使えるのは自分のターン中のみです。",
   "43.1141e7c1": "ほかのCard Typeも、siteと同様に毎ターンManaを生み出したり、そのターンの使用可能なManaを単に増やしたりすることがあります。",
   "43.5ca07181": "先攻プレイヤーから見て、東は中央の列の右側にある8つのマスです。西は左側にある8つのマスです。",
   "43.da4555b1": "Siteのないsquareは、Void regionの一部です。Avatarは、Voidのlocationに入ることはできません。そこにいるMinionは、Voidwalkを持たない限りBanishedになります。",
