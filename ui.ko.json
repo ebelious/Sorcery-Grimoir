@@ -1,8 +1,8 @@
 {
  "lang": "ko",
  "rules": 2,
- "count": 3392,
- "of": 3392,
+ "count": 3393,
+ "of": 3393,
  "t": {
   "10.035d9696": "<b>Bug</b>: 짧은 제목이에요. 필수 항목이에요.",
   "10.04705788": "카메라 접근이 거부되었거나 사용할 수 없어요.",
@@ -2637,6 +2637,7 @@
   "g.c3e11562": "전송 실패: {n}",
   "g.c3fb9eb1": "{n}: Life {n}{n}",
   "g.c773dd12": "· Collection {n}개",
+  "g.c803387f": "업데이트 있음",
   "g.cd695ecc": "Peter Mohrbacher",
   "g.cd6d794e": "Lone Swordmaster",
   "g.d0a806ee": "Beta 부스터 박스",
