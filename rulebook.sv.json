@@ -1,7 +1,7 @@
 {
  "lang": "sv",
  "rules": 3,
- "count": 605,
+ "count": 606,
  "of": 606,
  "t": {
   "10.ed9c2722": "Sites har några viktiga Characteristics:",
@@ -193,6 +193,7 @@
   "4.c8e3517f": "Void",
   "4.fda11053": "Ward",
   "41.45b2b5f9": "I det här exemplet är King of the Realm omringad av fiender på nästan alla sidor! Vissa utgör ett större hot än andra. Låt oss titta närmare.",
+  "42.cce68fb5": "Alla dina Spellcasters använder Mana för att cast:a sina Spells, och vissa förmågor kan också Draw:a från denna Power. Du kan bara spendera Mana under din egen tur.",
   "43.1141e7c1": "Andra Card Type kan också ge Mana tur efter tur på ett sätt som liknar sites, eller helt enkelt öka din tillgängliga Mana för den aktuella turen.",
   "43.5ca07181": "Sett från förstaspelarens håll är östern de åtta rutorna till höger om mittkolumnen. Västern är de åtta rutorna till vänster.",
   "43.da4555b1": "En square utan site är en del av void region. Avatars kan aldrig enter void locations. Minions där är banished om de inte har Voidwalk.",
