@@ -2,7 +2,7 @@
  "lang": "ko",
  "rules": 2,
  "source_updated": "2026-08-28T18:23:54.334Z",
- "count": 2723,
+ "count": 2724,
  "of": 2725,
  "t": {
   "10.10d5e2b0": "교체되는 Site는 Banished돼요.",
@@ -2349,6 +2349,7 @@
   "ap.af22c360": "토너먼트에 참가한다면 적용될 규칙을 미리 알아 두어 참가자 모두가 대회 진행 방식을 이해하도록 하는 것이 좋아요. 토너먼트 주최자는 커뮤니티 플레이어들의 재미를 극대화하기 위해 카드를 금지하거나 수정하고, 후공에 대한 보상을 주도록 세팅 규칙을 수정하는 등 규칙을 변경할 권한이 있어요.",
   "aq.83637e54": "“<term>Splitting Events on the Storyline</term>”와 Tawny 및 site의 Genesis 예시도 참고하세요. Deathspeaker의 Ability도 이와 비슷해서, Minion이 들어오면서 Storyline상의 Deathspeaker의 Ability가 나뉘고, Genesis 능력이 해결된 뒤(Minion이 <term>realm</term>에 들어오는 것에 기반한 다른 발동 능력도 함께) Minion은 Banished돼요.",
   "ar.0dcf2cca": "Adjacent한 Site 두 개와 Void가 하나 이상 있는 행 또는 열을 고르세요. 그런 다음 Adjacent한 두 Site를 다음과 같이 “떼어 놓아요”: 한 Site는 현재 칸에 그대로 있고, 다른 Site는 (같은 행 또는 열에서 이어진 다른 모든 Site와 함께) 한 칸 이동해요. 방금 생긴 Void에 Rift Valley를 놓아요. Site의 이동과 Rift Valley의 도착은 동시에 일어나요.",
+  "ar.4c4e5c3f": "둘 이상의 카드가 동시에 Realm에 들어오고 그 카드들의 패시브 능력에 순서를 정해야 할 수도 있는 드문 경우(예: <card>King of the Realm</card> 두 장, 즉 제 것과 당신 것이 <card>Boneyard</card>를 통해 동시에 들어오는 경우), active player의 카드가 먼저 들어온 것으로 간주해요(동시에 들어온 카드가 여러 장이면 그 플레이어가 고른 순서대로요).",
   "at.2c699262": "Morgana le Fay가 Lightning Bolt를 Cast하는 것은 Fire Damage가 아니에요. Lightning Bolt는 Air Spell이기 때문이에요. Apprentice Wizard가 Firebolts를 Cast하는 것은 Firebolts가 Fire Magic이므로 Fire Damage예요(사실 3개의 별개의 Fire Damage가 돼요). Grapple Shot을 누가 Cast하든 Minion을 Phoenix에게 보내면, Strike를 하는 Minion을 기준으로 봐요. 그 Minion이 Fire Minion이면 Fire Damage예요.",
   "at.a5aa3fe5": "<b>그 외에 Adjacent를 언급하는 모든 경우</b>, 예를 들어 Adjacent location, Adjacent Minion, Adjacent Artifact 등에서는 <i>region의 경계를 지켜야 하며 넘을 수 없어요</i>. 예를 들어 Voidwalk를 가진 Minion이 Site에 있는 동안 공격을 받고 <card>Dodge Roll</card>을 플레이했다면, “Adjacent location”은 region의 경계를 넘을 수 없으므로 Void square로 이동할 수 없어요.",
   "at.e875c9ff": "네. 대형 Unit을 끌어당기거나 밀 때는, 그 Unit이 차지한 위치 중 효과의 조건을 충족하는 하나의 위치를 골라 그곳에서 밀거나 끌어당겨요. 그래서 Site 2를 고르면 대형 Minion은 남쪽으로 끌려가 4-5-7-8에 위치하게 돼요. 또는 Site 4를 고르면 대형 Minion은 동쪽으로 끌려가 2-3-5-6에 위치하게 돼요. 또는 Site 5를 고르면 대형 Minion은 전혀 끌려가지 않아요.",
