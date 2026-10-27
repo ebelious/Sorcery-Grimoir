@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T03:41:38.679Z",
+  "updated": "2026-10-27T11:35:39.852Z",
   "total": 28,
   "rewards": [
     {
@@ -139,7 +139,7 @@
       "points": 300,
       "image": "https://okxleekxriptfrdarxdq.supabase.co/storage/v1/render/image/public/images/games/DUS/DSCF3261-3.jpg?width=600&quality=100&resize=contain",
       "url": "https://www.teamcovenant.com/games/sorcery-tcg?category=Dust",
-      "soldOut": false,
+      "soldOut": true,
       "slug": "court-of-equity-non-foil",
       "sku": "SOR-DUS-029",
       "limit": 3,
