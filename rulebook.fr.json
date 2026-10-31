@@ -1,7 +1,7 @@
 {
  "lang": "fr",
  "rules": 3,
- "count": 605,
+ "count": 606,
  "of": 606,
  "t": {
   "10.ed9c2722": "Les sites ont quelques Characteristics clés :",
@@ -193,6 +193,7 @@
   "4.c8e3517f": "Void",
   "4.fda11053": "Ward",
   "41.45b2b5f9": "Dans cet exemple, le King of the Realm est assailli par des Enemies de presque tous les côtés ! Certains représentent une menace plus grande que d'autres. Examinons cela de plus près.",
+  "42.cce68fb5": "Tous vos Spellcasters utilisent du Mana pour lancer leurs Spells, et certaines capacités peuvent aussi puiser (Draw) dans cette Power. Vous ne pouvez dépenser du Mana que pendant votre tour.",
   "43.1141e7c1": "D'autres Card Types peuvent aussi fournir du Mana tour après tour, de façon similaire aux sites, ou simplement augmenter votre Mana disponible pour le tour en cours.",
   "43.5ca07181": "Du point de vue du premier joueur, l'Est correspond aux huit cases à droite de la colonne centrale. L'Ouest correspond aux huit cases à gauche.",
   "43.da4555b1": "Une case sans Site fait partie de la région Void. Les Avatars ne peuvent jamais entrer dans les emplacements Void. Les Minions qui s'y trouvent sont Banished, sauf s'ils ont Voidwalk.",
