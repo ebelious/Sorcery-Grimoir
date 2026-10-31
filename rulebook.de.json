@@ -1,7 +1,7 @@
 {
  "lang": "de",
  "rules": 3,
- "count": 605,
+ "count": 606,
  "of": 606,
  "t": {
   "10.ed9c2722": "Sites haben einige wichtige Characteristics:",
@@ -193,6 +193,7 @@
   "4.c8e3517f": "Void",
   "4.fda11053": "Ward",
   "41.45b2b5f9": "In diesem Beispiel wird der King of the Realm von Enemies fast von allen Seiten bedrängt! Manche stellen eine größere Bedrohung dar als andere. Schauen wir genauer hin.",
+  "42.cce68fb5": "Alle deine Spellcasters nutzen Mana, um ihre Spells zu cast, und manche Abilities können ebenfalls aus dieser Power draw. Du kannst Mana nur während deines Zuges ausgeben.",
   "43.1141e7c1": "Andere Card Types können ebenfalls Zug für Zug Mana liefern, ähnlich wie Sites, oder dein verfügbares Mana für den aktuellen Zug einfach erhöhen.",
   "43.5ca07181": "Aus Sicht des First Player ist der Osten die acht Felder rechts von der mittleren Spalte. Der Westen sind die acht Felder links davon.",
   "43.da4555b1": "Ein Feld ohne Site ist Teil der Void-Region. Avatars können Void-Locations nie betreten. Minions dort werden gebannt (banished), sofern sie nicht Voidwalk haben.",
