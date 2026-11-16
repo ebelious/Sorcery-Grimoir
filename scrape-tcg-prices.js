@@ -68,7 +68,12 @@
 const fs = require('fs');
 const { chromium } = require('playwright');
 
-const CARDS_FILE = 'cards.json';
+// The card list to price. The workflow points this at the app's own card list (Sorcery-Data's
+// cards.json, fetched just before the run) through CARDS_FILE: this repo's cards.json stopped
+// updating on 2026-08-28 at 1,100 cards, so cards added since -- Frost Mage vs Lavamancer's 69 new
+// ones among them -- were never searched for and had no price. Run by hand without CARDS_FILE,
+// it reads this repo's cards.json as before.
+const CARDS_FILE = process.env.CARDS_FILE || 'cards.json';
 const OUT_FILE = 'tcg-prices.json';
 const DELAY_MS = 1200;       // pause between each card's search
 const NAV_TIMEOUT_MS = 30000;
