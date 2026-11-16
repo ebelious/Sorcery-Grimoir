@@ -31,8 +31,31 @@ jobs:
           npm install
           npm install playwright@1.62.1
 
+      # The cards to price: the app's own card list (Sorcery-Data), not this repo's cards.json,
+      # which stopped updating on 2026-08-28 at 1,100 cards and lacks every card added since
+      # (Frost Mage vs Lavamancer's new cards among them). Kept outside the checkout, so nothing
+      # here is committed but tcg-prices.json, as before. If it can't be fetched, or looks wrong
+      # (under 1,000 cards), the run prices this repo's cards.json instead, as it always has.
+      - name: Get the app's card list (Sorcery-Data)
+        run: |
+          node -e '
+            const fs = require("fs");
+            const out = process.argv[1];
+            fetch("https://raw.githubusercontent.com/ebelious/Sorcery-Data/main/cards.json")
+              .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+              .then((d) => {
+                const n = Array.isArray(d && d.cards) ? d.cards.length : 0;
+                if (n < 1000) throw new Error("only " + n + " cards in it");
+                fs.writeFileSync(out, JSON.stringify(d));
+                console.log("Sorcery-Data card list: " + n + " cards");
+              })
+              .catch((e) => console.log("::warning::Sorcery-Data card list not used (" + e.message + "), pricing the cards.json in this repo instead"));
+          ' "$RUNNER_TEMP/sd-cards.json"
+
       - name: Run TCGPlayer price scraper
-        run: node scrape-tcg-prices.js
+        run: |
+          if [ -s "$RUNNER_TEMP/sd-cards.json" ]; then export CARDS_FILE="$RUNNER_TEMP/sd-cards.json"; fi
+          node scrape-tcg-prices.js
 
       - name: Commit tcg-prices.json if changed
         run: |
